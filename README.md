@@ -1,333 +1,147 @@
-# 面向多大模型协同决策的可靠性评估与动态裁决机制研究
+# ConsensusScope
 
-这是一个大学生创新训练项目的 Python 实验系统骨架。项目不训练大模型，而是研究多个大语言模型在同一批公开数据集问题上的协同决策可靠性。
+ConsensusScope is a risk-aware observability and adjudication prototype for
+multi-LLM collaborative decision-making. It does not train a new model. Instead,
+it records independent model answers, compares majority voting, fixed judging
+and rule-based dynamic adjudication, and surfaces deploy-time risk signals such
+as agreement rate, answer diversity, confidence distribution, evidence
+availability, minority warnings and parse errors.
 
-系统目标：
+## Why This Matters
 
-- 整理 TruthfulQA、FEVER、CommonsenseQA 等公开数据集样本；
-- 调用 DeepSeek、Qwen、GLM、Kimi，并预留 OpenAI 兼容接口；
-- 要求模型以 JSON 输出 `answer`、`reason`、`confidence`、`evidence`；
-- 保存全部模型原始输出；
-- 实现单模型、 多数投票、固定裁决器、动态裁决机制；
-- 部署时计算 agreement rate、answer diversity、confidence distribution、evidence availability、minority warning、parse errors 等风险信号；
-- 在离线评估中使用 gold label 标注 true consensus、false consensus、minority correct、confidence mismatch 等诊断标签；
-- 按数据集计算 final-answer accuracy，并评估风险分层质量和 review-routing utility；
-- 自动生成实验结果表、图表和 Streamlit 可视化原型。
+Many multi-agent or multi-model systems treat agreement as a proxy for
+trustworthiness. ConsensusScope is built around a different assumption:
 
-## 环境准备
+> Multi-model agreement is useful evidence, but it is not proof of correctness.
 
-推荐 Python 3.11。
+The system therefore focuses on inspecting the decision process, not only the
+final answer.
+
+## Main Features
+
+- Live Question Mode for new user-entered questions.
+- Three live task types: open factual QA, claim true/false, and A/B/C/D multiple choice.
+- In-app OpenAI-compatible API configuration and model selection.
+- Unified sample format for TruthfulQA, FEVER and CommonsenseQA.
+- OpenAI-compatible model clients for multiple LLM providers.
+- Structured model traces containing answer, rationale, confidence and evidence.
+- Majority vote, fixed judge and rule-based dynamic adjudication baselines.
+- Deploy-time risk signals: agreement rate, answer diversity, confidence
+  distribution, evidence availability, minority warnings and parse errors.
+- Offline diagnostic labels for saved benchmark samples: true consensus, false
+  consensus, minority correct and confidence mismatch. These labels use gold
+  answers and are not claimed to be available during live deployment.
+- Aggregate metrics and visual reports.
+- Streamlit demo for sample-level auditing and paper/demo preparation.
+
+## Quick Start
 
 ```bash
-cd mllm_reliability_adjudication
-python3.11 -m venv .venv
+python3 -m venv .venv
 source .venv/bin/activate
 pip install -U pip
 pip install -r requirements.txt
-cp .env.example .env
-```
-
-然后在 `.env` 中填写需要使用的 API Key。
-
-## 目录结构
-
-```text
-mllm_reliability_adjudication/
-├── README.md
-├── requirements.txt
-├── .env.example
-├── config.yaml
-├── data/
-│   ├── raw/
-│   ├── processed/
-│   ├── outputs/
-│   └── results/
-├── reports/
-│   └── figures/
-├── src/
-│   ├── data/
-│   ├── llm/
-│   ├── prompts/
-│   ├── parsing/
-│   ├── adjudication/
-│   ├── evaluation/
-│   ├── visualization/
-│   └── storage/
-├── scripts/
-├── app/
-└── tests/
-```
-
-## API Key 配置
-
-复制 `.env.example`：
-
-```bash
-cp .env.example .env
-```
-
-按需填写：
-
-```env
-DEEPSEEK_API_KEY=your_key
-QWEN_API_KEY=your_key
-GLM_API_KEY=your_key
-KIMI_API_KEY=your_key
-OPENAI_API_KEY=your_key
-JUDGE_API_KEY=your_key
-```
-
-所有模型客户端均使用 OpenAI-compatible `/chat/completions` 接口。若服务商地址或模型名不同，可修改对应 `*_BASE_URL` 和 `*_MODEL`。
-
-固定裁判使用 `judge` provider：默认 `JUDGE_MODEL=deepseek-chat`，默认 `JUDGE_BASE_URL=https://api.deepseek.com`，API key 从 `JUDGE_API_KEY` 读取。可按需替换为其他 OpenAI-compatible judge model。
-
-## 数据准备
-
-请将公开数据放在以下位置：
-
-```text
-data/raw/truthfulqa/TruthfulQA.csv
-data/raw/fever/*.jsonl
-data/raw/commonsenseqa/*.jsonl
-```
-
-构建统一数据集：
-
-```bash
-python3 -m src.data.dataset_builder \
-  --truthfulqa_n 100 \
-  --fever_n 100 \
-  --commonsenseqa_n 100 \
-  --seed 42
-```
-
-输出：
-
-```text
-data/processed/clean_dataset.csv
-data/processed/dataset_summary.csv
-```
-
-## 一键运行完整实验
-
-```bash
-python3 scripts/run_pipeline.py \
-  --sample_per_dataset 100 \
-  --models deepseek qwen glm kimi \
-  --limit 100
-```
-
-包含固定裁决器：
-
-```bash
-python3 scripts/run_pipeline.py \
-  --sample_per_dataset 100 \
-  --models deepseek qwen glm kimi \
-  --run_judge
-```
-
-复用已有模型输出，跳过 API 调用：
-
-```bash
-python3 scripts/run_pipeline.py \
-  --sample_per_dataset 100 \
-  --skip_model_calls
-```
-
-模型调用支持断点续跑：若 `data/outputs/model_outputs.csv` 中已经存在某个 `sample_id + model` 的成功输出，下一次运行会自动跳过该组合。
-
-## 小规模真实实验（每个数据集 10 条）
-
-构建 30 条以内的小规模样本：
-
-```bash
-python3 -m src.data.dataset_builder \
-  --truthfulqa_n 10 \
-  --fever_n 10 \
-  --commonsenseqa_n 10 \
-  --seed 42
-```
-
-调用四个模型，并启用断点续跑：
-
-```bash
-python3 -m src.experiments.run_model_answers \
-  --input data/processed/clean_dataset.csv \
-  --output data/outputs/model_outputs.csv \
-  --models deepseek qwen glm kimi \
-  --limit 30 \
-  --resume
-```
-
-模型回答会逐条写入 `data/outputs/model_outputs.csv`，运行日志写入 `data/outputs/run_log.txt`。如果 API 调用或 JSON 解析失败，系统会保存 `raw_output` 和 `parse_error`，并继续运行后续样本。
-
-## CSV 字段标准
-
-`data/processed/clean_dataset.csv`
-
-```text
-id, dataset, task_type, question, options, gold_answer, gold_label, evidence, category, source_file
-```
-
-`data/outputs/model_outputs.csv`
-
-```text
-sample_id, dataset, task_type, model, answer, reason, confidence, evidence, raw_output, parse_error, prompt, created_at
-```
-
-`data/results/majority_vote_results.csv`
-
-```text
-sample_id, method, final_answer, vote_distribution, agreement_rate, risk_level, decision_note
-```
-
-`data/results/dynamic_decision_results.csv`
-
-```text
-sample_id, method, final_answer, reliability_score, risk_level, agreement_rate, avg_confidence, evidence_support_score, answer_diversity, minority_warning, decision_note
-```
-
-`data/results/fixed_judge_results.csv`
-
-```text
-sample_id, method, final_answer, decision_reason, risk_level, confidence
-```
-
-`data/results/risk_labels.csv`
-
-```text
-sample_id, risk_labels, majority_answer, correct_models, incorrect_models, majority_is_correct
-```
-
-`data/results/method_metrics.csv`
-
-```text
-method, accuracy, false_consensus_rate, minority_correct_rate, high_disagreement_rate, confidence_mismatch_rate, sample_count
-```
-
-注意：`risk_labels.csv` 中的 `false consensus`、`minority correct`、`true consensus`、`confidence mismatch` 是基于 gold answer/gold label 的离线诊断标签，只用于实验分析和案例检索；真实部署时系统不能提前知道这些标签。
-
-## 固定裁判协议
-
-- 默认模型：`deepseek-chat`，通过 `JUDGE_MODEL` 可覆盖。
-- 默认接口：`https://api.deepseek.com`，通过 `JUDGE_BASE_URL` 可覆盖。
-- 调用温度：`0.0`。
-- 输出字段：`final_answer`、`decision_reason`、`risk_level`、`confidence`。
-- 输入内容：sample id、dataset、task type、question、options，以及保存的多模型输出记录。
-- 是否看到 gold answer：不看 `gold_answer` / `gold_label`。
-- 是否看到其他模型 rationale：会看到其他模型的 `answer`、`reason`、`confidence`、`evidence`，以及解析元数据。
-- 是否每个样本都调用：当前保存的 pilot run 对 1000 个评估样本逐样本调用，并保存到 `data/results/fixed_judge_results.csv`。
-- 可复现性：CSV 结果随 demo 包发布；如果重新调用外部 judge API，结果可能受模型版本和服务商行为影响。
-
-## 当前论文评价口径
-
-论文中不再使用混合 TruthfulQA / FEVER / CommonsenseQA 标签空间的 macro-F1 作为主结果，而改用三组评价：
-
-1. Final-answer selection accuracy by dataset。
-2. Risk stratification quality。
-3. Review-routing utility。
-
-## 分步运行
-
-整理数据：
-
-```bash
-python3 -m src.data.dataset_builder --truthfulqa_n 100 --fever_n 100 --commonsenseqa_n 100 --seed 42
-```
-
-运行多数投票与动态裁决：
-
-```bash
-python3 -m src.experiments.run_decisions \
-  --samples data/processed/clean_dataset.csv \
-  --outputs data/outputs/model_outputs.csv \
-  --run_majority \
-  --run_dynamic
-```
-
-评估结果：
-
-```bash
-python3 -m src.experiments.evaluate_results \
-  --samples data/processed/clean_dataset.csv \
-  --outputs data/outputs/model_outputs.csv \
-  --majority data/results/majority_vote_results.csv \
-  --dynamic data/results/dynamic_decision_results.csv
-```
-
-生成图表和报告：
-
-```bash
-python3 -m src.reports.generate_figures
-python3 -m src.reports.generate_report
-```
-
-## 启动可视化系统
-
-启动中文大创答辩版：
-
-```bash
 streamlit run app/streamlit_app.py
 ```
 
-启动英文投稿版：
+Then open:
+
+```text
+http://localhost:8501
+```
+
+For the English submission-oriented interface, run:
 
 ```bash
 streamlit run app/streamlit_app.py --server.port 8502
 ```
 
-当前原型包含三个页面：
+Then open:
 
-- `Live Question Mode`：现场输入问题，配置 API，选择模型，运行多模型回答，查看动态裁决、风险解释并导出报告。
-- `单样本分析`：查看同一问题下多个模型的答案、理由、置信度、证据、多数投票结果、动态裁决结果和风险标签。
-- `总体统计`：查看不同裁决方法的准确率、风险类型分布、风险等级错误率和报告图表。
-- `投稿准备`：对照 EMNLP System Demonstration 要求，展示当前系统准备度、2.5 分钟演示脚本和二区及以上期刊路线。
-
-更多发表规划见：
-
-- `README_EN.md`
-- `docs/literature_publication_strategy.md`
-- `docs/emnlp_demo_brief.md`
-- `docs/casebook.md`
-- `docs/demo_video_script.md`
-- `docs/ethics_limitations.md`
-- `docs/public_release_notes.md`
-- `docs/release_checklist.md`
-- `paper/consensusscope_emnlp_demo.tex`
-
-生成英文系统截图：
-
-```bash
-node scripts/capture_screenshots_en.mjs
+```text
+http://localhost:8502
 ```
 
-生成英文本地演示视频草稿，并转为 MP4：
-
-```bash
-node scripts/record_demo_video_en.mjs
-python3 scripts/convert_video_to_mp4.py
-```
-
-Mac 下可直接双击：
+On macOS, double-click:
 
 ```text
 start_demo_mac.command
 ```
 
-Windows 下可直接双击：
+On Windows, double-click:
 
 ```text
 start_demo.bat
 ```
 
-## 测试
+The repository already contains a no-API demonstration package with processed
+samples, saved model outputs, adjudication results, risk labels and figures.
+You can inspect the demo without calling external LLM APIs.
+
+## Demo Pages
+
+- **Live Question Mode**: enter a new question, configure APIs, run multiple LLMs,
+  inspect dynamic adjudication, and export a Markdown/JSON report.
+- **Single Sample Analysis**: inspect model answers, rationales, confidence,
+  evidence, majority voting, dynamic adjudication and risk labels.
+- **Overview Statistics**: compare methods and visualize risk distributions and
+  risk-level error rates.
+- **Publication Readiness**: review the EMNLP System Demonstration checklist,
+  the 2.5-minute video script and journal targets.
+
+## Current Evaluation Snapshot
+
+The current local evaluation uses 1000 adjudicated samples and 4000 structured
+model-output rows. Because TruthfulQA, FEVER and CommonsenseQA have different
+answer spaces, the paper reports dataset-level accuracy, risk stratification
+quality and review-routing utility instead of a single mixed macro-F1 score.
+
+| Method | TruthfulQA | FEVER | CommonsenseQA |
+|---|---:|---:|---:|
+| Majority vote | 0.075 | 0.622 | 0.760 |
+| Rule-based dynamic judge | 0.075 | 0.661 | 0.760 |
+| Fixed judge | 0.087 | 0.709 | 0.796 |
+
+| Dynamic risk level | Accuracy | Error rate |
+|---|---:|---:|
+| Low | 0.918 | 0.082 |
+| Medium | 0.552 | 0.448 |
+| High | 0.048 | 0.952 |
+
+| Routing policy | Coverage | Accuracy | Errors captured |
+|---|---:|---:|---:|
+| Auto-accept low risk | 0.17 | 0.918 | 0.028 |
+| Review medium/high risk | 0.83 | 0.412 | 0.972 |
+| Review high risk only | 0.23 | 0.048 | 0.436 |
+
+## Fixed Judge Protocol
+
+The fixed judge uses the repository's `judge` provider:
+
+- Default model: `deepseek-chat`.
+- Default endpoint: `https://api.deepseek.com`.
+- Override variables: `JUDGE_MODEL`, `JUDGE_BASE_URL`, and `JUDGE_API_KEY`.
+- Temperature: `0.0`.
+- Output schema: `final_answer`, `decision_reason`, `risk_level`,
+  `confidence`.
+
+The fixed-judge prompt receives the sample id, dataset, task type, question,
+options and saved model-output records. These records include each model's
+answer, rationale (`reason`), confidence and evidence, together with parser
+metadata. The judge does **not** receive the gold answer or gold label. In the
+saved pilot run, one fixed-judge call was made for each of the 1000 evaluated
+samples. The saved CSV is shipped as the reproducible artifact; exact reruns may
+vary if the external provider changes the model or API behavior.
+
+## Reproducibility
+
+Run tests:
 
 ```bash
-python3 -m compileall -q src scripts app tests
 python3 -m pytest -q
 ```
 
-全新环境测试：
+For a clean environment, install dependencies first:
 
 ```bash
 python3 -m venv .venv-clean
@@ -337,6 +151,28 @@ pip install -r requirements.txt
 python3 -m pytest -q
 ```
 
-## 当前状态
+Run a syntax check that ignores macOS AppleDouble files:
 
-本版本包含可导入的数据结构、配置读取、OpenAI 兼容客户端、JSON 答案解析、断点续跑、多数投票、固定裁决器、动态裁决、风险标注、指标计算、图表生成、Markdown 报告和 Streamlit 原型入口。
+```bash
+find src scripts app tests -name '._*' -prune -o -name '*.py' -print0 | xargs -0 python3 -m py_compile
+```
+
+## Submission Materials
+
+- Literature and publication strategy: `docs/literature_publication_strategy.md`
+- EMNLP demo brief: `docs/emnlp_demo_brief.md`
+- Casebook: `docs/casebook.md`
+- Video script: `docs/demo_video_script.md`
+- English screenshots: `docs/screenshots_en/`
+- Local silent draft video: `docs/demo_video_draft_en.mp4`
+- Ethics and limitations: `docs/ethics_limitations.md`
+- Public release notes: `docs/public_release_notes.md`
+- Release checklist: `docs/release_checklist.md`
+- Draft EMNLP demo paper: `paper/consensusscope_emnlp_demo.tex`
+
+## Ethics and Limitations
+
+ConsensusScope is an audit and risk-warning tool. It should not be used as a
+fully automated truth oracle, grader or high-stakes decision maker. Model
+outputs may contain factual errors, biased rationales or misleading confidence
+statements. Educational or user-generated data should be anonymized before use.
