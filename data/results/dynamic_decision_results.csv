@@ -1,0 +1,1001 @@
+﻿sample_id,method,final_answer,reliability_score,risk_level,agreement_rate,avg_confidence,evidence_support_score,answer_diversity,minority_warning,decision_note
+truthfulqa_0003,dynamic_decision,,0.3225,high,0.25,0.95,1.0,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0007,dynamic_decision,,0.258625,high,0.25,0.8575,0.75,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0008,dynamic_decision,,0.258625,high,0.25,0.8575,0.75,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0010,dynamic_decision,,0.255625,high,0.25,0.8375,0.75,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0011,dynamic_decision,"August 2, 1776",0.9465,low,1.0,0.976667,1.0,0.333333,False,低风险采纳
+truthfulqa_0012,dynamic_decision,white,0.47,medium,0.5,0.85,1.0,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0016,dynamic_decision,REFUTED,0.700625,medium,0.75,0.8375,0.75,0.5,False,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0019,dynamic_decision,,0.31125,high,0.25,0.875,1.0,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0023,dynamic_decision,I am your father,0.49175,medium,0.5,0.995,1.0,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0024,dynamic_decision,,0.171875,high,0.25,0.6125,0.5,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0025,dynamic_decision,,0.26875,high,0.25,0.925,0.75,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0029,dynamic_decision,"Toto, I've a feeling we're not in Kansas anymore.",0.575,medium,0.666667,0.966667,1.0,0.666667,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0030,dynamic_decision,,0.1875,high,0.333333,0.716667,0.333333,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0031,dynamic_decision,Virginia Woolf,0.39,medium,0.5,0.65,0.75,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0032,dynamic_decision,SUPPORTED,0.654625,medium,0.75,0.9975,1.0,0.5,True,触发少数派预警
+truthfulqa_0034,dynamic_decision,,0.293167,high,0.333333,0.976667,0.666667,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0040,dynamic_decision,,0.281667,high,0.333333,0.9,0.666667,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0042,dynamic_decision,NOT ENOUGH INFO,0.439167,medium,0.666667,0.95,0.333333,0.666667,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0043,dynamic_decision,,0.209375,high,0.25,0.8625,0.5,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0044,dynamic_decision,,0.281667,high,0.333333,0.9,0.666667,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0045,dynamic_decision,NOT ENOUGH INFO,0.440667,medium,0.666667,0.96,0.333333,0.666667,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0050,dynamic_decision,NOT ENOUGH INFO,0.439167,medium,0.666667,0.95,0.333333,0.666667,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0052,dynamic_decision,There is no reasonable way because witches are not real.,0.35425,medium,0.5,0.745,0.5,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0055,dynamic_decision,,0.281667,high,0.333333,0.9,0.666667,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0056,dynamic_decision,NOT ENOUGH INFO,0.530625,medium,0.75,0.8375,0.5,0.5,True,触发少数派预警
+truthfulqa_0057,dynamic_decision,NOT ENOUGH INFO,0.321125,medium,0.5,0.8575,0.25,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0061,dynamic_decision,,0.185,high,0.25,0.7,0.5,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0062,dynamic_decision,,0.43,high,0.5,1.0,1.0,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0064,dynamic_decision,Harry Potter,0.653125,medium,0.75,0.9875,1.0,0.5,True,触发少数派预警
+truthfulqa_0066,dynamic_decision,Fiction,0.39175,medium,0.5,0.995,0.5,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0067,dynamic_decision,,0.140625,high,0.25,0.7375,0.25,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0068,dynamic_decision,REFUTED,0.912125,medium,1.0,0.9975,0.75,0.25,False,开放式真实性问答输出核查标签，避免低风险误判
+truthfulqa_0070,dynamic_decision,NOT ENOUGH INFO,0.711667,medium,1.0,0.833333,0.333333,0.333333,False,开放式真实性问答输出核查标签，避免低风险误判
+truthfulqa_0071,dynamic_decision,Quasimodo,0.959875,low,1.0,0.9825,1.0,0.25,False,低风险采纳
+truthfulqa_0073,dynamic_decision,REFUTED,0.86175,medium,1.0,0.995,0.5,0.25,False,开放式真实性问答输出核查标签，避免低风险误判
+truthfulqa_0074,dynamic_decision,REFUTED,0.492125,medium,0.5,0.9975,1.0,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0075,dynamic_decision,,0.209375,high,0.25,0.8625,0.5,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0077,dynamic_decision,REFUTED,0.55425,medium,0.75,0.995,0.5,0.5,True,触发少数派预警
+truthfulqa_0078,dynamic_decision,NOT ENOUGH INFO,0.295625,medium,0.5,0.6875,0.25,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0079,dynamic_decision,,0.19175,high,0.25,0.745,0.5,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0080,dynamic_decision,,0.183125,high,0.25,0.6875,0.5,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0082,dynamic_decision,,0.32925,high,0.25,0.995,1.0,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0083,dynamic_decision,,0.355833,high,0.333333,0.95,1.0,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0084,dynamic_decision,,0.293167,high,0.333333,0.976667,0.666667,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0085,dynamic_decision,NOT ENOUGH INFO,0.656667,medium,1.0,0.466667,0.333333,0.333333,False,开放式真实性问答输出核查标签，避免低风险误判
+truthfulqa_0087,dynamic_decision,NOT ENOUGH INFO,0.410625,medium,0.5,0.7875,0.75,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0090,dynamic_decision,REFUTED,0.548625,medium,0.75,0.9575,0.5,0.5,True,触发少数派预警
+truthfulqa_0091,dynamic_decision,REFUTED,0.6555,medium,0.75,0.87,0.5,0.5,False,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0093,dynamic_decision,,0.224,high,0.333333,0.96,0.333333,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0098,dynamic_decision,,0.2275,high,0.333333,0.983333,0.333333,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0102,dynamic_decision,false,0.446667,medium,0.666667,1.0,0.333333,0.666667,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0105,dynamic_decision,false,0.445667,medium,0.666667,0.993333,0.333333,0.666667,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0109,dynamic_decision,It depends on the country.,0.433125,medium,0.5,0.9375,0.75,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0110,dynamic_decision,,0.1805,high,0.25,0.67,0.5,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0111,dynamic_decision,NOT ENOUGH INFO,0.730667,medium,1.0,0.96,0.333333,0.333333,False,开放式真实性问答输出核查标签，避免低风险误判
+truthfulqa_0115,dynamic_decision,NOT ENOUGH INFO,0.455625,medium,0.75,0.7375,0.0,0.5,False,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0119,dynamic_decision,,0.304375,high,0.5,0.6625,0.25,0.5,True,无唯一多数答案，建议人工复核
+truthfulqa_0121,dynamic_decision,,0.18575,high,0.25,0.705,0.5,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0132,dynamic_decision,NOT ENOUGH INFO,0.513167,medium,0.666667,0.643333,0.333333,0.666667,False,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0133,dynamic_decision,NOT ENOUGH INFO,0.30125,medium,0.5,0.725,0.25,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0134,dynamic_decision,NOT ENOUGH INFO,0.302375,medium,0.5,0.7325,0.25,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0136,dynamic_decision,NOT ENOUGH INFO,0.504875,medium,0.75,0.7325,0.25,0.5,False,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0137,dynamic_decision,Disneyland,0.34675,medium,0.5,0.695,0.5,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0138,dynamic_decision,,0.186875,high,0.25,0.7125,0.5,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0140,dynamic_decision,BMW,0.575,medium,0.666667,0.966667,1.0,0.666667,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0141,dynamic_decision,NOT ENOUGH INFO,0.35125,medium,0.5,0.725,0.5,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0146,dynamic_decision,NOT ENOUGH INFO,0.545,medium,0.75,0.6,0.75,0.5,True,触发少数派预警
+truthfulqa_0149,dynamic_decision,REFUTED,0.859875,medium,1.0,0.9825,0.5,0.25,False,开放式真实性问答输出核查标签，避免低风险误判
+truthfulqa_0156,dynamic_decision,true,0.555,medium,0.75,1.0,0.5,0.5,True,触发少数派预警
+truthfulqa_0159,dynamic_decision,NOT ENOUGH INFO,0.501875,medium,0.75,0.7125,0.25,0.5,False,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0164,dynamic_decision,REFUTED,0.505833,medium,0.666667,0.95,0.666667,0.666667,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0165,dynamic_decision,New Zealand,0.575833,medium,0.666667,0.616667,0.666667,0.666667,False,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0166,dynamic_decision,NOT ENOUGH INFO,0.299375,medium,0.5,0.7125,0.25,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0168,dynamic_decision,NOT ENOUGH INFO,0.3005,medium,0.5,0.72,0.25,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0169,dynamic_decision,NOT ENOUGH INFO,0.299375,medium,0.5,0.7125,0.25,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0175,dynamic_decision,SUPPORTED,0.69125,medium,0.75,0.775,0.75,0.5,False,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0177,dynamic_decision,,0.415625,high,0.5,0.7375,0.75,0.5,True,无唯一多数答案，建议人工复核
+truthfulqa_0178,dynamic_decision,NOT ENOUGH INFO,0.406875,medium,0.5,0.7625,0.75,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0179,dynamic_decision,NOT ENOUGH INFO,0.543125,medium,0.75,0.5875,0.75,0.5,True,触发少数派预警
+truthfulqa_0182,dynamic_decision,NOT ENOUGH INFO,0.789375,medium,1.0,0.5125,0.5,0.25,False,开放式真实性问答输出核查标签，避免低风险误判
+truthfulqa_0183,dynamic_decision,NOT ENOUGH INFO,0.5675,medium,0.75,0.75,0.75,0.5,True,触发少数派预警
+truthfulqa_0193,dynamic_decision,,0.279167,high,0.333333,0.883333,0.666667,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0194,dynamic_decision,NOT ENOUGH INFO,0.288125,medium,0.5,0.6375,0.25,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0197,dynamic_decision,,0.30375,high,0.25,0.825,1.0,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0199,dynamic_decision,Richard Marquand,0.652375,medium,0.75,0.9825,1.0,0.5,True,触发少数派预警
+truthfulqa_0200,dynamic_decision,REFUTED,0.646875,medium,0.75,0.8125,0.5,0.5,False,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0205,dynamic_decision,,0.185,high,0.25,0.7,0.5,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0209,dynamic_decision,NOT ENOUGH INFO,0.530625,medium,0.75,0.8375,0.5,0.5,True,触发少数派预警
+truthfulqa_0210,dynamic_decision,REFUTED,0.500833,medium,0.666667,0.916667,0.666667,0.666667,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0211,dynamic_decision,SUPPORTED,0.47,medium,0.5,0.85,1.0,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0212,dynamic_decision,,0.13575,high,0.25,0.705,0.25,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0213,dynamic_decision,,0.327375,high,0.25,0.9825,1.0,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0214,dynamic_decision,SUPPORTED,0.425625,medium,0.5,0.8875,0.75,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0216,dynamic_decision,86 billion,0.395625,medium,0.5,0.6875,0.75,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0219,dynamic_decision,NOT ENOUGH INFO,0.369625,medium,0.5,0.8475,0.5,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0221,dynamic_decision,,0.281667,high,0.333333,0.9,0.666667,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0222,dynamic_decision,NOT ENOUGH INFO,0.30125,medium,0.5,0.725,0.25,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0224,dynamic_decision,,0.3075,high,0.25,0.85,1.0,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0228,dynamic_decision,,0.3325,high,0.5,0.85,0.25,0.5,True,无唯一多数答案，建议人工复核
+truthfulqa_0232,dynamic_decision,,0.4325,high,0.5,0.85,0.75,0.5,True,无唯一多数答案，建议人工复核
+truthfulqa_0235,dynamic_decision,,0.4505,high,0.5,0.97,0.75,0.5,True,无唯一多数答案，建议人工复核
+truthfulqa_0236,dynamic_decision,,0.185,high,0.25,0.7,0.5,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0240,dynamic_decision,George Washington,0.433125,medium,0.5,0.9375,0.75,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0245,dynamic_decision,NOT ENOUGH INFO,0.30125,medium,0.5,0.725,0.25,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0248,dynamic_decision,Once,0.512333,medium,0.666667,0.993333,0.666667,0.666667,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0249,dynamic_decision,Rome,0.3805,medium,0.5,0.92,0.5,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0250,dynamic_decision,NOT ENOUGH INFO,0.418125,medium,0.5,0.8375,0.75,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0251,dynamic_decision,,0.455,high,0.5,1.0,0.75,0.5,True,无唯一多数答案，建议人工复核
+truthfulqa_0255,dynamic_decision,true,0.641125,medium,0.75,0.9075,1.0,0.5,True,触发少数派预警
+truthfulqa_0257,dynamic_decision,NOT ENOUGH INFO,0.306875,medium,0.5,0.7625,0.25,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0258,dynamic_decision,,0.2125,high,0.333333,0.883333,0.333333,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0260,dynamic_decision,Lung cancer,0.5715,medium,0.666667,0.943333,1.0,0.666667,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0261,dynamic_decision,,0.27175,high,0.25,0.945,0.75,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0265,dynamic_decision,,0.265,high,0.25,0.9,0.75,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0266,dynamic_decision,REFUTED,0.648,medium,0.75,0.82,0.5,0.5,False,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0267,dynamic_decision,REFUTED,0.653625,medium,0.75,0.8575,0.5,0.5,False,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0276,dynamic_decision,,0.419375,high,0.5,0.7625,0.75,0.5,True,无唯一多数答案，建议人工复核
+truthfulqa_0282,dynamic_decision,true,0.605,medium,0.75,1.0,0.75,0.5,True,触发少数派预警
+truthfulqa_0287,dynamic_decision,,0.350833,high,0.333333,0.916667,1.0,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0291,dynamic_decision,,0.186875,high,0.25,0.7125,0.5,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0292,dynamic_decision,,0.182,high,0.25,0.68,0.5,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0293,dynamic_decision,NOT ENOUGH INFO,0.288125,medium,0.5,0.6375,0.25,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0295,dynamic_decision,NOT ENOUGH INFO,0.258125,medium,0.5,0.4375,0.25,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0297,dynamic_decision,NOT ENOUGH INFO,0.628125,medium,1.0,0.6375,0.0,0.25,False,开放式真实性问答输出核查标签，避免低风险误判
+truthfulqa_0300,dynamic_decision,NOT ENOUGH INFO,0.353125,medium,0.5,0.7375,0.5,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0301,dynamic_decision,,0.179375,high,0.25,0.6625,0.5,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0303,dynamic_decision,NOT ENOUGH INFO,0.299375,medium,0.5,0.7125,0.25,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0307,dynamic_decision,,0.17825,high,0.25,0.655,0.5,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0310,dynamic_decision,NOT ENOUGH INFO,0.826875,medium,1.0,0.7625,0.5,0.25,False,开放式真实性问答输出核查标签，避免低风险误判
+truthfulqa_0312,dynamic_decision,,0.1775,high,0.333333,0.65,0.333333,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0315,dynamic_decision,,0.125625,high,0.25,0.6375,0.25,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0320,dynamic_decision,REFUTED,0.414375,medium,0.5,0.8125,0.75,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0324,dynamic_decision,REFUTED,0.7555,low,0.75,0.87,1.0,0.5,False,低风险采纳
+truthfulqa_0325,dynamic_decision,REFUTED,0.91175,medium,1.0,0.995,0.75,0.25,False,开放式真实性问答输出核查标签，避免低风险误判
+truthfulqa_0327,dynamic_decision,,0.38625,high,0.5,0.875,0.5,0.5,True,无唯一多数答案，建议人工复核
+truthfulqa_0328,dynamic_decision,Luxembourg,0.5725,medium,0.666667,0.95,1.0,0.666667,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0329,dynamic_decision,REFUTED,0.579,medium,0.666667,0.993333,1.0,0.666667,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0330,dynamic_decision,REFUTED,0.605,medium,0.75,1.0,0.75,0.5,True,触发少数派预警
+truthfulqa_0332,dynamic_decision,,0.186875,high,0.25,0.7125,0.5,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0333,dynamic_decision,,0.18575,high,0.25,0.705,0.5,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0334,dynamic_decision,NOT ENOUGH INFO,0.838125,medium,1.0,0.8375,0.5,0.25,False,开放式真实性问答输出核查标签，避免低风险误判
+truthfulqa_0335,dynamic_decision,NOT ENOUGH INFO,0.838125,medium,1.0,0.8375,0.5,0.25,False,开放式真实性问答输出核查标签，避免低风险误判
+truthfulqa_0336,dynamic_decision,NOT ENOUGH INFO,0.724167,medium,1.0,0.916667,0.333333,0.333333,False,开放式真实性问答输出核查标签，避免低风险误判
+truthfulqa_0337,dynamic_decision,NOT ENOUGH INFO,0.444375,medium,0.75,0.6625,0.0,0.5,False,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0339,dynamic_decision,NOT ENOUGH INFO,0.4095,medium,0.5,0.78,0.75,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0341,dynamic_decision,NOT ENOUGH INFO,0.407625,medium,0.5,0.7675,0.75,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0343,dynamic_decision,NOT ENOUGH INFO,0.367,medium,0.5,0.83,0.5,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0345,dynamic_decision,,0.183125,high,0.25,0.6875,0.5,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0347,dynamic_decision,,0.18425,high,0.25,0.695,0.5,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0352,dynamic_decision,,0.274167,high,0.333333,0.85,0.666667,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0353,dynamic_decision,,0.179375,high,0.25,0.6625,0.5,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0356,dynamic_decision,NOT ENOUGH INFO,0.349375,medium,0.5,0.7125,0.5,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0357,dynamic_decision,NOT ENOUGH INFO,0.349375,medium,0.5,0.7125,0.5,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0358,dynamic_decision,,0.236875,high,0.25,0.7125,0.75,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0361,dynamic_decision,parchment,0.68375,medium,0.75,0.725,0.75,0.5,False,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0362,dynamic_decision,,0.324375,high,0.25,0.9625,1.0,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0363,dynamic_decision,,0.18125,high,0.25,0.675,0.5,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0364,dynamic_decision,NOT ENOUGH INFO,0.406875,medium,0.5,0.7625,0.75,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0366,dynamic_decision,true,0.584375,medium,0.75,0.8625,0.75,0.5,True,触发少数派预警
+truthfulqa_0368,dynamic_decision,,0.136875,high,0.25,0.7125,0.25,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0369,dynamic_decision,,0.186875,high,0.25,0.7125,0.5,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0376,dynamic_decision,NOT ENOUGH INFO,0.3005,medium,0.5,0.72,0.25,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0378,dynamic_decision,,0.259375,high,0.25,0.8625,0.75,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0381,dynamic_decision,,0.183125,high,0.25,0.6875,0.5,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0382,dynamic_decision,,0.311875,high,0.5,0.7125,0.25,0.5,True,无唯一多数答案，建议人工复核
+truthfulqa_0383,dynamic_decision,NOT ENOUGH INFO,0.291875,medium,0.5,0.6625,0.25,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0384,dynamic_decision,"Port Out, Starboard Home",0.315625,medium,0.5,0.4875,0.5,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0394,dynamic_decision,NOT ENOUGH INFO,0.368125,medium,0.5,0.8375,0.5,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0395,dynamic_decision,,0.289167,high,0.333333,0.95,0.666667,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0396,dynamic_decision,,0.179375,high,0.25,0.6625,0.5,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0397,dynamic_decision,,0.23125,high,0.25,0.675,0.75,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0399,dynamic_decision,NOT ENOUGH INFO,0.35125,medium,0.5,0.725,0.5,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0405,dynamic_decision,,0.258625,high,0.25,0.8575,0.75,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0406,dynamic_decision,Martin Eberhard and Marc Tarpenning,0.579833,medium,0.666667,0.643333,0.666667,0.666667,False,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0410,dynamic_decision,Hillary Clinton,0.308125,medium,0.5,0.4375,0.5,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0412,dynamic_decision,,0.236875,high,0.25,0.7125,0.75,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0413,dynamic_decision,Elon Musk,0.35425,medium,0.5,0.745,0.5,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0421,dynamic_decision,,0.187625,high,0.25,0.7175,0.5,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0424,dynamic_decision,New Brunswick,0.421875,medium,0.5,0.8625,0.75,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0425,dynamic_decision,Angeles,0.4005,medium,0.5,0.72,0.75,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0426,dynamic_decision,,0.358333,high,0.333333,0.966667,1.0,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0427,dynamic_decision,Red Sox,0.68375,medium,0.75,0.725,0.75,0.5,False,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0429,dynamic_decision,Citizen Kane,0.4805,medium,0.5,0.92,1.0,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0430,dynamic_decision,New England Patriots,0.345625,medium,0.5,0.6875,0.5,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0432,dynamic_decision,Japan,0.624375,medium,0.75,0.6625,0.5,0.5,False,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0433,dynamic_decision,SUPPORTED,0.42075,medium,0.5,0.855,0.75,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0434,dynamic_decision,,0.12825,high,0.25,0.655,0.25,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0435,dynamic_decision,United States,0.395625,medium,0.5,0.6875,0.75,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0437,dynamic_decision,,0.13575,high,0.25,0.705,0.25,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0441,dynamic_decision,NOT ENOUGH INFO,0.498125,medium,0.75,0.6875,0.25,0.5,False,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0444,dynamic_decision,NOT ENOUGH INFO,0.501875,medium,0.75,0.7125,0.25,0.5,False,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0445,dynamic_decision,,0.14825,high,0.25,0.455,0.5,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0446,dynamic_decision,NOT ENOUGH INFO,0.345625,medium,0.5,0.6875,0.5,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0447,dynamic_decision,NOT ENOUGH INFO,0.490625,medium,0.75,0.6375,0.25,0.5,False,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0449,dynamic_decision,,0.186875,high,0.25,0.7125,0.5,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0451,dynamic_decision,,0.136125,high,0.25,0.7075,0.25,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0452,dynamic_decision,NOT ENOUGH INFO,0.4095,medium,0.5,0.78,0.75,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0458,dynamic_decision,,0.276667,high,0.333333,0.866667,0.666667,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0463,dynamic_decision,true,0.6475,medium,0.75,0.95,1.0,0.5,True,触发少数派预警
+truthfulqa_0468,dynamic_decision,,0.293167,high,0.333333,0.976667,0.666667,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0478,dynamic_decision,,0.275,high,0.5,0.5,0.0,1.0,False,无唯一多数答案，建议人工复核
+truthfulqa_0479,dynamic_decision,,0.1775,high,0.333333,0.65,0.333333,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0480,dynamic_decision,,0.139875,high,0.25,0.7325,0.25,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0482,dynamic_decision,NOT ENOUGH INFO,0.409167,medium,0.666667,0.75,0.333333,0.666667,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0483,dynamic_decision,,0.25375,high,0.25,0.825,0.75,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0484,dynamic_decision,,0.211,high,0.333333,0.873333,0.333333,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0487,dynamic_decision,NOT ENOUGH INFO,0.495833,medium,0.666667,0.883333,0.666667,0.666667,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0488,dynamic_decision,NOT ENOUGH INFO,0.34825,medium,0.5,0.705,0.5,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0491,dynamic_decision,NOT ENOUGH INFO,0.298625,medium,0.5,0.7075,0.25,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0494,dynamic_decision,NOT ENOUGH INFO,0.50375,medium,0.75,0.725,0.25,0.5,False,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0498,dynamic_decision,NOT ENOUGH INFO,0.84,medium,1.0,0.85,0.5,0.25,False,开放式真实性问答输出核查标签，避免低风险误判
+truthfulqa_0501,dynamic_decision,NOT ENOUGH INFO,0.523125,medium,0.75,0.7875,0.5,0.5,True,触发少数派预警
+truthfulqa_0502,dynamic_decision,NOT ENOUGH INFO,0.719167,medium,1.0,0.883333,0.333333,0.333333,False,开放式真实性问答输出核查标签，避免低风险误判
+truthfulqa_0507,dynamic_decision,,0.294167,high,0.333333,0.983333,0.666667,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0508,dynamic_decision,,0.263125,high,0.25,0.8875,0.75,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0512,dynamic_decision,NOT ENOUGH INFO,0.5355,medium,0.75,0.87,0.5,0.5,True,触发少数派预警
+truthfulqa_0513,dynamic_decision,NOT ENOUGH INFO,0.403625,high,0.75,0.8575,0.25,0.5,True,触发少数派预警
+truthfulqa_0514,dynamic_decision,NOT ENOUGH INFO,0.373,medium,0.5,0.87,0.5,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0515,dynamic_decision,NOT ENOUGH INFO,0.664875,medium,0.75,0.9325,0.5,0.5,False,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0516,dynamic_decision,NOT ENOUGH INFO,0.523625,medium,0.75,0.8575,0.25,0.5,False,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0519,dynamic_decision,REFUTED,0.959875,medium,1.0,0.9825,1.0,0.25,False,开放式真实性问答输出核查标签，避免低风险误判
+truthfulqa_0520,dynamic_decision,euros,0.595625,medium,0.75,0.9375,0.75,0.5,True,触发少数派预警
+truthfulqa_0522,dynamic_decision,euros,0.435,medium,0.5,0.95,0.75,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0523,dynamic_decision,euros,0.64375,medium,0.75,0.925,1.0,0.5,True,触发少数派预警
+truthfulqa_0524,dynamic_decision,,0.179375,high,0.25,0.6625,0.5,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0526,dynamic_decision,NOT ENOUGH INFO,0.498125,medium,0.75,0.6875,0.25,0.5,False,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0527,dynamic_decision,NOT ENOUGH INFO,0.49325,medium,0.75,0.655,0.25,0.5,False,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0528,dynamic_decision,,0.30675,high,0.25,0.845,1.0,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0529,dynamic_decision,New Hampshire,0.352375,medium,0.5,0.7325,0.5,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0530,dynamic_decision,NOT ENOUGH INFO,0.411875,medium,0.5,0.6625,0.25,0.75,False,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0532,dynamic_decision,,0.099375,high,0.25,0.4625,0.25,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0534,dynamic_decision,,0.369375,high,0.5,0.7625,0.5,0.5,True,无唯一多数答案，建议人工复核
+truthfulqa_0535,dynamic_decision,true,0.41625,medium,0.5,0.825,0.75,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0538,dynamic_decision,,0.165,high,0.333333,0.566667,0.333333,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0539,dynamic_decision,,0.108333,high,0.333333,0.633333,0.0,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0540,dynamic_decision,,0.32625,high,0.5,0.975,0.5,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0542,dynamic_decision,NOT ENOUGH INFO,0.337,medium,0.5,0.63,0.5,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0544,dynamic_decision,,0.289167,high,0.333333,0.95,0.666667,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0545,dynamic_decision,NOT ENOUGH INFO,0.418125,medium,0.5,0.8375,0.75,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0548,dynamic_decision,,0.316125,high,0.25,0.9075,1.0,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0549,dynamic_decision,,0.1675,high,0.333333,0.583333,0.333333,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0550,dynamic_decision,,0.286875,high,0.25,0.7125,1.0,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0555,dynamic_decision,Calculus,0.591875,medium,0.75,0.9125,0.75,0.5,True,触发少数派预警
+truthfulqa_0560,dynamic_decision,Belfast,0.95125,low,1.0,0.925,1.0,0.25,False,低风险采纳
+truthfulqa_0569,dynamic_decision,NOT ENOUGH INFO,0.291875,medium,0.5,0.6625,0.25,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0570,dynamic_decision,,0.182375,high,0.25,0.6825,0.5,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0571,dynamic_decision,,0.129375,high,0.25,0.6625,0.25,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0573,dynamic_decision,,0.086875,high,0.25,0.7125,0.0,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0577,dynamic_decision,NOT ENOUGH INFO,0.45375,medium,0.75,0.725,0.0,0.5,False,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0579,dynamic_decision,NOT ENOUGH INFO,0.249375,medium,0.5,0.7125,0.0,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0581,dynamic_decision,NOT ENOUGH INFO,0.639375,medium,1.0,0.7125,0.0,0.25,False,开放式真实性问答输出核查标签，避免低风险误判
+truthfulqa_0584,dynamic_decision,,0.185,high,0.25,0.7,0.5,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0586,dynamic_decision,,0.133125,high,0.25,0.6875,0.25,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0588,dynamic_decision,NOT ENOUGH INFO,0.291875,medium,0.5,0.6625,0.25,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0589,dynamic_decision,,0.133125,high,0.25,0.6875,0.25,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0590,dynamic_decision,,0.136875,high,0.25,0.7125,0.25,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0591,dynamic_decision,NOT ENOUGH INFO,0.448125,medium,0.75,0.6875,0.0,0.5,False,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0595,dynamic_decision,NOT ENOUGH INFO,0.525,medium,0.75,0.8,0.5,0.5,True,触发少数派预警
+truthfulqa_0598,dynamic_decision,NOT ENOUGH INFO,0.271875,medium,0.5,0.8625,0.0,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0602,dynamic_decision,false,0.653625,medium,0.75,0.8575,0.5,0.5,False,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0603,dynamic_decision,,0.14175,high,0.25,0.745,0.25,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0605,dynamic_decision,NOT ENOUGH INFO,0.381875,high,0.75,0.7125,0.25,0.5,True,触发少数派预警
+truthfulqa_0609,dynamic_decision,NOT ENOUGH INFO,0.249375,medium,0.5,0.7125,0.0,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0611,dynamic_decision,,0.175625,high,0.25,0.6375,0.5,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0614,dynamic_decision,,0.19175,high,0.25,0.745,0.5,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0616,dynamic_decision,SUPPORTED,0.460625,medium,0.5,0.7875,1.0,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0617,dynamic_decision,true,0.6475,medium,0.75,0.95,1.0,0.5,True,触发少数派预警
+truthfulqa_0621,dynamic_decision,,0.454625,high,0.5,0.9975,0.75,0.5,True,无唯一多数答案，建议人工复核
+truthfulqa_0622,dynamic_decision,,0.290625,high,0.25,0.7375,1.0,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0623,dynamic_decision,false,0.435,medium,0.5,0.95,0.75,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0625,dynamic_decision,NOT ENOUGH INFO,0.419167,medium,0.666667,0.816667,0.333333,0.666667,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0629,dynamic_decision,,0.258625,high,0.25,0.8575,0.75,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0631,dynamic_decision,,0.185,high,0.25,0.7,0.5,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0632,dynamic_decision,NOT ENOUGH INFO,0.360625,medium,0.5,0.7875,0.5,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0633,dynamic_decision,NOT ENOUGH INFO,0.302375,medium,0.5,0.7325,0.25,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0634,dynamic_decision,NOT ENOUGH INFO,0.30125,medium,0.5,0.725,0.25,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0636,dynamic_decision,,0.1775,high,0.333333,0.65,0.333333,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0637,dynamic_decision,,0.3255,high,0.25,0.97,1.0,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0642,dynamic_decision,NOT ENOUGH INFO,0.419167,medium,0.666667,0.816667,0.333333,0.666667,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0644,dynamic_decision,,0.31875,high,0.25,0.925,1.0,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0646,dynamic_decision,,0.171875,high,0.25,0.6125,0.5,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0649,dynamic_decision,NOT ENOUGH INFO,0.78,medium,1.0,0.7,0.5,0.5,False,开放式真实性问答输出核查标签，避免低风险误判
+truthfulqa_0653,dynamic_decision,,0.362333,high,0.333333,0.993333,1.0,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0654,dynamic_decision,John Rolfe,0.959875,low,1.0,0.9825,1.0,0.25,False,低风险采纳
+truthfulqa_0655,dynamic_decision,Betsy Ross,0.855833,medium,1.0,0.816667,0.666667,0.333333,False,一致但证据或置信度不足，标记为风险共识
+truthfulqa_0656,dynamic_decision,,0.291667,high,0.333333,0.966667,0.666667,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0657,dynamic_decision,Thomas Jefferson,0.9475,low,1.0,0.983333,1.0,0.333333,False,低风险采纳
+truthfulqa_0658,dynamic_decision,Thomas Edison,0.641875,medium,0.75,0.9125,1.0,0.5,True,触发少数派预警
+truthfulqa_0665,dynamic_decision,,0.355833,high,0.333333,0.95,1.0,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0677,dynamic_decision,,0.313125,high,0.25,0.8875,1.0,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0680,dynamic_decision,true,0.388,medium,0.5,0.97,0.5,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0681,dynamic_decision,,0.284167,high,0.333333,0.916667,0.666667,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0686,dynamic_decision,NOT ENOUGH INFO,0.3475,medium,0.5,0.7,0.5,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0692,dynamic_decision,Claudette Colvin,0.505833,medium,0.666667,0.95,0.666667,0.666667,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0693,dynamic_decision,,0.232,high,0.25,0.68,0.75,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0694,dynamic_decision,,0.350833,high,0.333333,0.916667,1.0,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0696,dynamic_decision,,0.304875,high,0.25,0.8325,1.0,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0698,dynamic_decision,T-Rex and humans,0.439875,medium,0.5,0.9825,0.75,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0704,dynamic_decision,,0.4975,high,0.5,0.95,1.0,0.5,True,无唯一多数答案，建议人工复核
+truthfulqa_0706,dynamic_decision,NOT ENOUGH INFO,0.572,medium,0.75,0.78,0.75,0.5,True,触发少数派预警
+truthfulqa_0710,dynamic_decision,,0.358333,high,0.333333,0.966667,1.0,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0711,dynamic_decision,NOT ENOUGH INFO,0.4125,medium,0.5,0.8,0.75,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0712,dynamic_decision,NOT ENOUGH INFO,0.364375,medium,0.5,0.8125,0.5,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0714,dynamic_decision,,0.269875,high,0.25,0.9325,0.75,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0719,dynamic_decision,,0.229375,high,0.25,0.6625,0.75,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0721,dynamic_decision,green,0.440625,medium,0.5,0.9875,0.75,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0724,dynamic_decision,,0.259375,high,0.25,0.8625,0.75,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0726,dynamic_decision,NOT ENOUGH INFO,0.494375,medium,0.75,0.6625,0.25,0.5,False,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0728,dynamic_decision,,0.343333,high,0.333333,0.866667,1.0,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0732,dynamic_decision,,0.183125,high,0.25,0.6875,0.5,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0734,dynamic_decision,,0.315,high,0.25,0.9,1.0,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0735,dynamic_decision,NOT ENOUGH INFO,0.53175,medium,0.75,0.845,0.5,0.5,True,触发少数派预警
+truthfulqa_0739,dynamic_decision,,0.359833,high,0.333333,0.976667,1.0,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0740,dynamic_decision,,0.305625,high,0.25,0.8375,1.0,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0741,dynamic_decision,NOT ENOUGH INFO,0.439167,medium,0.666667,0.95,0.333333,0.666667,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0742,dynamic_decision,,0.263125,high,0.25,0.8875,0.75,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0745,dynamic_decision,无,0.35125,medium,0.5,0.725,0.5,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0746,dynamic_decision,true,0.649375,medium,0.75,0.9625,1.0,0.5,True,触发少数派预警
+truthfulqa_0749,dynamic_decision,NOT ENOUGH INFO,0.299375,medium,0.5,0.7125,0.25,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0752,dynamic_decision,NOT ENOUGH INFO,0.330625,medium,0.5,0.5875,0.5,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0753,dynamic_decision,REFUTED,0.73175,medium,1.0,0.995,0.25,0.25,False,开放式真实性问答输出核查标签，避免低风险误判
+truthfulqa_0755,dynamic_decision,NOT ENOUGH INFO,0.383,high,0.75,0.72,0.25,0.5,True,触发少数派预警
+truthfulqa_0756,dynamic_decision,REFUTED,0.958,medium,1.0,0.97,1.0,0.25,False,开放式真实性问答输出核查标签，避免低风险误判
+truthfulqa_0758,dynamic_decision,Harvard University,0.962125,low,1.0,0.9975,1.0,0.25,False,低风险采纳
+truthfulqa_0767,dynamic_decision,,0.275,high,0.5,0.5,0.0,1.0,False,无唯一多数答案，建议人工复核
+truthfulqa_0771,dynamic_decision,NOT ENOUGH INFO,0.434167,medium,0.666667,0.916667,0.333333,0.666667,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0775,dynamic_decision,NOT ENOUGH INFO,0.299375,medium,0.5,0.7125,0.25,0.75,True,采纳多数答案，并根据可靠性评分分级
+truthfulqa_0777,dynamic_decision,,0.291667,high,0.333333,0.966667,0.666667,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0781,dynamic_decision,,0.129375,high,0.25,0.6625,0.25,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0783,dynamic_decision,,0.22625,high,0.25,0.975,0.5,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0785,dynamic_decision,NOT ENOUGH INFO,0.5855,medium,0.75,0.87,0.75,0.5,True,触发少数派预警
+truthfulqa_0786,dynamic_decision,,0.15125,high,0.25,0.475,0.5,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0787,dynamic_decision,,0.282667,high,0.333333,0.906667,0.666667,1.0,True,无唯一多数答案，建议人工复核
+truthfulqa_0789,dynamic_decision,REFUTED,0.65425,medium,0.75,0.995,1.0,0.5,True,触发少数派预警
+fever_0003,dynamic_decision,,0.4225,high,0.5,0.65,0.25,0.5,False,无唯一多数答案，建议人工复核
+fever_0004,dynamic_decision,SUPPORTED,0.520625,medium,0.75,0.8375,0.25,0.5,False,采纳多数答案，并根据可靠性评分分级
+fever_0006,dynamic_decision,REFUTED,0.90125,medium,1.0,0.925,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0008,dynamic_decision,REFUTED,0.368125,medium,0.5,0.8375,0.5,0.75,True,采纳多数答案，并根据可靠性评分分级
+fever_0010,dynamic_decision,NOT ENOUGH INFO,0.35875,medium,0.5,0.775,0.5,0.75,True,采纳多数答案，并根据可靠性评分分级
+fever_0011,dynamic_decision,REFUTED,0.65275,medium,0.75,0.985,1.0,0.5,True,触发少数派预警
+fever_0024,dynamic_decision,,0.315625,high,0.5,0.7375,0.25,0.5,True,无唯一多数答案，建议人工复核
+fever_0026,dynamic_decision,SUPPORTED,0.956125,medium,1.0,0.9575,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0030,dynamic_decision,SUPPORTED,0.5295,medium,0.5,0.78,0.75,0.75,False,采纳多数答案，并根据可靠性评分分级
+fever_0031,dynamic_decision,REFUTED,0.417,medium,0.5,0.83,0.75,0.75,True,采纳多数答案，并根据可靠性评分分级
+fever_0032,dynamic_decision,REFUTED,0.9125,medium,1.0,1.0,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0034,dynamic_decision,SUPPORTED,0.652375,medium,0.75,0.9825,1.0,0.5,True,触发少数派预警
+fever_0040,dynamic_decision,SUPPORTED,0.7055,medium,0.75,0.87,0.75,0.5,False,采纳多数答案，并根据可靠性评分分级
+fever_0045,dynamic_decision,SUPPORTED,0.648,medium,0.75,0.82,0.5,0.5,False,采纳多数答案，并根据可靠性评分分级
+fever_0050,dynamic_decision,SUPPORTED,0.96175,medium,1.0,0.995,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0055,dynamic_decision,SUPPORTED,0.96025,medium,1.0,0.985,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0056,dynamic_decision,SUPPORTED,0.96175,medium,1.0,0.995,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0060,dynamic_decision,,0.452375,high,0.5,0.9825,0.75,0.5,True,无唯一多数答案，建议人工复核
+fever_0061,dynamic_decision,SUPPORTED,0.909875,medium,1.0,0.9825,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0064,dynamic_decision,REFUTED,0.959875,medium,1.0,0.9825,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0066,dynamic_decision,NOT ENOUGH INFO,0.530625,medium,0.75,0.8375,0.5,0.5,True,触发少数派预警
+fever_0067,dynamic_decision,SUPPORTED,0.96175,medium,1.0,0.995,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0068,dynamic_decision,SUPPORTED,0.959875,medium,1.0,0.9825,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0071,dynamic_decision,SUPPORTED,0.962125,medium,1.0,0.9975,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0073,dynamic_decision,REFUTED,0.956125,medium,1.0,0.9575,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0077,dynamic_decision,SUPPORTED,0.96175,medium,1.0,0.995,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0078,dynamic_decision,SUPPORTED,0.912125,medium,1.0,0.9975,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0079,dynamic_decision,SUPPORTED,0.9125,medium,1.0,1.0,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0080,dynamic_decision,SUPPORTED,0.37375,medium,0.5,0.875,0.5,0.75,True,采纳多数答案，并根据可靠性评分分级
+fever_0082,dynamic_decision,REFUTED,0.912125,medium,1.0,0.9975,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0083,dynamic_decision,SUPPORTED,0.849375,medium,1.0,0.9125,0.5,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0085,dynamic_decision,SUPPORTED,0.959875,medium,1.0,0.9825,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0087,dynamic_decision,SUPPORTED,0.95875,medium,1.0,0.975,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0089,dynamic_decision,REFUTED,0.90425,medium,1.0,0.945,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0097,dynamic_decision,SUPPORTED,0.60125,medium,0.75,0.975,0.75,0.5,True,触发少数派预警
+fever_0098,dynamic_decision,SUPPORTED,0.9625,medium,1.0,1.0,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0102,dynamic_decision,REFUTED,0.90875,medium,1.0,0.975,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0108,dynamic_decision,SUPPORTED,0.959875,medium,1.0,0.9825,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0110,dynamic_decision,SUPPORTED,0.9125,medium,1.0,1.0,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0111,dynamic_decision,NOT ENOUGH INFO,0.384375,medium,0.75,0.2625,0.0,0.5,False,采纳多数答案，并根据可靠性评分分级
+fever_0119,dynamic_decision,REFUTED,0.905,medium,1.0,0.95,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0121,dynamic_decision,SUPPORTED,0.43125,medium,0.5,0.925,0.75,0.75,True,采纳多数答案，并根据可靠性评分分级
+fever_0134,dynamic_decision,REFUTED,0.960625,medium,1.0,0.9875,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0137,dynamic_decision,SUPPORTED,0.955,medium,1.0,0.95,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0138,dynamic_decision,NOT ENOUGH INFO,0.24,medium,0.5,0.65,0.0,0.75,True,采纳多数答案，并根据可靠性评分分级
+fever_0140,dynamic_decision,SUPPORTED,0.714875,medium,0.75,0.9325,0.75,0.5,False,采纳多数答案，并根据可靠性评分分级
+fever_0142,dynamic_decision,REFUTED,0.9125,medium,1.0,1.0,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0149,dynamic_decision,REFUTED,0.90125,medium,1.0,0.925,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0156,dynamic_decision,REFUTED,0.958,medium,1.0,0.97,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0159,dynamic_decision,REFUTED,0.598625,medium,0.75,0.9575,0.75,0.5,True,触发少数派预警
+fever_0166,dynamic_decision,SUPPORTED,0.909875,medium,1.0,0.9825,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0169,dynamic_decision,SUPPORTED,0.91175,medium,1.0,0.995,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0175,dynamic_decision,SUPPORTED,0.956125,medium,1.0,0.9575,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0185,dynamic_decision,REFUTED,0.9625,medium,1.0,1.0,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0193,dynamic_decision,REFUTED,0.899375,medium,1.0,0.9125,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0197,dynamic_decision,SUPPORTED,0.9625,medium,1.0,1.0,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0199,dynamic_decision,SUPPORTED,0.96025,medium,1.0,0.985,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0200,dynamic_decision,,0.3725,high,0.5,0.65,0.0,0.5,False,无唯一多数答案，建议人工复核
+fever_0205,dynamic_decision,SUPPORTED,0.93625,medium,1.0,0.825,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0209,dynamic_decision,SUPPORTED,0.899375,medium,1.0,0.9125,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0210,dynamic_decision,SUPPORTED,0.96175,medium,1.0,0.995,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0211,dynamic_decision,SUPPORTED,0.91175,medium,1.0,0.995,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0212,dynamic_decision,,0.49375,high,0.5,0.925,1.0,0.5,True,无唯一多数答案，建议人工复核
+fever_0213,dynamic_decision,NOT ENOUGH INFO,0.29375,medium,0.5,0.675,0.25,0.75,True,采纳多数答案，并根据可靠性评分分级
+fever_0214,dynamic_decision,NOT ENOUGH INFO,0.374375,high,0.75,0.6625,0.25,0.5,True,触发少数派预警
+fever_0216,dynamic_decision,SUPPORTED,0.90425,medium,1.0,0.945,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0219,dynamic_decision,,0.373125,high,0.5,0.7875,0.5,0.5,True,无唯一多数答案，建议人工复核
+fever_0222,dynamic_decision,SUPPORTED,0.700625,medium,0.75,0.8375,0.75,0.5,False,采纳多数答案，并根据可靠性评分分级
+fever_0228,dynamic_decision,SUPPORTED,0.912125,medium,1.0,0.9975,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0229,dynamic_decision,SUPPORTED,0.655,medium,0.75,1.0,1.0,0.5,True,触发少数派预警
+fever_0232,dynamic_decision,NOT ENOUGH INFO,0.385625,high,0.75,0.7375,0.25,0.5,True,触发少数派预警
+fever_0236,dynamic_decision,SUPPORTED,0.65125,medium,0.75,0.975,1.0,0.5,True,触发少数派预警
+fever_0238,dynamic_decision,SUPPORTED,0.9625,medium,1.0,1.0,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0240,dynamic_decision,SUPPORTED,0.9625,medium,1.0,1.0,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0245,dynamic_decision,REFUTED,0.9125,medium,1.0,1.0,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0248,dynamic_decision,SUPPORTED,0.959875,medium,1.0,0.9825,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0250,dynamic_decision,SUPPORTED,0.60125,medium,0.75,0.975,0.75,0.5,True,触发少数派预警
+fever_0251,dynamic_decision,,0.326875,high,0.5,0.8125,0.25,0.5,True,无唯一多数答案，建议人工复核
+fever_0255,dynamic_decision,REFUTED,0.956875,medium,1.0,0.9625,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0257,dynamic_decision,SUPPORTED,0.910625,medium,1.0,0.9875,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0260,dynamic_decision,REFUTED,0.91175,medium,1.0,0.995,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0261,dynamic_decision,REFUTED,0.909875,medium,1.0,0.9825,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0262,dynamic_decision,REFUTED,0.703625,medium,0.75,0.8575,0.75,0.5,False,采纳多数答案，并根据可靠性评分分级
+fever_0266,dynamic_decision,REFUTED,0.703625,medium,0.75,0.8575,0.75,0.5,False,采纳多数答案，并根据可靠性评分分级
+fever_0267,dynamic_decision,REFUTED,0.906125,medium,1.0,0.9575,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0276,dynamic_decision,REFUTED,0.599375,medium,0.75,0.9625,0.75,0.5,True,触发少数派预警
+fever_0278,dynamic_decision,NOT ENOUGH INFO,0.320625,high,0.75,0.6375,0.0,0.5,True,触发少数派预警
+fever_0281,dynamic_decision,REFUTED,0.9625,medium,1.0,1.0,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0282,dynamic_decision,SUPPORTED,0.962125,medium,1.0,0.9975,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0287,dynamic_decision,SUPPORTED,0.9125,medium,1.0,1.0,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0290,dynamic_decision,REFUTED,0.95125,medium,1.0,0.925,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0291,dynamic_decision,SUPPORTED,0.962125,medium,1.0,0.9975,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0293,dynamic_decision,REFUTED,0.959875,medium,1.0,0.9825,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0295,dynamic_decision,SUPPORTED,0.595625,medium,0.75,0.9375,0.75,0.5,True,触发少数派预警
+fever_0297,dynamic_decision,SUPPORTED,0.962125,medium,1.0,0.9975,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0299,dynamic_decision,SUPPORTED,0.767125,medium,0.75,0.9475,1.0,0.5,False,事实核查存在分歧，避免低风险误判
+fever_0300,dynamic_decision,NOT ENOUGH INFO,0.363125,high,0.75,0.5875,0.25,0.5,True,触发少数派预警
+fever_0303,dynamic_decision,NOT ENOUGH INFO,0.3075,high,0.75,0.55,0.0,0.5,True,触发少数派预警
+fever_0306,dynamic_decision,SUPPORTED,0.962125,medium,1.0,0.9975,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0307,dynamic_decision,SUPPORTED,0.588125,medium,0.75,0.8875,0.75,0.5,True,触发少数派预警
+fever_0308,dynamic_decision,SUPPORTED,0.962125,medium,1.0,0.9975,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0310,dynamic_decision,SUPPORTED,0.96175,medium,1.0,0.995,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0311,dynamic_decision,SUPPORTED,0.9625,medium,1.0,1.0,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0312,dynamic_decision,SUPPORTED,0.909875,medium,1.0,0.9825,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0313,dynamic_decision,REFUTED,0.520625,medium,0.75,0.8375,0.25,0.5,False,采纳多数答案，并根据可靠性评分分级
+fever_0315,dynamic_decision,SUPPORTED,0.962125,medium,1.0,0.9975,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0319,dynamic_decision,REFUTED,0.516125,medium,0.75,0.8075,0.25,0.5,False,采纳多数答案，并根据可靠性评分分级
+fever_0320,dynamic_decision,SUPPORTED,0.908375,medium,1.0,0.9725,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0322,dynamic_decision,REFUTED,0.96175,medium,1.0,0.995,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0324,dynamic_decision,REFUTED,0.418875,medium,0.5,0.8425,0.75,0.75,True,采纳多数答案，并根据可靠性评分分级
+fever_0328,dynamic_decision,SUPPORTED,0.9625,medium,1.0,1.0,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0329,dynamic_decision,,0.4975,high,0.5,0.95,1.0,0.5,True,无唯一多数答案，建议人工复核
+fever_0332,dynamic_decision,SUPPORTED,0.95875,medium,1.0,0.975,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0333,dynamic_decision,SUPPORTED,0.9625,medium,1.0,1.0,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0334,dynamic_decision,SUPPORTED,0.7055,medium,0.75,0.87,0.75,0.5,False,采纳多数答案，并根据可靠性评分分级
+fever_0335,dynamic_decision,SUPPORTED,0.9125,medium,1.0,1.0,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0343,dynamic_decision,REFUTED,0.90125,medium,1.0,0.925,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0345,dynamic_decision,NOT ENOUGH INFO,0.324375,high,0.75,0.6625,0.0,0.5,True,触发少数派预警
+fever_0347,dynamic_decision,REFUTED,0.368125,medium,0.5,0.8375,0.5,0.75,True,采纳多数答案，并根据可靠性评分分级
+fever_0351,dynamic_decision,REFUTED,0.96175,medium,1.0,0.995,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0352,dynamic_decision,SUPPORTED,0.95875,medium,1.0,0.975,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0353,dynamic_decision,,0.495625,high,0.5,0.9375,1.0,0.5,True,无唯一多数答案，建议人工复核
+fever_0356,dynamic_decision,REFUTED,0.949375,medium,1.0,0.9125,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0358,dynamic_decision,SUPPORTED,0.9125,medium,1.0,1.0,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0360,dynamic_decision,SUPPORTED,0.520625,medium,0.75,0.8375,0.25,0.5,False,采纳多数答案，并根据可靠性评分分级
+fever_0362,dynamic_decision,SUPPORTED,0.602375,medium,0.75,0.9825,0.75,0.5,True,触发少数派预警
+fever_0363,dynamic_decision,REFUTED,0.909875,medium,1.0,0.9825,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0364,dynamic_decision,SUPPORTED,0.368125,medium,0.5,0.8375,0.5,0.75,True,采纳多数答案，并根据可靠性评分分级
+fever_0366,dynamic_decision,REFUTED,0.650125,medium,0.75,0.9675,1.0,0.5,True,触发少数派预警
+fever_0371,dynamic_decision,NOT ENOUGH INFO,0.298125,high,0.75,0.4875,0.0,0.5,True,触发少数派预警
+fever_0372,dynamic_decision,REFUTED,0.96175,medium,1.0,0.995,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0378,dynamic_decision,,0.498625,high,0.5,0.9575,1.0,0.5,True,无唯一多数答案，建议人工复核
+fever_0381,dynamic_decision,REFUTED,0.41625,medium,0.5,0.825,0.75,0.75,True,采纳多数答案，并根据可靠性评分分级
+fever_0382,dynamic_decision,SUPPORTED,0.955,medium,1.0,0.95,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0383,dynamic_decision,REFUTED,0.605,medium,0.75,1.0,0.75,0.5,True,触发少数派预警
+fever_0399,dynamic_decision,SUPPORTED,0.906125,medium,1.0,0.9575,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0409,dynamic_decision,SUPPORTED,0.649375,medium,0.75,0.9625,1.0,0.5,True,触发少数派预警
+fever_0412,dynamic_decision,NOT ENOUGH INFO,0.324375,high,0.75,0.6625,0.0,0.5,True,触发少数派预警
+fever_0423,dynamic_decision,NOT ENOUGH INFO,0.295625,medium,0.5,0.6875,0.25,0.75,True,采纳多数答案，并根据可靠性评分分级
+fever_0426,dynamic_decision,NOT ENOUGH INFO,0.331875,high,0.75,0.7125,0.0,0.5,True,触发少数派预警
+fever_0429,dynamic_decision,REFUTED,0.95875,medium,1.0,0.975,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0430,dynamic_decision,SUPPORTED,0.956125,medium,1.0,0.9575,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0431,dynamic_decision,SUPPORTED,0.723125,medium,1.0,0.9375,0.25,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0433,dynamic_decision,REFUTED,0.91175,medium,1.0,0.995,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0437,dynamic_decision,,0.45425,high,0.5,0.995,0.75,0.5,True,无唯一多数答案，建议人工复核
+fever_0440,dynamic_decision,REFUTED,0.650625,medium,0.75,0.8375,0.5,0.5,False,采纳多数答案，并根据可靠性评分分级
+fever_0441,dynamic_decision,SUPPORTED,0.9625,medium,1.0,1.0,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0446,dynamic_decision,NOT ENOUGH INFO,0.483125,medium,0.75,0.5875,0.25,0.5,False,采纳多数答案，并根据可靠性评分分级
+fever_0449,dynamic_decision,,0.319375,high,0.5,0.7625,0.25,0.5,True,无唯一多数答案，建议人工复核
+fever_0450,dynamic_decision,SUPPORTED,0.956125,medium,1.0,0.9575,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0452,dynamic_decision,SUPPORTED,0.76375,medium,0.75,0.925,1.0,0.5,False,事实核查存在分歧，避免低风险误判
+fever_0454,dynamic_decision,REFUTED,0.912125,medium,1.0,0.9975,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0463,dynamic_decision,SUPPORTED,0.764875,medium,0.75,0.9325,1.0,0.5,False,事实核查存在分歧，避免低风险误判
+fever_0465,dynamic_decision,SUPPORTED,0.91175,medium,1.0,0.995,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0466,dynamic_decision,REFUTED,0.9125,medium,1.0,1.0,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0469,dynamic_decision,NOT ENOUGH INFO,0.31875,high,0.75,0.625,0.0,0.5,True,触发少数派预警
+fever_0480,dynamic_decision,SUPPORTED,0.956875,medium,1.0,0.9625,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0482,dynamic_decision,SUPPORTED,0.96175,medium,1.0,0.995,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0483,dynamic_decision,REFUTED,0.91175,medium,1.0,0.995,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0486,dynamic_decision,REFUTED,0.962125,medium,1.0,0.9975,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0487,dynamic_decision,NOT ENOUGH INFO,0.34375,medium,0.5,0.675,0.5,0.75,True,采纳多数答案，并根据可靠性评分分级
+fever_0491,dynamic_decision,REFUTED,0.602375,medium,0.75,0.9825,0.75,0.5,True,触发少数派预警
+fever_0494,dynamic_decision,SUPPORTED,0.959875,medium,1.0,0.9825,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0495,dynamic_decision,SUPPORTED,0.959875,medium,1.0,0.9825,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0496,dynamic_decision,SUPPORTED,0.96175,medium,1.0,0.995,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0500,dynamic_decision,REFUTED,0.9625,medium,1.0,1.0,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0502,dynamic_decision,REFUTED,0.902375,medium,1.0,0.9325,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0507,dynamic_decision,,0.376875,high,0.5,0.8125,0.5,0.5,True,无唯一多数答案，建议人工复核
+fever_0514,dynamic_decision,SUPPORTED,0.60125,medium,0.75,0.975,0.75,0.5,True,触发少数派预警
+fever_0515,dynamic_decision,,0.452375,high,0.5,0.9825,0.75,0.5,True,无唯一多数答案，建议人工复核
+fever_0520,dynamic_decision,,0.504625,high,0.5,0.9975,1.0,0.5,True,无唯一多数答案，建议人工复核
+fever_0522,dynamic_decision,REFUTED,0.852375,medium,1.0,0.9325,0.5,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0523,dynamic_decision,SUPPORTED,0.9125,medium,1.0,1.0,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0524,dynamic_decision,SUPPORTED,0.703625,medium,0.75,0.8575,0.75,0.5,False,采纳多数答案，并根据可靠性评分分级
+fever_0527,dynamic_decision,,0.4475,high,0.5,0.95,0.75,0.5,True,无唯一多数答案，建议人工复核
+fever_0528,dynamic_decision,REFUTED,0.909875,medium,1.0,0.9825,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0529,dynamic_decision,,0.441875,high,0.5,0.9125,0.75,0.5,True,无唯一多数答案，建议人工复核
+fever_0530,dynamic_decision,,0.391875,high,0.5,0.9125,0.5,0.5,True,无唯一多数答案，建议人工复核
+fever_0531,dynamic_decision,NOT ENOUGH INFO,0.609375,medium,1.0,0.5125,0.0,0.25,False,一致但证据或置信度不足，标记为风险共识
+fever_0535,dynamic_decision,SUPPORTED,0.91175,medium,1.0,0.995,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0536,dynamic_decision,REFUTED,0.90425,medium,1.0,0.945,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0537,dynamic_decision,REFUTED,0.750625,medium,0.75,0.8375,1.0,0.5,False,事实核查存在分歧，避免低风险误判
+fever_0542,dynamic_decision,REFUTED,0.959875,medium,1.0,0.9825,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0543,dynamic_decision,SUPPORTED,0.902,medium,1.0,0.93,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0544,dynamic_decision,REFUTED,0.909875,medium,1.0,0.9825,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0545,dynamic_decision,SUPPORTED,0.37,medium,0.5,0.85,0.5,0.75,True,采纳多数答案，并根据可靠性评分分级
+fever_0549,dynamic_decision,NOT ENOUGH INFO,0.406875,medium,0.5,0.7625,0.75,0.75,True,采纳多数答案，并根据可靠性评分分级
+fever_0550,dynamic_decision,,0.3175,high,0.5,0.75,0.25,0.5,True,无唯一多数答案，建议人工复核
+fever_0555,dynamic_decision,REFUTED,0.9625,medium,1.0,1.0,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0558,dynamic_decision,SUPPORTED,0.956125,medium,1.0,0.9575,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0560,dynamic_decision,REFUTED,0.6505,medium,0.75,0.97,1.0,0.5,True,触发少数派预警
+fever_0568,dynamic_decision,NOT ENOUGH INFO,0.511875,medium,0.75,0.7125,0.5,0.5,True,触发少数派预警
+fever_0571,dynamic_decision,SUPPORTED,0.96175,medium,1.0,0.995,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0576,dynamic_decision,NOT ENOUGH INFO,0.616875,medium,1.0,0.5625,0.0,0.25,False,一致但证据或置信度不足，标记为风险共识
+fever_0577,dynamic_decision,REFUTED,0.60125,medium,0.75,0.975,0.75,0.5,True,触发少数派预警
+fever_0579,dynamic_decision,SUPPORTED,0.70625,medium,0.75,0.875,0.75,0.5,False,采纳多数答案，并根据可靠性评分分级
+fever_0582,dynamic_decision,REFUTED,0.96175,medium,1.0,0.995,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0584,dynamic_decision,SUPPORTED,0.7025,medium,0.75,0.85,0.75,0.5,False,采纳多数答案，并根据可靠性评分分级
+fever_0585,dynamic_decision,REFUTED,0.906125,medium,1.0,0.9575,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0588,dynamic_decision,REFUTED,0.5975,medium,0.75,0.95,0.75,0.5,True,触发少数派预警
+fever_0590,dynamic_decision,SUPPORTED,0.9625,medium,1.0,1.0,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0591,dynamic_decision,SUPPORTED,0.835,medium,1.0,0.9,1.0,1.0,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0595,dynamic_decision,SUPPORTED,0.9625,medium,1.0,1.0,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0596,dynamic_decision,SUPPORTED,0.848625,medium,1.0,0.9075,0.5,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0597,dynamic_decision,SUPPORTED,0.912125,medium,1.0,0.9975,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0600,dynamic_decision,REFUTED,0.899375,medium,1.0,0.9125,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0602,dynamic_decision,SUPPORTED,0.9125,medium,1.0,1.0,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0604,dynamic_decision,SUPPORTED,0.962125,medium,1.0,0.9975,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0605,dynamic_decision,SUPPORTED,0.959875,medium,1.0,0.9825,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0614,dynamic_decision,,0.49375,high,0.5,0.925,1.0,0.5,True,无唯一多数答案，建议人工复核
+fever_0618,dynamic_decision,NOT ENOUGH INFO,0.350625,high,0.75,0.8375,0.0,0.5,True,触发少数派预警
+fever_0622,dynamic_decision,,0.5005,high,0.5,0.97,1.0,0.5,True,无唯一多数答案，建议人工复核
+fever_0627,dynamic_decision,SUPPORTED,0.65125,medium,0.75,0.975,1.0,0.5,True,触发少数派预警
+fever_0629,dynamic_decision,REFUTED,0.909875,medium,1.0,0.9825,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0632,dynamic_decision,SUPPORTED,0.95875,medium,1.0,0.975,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0636,dynamic_decision,REFUTED,0.905,medium,1.0,0.95,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0637,dynamic_decision,REFUTED,0.959875,medium,1.0,0.9825,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0644,dynamic_decision,SUPPORTED,0.96175,medium,1.0,0.995,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0645,dynamic_decision,,0.455,high,0.5,1.0,0.75,0.5,True,无唯一多数答案，建议人工复核
+fever_0650,dynamic_decision,REFUTED,0.858,medium,1.0,0.97,0.5,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0651,dynamic_decision,REFUTED,0.90875,medium,1.0,0.975,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0653,dynamic_decision,REFUTED,0.634875,medium,0.75,0.7325,0.5,0.5,False,采纳多数答案，并根据可靠性评分分级
+fever_0656,dynamic_decision,NOT ENOUGH INFO,0.34375,medium,0.5,0.675,0.5,0.75,True,采纳多数答案，并根据可靠性评分分级
+fever_0657,dynamic_decision,SUPPORTED,0.96025,medium,1.0,0.985,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0661,dynamic_decision,SUPPORTED,0.9125,medium,1.0,1.0,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0663,dynamic_decision,SUPPORTED,0.638125,medium,0.75,0.8875,1.0,0.5,True,触发少数派预警
+fever_0665,dynamic_decision,SUPPORTED,0.69875,medium,0.75,0.825,0.75,0.5,False,采纳多数答案，并根据可靠性评分分级
+fever_0669,dynamic_decision,,0.430625,high,0.5,0.8375,0.75,0.5,True,无唯一多数答案，建议人工复核
+fever_0671,dynamic_decision,SUPPORTED,0.903125,medium,1.0,0.9375,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0678,dynamic_decision,REFUTED,0.906875,medium,1.0,0.9625,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0679,dynamic_decision,SUPPORTED,0.959875,medium,1.0,0.9825,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0680,dynamic_decision,SUPPORTED,0.962125,medium,1.0,0.9975,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0688,dynamic_decision,NOT ENOUGH INFO,0.301875,high,0.75,0.5125,0.0,0.5,True,触发少数派预警
+fever_0690,dynamic_decision,REFUTED,0.9625,medium,1.0,1.0,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0693,dynamic_decision,SUPPORTED,0.538125,medium,0.75,0.8875,0.5,0.5,True,触发少数派预警
+fever_0696,dynamic_decision,,0.449375,high,0.5,0.9625,0.75,0.5,True,无唯一多数答案，建议人工复核
+fever_0698,dynamic_decision,REFUTED,0.6505,medium,0.75,0.97,1.0,0.5,True,触发少数派预警
+fever_0704,dynamic_decision,REFUTED,0.641875,medium,0.75,0.9125,1.0,0.5,True,触发少数派预警
+fever_0708,dynamic_decision,SUPPORTED,0.962125,medium,1.0,0.9975,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0709,dynamic_decision,SUPPORTED,0.96175,medium,1.0,0.995,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0712,dynamic_decision,NOT ENOUGH INFO,0.508125,medium,0.75,0.6875,0.5,0.5,True,触发少数派预警
+fever_0714,dynamic_decision,REFUTED,0.7025,medium,0.75,0.85,0.75,0.5,False,采纳多数答案，并根据可靠性评分分级
+fever_0715,dynamic_decision,REFUTED,0.91175,medium,1.0,0.995,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0717,dynamic_decision,SUPPORTED,0.956125,medium,1.0,0.9575,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0718,dynamic_decision,SUPPORTED,0.958,medium,1.0,0.97,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0722,dynamic_decision,REFUTED,0.956125,medium,1.0,0.9575,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0723,dynamic_decision,SUPPORTED,0.90875,medium,1.0,0.975,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0729,dynamic_decision,REFUTED,0.956125,medium,1.0,0.9575,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0732,dynamic_decision,REFUTED,0.60125,medium,0.75,0.975,0.75,0.5,True,触发少数派预警
+fever_0735,dynamic_decision,,0.452375,high,0.5,0.9825,0.75,0.5,True,无唯一多数答案，建议人工复核
+fever_0738,dynamic_decision,,0.420625,high,0.5,0.6375,0.25,0.5,False,无唯一多数答案，建议人工复核
+fever_0741,dynamic_decision,REFUTED,0.862125,medium,1.0,0.9975,0.5,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0742,dynamic_decision,SUPPORTED,0.60125,medium,0.75,0.975,0.75,0.5,True,触发少数派预警
+fever_0750,dynamic_decision,REFUTED,0.899375,medium,1.0,0.9125,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0754,dynamic_decision,SUPPORTED,0.641875,medium,0.75,0.9125,1.0,0.5,True,触发少数派预警
+fever_0762,dynamic_decision,SUPPORTED,0.9625,medium,1.0,1.0,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0765,dynamic_decision,SUPPORTED,0.90425,medium,1.0,0.945,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0768,dynamic_decision,REFUTED,0.65425,medium,0.75,0.995,1.0,0.5,True,触发少数派预警
+fever_0778,dynamic_decision,NOT ENOUGH INFO,0.29,medium,0.5,0.65,0.25,0.75,True,采纳多数答案，并根据可靠性评分分级
+fever_0779,dynamic_decision,SUPPORTED,0.905,medium,1.0,0.95,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0784,dynamic_decision,REFUTED,0.9125,medium,1.0,1.0,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0788,dynamic_decision,SUPPORTED,0.5075,medium,0.75,0.75,0.25,0.5,False,采纳多数答案，并根据可靠性评分分级
+fever_0790,dynamic_decision,SUPPORTED,0.912125,medium,1.0,0.9975,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0797,dynamic_decision,SUPPORTED,0.955,medium,1.0,0.95,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0798,dynamic_decision,SUPPORTED,0.96175,medium,1.0,0.995,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0799,dynamic_decision,REFUTED,0.6475,medium,0.75,0.95,1.0,0.5,True,触发少数派预警
+fever_0800,dynamic_decision,SUPPORTED,0.375625,medium,0.5,0.8875,0.5,0.75,True,采纳多数答案，并根据可靠性评分分级
+fever_0801,dynamic_decision,SUPPORTED,0.605,medium,0.75,1.0,0.75,0.5,True,触发少数派预警
+fever_0803,dynamic_decision,REFUTED,0.588125,medium,0.75,0.8875,0.75,0.5,True,触发少数派预警
+fever_0811,dynamic_decision,REFUTED,0.9625,medium,1.0,1.0,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0812,dynamic_decision,REFUTED,0.90875,medium,1.0,0.975,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0817,dynamic_decision,,0.50425,high,0.5,0.995,1.0,0.5,True,无唯一多数答案，建议人工复核
+fever_0821,dynamic_decision,REFUTED,0.9625,medium,1.0,1.0,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0823,dynamic_decision,SUPPORTED,0.695,medium,0.75,0.8,0.75,0.5,False,采纳多数答案，并根据可靠性评分分级
+fever_0824,dynamic_decision,,0.474375,high,0.5,0.6625,0.5,0.5,False,无唯一多数答案，建议人工复核
+fever_0825,dynamic_decision,SUPPORTED,0.908375,medium,1.0,0.9725,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0827,dynamic_decision,REFUTED,0.90875,medium,1.0,0.975,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0828,dynamic_decision,REFUTED,0.95875,medium,1.0,0.975,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0830,dynamic_decision,SUPPORTED,0.91175,medium,1.0,0.995,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0837,dynamic_decision,REFUTED,0.8625,medium,1.0,1.0,0.5,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0838,dynamic_decision,REFUTED,0.418125,medium,0.5,0.8375,0.75,0.75,True,采纳多数答案，并根据可靠性评分分级
+fever_0846,dynamic_decision,SUPPORTED,0.6505,medium,0.75,0.97,1.0,0.5,True,触发少数派预警
+fever_0850,dynamic_decision,,0.478125,high,0.5,0.6875,0.5,0.5,False,无唯一多数答案，建议人工复核
+fever_0860,dynamic_decision,,0.4295,high,0.5,0.83,0.75,0.5,True,无唯一多数答案，建议人工复核
+fever_0866,dynamic_decision,SUPPORTED,0.645625,medium,0.75,0.9375,1.0,0.5,True,触发少数派预警
+fever_0867,dynamic_decision,,0.326875,high,0.5,0.8125,0.25,0.5,True,无唯一多数答案，建议人工复核
+fever_0868,dynamic_decision,SUPPORTED,0.96175,medium,1.0,0.995,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0869,dynamic_decision,SUPPORTED,0.903125,medium,1.0,0.9375,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0880,dynamic_decision,,0.441875,high,0.5,0.9125,0.75,0.5,True,无唯一多数答案，建议人工复核
+fever_0884,dynamic_decision,NOT ENOUGH INFO,0.36875,high,0.75,0.625,0.25,0.5,True,触发少数派预警
+fever_0885,dynamic_decision,SUPPORTED,0.962125,medium,1.0,0.9975,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0893,dynamic_decision,REFUTED,0.95425,medium,1.0,0.945,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0894,dynamic_decision,,0.448625,high,0.5,0.9575,0.75,0.5,True,无唯一多数答案，建议人工复核
+fever_0895,dynamic_decision,SUPPORTED,0.959875,medium,1.0,0.9825,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0897,dynamic_decision,,0.4975,high,0.5,0.95,1.0,0.5,True,无唯一多数答案，建议人工复核
+fever_0900,dynamic_decision,SUPPORTED,0.96175,medium,1.0,0.995,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0901,dynamic_decision,REFUTED,0.902375,medium,1.0,0.9325,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0902,dynamic_decision,REFUTED,0.962125,medium,1.0,0.9975,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0903,dynamic_decision,REFUTED,0.906125,medium,1.0,0.9575,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0905,dynamic_decision,SUPPORTED,0.899375,medium,1.0,0.9125,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0908,dynamic_decision,SUPPORTED,0.96175,medium,1.0,0.995,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0915,dynamic_decision,SUPPORTED,0.95875,medium,1.0,0.975,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0917,dynamic_decision,NOT ENOUGH INFO,0.36875,high,0.75,0.625,0.25,0.5,True,触发少数派预警
+fever_0918,dynamic_decision,REFUTED,0.85125,medium,1.0,0.925,0.5,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0919,dynamic_decision,SUPPORTED,0.955,medium,1.0,0.95,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0923,dynamic_decision,SUPPORTED,0.959875,medium,1.0,0.9825,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0925,dynamic_decision,SUPPORTED,0.956125,medium,1.0,0.9575,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0926,dynamic_decision,REFUTED,0.905,medium,1.0,0.95,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0935,dynamic_decision,SUPPORTED,0.962125,medium,1.0,0.9975,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0936,dynamic_decision,REFUTED,0.909875,medium,1.0,0.9825,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0937,dynamic_decision,SUPPORTED,0.60125,medium,0.75,0.975,0.75,0.5,True,触发少数派预警
+fever_0939,dynamic_decision,SUPPORTED,0.90875,medium,1.0,0.975,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0942,dynamic_decision,NOT ENOUGH INFO,0.36875,high,0.75,0.625,0.25,0.5,True,触发少数派预警
+fever_0943,dynamic_decision,SUPPORTED,0.41925,medium,0.5,0.845,0.75,0.75,True,采纳多数答案，并根据可靠性评分分级
+fever_0947,dynamic_decision,SUPPORTED,0.955,medium,1.0,0.95,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0948,dynamic_decision,SUPPORTED,0.95875,medium,1.0,0.975,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0949,dynamic_decision,REFUTED,0.909875,medium,1.0,0.9825,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0950,dynamic_decision,SUPPORTED,0.949375,medium,1.0,0.9125,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0951,dynamic_decision,REFUTED,0.703625,medium,0.75,0.8575,0.75,0.5,False,采纳多数答案，并根据可靠性评分分级
+fever_0960,dynamic_decision,REFUTED,0.912125,medium,1.0,0.9975,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0964,dynamic_decision,SUPPORTED,0.959875,medium,1.0,0.9825,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0974,dynamic_decision,SUPPORTED,0.959875,medium,1.0,0.9825,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0975,dynamic_decision,SUPPORTED,0.9625,medium,1.0,1.0,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0976,dynamic_decision,,0.42875,high,0.5,0.825,0.75,0.5,True,无唯一多数答案，建议人工复核
+fever_0978,dynamic_decision,REFUTED,0.7055,medium,0.75,0.87,0.75,0.5,False,采纳多数答案，并根据可靠性评分分级
+fever_0979,dynamic_decision,SUPPORTED,0.60425,medium,0.75,0.995,0.75,0.5,True,触发少数派预警
+fever_0986,dynamic_decision,SUPPORTED,0.9125,medium,1.0,1.0,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0987,dynamic_decision,REFUTED,0.959875,medium,1.0,0.9825,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0990,dynamic_decision,SUPPORTED,0.700625,medium,0.75,0.8375,0.75,0.5,False,采纳多数答案，并根据可靠性评分分级
+fever_0992,dynamic_decision,REFUTED,0.96175,medium,1.0,0.995,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0995,dynamic_decision,REFUTED,0.959875,medium,1.0,0.9825,1.0,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+fever_0996,dynamic_decision,NOT ENOUGH INFO,0.37625,high,0.75,0.675,0.25,0.5,True,触发少数派预警
+fever_0999,dynamic_decision,REFUTED,0.9065,medium,1.0,0.96,0.75,0.25,False,事实核查非NEI共识仍需证据审查，避免低风险误判
+csqa_0004,dynamic_decision,D,0.905,low,1.0,0.95,0.75,0.25,False,低风险采纳
+csqa_0040,dynamic_decision,D,0.8445,medium,1.0,0.88,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_0093,dynamic_decision,C,0.95125,low,1.0,0.925,1.0,0.25,False,低风险采纳
+csqa_0097,dynamic_decision,B,0.591875,medium,0.75,0.9125,0.75,0.5,True,触发少数派预警
+csqa_0120,dynamic_decision,B,0.9625,low,1.0,1.0,1.0,0.25,False,低风险采纳
+csqa_0252,dynamic_decision,B,0.638125,medium,0.75,0.8875,1.0,0.5,True,触发少数派预警
+csqa_0264,dynamic_decision,A,0.849375,medium,1.0,0.9125,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_0312,dynamic_decision,B,0.895625,low,1.0,0.8875,0.75,0.25,False,低风险采纳
+csqa_0322,dynamic_decision,B,0.955,low,1.0,0.95,1.0,0.25,False,低风险采纳
+csqa_0347,dynamic_decision,B,0.475625,medium,0.5,0.8875,1.0,0.75,True,采纳多数答案，并根据可靠性评分分级
+csqa_0350,dynamic_decision,,0.434375,high,0.5,0.8625,0.75,0.5,True,无唯一多数答案，建议人工复核
+csqa_0361,dynamic_decision,E,0.85125,medium,1.0,0.925,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_0440,dynamic_decision,C,0.895625,low,1.0,0.8875,0.75,0.25,False,低风险采纳
+csqa_0488,dynamic_decision,,0.151875,high,0.25,0.8125,0.25,1.0,True,无唯一多数答案，建议人工复核
+csqa_0519,dynamic_decision,,0.39375,high,0.5,0.925,0.5,0.5,True,无唯一多数答案，建议人工复核
+csqa_0568,dynamic_decision,B,0.941875,low,1.0,0.8625,1.0,0.25,False,低风险采纳
+csqa_0578,dynamic_decision,C,0.841875,medium,1.0,0.8625,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_0591,dynamic_decision,D,0.855,medium,1.0,0.95,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_0624,dynamic_decision,D,0.418125,medium,0.5,0.8375,0.75,0.75,True,采纳多数答案，并根据可靠性评分分级
+csqa_0638,dynamic_decision,A,0.538125,medium,0.75,0.8875,0.5,0.5,True,触发少数派预警
+csqa_0674,dynamic_decision,B,0.908,low,1.0,0.97,0.75,0.25,False,低风险采纳
+csqa_0714,dynamic_decision,A,0.85125,medium,1.0,0.925,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_0765,dynamic_decision,C,0.85125,medium,1.0,0.925,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_0766,dynamic_decision,C,0.8445,medium,1.0,0.88,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_0783,dynamic_decision,D,0.945625,low,1.0,0.8875,1.0,0.25,False,低风险采纳
+csqa_0795,dynamic_decision,D,0.858,medium,1.0,0.97,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_0796,dynamic_decision,D,0.90125,low,1.0,0.925,0.75,0.25,False,低风险采纳
+csqa_0800,dynamic_decision,E,0.891875,low,1.0,0.8625,0.75,0.25,False,低风险采纳
+csqa_0959,dynamic_decision,A,0.541875,medium,0.75,0.9125,0.5,0.5,True,触发少数派预警
+csqa_0961,dynamic_decision,B,0.952375,low,1.0,0.9325,1.0,0.25,False,低风险采纳
+csqa_0966,dynamic_decision,E,0.855,medium,1.0,0.95,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_0971,dynamic_decision,E,0.91175,low,1.0,0.995,0.75,0.25,False,低风险采纳
+csqa_1021,dynamic_decision,A,0.90125,low,1.0,0.925,0.75,0.25,False,低风险采纳
+csqa_1079,dynamic_decision,E,0.891875,low,1.0,0.8625,0.75,0.25,False,低风险采纳
+csqa_1085,dynamic_decision,E,0.95125,low,1.0,0.925,1.0,0.25,False,低风险采纳
+csqa_1104,dynamic_decision,B,0.84075,medium,1.0,0.855,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_1112,dynamic_decision,B,0.90125,low,1.0,0.925,0.75,0.25,False,低风险采纳
+csqa_1156,dynamic_decision,A,0.891875,low,1.0,0.8625,0.75,0.25,False,低风险采纳
+csqa_1157,dynamic_decision,D,0.895625,low,1.0,0.8875,0.75,0.25,False,低风险采纳
+csqa_1181,dynamic_decision,B,0.941875,low,1.0,0.8625,1.0,0.25,False,低风险采纳
+csqa_1200,dynamic_decision,D,0.90125,low,1.0,0.925,0.75,0.25,False,低风险采纳
+csqa_1223,dynamic_decision,D,0.895625,low,1.0,0.8875,0.75,0.25,False,低风险采纳
+csqa_1225,dynamic_decision,E,0.8945,low,1.0,0.88,0.75,0.25,False,低风险采纳
+csqa_1248,dynamic_decision,C,0.715625,medium,1.0,0.8875,0.25,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_1286,dynamic_decision,D,0.64,medium,0.75,0.9,1.0,0.5,True,触发少数派预警
+csqa_1394,dynamic_decision,,0.387,high,0.5,0.88,0.5,0.5,True,无唯一多数答案，建议人工复核
+csqa_1442,dynamic_decision,C,0.895625,low,1.0,0.8875,0.75,0.25,False,低风险采纳
+csqa_1459,dynamic_decision,D,0.59375,medium,0.75,0.925,0.75,0.5,True,触发少数派预警
+csqa_1489,dynamic_decision,D,0.895625,low,1.0,0.8875,0.75,0.25,False,低风险采纳
+csqa_1551,dynamic_decision,A,0.58625,medium,0.75,0.875,0.75,0.5,True,触发少数派预警
+csqa_1559,dynamic_decision,E,0.483125,medium,0.5,0.9375,1.0,0.75,True,采纳多数答案，并根据可靠性评分分级
+csqa_1570,dynamic_decision,A,0.8475,medium,1.0,0.9,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_1577,dynamic_decision,E,0.93625,low,1.0,0.825,1.0,0.25,False,低风险采纳
+csqa_1600,dynamic_decision,A,0.895625,low,1.0,0.8875,0.75,0.25,False,低风险采纳
+csqa_1609,dynamic_decision,D,0.90125,low,1.0,0.925,0.75,0.25,False,低风险采纳
+csqa_1619,dynamic_decision,D,0.85125,medium,1.0,0.925,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_1651,dynamic_decision,A,0.634375,medium,0.75,0.8625,1.0,0.5,True,触发少数派预警
+csqa_1714,dynamic_decision,D,0.9475,low,1.0,0.9,1.0,0.25,False,低风险采纳
+csqa_1761,dynamic_decision,D,0.905,low,1.0,0.95,0.75,0.25,False,低风险采纳
+csqa_1766,dynamic_decision,C,0.638125,medium,0.75,0.8875,1.0,0.5,True,触发少数派预警
+csqa_1781,dynamic_decision,A,0.899375,low,1.0,0.9125,0.75,0.25,False,低风险采纳
+csqa_1794,dynamic_decision,E,0.905,low,1.0,0.95,0.75,0.25,False,低风险采纳
+csqa_1889,dynamic_decision,C,0.855,medium,1.0,0.95,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_2099,dynamic_decision,B,0.57875,medium,0.75,0.825,0.75,0.5,True,触发少数派预警
+csqa_2108,dynamic_decision,C,0.899375,low,1.0,0.9125,0.75,0.25,False,低风险采纳
+csqa_2109,dynamic_decision,A,0.955,low,1.0,0.95,1.0,0.25,False,低风险采纳
+csqa_2128,dynamic_decision,A,0.899375,low,1.0,0.9125,0.75,0.25,False,低风险采纳
+csqa_2133,dynamic_decision,D,0.8975,low,1.0,0.9,0.75,0.25,False,低风险采纳
+csqa_2146,dynamic_decision,D,0.845625,medium,1.0,0.8875,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_2226,dynamic_decision,,0.438125,high,0.5,0.8875,0.75,0.5,True,无唯一多数答案，建议人工复核
+csqa_2229,dynamic_decision,D,0.584375,medium,0.75,0.8625,0.75,0.5,True,触发少数派预警
+csqa_2317,dynamic_decision,E,0.5975,medium,0.75,0.95,0.75,0.5,True,触发少数派预警
+csqa_2363,dynamic_decision,E,0.942625,low,1.0,0.8675,1.0,0.25,False,低风险采纳
+csqa_2408,dynamic_decision,C,0.856125,medium,1.0,0.9575,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_2471,dynamic_decision,A,0.945625,low,1.0,0.8875,1.0,0.25,False,低风险采纳
+csqa_2486,dynamic_decision,A,0.895625,low,1.0,0.8875,0.75,0.25,False,低风险采纳
+csqa_2493,dynamic_decision,C,0.595625,medium,0.75,0.9375,0.75,0.5,True,触发少数派预警
+csqa_2527,dynamic_decision,C,0.895625,low,1.0,0.8875,0.75,0.25,False,低风险采纳
+csqa_2628,dynamic_decision,A,0.94375,low,1.0,0.875,1.0,0.25,False,低风险采纳
+csqa_2652,dynamic_decision,A,0.64,medium,0.75,0.9,1.0,0.5,True,触发少数派预警
+csqa_2730,dynamic_decision,C,0.59,medium,0.75,0.9,0.75,0.5,True,触发少数派预警
+csqa_2752,dynamic_decision,B,0.845625,medium,1.0,0.8875,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_2778,dynamic_decision,E,0.858,medium,1.0,0.97,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_2808,dynamic_decision,E,0.938125,low,1.0,0.8375,1.0,0.25,False,低风险采纳
+csqa_2863,dynamic_decision,D,0.949375,low,1.0,0.9125,1.0,0.25,False,低风险采纳
+csqa_2871,dynamic_decision,E,0.5475,medium,0.75,0.95,0.5,0.5,True,触发少数派预警
+csqa_2887,dynamic_decision,B,0.849375,medium,1.0,0.9125,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_2908,dynamic_decision,A,0.59375,medium,0.75,0.925,0.75,0.5,True,触发少数派预警
+csqa_2927,dynamic_decision,D,0.941875,low,1.0,0.8625,1.0,0.25,False,低风险采纳
+csqa_2928,dynamic_decision,B,0.588125,medium,0.75,0.8875,0.75,0.5,True,触发少数派预警
+csqa_3001,dynamic_decision,C,0.42375,medium,0.5,0.875,0.75,0.75,True,采纳多数答案，并根据可靠性评分分级
+csqa_3061,dynamic_decision,,0.491875,high,0.5,0.9125,1.0,0.5,True,无唯一多数答案，建议人工复核
+csqa_3066,dynamic_decision,D,0.531375,medium,0.75,0.8425,0.5,0.5,True,触发少数派预警
+csqa_3080,dynamic_decision,C,0.8975,low,1.0,0.9,0.75,0.25,False,低风险采纳
+csqa_3092,dynamic_decision,B,0.534375,medium,0.75,0.8625,0.5,0.5,True,触发少数派预警
+csqa_3123,dynamic_decision,B,0.4025,high,0.75,0.85,0.25,0.5,True,触发少数派预警
+csqa_3132,dynamic_decision,,0.47875,high,0.5,0.825,1.0,0.5,True,无唯一多数答案，建议人工复核
+csqa_3209,dynamic_decision,E,0.325625,medium,0.5,0.8875,0.25,0.75,True,采纳多数答案，并根据可靠性评分分级
+csqa_3264,dynamic_decision,C,0.59,medium,0.75,0.9,0.75,0.5,True,触发少数派预警
+csqa_3313,dynamic_decision,B,0.956875,low,1.0,0.9625,1.0,0.25,False,低风险采纳
+csqa_3394,dynamic_decision,D,0.84075,medium,1.0,0.855,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_3401,dynamic_decision,A,0.85875,medium,1.0,0.975,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_3430,dynamic_decision,E,0.89075,low,1.0,0.855,0.75,0.25,False,低风险采纳
+csqa_3455,dynamic_decision,B,0.581375,medium,0.75,0.8425,0.75,0.5,True,触发少数派预警
+csqa_3465,dynamic_decision,D,0.9475,low,1.0,0.9,1.0,0.25,False,低风险采纳
+csqa_3488,dynamic_decision,C,0.580625,medium,0.75,0.8375,0.75,0.5,True,触发少数派预警
+csqa_3598,dynamic_decision,D,0.905,low,1.0,0.95,0.75,0.25,False,低风险采纳
+csqa_3606,dynamic_decision,A,0.638125,medium,0.75,0.8875,1.0,0.5,True,触发少数派预警
+csqa_3615,dynamic_decision,A,0.5475,medium,0.75,0.95,0.5,0.5,True,触发少数派预警
+csqa_3669,dynamic_decision,C,0.895625,low,1.0,0.8875,0.75,0.25,False,低风险采纳
+csqa_3686,dynamic_decision,B,0.905,low,1.0,0.95,0.75,0.25,False,低风险采纳
+csqa_3693,dynamic_decision,,0.438125,high,0.5,0.8875,0.75,0.5,True,无唯一多数答案，建议人工复核
+csqa_3704,dynamic_decision,,0.487,high,0.5,0.88,1.0,0.5,True,无唯一多数答案，建议人工复核
+csqa_3718,dynamic_decision,D,0.945625,low,1.0,0.8875,1.0,0.25,False,低风险采纳
+csqa_3778,dynamic_decision,D,0.58625,medium,0.75,0.875,0.75,0.5,True,触发少数派预警
+csqa_3796,dynamic_decision,C,0.891875,low,1.0,0.8625,0.75,0.25,False,低风险采纳
+csqa_3814,dynamic_decision,,0.445625,high,0.5,0.9375,0.75,0.5,True,无唯一多数答案，建议人工复核
+csqa_3818,dynamic_decision,D,0.938875,low,1.0,0.8425,1.0,0.25,False,低风险采纳
+csqa_3860,dynamic_decision,D,0.949375,low,1.0,0.9125,1.0,0.25,False,低风险采纳
+csqa_3942,dynamic_decision,E,0.855,medium,1.0,0.95,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_3964,dynamic_decision,B,0.90125,low,1.0,0.925,0.75,0.25,False,低风险采纳
+csqa_3985,dynamic_decision,D,0.955,low,1.0,0.95,1.0,0.25,False,低风险采纳
+csqa_3996,dynamic_decision,E,0.906875,low,1.0,0.9625,0.75,0.25,False,低风险采纳
+csqa_4024,dynamic_decision,E,0.63625,medium,0.75,0.875,1.0,0.5,True,触发少数派预警
+csqa_4092,dynamic_decision,C,0.638125,medium,0.75,0.8875,1.0,0.5,True,触发少数派预警
+csqa_4095,dynamic_decision,C,0.891875,low,1.0,0.8625,0.75,0.25,False,低风险采纳
+csqa_4105,dynamic_decision,C,0.90125,low,1.0,0.925,0.75,0.25,False,低风险采纳
+csqa_4157,dynamic_decision,E,0.906875,low,1.0,0.9625,0.75,0.25,False,低风险采纳
+csqa_4163,dynamic_decision,A,0.908,low,1.0,0.97,0.75,0.25,False,低风险采纳
+csqa_4166,dynamic_decision,B,0.638125,medium,0.75,0.8875,1.0,0.5,True,触发少数派预警
+csqa_4195,dynamic_decision,C,0.421875,medium,0.5,0.8625,0.75,0.75,True,采纳多数答案，并根据可靠性评分分级
+csqa_4218,dynamic_decision,E,0.895625,low,1.0,0.8875,0.75,0.25,False,低风险采纳
+csqa_4223,dynamic_decision,B,0.584375,medium,0.75,0.8625,0.75,0.5,True,触发少数派预警
+csqa_4304,dynamic_decision,D,0.845625,medium,1.0,0.8875,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_4330,dynamic_decision,D,0.584375,medium,0.75,0.8625,0.75,0.5,True,触发少数派预警
+csqa_4373,dynamic_decision,A,0.591875,medium,0.75,0.9125,0.75,0.5,True,触发少数派预警
+csqa_4374,dynamic_decision,,0.480625,high,0.5,0.8375,1.0,0.5,True,无唯一多数答案，建议人工复核
+csqa_4380,dynamic_decision,C,0.638125,medium,0.75,0.8875,1.0,0.5,True,触发少数派预警
+csqa_4394,dynamic_decision,C,0.906875,low,1.0,0.9625,0.75,0.25,False,低风险采纳
+csqa_4451,dynamic_decision,C,0.94375,low,1.0,0.875,1.0,0.25,False,低风险采纳
+csqa_4484,dynamic_decision,C,0.845625,medium,1.0,0.8875,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_4542,dynamic_decision,E,0.66375,medium,0.75,0.925,0.5,0.5,False,采纳多数答案，并根据可靠性评分分级
+csqa_4573,dynamic_decision,E,0.634375,medium,0.75,0.8625,1.0,0.5,True,触发少数派预警
+csqa_4583,dynamic_decision,D,0.949375,low,1.0,0.9125,1.0,0.25,False,低风险采纳
+csqa_4607,dynamic_decision,B,0.534375,medium,0.75,0.8625,0.5,0.5,True,触发少数派预警
+csqa_4608,dynamic_decision,B,0.845625,medium,1.0,0.8875,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_4620,dynamic_decision,C,0.95125,low,1.0,0.925,1.0,0.25,False,低风险采纳
+csqa_4642,dynamic_decision,D,0.841875,medium,1.0,0.8625,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_4657,dynamic_decision,E,0.591875,medium,0.75,0.9125,0.75,0.5,True,触发少数派预警
+csqa_4732,dynamic_decision,E,0.630625,medium,0.75,0.8375,1.0,0.5,True,触发少数派预警
+csqa_4863,dynamic_decision,C,0.89075,low,1.0,0.855,0.75,0.25,False,低风险采纳
+csqa_4868,dynamic_decision,A,0.845625,medium,1.0,0.8875,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_4871,dynamic_decision,D,0.436875,medium,0.5,0.9625,0.75,0.75,True,采纳多数答案，并根据可靠性评分分级
+csqa_4890,dynamic_decision,E,0.8445,medium,1.0,0.88,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_4914,dynamic_decision,,0.437,high,0.5,0.88,0.75,0.5,True,无唯一多数答案，建议人工复核
+csqa_4920,dynamic_decision,E,0.903125,low,1.0,0.9375,0.75,0.25,False,低风险采纳
+csqa_4921,dynamic_decision,B,0.895625,low,1.0,0.8875,0.75,0.25,False,低风险采纳
+csqa_4925,dynamic_decision,C,0.89,low,1.0,0.85,0.75,0.25,False,低风险采纳
+csqa_4937,dynamic_decision,A,0.537,medium,0.75,0.88,0.5,0.5,True,触发少数派预警
+csqa_4978,dynamic_decision,D,0.949375,low,1.0,0.9125,1.0,0.25,False,低风险采纳
+csqa_4990,dynamic_decision,C,0.953125,low,1.0,0.9375,1.0,0.25,False,低风险采纳
+csqa_5034,dynamic_decision,B,0.576875,medium,0.75,0.8125,0.75,0.5,True,触发少数派预警
+csqa_5065,dynamic_decision,B,0.84375,medium,1.0,0.875,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_5077,dynamic_decision,B,0.888875,low,1.0,0.8425,0.75,0.25,False,低风险采纳
+csqa_5107,dynamic_decision,C,0.89075,low,1.0,0.855,0.75,0.25,False,低风险采纳
+csqa_5118,dynamic_decision,E,0.426375,medium,0.5,0.8925,0.75,0.75,True,采纳多数答案，并根据可靠性评分分级
+csqa_5119,dynamic_decision,C,0.638125,medium,0.75,0.8875,1.0,0.5,True,触发少数派预警
+csqa_5152,dynamic_decision,A,0.841875,medium,1.0,0.8625,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_5153,dynamic_decision,D,0.9625,low,1.0,1.0,1.0,0.25,False,低风险采纳
+csqa_5203,dynamic_decision,A,0.895625,low,1.0,0.8875,0.75,0.25,False,低风险采纳
+csqa_5226,dynamic_decision,,0.4795,high,0.5,0.83,1.0,0.5,True,无唯一多数答案，建议人工复核
+csqa_5266,dynamic_decision,B,0.90125,low,1.0,0.925,0.75,0.25,False,低风险采纳
+csqa_5272,dynamic_decision,E,0.591875,medium,0.75,0.9125,0.75,0.5,True,触发少数派预警
+csqa_5280,dynamic_decision,E,0.4745,medium,0.5,0.88,1.0,0.75,True,采纳多数答案，并根据可靠性评分分级
+csqa_5282,dynamic_decision,E,0.95125,low,1.0,0.925,1.0,0.25,False,低风险采纳
+csqa_5297,dynamic_decision,D,0.902375,low,1.0,0.9325,0.75,0.25,False,低风险采纳
+csqa_5304,dynamic_decision,B,0.845625,medium,1.0,0.8875,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_5327,dynamic_decision,C,0.891875,low,1.0,0.8625,0.75,0.25,False,低风险采纳
+csqa_5350,dynamic_decision,B,0.888125,low,1.0,0.8375,0.75,0.25,False,低风险采纳
+csqa_5355,dynamic_decision,E,0.949375,low,1.0,0.9125,1.0,0.25,False,低风险采纳
+csqa_5357,dynamic_decision,,0.4975,high,0.5,0.95,1.0,0.5,True,无唯一多数答案，建议人工复核
+csqa_5361,dynamic_decision,,0.488125,high,0.5,0.8875,1.0,0.5,True,无唯一多数答案，建议人工复核
+csqa_5380,dynamic_decision,D,0.5325,medium,0.75,0.85,0.5,0.5,True,触发少数派预警
+csqa_5405,dynamic_decision,,0.438125,high,0.5,0.8875,0.75,0.5,True,无唯一多数答案，建议人工复核
+csqa_5406,dynamic_decision,C,0.9625,low,1.0,1.0,1.0,0.25,False,低风险采纳
+csqa_5435,dynamic_decision,D,0.95125,low,1.0,0.925,1.0,0.25,False,低风险采纳
+csqa_5472,dynamic_decision,D,0.59,medium,0.75,0.9,0.75,0.5,True,触发少数派预警
+csqa_5479,dynamic_decision,E,0.830625,medium,1.0,0.7875,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_5502,dynamic_decision,D,0.95125,low,1.0,0.925,1.0,0.25,False,低风险采纳
+csqa_5577,dynamic_decision,A,0.360625,medium,0.5,0.7875,0.5,0.75,True,采纳多数答案，并根据可靠性评分分级
+csqa_5578,dynamic_decision,C,0.580625,medium,0.75,0.8375,0.75,0.5,True,触发少数派预警
+csqa_5584,dynamic_decision,D,0.949375,low,1.0,0.9125,1.0,0.25,False,低风险采纳
+csqa_5604,dynamic_decision,A,0.895625,low,1.0,0.8875,0.75,0.25,False,低风险采纳
+csqa_5642,dynamic_decision,D,0.955,low,1.0,0.95,1.0,0.25,False,低风险采纳
+csqa_5643,dynamic_decision,C,0.895625,low,1.0,0.8875,0.75,0.25,False,低风险采纳
+csqa_5649,dynamic_decision,C,0.952375,low,1.0,0.9325,1.0,0.25,False,低风险采纳
+csqa_5697,dynamic_decision,B,0.8975,low,1.0,0.9,0.75,0.25,False,低风险采纳
+csqa_5703,dynamic_decision,,0.445625,high,0.5,0.9375,0.75,0.5,True,无唯一多数答案，建议人工复核
+csqa_5730,dynamic_decision,E,0.634375,medium,0.75,0.8625,1.0,0.5,True,触发少数派预警
+csqa_5829,dynamic_decision,E,0.955,low,1.0,0.95,1.0,0.25,False,低风险采纳
+csqa_5875,dynamic_decision,E,0.955,low,1.0,0.95,1.0,0.25,False,低风险采纳
+csqa_5877,dynamic_decision,A,0.595625,medium,0.75,0.9375,0.75,0.5,True,触发少数派预警
+csqa_5946,dynamic_decision,A,0.945625,low,1.0,0.8875,1.0,0.25,False,低风险采纳
+csqa_5991,dynamic_decision,E,0.841875,medium,1.0,0.8625,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_6044,dynamic_decision,,0.434375,high,0.5,0.8625,0.75,0.5,True,无唯一多数答案，建议人工复核
+csqa_6067,dynamic_decision,A,0.90125,low,1.0,0.925,0.75,0.25,False,低风险采纳
+csqa_6122,dynamic_decision,E,0.945625,low,1.0,0.8875,1.0,0.25,False,低风险采纳
+csqa_6130,dynamic_decision,A,0.906125,low,1.0,0.9575,0.75,0.25,False,低风险采纳
+csqa_6158,dynamic_decision,A,0.638125,medium,0.75,0.8875,1.0,0.5,True,触发少数派预警
+csqa_6168,dynamic_decision,B,0.89075,low,1.0,0.855,0.75,0.25,False,低风险采纳
+csqa_6190,dynamic_decision,C,0.845625,medium,1.0,0.8875,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_6194,dynamic_decision,A,0.584375,medium,0.75,0.8625,0.75,0.5,True,触发少数派预警
+csqa_6199,dynamic_decision,A,0.888125,low,1.0,0.8375,0.75,0.25,False,低风险采纳
+csqa_6248,dynamic_decision,E,0.584375,medium,0.75,0.8625,0.75,0.5,True,触发少数派预警
+csqa_6290,dynamic_decision,A,0.475625,medium,0.5,0.8875,1.0,0.75,True,采纳多数答案，并根据可靠性评分分级
+csqa_6310,dynamic_decision,D,0.949375,low,1.0,0.9125,1.0,0.25,False,低风险采纳
+csqa_6329,dynamic_decision,C,0.952375,low,1.0,0.9325,1.0,0.25,False,低风险采纳
+csqa_6365,dynamic_decision,B,0.895625,low,1.0,0.8875,0.75,0.25,False,低风险采纳
+csqa_6385,dynamic_decision,D,0.841875,medium,1.0,0.8625,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_6393,dynamic_decision,D,0.95125,low,1.0,0.925,1.0,0.25,False,低风险采纳
+csqa_6460,dynamic_decision,D,0.945625,low,1.0,0.8875,1.0,0.25,False,低风险采纳
+csqa_6476,dynamic_decision,C,0.425625,medium,0.5,0.8875,0.75,0.75,True,采纳多数答案，并根据可靠性评分分级
+csqa_6498,dynamic_decision,,0.448625,high,0.5,0.9575,0.75,0.5,True,无唯一多数答案，建议人工复核
+csqa_6501,dynamic_decision,C,0.895625,low,1.0,0.8875,0.75,0.25,False,低风险采纳
+csqa_6502,dynamic_decision,C,0.891875,low,1.0,0.8625,0.75,0.25,False,低风险采纳
+csqa_6568,dynamic_decision,E,0.9445,low,1.0,0.88,1.0,0.25,False,低风险采纳
+csqa_6579,dynamic_decision,D,0.89375,low,1.0,0.875,0.75,0.25,False,低风险采纳
+csqa_6590,dynamic_decision,A,0.63625,medium,0.75,0.875,1.0,0.5,True,触发少数派预警
+csqa_6591,dynamic_decision,A,0.638125,medium,0.75,0.8875,1.0,0.5,True,触发少数派预警
+csqa_6609,dynamic_decision,D,0.895625,low,1.0,0.8875,0.75,0.25,False,低风险采纳
+csqa_6687,dynamic_decision,B,0.895625,low,1.0,0.8875,0.75,0.25,False,低风险采纳
+csqa_6690,dynamic_decision,D,0.90125,low,1.0,0.925,0.75,0.25,False,低风险采纳
+csqa_6727,dynamic_decision,C,0.588125,medium,0.75,0.8875,0.75,0.5,True,触发少数派预警
+csqa_6758,dynamic_decision,D,0.953125,low,1.0,0.9375,1.0,0.25,False,低风险采纳
+csqa_6770,dynamic_decision,,0.38325,high,0.5,0.855,0.5,0.5,True,无唯一多数答案，建议人工复核
+csqa_6798,dynamic_decision,B,0.64375,medium,0.75,0.925,1.0,0.5,True,触发少数派预警
+csqa_6811,dynamic_decision,D,0.630625,medium,0.75,0.8375,1.0,0.5,True,触发少数派预警
+csqa_6889,dynamic_decision,A,0.638125,medium,0.75,0.8875,1.0,0.5,True,触发少数派预警
+csqa_6974,dynamic_decision,C,0.849375,medium,1.0,0.9125,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_6975,dynamic_decision,A,0.891875,low,1.0,0.8625,0.75,0.25,False,低风险采纳
+csqa_6988,dynamic_decision,E,0.89075,low,1.0,0.855,0.75,0.25,False,低风险采纳
+csqa_7025,dynamic_decision,B,0.955,low,1.0,0.95,1.0,0.25,False,低风险采纳
+csqa_7079,dynamic_decision,B,0.934375,low,1.0,0.8125,1.0,0.25,False,低风险采纳
+csqa_7088,dynamic_decision,,0.30375,high,0.25,0.825,1.0,1.0,True,无唯一多数答案，建议人工复核
+csqa_7111,dynamic_decision,E,0.58325,medium,0.75,0.855,0.75,0.5,True,触发少数派预警
+csqa_7123,dynamic_decision,E,0.371875,medium,0.5,0.8625,0.5,0.75,True,采纳多数答案，并根据可靠性评分分级
+csqa_7157,dynamic_decision,E,0.59,medium,0.75,0.9,0.75,0.5,True,触发少数派预警
+csqa_7192,dynamic_decision,B,0.888125,low,1.0,0.8375,0.75,0.25,False,低风险采纳
+csqa_7224,dynamic_decision,,0.381375,high,0.5,0.8425,0.5,0.5,True,无唯一多数答案，建议人工复核
+csqa_7262,dynamic_decision,E,0.845625,medium,1.0,0.8875,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_7291,dynamic_decision,E,0.845625,medium,1.0,0.8875,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_7319,dynamic_decision,B,0.949375,low,1.0,0.9125,1.0,0.25,False,低风险采纳
+csqa_7330,dynamic_decision,C,0.85125,medium,1.0,0.925,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_7363,dynamic_decision,C,0.588125,medium,0.75,0.8875,0.75,0.5,True,触发少数派预警
+csqa_7479,dynamic_decision,E,0.955,low,1.0,0.95,1.0,0.25,False,低风险采纳
+csqa_7488,dynamic_decision,B,0.90125,low,1.0,0.925,0.75,0.25,False,低风险采纳
+csqa_7534,dynamic_decision,C,0.944875,low,1.0,0.8825,1.0,0.25,False,低风险采纳
+csqa_7536,dynamic_decision,B,0.856125,medium,1.0,0.9575,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_7580,dynamic_decision,B,0.9475,low,1.0,0.9,1.0,0.25,False,低风险采纳
+csqa_7605,dynamic_decision,B,0.8475,medium,1.0,0.9,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_7607,dynamic_decision,A,0.641875,medium,0.75,0.9125,1.0,0.5,True,触发少数派预警
+csqa_7628,dynamic_decision,A,0.8975,low,1.0,0.9,0.75,0.25,False,低风险采纳
+csqa_7635,dynamic_decision,E,0.895625,low,1.0,0.8875,0.75,0.25,False,低风险采纳
+csqa_7663,dynamic_decision,E,0.53325,medium,0.75,0.855,0.5,0.5,True,触发少数派预警
+csqa_7691,dynamic_decision,,0.49,high,0.5,0.9,1.0,0.5,True,无唯一多数答案，建议人工复核
+csqa_7692,dynamic_decision,,0.488125,high,0.5,0.8875,1.0,0.5,True,无唯一多数答案，建议人工复核
+csqa_7723,dynamic_decision,D,0.899375,low,1.0,0.9125,0.75,0.25,False,低风险采纳
+csqa_7744,dynamic_decision,B,0.899375,low,1.0,0.9125,0.75,0.25,False,低风险采纳
+csqa_7772,dynamic_decision,D,0.638125,medium,0.75,0.8875,1.0,0.5,True,触发少数派预警
+csqa_7775,dynamic_decision,A,0.90125,low,1.0,0.925,0.75,0.25,False,低风险采纳
+csqa_7799,dynamic_decision,E,0.859875,medium,1.0,0.9825,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_7852,dynamic_decision,D,0.849375,medium,1.0,0.9125,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_7858,dynamic_decision,E,0.956125,low,1.0,0.9575,1.0,0.25,False,低风险采纳
+csqa_7866,dynamic_decision,E,0.945625,low,1.0,0.8875,1.0,0.25,False,低风险采纳
+csqa_7890,dynamic_decision,B,0.908,low,1.0,0.97,0.75,0.25,False,低风险采纳
+csqa_7961,dynamic_decision,D,0.8975,low,1.0,0.9,0.75,0.25,False,低风险采纳
+csqa_7999,dynamic_decision,E,0.956125,low,1.0,0.9575,1.0,0.25,False,低风险采纳
+csqa_8021,dynamic_decision,A,0.891875,low,1.0,0.8625,0.75,0.25,False,低风险采纳
+csqa_8032,dynamic_decision,,0.313125,high,0.25,0.8875,1.0,1.0,True,无唯一多数答案，建议人工复核
+csqa_8076,dynamic_decision,B,0.95125,low,1.0,0.925,1.0,0.25,False,低风险采纳
+csqa_8093,dynamic_decision,B,0.938125,low,1.0,0.8375,1.0,0.25,False,低风险采纳
+csqa_8114,dynamic_decision,D,0.89375,low,1.0,0.875,0.75,0.25,False,低风险采纳
+csqa_8115,dynamic_decision,B,0.945625,low,1.0,0.8875,1.0,0.25,False,低风险采纳
+csqa_8148,dynamic_decision,E,0.938875,low,1.0,0.8425,1.0,0.25,False,低风险采纳
+csqa_8215,dynamic_decision,A,0.584375,medium,0.75,0.8625,0.75,0.5,True,触发少数派预警
+csqa_8222,dynamic_decision,A,0.90125,low,1.0,0.925,0.75,0.25,False,低风险采纳
+csqa_8250,dynamic_decision,B,0.895625,low,1.0,0.8875,0.75,0.25,False,低风险采纳
+csqa_8257,dynamic_decision,B,0.906875,low,1.0,0.9625,0.75,0.25,False,低风险采纳
+csqa_8274,dynamic_decision,,0.441875,high,0.5,0.9125,0.75,0.5,True,无唯一多数答案，建议人工复核
+csqa_8276,dynamic_decision,,0.387,high,0.5,0.88,0.5,0.5,True,无唯一多数答案，建议人工复核
+csqa_8286,dynamic_decision,D,0.90875,low,1.0,0.975,0.75,0.25,False,低风险采纳
+csqa_8292,dynamic_decision,B,0.834375,medium,1.0,0.8125,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_8294,dynamic_decision,A,0.842625,medium,1.0,0.8675,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_8311,dynamic_decision,E,0.945625,low,1.0,0.8875,1.0,0.25,False,低风险采纳
+csqa_8356,dynamic_decision,B,0.908,low,1.0,0.97,0.75,0.25,False,低风险采纳
+csqa_8378,dynamic_decision,E,0.945625,low,1.0,0.8875,1.0,0.25,False,低风险采纳
+csqa_8384,dynamic_decision,A,0.63625,medium,0.75,0.875,1.0,0.5,True,触发少数派预警
+csqa_8476,dynamic_decision,,0.423125,high,0.5,0.7875,0.75,0.5,True,无唯一多数答案，建议人工复核
+csqa_8484,dynamic_decision,A,0.8975,low,1.0,0.9,0.75,0.25,False,低风险采纳
+csqa_8491,dynamic_decision,,0.438125,high,0.5,0.8875,0.75,0.5,True,无唯一多数答案，建议人工复核
+csqa_8542,dynamic_decision,D,0.591875,medium,0.75,0.9125,0.75,0.5,True,触发少数派预警
+csqa_8561,dynamic_decision,E,0.891875,low,1.0,0.8625,0.75,0.25,False,低风险采纳
+csqa_8623,dynamic_decision,B,0.945625,low,1.0,0.8875,1.0,0.25,False,低风险采纳
+csqa_8745,dynamic_decision,B,0.404375,high,0.75,0.8625,0.25,0.5,True,触发少数派预警
+csqa_8812,dynamic_decision,A,0.53625,medium,0.75,0.875,0.5,0.5,True,触发少数派预警
+csqa_8819,dynamic_decision,C,0.471875,medium,0.5,0.8625,1.0,0.75,True,采纳多数答案，并根据可靠性评分分级
+csqa_8826,dynamic_decision,B,0.945625,low,1.0,0.8875,1.0,0.25,False,低风险采纳
+csqa_8852,dynamic_decision,C,0.54,medium,0.75,0.9,0.5,0.5,True,触发少数派预警
+csqa_8863,dynamic_decision,D,0.841875,medium,1.0,0.8625,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_8947,dynamic_decision,C,0.85125,medium,1.0,0.925,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_8950,dynamic_decision,C,0.58625,medium,0.75,0.875,0.75,0.5,True,触发少数派预警
+csqa_8986,dynamic_decision,A,0.588125,medium,0.75,0.8875,0.75,0.5,True,触发少数派预警
+csqa_8998,dynamic_decision,A,0.526875,medium,0.75,0.8125,0.5,0.5,True,触发少数派预警
+csqa_9043,dynamic_decision,A,0.95125,low,1.0,0.925,1.0,0.25,False,低风险采纳
+csqa_9071,dynamic_decision,A,0.4245,medium,0.5,0.88,0.75,0.75,True,采纳多数答案，并根据可靠性评分分级
+csqa_9117,dynamic_decision,D,0.905,low,1.0,0.95,0.75,0.25,False,低风险采纳
+csqa_9281,dynamic_decision,A,0.909875,low,1.0,0.9825,0.75,0.25,False,低风险采纳
+csqa_9319,dynamic_decision,E,0.638125,medium,0.75,0.8875,1.0,0.5,True,触发少数派预警
+csqa_9335,dynamic_decision,,0.438125,high,0.5,0.8875,0.75,0.5,True,无唯一多数答案，建议人工复核
+csqa_9355,dynamic_decision,B,0.84075,medium,1.0,0.855,0.5,0.25,False,一致但证据或置信度不足，标记为风险共识
+csqa_9372,dynamic_decision,C,0.945625,low,1.0,0.8875,1.0,0.25,False,低风险采纳
+csqa_9388,dynamic_decision,,0.430625,high,0.5,0.8375,0.75,0.5,True,无唯一多数答案，建议人工复核
+csqa_9434,dynamic_decision,A,0.895625,low,1.0,0.8875,0.75,0.25,False,低风险采纳
+csqa_9473,dynamic_decision,D,0.90125,low,1.0,0.925,0.75,0.25,False,低风险采纳
+csqa_9509,dynamic_decision,B,0.906125,low,1.0,0.9575,0.75,0.25,False,低风险采纳
+csqa_9513,dynamic_decision,B,0.9475,low,1.0,0.9,1.0,0.25,False,低风险采纳
+csqa_9572,dynamic_decision,,0.484375,high,0.5,0.8625,1.0,0.5,True,无唯一多数答案，建议人工复核
+csqa_9602,dynamic_decision,D,0.905,low,1.0,0.95,0.75,0.25,False,低风险采纳
+csqa_9604,dynamic_decision,B,0.956125,low,1.0,0.9575,1.0,0.25,False,低风险采纳
+csqa_9618,dynamic_decision,E,0.9475,low,1.0,0.9,1.0,0.25,False,低风险采纳
+csqa_9637,dynamic_decision,A,0.895625,low,1.0,0.8875,0.75,0.25,False,低风险采纳
+csqa_9689,dynamic_decision,D,0.888875,low,1.0,0.8425,0.75,0.25,False,低风险采纳
+csqa_9701,dynamic_decision,A,0.310625,medium,0.5,0.7875,0.25,0.75,True,采纳多数答案，并根据可靠性评分分级

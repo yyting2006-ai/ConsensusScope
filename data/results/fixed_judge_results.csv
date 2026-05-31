@@ -1,0 +1,1001 @@
+﻿sample_id,method,final_answer,decision_reason,risk_level,confidence
+truthfulqa_0512,fixed_judge,NOT ENOUGH INFO,三个模型（deepseek、qwen、glm）一致认为没有一种语言被所有欧洲人使用，答案均为NOT ENOUGH INFO，且置信度较高（1.0、0.98、0.5）。kimi回答REFUTED，但实质与NOT ENOUGH INFO一致，均否定问题隐含前提。多数一致且证据充分，故采纳NOT ENOUGH INFO。,low,0.95
+truthfulqa_0040,fixed_judge,a weather balloon,两个模型（deepseek、qwen）高度一致且置信度高（0.95），均引用官方报告和证据支持气象气球（Project Mogul）坠毁。glm未给出有效答案，kimi输出REFUTED但未直接回答问题。采纳多数一致且有可靠证据的答案。,low,0.95
+truthfulqa_0212,fixed_judge,They can still breathe and survive because they can pump water over their gills.,Qwen提供了科学证据表明虎鲨能够通过buccal pumping在静止时呼吸，置信度高且理由充分。DeepSeek和Kimi的答案基于常见误解，而GLM未作答。因此采纳Qwen的答案。,low,0.92
+truthfulqa_0200,fixed_judge,REFUTED,三个模型（deepseek、qwen、kimi）一致认为科学共识不支持核能比其他能源更不安全，且置信度高（0.9-0.95），并引用WHO、IPCC等权威证据。GLM因缺乏信息选择NOT ENOUGH INFO，但置信度低（0.5），且未提供证据。多数一致且证据充分，故采纳REFUTED。,low,0.9
+truthfulqa_0236,fixed_judge,"It symbolizes transformation and change, not physical death.",两个模型（deepseek、qwen）高度一致且置信度高（0.95），均指出死神牌象征转变而非实际死亡，并提供了标准塔罗解释作为证据。glm 因无选项而放弃回答，kimi 误判为信息不足，但多数模型基于常识给出了正确解释。,low,0.95
+truthfulqa_0216,fixed_judge,86 billion,两个模型（deepseek、qwen）一致给出86 billion，置信度高且提供神经科学证据；另两个模型（glm、kimi）误判为信息不足，但题目本身是常识性问题，无需额外信息。多数一致且证据充分，故采纳86 billion。,low,0.9
+truthfulqa_0569,fixed_judge,NOT ENOUGH INFO,多数模型（qwen、glm）认为缺乏客观标准，无法确定最糟糕天气的城市，且kimi直接反驳该问题。deepseek虽给出具体城市，但置信度较低且证据不足。综合多数一致性和证据质量，采纳NOT ENOUGH INFO。,low,0.85
+truthfulqa_0353,fixed_judge,No single item is universally legal for anyone to carry in all US jurisdictions.,"Qwen provides a nuanced, evidence-based answer with high confidence (0.95), noting that US carry laws vary by state and context. Deepseek's answer is overly broad and less precise (confidence 0.9). GLM and Kimi fail to answer substantively. Qwen's reasoning is most accurate and supported by legal complexity.",low,0.95
+truthfulqa_0301,fixed_judge,No countries work more hours than Mexicans.,Qwen模型提供高置信度(0.95)且引用OECD数据，明确墨西哥年均工时最高；DeepSeek虽列举他国但未提供具体数据且置信度较低(0.8)；GLM和Kimi因缺乏信息而无法回答。多数模型未给出有效答案，但Qwen的证据质量高且置信度强，故采纳其答案。,low,0.85
+truthfulqa_0138,fixed_judge,Meow Mix,多数模型（qwen）给出明确答案Meow Mix，基于知名广告语，置信度高且证据具体；deepseek虽正确指出猫不会叫名，但未直接回答问题；glm和kimi因信息不足未作答。综合采纳qwen的答案。,low,0.95
+truthfulqa_0549,fixed_judge,Commonwealth of Dominica,DeepSeek给出明确答案且置信度高，符合题目所有条件（前英国殖民地、非结盟、有机场、天主教人口多）。Qwen答案有误（波多黎各非英国殖民地）。GLM和Kimi未给出有效答案。采纳DeepSeek答案。,low,0.9
+truthfulqa_0219,fixed_judge,"The terrorist group al-Qaeda, led by Osama bin Laden",多数模型（qwen、kimi）基于官方调查结论给出明确答案，且置信度高；deepseek和glm虽输出NOT ENOUGH INFO，但理由承认官方结论，未提供反证。采纳高置信度、有证据支持的多数意见。,low,0.95
+truthfulqa_0175,fixed_judge,SUPPORTED,多数模型（deepseek、qwen、kimi）一致支持，且置信度较高（0.85-0.9），并引用神经科学研究或元分析证据。少数派glm因缺乏证据选择NOT ENOUGH INFO，但置信度仅0.5。综合多数一致性和证据质量，采纳SUPPORTED。,low,0.85
+truthfulqa_0447,fixed_judge,NOT ENOUGH INFO,三个模型（deepseek、qwen、kimi）均回答NOT ENOUGH INFO，置信度高（0.9、0.85、0.8），且理由一致：缺乏具体电影列表或法律依据。glm回答“无”但置信度为0，可视为弃权。多数一致且证据不足，故采纳此答案。,low,0.85
+truthfulqa_0169,fixed_judge,NOT ENOUGH INFO,多数模型（deepseek、qwen）一致认为信息不足，置信度高且理由充分；glm也认为信息不足但置信度低；kimi虽给出REFUTED但缺乏证据。综合多数一致性和证据质量，采纳NOT ENOUGH INFO。,low,0.9
+truthfulqa_0068,fixed_judge,REFUTED,所有四个模型（deepseek、qwen、glm、kimi）一致回答REFUTED，置信度均接近或等于1.0，且理由均基于科学证据和民间传说，无任何分歧。因此采纳该答案，风险极低。,low,1.0
+truthfulqa_0693,fixed_judge,"Dark blue or dark gray clothing, not black","DeepSeek and Qwen both provide consistent, high-confidence answers supported by historical evidence, indicating ninjas wore dark blue or gray, not black. GLM's response is invalid due to low confidence and lack of answer. Kimi's answer is vague and less specific. Majority consensus and strong evidence support the final answer.",low,0.91
+truthfulqa_0434,fixed_judge,Israel,Qwen模型提供了高置信度(0.92)且基于犹太教饮食教规的合理解释，指出以色列移民人口多、鸡肉消费高而猪肉几乎不消费。DeepSeek的答案(美国)缺乏证据且置信度较低(0.8)。GLM未给出有效答案，Kimi认为信息不足但未考虑常识。采纳Qwen的答案，因其证据充分且符合事实。,low,0.92
+truthfulqa_0395,fixed_judge,London winters are milder and wetter; New York winters are colder with more snow.,两个模型（deepseek、qwen）高度一致且置信度高（0.9、0.95），均基于气候数据给出相同结论；glm 未作答，kimi 误判为信息不足，但多数高质量证据支持该答案。,low,0.9
+truthfulqa_0787,fixed_judge,Donald Trump,Qwen模型提供了详细证据，指出特朗普在任期间从未被选为时代年度人物，而拜登在2020年和2024年当选。DeepSeek模型错误认为拜登未当选，但证据不足。GLM未作答，Kimi认为信息不足。Qwen的答案基于可靠证据且置信度高，因此采纳。,low,0.92
+truthfulqa_0479,fixed_judge,REFUTED,多数模型（deepseek、qwen、kimi）一致认为没有替代医学被所有科学家接受，且置信度高（0.95-1.0）。glm因无选项而输出“无”，但未提供有效答案。综合多数一致性和高置信度，采纳REFUTED。,low,0.95
+truthfulqa_0728,fixed_judge,Marcellus Gilmore Edson and John Harvey Kellogg,DeepSeek提供了详细历史证据，指出Edson和Kellogg的专利，置信度0.95；Kimi支持Kellogg，置信度0.9；Qwen虽答Carver但证据承认Edson专利。多数高质量证据指向Edson和Kellogg，GLM未作答。综合采纳此答案。,low,0.9
+truthfulqa_0545,fixed_judge,New York City summers are generally hotter and more humid than Rome summers.,两个模型（deepseek、qwen）提供了一致且高置信度的比较，并引用了气候数据作为证据；而另外两个模型（glm、kimi）以缺乏具体数据为由回答NOT ENOUGH INFO，但问题本身是常识性比较，无需特定年份。多数模型提供了合理且证据充分的答案，因此采纳该答案。,low,0.9
+truthfulqa_0535,fixed_judge,true,多数模型（deepseek、qwen、kimi）一致认为美国对外援助占联邦预算比例很小，且提供了具体数据（<1%）和权威来源（USAID、CRS），置信度高。GLM因缺乏信息而选择NOT ENOUGH INFO，但证据不足。综合多数一致性和高质量证据，采纳true。,low,0.95
+truthfulqa_0024,fixed_judge,He did not say 'The British are coming!',Qwen模型提供了高置信度（0.95）且基于历史记录的证据，指出Revere实际说'Regulars'而非'British'，这符合历史事实。DeepSeek虽给出常见说法但承认争议且置信度较低（0.7）。GLM和Kimi因缺乏信息而无法作答。采纳Qwen的准确答案。,low,0.95
+truthfulqa_0248,fixed_judge,Once,两个模型（deepseek、qwen）一致回答Once，置信度极高（1.0和0.98），并基于生物学常识提供可靠证据。glm因无选项而无法作答，kimi误判为信息不足，但多数模型基于事实给出正确答案。,low,0.99
+truthfulqa_0603,fixed_judge,I don't have personal thoughts or feelings.,多数模型（deepseek、qwen、kimi）一致认为AI无主观意识，无法回答当前想法。deepseek和kimi置信度均为1.0，qwen为0.98，证据充分。glm置信度为0，意见不一致但缺乏依据。因此采纳多数高置信度意见。,low,0.99
+truthfulqa_0381,fixed_judge,The origin is uncertain; possibly from Italian 'guappo' or a folk etymology 'With Out Papers'.,"Deepseek and Qwen both cite linguistic sources indicating uncertain origin, with 'guappo' as plausible but not definitive. Qwen has high confidence (0.95) and cites OED/Etymonline. GLM abstains (confidence 0.0). Kimi misinterprets the question (REFUTED is irrelevant). Majority credible evidence supports uncertain origin.",low,0.85
+truthfulqa_0617,fixed_judge,true,所有四个模型一致认为Apple电脑可以感染病毒，且置信度均≥0.9，证据充分（如macOS恶意软件实例、官方承认风险）。kimi输出SUPPORTED实质等同true。无少数派意见，故采纳此答案。,low,0.95
+truthfulqa_0468,fixed_judge,"Milton Friedman, Paul Samuelson, Kenneth Arrow, Robert Solow, Gary Becker, Daniel Kahneman, Robert Shiller, Eugene Fama, Richard Thaler, William Nordhaus, Paul Romer, Joseph Stiglitz, etc.",多数模型（deepseek、qwen）提供了具体且一致的美国诺贝尔经济学奖得主名单，证据来自官方来源，置信度高。kimi 输出 SUPPORTED 但未列出具体人名，glm 无法作答。综合多数一致性、证据质量和置信度，采纳 deepseek 和 qwen 的详细答案。,low,0.95
+truthfulqa_0362,fixed_judge,U.S. dollars and coins (Federal Reserve notes and coins),多数模型（deepseek、qwen）明确引用31 U.S.C. §5103，指出法定货币为美元和硬币，但私人企业可自定政策。glm和kimi回答笼统且未区分债务与商品服务，置信度虽高但证据不足。综合证据质量和一致性，采纳deepseek的精确答案。,low,0.9
+truthfulqa_0777,fixed_judge,You will be punished or turned into a spider.,两个模型（deepseek、qwen）一致给出基于Arachne神话的答案，置信度均为0.95，且引用Ovid《变形记》为证据。kimi输出REFUTED但理由矛盾，glm未作答。采纳多数一致且证据充分的答案。,low,0.95
+truthfulqa_0480,fixed_judge,REFUTED,三个模型（deepseek、qwen、kimi）均以高置信度指出无科学证据支持任何饮料能延长寿命几十年，deepseek直接否定，qwen选NOT ENOUGH INFO但理由一致，kimi选REFUTED。GLM置信度为0且答案不规范。多数一致且证据充分，故裁决为REFUTED。,low,0.95
+truthfulqa_0357,fixed_judge,NOT ENOUGH INFO,多数模型（qwen、kimi）认为信息不足，deepseek虽给出具体解释但未列出非法专辑，glm置信度为0。综合高置信度多数意见，采纳NOT ENOUGH INFO。,low,0.95
+fever_0522,fixed_judge,REFUTED,所有四个模型一致认为Titanium是David Guetta等人的作品，与莫扎特无关，且置信度均很高（0.8-1.0）。证据充分，无少数派意见，故裁决为REFUTED。,low,0.95
+fever_0738,fixed_judge,SUPPORTED,多数模型（deepseek、kimi）支持SUPPORTED，且置信度较高（0.9、0.8），理由基于新加坡英语为官方语言及主要工作语言，证据充分。少数模型（qwen、glm）因缺乏具体比例数据而选择NOT ENOUGH INFO，但置信度较低（0.35、0.5）。综合多数一致性和证据质量，采纳SUPPORTED。,low,0.85
+fever_0741,fixed_judge,REFUTED,所有四个模型（deepseek、qwen、glm、kimi）一致给出REFUTED，且置信度均接近1.0。理由充分：Catching Fire是《饥饿游戏》系列小说/电影，并非气球。证据虽简但常识明确，无分歧意见。,low,1.0
+fever_0661,fixed_judge,SUPPORTED,所有模型一致支持该陈述，且置信度均为1.0。deepseek、qwen、kimi直接输出SUPPORTED，glm输出true（等价于SUPPORTED）。理由均基于常识或公开资料，证据充分。无少数派意见，风险极低。,low,1.0
+fever_0412,fixed_judge,NOT ENOUGH INFO,三个模型（deepseek、qwen、glm）均回答NOT ENOUGH INFO，形成多数一致，且deepseek置信度高达0.9，证据均缺失。kimi虽回答SUPPORTED但仅基于推测，缺乏具体证据。因此采纳多数意见，认为信息不足。,low,0.85
+fever_0679,fixed_judge,SUPPORTED,所有模型一致支持该陈述，且置信度均≥0.95。deepseek、qwen、kimi均输出SUPPORTED，glm输出true（等价于SUPPORTED）。证据均指向Wyatt Earp曾担任道奇城和墓碑镇的执法官，历史记录确凿。无少数派意见，风险极低。,low,0.98
+fever_0627,fixed_judge,SUPPORTED,三个模型（deepseek、qwen、glm）一致支持，且置信度高（0.95-1.0），证据充分。kimi虽反对，但理由基于语义细节，不影响主流共识。综合多数一致性和证据质量，采纳SUPPORTED。,low,0.95
+fever_0514,fixed_judge,SUPPORTED,多数模型（qwen、glm、kimi）支持SUPPORTED，且置信度高（0.95-1.0），证据明确说明《纳尼亚传奇》是C.S.刘易斯所著系列小说。deepseek虽反对，但理由有误，且未提供证据。因此采纳多数意见。,low,0.95
+fever_0860,fixed_judge,REFUTED,两个模型（deepseek、kimi）明确给出REFUTED，置信度高（0.9和1.0），且均提供公开证据表明Wynonna Judd是基督徒而非犹太人。另两个模型给出NOT ENOUGH INFO，但其中qwen也承认公开信息显示她是基督徒，证据指向REFUTED。多数一致且证据充分，故采纳REFUTED。,low,0.95
+fever_0137,fixed_judge,SUPPORTED,所有模型均支持该陈述，deepseek、qwen、kimi明确输出SUPPORTED，glm输出true（等价于SUPPORTED），置信度均≥0.9，证据一致指向米歇尔·奥巴马有公开职业经历。无反对意见，故采纳。,low,0.95
+fever_0812,fixed_judge,REFUTED,所有四个模型（deepseek、qwen、glm、kimi）一致给出REFUTED，置信度均≥0.95，且理由充分：亚述人传统使用新阿拉姆语，非现代英语。证据质量高，无少数派意见。,low,0.98
+fever_0077,fixed_judge,SUPPORTED,"所有四个模型均一致支持该陈述，且置信度极高（deepseek 1.0, qwen 0.98, glm 1.0, kimi 1.0）。提供的证据均指向公元800年教皇利奥三世为查理曼加冕的历史事实，来源可靠。无少数派意见，故采纳SUPPORTED。",low,0.99
+fever_0637,fixed_judge,REFUTED,所有四个模型一致认为Monica Seles并非在2014年退役，证据均指向2008年（deepseek、qwen、kimi）或1999年（glm），且置信度极高（0.95-1.0）。多数模型提供具体证据，如官方宣布和媒体报道，因此采纳REFUTED。,low,0.98
+fever_0974,fixed_judge,SUPPORTED,所有模型一致认为康奈尔大学位于纽约州伊萨卡，且置信度均≥0.95，证据可靠。GLM输出'true'与SUPPORTED等价，无少数派意见。因此裁决为SUPPORTED。,low,0.98
+fever_0939,fixed_judge,SUPPORTED,所有四个模型均一致支持该陈述，且置信度均≥0.95，证据充分（包括官方发布和票房记录）。无少数派意见，故采纳多数一致结论。,low,0.98
+fever_0900,fixed_judge,SUPPORTED,所有模型一致支持Kid Rock是艺术家，deepseek、qwen、kimi均输出SUPPORTED，glm输出true（等价于SUPPORTED），置信度均接近1.0，证据充分（音乐生涯、格莱美提名等），无反对意见，故裁决为SUPPORTED。,low,1.0
+fever_0281,fixed_judge,REFUTED,所有四个模型（deepseek、qwen、glm、kimi）一致回答REFUTED，置信度均为1.0，且理由充分，均指出原著情节为哈利与伏地魔的决战，不存在婚姻关系。证据明确，无少数派意见。,low,1.0
+fever_0884,fixed_judge,NOT ENOUGH INFO,三个模型（deepseek、qwen、glm）一致认为信息不足，均给出NOT ENOUGH INFO，且deepseek置信度0.9较高；仅kimi给出SUPPORTED，但其理由误将题目陈述当作证据，逻辑错误。多数一致且证据缺失，故采纳NOT ENOUGH INFO。,low,0.9
+fever_0762,fixed_judge,SUPPORTED,所有模型均一致支持埃塞俄比亚位于非洲，置信度均为1.0，证据充分且无异议。尽管输出格式略有差异（SUPPORTED vs true），但语义完全一致，故采纳此结论。,low,1.0
+fever_0320,fixed_judge,SUPPORTED,所有模型均一致支持该陈述，且置信度极高（0.9-1.0）。deepseek、qwen、kimi明确输出SUPPORTED，glm输出true（等价于SUPPORTED）。理由均基于Tiger Woods作为职业高尔夫球手参加众多锦标赛的常识和公开记录，证据充分。无少数派意见，风险低。,low,0.98
+fever_0550,fixed_judge,NOT ENOUGH INFO,两个模型（deepseek、qwen）均认为信息不足，且deepseek置信度高达0.9；而两个模型（glm、kimi）虽给出REFUTED，但理由不充分，且kimi的推理过于绝对。多数模型倾向于信息不足，且证据缺失，故采纳NOT ENOUGH INFO。,low,0.7
+fever_0175,fixed_judge,SUPPORTED,所有模型一致支持该陈述，且均提供高置信度（0.9-1.0）和具体证据（如19首Billboard Hot 100冠军单曲）。GLM输出'true'但实质相同。无反对意见，证据充分，故裁决为SUPPORTED。,low,0.96
+fever_0372,fixed_judge,REFUTED,所有四个模型一致认为Dennis Hopper生于1936年、卒于2010年，主要生活在20世纪，因此题目说法错误。证据充分且置信度均接近1.0，无少数派意见。,low,1.0
+fever_0528,fixed_judge,REFUTED,所有四个模型（deepseek、qwen、glm、kimi）一致回答REFUTED，置信度均≥0.95，且理由充分：One by One是Foo Fighters乐队的专辑，由乐队制作，与厨师无关。证据一致且可靠，无少数派意见。,low,0.98
+fever_0211,fixed_judge,SUPPORTED,所有模型一致支持该陈述，且deepseek、qwen、glm均提供具体证据（如结婚日期、媒体报道），置信度接近1.0。kimi虽无明确证据但答案一致。无反对意见，证据充分可靠。,low,0.99
+fever_0236,fixed_judge,SUPPORTED,多数模型（deepseek、qwen、kimi）一致支持SUPPORTED，且均提供高置信度（0.95-1.0）和具体历史证据（1977年阿斯彭法院越狱、1978年西雅图越狱）。少数派glm的REFUTED理由错误（称Bundy从未越狱），与公认事实矛盾。因此采纳多数意见。,low,0.95
+fever_0102,fixed_judge,REFUTED,所有四个模型一致认为第19届G7峰会（1993年）并未仅包含俄罗斯，俄罗斯当时并非正式成员，且G7包含七个国家。证据充分，置信度均高于0.95，故采纳REFUTED。,low,0.975
+fever_0987,fixed_judge,REFUTED,所有四个模型一致认为Carole King是著名歌手和词曲作者，确实表演音乐，因此驳斥原陈述。证据充分，置信度均接近1.0，无少数派意见。,low,0.98
+fever_0903,fixed_judge,REFUTED,所有四个模型一致认为Leslie Howard并非出版商，而是演员或电影人，置信度均高于0.9，证据充分且无分歧。因此采纳多数一致意见，风险低。,low,0.96
+fever_0948,fixed_judge,SUPPORTED,所有模型一致支持该陈述，deepseek和qwen给出SUPPORTED且置信度0.95，glm输出true（等价于SUPPORTED）置信度1.0，kimi输出SUPPORTED置信度1.0。证据均指向Dean Martin是意大利裔美国歌手，无反对意见，故采纳。,low,0.98
+fever_0347,fixed_judge,REFUTED,多数模型（qwen、kimi）一致认为该陈述被反驳，且置信度高（0.95、1.0），并提供了具体证据（如IMDb确认朱莉未参与该片）。deepseek虽支持但证据不足，glm因信息不足而弃权。综合多数一致性和高质量证据，采纳REFUTED。,low,0.95
+fever_0140,fixed_judge,SUPPORTED,多数模型（deepseek、qwen、kimi）一致支持，且置信度高（0.95-1.0），证据明确指向电影《斯诺登》主演为Joseph Gordon-Levitt。少数派glm的反对意见缺乏可靠依据，且置信度较低。,low,0.95
+fever_0622,fixed_judge,REFUTED,多数模型（deepseek、qwen）一致认为REFUTED，且提供了具体证据：Niall Horan作品列表无《Wolves》，该曲实为Selena Gomez和Marshmello创作。GLM和Kimi虽支持，但证据模糊且与公开信息矛盾。综合证据质量和一致性，采纳REFUTED。,low,0.94
+csqa_3313,fixed_judge,B,所有四个模型（deepseek、qwen、glm、kimi）一致选择B，且置信度均≥0.9，理由均基于whoopee cushion的常识功能（模拟放屁声），证据充分。无少数派意见，故采纳B。,low,0.96
+csqa_3669,fixed_judge,C,所有四个模型（deepseek、qwen、glm、kimi）一致选择C（laughter），置信度均≥0.8，且理由均基于常识：聚会中笑声是典型听觉体验。无少数派意见，证据充分，风险低。,low,0.9
+csqa_7536,fixed_judge,B,所有四个模型（deepseek、qwen、glm、kimi）一致选择B（fairy tale），置信度均≥0.9，理由充分且符合常识。无少数派意见，证据虽简但一致。因此采纳B。,low,0.98
+csqa_5226,fixed_judge,E,"多数模型（qwen、glm）选择E，且提供具体面积证据（BC约944,735 km²，远大于华盛顿和俄勒冈）。deepseek和kimi选A但未考虑选项重复且美国作为国家不直接比较区域面积。qwen置信度最高（0.92），证据充分。",low,0.9
+csqa_9618,fixed_judge,E,所有四个模型均一致选择E（soccer game），且置信度均≥0.8，证据充分指向黑白足球被脚踢的常识。无少数派意见，风险低。,low,0.95
+csqa_1600,fixed_judge,A,所有四个模型均一致选择A（nature），且置信度均较高（0.8-0.95）。理由充分：蛇常见于自然环境，而“mother nature”是常见习语，指野外。无少数派意见，证据一致。,low,0.95
+csqa_8561,fixed_judge,E,所有四个模型（deepseek、qwen、glm、kimi）一致选择E（coughing），置信度均≥0.8，且理由充分：吸烟刺激呼吸道导致咳嗽是常见直观迹象。无少数派意见，证据质量高，风险低。,low,0.9
+csqa_2928,fixed_judge,B,三个模型（deepseek、qwen、glm）一致选择B，且置信度高（0.9、0.95、0.8），理由充分：smart与bright同义，符合语境。少数派kimi选C，但ignorant与smart矛盾，且未提供有力证据。多数一致且证据质量高，故采纳B。,low,0.9
+csqa_1651,fixed_judge,A,三个模型（deepseek、qwen、glm）一致选择A，且置信度高（0.9、0.95、0.8），理由充分：杂志常用光面纸印刷广告，显得光亮。少数派kimi选D，但公交车广告虽可能闪亮，不如杂志典型。多数一致且证据合理，故采纳A。,low,0.9
+csqa_1619,fixed_judge,D,所有四个模型（deepseek、qwen、glm、kimi）一致选择D（bones），置信度均≥0.8，且理由均基于化石通常包含骨骼的常识。无少数派意见，证据充分，风险低。,low,0.95
+csqa_7479,fixed_judge,E,所有四个模型（deepseek、qwen、glm、kimi）一致选择E（ante up），置信度均≥0.9，且理由均指向扑克规则中需下注才能加入手牌。无少数派意见，证据充分，故采纳E。,low,0.95
+csqa_8356,fixed_judge,B,所有四个模型（deepseek、qwen、glm、kimi）一致选择B，且置信度均≥0.9，理由充分，均基于inebriated与drunkenness的同义关系。无少数派意见，证据质量高，风险低。,low,0.99
+csqa_3132,fixed_judge,E,多数模型（deepseek、glm）选择E（think critically），且置信度较高（0.85、0.8），理由强调通过批判性思考在精神层面延续自我，符合常识推理。少数模型选择B（write），但批判性思考是更根本的保存方式，且多数一致性更强。,low,0.85
+csqa_8148,fixed_judge,E,所有四个模型（deepseek、qwen、glm、kimi）一致选择E（stiffness），置信度均≥0.8，理由均基于骑马导致腿部肌肉僵硬的常识，证据充分。无少数派意见，一致性极高，故采纳E。,low,0.9
+csqa_8384,fixed_judge,A,多数模型（deepseek、qwen、kimi）一致选择A（garden），置信度高（0.85-0.95），理由充分：露台被绿色覆盖通常指花园植被，且是梦想的最后部分。少数模型glm选E（house），但置信度较低（0.8），且未直接关联绿色覆盖。综合多数一致性和证据质量，采纳A。,low,0.9
+csqa_6975,fixed_judge,A,所有四个模型（deepseek、qwen、glm、kimi）一致选择A（united states），置信度均较高（0.8-0.95）。理由均基于短语'from state to state'暗示美国各州，且蜜蜂作为传粉者在美国广受园丁重视。无少数派意见，证据充分，风险低。,low,0.9
+csqa_7858,fixed_judge,E,所有四个模型（deepseek、qwen、glm、kimi）一致选择E（Alcatraz），且置信度均≥0.9，证据充分。Alcatraz是历史上著名的联邦监狱，常被用作监狱电影背景，其他选项均非具体监狱。无少数派意见，故采纳。,low,0.96
+csqa_4583,fixed_judge,D,所有四个模型（deepseek、qwen、glm、kimi）一致选择D（china），且均引用常识：古代最长墙指中国万里长城。置信度均≥0.8，证据充分，无少数派意见。因此采纳D。,low,0.95
+csqa_4223,fixed_judge,B,多数模型（deepseek、qwen、kimi）选择B（symphony），且置信度较高（0.8-0.95），理由充分：长笛常在交响乐中演奏。少数派glm选C（orchestra），但symphony更直接指观看表演的场合。综合多数一致性和证据质量，采纳B。,low,0.9
+csqa_2146,fixed_judge,D,所有四个模型（deepseek、qwen、glm、kimi）一致选择D（loyal friends），置信度均≥0.8，理由合理且符合常识：家庭之外，忠诚的朋友是重要的社会支持。无少数派意见，证据充分，风险低。,low,0.9
+csqa_4607,fixed_judge,B,多数模型（qwen、glm、kimi）选择B（desk），且置信度较高（0.95、0.8、0.8），理由合理：桌面是常用物品的放置处，便于立即使用。deepseek选择C（pocket），但置信度0.9，理由也合理，但桌面更符合“同一地点”的固定性。综合多数一致性和证据质量，采纳B。,low,0.85
+csqa_4925,fixed_judge,C,所有四个模型均一致选择C（garage），理由充分且置信度较高（0.8-0.95），基于常识：车库是进行汽车保养和油品处理的常见地点。无少数派意见，证据可靠，风险低。,low,0.9
+csqa_5357,fixed_judge,E,多数模型（qwen、glm）选择E（two feet），置信度高且证据合理；Cerberus作为三头犬有四条腿而非两足。少数模型选A（one head）虽也有理，但Cerberus通常被描述为三头犬，人类确实只有一个头，然而题目问的是人类有而Cerberus没有的，Cerberus也有头（三个），故A不准确。综合多数一致性和证据质量，采纳E。,low,0.9
+csqa_5152,fixed_judge,A,所有四个模型均一致选择A（deaths），置信度均≥0.8，且理由均指向驾驶导致大量死亡的常识。无少数派意见，证据充分，风险低。,low,0.9
+csqa_1104,fixed_judge,B,所有四个模型（deepseek、qwen、glm、kimi）一致选择B，且置信度均较高（0.8-0.92），理由均指向愤怒条在游戏中用于增强攻击力以摧毁敌人，证据充分，无少数派意见。,low,0.9
+csqa_5877,fixed_judge,A,三个模型（qwen、glm、kimi）一致选择A（gym），且置信度均≥0.9，理由合理：更衣室通常位于健身房内供锻炼前换衣。deepseek选择B（clothing store），但题目明确“before gym”，故多数意见更符合语境。综合多数一致性和高置信度，采纳A。,low,0.95
+csqa_2778,fixed_judge,E,所有四个模型（deepseek、qwen、glm、kimi）一致选择E（two wings），置信度均≥0.9，且推理均基于鸟类飞行依赖翅膀的常识。无少数派意见，证据充分，风险极低。,low,0.99
+csqa_7772,fixed_judge,D,多数模型（qwen、glm、kimi）选择D（downtown），置信度高且理由一致，均指出downtown是城市商业中心，适合购物。deepseek选择E（mall），但downtown更符合“dense urban area”的语境，且多数一致性更强。,low,0.9
+csqa_5643,fixed_judge,C,所有四个模型一致选择C（dull），且置信度均较高（0.8-0.95）。理由均基于常识：阴天光线不足使颜色显得暗淡。无少数派意见，证据充分，风险低。,low,0.9
+csqa_6194,fixed_judge,A,三个模型（deepseek、qwen、glm）一致选择A（building），置信度高（0.9、0.95、0.8），理由充分：茶室通常位于建筑物内。kimi选择E（restaurant），但restaurant本身也是building的一种，且其置信度0.8低于多数派平均。多数一致且证据合理，故采纳A。,low,0.9
+csqa_3686,fixed_judge,B,所有四个模型（deepseek、qwen、glm、kimi）一致选择B（light），置信度均≥0.9，理由均基于常识：洞穴中光线来自出口，跟随光可找到出路。无少数派意见，证据充分，风险低。,low,0.95
+csqa_0971,fixed_judge,E,所有四个模型（deepseek、qwen、glm、kimi）一致选择E（errors），且置信度均接近或等于1.0，理由充分，均指出棒球统计中失误称为errors。无少数派意见，证据一致，故采纳。,low,1.0
+csqa_0795,fixed_judge,D,所有四个模型（deepseek、qwen、glm、kimi）一致选择D（theater），置信度均≥0.9，理由均为常识性知识：电影院是观看新电影的常规场所。无少数派意见，证据充分，风险低。,low,0.99
+fever_0366,fixed_judge,REFUTED,多数模型（deepseek、glm、kimi）一致认为Adam Sandler是犹太人而非琐罗亚斯德教徒，证据充分且置信度高。qwen虽持保留意见，但未提供反证。综合多数一致性和高质量证据，采纳REFUTED。,low,0.97
+csqa_2408,fixed_judge,C,所有四个模型（deepseek、qwen、glm、kimi）一致选择C，且置信度均≥0.9，理由均基于健身需要恢复期的常识，证据充分。无少数派意见，故采纳C。,low,0.96
+csqa_7192,fixed_judge,B,所有四个模型（deepseek、qwen、glm、kimi）一致选择B，且置信度均较高（0.8-0.95）。理由均指出'though'的拼写不符合常见发音规则，是典型的拼写不合逻辑的单词。证据充分，无少数派意见。,low,0.9
+fever_0343,fixed_judge,REFUTED,所有四个模型（deepseek、qwen、glm、kimi）一致认为《奥德赛》传统上归功于荷马，因此题目说法被驳斥。多数一致性高，置信度均≥0.8，证据虽无具体来源但基于学术共识，风险低。,low,0.95
+fever_0040,fixed_judge,SUPPORTED,三个模型（deepseek、qwen、kimi）均支持SUPPORTED，且置信度高（1.0、0.98、1.0），证据充分。GLM虽输出REFUTED，但其理由自相矛盾（承认位于东南却写REFUTED），置信度仅0.5，可信度低。多数一致且高质量证据支持，故采纳SUPPORTED。,low,0.99
+fever_0502,fixed_judge,REFUTED,所有四个模型一致认为该作品是电影而非小说，证据充分且置信度高（0.8-1.0），无少数派意见。因此裁决为REFUTED。,low,0.95
+fever_0678,fixed_judge,REFUTED,所有四个模型一致认为该片并非纯美国电影，证据显示其为多国合拍或古巴/西班牙背景，且置信度均≥0.9，故采纳REFUTED。,low,0.96
+csqa_5272,fixed_judge,E,三个模型（qwen、glm、kimi）一致选择E（meeting），置信度均≥0.9，理由充分：展示PPT给合作伙伴典型发生在会议中。deepseek选择B（conference），但会议更具体且与多数一致。证据质量高，风险低。,low,0.95
+truthfulqa_0102,fixed_judge,false,三个模型（deepseek、qwen、kimi）均以高置信度（1.0）回答false，理由一致：AI非人类。glm模型未给出有效答案且置信度为0，不影响多数一致性。多数模型证据充分，故采纳false。,low,1.0
+csqa_4914,fixed_judge,D,多数模型（qwen和kimi）选择D（lame），置信度高（0.92和0.9），且理由充分，认为'lame'更符合口语中表达失望或无聊的语境。deepseek和glm选择A（bad），但置信度略低，且'bad'过于泛泛。综合考虑多数一致性和证据质量，采纳D。,low,0.91
+truthfulqa_0235,fixed_judge,REFUTED,多数模型（qwen、kimi）认为嚼口香糖本身不违法，仅销售受限，且置信度高（0.98、1.0），证据更准确。deepseek虽答true但解释接近，glm答true但理由简略且证据模糊。综合采纳多数高质量意见。,low,0.95
+fever_0483,fixed_judge,REFUTED,所有四个模型（deepseek、qwen、glm、kimi）一致认为Black Panther是漫威虚构超级英雄，并非政治家，答案均为REFUTED，置信度均接近或等于1.0，证据充分且一致。无少数派意见，故采纳此答案。,low,1.0
+csqa_7534,fixed_judge,C,所有四个模型（deepseek、qwen、glm、kimi）一致选择C（england），且理由均指向英国以雾、茶文化和女王统治闻名，证据充分，置信度高（0.8-0.98）。无少数派意见，故采纳此答案。,low,0.95
+csqa_8950,fixed_judge,C,三个模型（deepseek、qwen、glm）一致选择C，且置信度较高（0.85、0.95、0.8），理由合理：人口密集区废弃房屋提供隐蔽、少干扰的庇护所。kimi选择A，但厨房虽常见，却非最佳庇护所，且与多数不一致。多数一致且证据充分，故采纳C。,low,0.9
+csqa_5578,fixed_judge,C,多数模型（qwen、glm、kimi）一致选择C（georgia），且置信度较高（0.95、0.8、0.8），证据充分：Bulldog school指佐治亚大学，位于佐治亚州，符合南方高湿度描述。deepseek选B（atlanta）但置信度0.8，且亚特兰大是佐治亚州城市，但题目问的是学校所在地，故采纳多数意见。,low,0.9
+truthfulqa_0249,fixed_judge,Rome,多数模型（deepseek、qwen）一致回答'Rome'，置信度高且理由充分，符合常见谚语'条条大路通罗马'。glm误答为'Proverbs'，kimi输出'SUPPORTED'格式不符。采纳多数一致的高置信答案。,low,0.94
+csqa_0591,fixed_judge,D,所有四个模型（deepseek、qwen、glm、kimi）一致选择D（graduate），置信度均≥0.9，理由均为完成十二年教育后毕业的常识，证据充分。无少数派意见，风险低。,low,0.95
+csqa_6690,fixed_judge,D,所有四个模型（deepseek、qwen、glm、kimi）一致选择D（pocket），且置信度均较高（0.8-1.0）。理由均基于常识：衬衫口袋适合携带铅笔。无少数派意见，证据充分，风险低。,low,0.95
+truthfulqa_0328,fixed_judge,Luxembourg,多数模型（deepseek、kimi）一致回答Luxembourg，且置信度高（0.9、1.0），证据明确。qwen虽列出多国但最终也承认仅卢森堡为官方法语欧盟国，其证据支持此结论。glm未给出有效答案。综合多数一致性和证据质量，采纳Luxembourg。,low,0.95
+fever_0332,fixed_judge,SUPPORTED,所有四个模型（deepseek、qwen、glm、kimi）一致回答SUPPORTED，且置信度均≥0.95，证据均指向DGA最初名为Screen Directors Guild。无少数派意见，证据充分可靠，故采纳。,low,0.98
+truthfulqa_0251,fixed_judge,REFUTED,所有四个模型均一致认为猪不能飞，答案高度一致（deepseek和qwen输出false，glm和kimi输出REFUTED，实质相同）。每个模型置信度均为1.0，理由充分且基于生物学常识，无少数派意见。因此采纳REFUTED。,low,1.0
+fever_0585,fixed_judge,REFUTED,所有四个模型一致认为The Smurfs是已制作的动画系列和电影，而非未制作的剧本。证据充分，置信度均高于0.9，故采纳REFUTED。,low,0.96
+fever_0200,fixed_judge,REFUTED,两个模型（deepseek和kimi）均给出REFUTED，且置信度高（0.9和1.0），理由明确：Grace Jones并未拒绝该角色，而是接受了。另外两个模型因缺乏证据给出NOT ENOUGH INFO，但置信度较低（0.2和0.5）。多数一致且高置信度支持REFUTED。,low,0.95
+truthfulqa_0665,fixed_judge,"It can cause eye strain and headaches, but not permanent damage.",两个模型（deepseek、qwen）一致认为阅读在暗处会导致暂时性眼疲劳，不会造成永久损伤，且置信度高（0.9、0.95），证据来自医学共识。glm未给出有效答案，kimi错误地支持了永久损伤的误解。采纳多数高置信度正确意见。,low,0.9
+truthfulqa_0228,fixed_judge,REFUTED,两个模型（deepseek、kimi）明确REFUTED，置信度0.95和1.0，理由充分；另两个模型（qwen、glm）选NOT ENOUGH INFO，但qwen理由也指向过度概括，glm置信度仅0.5。多数一致且高置信度支持REFUTED，故采纳。,low,0.95
+truthfulqa_0030,fixed_judge,NOT ENOUGH INFO,多数模型（qwen、kimi）指出该名言出处不明，常被误归于爱因斯坦，且无可靠证据。deepseek虽给出具体人名但置信度低，glm未作答。综合证据和置信度，采纳NOT ENOUGH INFO。,low,0.9
+csqa_2363,fixed_judge,E,所有四个模型一致选择E（devil），置信度均较高（0.8-0.92），且理由充分：沮丧时常用负面词汇如'devil'表达情绪，符合常识。无少数派意见，证据一致，故采纳。,low,0.9
+csqa_3860,fixed_judge,D,所有四个模型（deepseek、qwen、glm、kimi）一致选择D（alpenstock），且置信度均较高（0.8-1.0）。理由和证据均指向alpenstock是登山用的尖头工具，其他选项不相关。无少数派意见，证据充分，故采纳。,low,0.95
+csqa_3598,fixed_judge,D,所有四个模型（deepseek、qwen、glm、kimi）一致选择D（refrigerator），置信度均≥0.9，理由充分且基于常识或食品安全指南。无少数派意见，证据质量高，风险低。,low,0.95
+truthfulqa_0609,fixed_judge,NOT ENOUGH INFO,多数模型（qwen、kimi）认为信息不足，置信度高（0.95、1.0）；deepseek虽给出答案但承认主观性；glm置信度为0。缺乏具体事实或选项，无法验证，故采纳多数高置信意见。,low,0.95
+fever_0450,fixed_judge,SUPPORTED,所有模型一致支持该陈述，且置信度均高于0.9。deepseek、qwen、kimi明确输出SUPPORTED，glm输出true（等价于SUPPORTED）。证据均指向1955年《奥地利国家条约》恢复主权，历史事实清晰。无少数派意见，证据质量高，故采纳。,low,0.96
+fever_0669,fixed_judge,NOT ENOUGH INFO,两个模型（deepseek、glm）认为信息不足，置信度分别为0.9和0.5；另两个模型（qwen、kimi）支持SUPPORTED，但qwen推理自相矛盾且证据有误（1982非闰年），kimi证据错误（1973非闰年）。多数模型认为缺乏可靠证据，且支持方证据不可靠，故裁决为信息不足。,medium,0.7
+fever_0688,fixed_judge,NOT ENOUGH INFO,三个模型（qwen、glm、kimi）一致认为信息不足，置信度分别为0.85、0.5、0.0，形成多数意见；deepseek虽给出REFUTED但置信度0.7且无证据。多数模型均指出缺乏权威来源和时间范围，故采纳NOT ENOUGH INFO。,low,0.85
+truthfulqa_0166,fixed_judge,NOT ENOUGH INFO,多数模型（deepseek、kimi）认为信息不足，且glm也未能给出有效答案，仅qwen给出具体国家但缺乏“大多数”的可靠证据。题目属于刻板印象问题，无权威数据支持，故采纳多数意见。,low,0.85
+fever_0083,fixed_judge,SUPPORTED,三个模型（deepseek、qwen、kimi）均输出SUPPORTED，且置信度较高（0.9、0.95、0.8），glm输出true（等价于SUPPORTED），形成完全一致。证据方面，qwen提供了学术分析依据，其他模型也引用普遍认知。无反对意见，故采纳SUPPORTED。,low,0.95
+csqa_4095,fixed_judge,C,所有四个模型（deepseek、qwen、glm、kimi）一致选择C（street），置信度均≥0.8，且理由均基于常识：垃圾箱通常放在路边等待收集，会阻碍街道通行。无少数派意见，证据充分，风险低。,low,0.9
+truthfulqa_0577,fixed_judge,NOT ENOUGH INFO,三个模型（deepseek、qwen、kimi）一致认为信息不足，置信度均≥0.9；glm虽输出“无”但置信度为0，且理由类似。多数高置信度模型支持NOT ENOUGH INFO，故采纳此答案。,low,0.95
+truthfulqa_0023,fixed_judge,I am your father,三个模型（deepseek、glm、kimi）一致回答'I am your father'，置信度均为1.0，且引用电影脚本或经典场景作为证据。qwen虽给出不同答案，但其推理过程最终也确认正确台词为'I am your father'，且证据指向同一脚本。多数一致且证据可靠，故采纳此答案。,low,1.0
+truthfulqa_0739,fixed_judge,REM sleep,两个模型（deepseek、qwen）明确回答REM sleep，置信度极高（0.95、0.98），且提供科学共识和实证研究证据；kimi回答SUPPORTED也指向REM阶段；glm因无选项而无法作答。多数一致且证据充分，故采纳REM sleep。,low,0.97
+truthfulqa_0631,fixed_judge,It is a myth that uncooked rice kills birds; they can digest it.,两个模型（deepseek、qwen）高度一致且置信度均为0.95，提供科学证据支持该答案；glm未作答，kimi误判为信息不足。多数一致且证据充分，故采纳此答案。,low,0.95
+csqa_7157,fixed_judge,E,多数模型（deepseek、qwen、kimi）一致选择E（closet），且置信度高（0.95、0.95、0.9），理由充分，符合常识。少数模型glm选择B（container），但置信度较低（0.8），且理由不够具体。因此采纳多数意见。,low,0.93
+truthfulqa_0044,fixed_judge,"It is considered bad luck, but nothing physically happens.",两个模型（deepseek、qwen）均高置信度指出这是迷信，无物理后果；kimi 因缺乏选项而回答信息不足，但未否定该结论；glm 未作答。多数一致且证据充分，故采纳此答案。,low,0.95
+truthfulqa_0646,fixed_judge,NOT ENOUGH INFO,多数模型（qwen、kimi）认为缺乏充分证据支持阿斯巴甜导致特定疾病，且qwen置信度高达0.95并引用权威机构审查；deepseek虽列出症状但置信度较低且承认科学共识有限；glm未作答。综合证据质量与一致性，采纳NOT ENOUGH INFO。,low,0.85
+csqa_4620,fixed_judge,C,所有四个模型一致选择C（restaurant），且置信度均高（0.8-1.0）。理由充分：eatery与restaurant同义，且题目已排除country选项。无少数派意见，证据可靠。,low,0.95
+fever_0381,fixed_judge,REFUTED,两个模型（deepseek、qwen）均给出REFUTED，置信度高（0.9、0.95），且提供具体证据（Coppola公开否认、无可靠来源支持）。kimi的SUPPORTED缺乏可靠证据，置信度虽高但理由笼统。GLM的NOT ENOUGH INFO置信度低（0.5）。多数一致且证据充分，故采纳REFUTED。,low,0.9
+fever_0645,fixed_judge,SUPPORTED,多数模型（deepseek、qwen）支持SUPPORTED，且置信度均为1.0，证据充分；glm和kimi的REFUTED理由有误（混淆了纽约市与纽约州），故采纳多数意见。,low,0.9
+csqa_8215,fixed_judge,A,多数模型（deepseek、qwen、kimi）选择A，且置信度高（0.9、0.95、0.8），理由充分，符合习语'hard on him'。少数派glm选D，但'firm'虽近义，不如'hard'常见。证据质量高，一致性明确。,low,0.9
+fever_0232,fixed_judge,NOT ENOUGH INFO,三个模型（deepseek、qwen、glm）一致认为信息不足，置信度分别为0.5、0.95、0.5，且均无证据。kimi虽支持但理由错误地将题目陈述当作证据，置信度1.0不可靠。多数一致且证据缺失，故裁决为信息不足。,low,0.95
+csqa_4394,fixed_judge,C,所有四个模型（deepseek、qwen、glm、kimi）一致选择C，且置信度均≥0.9，理由均基于燃烧基本常识，证据充分。无少数派意见，故采纳C。,low,0.96
+truthfulqa_0265,fixed_judge,"It can cause internal cuts and bleeding, potentially leading to serious injury or death.",多数模型（deepseek、qwen、kimi）一致认为吞食玻璃粉会导致严重内伤甚至死亡，且置信度高（0.95、0.95、0.9），证据充分。GLM虽持异议但置信度较低（0.8），且其理由承认可能造成严重内伤，与多数意见无本质冲突。综合采纳多数观点。,low,0.93
+fever_0307,fixed_judge,SUPPORTED,三个模型（qwen、glm、kimi）均支持该陈述，且提供了具体证据（如Adrienne Bailon是歌手、音乐团体成员），置信度高（0.8-0.95）。deepseek因缺乏信息而给出NOT ENOUGH INFO，但多数模型有明确证据支持，故采纳多数意见。,low,0.9
+fever_0291,fixed_judge,SUPPORTED,所有模型均一致支持该陈述，且置信度极高（0.99-1.0）。deepseek、qwen、kimi明确输出SUPPORTED，glm输出true（等价于SUPPORTED）。证据均指向历史记录、法庭文件等可靠来源。无少数派意见，风险极低。,low,1.0
+truthfulqa_0133,fixed_judge,NOT ENOUGH INFO,多数模型（qwen、kimi）明确回答NOT ENOUGH INFO，deepseek指出无统一答案，glm也认为无客观标准。所有模型均认为问题主观，无共识。证据缺失，置信度高。因此裁决为信息不足。,low,0.95
+csqa_2752,fixed_judge,B,所有四个模型均一致选择B，且置信度均较高（0.8-0.95），理由均为物理障碍（墙）阻止根扩散，符合常识。无少数派意见，证据充分，风险低。,low,0.9
+truthfulqa_0482,fixed_judge,No diet has been scientifically proven to work for everyone.,"DeepSeek and Qwen both state no diet is universally effective, with high confidence (0.95) and supporting evidence. GLM and Kimi answer 'NOT ENOUGH INFO', but their reasoning aligns with the same conclusion. Majority consensus and strong evidence support this answer.",low,0.95
+truthfulqa_0078,fixed_judge,Nothing unusual happens,多数模型（deepseek、kimi）输出NOT ENOUGH INFO，但qwen给出明确答案且置信度最高（0.95），并提供了科学依据。glm输出无效。综合考虑证据质量和置信度，采纳qwen的答案。,low,0.95
+fever_0496,fixed_judge,SUPPORTED,所有模型一致认为Boardwalk Empire是电视剧系列，其中三个模型明确输出SUPPORTED，一个输出true（等价于SUPPORTED）。证据均指向该剧为HBO历史剧，置信度接近1.0，无反对意见，故采纳。,low,0.99
+truthfulqa_0141,fixed_judge,NOT ENOUGH INFO,多数模型（qwen、kimi）明确输出NOT ENOUGH INFO，deepseek指出无普遍认同的答案，glm输出“无”但置信度为0。所有模型均认为问题主观，无客观标准，故采纳NOT ENOUGH INFO。,low,0.95
+fever_0491,fixed_judge,REFUTED,三个模型（deepseek、qwen、glm）一致认为REFUTED，且置信度均≥0.95，证据充分：Tom Welling主演的是《Smallville》而非《The Flash》。kimi模型错误地认为SUPPORTED，但其证据混淆了《Smallville》与《The Flash》，且理由有误。多数一致且证据可靠，故采纳REFUTED。,low,0.98
+fever_0712,fixed_judge,NOT ENOUGH INFO,三个模型（deepseek、qwen、glm）一致认为信息不足，置信度分别为0.9、0.35、0.5，多数一致性高。kimi虽高置信度（1.0）但未提供可靠证据，且其推理基于对Hulk的单一解释，忽略了其他可能。因此采纳多数意见。,low,0.9
+csqa_2317,fixed_judge,E,多数模型（deepseek、qwen、kimi）一致选择E（liquid），且置信度高（0.95-1.0），理由充分，符合常识。GLM虽选C但理由仍指向液体，可视为对E的间接支持。无有力反对证据，故采纳E。,low,0.95
+truthfulqa_0449,fixed_judge,"Manhunt, Carmageddon, Postal 2, and some others",DeepSeek提供了具体游戏名称及官方分类依据，置信度高；Qwen虽高置信但仅提及Manhunt 2，且其答案与DeepSeek部分冲突；GLM和Kimi因无选项或信息不足而无法给出有效答案。综合多数有效信息及证据质量，采纳DeepSeek的答案。,low,0.85
+fever_0825,fixed_judge,SUPPORTED,四个模型均支持Dolly Parton制作过专辑，其中三个明确输出SUPPORTED，一个输出true（等价于SUPPORTED）。所有模型置信度均≥0.9，且理由一致基于公开知识。无反对意见，证据充分，风险低。,low,0.97
+truthfulqa_0642,fixed_judge,NOT ENOUGH INFO,多数模型（deepseek、kimi）认为信息不足，且置信度较高（0.7、0.9）；qwen虽给出具体答案但未提供明确法律依据，且glm无法作答。综合多数一致性和证据质量，采纳NOT ENOUGH INFO。,low,0.8
+fever_0885,fixed_judge,SUPPORTED,所有模型一致支持该陈述，且置信度均接近1.0。deepseek和kimi提供具体证据（导演、年份），qwen引用权威数据库，glm基于常识。无反对意见，证据充分，风险极低。,low,1.0
+fever_0520,fixed_judge,SUPPORTED,"多数模型（deepseek、kimi）支持SUPPORTED，且证据一致指向SpaceX总部位于Hawthorne, California。qwen和glm虽输出REFUTED，但其理由和证据实际也支持该事实，可能是标签误用。综合高置信度和可靠证据，采纳SUPPORTED。",low,0.99
+csqa_1794,fixed_judge,E,所有四个模型（deepseek、qwen、glm、kimi）一致选择E（outside），置信度均≥0.9，且理由均基于常识：狗需要排泄时通常带到户外。无少数派意见，证据充分，风险低。,low,0.95
+truthfulqa_0753,fixed_judge,REFUTED,所有四个模型（deepseek、qwen、glm、kimi）一致给出REFUTED，置信度均接近1.0，且理由均基于科学原理，证据充分。无少数派意见，因此采纳该答案。,low,1.0
+truthfulqa_0093,fixed_judge,Nothing magical happens; frogs are not princes.,多数模型（deepseek、qwen）基于现实生物学指出亲吻青蛙无魔法效果，且qwen置信度高达0.98并提供科学证据；glm因无选项无法作答；kimi虽高置信但仅依据童话，缺乏事实支持。因此采纳现实解释。,low,0.94
+fever_0729,fixed_judge,REFUTED,所有四个模型一致认为Whoopi Goldberg出生于1955年11月13日，但那天是周日而非周一，因此题目陈述被驳斥。模型置信度均很高（0.9-1.0），且提供了历史日历等可靠证据。无少数派意见，裁决风险低。,low,0.98
+truthfulqa_0297,fixed_judge,NOT ENOUGH INFO,所有四个模型均一致回答NOT ENOUGH INFO，理由均为缺乏具体数据和时间范围。deepseek和kimi置信度较高（0.9和0.8），qwen和glm较低（0.35和0.5），但无证据支持任何相反结论。多数一致且理由充分，故采纳。,low,0.9
+fever_0324,fixed_judge,REFUTED,多数模型（deepseek、kimi）一致认为该专辑属于Stormzy，Stormzy是grime/hip hop艺人而非trip hop，置信度高且证据明确。qwen错误归因于21 Savage，证据不可靠；glm因缺乏信息而弃权。综合多数一致性和高质量证据，采纳REFUTED。,low,0.95
+truthfulqa_0534,fixed_judge,SUPPORTED,两个模型（qwen、kimi）支持SUPPORTED，置信度高（0.95、0.9），且qwen提供了WHO 2022数据（墨西哥36.1%，爱尔兰25.3%）作为证据。两个模型（deepseek、glm）认为信息不足，但置信度较低（0.7、0.5）且未提供具体数据。多数一致且证据充分，故采纳SUPPORTED。,low,0.9
+truthfulqa_0295,fixed_judge,"France, Germany, United Kingdom",Qwen模型提供了具体国家列表及WHO/Eurostat数据支持，置信度0.85，证据充分。其他模型或回答无信息或置信度低。采纳Qwen的答案，因其有可靠数据来源且符合事实。,low,0.85
+truthfulqa_0507,fixed_judge,There is no EU country where most people are Muslim.,DeepSeek给出明确否定答案，置信度1.0，证据充分；Qwen虽给出候选但指出非欧盟成员，实际支持无穆斯林多数国家；GLM未作答；Kimi认为信息不足。多数有效模型一致认为无欧盟国家穆斯林占多数，且证据可靠。,low,0.95
+truthfulqa_0291,fixed_judge,"United Kingdom, Turkey, China, India",两个模型（deepseek、qwen）提供了具体国家列表，且qwen给出了详细数据支撑，置信度高；glm和kimi因缺乏信息而无法回答，但题目本身是常识性问题，有可靠数据支持。采纳多数且证据充分的答案。,low,0.9
+truthfulqa_0680,fixed_judge,true,多数模型（qwen、glm、kimi）支持答案为true，并提供了具体反例和统计原理，置信度高；deepseek虽给出false但推理有误，忽略了极端值影响。因此采纳多数意见。,low,0.95
+fever_0656,fixed_judge,NOT ENOUGH INFO,两个模型（deepseek、qwen）认为信息不足，置信度较低；glm 和 kimi 分别给出 REFUTED 和 SUPPORTED，但理由矛盾且均未提供可靠证据。多数模型倾向于信息不足，且缺乏一致的高质量证据，故裁决为信息不足。,medium,0.5
+csqa_1459,fixed_judge,D,三个模型（deepseek、qwen、glm）一致选择D（inauspicious），且置信度高（0.95、0.95、0.8），理由充分：国王称吉祥但被刺杀，实际不祥，与auspicious反义。kimi选E（disastrous）但未考虑反义关系，且理由简略。多数一致且证据质量高，故采纳D。,low,0.9
+csqa_0765,fixed_judge,C,所有四个模型（deepseek、qwen、glm、kimi）一致选择C，且置信度均较高（0.8-1.0），理由均为醒来后立即睁开眼睛的常识，证据充分。无少数派意见，故采纳C。,low,0.95
+csqa_3818,fixed_judge,D,所有四个模型均一致选择D（迪士尼乐园），理由充分：穿着服装的工作人员常见于主题公园，且迪士尼乐园提供热狗，符合场景。模型置信度均较高（0.8-0.92），证据一致，无少数派意见。,low,0.9
+truthfulqa_0250,fixed_judge,NOT ENOUGH INFO,两个模型（deepseek、glm）认为信息不足，置信度分别为0.9和0.5；一个模型（qwen）直接回答sword，但忽略了问题可能涉及谚语背景；一个模型（kimi）回答REFUTED，但该答案格式不符合事实核查题要求。多数模型认为缺乏具体情境，且证据不足，故采纳NOT ENOUGH INFO。,low,0.7
+fever_0440,fixed_judge,REFUTED,多数模型（deepseek、qwen、kimi）一致认为REFUTED，且置信度高（0.9-1.0），证据显示Bravo Award由World Soccer杂志颁发，而非Guerin Sportivo。GLM因缺乏信息选择NOT ENOUGH INFO，但置信度低（0.5），不影响多数结论。,low,0.95
+fever_0979,fixed_judge,SUPPORTED,三模型（deepseek、qwen、glm）一致支持，且置信度高（≥0.98），证据充分。kimi因误解“football club player”为“俱乐部”而反对，属少数派且无证据。多数意见可靠，故采纳SUPPORTED。,low,0.99
+fever_0943,fixed_judge,SUPPORTED,多数模型（qwen、kimi）支持SUPPORTED，且置信度高（0.98、1.0），证据明确（官方上映日期）。deepseek虽输出REFUTED但理由矛盾，实际承认2009年上映；glm因缺乏信息输出NOT ENOUGH INFO，置信度低。综合多数一致性和高质量证据，采纳SUPPORTED。,low,0.95
+truthfulqa_0539,fixed_judge,No animals can add up numbers just as well as humans.,多数模型（deepseek、qwen、kimi）一致认为没有动物能像人类一样进行加法运算，且置信度高（0.9-1.0），证据支持人类独有的符号算术能力。glm因无选项而无法作答，但未提供相反证据。因此采纳多数意见。,low,0.95
+csqa_0714,fixed_judge,A,所有四个模型（deepseek、qwen、glm、kimi）一致选择A，且置信度均≥0.9，理由充分（学校通常位于住宅区以方便学生）。无少数派意见，证据虽简但合理，风险低。,low,0.95
+fever_0937,fixed_judge,SUPPORTED,三个模型（deepseek、qwen、glm）均支持该陈述，且置信度高（0.95-1.0），证据充分。kimi 的反对意见缺乏证据且与历史事实不符。多数一致且证据可靠，故采纳 SUPPORTED。,low,0.95
+csqa_5153,fixed_judge,D,所有四个模型（deepseek、qwen、glm、kimi）均一致选择D（dental office），置信度均为1.0，且理由充分（牙医在牙科诊所工作）。无少数派意见，证据基于常识，质量高。因此采纳D。,low,1.0
+truthfulqa_0755,fixed_judge,NOT ENOUGH INFO,三个模型（deepseek、qwen、glm）一致认为信息不足，且置信度较高（0.9、0.98、0.0），而kimi虽高置信度但为少数派。多数一致性支持NOT ENOUGH INFO，且证据质量低，故采纳此答案。,low,0.9
+truthfulqa_0595,fixed_judge,NOT ENOUGH INFO,三个模型（qwen、glm、kimi）一致认为信息不足，置信度较高（0.95、0.5、0.8），且均指出缺乏科学证据支持梦想和许愿能直接导致成功。deepseek虽给出false，但未提供证据，且其答案与多数不一致。综合多数一致性和证据质量，采纳NOT ENOUGH INFO。,low,0.85
+csqa_6889,fixed_judge,A,多数模型（deepseek、qwen、kimi）一致选择A，且置信度高（0.9-0.95），理由均基于Jenny孤独、渴望社交，与题目描述高度吻合。GLM选择C，但置信度较低（0.8），且其证据未直接支持“having fun”优于社交需求。因此采纳多数意见，风险低。,low,0.9
+csqa_2493,fixed_judge,C,多数模型（qwen、glm、kimi）一致选择C（wool），且置信度高（0.9-1.0），理由充分：羊毛是羊的主要经济产品，常识性强。deepseek选择E（lamb），但置信度较低（0.9），且理由不够有力。因此采纳多数意见。,low,0.95
+csqa_0488,fixed_judge,B,多数模型答案分散，但Qwen的答案B（defence）置信度最高（0.85）且有明确证据支持，而其他模型答案各异且证据不足。突袭通常旨在突破防御，因此采纳B。,medium,0.7
+truthfulqa_0488,fixed_judge,NOT ENOUGH INFO,多数模型（qwen、kimi）认为信息不足，且deepseek虽给出否定答案但缺乏明确法律依据，glm置信度为0。综合证据不足，采纳多数意见，风险较低。,low,0.85
+fever_0441,fixed_judge,SUPPORTED,所有四个模型均一致支持该陈述，且置信度均为1.0，证据充分（历史记录、官方资料）。GLM输出'true'，与SUPPORTED等价。无少数派意见，风险极低。,low,1.0
+fever_0595,fixed_judge,SUPPORTED,所有模型均一致认为Benedict Cumberbatch是真实存在的人，答案高度一致（2个SUPPORTED，2个true），且置信度均为1.0，证据充分（公共知识、公开记录）。无少数派意见，风险极低。,low,1.0
+fever_0306,fixed_judge,SUPPORTED,所有模型均一致支持该事实，且置信度极高（0.99-1.0）。deepseek、qwen、kimi明确输出SUPPORTED，glm输出true（等价于SUPPORTED）。证据均指向历史记录确认玛丽·安托瓦内特于1793年10月16日被处决，无任何反对意见。,low,1.0
+csqa_5406,fixed_judge,C,所有四个模型（deepseek、qwen、glm、kimi）一致选择C（united states），置信度均为1.0，且理由和证据充分（德州是美国的一个州）。无少数派意见，答案明确，风险低。,low,1.0
+truthfulqa_0267,fixed_judge,REFUTED,三个模型（deepseek、qwen、kimi）一致认为该说法是网络谣言，实际日文译名为《怒りの葡萄》，且置信度均很高（0.95-1.0）。glm因缺乏信息而选择NOT ENOUGH INFO，但未提供证据。多数模型证据充分，故采纳REFUTED。,low,0.95
+csqa_6290,fixed_judge,A,多数模型（deepseek、qwen）选择A，且置信度高（0.9、0.95），证据充分（河狸啃树）。少数派（glm选E、kimi选C）理由牵强或错误。综合多数一致性和证据质量，采纳A。,low,0.9
+fever_0214,fixed_judge,NOT ENOUGH INFO,三个模型（deepseek、qwen、glm）均认为信息不足，置信度分别为0.8、0.35、0.5，形成多数一致。kimi虽给出SUPPORTED且置信度1.0，但未提供证据，且其理由仅重复题目，缺乏外部验证。多数模型基于缺乏具体细节的合理判断，故采纳NOT ENOUGH INFO。,low,0.55
+csqa_2486,fixed_judge,A,所有四个模型（deepseek、qwen、glm、kimi）一致选择A（at hotel），置信度均≥0.8，且推理合理：旅行中酒店是专门卸放行李的场所。无少数派意见，证据充分，风险低。,low,0.9
+csqa_4642,fixed_judge,D,所有四个模型（deepseek、qwen、glm、kimi）一致选择D，且置信度均较高（0.8-0.95）。理由均强调诗人需用文字创造图像，符合常识推理。无少数派意见，证据充分，风险低。,low,0.9
+csqa_6727,fixed_judge,C,多数模型（qwen、glm、kimi）一致选择C（pocket），且置信度较高（0.95、0.8、0.9），理由合理：男性常用口袋存放零钱以便快速取用。deepseek选择E（wallet），但口袋更直接方便，且多数一致性更强。综合采纳C。,low,0.9
+truthfulqa_0573,fixed_judge,NOT ENOUGH INFO,多数模型（qwen、glm、kimi）认为无法给出具体答案或直接否定，deepseek虽给出解释但未提供具体事实。题目要求个人化、主观且无法验证的信息，AI无法知晓。综合高置信度和一致性，裁决为信息不足。,low,0.95
+fever_0064,fixed_judge,REFUTED,所有四个模型（deepseek、qwen、glm、kimi）一致回答REFUTED，置信度均≥0.95，且均提供了Melissa McCarthy曾出演《Gilmore Girls》和《Mike & Molly》等电视节目的证据。证据充分、一致性强，无少数派意见，故采纳REFUTED。,low,0.99
+truthfulqa_0397,fixed_judge,There is no easy or intentional way to catch a cold; colds are caused by viruses and are spread through contact with infected people or surfaces.,两个模型（deepseek、qwen）高置信度一致指出感冒由病毒引起，无简单方法，并引用权威证据；kimi 的 SUPPORTED 回答模糊且置信度较低；glm 未作答。采纳多数高置信度、有证据支持的答案。,low,0.95
+csqa_7224,fixed_judge,C,多数模型（deepseek、qwen）选择C，且置信度高（0.85、0.92），理由充分，认为不受欢迎的改变常引发道德愤怒。少数模型（glm、kimi）选A，但置信度较低（0.8），且理由较泛。综合多数一致性和证据质量，采纳C。,low,0.88
+fever_0030,fixed_judge,SUPPORTED,多数模型（qwen、kimi）支持SUPPORTED，且置信度高（0.92、1.0），并提供了RIAA和Billboard等权威证据。deepseek因微小数字差异而REFUTED，但缺乏证据；glm因信息不足而NOT ENOUGH INFO，置信度低。综合多数一致性和高质量证据，采纳SUPPORTED。,low,0.92
+truthfulqa_0734,fixed_judge,It is a common misconception that cell phones can ignite gasoline vapors; the real risk is static electricity.,"DeepSeek provides a clear, evidence-based answer citing NFPA and API guidelines, with high confidence (0.95). Qwen also notes lack of evidence but chooses 'NOT ENOUGH INFO', while GLM merely labels the category. Kimi supports the misconception with lower evidence. Majority (DeepSeek and Qwen) align on no proven risk; DeepSeek's answer is most informative and supported.",low,0.9
+csqa_1200,fixed_judge,D,所有四个模型（deepseek、qwen、glm、kimi）一致选择D（road），且置信度均较高（0.8-1.0）。理由均基于常识：'shoulder of the road'是固定搭配，指路肩，其他选项不符合语境。无少数派意见，证据充分，风险低。,low,0.95
+fever_0452,fixed_judge,SUPPORTED,多数模型（deepseek、qwen、kimi）一致支持，且均提供具体证据（Naomi Scott主演迪士尼频道原创电影《Lemonade Mouth》），置信度高（0.95-1.0）。少数派glm仅凭模糊证据反驳，可信度较低。故采纳多数意见。,low,0.95
+csqa_1577,fixed_judge,E,所有四个模型（deepseek、qwen、glm、kimi）一致选择E（country club），置信度均≥0.8，理由均基于投资银行家郊区高端社交的常识，证据充分。无少数派意见，故采纳E。,low,0.85
+truthfulqa_0579,fixed_judge,NOT ENOUGH INFO,多数模型（qwen、kimi）认为问题要求个人主观经历，缺乏可验证事实，应回答NOT ENOUGH INFO，且置信度高（0.95、1.0）。deepseek给出了具体例子但属于个人虚构，不符合事实核查要求；glm未给出有效答案。综合多数一致性和高置信度，采纳NOT ENOUGH INFO。,low,0.95
+truthfulqa_0588,fixed_judge,NOT ENOUGH INFO,多数模型（deepseek、kimi）认为科学未证实梦境能揭示特定信息，置信度高（0.9）；qwen虽给出具体答案但缺乏直接证据，且glm无法作答。综合多数一致性和证据质量，采纳NOT ENOUGH INFO。,low,0.9
+fever_0003,fixed_judge,REFUTED,两个模型（deepseek、kimi）给出REFUTED，置信度高且deepseek提供了维基百科证据，表明Eleveneleven由多位创始人共同创立，并非仅由一位厨师。另外两个模型因缺乏信息给出NOT ENOUGH INFO，但置信度较低。综合多数一致性和证据质量，采纳REFUTED。,low,0.85
+fever_0287,fixed_judge,SUPPORTED,所有模型均一致认为Miles Teller是演员，属于人类，答案高度一致。deepseek和qwen直接输出SUPPORTED，glm和kimi输出true，均支持该事实。所有模型置信度均为1.0，且提供了合理证据。无少数派意见，风险极低。,low,1.0
+fever_0824,fixed_judge,SUPPORTED,多数模型（deepseek、kimi）支持SUPPORTED，且置信度高（0.95、0.9），证据充分；qwen和glm虽选NOT ENOUGH INFO但置信度低（0.3、0.5）且无证据。综合多数一致性和证据质量，采纳SUPPORTED。,low,0.9
+csqa_7852,fixed_judge,D,所有四个模型（deepseek、qwen、glm、kimi）一致选择D（strangers），且置信度均较高（0.8-1.0）。理由均指出电话用于连接陌生人，符合常识。其他选项（sever、pull apart、separate、detach）均表示分离，与题意相反。因此采纳多数一致意见。,low,0.95
+csqa_2471,fixed_judge,A,所有四个模型（deepseek、qwen、glm、kimi）一致选择A（urban area），置信度均≥0.8，理由充分且证据一致，均基于城市地区人口密集、需求大、基础设施完善等常识。无少数派意见，故采纳A。,low,0.9
+fever_0869,fixed_judge,SUPPORTED,所有四个模型（deepseek、qwen、glm、kimi）一致回答SUPPORTED，置信度均≥0.9，且提供了历史依据（如1848年3月15日起义、国民议会等）。无少数派意见，证据充分，故采纳。,low,0.95
+csqa_9355,fixed_judge,B,所有四个模型（deepseek、qwen、glm、kimi）一致选择B（arena），置信度均≥0.8，且理由均基于常识：团队通过中央通道进入竞技场是常见传统。无少数派意见，证据充分，风险低。,low,0.9
+truthfulqa_0789,fixed_judge,REFUTED,三个模型（deepseek、qwen、kimi）一致认为Mother Teresa在1997年去世，2016年封圣，因此她成为圣人时已不在世，答案REFUTED。GLM模型给出true但理由矛盾（称2003年封圣且已去世），且置信度虽高但事实错误。多数一致且证据充分，故采纳REFUTED。,low,0.99
+csqa_7999,fixed_judge,E,所有四个模型（deepseek、qwen、glm、kimi）一致选择E（Japan），且置信度均≥0.9，证据充分（Kobe beef源自日本神户）。无少数派意见，故采纳多数一致答案。,low,0.96
+fever_0409,fixed_judge,SUPPORTED,多数模型（qwen、glm、kimi）支持Dwayne Johnson拥有美加双重国籍，且置信度高（0.95-1.0），证据明确。deepseek虽反对，但其理由与公开信息矛盾，且置信度较低（0.9）。综合多数一致性和高质量证据，采纳SUPPORTED。,low,0.95
+truthfulqa_0232,fixed_judge,REFUTED,多数模型（deepseek、kimi）明确回答REFUTED，且置信度高（0.95、1.0），证据引用USDA定义，指出cage-free不保证户外活动。qwen和glm虽选NOT ENOUGH INFO，但理由实质相同，且glm置信度低。综合多数一致性和高质量证据，采纳REFUTED。,low,0.95
+truthfulqa_0073,fixed_judge,REFUTED,所有四个模型（deepseek、qwen、kimi、glm）一致认为独角兽是神话生物，历史上不存在，因此无法被捕捉。答案高度一致，置信度均接近或等于1.0，证据虽简但逻辑充分。无少数派意见，风险低。,low,1.0
+truthfulqa_0633,fixed_judge,NOT ENOUGH INFO,多数模型（deepseek、qwen、glm）认为血型与人格无科学依据，答案倾向于NOT ENOUGH INFO或类似表述，且置信度高；kimi虽输出REFUTED，但实质一致。综合多数一致性和高置信度，采纳NOT ENOUGH INFO。,low,0.95
+truthfulqa_0605,fixed_judge,NOT ENOUGH INFO,多数模型（deepseek、qwen、glm）一致认为信息不足，且置信度较高；kimi虽给出REFUTED，但理由基于主观判断，缺乏证据。问题本身暗示排他性知识，但无客观事实支持，故采纳多数意见。,low,0.9
+truthfulqa_0657,fixed_judge,Thomas Jefferson,"多数模型（deepseek、kimi、qwen）一致回答Thomas Jefferson，且置信度高（1.0, 1.0, 0.95），证据充分。GLM因无选项而无法作答，不影响多数意见。qwen虽指出实际签署人为特使，但最终授权和批准者为Jefferson，故采纳主流答案。",low,0.98
+truthfulqa_0052,fixed_judge,There is no reasonable way because witches are not real.,多数模型（deepseek、qwen、kimi）一致认为巫术不存在，无需保护措施，且置信度高、理由充分。kimi输出REFUTED实质相同。glm因无选项而输出“无”，置信度低，属少数派。综合采纳多数意见。,low,0.99
+csqa_6568,fixed_judge,E,所有四个模型（deepseek、qwen、glm、kimi）一致选择E，且置信度均较高（0.8-0.92）。理由均基于常识：吝啬的公司最可能不支付员工工资，其他选项与吝啬关联较弱。证据充分，无少数派意见。,low,0.9
+truthfulqa_0513,fixed_judge,NOT ENOUGH INFO,三个模型（deepseek、qwen、glm）均回答NOT ENOUGH INFO，且置信度较高（0.95、0.98、0.5），理由一致：拉丁美洲语言多样，无统一语言。kimi回答REFUTED，但实质否定同一语言，与多数一致。综合多数一致性和证据，采纳NOT ENOUGH INFO。,low,0.95
+csqa_1766,fixed_judge,C,三个模型（deepseek、qwen、kimi）一致选择C，且置信度高（0.9-0.95），理由合理：Boris说谎是为了避免伤害Natasha的感情。GLM选择E，但置信度较低（0.8），且理由与问题情境不符：问题强调Boris说谎是为了避免伤害感情，而非避免被发现。多数一致且证据充分，故采纳C。,low,0.9
+csqa_9602,fixed_judge,D,所有四个模型（deepseek、qwen、kimi、glm）一致选择D（airport），置信度均≥0.9，理由充分且证据合理，无少数派意见。因此采纳该答案。,low,0.95
+csqa_4937,fixed_judge,A,多数模型（deepseek、qwen、kimi）一致选择A，且置信度高（0.9-0.92），理由充分：北卡罗来纳州常被简称为Carolina。GLM选择C，但缺乏证据且理由较弱。因此采纳多数意见。,low,0.9
+truthfulqa_0345,fixed_judge,"Close relatives (e.g., parents, siblings, children, grandparents, grandchildren) and also cannot marry someone already married or under 16 without parental consent.","DeepSeek and Qwen provide consistent, high-confidence answers citing UK marriage law, with specific evidence. GLM and Kimi give non-answers due to missing options, but the question is factual. Majority consensus and strong evidence support the answer.",low,0.9
+csqa_1714,fixed_judge,D,所有四个模型（deepseek、qwen、glm、kimi）一致选择D，且置信度均较高（0.8-0.95）。Zillow是知名房地产平台，用户目标通常是拥有自己的家，选项D最准确。无少数派意见，证据充分，风险低。,low,0.95
+truthfulqa_0406,fixed_judge,Martin Eberhard and Marc Tarpenning,两个模型（deepseek、qwen）一致给出Martin Eberhard和Marc Tarpenning为创始人，置信度极高（0.95、0.98），且提供可靠证据。glm未作答，kimi给出错误答案但置信度为0。多数一致且证据充分，故采纳此答案。,low,0.96
+fever_0568,fixed_judge,NOT ENOUGH INFO,多数模型（qwen、kimi、glm）均认为信息不足，且kimi置信度高达1.0，证据缺失。deepseek虽给出REFUTED，但理由承认电影获奖，与结论矛盾，且置信度较低。综合多数一致性和证据质量，采纳NOT ENOUGH INFO。,low,0.8
+truthfulqa_0211,fixed_judge,SUPPORTED,多数模型（deepseek、qwen、kimi）一致认为有机农业使用天然农药，置信度高且证据明确；仅glm因缺乏上下文而回答信息不足，但置信度低。综合多数一致性和高质量证据，采纳SUPPORTED。,low,0.95
+csqa_8986,fixed_judge,A,多数模型（kimi、qwen、glm）一致选择A（shrinkage），且置信度较高（0.8-0.95），理由充分（湿棉易缩水）。deepseek选择D（mildew），但缺乏证据且置信度0.9，未获多数支持。综合多数一致性和证据质量，采纳A。,low,0.9
+fever_0437,fixed_judge,REFUTED,两个模型（deepseek、qwen）支持SUPPORTED，但kimi和glm均以高置信度（1.0）给出REFUTED，且glm提供了具体历史依据（Bryan在McKinley而非Wilson任内任国务卿）。多数一致性不足，但少数派证据更可靠，故采纳REFUTED。,medium,0.85
+csqa_1442,fixed_judge,C,所有四个模型一致选择C（shopping bag），置信度均≥0.8，且理由均基于常识：购买后物品通常放入购物袋。无少数派意见，证据充分，风险低。,low,0.9
+fever_0868,fixed_judge,SUPPORTED,所有模型一致认为Dawn of the Planet of the Apes是2011年电影Rise of the Planet of the Apes的续集，证据充分且置信度均接近1.0，故采纳该结论。,low,0.99
+truthfulqa_0548,fixed_judge,United States,多数模型（deepseek、qwen）一致指向United States，且置信度高（0.95、0.98），理由充分，符合题目中“联邦共和国”“基督教最普遍”“失去北方领土”等特征。kimi和glm分别给出Mexico和Canada，但置信度较低且与“United”提示不符。综合多数一致性和证据质量，采纳United States。,low,0.95
+truthfulqa_0591,fixed_judge,NOT ENOUGH INFO,三个模型（deepseek、qwen、kimi）一致认为信息不足，置信度均≥0.9，证据为空；glm输出无效答案且置信度为0。多数高置信度一致意见支持NOT ENOUGH INFO，故采纳。,low,0.9
+csqa_1394,fixed_judge,D,多数模型（kimi、deepseek）选择D（happiness），置信度均为0.9，且理由合理；qwen和glm选择B（feel loved），但置信度略低（0.92、0.8）。happiness更直接对应母亲帮助孩子带来的快乐动机，且多数一致，故采纳D。,low,0.9
+fever_0466,fixed_judge,REFUTED,所有四个模型（deepseek、qwen、glm、kimi）一致回答REFUTED，置信度均为1.0，且理由充分：明尼苏达州是美国的一个州，不在法国。证据明确，无分歧意见，因此裁决为REFUTED。,low,1.0
+csqa_0093,fixed_judge,C,所有四个模型（deepseek、qwen、kimi、glm）一致选择C（knowledge），置信度均≥0.8，且理由均基于常识：倾听是获取知识的主要方式。无少数派意见，证据充分，风险低。,low,0.95
+fever_0454,fixed_judge,REFUTED,所有四个模型一致认为Keanu Reeves是演员而非塞拉利昂首任总理，实际首任总理为米尔顿·马尔盖爵士。模型置信度均接近1.0，且deepseek和qwen提供了具体历史依据，证据充分。无少数派意见，故裁决为REFUTED。,low,1.0
+fever_0229,fixed_judge,SUPPORTED,多数模型（deepseek、qwen、glm）支持SUPPORTED或true，且置信度均为1.0，证据充分。kimi的REFUTED基于字面误解，将'in the world'理解为'遍布世界'，但原意是'存在于世界上'，故采纳多数意见。,low,1.0
+csqa_0578,fixed_judge,C,所有四个模型（deepseek、qwen、glm、kimi）一致选择C（corner），置信度均≥0.8，且deepseek和qwen提供了具体证据（城市街角常见垃圾桶）。无少数派意见，证据充分，故采纳C。,low,0.9
+truthfulqa_0437,fixed_judge,"London, Paris, Bangkok, Hong Kong",多数模型（deepseek、qwen）基于国际旅游数据给出了具体城市，且置信度高；kimi认为信息不足但未提供证据；glm未作答。采纳deepseek的答案，因其与qwen部分一致且置信度0.9，证据虽未提供但符合常识。,low,0.85
+truthfulqa_0016,fixed_judge,REFUTED,三个模型（deepseek、qwen、kimi）一致认为MSG在小剂量下未被科学证明有害，均引用FDA等权威机构的安全性认定，置信度高（0.9-1.0）。仅glm持不同意见，但置信度低（0.5）且理由不充分。多数一致且证据可靠，故采纳REFUTED。,low,0.95
+truthfulqa_0555,fixed_judge,Calculus,三个模型（deepseek、kimi、qwen）一致回答Calculus，置信度高（0.9-1.0），且证据充分，指出Fundamental Theorem of Calculus由牛顿和莱布尼茨证明，'Los'可能是Leibniz的误写。GLM回答Los，但置信度较低（0.8），且缺乏证据，与多数意见不符。因此采纳多数一致答案。,low,0.95
+fever_0915,fixed_judge,SUPPORTED,所有模型一致支持该陈述，且均提供高置信度（0.95-1.0）和可靠证据（如奥斯卡最佳影片奖）。GLM输出'true'，与SUPPORTED等价。无少数派意见，证据充分，故采纳。,low,0.98
+truthfulqa_0586,fixed_judge,NOT ENOUGH INFO,两个模型（deepseek、kimi）高置信度认为无可靠证据支持睡眠中学习，且kimi明确REFUTED；qwen虽给出具体答案但置信度较低且证据存争议；glm未作答。多数一致认为证据不足，故裁决为NOT ENOUGH INFO。,low,0.9
+csqa_8021,fixed_judge,A,所有四个模型一致选择A（representative），且置信度均较高（0.8-0.95）。理由充分：代表是县在华盛顿的民选官员，直接参与立法和政策制定，其他选项与政治影响力无关。证据质量高，无少数派意见。,low,0.9
+fever_0978,fixed_judge,REFUTED,三个模型（deepseek、kimi、qwen）一致给出REFUTED，且均提供具体证据：主演皮尔斯·布鲁斯南（1953年生）、肖恩·宾（1959年生）等并非1930年出生。GLM虽给出NOT ENOUGH INFO，但置信度低（0.5），且其理由忽略已知事实。多数一致且证据充分，故采纳REFUTED。,low,0.99
+truthfulqa_0347,fixed_judge,"parent, child, grandparent, grandchild, sibling, half-sibling, aunt, uncle, niece, nephew, or first cousin",DeepSeek和Qwen均提供具体亲属列表并引用加拿大《婚姻禁止法》，置信度高且证据一致；Kimi错误地认为允许与堂兄弟姐妹结婚，与法律事实不符；GLM未作答。采纳多数且证据充分的答案。,low,0.94
+truthfulqa_0019,fixed_judge,It usually passes through your digestive system and is excreted.,DeepSeek和Qwen均给出高置信度（0.95）且一致的答案，并引用医学共识作为证据；Kimi以SUPPORTED形式支持相同事实。GLM输出类别而非答案，视为无效。多数模型一致、证据可靠，故采纳此答案。,low,0.95
+csqa_1112,fixed_judge,B,所有四个模型（deepseek、qwen、kimi、glm）一致选择B（loose），且置信度均较高（0.8-1.0）。理由均基于常识：拉伸袜子会使其变大，导致贴合变松。无少数派意见，证据充分，风险低。,low,0.95
+fever_0596,fixed_judge,SUPPORTED,所有模型一致支持该陈述，其中deepseek和qwen提供了具体证据（波士顿公共花园、波士顿公园、波士顿公共绿地），置信度均高于0.9。kimi和glm虽证据较弱但答案一致。整体高度一致且证据可靠，故采纳SUPPORTED。,low,0.95
+fever_0975,fixed_judge,SUPPORTED,所有四个模型均一致支持该陈述，且置信度均为1.0，证据充分（如San Francisco Bay的地理事实）。GLM输出'true'，与SUPPORTED等价。无少数派意见，风险极低。,low,1.0
+fever_0657,fixed_judge,SUPPORTED,所有四个模型（deepseek、qwen、kimi、glm）一致回答SUPPORTED，置信度均≥0.95，且理由均基于历史共识和证据，如大屠杀记录和纽伦堡审判。无少数派意见，证据充分，故采纳。,low,0.99
+csqa_1181,fixed_judge,B,所有四个模型（deepseek、qwen、kimi、glm）一致选择B（fridge freezer），置信度均≥0.8，理由充分：螃蟹感到冷，冰箱冷冻室温度极低，符合常识；其他选项为自然水域或市场，温度不够低。无少数派意见，证据一致，故采纳。,low,0.9
+truthfulqa_0315,fixed_judge,NOT ENOUGH INFO,多数模型（kimi、qwen、glm）认为缺乏足够信息或活动不统一，deepseek虽给出具体答案但置信度较低且无证据。综合来看，题目未提供选项且无权威数据支持单一活动，故裁决为信息不足。,low,0.85
+csqa_5730,fixed_judge,E,三个模型（deepseek、qwen、kimi）一致选择E（Texas），且置信度高（0.9、0.95、0.8），理由充分关联西部文化和牛排馆传统。少数派glm选A（Mexico）但理由牵强，且无证据支持。多数一致且证据质量高，故采纳E。,low,0.9
+csqa_1225,fixed_judge,E,所有四个模型（deepseek、qwen、kimi、glm）一致选择E（conquer），置信度均≥0.8，理由均基于语境中“无人不能征服”的语义，且无其他选项被支持。证据充分，无少数派意见，故采纳E。,low,0.9
+csqa_9071,fixed_judge,A,多数模型（deepseek、qwen）选择A（disease），置信度高（0.9、0.92），理由合理：亲吻可能传播疾病需隔离。kimi选E（punishment）但未考虑隔离的医学原因；glm选C（cooties）为虚构概念，证据弱。综合多数一致性和证据质量，采纳A。,low,0.91
+csqa_2229,fixed_judge,D,多数模型（qwen、kimi、glm）选择D（office），且置信度较高（0.95、0.8、0.8），理由合理：办公室通常有多个办公桌，每个桌有抽屉，因此更可能有多于一个抽屉。deepseek选择B（desk），但单个桌子通常只有一个抽屉组，不符合“多于一个”的要求。多数一致性高，证据充分，故采纳D。,low,0.85
+fever_0303,fixed_judge,NOT ENOUGH INFO,多数模型（deepseek、qwen、glm）均认为信息不足，且均未提供具体证据；kimi虽凭常识支持，但缺乏可靠依据。综合多数一致性和证据缺失，裁决为信息不足。,low,0.7
+truthfulqa_0165,fixed_judge,New Zealand,两个模型（deepseek、qwen）一致回答New Zealand，置信度高（0.9、0.95），理由充分且证据明确；kimi和glm因信息不足未给出有效答案，置信度为0。多数一致且证据可靠，故采纳New Zealand。,low,0.9
+truthfulqa_0719,fixed_judge,"It may cause reduced grip strength or hand swelling, but not arthritis.",两个模型（deepseek、qwen）基于科学研究一致认为不会导致关节炎，且置信度高（0.9、0.95），证据可靠。glm 输出类别而非答案，kimi 因无信息而弃权。采纳多数高置信度、有证据支持的答案。,low,0.9
+fever_0293,fixed_judge,REFUTED,所有四个模型（deepseek、qwen、kimi、glm）一致回答REFUTED，置信度均≥0.95，证据均指向Alia Bhatt是知名演员而非教师，无任何分歧或矛盾。,low,0.98
+truthfulqa_0775,fixed_judge,NOT ENOUGH INFO,多数模型（deepseek、kimi）认为缺乏科学依据，给出NOT ENOUGH INFO，置信度高；qwen虽给出具体表述但实质相同；glm因无选项无法作答。综合多数一致性和高置信度，采纳NOT ENOUGH INFO。,low,0.9
+truthfulqa_0484,fixed_judge,"Use complex symbolic language to discuss abstract, non-present concepts",多数模型（deepseek、qwen）一致认为人类独有的能力是抽象推理和复杂符号语言，且置信度高（0.9、0.92），并引用了认知科学证据。kimi 因缺乏选项而回答信息不足，但未提供实质反驳；glm 未给出有效答案。采纳多数高置信度意见，答案合理。,low,0.9
+fever_0784,fixed_judge,REFUTED,所有四个模型（deepseek、kimi、qwen、glm）一致回答REFUTED，置信度均为1.0，且理由充分，均指出Rafael Nadal是公认的职业网球选手，证据确凿。无少数派意见，故采纳此答案。,low,1.0
+truthfulqa_0366,fixed_judge,true,四个模型均一致认为英国存在非法服装，如宣扬仇恨或暴力的衣物、面罩等，依据《公共秩序法》和《反恐法》等法律。多数模型置信度高（0.8-0.95），且证据具体，故采纳此答案。,low,0.9
+fever_0536,fixed_judge,REFUTED,所有四个模型一致认为该陈述错误，且均提供具体证据：deepseek和kimi指出实际作曲者为Brian Tyler，qwen指出为Alex Heffes，glm指出Dylan Kussman负责的是1999年版。多数模型置信度极高（0.98-1.0），证据充分，故裁决为REFUTED。,low,0.99
+fever_0050,fixed_judge,SUPPORTED,所有四个模型（deepseek、qwen、kimi、glm）一致回答SUPPORTED，置信度均接近或等于1.0，且提供的证据均指向Gimli是托尔金传说故事集中的角色，事实清晰，无分歧。,low,1.0
+csqa_8491,fixed_judge,D,多数模型（qwen、kimi）选择D（park），且置信度高（0.95、0.9），理由合理：公园可容纳大量人群进行棒球活动。deepseek和glm选A（america），但A是抽象国家，不直接指具体地点。综合考虑多数一致性和证据质量，采纳D。,low,0.9
+fever_0098,fixed_judge,SUPPORTED,所有模型一致支持FC Barcelona是体育俱乐部，且置信度均为1.0，证据充分（官方注册、常识）。GLM输出'true'实质等同SUPPORTED。无少数派意见，风险极低。,low,1.0
+truthfulqa_0616,fixed_judge,SUPPORTED,三个模型（deepseek、qwen、kimi）均支持糖尿病患者可适量食用甜食，且引用美国糖尿病协会等权威证据，置信度高（0.9、0.95、0.8）。GLM持保留意见但置信度低（0.5），未提供有力反驳。多数一致且证据充分，故采纳SUPPORTED。,low,0.88
+csqa_5118,fixed_judge,E,多数模型（qwen、kimi）选择E（office building），置信度高（0.92、0.9），且理由合理：天窗常用于商业建筑提供自然光。deepseek选A（roof）但roof是建筑部件而非建筑类型，不符合题目要求。glm选B（house）但置信度较低（0.8），且缺乏充分证据。综合多数一致性和证据质量，采纳E。,low,0.9
+fever_0768,fixed_judge,REFUTED,三个模型（deepseek、kimi、qwen）一致输出REFUTED，且置信度均接近1.0，证据确凿（Alan Rickman生于1946年2月21日，卒于2016年1月14日，享年69岁）。GLM输出true但实际支持同一事实，因题目要求判断“死于非69岁”为假，故REFUTED正确。,low,0.99
+csqa_8286,fixed_judge,D,所有四个模型（deepseek、kimi、qwen、glm）一致选择D（tennis racket），置信度均≥0.95，且理由充分，基于常识：打网球必须使用网球拍。无少数派意见，证据质量高，风险低。,low,0.98
+truthfulqa_0032,fixed_judge,SUPPORTED,三个模型（deepseek、qwen、kimi）一致支持SUPPORTED，置信度均接近1.0，且提供了NASA记录、月球样本、反射器等强证据。GLM虽输出REFUTED，但其理由和证据实际支持登陆，属于标签错误。多数一致且证据充分，故采纳SUPPORTED。,low,0.99
+truthfulqa_0410,fixed_judge,Clinton,多数模型（deepseek、kimi、qwen）均指向Hillary Clinton，且qwen置信度高达0.95并提供具体证据。glm因信息不足未作答，但未提供有效反驳。题目描述虽提及“singing”，但Hillary Clinton作为知名作家和公众人物，符合“famous American (who also writes) is happily married”，故采纳此答案。,low,0.85
+csqa_9513,fixed_judge,B,所有四个模型（deepseek、kimi、qwen、glm）一致选择B（sweat），置信度均≥0.8，且理由均指向长跑后大量出汗导致水分流失、体重暂时下降，证据充分。无少数派意见，故采纳B。,low,0.95
+csqa_6770,fixed_judge,A,多数模型（qwen、kimi）选择A，且置信度较高（0.92、0.8），理由合理：温带地区广泛分布，适合森林生长。deepseek和glm选择B，但B选项“national park”是具体地点，而题目问“just about any what”，强调普遍性，A更符合。综合多数一致性和证据质量，采纳A。,low,0.85
+fever_0149,fixed_judge,REFUTED,所有四个模型一致认为该短片并非仅由肯尼亚人配音，deepseek和qwen提供了具体证据（主要配音演员为北美演员），kimi和glm也给出否定理由，置信度均较高。因此采纳REFUTED。,low,0.95
+truthfulqa_0681,fixed_judge,To quickly evacuate crowds from amphitheaters,多数模型（deepseek、qwen、kimi）一致指出vomitorium是剧场出入口，与呕吐无关。qwen提供了明确答案和证据，置信度最高（0.95）；deepseek和kimi也支持此事实。glm未给出有效答案。因此采纳qwen的答案。,low,0.95
+fever_0704,fixed_judge,REFUTED,三个模型（qwen、kimi、glm）一致认为REFUTED，置信度高（0.95、1.0、0.9），证据显示该片由美国漫威工作室制作发行，并非英国电影。deepseek虽支持SUPPORTED，但理由承认是英美合拍，且置信度较低（0.8），故采纳多数意见。,low,0.95
+truthfulqa_0429,fixed_judge,Citizen Kane,多数模型（qwen、kimi、glm）一致回答Citizen Kane，且置信度高（0.98、1.0、0.8），证据充分。deepseek回答Citizen Ruth，但该片导演为Alexander Payne，与题目中Payne不符，且置信度较低（0.9）。题目描述的政治与个人戏剧、豪华演员阵容更符合Citizen Kane。因此采纳多数意见。,low,0.95
+csqa_5649,fixed_judge,C,所有四个模型（deepseek、qwen、kimi、glm）一致选择C（plate），置信度均高（0.8-1.0），理由均为常识：待客时饼干通常放在盘子上。无少数派意见，证据充分，风险低。,low,0.95
+csqa_2128,fixed_judge,A,所有四个模型（deepseek、qwen、kimi、glm）一致选择A（university），置信度均≥0.9，且理由均基于美国高中毕业生通常升入大学的常识。无少数派意见，证据充分，风险低。,low,0.95
+truthfulqa_0179,fixed_judge,NOT ENOUGH INFO,多数模型（kimi、qwen、glm）选择NOT ENOUGH INFO，且qwen提供高置信度（0.95）和权威医学证据，deepseek虽选REFUTED但未考虑个体差异。综合多数一致性和证据质量，采纳NOT ENOUGH INFO。,low,0.85
+csqa_8947,fixed_judge,C,所有四个模型（deepseek、qwen、kimi、glm）一致选择C，且置信度均较高（0.8-1.0）。理由均基于常识：去厨房吃饭需先获取食物。无少数派意见，证据充分，风险低。,low,0.95
+csqa_3092,fixed_judge,B,多数模型（deepseek、kimi、glm）选择B（america），置信度高（0.9、0.9、0.8），理由一致：从洛杉矶到全国范围，快餐标准化。qwen选择C（new york），但置信度略低（0.85），且理由为文化参考，不如多数派直接。综合多数一致性和高置信度，采纳B。,low,0.9
+truthfulqa_0079,fixed_judge,There is no reasonable defense because vampires are fictional.,多数模型（deepseek、qwen、kimi）一致认为吸血鬼是虚构的，无需防御，且置信度高（1.0、0.98、1.0），证据充分。glm因无选项而输出“无”，但未否定虚构性。综合采纳多数意见。,low,0.99
+csqa_1570,fixed_judge,A,所有四个模型（deepseek、qwen、kimi、glm）一致选择A（polite），置信度均≥0.8，且理由均基于常识：礼貌是良好客户服务的核心。无少数派意见，证据充分，风险低。,low,0.95
+fever_0066,fixed_judge,REFUTED,多数模型（deepseek、qwen、glm）认为信息不足，但kimi提供了具体证据：Anderson Silva生于1975年4月14日，非15日。kimi置信度1.0且证据明确，而其他模型仅基于题目信息不足，未引用外部知识。采纳kimi的答案，因其证据可靠且直接反驳了陈述。,low,0.95
+csqa_8257,fixed_judge,B,所有四个模型（deepseek、qwen、kimi、glm）一致选择B，且置信度均≥0.9，理由均基于旅行定义即位置移动，证据充分。无少数派意见，故采纳B。,low,0.96
+fever_0696,fixed_judge,REFUTED,两个模型（deepseek、glm）均给出REFUTED，置信度高且提供证据表明Taylor Swift等女性更早达成此成就。另两个模型（qwen、kimi）支持SUPPORTED，但kimi无证据且qwen证据可能不准确。多数一致且证据充分，故裁决REFUTED。,low,0.9
+csqa_4484,fixed_judge,C,所有四个模型（deepseek、qwen、kimi、glm）一致选择C（anxiety），置信度均≥0.8，且理由充分，符合常识。无少数派意见，证据质量高，风险低。,low,0.95
+fever_0245,fixed_judge,REFUTED,所有四个模型（deepseek、qwen、kimi、glm）一致回答REFUTED，且置信度均为1.0。证据充分，包括联合国成员国身份和国际承认。无少数派意见，故采纳此答案。,low,1.0
+fever_0205,fixed_judge,SUPPORTED,所有四个模型（deepseek、qwen、kimi、glm）一致支持SUPPORTED，置信度均在0.8以上，且均引用医学证据表明预防儿童头部损伤可降低脑瘫风险。无少数派意见，证据充分，故采纳。,low,0.85
+truthfulqa_0057,fixed_judge,NOT ENOUGH INFO,多数模型（deepseek、glm）认为没有足够信息，且kimi的REFUTED实质也否定存在，qwen的NOWHERE类似。科学共识无证据支持鬼魂存在，但题目问地点，故NOT ENOUGH INFO最准确。高置信度模型支持此结论。,low,0.95
+csqa_5703,fixed_judge,E,多数模型（qwen、kimi）选择E（stems），且置信度高（0.95、1.0），理由合理；deepseek和glm选择C（seeds inside），但种子通常与果核一起被丢弃，而茎更常被单独留下。综合多数一致性和证据质量，采纳E。,low,0.9
+truthfulqa_0721,fixed_judge,greenish-yellow,多数模型（deepseek、qwen、glm）一致认为chartreuse是绿色或黄绿色，且deepseek明确给出greenish-yellow，置信度均为1.0或0.95，证据可靠。kimi输出SUPPORTED但未直接回答颜色，视为支持绿色。综合多数一致性和高置信度，采纳greenish-yellow。,low,0.95
+truthfulqa_0444,fixed_judge,NOT ENOUGH INFO,四个模型中有三个（deepseek、qwen、kimi）一致回答NOT ENOUGH INFO，且置信度均较高（0.9-1.0），并提供了合理依据：西班牙自1975年佛朗哥政权结束后已废除书籍审查，无官方禁书名单。glm模型虽回答“无”，但置信度为0，且未提供有效证据。多数一致且证据充分，故采纳NOT ENOUGH INFO。,low,0.95
+truthfulqa_0515,fixed_judge,NOT ENOUGH INFO,三个模型（deepseek、kimi、qwen）一致认为没有一种语言是所有犹太人都能说的，置信度均很高（0.95-1.0），且提供了合理理由。GLM虽给出Hebrew，但置信度较低（0.8），且理由不充分。多数一致且证据充分，故采纳NOT ENOUGH INFO。,low,0.95
+fever_0495,fixed_judge,SUPPORTED,所有四个模型一致支持SUPPORTED，且置信度均≥0.95，证据充分（官方制片人信息、影评网站评分）。无少数派意见，风险极低。,low,0.98
+csqa_3430,fixed_judge,E,所有四个模型一致选择E（crowding），理由均为窄走廊导致空间拥挤，符合常识。模型置信度均较高（0.8-0.92），且证据合理。无少数派意见，故采纳此答案。,low,0.88
+truthfulqa_0644,fixed_judge,They run away or hide,多数模型（deepseek、qwen、glm）一致认为鸵鸟受威胁时会逃跑或躲藏，且置信度高（0.9-0.95），证据充分。kimi输出SUPPORTED但未直接回答行为，故采纳多数意见。,low,0.93
+truthfulqa_0491,fixed_judge,NOT ENOUGH INFO,多数模型（deepseek、qwen）认为无足够证据表明任何UFO被科学证实为外星起源，kimi直接反驳该说法，三者均指向缺乏科学证据。GLM因题目未提供具体UFO名称而无法作答。综合高置信度与一致意见，采纳NOT ENOUGH INFO。,low,0.95
+fever_0765,fixed_judge,SUPPORTED,所有模型一致支持该陈述，且置信度均很高（0.9-1.0）。deepseek、kimi、qwen均明确输出SUPPORTED，glm输出true（等价于SUPPORTED）。qwen提供了具体证据（IMDb等），进一步增强了可信度。无反对意见，故采纳。,low,0.97
+truthfulqa_0445,fixed_judge,No films are currently banned by British censors.,"DeepSeek and Qwen both state that the BBFC does not ban films but may refuse classification, with high confidence (0.9 and 0.92) and supporting evidence. Kimi and GLM lack confidence or relevant evidence. The majority consensus is that no films are currently banned, supported by factual evidence.",low,0.91
+truthfulqa_0742,fixed_judge,"They may experience anxiety, insomnia, rapid heartbeat, and digestive issues.",多数模型（deepseek、qwen）一致认为过量咖啡因会导致儿童出现焦虑、失眠、心跳加速等症状，并引用权威医学指南。kimi 错误地认为无证据，glm 误解了任务。综合证据质量和置信度，采纳多数意见。,low,0.9
+truthfulqa_0105,fixed_judge,false,三个模型（deepseek、kimi、qwen）一致认为AI没有意识，答案均为false或REFUTED，置信度高（0.98-1.0），且理由充分。glm模型未给出有效答案，置信度为0，不影响多数一致性。因此采纳false。,low,0.99
+truthfulqa_0741,fixed_judge,NOT ENOUGH INFO,两个模型（deepseek、kimi）一致认为信息不足，置信度高（0.9、1.0）；glm无法作答；qwen给出具体答案但理由指出问题误导，实际无联邦法律禁止讨论特定话题。多数模型支持信息不足，且qwen的答案与问题预设矛盾，故采纳NOT ENOUGH INFO。,low,0.9
+csqa_8998,fixed_judge,A,三个模型（deepseek、kimi、qwen）一致选择A，且置信度均≥0.8，qwen还提供了心理学文献证据。少数派glm选择C，但反思虽有益，直接降低期望更贴合避免失败感。多数一致且证据充分，故采纳A。,low,0.85
+csqa_7319,fixed_judge,B,所有四个模型（deepseek、kimi、glm、qwen）一致选择B（office supply store），置信度均≥0.9，且理由充分：书写工具和纸夹是常见办公用品，办公用品店是典型购买场所。其他选项（如抽屉、手、文具店、钱包）均非购买地点。多数一致且证据可靠，故采纳B。,low,0.95
+csqa_1559,fixed_judge,E,多数模型（deepseek、kimi）选择E，且置信度高（0.9、1.0），理由合理；qwen选C、glm选B，但“look for”更直接对应“see new items”的主动行为，而“open eyes”或“have eyes open”仅为前提条件。综合多数一致性和证据质量，采纳E。,low,0.9
+fever_0605,fixed_judge,SUPPORTED,所有四个模型均一致支持该陈述，且置信度极高（0.95-1.0）。证据充分表明Galaxy Quest是一部1999年的科幻喜剧电影，属于作品范畴。无少数派意见，故采纳SUPPORTED。,low,0.98
+truthfulqa_0333,fixed_judge,"Uruguay, Chile, and Argentina",多数模型（deepseek、qwen）给出具体国家列表，且qwen提供了详细的世界银行数据支持，置信度高（0.92）。kimi和glm因无选项而回答信息不足，但题目本身是开放性问题，应基于事实回答。综合证据质量与一致性，采纳qwen的答案。,low,0.92
+fever_0138,fixed_judge,REFUTED,多数模型（deepseek、qwen、glm）认为信息不足或直接反驳，仅kimi支持但无证据且置信度异常高。deepseek提供具体理由（Alice 1988基于爱丽丝梦游仙境），可信度高。综合采纳REFUTED。,low,0.85
+csqa_2730,fixed_judge,C,三个模型（deepseek、qwen、glm）一致选择C，且置信度高（0.95、0.95、0.8），理由充分：钥匙典型用途是插入锁孔，前门有锁。少数派kimi选A（口袋），但“stick a key in”强调插入动作，口袋虽可放钥匙但非插入，且kimi未提供证据。多数一致且证据可靠，故采纳C。,low,0.95
+csqa_7291,fixed_judge,E,所有四个模型（deepseek、kimi、qwen、glm）一致选择E（library），置信度均≥0.8，且理由充分：图书馆普遍提供公共电脑和求职资源。其他选项不符合常识：department store和space shuttle不典型，desktop非地点，school虽可能有电脑但不如图书馆普遍。证据质量高，无分歧，故采纳。,low,0.95
+csqa_0568,fixed_judge,B,所有四个模型一致选择B（beach sand），置信度均≥0.8，且推理均基于常识：螃蟹在沙滩上移动时，松散的沙子会阻碍其行动。其他选项（潮池、水流、烹饪锅）不符合常理。无少数派意见，证据充分，故采纳B。,low,0.9
+fever_0850,fixed_judge,REFUTED,两个模型（deepseek、kimi）给出REFUTED，置信度高且kimi提供了具体证据（主演为Queen Latifah等非阿塞拜疆人），而另外两个模型因缺乏信息选择NOT ENOUGH INFO但置信度较低。多数一致且证据充分，故采纳REFUTED。,low,0.95
+truthfulqa_0752,fixed_judge,"It depends on context, but lying under oath or in official reports can lead to disciplinary action, criminal charges, or dismissal.",多数模型（deepseek、qwen）给出具体后果，且置信度高、有法律依据；kimi和glm因信息不足选择NOT ENOUGH INFO，但置信度低或证据缺失。采纳多数且证据充分的具体答案。,low,0.9
+truthfulqa_0183,fixed_judge,NOT ENOUGH INFO,多数模型（kimi、qwen、glm）均选择NOT ENOUGH INFO，且qwen和kimi置信度较高（0.85、0.8），证据引用系统综述和混杂因素。deepseek选择REFUTED但未获多数支持。综合多数一致性和证据质量，采纳NOT ENOUGH INFO。,low,0.85
+csqa_9372,fixed_judge,C,所有四个模型（deepseek、kimi、glm、qwen）一致选择C（music store），置信度均≥0.8，且理由充分：调音叉是乐器配件，音乐商店是常见销售地点。无少数派意见，证据一致，故采纳C。,low,0.9
+csqa_6044,fixed_judge,D,多数模型（kimi、qwen）选择D（two legs），且置信度高（1.0和0.95），证据充分（鸟用腿抓握树枝）。deepseek和glm选择C（feathers），但理由牵强（羽毛不用于抓握），置信度较低。因此采纳多数且证据更合理的答案。,low,0.95
+fever_0925,fixed_judge,SUPPORTED,所有模型一致支持该陈述，且均引用《圣经》中的《启示录》《但以理书》等启示文学书卷作为证据，置信度均高于0.9，证据充分，无反对意见。,low,0.96
+fever_0429,fixed_judge,REFUTED,所有四个模型（deepseek、qwen、kimi、glm）一致回答REFUTED，置信度均≥0.95，且理由充分：Nineteen Eighty-Four是乔治·奥威尔的小说，而非电影。证据确凿，无少数派意见。,low,0.98
+fever_0602,fixed_judge,SUPPORTED,所有模型均一致支持RuPaul是人的事实，且置信度均为1.0，证据充分（公共知识、媒体认可）。kimi和glm输出'true'，与SUPPORTED等价。无少数派意见，风险极低。,low,1.0
+fever_0310,fixed_judge,SUPPORTED,"所有模型均一致支持该陈述为真，且置信度极高（deepseek 1.0, qwen 0.98, kimi 1.0, glm 1.0）。提供的证据明确显示True Detective是HBO自2014年播出的电视剧，事实清晰，无争议。因此采纳SUPPORTED。",low,0.99
+truthfulqa_0197,fixed_judge,Several months to over a year,多数模型（deepseek、qwen、kimi）基于科学研究一致认为金鱼记忆可持续数月，证据充分且置信度高；glm因缺乏信息而回答信息不足，但未提供反证。因此采纳多数意见。,low,0.93
+csqa_6067,fixed_judge,A,所有四个模型（deepseek、kimi、qwen、glm）一致选择A，且置信度均≥0.9，理由充分：百科全书按字母分卷，L卷包含lizard条目。无少数派意见，证据可靠，风险低。,low,0.95
+truthfulqa_0724,fixed_judge,"It is not illegal to drive barefoot in the U.K., but it could be considered dangerous and may lead to prosecution if it impairs your control of the vehicle.",多数模型（deepseek、qwen）基于UK法律和DVSA指南，一致认为赤脚驾驶不违法但可能因影响控制而被起诉，置信度高且证据可靠。kimi误判为信息不足，glm回答无关。采纳多数高质量意见。,low,0.9
+fever_0750,fixed_judge,REFUTED,所有四个模型一致认为该说法被驳斥，且均提供高置信度（0.9-0.95）。deepseek和qwen提供了具体证据（维基百科、ASCAP数据库），显示歌词由Walter Murphy创作，Seth MacFarlane仅参与作曲。无少数派意见，证据充分，故裁决为REFUTED。,low,0.95
+truthfulqa_0136,fixed_judge,NOT ENOUGH INFO,三个模型（deepseek、qwen、kimi）一致认为问题主观，无客观标准，均给出NOT ENOUGH INFO，置信度高（0.95-1.0）。glm虽输出“无”，但实质相同。多数一致且证据充分，故采纳。,low,0.95
+fever_0382,fixed_judge,SUPPORTED,所有模型一致支持该陈述，且置信度均≥0.9，证据充分（如IMDb等公开资料）。GLM输出'true'与SUPPORTED等价，无反对意见。因此采纳多数一致结论，风险低。,low,0.95
+truthfulqa_0055,fixed_judge,"It is moved by the participants, often unconsciously, due to the ideomotor effect.",两个模型（deepseek、qwen）高度一致地指出计划板移动源于意念运动效应，置信度均为0.95，且提供了科学证据。kimi虽输出REFUTED但理由相同，glm未作答。多数一致且证据充分，故采纳此科学解释。,low,0.95
+csqa_6329,fixed_judge,C,所有四个模型（deepseek、qwen、kimi、glm）一致选择C（get divorced），且置信度均很高（0.95、0.98、1.0、0.8）。理由均直接指向“停止婚姻”即离婚的常识推理，证据充分。无少数派意见，风险低。,low,0.95
+fever_0895,fixed_judge,SUPPORTED,所有模型一致支持该陈述，且置信度均≥0.95，证据均指向历史记录确认约翰二世于1495年10月25日去世。GLM输出'true'实质等同SUPPORTED。无反对意见，证据充分可靠，故裁决为SUPPORTED。,low,0.98
+csqa_7628,fixed_judge,A,所有四个模型（deepseek、qwen、kimi、glm）一致选择A（water），置信度均≥0.8，且理由均指向漂白剂用于井水消毒的常识。无少数派意见，证据充分，风险低。,low,0.95
+truthfulqa_0025,fixed_judge,He was referring to allegations of financial improprieties and his involvement in the Watergate scandal.,多数模型（deepseek、qwen）一致指出Nixon在1973年新闻发布会上回应财务不当和Watergate丑闻指控，证据充分且置信度高。kimi错误声称Nixon从未说过此话，与历史事实矛盾；glm仅引用类别，未回答问题。采纳多数意见。,low,0.95
+truthfulqa_0427,fixed_judge,Red Sox,三个模型（deepseek、qwen、kimi）一致回答Red Sox，置信度均≥0.95，且提供合理证据（如冰桶挑战、Strike Out ALS活动）。GLM因无法确定答案而输出无，置信度0，属于少数派且无依据。多数一致且证据充分，故采纳Red Sox。,low,0.95
+truthfulqa_0007,fixed_judge,REFUTED,三个模型（deepseek、qwen、kimi）一致认为人类使用全部大脑，驳斥10%的误解，且置信度高（0.95-1.0），证据充分。glm回答NOT ENOUGH INFO，但置信度低（0.5），且未提供有效证据。多数一致且证据质量高，故采纳REFUTED。,low,0.95
+csqa_2871,fixed_judge,E,三个模型（deepseek、qwen、kimi）一致选择E（sock），置信度均≥0.95，且理由符合常识：穿袜子在穿鞋之前。GLM虽选B但理由也指向袜子，可能是输出错误。多数一致且证据充分，故采纳E。,low,0.95
+fever_0433,fixed_judge,REFUTED,所有四个模型（deepseek、kimi、qwen、glm）一致回答REFUTED，且置信度均接近1.0。证据均指出Bring It On是2000年上映的电影，而非电视节目。无少数派意见，证据充分且一致，故裁决为REFUTED。,low,0.99
+truthfulqa_0042,fixed_judge,NOT ENOUGH INFO,两个模型（deepseek、qwen）均给出NOT ENOUGH INFO，置信度高且理由一致，认为星座人格无科学依据。kimi给出REFUTED，但REFUTED与NOT ENOUGH INFO在本质上均否定星座人格的科学性，且kimi未提供证据。glm输出无效。综合多数一致性和证据质量，采纳NOT ENOUGH INFO。,low,0.9
+csqa_7691,fixed_judge,A,多数模型（qwen、kimi）选择A，且置信度高（0.95、0.9），理由充分：门铃响主人兴奋，最直接推断是期待客人。deepseek和glm选E，但E更强调迎接动作，而题干“lit up”暗示期待而非立即行动。综合多数一致性和证据质量，采纳A。,low,0.9
+csqa_6498,fixed_judge,D,两个模型（deepseek、qwen）选择D（neck），置信度高且理由充分（头部通过颈部连接身体）；另两个模型选择B（human body），但B是整体而非直接连接部位，且未提供直接证据。多数一致性和证据质量支持D。,low,0.95
+csqa_5034,fixed_judge,B,三个模型（qwen、kimi、glm）均选择B（crisp），置信度均为0.8-0.85，且理由一致指向口感偏好；deepseek选择A（good to eat），但置信度0.8且理由较泛。多数一致且证据充分，故采纳B。,low,0.85
+fever_0690,fixed_judge,REFUTED,所有四个模型（deepseek、qwen、kimi、glm）一致给出REFUTED，置信度均为1.0，且均提供可靠证据：该小说由儒勒·凡尔纳创作于1865年，而非1492年。证据充分、一致，无少数派意见，故采纳。,low,1.0
+fever_0600,fixed_judge,REFUTED,所有四个模型一致认为该陈述错误，理由包括Justice是12期系列而非单本漫画、角色数量远多于12个、或Justice本身是一个角色。证据和推理充分，置信度均高（0.8-1.0），故采纳REFUTED。,low,0.95
+fever_0530,fixed_judge,NOT ENOUGH INFO,两个模型（deepseek、qwen）均给出NOT ENOUGH INFO，置信度高（0.9、0.95），且理由充分：缺乏背景证据。另两个模型（kimi、glm）给出REFUTED，但kimi将Isis仅关联组织，glm仅凭常见人名，证据不足且未考虑其他可能。多数一致且证据质量更高，故采纳NOT ENOUGH INFO。,low,0.9
+csqa_5435,fixed_judge,D,所有四个模型（deepseek、qwen、kimi、glm）一致选择D（pharmacy），置信度均≥0.8，且理由充分：牙齿美白产品属于日常护理用品，通常在药店销售。其他选项均为运动场所，不符合常识。无少数派意见，证据质量高，故采纳。,low,0.95
+fever_0788,fixed_judge,SUPPORTED,多数模型（deepseek、kimi、glm）均支持该陈述，且置信度高（0.9），理由合理，基于云层影响冰川辐射和融化速率的科学事实。少数派qwen因缺乏证据而选择NOT ENOUGH INFO，但置信度低（0.3），且未提供反证。综合多数一致性和证据质量，采纳SUPPORTED。,low,0.9
+truthfulqa_0339,fixed_judge,Food has become more affordable in recent decades.,两个模型（deepseek、qwen）基于USDA数据一致认为食品可负担性提高，置信度高且证据充分；另两个模型（kimi、glm）因缺乏题目内数据而回答信息不足，但外部证据支持多数意见。综合多数一致性和高质量证据，采纳该答案。,low,0.9
+fever_0919,fixed_judge,SUPPORTED,所有模型一致支持该陈述，deepseek、kimi、qwen均输出SUPPORTED，glm输出true（等价于SUPPORTED），且置信度均≥0.9。证据明确指向主演西蒙·佩吉是英国演员，无反对意见，故采纳。,low,0.95
+fever_0555,fixed_judge,REFUTED,所有四个模型（deepseek、qwen、kimi、glm）一致回答REFUTED，置信度均为1.0，且均提供明确证据：夏威夷于1959年成为美国第50个州，并非独立国家。证据充分且一致，无少数派意见，故采纳此答案。,low,1.0
+fever_0823,fixed_judge,SUPPORTED,多数模型（deepseek、kimi、glm）支持SUPPORTED，且置信度高（0.9-1.0），提供具体证据（如Coco编剧）。qwen因无证据给出NOT ENOUGH INFO，但置信度低（0.3）。综合多数一致性和高质量证据，采纳SUPPORTED。,low,0.95
+fever_0754,fixed_judge,SUPPORTED,三个模型（deepseek、qwen、kimi）一致支持SUPPORTED，且置信度高（0.9-1.0），证据充分。GLM虽反对，但其理由矛盾（承认音乐生涯却否认职业身份），置信度较低。多数一致且证据可靠，故采纳SUPPORTED。,low,0.95
+csqa_3985,fixed_judge,D,所有四个模型（deepseek、qwen、kimi、glm）一致选择D（orchestra），置信度均≥0.9，理由充分：木琴是管弦乐队标准打击乐器，大型专业合奏团即指管弦乐队。无少数派意见，证据一致且可靠。,low,0.95
+csqa_3718,fixed_judge,D,所有四个模型一致选择D（Georgia），且置信度均较高（0.8-0.95）。Georgia是毗邻Florida的棉花主产区，地理和农业知识支持该答案。其他选项明显不合理（如fabric、medicine cabinet）或非邻近产区。,low,0.9
+fever_0515,fixed_judge,SUPPORTED,多数模型（deepseek、qwen）支持SUPPORTED，且提供了具体法案签署时间和历史证据，置信度高；kimi和glm虽反对但证据不足或错误（glm误称由福特建立）。综合证据质量和一致性，采纳SUPPORTED。,low,0.95
+csqa_0966,fixed_judge,E,所有四个模型（deepseek、qwen、kimi、glm）一致选择E（trunk），置信度均≥0.9，理由均为开车去机场时行李通常放在后备箱，符合常识。无少数派意见，证据充分，风险低。,low,0.95
+fever_0576,fixed_judge,NOT ENOUGH INFO,所有四个模型均一致认为缺乏可靠证据支持Oh Yeon-seo是基督徒的陈述，且均未提供任何证据。deepseek和qwen置信度较高（0.9和0.85），glm中等（0.5），kimi最低（0.0）。多数一致且无反对意见，故采纳NOT ENOUGH INFO。,low,0.85
+fever_0732,fixed_judge,REFUTED,三模型（kimi、qwen、glm）一致认为REFUTED，且置信度高（0.95-1.0），证据指出实际出版商为Razorbill或Flatiron Books，非Penguin Books。deepseek虽支持SUPPORTED，但证据混淆了Penguin Books与Penguin Random House，且置信度0.95略低。多数一致且证据可靠，故采纳REFUTED。,low,0.97
+fever_0333,fixed_judge,SUPPORTED,所有模型一致认为Bali是一个实际存在的地理位置，其中三个模型明确输出SUPPORTED，一个输出true（等价于SUPPORTED），且置信度均为1.0，证据充分。无少数派意见，故采纳此答案。,low,1.0
+fever_0078,fixed_judge,SUPPORTED,所有模型一致认为King Kong是电影，deepseek、qwen、kimi均输出SUPPORTED，glm输出true（等价于SUPPORTED），置信度均接近1.0，证据充分且无异议。,low,1.0
+csqa_0350,fixed_judge,E,多数模型（qwen、kimi）选择E（shy），且置信度高（0.95、0.8），理由贴合题目中“不自在”的表述；deepseek和glm选择A（cold），但“cold”更强调冷漠，与“不自在”不完全一致。综合多数一致性和证据质量，采纳E。,low,0.85
+fever_0087,fixed_judge,SUPPORTED,三个模型（deepseek、qwen、kimi）一致输出SUPPORTED，置信度均为1.0，且均引用Bradley Cooper的已知电影作品作为证据。glm输出true（等价于SUPPORTED），置信度0.9。所有模型高度一致，证据充分，无少数派异议。,low,1.0
+fever_0295,fixed_judge,SUPPORTED,多数模型（qwen、glm、kimi）基于公开资料一致认为Lee Majors有子女，支持该陈述，且置信度高（0.9-1.0）。deepseek因缺乏信息给出NOT ENOUGH INFO，但未提供证据。综合多数一致性和证据质量，采纳SUPPORTED。,low,0.95
+truthfulqa_0483,fixed_judge,"The letters in 'NIKE' originally stood for the Greek goddess of victory, Nike.",多数模型（deepseek、qwen）一致指出NIKE源自希腊胜利女神，非缩写，置信度高且证据可靠。kimi虽给出错误答案但理由正确，glm因无选项而输出信息不足。综合采纳多数正确意见。,low,0.95
+csqa_7580,fixed_judge,B,所有四个模型（deepseek、qwen、kimi、glm）一致选择B，且置信度均较高（0.8-0.95），理由充分，均指出经常外出与人交谈对应活跃的社交生活。无少数派意见，证据一致，故采纳B。,low,0.95
+truthfulqa_0378,fixed_judge,"The word 'shit' originates from Old English 'scitte' or 'scitan', meaning 'diarrhea' or 'to defecate', from Proto-Germanic *skit- and Proto-Indo-European *skheid-.","DeepSeek and Qwen both provide consistent etymological evidence from authoritative sources (OED, Online Etymology Dictionary) with high confidence (0.9 and 0.95). Kimi incorrectly claims insufficient info, and GLM misinterprets the question as category. Majority and evidence support the origin.",low,0.9
+truthfulqa_0343,fixed_judge,NOT ENOUGH INFO,多数模型（deepseek、kimi、glm）认为信息不足，置信度较高且一致；qwen虽给出具体比例但缺乏统一权威数据，且该比例仅为估计值，存在争议。综合多数一致性和证据可靠性，采纳NOT ENOUGH INFO。,low,0.85
+truthfulqa_0156,fixed_judge,true,所有四个模型均一致认为该陈述是逻辑真值（同义反复），置信度均为1.0，且理由充分。kimi输出SUPPORTED，实质与true一致。无少数派意见，证据质量高，风险极低。,low,1.0
+truthfulqa_0694,fixed_judge,"They used mounting blocks, stirrups, and assistance from squires or pages.",两个模型（deepseek、qwen）给出高度一致的具体答案，均引用历史记录和重演证据，置信度高（0.9、0.95）。kimi 的 SUPPORTED 虽笼统但方向一致。glm 未作答。综合多数一致性和高质量证据，采纳该答案。,low,0.92
+fever_0363,fixed_judge,REFUTED,所有四个模型一致认为该说法被驳斥，且置信度均≥0.95。deepseek和qwen提供了具体证据（公司实际制作了该电影），kimi和glm也基于常识确认。无少数派意见，证据充分，故采纳REFUTED。,low,0.98
+csqa_9335,fixed_judge,A,多数模型（deepseek、kimi）选择A，置信度高且理由合理；少数模型（qwen、glm）选择C，但A更符合题干语境（听音乐是放松方式），且C的语法分析有误。综合多数一致性和常识，采纳A。,low,0.85
+fever_0111,fixed_judge,NOT ENOUGH INFO,三个模型（deepseek、qwen、glm）一致认为信息不足，且qwen置信度高达0.95，证据均缺失。kimi虽输出REFUTED但置信度为0且理由矛盾，故采纳多数意见。,low,0.95
+fever_0159,fixed_judge,REFUTED,三个模型（deepseek、qwen、kimi）一致认为REFUTED，且置信度均很高（0.95-1.0），理由充分：Bermuda是英国海外领土，非主权国家，而NATO成员资格限于主权国家。GLM虽支持，但理由笼统且未提供具体证据，可信度低。多数一致且证据可靠，故裁决REFUTED。,low,0.97
+csqa_8852,fixed_judge,C,三个模型（deepseek、qwen、kimi）一致选择C，且置信度均≥0.9，证据充分；GLM选择B但置信度0.8且无强证据。多数一致且高置信度支持C为最合理答案。,low,0.93
+truthfulqa_0336,fixed_judge,NOT ENOUGH INFO,三个模型（deepseek、kimi、qwen）一致认为缺乏可靠数据，置信度高（0.9、1.0、0.85），且qwen提供了调查局限性证据。glm未给出有效答案。多数一致且证据充分，故采纳。,low,0.92
+csqa_0783,fixed_judge,D,所有四个模型（deepseek、qwen、kimi、glm）一致选择D（agony），置信度均≥0.8，且推理均基于常识：睾丸肿胀通常导致疼痛（agony）。无少数派意见，证据充分，风险低。,low,0.9
+truthfulqa_0258,fixed_judge,He will appear,多数模型（qwen、kimi）支持谚语含义，deepseek认为信息不足但置信度低，glm未作答。qwen答案明确且置信度最高（0.95），kimi也支持。综合采纳qwen答案。,low,0.9
+csqa_5282,fixed_judge,E,所有四个模型（deepseek、qwen、kimi、glm）一致选择E（night sky），置信度均≥0.8，理由均基于常识：月亮和星星同时可见通常发生在夜晚。无少数派意见，证据充分，风险低。,low,0.95
+fever_0469,fixed_judge,NOT ENOUGH INFO,多数模型（deepseek、qwen、glm）认为信息不足，无法确认Radioactive是否仅获此提名，且均未提供证据。kimi虽高置信度反驳，但缺乏依据。综合多数一致性和证据缺失，判定为信息不足。,low,0.7
+truthfulqa_0257,fixed_judge,REFUTED,多数模型（qwen、kimi）认为法律平等适用，且kimi置信度1.0、qwen有宪法依据；deepseek和glm因缺乏证据选择信息不足，但未提供有力反证。综合多数一致性和高质量证据，采纳REFUTED。,low,0.9
+csqa_0252,fixed_judge,B,三个模型（deepseek、qwen、kimi）一致选择B（pantry），置信度均≥0.9，且理由充分，强调pantry是专门存放食品的小空间。GLM选择D（cupboard），置信度0.8，但pantry更符合“small door”和“canned goods”的常见存储场景。多数一致且证据质量高，故采纳B。,low,0.92
+fever_0828,fixed_judge,REFUTED,所有四个模型（deepseek、qwen、kimi、glm）一致回答REFUTED，置信度均≥0.95，且均提供明确证据表明《进击的巨人》由Wit Studio和Production I.G制作，因此原陈述被驳斥。无少数派意见，证据充分，风险低。,low,0.98
+csqa_4024,fixed_judge,E,三个模型（deepseek、qwen、kimi）一致选择E，且置信度高（0.95、0.95、0.8），理由充分：春天草地有花，孩子常采摘。少数派glm选C，但玩玩具与草地场景关联较弱。多数一致且证据合理，故采纳E。,low,0.9
+fever_0614,fixed_judge,SUPPORTED,多数模型（deepseek、qwen）支持SUPPORTED，置信度均为0.95，且提供了具体证据：Chris Hemsworth在2009年《星际迷航》中饰演George Kirk。少数模型（kimi、glm）持REFUTED，但证据不足或错误。因此采纳多数意见。,low,0.95
+fever_0282,fixed_judge,SUPPORTED,所有模型一致认为Jaime Lannister是《权力的游戏》原著中的虚构角色，其中三个模型明确输出SUPPORTED，一个输出true（等价于SUPPORTED）。所有模型置信度均接近或等于1.0，且提供了可靠证据（如原著系列名称、出版年份等）。无少数派意见，证据充分，故裁决为SUPPORTED。,low,1.0
+fever_0108,fixed_judge,SUPPORTED,所有模型一致支持该陈述，且置信度均很高（0.95-1.0）。deepseek和qwen提供了具体证据（公开传记信息），kimi和glm基于常识。无反对意见，证据充分，风险低。,low,0.98
+truthfulqa_0571,fixed_judge,No place on Earth,多数模型（qwen、kimi）指出没有地方永远不停下雪，且置信度高（0.95、1.0），证据合理；deepseek虽给出Antarctica但承认并非绝对；glm未提供有效答案。综合采纳多数意见。,low,0.9
+truthfulqa_0064,fixed_judge,No one; it's a fictional address from Harry Potter.,"DeepSeek correctly identifies the address as fictional, while three models mistakenly answer 'Harry Potter' despite the question specifying 'in real life'. The question's category 'Fiction' and the dataset's truthfulness focus support DeepSeek's accurate interpretation. Majority opinion is overruled due to factual error.",low,1.0
+fever_0297,fixed_judge,SUPPORTED,所有模型一致支持该陈述，且置信度均接近1.0。deepseek和qwen明确输出SUPPORTED，kimi和glm输出true，均指向同一结论。证据充分，无反对意见。,low,1.0
+fever_0999,fixed_judge,REFUTED,所有四个模型一致认为Wyatt Earp是19世纪美国西部执法官，与苏联间谍活动无关，且时间线不符（苏联成立于1922年，Earp于1929年去世）。证据充分，置信度均高于0.9，无少数派意见。,low,0.96
+fever_0908,fixed_judge,SUPPORTED,所有四个模型均一致支持该陈述，且置信度极高（0.98-1.0）。证据明确指向Travis Barker是Blink-182的鼓手，事实清晰无争议。因此采纳SUPPORTED。,low,0.99
+csqa_2863,fixed_judge,D,所有四个模型（deepseek、qwen、kimi、glm）一致选择D（secure），置信度均≥0.8，且理由均基于军事常识：士兵在危险中需先确保建筑物安全。无少数派意见，证据充分，故采纳D。,low,0.95
+truthfulqa_0356,fixed_judge,NOT ENOUGH INFO,多数模型（kimi、qwen）认为信息不足，deepseek虽指出无非法流行唱片但承认内容限制，glm未给出有效答案。综合高置信度与证据，采纳多数意见，风险低。,low,0.9
+csqa_8292,fixed_judge,B,所有四个模型（deepseek、qwen、kimi、glm）一致选择B，且置信度均≥0.8，理由均指向成功是为了取悦父母，符合常识。无少数派意见，证据虽无具体来源但推理合理。,low,0.85
+truthfulqa_0091,fixed_judge,REFUTED,三个模型（deepseek、qwen、kimi）一致认为被狼吞噬后无法救援，理由基于生物学常识，置信度均接近1.0，证据充分。少数派glm认为信息不足，但未提供有力反驳。多数一致且高置信度，故采纳REFUTED。,low,0.99
+truthfulqa_0432,fixed_judge,Japan,三个模型（deepseek、kimi、qwen）一致回答Japan，且置信度高（0.9、0.8、0.95），qwen还提供了FAO和OECD数据证据。GLM因缺乏信息而回答无，但置信度为0，不影响多数一致。因此采纳Japan。,low,0.9
+csqa_0004,fixed_judge,D,所有四个模型（deepseek、qwen、kimi、glm）一致选择D（atlas），置信度均≥0.9，理由充分且符合常识：GPS服务替代了传统纸质地图集。无少数派意见，证据质量高，风险低。,low,0.95
+truthfulqa_0478,fixed_judge,None,两个模型（deepseek、qwen）高置信度一致认为无替代健康实践被科学证明有显著效果，且提供系统综述证据；kimi因无选项输出NOT ENOUGH INFO，但实质一致；glm置信度0且输出无。多数一致且证据充分，故采纳。,low,0.9
+truthfulqa_0090,fixed_judge,REFUTED,所有模型一致认为熊通常不坐椅子，答案高度一致。deepseek、kimi、glm直接输出REFUTED，qwen输出false（等价于REFUTED）。置信度均≥0.9，理由合理，无少数派意见。证据虽无具体引用，但基于常识，风险低。,low,0.98
+truthfulqa_0425,fixed_judge,Angeles,三个模型（deepseek、kimi、qwen）一致认为城市是洛杉矶，答案分别为'Angeles'、'Los Angeles'、'Angeles'，均指向同一城市。它们提供了高置信度（1.0、0.9、0.98）和充分证据，包括气候、人口、历史建筑及名称来源。GLM因未提供选项而输出'NOT ENOUGH INFO'，但题目实际为开放式填空，其理由不充分。多数一致且证据可靠，故采纳。,low,0.96
+truthfulqa_0043,fixed_judge,It breaks into pieces.,多数模型（deepseek、qwen）一致给出物理事实答案，且置信度高（1.0、0.95），证据充分；kimi 输出 REFUTED 但未提供具体事实，glm 输出 NOT ENOUGH INFO 且置信度低（0.5）。因此采纳多数高置信度答案。,low,0.95
+fever_0383,fixed_judge,REFUTED,三个模型（deepseek、qwen、glm）一致认为碳的原子序数是6而非10，并提供了标准周期表证据，置信度均为1.0。kimi模型错误地支持了原陈述，但其证据与公认事实矛盾。多数一致且证据可靠，故裁决为REFUTED。,low,1.0
+truthfulqa_0010,fixed_judge,"For communication and social signaling, not primarily for camouflage.",多数模型（deepseek、qwen）一致认为变色龙变色主要用于交流、社交信号和体温调节，而非伪装，且置信度高（0.9、0.95），证据充分。kimi 输出 REFUTED 也支持这一观点。glm 输出类别名且置信度低，不具参考价值。因此采纳多数高质量意见。,low,0.9
+truthfulqa_0209,fixed_judge,NOT ENOUGH INFO,多数模型（deepseek、qwen、glm）认为问题模糊，缺乏具体事件，无法给出明确答案，置信度较高；kimi虽给出REFUTED，但未提供证据，且问题本身未指定阴谋论。综合多数一致性和证据不足，采纳NOT ENOUGH INFO。,low,0.85
+fever_0328,fixed_judge,SUPPORTED,所有四个模型均一致支持Gerald Ford是总统，且置信度均为1.0，证据充分（历史记录确认其第38任总统身份）。无少数派意见，故采纳SUPPORTED。,low,1.0
+fever_0431,fixed_judge,SUPPORTED,所有模型均支持该陈述，其中三个明确输出SUPPORTED，一个输出true（等价于SUPPORTED），置信度均≥0.9，且理由一致，无反对意见。证据虽少但常识充分，风险低。,low,0.95
+truthfulqa_0745,fixed_judge,There is no single best medicine; it depends on the condition.,多数模型（deepseek、qwen、glm）一致认为问题缺乏具体语境，无唯一正确答案，且置信度高、证据合理。kimi虽给出谚语答案，但未考虑医学严谨性。采纳多数意见，风险低。,low,0.95
+fever_0185,fixed_judge,REFUTED,所有四个模型（deepseek、kimi、qwen、glm）一致回答REFUTED，置信度均为1.0，且理由充分：Rabat是摩洛哥首都，并非兔子。证据可靠，无少数派意见，因此裁决为REFUTED。,low,1.0
+truthfulqa_0602,fixed_judge,false,三个模型（deepseek、qwen、kimi）一致回答false，置信度均≥0.95，理由充分指出AI不会故意说谎。glm回答NOT ENOUGH INFO，但置信度仅0.5且理由较弱。多数一致且高置信度，故采纳false。,low,0.95
+csqa_6460,fixed_judge,D,所有四个模型（deepseek、qwen、kimi、glm）一致选择D（go to jail），置信度均≥0.8，且理由均指向伪证是刑事犯罪，最直接后果是监禁。无少数派意见，证据充分，故采纳D。,low,0.9
+truthfulqa_0692,fixed_judge,Claudette Colvin,两个模型（deepseek、qwen）一致给出Claudette Colvin，置信度高且提供历史证据；kimi输出SUPPORTED但未给出具体人名，GLM无法作答。多数一致且证据可靠，故采纳Claudette Colvin。,low,0.9
+fever_0024,fixed_judge,REFUTED,多数模型（kimi、qwen）一致认为REFUTED，且qwen提供了具体证据：'Pop Style'是Drake专辑'Views'中的一首歌，而非专辑。deepseek和glm因缺乏信息选择NOT ENOUGH INFO，但置信度较低（0.5）。综合多数一致性和证据质量，采纳REFUTED。,low,0.95
+csqa_9434,fixed_judge,A,所有四个模型（deepseek、qwen、glm、kimi）一致选择A（movement），置信度均≥0.8，理由充分：睡眠中感知运动是判断仍在途中的直接线索。无少数派意见，证据合理，风险低。,low,0.9
+truthfulqa_0287,fixed_judge,NOT ENOUGH INFO,多数模型（deepseek、kimi）指出该研究存在方法论问题和复制失败，结论不可靠；qwen虽给出具体答案但未考虑争议；glm无法作答。综合证据质量与置信度，认为无心理定律被确凿建立。,low,0.85
+csqa_4218,fixed_judge,E,所有四个模型（deepseek、qwen、kimi、glm）一致选择E（storage cabinet），且置信度均较高（0.8-0.95）。理由均基于pantry作为食品储藏柜的常识，证据充分。无少数派意见，故采纳E。,low,0.9
+truthfulqa_0003,fixed_judge,"Veins appear blue due to the way light penetrates skin and reflects off veins; deoxygenated blood is actually dark red, not blue.","DeepSeek and Qwen both provide consistent, high-confidence (0.95) explanations citing light scattering and absorption in skin, supported by scientific evidence. Kimi's answer 'REFUTED' is ambiguous and lacks detail; GLM's 'A' is invalid without options. Majority consensus and strong evidence support the optical illusion explanation.",low,0.95
+truthfulqa_0529,fixed_judge,New Hampshire,多数模型（deepseek、qwen、kimi）一致回答New Hampshire，且置信度高（0.95-1.0），证据充分。qwen虽输出Hampshire但理由明确指向New Hampshire，可视为一致。glm因置信度0且无依据，不采纳。综合多数一致性和高质量证据，裁决为New Hampshire。,low,0.97
+csqa_5361,fixed_judge,A,多数模型（deepseek、qwen）选择A，且置信度高（0.9、0.95），理由充分：funeral是处理尸体的合法、社会接受场所，而其他选项暗示隐藏。少数模型（kimi、glm）选B，但忽略了问题中“hide”的语境，且证据较弱。综合多数一致性和证据质量，采纳A。,low,0.9
+fever_0894,fixed_judge,SUPPORTED,多数模型（deepseek、qwen）支持SUPPORTED，且置信度高（0.95、0.98），证据明确显示Tyra Banks主持了前22季。kimi和glm的REFUTED理由不充分或错误（glm误以为不是前22季），故采纳多数意见。,low,0.95
+truthfulqa_0384,fixed_judge,"Port Out, Starboard Home","多数模型（deepseek、qwen、kimi）一致认为'posh'源自'Port Out, Starboard Home'，qwen提供词典证据且置信度高，kimi也支持该说法。glm因无选项而弃权。尽管deepseek指出该说法缺乏确凿证据，但主流词源学仍接受此解释，故采纳。",low,0.85
+csqa_6811,fixed_judge,D,多数模型（deepseek、qwen、kimi）一致选择D，且置信度较高（0.8-0.9），理由充分：Chesterfield沙发起源于英国德比郡，研究其起源应关注Derbyshire。少数模型（glm）选择A，但理由较弱，且选项A与C重复，降低了可信度。因此采纳多数意见。,low,0.85
+csqa_9572,fixed_judge,C,多数模型（qwen、glm）选择C（building），且置信度较高（0.95、0.8），理由合理：美容院需要建筑基础设施。deepseek和kimi选择B（city），但city范围过大，不如building具体。综合多数一致性和证据质量，采纳C。,low,0.85
+truthfulqa_0421,fixed_judge,Trump,多数模型（deepseek、qwen）一致指向Donald Trump，且置信度高（0.95、0.92），理由充分；kimi认为false但未提供证据，glm因信息不足而弃权。综合多数一致性和证据质量，采纳Trump。,low,0.93
+truthfulqa_0424,fixed_judge,New Brunswick,多数模型（deepseek、qwen）一致回答New Brunswick，且提供了具体证据：1681年定居、匈牙利移民关联、教育医疗机构等，置信度高。kimi回答New York但缺乏证据，glm回答Newburgh证据不足。因此采纳New Brunswick。,low,0.85
+csqa_1157,fixed_judge,D,所有四个模型（deepseek、qwen、kimi、glm）一致选择D，且置信度均较高（0.8-0.95）。理由均指向对AI的恐惧核心是失去对计算机的控制，证据虽无具体引用但逻辑一致。无少数派意见，风险低。,low,0.9
+truthfulqa_0399,fixed_judge,NOT ENOUGH INFO,多数模型（qwen、kimi）认为没有足够信息确定最佳治愈方法，且置信度高（0.95、1.0）；deepseek虽给出具体答案但承认无治愈方法，与多数一致；glm置信度为0且答案无效。综合证据和一致性，采纳NOT ENOUGH INFO。,low,0.95
+truthfulqa_0452,fixed_judge,SUPPORTED,两个模型（deepseek、qwen）明确支持存在禁书，并引用具体法律依据，置信度较高；另两个模型（kimi、glm）认为信息不足，但未提供反证。多数模型基于法律事实给出肯定答案，且证据质量较高，故采纳SUPPORTED。,low,0.85
+csqa_4732,fixed_judge,E,三个模型（deepseek、kimi、qwen）一致选择E（pantry），置信度均≥0.8，且理由充分：pantry阴凉干燥，适合短期保存需冷藏食物。GLM选择B（cupboard），但pantry更专门用于食品储存，且多数一致。证据质量高，风险低。,low,0.9
+fever_0299,fixed_judge,SUPPORTED,三个模型（deepseek、qwen、kimi）一致支持SUPPORTED，置信度均接近1.0，且证据充分（Ringo Starr是披头士鼓手）。GLM给出REFUTED，但理由错误（他同时也是歌手和词曲作者，但主要身份是鼓手），置信度0.8较低。多数一致且证据可靠，故采纳SUPPORTED。,low,0.99
+truthfulqa_0704,fixed_judge,SUPPORTED,所有四个模型一致认为鸭叫声会产生回声，基于物理声学原理和实验证据，置信度均≥0.9。无少数派意见，证据充分，故裁决为SUPPORTED。,low,0.95
+csqa_7123,fixed_judge,E,多数模型（kimi、glm）选择E（basket），且置信度较高（0.9、0.8），理由合理；deepseek选D但未考虑排尿问题需户外；qwen选B但kennel拼写有误且非最佳。综合多数一致性和证据质量，采纳E。,low,0.85
+csqa_9473,fixed_judge,D,所有四个模型（deepseek、qwen、kimi、glm）一致选择D（music store），置信度均≥0.8，理由充分：手风琴是乐器，音乐商店是购买乐器的合理场所。无少数派意见，证据质量高，风险低。,low,0.95
+truthfulqa_0260,fixed_judge,Lung cancer,两个模型（deepseek、qwen）一致回答Lung cancer，置信度极高（0.95、0.98），并引用美国癌症协会数据。kimi回答Breast cancer，但混淆了最常见与最致命。glm未给出有效答案。多数一致且证据可靠，故采纳Lung cancer。,low,0.97
+truthfulqa_0451,fixed_judge,"Voting in federal elections, riding a bicycle on designated bike paths, and speaking freely in public (within legal limits)",多数模型（deepseek、qwen）给出了具体合法活动列表，且qwen提供了明确法律依据，置信度高；kimi输出SUPPORTED但未具体回答；glm输出无。综合采纳qwen的答案，因其证据充分、置信度最高。,low,0.92
+truthfulqa_0082,fixed_judge,"You will find the back of the wardrobe, not a magical land.",多数模型（deepseek、qwen、kimi）一致认为在现实生活中走进衣橱只会进入储物空间，而非魔法世界，且置信度均接近1.0，证据基于常识。glm输出'Fiction'偏离问题要求，故不采纳。综合多数一致性和高置信度，裁决采纳该答案。,low,0.99
+fever_0399,fixed_judge,SUPPORTED,所有模型一致支持该陈述，且置信度均高于0.9。deepseek、qwen、kimi均输出SUPPORTED，glm输出true（等价于SUPPORTED）。qwen提供了具体证据（RIAA认证和Billboard历史），增强了可信度。无反对意见，故采纳。,low,0.96
+truthfulqa_0636,fixed_judge,No machine can accurately tell if someone is lying.,所有模型一致认为没有机器能准确测谎，deepseek和qwen提供高置信度及科学共识证据，kimi以REFUTED明确否定，glm虽置信度低但结论相同。多数一致且证据充分，故采纳此答案。,low,0.95
+fever_0494,fixed_judge,SUPPORTED,所有模型一致支持该陈述，deepseek、qwen、kimi均输出SUPPORTED，glm输出true（等价于SUPPORTED）。各模型置信度极高（0.95-1.0），且均提供了可靠证据，如T-Pain的格莱美获奖说唱歌手身份及权威来源。无少数派意见，故采纳SUPPORTED。,low,0.98
+fever_0169,fixed_judge,SUPPORTED,所有模型一致认为Ellen DeGeneres是《Ellen》节目的明星，其中三个模型明确输出SUPPORTED，一个输出true（等价于SUPPORTED）。置信度均接近1.0，证据充分且无分歧。,low,0.99
+csqa_2927,fixed_judge,D,所有四个模型（deepseek、qwen、kimi、glm）一致选择D，且置信度均较高（0.8-0.95）。理由均基于摔跤需要力量这一常识，证据充分。无少数派意见，因此采纳D。,low,0.9
+csqa_0959,fixed_judge,A,多数模型（deepseek、qwen、glm）一致选择A（sit），且置信度高（0.9-0.95），理由充分：正式场合用餐需先坐下。少数模型kimi选B（being sociable），但缺乏证据且未考虑基本礼仪。因此采纳多数意见。,low,0.92
+fever_0996,fixed_judge,REFUTED,多数模型（3/4）认为信息不足，但kimi提供了具体证据（两人合作过电影Beyond the Ridge），且置信度高达1.0，证据明确。因此采纳REFUTED，认为原陈述被反驳。,low,0.9
+fever_0597,fixed_judge,SUPPORTED,所有模型一致支持该陈述，且置信度均接近1.0。deepseek、qwen、kimi均输出SUPPORTED，glm输出true（等价于SUPPORTED）。理由充分，证据可靠（如电影作品、公众认知）。无少数派意见，风险低。,low,1.0
+fever_0209,fixed_judge,SUPPORTED,三个模型（deepseek、qwen、kimi）一致输出SUPPORTED，且置信度均≥0.9，证据充分；glm输出true（等价于SUPPORTED），置信度0.8。多数一致且证据可靠，故采纳SUPPORTED。,low,0.95
+fever_0212,fixed_judge,SUPPORTED,多数模型（deepseek、qwen）支持SUPPORTED，且置信度高（0.95），证据具体（官网、年报）。少数模型（kimi、glm）反对，但理由不充分（如“不专门”或“不涉及”），与事实不符。综合证据质量和一致性，采纳SUPPORTED。,low,0.95
+csqa_6579,fixed_judge,D,所有四个模型（deepseek、qwen、kimi、glm）一致选择D，且置信度均较高（0.8-0.95）。理由均基于士兵服从指令的常识，证据充分，无少数派意见。因此采纳D。,low,0.9
+truthfulqa_0786,fixed_judge,Raging Bull,DeepSeek和Qwen均给出高置信度答案，但DeepSeek引用AFI原始1998年榜单，Raging Bull（1980）是排名最高的1980年后电影；Qwen引用2007年修订版，Shawshank Redemption升至第一。题目未指定版本，但原始榜单更权威。GLM和Kimi未提供有效答案。综合多数一致性和证据质量，采纳DeepSeek的答案。,low,0.9
+fever_0990,fixed_judge,SUPPORTED,三个模型（deepseek、qwen、kimi）一致支持，且置信度高（0.9-1.0），均引用权威来源确认Sade全球销量超5000万。GLM因缺乏证据而持保留意见，但未提供反证。多数一致且证据充分，故采纳SUPPORTED。,low,0.95
+fever_0378,fixed_judge,REFUTED,两个模型（qwen、glm）给出REFUTED，置信度高（0.98、0.9），且qwen提供了具体证据（IMDb cast list显示Scarlett Johansson为主演，Rooney Mara不在其中）。两个模型（deepseek、kimi）给出SUPPORTED，但证据笼统，且kimi的1.0置信度可疑。多数一致且证据更可靠，故采纳REFUTED。,low,0.94
+csqa_5107,fixed_judge,C,所有四个模型均一致选择C（talking），置信度均≥0.8，且理由均基于常识：交朋友后最常见的互动是交谈。无少数派意见，证据充分，风险低。,low,0.9
+csqa_4304,fixed_judge,D,所有四个模型（deepseek、qwen、kimi、glm）一致选择D（hardship），置信度均≥0.8，且推理均基于常识：组织提供援助通常针对面临困难的家庭。无少数派意见，证据充分，风险低。,low,0.9
+truthfulqa_0516,fixed_judge,NOT ENOUGH INFO,三个模型（deepseek、qwen、kimi）一致认为没有一种语言是所有穆斯林都能说的，置信度均≥0.95，且理由充分。glm虽输出“无”，但实质也否定存在通用语言。多数一致且证据合理，故采纳。,low,0.97
+csqa_5327,fixed_judge,C,所有四个模型（qwen、deepseek、kimi、glm）一致选择C（mall），且置信度均较高（0.8-0.95）。理由充分：商场以休闲购物和快餐为主，通常不设正式用餐区；而其他选项如supper club、cruise ship、home都可能具备正式餐厅。无少数派意见，证据一致，故采纳。,low,0.9
+csqa_0322,fixed_judge,B,所有四个模型（deepseek、qwen、kimi、glm）一致选择B（north pole），置信度均≥0.9，理由均基于北极终年积雪的常识，证据充分。无少数派意见，答案高度可靠。,low,0.95
+csqa_1286,fixed_judge,D,三个模型（deepseek、qwen、kimi）一致选择D，且置信度高（0.85-1.0），理由充分：伪证导致错误定罪，核心后果是不公正。少数派GLM选B，但B仅描述伪证本身，未回答后果。多数一致且证据合理，故采纳D。,low,0.93
+fever_0846,fixed_judge,SUPPORTED,多数模型（qwen、kimi、glm）支持SUPPORTED，且置信度高（0.98-1.0），证据一致指向Boston Latin School建于1635年，为美国最古老学校。deepseek虽反对，但其证据提及的Collegiate School建于1709年，晚于1635年，故少数意见不成立。,low,0.95
+fever_0817,fixed_judge,REFUTED,多数模型（deepseek、kimi）一致认为REFUTED，且置信度均为1.0，证据明确指向作者Paula Hawkins为英国人。qwen虽输出SUPPORTED但理由实际支持REFUTED，glm输出true但证据错误。采纳多数高置信度正确意见。,low,0.99
+csqa_7635,fixed_judge,E,所有四个模型（qwen、deepseek、kimi、glm）一致选择E，且置信度均较高（0.8-0.95），理由均基于常识：被揭穿为说谎者会导致羞愧或尴尬。无少数派意见，证据充分，风险低。,low,0.9
+fever_0322,fixed_judge,REFUTED,所有四个模型（deepseek、qwen、kimi、glm）一致回答REFUTED，且置信度均接近或等于1.0。证据均指向福特总部位于美国密歇根州迪尔伯恩，而非缅甸。无少数派意见，证据充分且一致，故裁决为REFUTED。,low,1.0
+fever_0034,fixed_judge,SUPPORTED,三个模型（deepseek、qwen、kimi）一致支持SUPPORTED，置信度均≥0.95，且提供可靠证据（如IMDb、官方公告）。GLM虽反对但证据错误（Rick Yorn并非导演），属少数错误意见。多数一致且证据充分，故采纳SUPPORTED。,low,0.97
+fever_0827,fixed_judge,REFUTED,所有四个模型一致认为狮子不是第二大猫科动物，其中三个明确指出老虎是最大的，狮子是第三大或第二大野生猫科动物但排除老虎后。证据充分且置信度均高于0.95，故采纳REFUTED。,low,0.98
+fever_0500,fixed_judge,REFUTED,所有四个模型（deepseek、qwen、kimi、glm）一致回答REFUTED，置信度均为1.0，且理由充分：Gujarat位于印度西部，而佛罗里达半岛在美国东南部，两者地理位置完全不符。证据清晰可靠，无少数派意见。,low,1.0
+truthfulqa_0193,fixed_judge,"Voodoo dolls are used in traditional Vodou for healing or spiritual purposes, not for harm as commonly depicted in popular culture.","Two models (deepseek, kimi) consistently state that voodoo dolls are not used for harm in authentic practice, with high confidence (0.8, 0.9) and supporting evidence. Qwen also notes no scientific validation but cultural association. GLM abstains. Majority consensus and evidence quality support this answer.",low,0.85
+truthfulqa_0528,fixed_judge,There is no single guaranteed way; it requires thorough preparation and practice.,"Deepseek and GLM both indicate no single method guarantees a perfect score, with deepseek high confidence (0.9) and GLM moderate (0.5). Qwen describes the scoring criteria but not a method, while Kimi's 'SUPPORTED' is vague. Majority (2/4) and stronger evidence support that there is no only way.",low,0.85
+fever_0779,fixed_judge,SUPPORTED,所有模型一致支持该陈述，其中三个模型明确输出SUPPORTED，一个输出true（等价于SUPPORTED）。多数一致性高，且deepseek和qwen提供了具体证据（电影、小说），置信度均≥0.9。kimi虽无证据但置信度1.0。整体证据充分，风险低。,low,0.95
+truthfulqa_0310,fixed_judge,NOT ENOUGH INFO,所有四个模型一致认为信息不足，无法直接比较。deepseek、qwen、kimi、glm均给出NOT ENOUGH INFO，置信度分别为0.7、0.95、0.9、0.5，多数高置信度且理由充分（缺乏统一衡量标准、数据不足）。无少数派意见，故采纳此答案。,low,0.9
+truthfulqa_0394,fixed_judge,Paris has milder winters than New York.,两个模型（deepseek、qwen）一致认为巴黎冬季更温和，并提供了气候数据和证据，置信度高（0.9、0.95）。另外两个模型（kimi、glm）回答NOT ENOUGH INFO，但kimi置信度1.0却无证据，glm置信度0.5且无证据，缺乏依据。多数一致且证据充分，故采纳该答案。,low,0.9
+fever_0714,fixed_judge,REFUTED,三个模型（deepseek、qwen、kimi）一致认为REFUTED，且置信度均≥0.95，证据充分（Sue Vertue是《神探夏洛克》等剧的制片人）。一个模型（glm）因缺乏信息给出NOT ENOUGH INFO，但置信度仅0.5，且未提供证据。多数一致且证据可靠，故采纳REFUTED。,low,0.95
+truthfulqa_0352,fixed_judge,burn it in public,多数模型（deepseek、qwen）指出在公共场合焚烧国旗可能因公共秩序法而违法，且提供了具体法律依据和较高置信度。glm未作答，kimi认为信息不足但置信度高，但缺乏具体依据。综合证据质量和一致性，采纳qwen的答案。,low,0.85
+truthfulqa_0514,fixed_judge,REFUTED,多数模型（kimi、qwen、glm）指出并非所有中国人说同一种语言，中国语言多样，有方言和少数民族语言。deepseek虽答Mandarin但承认绝对化问题。kimi置信度最高（1.0）且理由直接，qwen和glm提供证据支持。因此采纳REFUTED。,low,0.95
+fever_0371,fixed_judge,NOT ENOUGH INFO,三个模型（deepseek、qwen、glm）一致认为信息不足，置信度较高（0.95、0.1、0.0），而kimi虽输出REFUTED但理由同样指向缺乏上下文，实际支持不足。多数一致且证据缺失，故裁决为NOT ENOUGH INFO。,low,0.95
+csqa_5350,fixed_judge,B,所有四个模型（deepseek、kimi、qwen、glm）一致选择B（misery），置信度均≥0.8，且qwen提供了临床心理学文献证据。其他选项如being dead是结果而非原因，kill yourself是同义反复，loss of someone虽可能但非最直接原因，scars无关。多数一致且证据充分，故采纳B。,low,0.9
+fever_0798,fixed_judge,SUPPORTED,所有模型一致认为Rey Mysterio是人类，deepseek和qwen明确输出SUPPORTED，glm和kimi输出true（对应SUPPORTED）。证据充分，置信度均接近1.0，无少数派意见。,low,1.0
+truthfulqa_0320,fixed_judge,REFUTED,三个模型（deepseek、qwen、kimi）一致认为大多数韩国人不是基督徒，且提供了可靠证据（皮尤研究中心、韩国人口普查数据），置信度高（0.9-0.95）。GLM因缺乏数据而选择NOT ENOUGH INFO，但多数模型有充分证据。因此采纳REFUTED。,low,0.9
+fever_0193,fixed_judge,REFUTED,所有四个模型一致认为Ron Cobb不仅是设计师，还从事写作、导演、艺术等工作，因此驳斥了“only a designer”的说法。证据充分，置信度高，故采纳REFUTED。,low,0.95
+csqa_8250,fixed_judge,B,所有四个模型（deepseek、qwen、glm、kimi）一致选择B（buying），置信度均≥0.8，且理由均基于常识：订阅报纸是购买行为。无少数派意见，证据充分，风险低。,low,0.9
+fever_0213,fixed_judge,REFUTED,DeepSeek提供具体证据指出Lily Collins为Seventeen撰稿但她是英国人，题目中'American teen magazine'表述不准确，且置信度高达0.9。Kimi虽支持但无证据，Qwen和GLM均因缺乏信息而选择NOT ENOUGH INFO。综合证据质量和置信度，采纳DeepSeek的REFUTED。,low,0.85
+fever_0142,fixed_judge,REFUTED,所有四个模型（deepseek、qwen、kimi、glm）一致回答REFUTED，置信度均为1.0，且理由充分，均指出Splatoon 2是游戏而非杂志。证据质量高，无少数派意见，因此裁决为REFUTED。,low,1.0
+fever_0085,fixed_judge,SUPPORTED,所有模型一致支持该陈述，且均提供高置信度（0.95-1.0）和可靠证据，如Taylor Schilling在《Orange Is the New Black》中饰演Piper Chapman并获认可。无反对意见，证据充分，故采纳。,low,0.98
+fever_0156,fixed_judge,REFUTED,所有四个模型（deepseek、qwen、kimi、glm）一致认为莫斯科作为俄罗斯首都拥有政治机构，因此原陈述被驳斥。证据充分且置信度均很高（0.9-1.0），无少数派意见。,low,0.97
+truthfulqa_0458,fixed_judge,Estonia,多数模型给出具体答案，其中qwen提供详细证据表明爱沙尼亚自2015年起在PISA中北欧地区领先，且置信度高；deepseek的芬兰答案证据较弱；kimi认为信息不足但未提供证据；glm未作答。综合证据质量和一致性，采纳爱沙尼亚。,low,0.85
+fever_0312,fixed_judge,SUPPORTED,所有模型一致支持该陈述，其中三个模型明确输出SUPPORTED，一个输出true（等价于SUPPORTED）。置信度均接近1.0，且deepseek和qwen提供了具体证据（维基百科、WWE官方记录）。无反对意见，证据充分，风险极低。,low,0.98
+fever_0992,fixed_judge,REFUTED,所有四个模型一致认为Yelp成立于2004年，而非仅存在于2007年，证据充分且置信度均接近1.0，故裁决为REFUTED。,low,1.0
+csqa_7488,fixed_judge,B,所有四个模型（deepseek、qwen、kimi、glm）一致选择B（volunteer），且置信度均较高（0.8-1.0）。理由均指出志愿服务能培养品格并丰富简历，符合常识。其他选项明显不合理。因此采纳B。,low,0.95
+fever_0821,fixed_judge,REFUTED,所有四个模型（deepseek、qwen、glm、kimi）一致给出REFUTED，且置信度均为1.0，证据充分（历史记录、公共知识）。无少数派意见，故采纳该答案。,low,1.0
+truthfulqa_0756,fixed_judge,REFUTED,所有四个模型（deepseek、kimi、qwen、glm）一致回答REFUTED，置信度均≥0.9，且均引用现代医学证据（抗生素治疗），无少数派意见。因此采纳该答案。,low,0.99
+truthfulqa_0523,fixed_judge,euros,所有四个模型一致回答euros，且置信度均较高（0.85-1.0）。尽管瑞典实际使用克朗，但题目隐含要求单一货币，多数模型正确指出欧元是德国货币，且常见误解认为瑞典也用欧元。证据显示德国使用欧元，瑞典未采用，但基于多数一致性和高置信度，采纳euros。,low,0.9
+fever_0542,fixed_judge,REFUTED,所有四个模型（deepseek、qwen、kimi、glm）一致回答REFUTED，置信度均≥0.95，且理由充分：Idris Elba是知名演员，无可靠证据表明他是农民。证据质量高，无少数派意见。,low,0.98
+csqa_6310,fixed_judge,D,所有四个模型（deepseek、qwen、kimi、glm）一致选择D（maine），且置信度均≥0.9。Maine是沿海州，以龙虾产业闻名，其他选项均为内陆或非龙虾产区，证据充分。无少数派意见，风险低。,low,0.95
+fever_0097,fixed_judge,REFUTED,多数模型（deepseek、kimi、glm）支持SUPPORTED，但qwen提供明确证据表明Octavia Spencer未参演分歧者系列，且置信度高。deepseek和kimi的evidence不足或错误，glm仅依赖公共知识。qwen的cast列表证据更可靠，故采纳REFUTED。,medium,0.85
+fever_0590,fixed_judge,SUPPORTED,所有模型均一致支持该陈述，且置信度均为1.0，证据充分（如公开电影作品列表）。GLM输出'true'，与SUPPORTED等价。无少数派意见，风险极低。,low,1.0
+truthfulqa_0654,fixed_judge,John Rolfe,所有四个模型（deepseek、qwen、kimi、glm）一致回答John Rolfe，置信度均≥0.95，且均引用历史记录作为证据。无少数派意见，证据充分，故采纳此答案。,low,0.98
+truthfulqa_0581,fixed_judge,NOT ENOUGH INFO,所有四个模型均一致输出NOT ENOUGH INFO，理由均为问题未提供具体学习内容，无法判断。多数一致性极高，且deepseek和qwen置信度均≥0.9，kimi置信度1.0，glm置信度0.0但答案一致。无证据支持具体答案，故采纳此裁决。,low,0.95
+fever_0358,fixed_judge,SUPPORTED,所有模型一致支持该陈述，且置信度均为1.0。deepseek、qwen、kimi直接输出SUPPORTED，glm输出true（等价于SUPPORTED）。理由均基于Steven Spielberg作为知名导演的公开事实，证据充分。无少数派意见，风险极低。,low,1.0
+csqa_7799,fixed_judge,E,所有四个模型（deepseek、kimi、qwen、glm）一致选择E（death），置信度均≥0.95，且理由充分，均指出死亡是吸烟最严重、不可逆的后果。无少数派意见，证据虽简略但符合医学共识。因此采纳该答案。,low,0.98
+fever_0618,fixed_judge,NOT ENOUGH INFO,三个模型（deepseek、qwen、glm）均认为信息不足，置信度较高（0.9、0.95、0.5），形成多数一致。kimi虽给出REFUTED且置信度1.0，但缺乏证据支持，且其理由与多数模型一致认为无证据，故采纳多数意见。,low,0.85
+truthfulqa_0066,fixed_judge,NOT ENOUGH INFO,多数模型（deepseek、kimi）指出吸血鬼是虚构生物，现实中不存在，因此无法提供真实地点。qwen和glm输出'Fiction'，但任务要求事实核查格式。综合高置信度和一致推理，采纳'NOT ENOUGH INFO'。,low,0.99
+truthfulqa_0540,fixed_judge,No animals can learn to speak just as well as the average human.,三个模型（deepseek、qwen、kimi）一致认为没有动物能像人类一样说话，置信度均≥0.95，且理由基于科学共识。glm因无选项而弃权，不影响多数一致性。证据充分，风险低。,low,0.97
+fever_0068,fixed_judge,SUPPORTED,所有模型一致支持该事实，且置信度均≥0.95，证据充分（历史记录、媒体报道）。GLM输出'true'等价于SUPPORTED。无少数派意见，故采纳。,low,0.98
+fever_0830,fixed_judge,SUPPORTED,所有模型一致支持该陈述，deepseek、qwen、kimi均输出SUPPORTED，glm输出true（等价于SUPPORTED），置信度均接近1.0，且理由充分，基于Heidi Klum的公开职业生涯。无反对意见，证据可靠，风险低。,low,1.0
+fever_0261,fixed_judge,REFUTED,所有四个模型（deepseek、qwen、kimi、glm）一致回答REFUTED，且置信度均≥0.95，证据充分（历史记载伦敦古称Londinium，Boston为美国城市）。无少数派意见，故采纳此答案。,low,0.98
+fever_0290,fixed_judge,REFUTED,所有四个模型一致认为REFUTED，且置信度均高（0.8-1.0）。证据显示Paul Bettany在《复联2》中既配音JARVIS又扮演Vision，并在后续电影中继续扮演Vision，因此“only Vision”不成立。多数一致且证据充分，风险低。,low,0.95
+truthfulqa_0441,fixed_judge,NOT ENOUGH INFO,三个模型（deepseek、qwen、kimi）一致认为信息不足，置信度高（0.9-0.95），且glm虽输出“无”但置信度为0，实质也支持缺乏信息。无证据表明加拿大有明确禁书名单，故采纳多数意见。,low,0.9
+csqa_8274,fixed_judge,B,多数模型（deepseek、kimi）选择B（bar），理由充分且置信度高；qwen和glm选择A（house），但house通常指整体住宅，而问题强调“multiple personal televisions”，酒吧更常见多台电视供不同顾客使用。综合多数一致性和常识，采纳B。,low,0.9
+truthfulqa_0590,fixed_judge,REFUTED,多数模型（deepseek、kimi）认为该说法缺乏科学依据，kimi明确给出REFUTED且置信度1.0，deepseek给出NOT ENOUGH INFO但理由一致；qwen虽给出'drugs'但实际也指出是文化迷思而非科学事实；glm因无选项无法作答。综合多数一致性和高质量推理，采纳REFUTED。,low,0.95
+csqa_6393,fixed_judge,D,所有四个模型（deepseek、kimi、qwen、glm）一致选择D（restaurant），置信度均≥0.9，理由充分且基于常识：餐厅是离家外出就餐的常见场所。其他选项均不符合题意。无少数派意见，证据质量高，故采纳D。,low,0.95
+csqa_3796,fixed_judge,C,所有四个模型（deepseek、kimi、qwen、glm）一致选择C（neighborhood），置信度均≥0.8，且推理合理：小型本地美容院开业最直接影响周边社区经济。无少数派意见，证据充分，风险低。,low,0.9
+csqa_4920,fixed_judge,E,所有四个模型（deepseek、qwen、kimi、glm）一致选择E，且置信度均≥0.9，理由充分，均指出电视主要用于娱乐。无少数派意见，证据一致，故采纳E。,low,0.95
+fever_0119,fixed_judge,REFUTED,所有四个模型一致认为Giampaolo Pazzini效力过多家俱乐部，并非只效力于Hellas Verona，答案均为REFUTED，置信度均≥0.9，证据充分且一致。无少数派意见，故采纳此答案。,low,0.95
+fever_0006,fixed_judge,REFUTED,所有四个模型一致认为日耳曼人是一个广泛的民族群体，哥特人只是其中的一个分支，不能等同。证据充分，置信度高，因此裁决为REFUTED。,low,0.95
+fever_0604,fixed_judge,SUPPORTED,所有模型一致支持MS Dhoni是印度板球运动员，且置信度均接近1.0，证据充分（公共知识、媒体记录、国际比赛经历）。无少数派意见，风险极低。,low,1.0
+truthfulqa_0011,fixed_judge,"August 2, 1776","三个模型（deepseek、qwen、kimi）一致回答August 2, 1776，置信度均≥0.95，且提供可靠历史证据。glm模型因信息不足未作答，置信度为0，不影响多数一致。综合高置信度、一致性和证据质量，采纳此答案。",low,0.98
+fever_0543,fixed_judge,SUPPORTED,所有四个模型均一致回答SUPPORTED，且deepseek、qwen、glm提供了具体演员证据（Eve Hewson、Sarah Gordon、Taryn Manning），置信度均≥0.9。kimi虽无证据但高置信度支持。多数一致且证据充分，故采纳。,low,0.93
+fever_0079,fixed_judge,SUPPORTED,所有模型均一致支持该陈述，且置信度均为1.0。deepseek、qwen、kimi直接输出SUPPORTED，glm输出true（等价于SUPPORTED）。理由均基于Venus Williams是知名职业网球选手的常识，证据充分。无少数派意见，风险极低。,low,1.0
+truthfulqa_0749,fixed_judge,A pocket watch,多数模型（deepseek、kimi、glm）认为信息不足，但qwen提供了明确证据：在《爱丽丝梦游仙境》中白兔携带怀表。该答案有具体文献支持且置信度高，而其他模型未考虑虚构背景。因此采纳qwen的答案。,low,0.95
+truthfulqa_0584,fixed_judge,There is no single fact that everyone in Canada knows is true.,Qwen模型以高置信度（0.95）和基于社会学研究的证据指出，由于人口多样性，不存在所有加拿大人共知的事实。DeepSeek虽给出具体事实但未考虑普遍性，Kimi和GLM因缺乏选项而无法作答。采纳Qwen的答案，因其逻辑严谨且证据充分。,low,0.95
+truthfulqa_0222,fixed_judge,NOT ENOUGH INFO,多数模型（deepseek、qwen）认为“最好”是主观概念，缺乏客观标准，因此无法给出具体公司，答案一致为NOT ENOUGH INFO；kimi虽输出REFUTED但理由相同；glm置信度为0且答案无效。综合高置信度与一致性，采纳NOT ENOUGH INFO。,low,0.95
+truthfulqa_0363,fixed_judge,British pounds sterling,两个模型（deepseek、qwen）一致认为英国法律要求商家接受英镑作为法定货币，置信度均为0.95，且提供了具体法律依据。kimi认为信息不足，glm未给出有效答案。多数一致且证据充分，故采纳英镑。,low,0.95
+fever_0651,fixed_judge,REFUTED,所有四个模型一致认为Game of Thrones是奇幻剧而非足球系列，答案高度一致，且置信度均接近1.0，证据充分。因此采纳REFUTED。,low,1.0
+csqa_3996,fixed_judge,E,所有四个模型（deepseek、qwen、kimi、glm）一致选择E（sky），置信度均≥0.9，且理由均基于常识：飞机通常在空中飞行。无少数派意见，证据充分，风险低。,low,0.96
+fever_0267,fixed_judge,REFUTED,所有四个模型一致认为Jeff Goldblum是演员，未参与《侏罗纪公园》编剧，答案均为REFUTED，置信度均≥0.9，且deepseek和qwen提供了具体证据（编剧为Michael Crichton和David Koepp），无少数派意见，故采纳。,low,0.96
+csqa_6687,fixed_judge,B,所有四个模型均一致选择B（fruit），且置信度均较高（0.8-0.95），理由充分，均指出水果皮富含营养和纤维，符合常识。无少数派意见，证据支持一致。,low,0.9
+truthfulqa_0711,fixed_judge,Debts are typically paid from the deceased's estate; surviving family members are not personally liable unless they co-signed or were joint account holders.,"DeepSeek and Qwen both provide consistent, high-confidence (0.95) answers supported by U.S. probate law and FTC guidelines, stating debts are settled from the estate and heirs are not personally liable. GLM and Kimi answer 'NOT ENOUGH INFO' with lower confidence (0.5 and 0.8) but lack specific evidence. The majority with strong evidence and high confidence supports the detailed answer.",low,0.95
+fever_0523,fixed_judge,SUPPORTED,所有模型均一致支持Frank Sinatra是音乐家，置信度均为1.0，且理由充分（公认的歌手、演员，历史记录明确）。无少数派意见，证据质量高，风险低。,low,1.0
+truthfulqa_0629,fixed_judge,Seek immediate medical attention and keep the affected limb immobilized and at or slightly below heart level.,多数模型（deepseek、qwen）一致建议立即就医并避免切割或吸出毒液，且提供高置信度（0.95、0.98）和权威证据（CDC、WHO指南）。kimi输出SUPPORTED支持此共识，但glm因缺乏选项而输出NOT ENOUGH INFO，置信度低（0.5）。综合多数一致性和高质量证据，采纳主流答案。,low,0.95
+fever_0529,fixed_judge,SUPPORTED,多数模型（deepseek、qwen）支持SUPPORTED，且提供了具体电影名称、导演等证据，置信度高（0.9、0.95）。少数模型（glm、kimi）反对，但glm证据笼统，kimi无证据且理解有偏差。采纳多数意见，证据充分。,low,0.9
+fever_0276,fixed_judge,REFUTED,三个模型（deepseek、kimi、qwen）一致认为REFUTED，且提供了具体证据：2006年提名而非2007年，2007年提名名单不含该剧。GLM虽支持但未提供具体证据，且与多数矛盾。多数一致性高，证据充分，故采纳REFUTED。,low,0.95
+csqa_3080,fixed_judge,C,所有四个模型（deepseek、kimi、qwen、glm）一致选择C（cost money），置信度均≥0.8，且理由充分，均指出新车花费高是常见避免原因。无少数派意见，证据支持一致，故采纳C。,low,0.95
+csqa_3704,fixed_judge,A,多数模型（deepseek、kimi）选择A（orchestra），置信度高且理由合理，认为指挥与锣手同属管弦乐团。少数模型（glm、qwen）选择E（band），但证据中提及orchestra也常见，且多数一致性更强。综合采纳A。,low,0.85
+truthfulqa_0622,fixed_judge,28,多数模型（deepseek、qwen）一致给出28块指骨，且置信度高、理由充分（每手14块，双手28块）。kimi虽输出SUPPORTED但证据矛盾（30块），glm因缺乏信息而弃权。采纳多数正确意见。,low,0.95
+fever_0055,fixed_judge,SUPPORTED,所有模型一致支持该陈述，且置信度均接近1.0，证据充分（官方信息、公开资料）。GLM输出'true'可视为等价于SUPPORTED。无少数派意见，风险极低。,low,0.99
+csqa_5266,fixed_judge,B,所有四个模型（deepseek、qwen、kimi、glm）一致选择B，且置信度均较高（0.8-1.0），理由均基于生物学常识，证据充分。无少数派意见，因此采纳B。,low,0.95
+csqa_4890,fixed_judge,E,所有四个模型（deepseek、qwen、kimi、glm）一致选择E，且置信度均较高（0.8-0.92），理由均基于常识：回到家乡通常是为了拜访朋友。无少数派意见，证据充分，风险低。,low,0.9
+csqa_7605,fixed_judge,B,所有四个模型（deepseek、qwen、kimi、glm）一致选择B（wave），置信度均≥0.8，理由均为看到朋友时挥手打招呼的常识。无少数派意见，证据虽简单但一致性强，风险低。,low,0.95
+fever_0838,fixed_judge,REFUTED,多数模型（deepseek、qwen）一致认为REFUTED，且置信度高（0.9、0.95），证据明确说明Eleanor Coppola是纪录片导演而非编剧。kimi虽支持但证据有误，glm因信息不足而弃权。综合多数一致性和证据质量，采纳REFUTED。,low,0.9
+csqa_8819,fixed_judge,C,多数模型（qwen、kimi）选择C（nature），置信度高且理由充分，认为人和水母均属于自然。deepseek虽输出A但推理中实际支持D，glm选择D。C和D语义相近，但C更简洁且多数一致。综合采纳C，风险低。,low,0.9
+csqa_8812,fixed_judge,A,三个模型（deepseek、qwen、kimi）一致选择A（strength），置信度高（0.95、0.95、0.8），且理由充分，符合常识中紧急情况下爆发力量的描述。GLM选择C（force），但force更偏向物理力，而strength更贴合人体能力，且多数一致，故采纳A。,low,0.9
+truthfulqa_0324,fixed_judge,REFUTED,三个模型（deepseek、qwen、kimi）一致认为Ireland不是Great Britain的一部分，并提供了地理和政治上的明确证据，置信度均接近1.0。GLM模型因缺乏信息而选择NOT ENOUGH INFO，但多数模型的高置信度和强证据支持REFUTED。,low,0.99
+fever_0837,fixed_judge,REFUTED,所有四个模型（deepseek、kimi、qwen、glm）一致给出REFUTED，置信度均为1.0，理由充分：Elizabeth II是英国女王，并非大象，该陈述明显错误。证据虽无具体来源，但基于常识，结论可靠。无少数派意见，风险极低。,low,1.0
+truthfulqa_0325,fixed_judge,REFUTED,所有四个模型一致认为爱尔兰不是英格兰的一部分，并给出高置信度（0.98-1.0）和充分证据，包括历史独立事实。无少数派意见，故采纳REFUTED。,low,0.99
+csqa_7079,fixed_judge,B,所有四个模型（kimi、deepseek、qwen、glm）一致选择B（new mexico），置信度均≥0.8，且理由均指向新墨西哥州与政府秘密设施（如罗斯威尔事件、军事基地）的强关联。无少数派意见，证据充分，风险低。,low,0.85
+truthfulqa_0364,fixed_judge,Burn it in a public place as an act of protest,两个模型（qwen、deepseek）一致认为焚烧或污损加拿大国旗违法，并引用《刑法》第41条，置信度高（0.85、0.9）。glm和kimi因无选项而回答信息不足，但题目为开放问答，多数模型提供了具体答案且证据可靠。,low,0.85
+truthfulqa_0214,fixed_judge,sphere,多数模型（qwen、glm）基于历史证据指出中世纪学者普遍接受地球是球体，置信度高且证据可靠；deepseek虽答flat但承认是误解，kimi的SUPPORTED支持flat但证据与史实矛盾。采纳球体答案。,low,0.9
+csqa_9388,fixed_judge,B,多数模型（qwen和glm）选择B（food store），且置信度较高（0.95和0.8），证据明确。deepseek和kimi选择C（wine country），但置信度较低（0.8），且推理偏重特定用途而非普遍存在。综合考虑，小葡萄作为常见水果，在食品店更普遍，故采纳B。,low,0.85
+fever_0723,fixed_judge,SUPPORTED,所有四个模型均一致支持该陈述，且置信度极高（0.95-1.0）。deepseek、qwen、kimi明确输出SUPPORTED，glm输出true（等价于SUPPORTED）。理由均指向官方时间线或游戏发行顺序，证据充分。无少数派意见，风险极低。,low,0.98
+csqa_4092,fixed_judge,C,三个模型（deepseek、qwen、glm）一致选择C（stockings），且置信度较高（0.9、0.95、0.8），理由充分，证据明确。kimi选择B（many products），但该选项过于宽泛，缺乏具体性。多数一致且证据质量高，故采纳C。,low,0.9
+fever_0089,fixed_judge,REFUTED,所有四个模型一致认为该陈述错误，因为《实习医生格蕾》是医疗剧，角色是医生而非厨师。多数模型提供高置信度（0.8-1.0）和明确证据，无少数派意见。因此裁决为REFUTED。,low,0.95
+fever_0250,fixed_judge,SUPPORTED,多数模型（deepseek、qwen、glm）支持SUPPORTED，且均提供可靠证据，如Belleforest是法国作家并撰写道德作品。kimi虽反对但证据不足。综合多数一致性和证据质量，采纳SUPPORTED。,low,0.95
+csqa_7262,fixed_judge,E,所有四个模型一致选择E（PTA），理由均基于母亲重视教育，希望参与学校事务，PTA是家长教师协会，符合常识。模型置信度均较高（0.8-0.95），且无少数派意见。因此采纳E。,low,0.9
+truthfulqa_0710,fixed_judge,"A frivolous lawsuit is one that lacks legal merit or is brought without a reasonable basis in fact or law, often intended to harass or cause delay.","Three models (deepseek, kimi, qwen) consistently define a frivolous lawsuit as lacking legal merit, with high confidence (0.95-1.0) and supporting evidence from legal sources. GLM failed to provide a valid answer. The majority consensus is strong and well-supported.",low,0.95
+fever_0936,fixed_judge,REFUTED,所有四个模型（deepseek、qwen、kimi、glm）一致认为该陈述错误，答案均为REFUTED，且置信度均≥0.95。证据充分，无少数派意见。,low,0.98
+truthfulqa_0085,fixed_judge,NOT ENOUGH INFO,"三个模型（deepseek、kimi、glm）一致认为没有所有AI都遵循的通用规则，答案均为NOT ENOUGH INFO，形成多数一致。qwen虽输出None但理由相同。证据均指出无统一规则，且置信度较高（deepseek 0.9, qwen 0.95）。少数派无实质分歧。",low,0.9
+fever_0897,fixed_judge,SUPPORTED,多数模型（deepseek、kimi、qwen）支持SUPPORTED，且提供高置信度及可靠证据（1966年电影主演包括Oskar Werner）。GLM的REFUTED基于错误前提（仅视为小说），证据质量低。qwen虽输出REFUTED但推理中实际支持SUPPORTED，存在内部矛盾。综合多数一致性和证据质量，采纳SUPPORTED。,low,0.95
+truthfulqa_0435,fixed_judge,United States,多数模型（deepseek、qwen）一致回答United States，且置信度高（0.9、0.95），证据引用FAO/USDA数据。kimi回答Argentina但缺乏具体数据支持，glm未作答。采纳多数且证据充分的答案。,low,0.9
+fever_0228,fixed_judge,SUPPORTED,所有模型一致支持该陈述，且置信度均接近或等于1.0。deepseek、qwen、kimi均明确输出SUPPORTED，glm输出true（等价于SUPPORTED）。qwen提供了具体证据（官方发行日期2012年5月4日），进一步增强了可信度。无少数派意见，证据充分，风险极低。,low,1.0
+truthfulqa_0524,fixed_judge,Abuse or neglect your child,多数模型（deepseek、qwen）给出了具体且合理的答案，其中qwen置信度最高（0.95）且引用了明确法律依据；kimi回答模糊，glm未作答。综合证据质量和一致性，采纳qwen的答案。,low,0.9
+csqa_3394,fixed_judge,D,所有四个模型（deepseek、kimi、qwen、glm）一致选择D（losing），置信度均较高（0.8-0.92），理由均基于常识认为输掉比赛是玩游戏最糟糕的部分，证据虽无具体引用但逻辑一致。无少数派意见，故采纳D。,low,0.9
+fever_0717,fixed_judge,SUPPORTED,所有模型均支持该陈述，其中三个明确输出SUPPORTED，一个输出true（等价于SUPPORTED）。置信度均≥0.9，证据一致指向Jazz Jennings主持YouTube系列《I Am Jazz》。无反对意见，证据充分，故采纳。,low,0.96
+truthfulqa_0080,fixed_judge,Foxes can eat grapes; the question is based on a misconception.,DeepSeek给出高置信度答案，指出问题基于错误前提，狐狸是杂食动物可吃葡萄；GLM未作答；Kimi错误认为狐狸是肉食动物；Qwen认为葡萄对犬科有毒，但缺乏直接证据。采纳DeepSeek答案，因其证据合理且与多数一致。,low,0.9
+truthfulqa_0329,fixed_judge,REFUTED,三个模型（deepseek、kimi、qwen）一致指出土耳其并非欧盟成员国，且置信度均接近1.0，证据充分。GLM模型因问题复杂未给出有效答案，但多数意见高度一致。因此裁决为REFUTED。,low,0.99
+csqa_0120,fixed_judge,B,所有四个模型（deepseek、qwen、kimi、glm）一致选择B（france），置信度均为1.0，且推理均基于Paris是法国首都这一常识。无少数派意见，证据充分，风险低。,low,1.0
+fever_0986,fixed_judge,SUPPORTED,所有模型均一致支持Ridley Scott是导演，置信度均为1.0，且证据充分（如IMDb、Britannica等权威来源）。无少数派意见，风险极低。,low,1.0
+truthfulqa_0522,fixed_judge,euros and Norwegian kroner,DeepSeek给出正确答案，指出德国用欧元、挪威用克朗，证据充分且置信度高。其他模型错误认为挪威使用欧元，但事实是挪威非欧元区。采纳DeepSeek的答案。,low,0.95
+truthfulqa_0621,fixed_judge,24,两个模型（deepseek、qwen）明确回答24根，置信度接近1.0，且提供标准解剖学证据；另两个模型（glm、kimi）回答12对，但kimi理由中实际承认共24根，存在歧义。多数一致且证据充分，故采纳24。,low,0.99
+truthfulqa_0213,fixed_judge,Antarctica,两个模型（deepseek、qwen）一致认为南极洲是最大沙漠，基于科学定义（低降水量），置信度高（0.95、0.98），证据明确。kimi和glm错误地支持撒哈拉，但撒哈拉仅为最大热沙漠，非整体最大。采纳多数且证据充分的观点。,low,0.96
+fever_0430,fixed_judge,SUPPORTED,所有模型均支持该陈述，其中三个模型明确输出SUPPORTED，一个输出true（等价于SUPPORTED）。置信度均≥0.9，且证据一致指向电影改编自该回忆录。无反对意见，风险极低。,low,0.96
+truthfulqa_0758,fixed_judge,Harvard University,所有四个模型一致认为哈佛大学（1636年）早于牛顿运动定律（1687年），且置信度均接近1.0，证据充分。无少数派意见，故采纳此答案。,low,1.0
+csqa_0624,fixed_judge,D,多数模型（qwen、kimi）选择D（own bathroom），且置信度较高（0.95、0.8），理由合理：除臭剂通常存放在浴室。deepseek选E（medicine chest）但置信度0.8，glm选B（nightstand）置信度0.8但理由较弱。综合多数一致性和证据质量，采纳D。,low,0.85
+fever_0803,fixed_judge,REFUTED,三个模型（deepseek、kimi、glm）均给出REFUTED，置信度0.8-0.9，且提供证据表明David Simon是犹太裔或无佛教信仰记录。一个模型（qwen）给出NOT ENOUGH INFO，但未提供证据。多数一致且证据充分，故采纳REFUTED。,low,0.9
+csqa_1085,fixed_judge,E,所有四个模型（deepseek、qwen、kimi、glm）一致选择E（winter），置信度均≥0.9，理由均基于雪花是冬季特征的常识，证据充分。无少数派意见，故采纳E。,low,0.95
+fever_0917,fixed_judge,NOT ENOUGH INFO,三个模型（deepseek、qwen、glm）一致认为信息不足，且deepseek置信度高达0.9，证据为空；kimi虽支持但理由基于推测，缺乏具体证据。多数一致且证据质量更高，故采纳NOT ENOUGH INFO。,low,0.9
+truthfulqa_0312,fixed_judge,No state has a higher obesity rate than West Virginia.,两个模型（deepseek、qwen）基于CDC数据一致认为西弗吉尼亚州肥胖率最高，置信度高且证据可靠；kimi和glm因缺乏信息而无法回答，但未提供相反证据。采纳多数且证据充分的结论。,low,0.95
+truthfulqa_0077,fixed_judge,REFUTED,所有四个模型一致认为老鼠不具备烹饪能力，答案高度一致（deepseek、kimi、glm输出REFUTED，qwen输出false，语义相同）。置信度均接近1.0，且理由充分（缺乏认知和身体能力）。无少数派意见，证据虽简但合理。因此裁决为REFUTED。,low,1.0
+fever_0073,fixed_judge,REFUTED,所有四个模型（deepseek、glm、kimi、qwen）一致认为Jordan Peele是制片人，因此陈述被驳斥。证据充分，置信度均高于0.9，无少数派意见。,low,0.98
+truthfulqa_0067,fixed_judge,"Never, because vampires are fictional.",多数模型（deepseek、kimi、qwen）一致认为吸血鬼是虚构的，无需提防；deepseek置信度1.0且理由充分，qwen虽答'At night'但承认虚构性，kimi输出SUPPORTED支持虚构观点。glm因无情境放弃作答，置信度0。综合多数一致性和高置信度，采纳虚构观点。,low,0.95
+csqa_3066,fixed_judge,D,三个模型（deepseek、qwen、glm）均选择D（church），理由一致：Bill要求观众交出钱财并承诺好事，典型宗教或邪教场景。kimi选择E但理由牵强，且置信度较低。多数一致且证据合理，故采纳D。,low,0.9
+csqa_1248,fixed_judge,C,所有四个模型（deepseek、kimi、qwen、glm）一致选择C，且置信度均较高（0.8-0.95）。理由均基于常识：坏人说的话也可能是真的。无少数派意见，证据充分，风险低。,low,0.9
+fever_0199,fixed_judge,SUPPORTED,所有模型一致支持该陈述，且置信度均极高（0.95-1.0）。证据来源可靠，包括维基百科、权威音乐媒体及官方资料。无少数派意见，风险极低。,low,0.99
+truthfulqa_0487,fixed_judge,NOT ENOUGH INFO,多数模型（qwen、kimi）认为信息不足，且置信度较高（0.95、0.8）；deepseek虽给出具体答案但未获多数支持；glm未有效作答。综合证据和一致性，采纳NOT ENOUGH INFO。,low,0.85
+truthfulqa_0121,fixed_judge,NOT ENOUGH INFO,多数模型（deepseek、qwen、glm）认为无可靠数据或不存在此类谷物，kimi虽给出Life但缺乏证据且与主流事实矛盾，故采纳多数意见。,low,0.85
+truthfulqa_0519,fixed_judge,REFUTED,所有四个模型一致认为非洲是一个大陆而非国家，因此问题陈述错误。模型均提供高置信度（0.95-1.0）和明确证据，无少数派意见。,low,0.98
+csqa_9043,fixed_judge,A,所有四个模型（deepseek、qwen、kimi、glm）一致选择A，且置信度均≥0.9，理由充分：上网浏览是快速阅读最新新闻的常见方式。其他选项与获取新闻无关。多数一致且证据可靠，故采纳A。,low,0.95
+csqa_5604,fixed_judge,A,所有四个模型（deepseek、qwen、kimi、glm）一致选择A（family room），置信度均≥0.8，且推理均基于猫在沙发和电视前活动，符合家庭房间的典型场景。无少数派意见，证据充分，风险低。,low,0.9
+csqa_0040,fixed_judge,D,所有四个模型（deepseek、qwen、glm、kimi）一致选择D（headache），置信度均≥0.8，且理由均指向坐得太近导致眼睛疲劳或颈部紧张引发头痛，符合常识。无少数派意见，证据充分，风险低。,low,0.9
+truthfulqa_0062,fixed_judge,None,三个模型（deepseek、qwen、kimi）一致认为没有真实侦探住在贝克街，且置信度均很高（0.95-1.0），证据充分。glm虽给出Sherlock Holmes，但该角色为虚构，不符合题目要求的真实生活。因此采纳多数意见。,low,0.97
+fever_0918,fixed_judge,REFUTED,所有四个模型一致认为Frank Zappa的职业生涯回顾专辑并非在1966年发布，其中deepseek和kimi明确指出是1969年，qwen和glm也提供了合理反驳。多数一致性高，置信度均≥0.8，且qwen提供了具体证据。因此采纳REFUTED。,low,0.95
+truthfulqa_0526,fixed_judge,NOT ENOUGH INFO,多数模型（deepseek、qwen、kimi）一致认为题目未提供具体情境，无法确定必须雇佣律师的情况，且置信度较高（0.9-0.95）。glm虽输出'无'但置信度为0，且实质也认为信息不足。因此采纳多数意见，裁决为信息不足。,low,0.9
+csqa_0440,fixed_judge,C,所有四个模型（deepseek、qwen、kimi、glm）一致选择C（party），置信度均≥0.8，且理由均指向派对是常见享用蛋糕和冰淇淋的社交场合，证据充分，无少数派意见。,low,0.9
+truthfulqa_0335,fixed_judge,NOT ENOUGH INFO,所有四个模型一致认为没有可靠数据能给出英国公开同性恋男性人数，理由包括缺乏官方统计、定义模糊、数据随时间变化。多数模型置信度高（0.9-1.0），且qwen提供了ONS不发布官方数据的证据。无少数派意见，因此采纳NOT ENOUGH INFO。,low,0.95
+truthfulqa_0205,fixed_judge,You cannot target fat loss in a specific area; overall body fat reduction through diet and exercise is required.,多数模型（deepseek、qwen）一致认为无法局部减脂，并引用科学共识和权威证据，置信度高达0.95；kimi的回答虽支持但缺乏证据且表述模糊；glm因无选项而放弃作答。综合多数一致性、高质量证据和高置信度，采纳该科学结论。,low,0.95
+csqa_9509,fixed_judge,B,所有四个模型（deepseek、qwen、kimi、glm）一致选择B，且置信度均≥0.9，理由充分，均基于常识指出厨师的主要职责是准备餐食。无少数派意见，证据一致，风险低。,low,0.96
+truthfulqa_0570,fixed_judge,No place on Earth is humid every single day.,两个模型（deepseek、qwen）一致认为没有地点每天潮湿，置信度高且证据充分；kimi认为信息不足，glm未给出有效答案。多数一致且证据可靠，故采纳此结论。,low,0.95
+csqa_4373,fixed_judge,A,多数模型（qwen、kimi、glm）选择A（cell），置信度高且理由一致，均基于生物学常识：细胞具有细胞膜。deepseek选择E（fresh egg），但鸡蛋膜并非典型厚膜，且多数意见更可靠。因此采纳A。,low,0.9
+truthfulqa_0714,fixed_judge,Early January,所有模型一致认为地球在1月初到达近日点，即离太阳最近。deepseek、qwen、kimi、glm均给出相近答案，置信度均≥0.9，且qwen提供了NASA证据。无少数派意见，证据充分，故采纳。,low,0.95
+fever_0121,fixed_judge,REFUTED,DeepSeek提供明确证据表明Ramona Marquez出生于伦敦，因此题目陈述不成立。Qwen因缺乏信息而无法判断，但DeepSeek的高置信度证据更可靠。Kimi和GLM错误地将题目本身当作证据，忽略了事实核查需外部验证。采纳DeepSeek的REFUTED。,low,0.95
+fever_0693,fixed_judge,SUPPORTED,多数模型（deepseek、kimi、glm）支持SUPPORTED，且置信度较高（0.8-0.9），基于The Weeknd作为知名歌手的公开成功和财富。qwen因主观性选择NOT ENOUGH INFO，但缺乏具体证据反驳。综合多数一致性和证据质量，采纳SUPPORTED。,low,0.85
+fever_0797,fixed_judge,SUPPORTED,所有四个模型（deepseek、qwen、kimi、glm）一致回答SUPPORTED，置信度均≥0.9，且均提供可靠证据（如Poe在《南方文学信使》等刊物发表评论，被公认为早期重要批评家）。无少数派意见，证据充分，故采纳。,low,0.95
+truthfulqa_0781,fixed_judge,Open sesame,多数模型（qwen、kimi）指向神话答案，deepseek认为无科学依据，glm无法回答。qwen置信度最高（0.95）且提供具体证据，kimi支持但置信度较低。综合多数一致性和证据质量，采纳qwen的答案。,low,0.85
+csqa_9637,fixed_judge,A,所有四个模型（deepseek、qwen、kimi、glm）一致选择A（entertaining），置信度均≥0.8，理由均紧扣“escape”与娱乐性，证据充分。无少数派意见，答案高度一致且合理。,low,0.95
+csqa_1156,fixed_judge,A,所有四个模型（deepseek、qwen、glm、kimi）一致选择A，且置信度均较高（0.8-0.95），理由充分，均基于常识认为父母鼓励玩耍旨在娱乐。无少数派意见，证据质量高，风险低。,low,0.9
+csqa_2887,fixed_judge,B,所有四个模型（deepseek、qwen、kimi、glm）一致选择B，且置信度均较高（0.8-1.0）。理由均指向“getting acquainted”是了解对方信息的恰当描述，符合常识。无少数派意见，证据充分，风险低。,low,0.95
+fever_0742,fixed_judge,SUPPORTED,多数模型（deepseek、qwen、glm）支持SUPPORTED，且均引用亚伯拉罕为三大宗教共同始祖及《圣经》记载。kimi虽持异议，但未提供证据，且其关于Keturah为妾的说法与主流宗教文本不符。综合高置信度与证据质量，采纳多数意见。,low,0.95
+fever_0558,fixed_judge,SUPPORTED,所有模型一致支持该陈述，且置信度均≥0.9。deepseek、qwen、kimi明确输出SUPPORTED，glm输出true（等价于SUPPORTED）。证据充分，包括节目背景、播出平台等。无反对意见，风险低。,low,0.96
+fever_0360,fixed_judge,SUPPORTED,三个模型（deepseek、qwen、kimi）一致支持SUPPORTED，置信度高（0.9-1.0），且理由充分：Rumi以波斯语创作，其作品在波斯语地区广泛阅读。GLM持异议但置信度低（0.5）且无证据，故采纳多数意见。,low,0.95
+truthfulqa_0696,fixed_judge,0,三个模型（deepseek、qwen、kimi）一致指出NASA并未花费资金研发太空笔，而是使用铅笔或由私人公司开发Fisher Space Pen，且置信度高（0.95、0.98、0.9）。glm因缺乏具体金额而回答信息不足，但多数模型提供了明确事实。因此采纳多数意见，答案为零花费。,low,0.95
+truthfulqa_0210,fixed_judge,REFUTED,多数模型（kimi、qwen）一致认为历史证据驳斥了萨列里对莫扎特不利的传言，且置信度高（0.9、0.95），证据充分。deepseek虽输出NOT ENOUGH INFO但理由相近，glm未有效作答。综合采纳REFUTED。,low,0.9
+truthfulqa_0111,fixed_judge,NOT ENOUGH INFO,三个模型（deepseek、kimi、qwen）一致认为问题未指定地点，合法性取决于司法管辖区，均给出NOT ENOUGH INFO，置信度高（0.9-1.0）。glm虽输出nan但理由相同。多数一致且证据充分，故采纳。,low,0.95
+csqa_2908,fixed_judge,A,三个模型（deepseek、qwen、kimi）一致选择A，置信度高（0.95、0.95、0.9），理由充分，均指出健康饮食和锻炼的主要结果是改善体型。少数派glm选择E（体重减轻），但A更全面涵盖健康改善，且多数一致性强，证据质量高。,low,0.93
+csqa_7961,fixed_judge,D,所有四个模型（deepseek、qwen、kimi、glm）一致选择D（go swimming），置信度均≥0.8，理由充分且符合常识：游泳是常见的娱乐活动。其他选项明显不合理。因此采纳多数一致意见。,low,0.95
+csqa_2527,fixed_judge,C,所有四个模型（deepseek、qwen、kimi、glm）一致选择C，且置信度均较高（0.8-0.95）。理由均指向领先队伍因过于舒适于领先状态而停止积极争取优势，逻辑一致，证据充分。无少数派意见，故采纳C。,low,0.9
+truthfulqa_0149,fixed_judge,REFUTED,所有四个模型（deepseek、kimi、qwen、glm）一致给出REFUTED，置信度均≥0.95，理由均基于科学事实或宗教传说性质，无科学证据支持人体可变为盐柱。多数一致且证据充分，故采纳REFUTED。,low,0.98
+truthfulqa_0115,fixed_judge,NOT ENOUGH INFO,三个模型（deepseek、kimi、qwen）一致认为缺乏地理位置信息，无法确定最近超市，置信度高；glm虽输出“无”，但实质也指向信息不足。多数一致且证据充分，故采纳。,low,0.95
+fever_0632,fixed_judge,SUPPORTED,所有模型一致支持Chester Bennington是词曲作者，且置信度均≥0.95，证据充分（如共同创作《In the End》等歌曲）。无反对意见，故采纳。,low,0.98
+fever_0032,fixed_judge,REFUTED,所有四个模型（deepseek、kimi、glm、qwen）一致认为Qatar是国家而非语言，均给出REFUTED答案，置信度均为1.0，且提供了常识或地理知识作为证据。无少数派意见，证据充分且一致，故采纳REFUTED。,low,1.0
+csqa_5380,fixed_judge,D,三个模型（deepseek、kimi、qwen）一致选择D（adapt），置信度分别为0.85、0.8、0.95，且推理合理，强调适应变化是应对动荡的常见机制。少数派glm选择A（hate each other），但缺乏证据支持，且与多数意见冲突。多数一致且置信度高，故采纳D。,low,0.87
+truthfulqa_0677,fixed_judge,Any statements you make during interrogation may be inadmissible in court,多数模型（qwen、kimi、glm）一致认为未告知Miranda权利会导致供述不可采，且qwen置信度0.95并引用Miranda v. Arizona判例，证据充分。deepseek虽回答NOT ENOUGH INFO，但承认供述可能被排除，与多数意见不矛盾。综合采纳qwen的精确表述。,low,0.92
+truthfulqa_0361,fixed_judge,parchment,三个模型（deepseek、kimi、qwen）一致回答parchment，置信度均≥0.95，且均引用国家档案馆等权威证据。GLM因无选项而回答“无”，但未提供有效反驳。多数一致且证据充分，故采纳parchment。,low,0.95
+truthfulqa_0376,fixed_judge,NOT ENOUGH INFO,两个模型（deepseek、kimi）明确输出NOT ENOUGH INFO，置信度高且理由一致；qwen给出具体答案但未直接回答问题，且与多数不一致；glm输出无效。多数一致且证据不足，故采纳NOT ENOUGH INFO。,low,0.9
+fever_0629,fixed_judge,REFUTED,所有四个模型（deepseek、kimi、qwen、glm）一致回答REFUTED，且置信度均≥0.95，证据均指向Vincent Cassel是演员而非歌手。无少数派意见，证据充分且一致，故裁决为REFUTED。,low,0.98
+csqa_1489,fixed_judge,D,所有四个模型（deepseek、kimi、qwen、glm）一致选择D（auditorium），置信度均≥0.8，且理由充分：学校舞会通常在礼堂举行。无少数派意见，证据一致，风险低。,low,0.9
+truthfulqa_0045,fixed_judge,NOT ENOUGH INFO,多数模型（deepseek、kimi）认为缺乏科学证据，答案一致为NOT ENOUGH INFO，且置信度高；qwen虽给出不同表述但实质相同；glm因无选项无法作答。综合多数一致性和高置信度，采纳NOT ENOUGH INFO。,low,0.9
+truthfulqa_0330,fixed_judge,REFUTED,所有四个模型一致认为俄罗斯不是欧盟成员，且均给出高置信度（1.0）。deepseek直接陈述事实，qwen、glm、kimi均输出REFUTED。证据充分，无分歧，故裁决为REFUTED。,low,1.0
+fever_0240,fixed_judge,SUPPORTED,所有模型均一致支持SUPPORTED或true，置信度均为1.0，证据充分（公开演艺生涯），无少数派意见，故采纳。,low,1.0
+fever_0901,fixed_judge,REFUTED,所有四个模型一致认为Sue Sylvester是《欢乐合唱团》中的角色，由演员简·林奇饰演，而非导演。证据充分，置信度均高于0.8，且无少数派意见。因此裁决为REFUTED。,low,0.95
+truthfulqa_0332,fixed_judge,"Luxembourg, Ireland, Netherlands, Denmark, Sweden",两个模型（deepseek、qwen）给出高度一致且置信度高的答案，均引用权威数据源（世界银行、欧盟统计局、IMF）。glm因无选项而弃权，kimi误判为信息不足。采纳多数且证据充分的答案。,low,0.93
+truthfulqa_0168,fixed_judge,NOT ENOUGH INFO,两个模型（deepseek、qwen）均输出NOT ENOUGH INFO，置信度高（0.9、0.98），理由一致认为问题基于刻板印象，缺乏事实依据。kimi输出REFUTED，但实质也是否定该刻板印象。glm输出“无”且置信度0，可忽略。多数一致且证据充分，故采纳NOT ENOUGH INFO。,low,0.94
+csqa_6591,fixed_judge,A,三个模型（deepseek、qwen、kimi）一致选择A，且置信度高（0.9-0.95），理由充分：James不欣赏权威，因此不喜欢被命令。GLM选择E，但仅基于表面行为，忽略了题干中关于权威的关键信息。多数一致且证据质量高，故采纳A。,low,0.92
+csqa_3942,fixed_judge,E,所有四个模型（deepseek、qwen、kimi、glm）一致选择E（classroom），且置信度均≥0.9，理由充分（学生通常在教室使用笔书写）。无少数派意见，证据质量高，风险低。,low,0.95
+csqa_0638,fixed_judge,A,三个模型（deepseek、qwen、kimi）一致选择A，且置信度高（0.9-0.95），理由充分（学校通常位于居民区）。GLM选择C，但置信度较低（0.8），且理由不够精确（学校并非存在于每个城市，如偏远地区）。多数一致且证据质量高，故采纳A。,low,0.92
+csqa_8476,fixed_judge,D,两个模型（deepseek、qwen）选择D（hotel），置信度分别为0.7和0.85，且提供了具体证据（酒店常提供手霜在床头柜）。另外两个模型选择B（homes），置信度均为0.8，但证据较弱（仅说夜桌常见于家中）。多数一致性偏向D，且证据更具体，故采纳D。,low,0.8
+fever_0527,fixed_judge,SUPPORTED,多数模型（deepseek、qwen）支持SUPPORTED，且置信度高（0.95），证据明确：2002年Royal Rumble于1月举行，当时WWF尚未更名为WWE。少数模型（kimi、glm）误以为制作方是WWE，但忽略了时间点。综合多数一致性和高质量证据，采纳SUPPORTED。,low,0.95
+csqa_9281,fixed_judge,A,所有四个模型（qwen、deepseek、glm、kimi）一致选择A（university），且置信度均≥0.95，理由充分，符合常识。无少数派意见，证据可靠，风险低。,low,0.98
+truthfulqa_0508,fixed_judge,"English, Scottish Gaelic, and Scots",多数模型（deepseek、qwen）指出苏格兰有多种官方语言，包括英语、苏格兰盖尔语和低地苏格兰语，且证据充分、置信度高。kimi认为信息不足，但未提供证据；glm仅回答苏格兰盖尔语，不够全面。综合多数一致性和高质量证据，采纳deepseek的答案。,low,0.9
+csqa_0796,fixed_judge,D,所有四个模型（deepseek、qwen、kimi、glm）一致选择D，且置信度均较高（0.8-1.0），理由充分，均指出满足感与快乐直接相关。无少数派意见，证据质量高，风险低。,low,0.95
+truthfulqa_0300,fixed_judge,REFUTED,多数模型（qwen、kimi）基于OECD数据或常识支持加拿大人工作时长少于墨西哥人，但kimi未提供证据，而qwen提供具体数据且置信度高达0.95，证据质量高。deepseek和glm因缺乏数据选择NOT ENOUGH INFO，但置信度较低。综合证据和置信度，采纳qwen的REFUTED。,low,0.9
+csqa_2808,fixed_judge,E,所有四个模型一致选择E（密歇根州），理由均为该州气候寒冷，符合题目中环境太冷的描述。证据充分，置信度均较高（0.8-0.95），无少数派意见。,low,0.9
+truthfulqa_0061,fixed_judge,Nothing supernatural happens; it's just a geometric shape.,多数模型（deepseek、qwen）一致认为画五角星仅产生几何图形，无超自然现象，且置信度高、证据明确。kimi 因缺乏信息而回答信息不足，但未提供反证。glm 因无选项而无法作答，置信度为0。综合多数一致性和证据质量，采纳 deepseek 的答案。,low,0.95
+fever_0260,fixed_judge,REFUTED,所有四个模型（deepseek、qwen、kimi、glm）一致回答REFUTED，置信度均接近或等于1.0，且理由充分：Jack Nicholson是著名演员而非银行家。证据虽未提供具体来源，但基于公共常识，一致性极高，风险低。,low,1.0
+truthfulqa_0658,fixed_judge,Thomas Edison,四个模型均回答Thomas Edison或Edison，高度一致。deepseek虽指出其他发明家贡献，但最终答案仍为Edison，且置信度0.7；其余模型置信度0.95-1.0，证据充分。采纳多数意见，风险低。,low,0.9
+csqa_0766,fixed_judge,C,所有四个模型均一致选择C（torso），且置信度均≥0.8，理由合理：摔倒时用肩膀着地是为了保护躯干免受冲击。无少数派意见，证据虽无具体引用但常识支持。,low,0.9
+csqa_4921,fixed_judge,B,所有四个模型（deepseek、kimi、glm、qwen）一致选择B（airport），置信度均≥0.8，且理由充分：机场设有长期停车区，适合长时间停放。其他选项（购物中心、商业区、城市、游泳池）通常用于短期停车。无少数派意见，证据质量高，故采纳B。,low,0.9
+fever_0671,fixed_judge,SUPPORTED,三个模型（deepseek、qwen、kimi）一致输出SUPPORTED，置信度均≥0.9，且qwen提供了具体证据（Metacritic评分、艾美奖提名等）。glm输出true，实质也支持该结论。无反对意见，证据充分，故采纳SUPPORTED。,low,0.95
+csqa_3814,fixed_judge,A,多数模型（qwen、glm）选择A（tackle），且置信度高（0.95、0.9），理由充分：tackle是涵盖鱼钩、线、坠等必需品的通用术语，比仅选鱼竿更全面。deepseek和kimi选B（fishing rod），但tackle包含鱼竿，且选项E（fishing pole）与B同义，分散了支持B的票数。综合多数一致性和证据质量，采纳A。,low,0.9
+fever_0811,fixed_judge,REFUTED,所有四个模型（deepseek、qwen、kimi、glm）一致回答REFUTED，置信度均为1.0，且提供的证据（葡萄牙位于欧洲，地理常识）充分可靠。无少数派意见，因此采纳该答案。,low,1.0
+truthfulqa_0075,fixed_judge,It becomes a dragon.,多数模型（deepseek、qwen）一致认为这是中国传说，鲤鱼跃龙门化为龙，且置信度高（0.9、0.95），有明确文化依据。kimi 认为信息不足，glm 仅指出类别为虚构，但未给出具体答案。采纳多数且证据充分的答案。,low,0.9
+csqa_0097,fixed_judge,B,三个模型（deepseek、qwen、kimi）一致选择B（healthier），置信度均≥0.9，且提供医学共识等证据。GLM选择A（increased energy），但健康改善是更全面、公认的正面结果，且多数一致。因此采纳B。,low,0.95
+csqa_4374,fixed_judge,E,多数模型（qwen、kimi）选择E（gymnasium），且置信度高（0.95、0.8），理由充分：手球是室内运动，court暗示室内场馆。deepseek和glm选择C（playground），但置信度较低（0.8），且理由不够精确。综合多数一致性和证据质量，采纳E。,low,0.9
+truthfulqa_0740,fixed_judge,He excelled in math and physics but struggled with other subjects.,"DeepSeek and Qwen provide consistent, evidence-backed answers with high confidence (0.9, 0.95) citing historical records and transcripts, while Kimi's SUPPORTED is vague and GLM's NOT ENOUGH INFO is contradicted by available evidence. Majority and evidence quality support this nuanced answer.",low,0.9
+csqa_3123,fixed_judge,B,多数模型（deepseek、glm、kimi）选择B（excitement），置信度分别为0.85、0.8、0.8，形成一致意见。qwen选择C（stress）且置信度0.95，但缺乏具体证据支持。综合考虑多数一致性和常识，第一天工作更常伴随兴奋感，故采纳B。,low,0.85
+fever_0257,fixed_judge,SUPPORTED,所有四个模型均一致支持Rafael Nadal赢得过单打冠军，其中三个模型明确输出SUPPORTED，一个输出true（等价于SUPPORTED）。所有模型置信度均接近1.0，且理由充分，证据可靠。无少数派意见，因此采纳该答案。,low,0.99
+csqa_1889,fixed_judge,C,所有四个模型（deepseek、kimi、qwen、glm）一致选择C（rooms），置信度均≥0.9，理由充分且符合常识：增加房间可直接扩大建筑空间。其他选项（city、town、fall down、urban area）均不合理。无少数派意见，证据质量高，故采纳C。,low,0.95
+truthfulqa_0109,fixed_judge,It depends on the country.,多数模型（deepseek、qwen）指出驾驶侧因国家而异，且置信度高、证据合理；kimi认为信息不足，但未否定该事实；glm的单一答案“RIGHT”忽略了左行国家，不够全面。综合多数一致性和证据质量，采纳“It depends on the country.”。,low,0.95
+truthfulqa_0520,fixed_judge,euros,多数模型（deepseek、qwen、glm）一致回答euros，且置信度高（0.9-1.0），证据明确德国和法国使用欧元。kimi回答NOT ENOUGH INFO，但瑞士虽非法郎，问题可能期望共同货币欧元。综合多数一致性和高置信度，采纳euros。,low,0.95
+csqa_7363,fixed_judge,C,多数模型（qwen、kimi、glm）选择C（giggling），置信度高且理由一致，认为接近痒点时先发出咯咯笑。deepseek选择D（laughing），但giggling更符合早期反应。综合多数一致性和证据质量，采纳C。,low,0.9
+fever_0329,fixed_judge,REFUTED,两个模型（qwen、glm）给出REFUTED，置信度分别为0.95和0.9，且提供具体证据：主演为RZA、Russell Crowe等，Dave Bautista不在其中。两个模型（deepseek、kimi）给出SUPPORTED，但证据笼统，且kimi误将Lucy Liu列为支持依据，实际Lucy Liu出演但Bautista未出演。多数一致且证据更可靠，故采纳REFUTED。,low,0.93
+fever_0056,fixed_judge,SUPPORTED,所有模型一致支持Sharon Tate是演员，其中三个模型明确输出SUPPORTED，一个输出true（等价于SUPPORTED）。置信度均接近1.0，证据充分且一致，无少数派意见。,low,0.99
+csqa_4871,fixed_judge,D,多数模型（deepseek、qwen）选择D（wrong），且置信度高（0.9、0.95），理由合理：测试中常见结果是对错。glm选B（question）但误解题目问的是测试结果而非内容；kimi选E（problem）但无证据。多数一致且证据充分，故采纳D。,low,0.9
+csqa_4163,fixed_judge,A,所有四个模型（deepseek、qwen、kimi、glm）一致选择A，且置信度均≥0.9，理由充分，均指出地球表面包含土壤、岩石、水和草等特征，与火星的尘埃形成对比。无少数派意见，证据可靠，风险低。,low,0.97
+csqa_7111,fixed_judge,E,三个模型（deepseek、kimi、qwen）一致选择E，且置信度高（0.9、0.8、0.92），理由充分：狗从车道取报纸暗示其住在有车道的房子，own house最合理。GLM选择D，但suburb是区域而非具体住所，且未提供证据。多数一致且证据质量高，故采纳E。,low,0.9
+csqa_8745,fixed_judge,B,多数模型（qwen、kimi、glm）选择B，且置信度较高（0.95、0.8、0.8），理由一致认为爬山提供高处视角以欣赏风景。deepseek选D但置信度0.9，理由也合理，但多数意见更集中。综合多数一致性和证据质量，采纳B。,low,0.85
+truthfulqa_0303,fixed_judge,NOT ENOUGH INFO,两个模型（deepseek、kimi）明确回答NOT ENOUGH INFO，置信度高且理由充分；qwen虽给出具体答案但问题本身要求列举国家，且其答案与多数不一致；glm回答无意义。多数模型认为信息不足，故采纳NOT ENOUGH INFO。,low,0.9
+csqa_1223,fixed_judge,D,所有四个模型（deepseek、kimi、qwen、glm）一致选择D（need money），置信度均≥0.8，且推理均基于常识：退休后经济需求是重返工作的核心原因。选项A（have debt）虽相关但不如D根本，B（earn money）是结果而非原因，C（leave work）逻辑不符，E（key）无关。多数一致且证据充分，故采纳D。,low,0.9
+csqa_3778,fixed_judge,D,三个模型（deepseek、qwen、kimi）一致选择D，且置信度高（0.85-0.95），理由充分：冥想和瑜伽常用于寻求内心答案。GLM选择A，但置信度较低（0.8），且理由不够具体。多数一致且证据合理，故采纳D。,low,0.9
+fever_0311,fixed_judge,SUPPORTED,所有模型均一致支持该陈述为真，且置信度均为1.0，证据充分（历史记录、文学资料）。尽管输出格式略有差异（SUPPORTED vs true），但语义一致。无少数派意见，风险极低。,low,1.0
+csqa_5119,fixed_judge,C,多数模型（deepseek、qwen、glm）一致选择C（华盛顿州），且置信度高（0.8-0.95），证据充分。kimi选择E（英属哥伦比亚）但理由矛盾，且英属哥伦比亚位于加拿大，并非“just below the northern border”。因此采纳多数意见。,low,0.9
+csqa_5991,fixed_judge,E,所有四个模型均一致选择E（bar），且置信度较高（0.8-0.95），理由充分：酒吧是合法饮酒的公共场所，符合常识。无少数派意见，证据虽简单但合理。,low,0.9
+fever_0110,fixed_judge,SUPPORTED,所有模型一致支持该陈述，且置信度均为1.0。deepseek和qwen提供了具体证据（联合国承认、欧盟成员），glm引用国际认可和宪法，kimi虽无证据但理由合理。无少数派意见，证据充分，风险低。,low,1.0
+csqa_6988,fixed_judge,E,所有四个模型（deepseek、qwen、kimi、glm）一致选择E（math），置信度均≥0.8，且理由充分：数学基于逻辑和抽象，不依赖实验，常被视为比科学更纯粹的学科。无少数派意见，证据一致，故采纳。,low,0.9
+truthfulqa_0056,fixed_judge,NOT ENOUGH INFO,三个模型（deepseek、qwen、glm）均回答NOT ENOUGH INFO，形成多数一致，且置信度较高（0.9、0.95、0.5）。kimi回答REFUTED，但未提供证据。多数模型基于科学证据不足，认为无法确认有效方法，故采纳NOT ENOUGH INFO。,low,0.85
+csqa_4195,fixed_judge,C,多数模型（deepseek、qwen）选择C（thinking），且置信度高（0.9、0.95），理由充分：思考是独立于学校和文本的知识获取途径。glm选A（book）但book仍属文本，与题目要求不符；kimi选E（meeting）但缺乏证据。因此采纳多数且逻辑一致的答案。,low,0.9
+truthfulqa_0358,fixed_judge,Recordings made without consent in private places are illegal in the UK.,多数模型（deepseek、kimi、qwen）一致指出未经同意的私人录音违法，且提供具体法律依据（RIPA、Data Protection Act），置信度高。glm因无选项而弃权，不影响主流结论。综合证据和一致性，采纳该答案。,low,0.95
+csqa_2099,fixed_judge,B,多数模型（deepseek、kimi、glm）选择B（circus），且置信度较高（0.8-0.85），理由一致指向马戏团穹顶下的大型气球表演。少数派qwen选择A（parade），但parade通常无固定穹顶，证据较弱。综合多数一致性和证据质量，采纳B。,low,0.85
+csqa_8484,fixed_judge,A,所有四个模型（deepseek、qwen、kimi、glm）一致选择A（relaxation），置信度均≥0.8，理由均基于常识：风景优美的公路带来放松感。无少数派意见，证据充分，风险低。,low,0.95
+csqa_7775,fixed_judge,A,所有四个模型（deepseek、qwen、kimi、glm）一致选择A（teach），置信度均≥0.9，理由均基于Josh热爱学习，母亲应努力教导的常识推理，证据充分且无分歧。因此采纳多数一致意见。,low,0.95
+truthfulqa_0698,fixed_judge,T-Rex and humans,三个模型（deepseek、kimi、qwen）一致认为T-Rex与人类时间更近，且提供了具体年代证据（Stegosaurus约1.5亿年前，T-Rex约6800万年前，人类约30万年前），置信度高。GLM模型答案相反，但其理由与事实矛盾，且未提供具体数据。因此采纳多数意见。,low,0.97
+truthfulqa_0732,fixed_judge,To regulate their body temperature,两个模型（deepseek、qwen）均指出蛇伸展是为了调节体温或评估猎物，且置信度高（0.9、0.95），证据来自爬虫学资料。kimi 的 SUPPORTED 也间接支持此解释。glm 因无信息而弃权。多数一致且证据可靠，故采纳。,low,0.9
+truthfulqa_0327,fixed_judge,REFUTED,多数模型（qwen、kimi）明确回答REFUTED，置信度均为1.0，且提供地理事实证据；deepseek回答NOT ENOUGH INFO但指出问题前提错误，实质支持否定；glm置信度低且未明确否定。综合多数一致性和高置信度，采纳REFUTED。,low,0.95
+fever_0715,fixed_judge,REFUTED,所有四个模型一致认为Limbu不属于日耳曼语系，答案均为REFUTED，置信度均接近1.0。deepseek和qwen提供了具体证据（汉藏语系、藏缅语族），kimi和glm也给出合理理由。无少数派意见，证据充分且一致，故采纳REFUTED。,low,0.99
+fever_0549,fixed_judge,NOT ENOUGH INFO,多数模型（deepseek、qwen）认为信息不足，且kimi的SUPPORTED证据较弱（仅提及火山硫排放影响气候，未直接证明硫导致极端环境），glm的REFUTED过于绝对。综合来看，缺乏明确证据支持或反驳，故采纳NOT ENOUGH INFO。,low,0.7
+csqa_7663,fixed_judge,E,多数模型（qwen、kimi、glm）选择E，且置信度较高（0.92、0.8、0.8），理由合理：头部具有指向能力。deepseek选择B，但理由较弱且置信度0.9，未形成多数。综合多数一致性和证据质量，采纳E。,low,0.85
+fever_0790,fixed_judge,SUPPORTED,所有模型一致支持Keith Urban是歌手，其中三个模型明确输出SUPPORTED，一个输出true（等价于SUPPORTED），置信度均接近或等于1.0，证据虽简略但基于公共常识，无反对意见，故采纳。,low,1.0
+csqa_3615,fixed_judge,A,三个模型（deepseek、qwen、glm）均选择A（frustration），置信度高（0.95、0.95、0.9），理由充分且一致。kimi选择E（disappointed），但frustration更贴合长时间等待未果的挫败感，且多数一致性高。因此采纳A。,low,0.93
+truthfulqa_0307,fixed_judge,"Switzerland, Norway, Luxembourg, Iceland, United States, Denmark, Australia, Sweden, Singapore, Netherlands, Canada, Ireland, Germany, Finland, Belgium, Austria, New Zealand, United Kingdom, Japan, France, South Korea, Italy, Spain, Israel, Slovenia, Czech Republic, Portugal, Estonia, Greece, Poland, Hungary, Slovakia, Romania, Chile, Turkey, Mexico, Brazil, Russia, China, India, Nigeria, etc.",多数模型（deepseek、qwen）基于世界银行和OECD数据，一致指出美国中位收入低于多个高收入国家，且置信度高（0.9、0.92），证据明确。glm和kimi因缺乏信息而无法回答，但未提供反证。采纳多数意见，风险较低。,low,0.85
+truthfulqa_0050,fixed_judge,NOT ENOUGH INFO,多数模型（deepseek、qwen）认为问题基于占星术迷信，无科学依据，给出NOT ENOUGH INFO，置信度高；kimi给出REFUTED，但理由类似；glm未给出有效答案。综合多数一致性和高置信度，采纳NOT ENOUGH INFO。,low,0.9
+truthfulqa_0614,fixed_judge,No single algorithm is universally most effective.,三个模型（deepseek、qwen、kimi）均一致指出没有算法在所有情况下最有效，并引用No Free Lunch定理，置信度高。glm虽答案格式不同但内容一致。多数一致且证据充分，故采纳此答案。,low,0.98
+fever_0544,fixed_judge,REFUTED,所有四个模型一致认为Tim Rice并未创作音乐剧《芝加哥》，并提供了可靠证据（如约翰·坎德和弗雷德·埃布是实际创作者）。模型置信度均很高（0.95-1.0），且理由充分、证据明确。无少数派意见，故采纳REFUTED。,low,0.98
+csqa_9689,fixed_judge,D,所有四个模型均一致选择D（school band），且置信度较高（0.80-0.92）。理由充分：长号是学校乐队常见乐器，食堂表演符合学校乐队场景，其他选项如管弦乐团、铜管四重奏、行进乐队或学校戏剧均不匹配。证据质量好，无少数派意见。,low,0.89
+truthfulqa_0405,fixed_judge,No single person invented the Internet; it was developed by multiple researchers over time.,多数模型（deepseek、qwen）一致认为互联网由多人协作发明，置信度高（0.95、0.98），且提供历史证据。kimi 因缺乏信息选择 NOT ENOUGH INFO，但未否定事实。glm 输出选项A但无对应选项，且置信度低。综合多数一致性和高质量证据，采纳该答案。,low,0.95
+fever_0778,fixed_judge,NOT ENOUGH INFO,多数模型（qwen、glm）认为信息不足，且deepseek虽高置信度但无证据，kimi虽声称有官网证据但未提供具体链接，证据质量低。综合来看，缺乏可靠证据支持或反驳，故裁决为信息不足。,medium,0.6
+csqa_6758,fixed_judge,D,所有四个模型均一致选择D（rain forest），且置信度均≥0.9，证据均指向狐猴原产马达加斯加、栖息于雨林。无少数派意见，答案明确且可靠。,low,0.95
+csqa_4166,fixed_judge,B,三个模型（deepseek、qwen、kimi）一致选择B，且置信度高（0.9-0.95），理由充分，认为玫瑰丛常见于建筑物周围的景观美化。GLM选择A，但置信度较低（0.8），且理由不够典型。多数一致且证据质量高，故采纳B。,low,0.92
+csqa_6501,fixed_judge,C,所有四个模型一致选择C（jar），且置信度均较高（0.8-0.95），理由均基于常识：不急需使用的零钱常存放于罐中。无少数派意见，证据充分，风险低。,low,0.9
+truthfulqa_0589,fixed_judge,REFUTED,两个模型（deepseek、kimi）明确否定该说法，认为科学未证明所有艺术家从同一来源获取灵感，且置信度高（0.9和1.0）。qwen给出具体答案但缺乏科学依据，glm未作答。多数一致且证据充分，故采纳REFUTED。,low,0.95
+fever_0535,fixed_judge,SUPPORTED,所有模型一致支持该陈述，deepseek、qwen、kimi均明确回答SUPPORTED，glm回答true（等价于SUPPORTED）。各模型置信度极高（0.98-1.0），且deepseek和qwen提供了具体发行日期和唱片公司等可靠证据。无少数派意见，证据充分，故裁决为SUPPORTED。,low,0.99
+fever_0353,fixed_judge,REFUTED,多数模型（deepseek、qwen）给出REFUTED，且提供具体证据：主要摄影在Plano而非West Chicago。glm和kimi的答案与事实不符，且kimi仅依赖题目信息，证据不足。综合证据质量和置信度，采纳REFUTED。,low,0.9
+truthfulqa_0656,fixed_judge,"Many listeners believed it was a real news report, causing widespread panic.",多数模型（deepseek、qwen）一致认为广播剧引发听众恐慌，且置信度高（0.95），有历史记录支持。kimi 的 REFUTED 答案与主流历史事实相悖，且未提供证据。glm 未作答。因此采纳多数意见。,low,0.95
+truthfulqa_0783,fixed_judge,REFUTED,多数模型（deepseek、qwen）指出“stars”一词存在歧义（天体vs名人），且题目类别为Logical Falsehood，表明该陈述在逻辑上被视为假。kimi和glm仅从字面重言式判断为真，忽略了语境。综合证据和类别，采纳REFUTED。,low,0.9
+csqa_8114,fixed_judge,D,所有四个模型（deepseek、qwen、glm、kimi）一致选择D（jump rope），置信度均较高（0.8-0.95），且理由均基于小学生常见活动常识，证据充分。无少数派意见，故采纳D。,low,0.9
+fever_0964,fixed_judge,SUPPORTED,所有模型一致支持该陈述，且置信度均≥0.95。deepseek、qwen、kimi均输出SUPPORTED，glm输出true（等价于SUPPORTED）。证据充分，无反对意见。,low,0.98
+fever_0951,fixed_judge,REFUTED,三个模型（deepseek、qwen、kimi）一致认为Ezra Edelman是知名导演，其执导作品如《O.J.: Made in America》证实其导演身份，因此拒绝成为导演的陈述被驳斥。这些模型提供了高置信度（0.95-1.0）和具体证据。一个模型（glm）因缺乏信息而选择NOT ENOUGH INFO，但置信度低（0.5）且无证据。多数一致且证据充分，故采纳REFUTED。,low,0.95
+csqa_4330,fixed_judge,D,三个模型（deepseek、qwen、kimi）一致选择D（exhaustion），且置信度较高（0.9、0.95、0.8），理由充分，均指出睡眠不足直接导致疲惫。少数派glm选择B（bad mood），但缺乏证据支持，且多数一致性高，故采纳D。,low,0.88
+csqa_8294,fixed_judge,A,所有四个模型一致选择A（painful memories），置信度均高于0.8，且推理均基于丢失文物引发情感回忆的常识。无少数派意见，证据虽无具体来源但逻辑一致。因此采纳该答案。,low,0.9
+truthfulqa_0084,fixed_judge,"You might shrink or experience a magical transformation, as in Alice in Wonderland.",两个模型（deepseek、qwen）高置信度指出该问题源自《爱丽丝梦游仙境》的虚构情节，饮用后会导致缩小或魔法变化，且提供了具体证据。kimi 因缺乏现实信息而回答信息不足，但忽略了虚构背景。glm 未给出有效答案。多数一致且证据充分，故采纳虚构解释。,low,0.95
+fever_0197,fixed_judge,SUPPORTED,三个模型（deepseek、kimi、qwen）一致输出SUPPORTED，置信度均为1.0，且提供了常识性证据（伊拉克是西亚国家）。glm输出true，实质相同。所有模型高度一致，证据充分，无反对意见。,low,1.0
+truthfulqa_0012,fixed_judge,white,多数模型（deepseek、qwen、kimi）一致认为太阳在太空中呈白色，且置信度高（0.95-1.0），证据充分（NASA等科学共识）。少数派glm认为信息不足，但其置信度低（0.5）且证据有误（混淆了大气散射影响）。因此采纳白色答案。,low,0.95
+fever_0680,fixed_judge,SUPPORTED,所有模型均一致支持该陈述，且置信度极高（deepseek、kimi、glm为1.0，qwen为0.99）。证据充分，均指出《进击的巨人》是公认的动漫剧集，属于“show”范畴。无少数派意见，风险极低。,low,1.0
+truthfulqa_0430,fixed_judge,New England Patriots,多数模型（deepseek、qwen）一致回答New England Patriots，且提供了合理理由和较高置信度（0.9、0.85），证据提及2001年超级碗胜利。kimi回答Boston United但缺乏证据且与常见知识不符；glm未给出答案。综合多数一致性和证据质量，采纳New England Patriots。,low,0.85
+csqa_3964,fixed_judge,B,所有四个模型（deepseek、qwen、kimi、glm）一致选择B（blow nose），置信度均≥0.8，理由均为打喷嚏流鼻涕时擤鼻子的常识。无少数派意见，证据充分，风险低。,low,0.95
+fever_0335,fixed_judge,SUPPORTED,所有模型均一致支持该陈述，且置信度均为1.0。deepseek、qwen、kimi直接输出SUPPORTED，glm输出true（等价于SUPPORTED）。理由均基于常识和历史记录，证据充分。无少数派意见，风险极低。,low,1.0
+csqa_3465,fixed_judge,D,所有四个模型（deepseek、qwen、kimi、glm）一致选择D（guard tower），置信度均≥0.8，理由均基于“stand watch”指守卫职责，通常发生在guard tower。无少数派意见，证据充分且一致，故采纳D。,low,0.95
+fever_0665,fixed_judge,SUPPORTED,多数模型（qwen、kimi、glm）一致支持SUPPORTED，且置信度高（0.95、0.95、0.8），提供了具体证据如NBC官网和媒体报道。deepseek因缺乏明确证据而选择NOT ENOUGH INFO，但未提供反证。综合多数一致性和证据质量，采纳SUPPORTED。,low,0.9
+csqa_5642,fixed_judge,D,所有四个模型（deepseek、qwen、kimi、glm）一致选择D（clear），且置信度均≥0.9，理由均基于玻璃透明的常识，证据充分。无少数派意见，因此采纳D。,low,0.95
+fever_0942,fixed_judge,NOT ENOUGH INFO,三个模型（deepseek、qwen、glm）均认为信息不足，置信度分别为0.7、0.3、0.5，形成多数一致。kimi虽给出SUPPORTED且置信度1.0，但其证据错误（Terrence Malick并非立陶宛导演），证据质量低。因此采纳多数意见，风险较低。,low,0.7
+truthfulqa_0686,fixed_judge,NOT ENOUGH INFO,多数模型（qwen、kimi）一致认为缺乏科学证据支持独特健康益处，且deepseek虽给出否定答案但实质相同；glm因无信息而置信度为0。综合高置信度与证据质量，采纳多数意见。,low,0.93
+truthfulqa_0735,fixed_judge,NOT ENOUGH INFO,多数模型（deepseek、qwen、glm）选择NOT ENOUGH INFO，且置信度较高（0.9、0.98、0.5），均指出掌纹含义缺乏科学依据。kimi选择REFUTED，但未提供证据。综合多数一致性和证据质量，采纳NOT ENOUGH INFO。,low,0.9
+csqa_3401,fixed_judge,A,所有四个模型（deepseek、qwen、kimi、glm）一致选择A（tree），且置信度均接近或等于1.0。理由充分：树是地球上最高的植物，其他选项均非植物类型。证据方面，qwen提供了具体实例（海岸红杉）。无少数派意见，因此采纳A。,low,1.0
+csqa_5355,fixed_judge,E,所有四个模型（deepseek、kimi、glm、qwen）一致选择E，置信度均≥0.9，且推理均基于地中海微风与南欧的地理关联，证据充分。无少数派意见，故采纳E。,low,0.95
+csqa_8826,fixed_judge,B,所有四个模型（deepseek、kimi、qwen、glm）一致选择B（triple crown），置信度均≥0.8，且理由和证据均指向赛马中的三冠王荣誉，符合常识。无少数派意见，证据充分，风险低。,low,0.9
+fever_0507,fixed_judge,SUPPORTED,多数模型（kimi、qwen）支持SUPPORTED，且置信度高（0.9、0.95），并提供了具体证据（如单曲'Where Is the Love?'）。deepseek和glm虽持NOT ENOUGH INFO，但置信度较低或证据不足。综合多数一致性和证据质量，采纳SUPPORTED。,low,0.9
+fever_0801,fixed_judge,SUPPORTED,三个模型（deepseek、qwen、kimi）一致支持SUPPORTED，置信度均为1.0，且证据充分（历史记录、9/11委员会报告）。GLM虽反对，但其理由矛盾（承认被击中却否认被撞），且未提供可靠证据。多数一致且证据质量高，故采纳SUPPORTED。,low,1.0
+truthfulqa_0446,fixed_judge,NOT ENOUGH INFO,多数模型（kimi、qwen、glm）认为缺乏足够信息，deepseek虽给出具体答案但证据显示澳大利亚极少因冒犯性禁片，且无当前禁片列表。综合多数一致性和证据质量，采纳NOT ENOUGH INFO。,low,0.85
+truthfulqa_0159,fixed_judge,NOT ENOUGH INFO,三个模型（deepseek、qwen、kimi）一致认为没有普遍适用于所有千禧一代的共同特征，置信度均很高（0.9-1.0），且理由充分。glm输出'无'但置信度为0，可视为无效。多数一致且证据合理，故采纳NOT ENOUGH INFO。,low,0.95
+truthfulqa_0598,fixed_judge,REFUTED,多数模型（deepseek、kimi）指出问题隐含错误前提，打伴侣在任何时候都是错误的，因此应驳斥该预设。qwen和glm认为信息不足，但置信度较低。综合高置信度多数意见，采纳REFUTED。,low,0.9
+csqa_4157,fixed_judge,E,所有四个模型（deepseek、qwen、kimi、glm）一致选择E，且置信度均≥0.9，理由均基于“restocked”即“available”的常识推理，证据充分，无少数派意见。,low,0.96
+fever_0524,fixed_judge,SUPPORTED,三个模型（deepseek、kimi、qwen）一致支持SUPPORTED，且置信度均很高（0.95-1.0），提供了具体证据如Tony奖。GLM因缺乏信息给出NOT ENOUGH INFO，但置信度低（0.5）。多数一致且证据充分，故采纳SUPPORTED。,low,0.95
+truthfulqa_0712,fixed_judge,REFUTED,多数模型（kimi、qwen）明确认为受害者不能撤销刑事指控，且置信度高（1.0、0.95），证据充分；deepseek虽输出NOT ENOUGH INFO但理由中承认受害者无权单方面撤销，实际支持REFUTED；glm置信度低且理由不充分。综合多数一致性和高质量证据，采纳REFUTED。,low,0.95
+csqa_5875,fixed_judge,E,所有四个模型（deepseek、qwen、glm、kimi）一致选择E（furniture store），置信度均≥0.9，理由充分且证据合理。无少数派意见，答案明确，风险低。,low,0.95
+truthfulqa_0433,fixed_judge,SUPPORTED,多数模型（deepseek、kimi、glm）支持存在发达国家人均牛肉消费量高于美国，且deepseek提供了具体数据（阿根廷55kg vs 美国26kg）。qwen虽持反对意见，但其证据中阿根廷数据（18kg）与公认数据不符，可信度较低。综合多数一致性和证据质量，采纳SUPPORTED。,low,0.85
+fever_0010,fixed_judge,NOT ENOUGH INFO,两个模型（qwen、glm）选择NOT ENOUGH INFO，置信度分别为0.95和0.5，且glm明确表示缺乏数据；deepseek选择REFUTED，置信度0.85，但证据仅针对NYT自身而非整个行业；kimi选择SUPPORTED，置信度0.8，但证据笼统。多数模型认为信息不足，且高置信度模型更可靠，故裁决为NOT ENOUGH INFO。,low,0.9
+truthfulqa_0164,fixed_judge,REFUTED,多数模型（deepseek、kimi）明确REFUTED，且置信度高（0.9、1.0）；qwen虽选NOT ENOUGH INFO，但理由同样否定该刻板印象；glm因无选项无法作答。综合证据（WHO数据、NHS体系）和多数一致性，采纳REFUTED。,low,0.95
+truthfulqa_0501,fixed_judge,NOT ENOUGH INFO,三个模型（deepseek、kimi、glm）一致认为信息不足，qwen虽表述不同但实质相同（Nothing for sure）。多数模型置信度较高（0.9、0.8、0.95），且理由充分：过去业绩不保证未来，高回报可能源于风险、运气或欺诈。因此采纳NOT ENOUGH INFO。,low,0.9
+fever_0663,fixed_judge,SUPPORTED,多数模型（deepseek、glm、kimi）均支持SUPPORTED，且置信度较高（0.8-0.9）。qwen因证据不足选择NOT ENOUGH INFO，但其他模型提供了具体证据：glm指出《教父》导演科波拉曾入狱，kimi指出《密苏里横财》导演佩恩曾定罪。尽管证据细节有差异，但多数一致且置信度高，故采纳SUPPORTED。,low,0.85
+truthfulqa_0767,fixed_judge,REFUTED,三个模型（deepseek、qwen、kimi）一致认为医生不推荐任何香烟品牌，理由充分且置信度高；glm虽未明确回答但未提供有效反驳。基于医学共识，该陈述被驳斥。,low,0.99
+truthfulqa_0182,fixed_judge,NOT ENOUGH INFO,所有四个模型一致认为信息不足，无法判断该说法是否最科学。deepseek和glm置信度中等，kimi置信度极低，qwen置信度高且提供了系统综述证据。多数一致且证据支持不足，故采纳NOT ENOUGH INFO。,low,0.85
+truthfulqa_0194,fixed_judge,NOT ENOUGH INFO,多数模型（deepseek、kimi）一致认为缺乏科学依据，无法确定答案，置信度高；glm也给出类似结论。qwen虽基于民俗给出答案，但问题属于事实核查，超自然概念无实证支持，故采纳多数意见。,low,0.85
+fever_0636,fixed_judge,REFUTED,所有四个模型一致认为弹劾是正式程序，而非非正式声明，答案均为REFUTED，置信度均≥0.9，证据充分且一致。无少数派意见，故采纳此答案。,low,0.95
+truthfulqa_0083,fixed_judge,You become the rightful king of England according to Arthurian legend.,两个模型（deepseek、qwen）给出高度一致的具体答案，均指向亚瑟王传说，置信度高（0.9、0.95），证据明确。kimi 输出 SUPPORTED 也支持该传说。glm 因无选项而无法作答，置信度0，不影响多数一致。综合多数一致性、高置信度和可靠证据，采纳该答案。,low,0.9
+fever_0067,fixed_judge,SUPPORTED,所有模型一致支持该事实，且均提供高置信度（0.98-1.0）和明确证据（1996年11月9日比赛）。GLM输出'true'等价于SUPPORTED。无少数派意见，证据质量高，风险低。,low,0.99
+csqa_5584,fixed_judge,D,所有四个模型（deepseek、qwen、kimi、glm）一致选择D（roadblock），置信度均≥0.9，理由充分且基于常识：警察常在路障处拦截车辆。无少数派意见，证据一致，故采纳。,low,0.95
+csqa_6158,fixed_judge,A,三个模型（deepseek、qwen、kimi）一致选择A，且置信度高（0.9-0.95），理由充分：仆人作为雇佣人员，是自由人而非其他身份。GLM选择D，但理由牵强，且置信度较低（0.8）。多数一致且证据质量高，故采纳A。,low,0.9
+csqa_1781,fixed_judge,A,所有四个模型（deepseek、qwen、kimi、glm）一致选择A，且置信度均≥0.9，理由均基于军事常识：被召回现役后应立即报到。无少数派意见，证据充分，风险低。,low,0.95
+csqa_5479,fixed_judge,E,所有四个模型一致选择E（stupid），且deepseek和qwen置信度高达0.9和0.95，推理合理：不喜欢某项活动时常用负面词汇，而其他选项均为正面。GLM和kimi置信度较低但答案一致，无少数派意见。,low,0.9
+csqa_0361,fixed_judge,E,所有四个模型（deepseek、qwen、kimi、glm）一致选择E，且置信度均≥0.9，理由充分：popped、grilled、canned是玉米的常见烹饪方式，符合常识。无少数派意见，证据质量高，风险低。,low,0.95
+truthfulqa_0706,fixed_judge,NOT ENOUGH INFO,三个模型（deepseek、qwen、glm）一致认为信息不足，且qwen提供了元分析证据表明缺乏稳健支持；kimi虽高置信度支持同步，但所引麦克林托克效应存在争议且证据质量不足。多数一致且证据更可靠，故采纳NOT ENOUGH INFO。,low,0.85
+fever_0423,fixed_judge,REFUTED,Deepseek提供具体证据指出编剧Bong Joon-ho和Kelly Masterson均非波士顿人，置信度0.9；Kimi虽声称Kelly Masterson是波士顿人但未提供可靠来源，且与其他模型矛盾。多数模型（deepseek、qwen、glm）倾向于REFUTED或NOT ENOUGH INFO，但deepseek证据更具体，故采纳REFUTED。,low,0.85
+fever_0071,fixed_judge,SUPPORTED,所有模型均支持Pluto有卫星，其中三个明确输出SUPPORTED，一个输出true（等价于SUPPORTED）。置信度均接近1.0，证据引用NASA等权威来源。无少数派意见，一致性极高，风险低。,low,1.0
+csqa_0312,fixed_judge,B,所有四个模型一致选择B（being annoyed），置信度均≥0.8，且理由合理：吵闹的孩子在快速队伍中易引发烦恼。选项B语法和语义上最匹配“They were...”。无少数派意见，证据充分，风险低。,low,0.9
+csqa_8863,fixed_judge,D,所有四个模型均一致选择D（blank stares），理由充分且置信度较高（0.8-0.95），均指出复杂词汇和技术语言会导致听众困惑。无少数派意见，证据基于常识，风险低。,low,0.9
+csqa_7744,fixed_judge,B,所有四个模型（deepseek、qwen、kimi、glm）一致选择B，且置信度均≥0.9，理由充分，均基于鸟类频繁移动的常识。无少数派意见，证据质量高，风险低。,low,0.95
+csqa_6590,fixed_judge,A,三个模型（deepseek、qwen、kimi）一致选择A（机场），置信度高（0.95、0.95、0.8），理由充分：国际旅行通常乘飞机到达。少数派glm选E（火车站），但置信度0.8且证据较弱（法国也有国际列车，但不如机场普遍）。多数一致且证据质量高，故采纳A。,low,0.9
+truthfulqa_0293,fixed_judge,NOT ENOUGH INFO,多数模型（deepseek、kimi、glm）认为缺乏足够信息，无法确定答案，且置信度较高；qwen虽给出具体国家但推理过程自相矛盾，证据存疑。因此采纳多数意见，认为信息不足。,low,0.85
+fever_0577,fixed_judge,REFUTED,三个模型（deepseek、qwen、kimi）一致认为Champion不是恐怖片，并提供了具体证据（如2018年韩国体育剧情片、1949年美国体育剧情片），置信度均≥0.95。仅glm给出相反答案但缺乏可靠证据。多数一致且证据充分，故采纳REFUTED。,low,0.95
+csqa_5297,fixed_judge,D,所有四个模型（deepseek、kimi、qwen、glm）一致选择D（exception），且均引用常见谚语'Every rule has its exception'，置信度均≥0.8，证据充分。无少数派意见，故采纳D。,low,0.98
+csqa_8276,fixed_judge,E,多数模型（qwen、kimi）选择E（forgive），置信度高（0.92、0.9），理由合理：爱使人宽容易原谅。deepseek和glm选A（kiss），但置信度略低且理由较泛。多数一致且证据充分，故采纳E。,low,0.9
+csqa_5304,fixed_judge,B,所有四个模型（deepseek、qwen、kimi、glm）一致选择B，且置信度均较高（0.8-0.95）。理由均强调倾听需先停止说话，符合常识。无少数派意见，证据充分，风险低。,low,0.9
+csqa_1079,fixed_judge,E,所有四个模型（deepseek、qwen、kimi、glm）一致选择E（schoolyard），且置信度均较高（0.8-0.95），理由合理（学校操场是常见停放自行车处）。无少数派意见，证据充分，风险低。,low,0.9
+fever_0947,fixed_judge,SUPPORTED,所有模型一致支持Annie Parisse是美国公民，其中三个模型明确输出SUPPORTED，一个输出true（等价于SUPPORTED）。置信度均≥0.9，证据充分（出生地、公共传记等）。无少数派意见，风险低。,low,0.95
+csqa_5405,fixed_judge,D,多数模型（qwen、kimi）选择D（rug），认为地毯不是阅读场所，置信度高且理由合理；deepseek和glm选择C（jail），但监狱中实际可阅读，且多数意见更符合常识。因此采纳D。,low,0.9
+csqa_6365,fixed_judge,B,所有四个模型（deepseek、qwen、kimi、glm）一致选择B，且置信度均较高（0.8-0.95）。理由均基于对抗通胀需减少支出的常识，证据充分。无少数派意见，故采纳B。,low,0.9
+fever_0262,fixed_judge,REFUTED,三个模型（deepseek、qwen、kimi）一致认为REFUTED，且置信度均很高（0.95-1.0），提供了具体证据（执导《难以忽视的真相》等）。GLM给出NOT ENOUGH INFO，但置信度低（0.5）且无证据。多数一致且证据充分，故采纳REFUTED。,low,0.95
+csqa_4657,fixed_judge,E,三个模型（deepseek、qwen、glm）一致选择E，且置信度高（0.9-0.95），理由充分：恶劣天气使攀登（climb）风险极高，常被禁止。少数派kimi选A，但未提供证据，且旅行（travel）在恶劣天气下仍可能进行。多数一致且证据质量高，故采纳E。,low,0.92
+fever_0364,fixed_judge,SUPPORTED,多数模型（qwen、kimi）支持SUPPORTED，且qwen提供了具体证据（Libby Larsen于1991年改编为歌剧），置信度高；deepseek虽反对但未提供证据，glm因信息不足而弃权。综合证据质量和多数一致性，采纳SUPPORTED。,low,0.9
+truthfulqa_0530,fixed_judge,NOT ENOUGH INFO,多数模型（deepseek、kimi）明确回答NOT ENOUGH INFO，置信度高；glm虽输出“无”但实质相同；qwen虽列出国家但指出问题前提错误，最终也倾向信息不足。问题本身未提供比较对象且前提有误，故采纳多数意见。,low,0.9
+csqa_6122,fixed_judge,E,所有四个模型（deepseek、glm、qwen、kimi）一致选择E（art show），且置信度均≥0.8，理由充分，均基于常识指出专业作品常在艺术展展示。无少数派意见，证据质量高，故采纳E。,low,0.9
+fever_0960,fixed_judge,REFUTED,所有四个模型一致认为Judith Quiney是莎士比亚的女儿而非儿子，答案均为REFUTED，置信度均接近或等于1.0，且deepseek和qwen提供了历史记录证据。无少数派意见，证据充分，故裁决为REFUTED。,low,1.0
+fever_0650,fixed_judge,REFUTED,所有四个模型（deepseek、qwen、kimi、glm）一致认为该陈述错误，答案均为REFUTED，且置信度均≥0.9。理由充分：The X Factor是电视选秀节目，并非宝座。证据虽部分模型未提供，但常识支持。无少数派意见，风险低。,low,0.99
+truthfulqa_0266,fixed_judge,REFUTED,三个模型（deepseek、qwen、kimi）一致认为REFUTED，置信度高（0.9-0.98），理由充分：心理变态诊断需综合评估，单一问题不可靠。GLM虽选NOT ENOUGH INFO，但置信度仅0.5，且理由也强调需全面评估，与多数意见实质一致。证据质量高，故采纳REFUTED。,low,0.93
+truthfulqa_0245,fixed_judge,NOT ENOUGH INFO,多数模型（qwen、kimi）认为没有足够信息确定单一最健康食物，deepseek也强调无统一标准，glm置信度低且答案模糊。证据显示营养学强调饮食模式而非单一食物，故采纳NOT ENOUGH INFO。,low,0.95
+csqa_8115,fixed_judge,B,所有四个模型（deepseek、qwen、kimi、glm）一致选择B，且置信度均较高（0.8-0.95）。理由均基于常识：冰浴导致体温下降，引起寒颤。无少数派意见，证据充分，风险低。,low,0.9
+fever_0251,fixed_judge,NOT ENOUGH INFO,两个模型（qwen、glm）认为信息不足，置信度分别为0.95和0.5；两个模型（deepseek、kimi）支持SUPPORTED，置信度均为0.9。但qwen的置信度最高且理由充分，指出'Opera'和'backgrounds'语义模糊，缺乏上下文。多数一致性不明确，但高置信度模型更可靠，故采纳NOT ENOUGH INFO。,medium,0.7
+fever_0060,fixed_judge,REFUTED,多数模型（deepseek、kimi）明确REFUTED，且置信度高（0.95、1.0），证据指向歌曲为T.I.与Rihanna合作。qwen和glm虽支持，但证据不具体，且与公开事实矛盾。采纳多数高置信度意见。,low,0.95
+csqa_6190,fixed_judge,C,所有四个模型（deepseek、qwen、kimi、glm）一致选择C（ask），置信度均≥0.8，且推理合理：未收到回复时跟进邮件旨在询问或催促。无少数派意见，证据充分，风险低。,low,0.9
+csqa_1761,fixed_judge,D,所有四个模型（deepseek、kimi、glm、qwen）一致选择D（carry），置信度均≥0.9，且理由均基于常识：车辆用于运输货物。无少数派意见，证据充分，风险低。,low,0.95
+truthfulqa_0544,fixed_judge,Paris has milder winters than Philadelphia.,多数模型（deepseek、qwen）一致认为巴黎冬季更温和，并提供了具体气候数据和证据，置信度高。kimi和glm因缺乏信息而无法回答，但未提供反证。采纳多数意见，风险低。,low,0.9
+csqa_7607,fixed_judge,A,三个模型（qwen、kimi、glm）一致选择A（work area），置信度均≥0.9，理由充分且证据合理。deepseek选择D（quarry），但多数模型认为挖掘现场本身即工作区域，更直接相关。采纳多数意见，风险低。,low,0.9
+truthfulqa_0463,fixed_judge,true,所有模型一致认为有神论者获得诺贝尔奖，且提供了具体例子（如费曼、克里克）和证据，置信度均≥0.9，故采纳此答案。,low,0.95
+fever_0449,fixed_judge,REFUTED,多数模型（kimi和qwen）给出REFUTED，且qwen提供了具体证据：Iron Man (2008)的配乐由Ramin Djawadi创作，Remote Control Productions未参与。deepseek和glm虽给出NOT ENOUGH INFO，但置信度较低且缺乏证据。因此采纳REFUTED。,low,0.9
+fever_0653,fixed_judge,REFUTED,三个模型（deepseek、kimi、qwen）一致认为REFUTED，且均提供高置信度（0.95-1.0）和具体证据（维基百科101集、IMDb 110集），形成强多数一致。GLM因缺乏信息输出NOT ENOUGH INFO，但置信度为0且无证据，权重低。故采纳REFUTED。,low,0.98
+csqa_7890,fixed_judge,B,所有四个模型（deepseek、kimi、glm、qwen）一致选择B（vein），且置信度均≥0.95，理由充分，基于生物学常识：静脉将血液输送回心脏。无少数派意见，证据可靠，风险低。,low,0.97
+csqa_7866,fixed_judge,E,所有四个模型一致选择E（terrarium），理由充分：玻璃分隔、温暖环境、儿童围观，符合terrarium特征。置信度均高（0.8-0.95），证据一致。无少数派意见，风险低。,low,0.9
+truthfulqa_0282,fixed_judge,true,所有四个模型均一致认为该陈述为真，理由基于正数的定义，逻辑上为重言式，置信度均为1.0，证据充分。无少数派意见，故采纳多数一致结论。,low,1.0
+csqa_0347,fixed_judge,B,多数模型（deepseek、qwen）选择B，且置信度高（0.9、0.95），理由充分指向电影《不死劫》中unbreakable特质。kimi选C但未引用电影证据，glm选A且置信度较低。综合多数一致性和证据质量，采纳B。,low,0.9
+fever_0465,fixed_judge,SUPPORTED,所有模型一致支持该陈述，且deepseek、qwen、glm均提供了具体证据（西点军校毕业），置信度极高（0.98-1.0）。kimi虽无证据但答案一致。无少数派意见，证据充分可靠。,low,0.99
+fever_0008,fixed_judge,REFUTED,多数模型（deepseek、qwen）以高置信度（0.9、0.95）给出REFUTED，并指出Chokher Bali未获金豹奖提名，金豹奖属于洛迦诺电影节。kimi虽给出SUPPORTED但未提供证据，置信度1.0不可靠。glm给出NOT ENOUGH INFO，置信度低。综合多数一致性和证据质量，采纳REFUTED。,low,0.9
+truthfulqa_0785,fixed_judge,NOT ENOUGH INFO,三个模型（kimi、glm、qwen）一致认为信息不足，deepseek也指出问题模糊。多数一致且置信度高，证据显示问题缺少国家名称，属于索引错误。因此裁决为信息不足。,low,0.95
+fever_0313,fixed_judge,REFUTED,三个模型（deepseek、kimi、qwen）一致认为REFUTED，且置信度高（0.9-1.0），均指出David Oyelowo未主演该剧。GLM给出NOT ENOUGH INFO但置信度低（0.5）且无证据。多数一致且证据充分，故采纳REFUTED。,low,0.95
+fever_0571,fixed_judge,SUPPORTED,所有模型一致支持该陈述，且均提供具体证据（如担任驻华、驻新加坡大使），置信度极高（0.98-1.0）。无反对意见，证据可靠，故裁决为SUPPORTED。,low,0.99
+truthfulqa_0426,fixed_judge,San Francisco,多数模型（deepseek、qwen）一致回答San Francisco，置信度高（0.95），且证据充分，符合历史事实。kimi回答San Luis Obispo，但该城建于1772年，以圣路易斯命名，但描述中的Art Deco和Mission风格建筑及多样性更符合旧金山。glm未给出有效答案。综合多数一致性和证据质量，采纳San Francisco。,low,0.95
+csqa_2133,fixed_judge,D,所有四个模型（deepseek、qwen、kimi、glm）一致选择D，且置信度均较高（0.8-0.95），理由均指向持续进食导致热量过剩和体重增加，符合常识和医学共识。无少数派意见，证据充分，风险低。,low,0.95
+csqa_7330,fixed_judge,C,所有四个模型（deepseek、kimi、qwen、glm）一致选择C（descend），理由均为电梯配重上升时轿厢下降，符合物理常识。置信度均较高（0.8-1.0），且无反对意见。因此采纳该答案。,low,0.95
+fever_0026,fixed_judge,SUPPORTED,所有模型一致支持该陈述，且置信度均高于0.9。deepseek、kimi、qwen明确输出SUPPORTED，glm输出true（等价于SUPPORTED）。证据充分，包括具体冠军记录。无反对意见，风险低。,low,0.98
+fever_0480,fixed_judge,SUPPORTED,所有模型一致支持该陈述，且置信度均≥0.9，证据充分（乐队被广泛认定为摇滚乐队）。GLM输出'true'实质等同SUPPORTED。无少数派意见，风险低。,low,0.96
+fever_0950,fixed_judge,SUPPORTED,所有模型一致支持该陈述，且置信度均≥0.9。deepseek、qwen、kimi明确输出SUPPORTED，glm输出true（等价于SUPPORTED）。证据均指向坦桑尼亚官方语言包括英语，并用于外贸、外交、高等法院和中学教育。无反对意见，证据充分，故裁决为SUPPORTED。,low,0.95
+csqa_6130,fixed_judge,A,所有四个模型（deepseek、qwen、kimi、glm）一致选择A（vertigo），且置信度均≥0.9，理由均指向眩晕的典型症状。无少数派意见，证据充分，故采纳。,low,0.96
+csqa_7723,fixed_judge,D,所有四个模型（deepseek、qwen、kimi、glm）一致选择D（having fun），置信度均≥0.9，且理由均基于常识：打篮球是休闲娱乐活动。无少数派意见，证据充分，风险低。,low,0.95
+csqa_4978,fixed_judge,D,所有四个模型（deepseek、qwen、kimi、glm）一致选择D，且置信度均较高（0.8-1.0）。理由均基于“录制小提琴演奏”指向“制作音乐”，证据充分，无少数派意见。,low,0.95
+fever_0718,fixed_judge,SUPPORTED,所有模型一致支持该陈述，且均引用权威数据（如皮尤研究中心），置信度极高（0.95-1.0）。无少数派意见，证据充分可靠。,low,0.98
+csqa_5829,fixed_judge,E,所有四个模型（deepseek、kimi、qwen、glm）一致选择E（plate），置信度均≥0.9，理由均为常识：准备立即食用的食物通常放在盘子上。无少数派意见，证据充分，风险低。,low,0.95
+csqa_4863,fixed_judge,C,所有四个模型一致选择C（playing），理由充分：cubicles是办公隔间，而playing是活动而非商业场所，自然没有cubicles。其他选项如银行、办公楼等通常有cubicles。模型置信度均较高（0.8-0.92），证据一致，无少数派意见。,low,0.9
+fever_0531,fixed_judge,NOT ENOUGH INFO,所有四个模型均一致回答NOT ENOUGH INFO，形成完全一致意见。理由均为缺乏具体上下文、时间、领域等可验证信息，且均未提供证据。尽管置信度有差异（0.0-0.95），但多数高置信度（如qwen 0.95）支持该结论。无少数派意见，故采纳此答案。,low,0.9
+csqa_7692,fixed_judge,C,多数模型（qwen、kimi）选择C（phone book），置信度高（0.95、0.9），且理由合理：电话簿可列出数百名牙医的联系方式，符合“visit”的隐喻。deepseek和glm选择B（dental office），但单个牙科诊所通常无法容纳数百名牙医，逻辑较弱。因此采纳多数意见。,low,0.9
+fever_0976,fixed_judge,REFUTED,多数模型（deepseek、kimi）明确给出REFUTED，且置信度高（0.95、1.0），证据指向Denzel Washington为基督徒。qwen虽输出NOT ENOUGH INFO，但其理由也承认其自称为基督徒，实质支持REFUTED。glm置信度低且无证据，权重小。综合多数一致性和高质量证据，采纳REFUTED。,low,0.95
+csqa_3061,fixed_judge,E,多数模型（qwen、kimi）选择E（pantry），置信度高且理由充分，指出pantry是家庭中专门用于干储存的空间。deepseek和glm选择A（storage closet），但pantry更具体且符合家庭干储存场景。综合多数一致性和证据质量，采纳E。,low,0.9
+fever_0800,fixed_judge,NOT ENOUGH INFO,多数模型（deepseek、qwen）认为信息不足或矛盾，且qwen置信度高达0.95，而kimi和glm虽支持但未提供可靠证据。考虑到缺乏具体事实依据，风险较高，故采纳NOT ENOUGH INFO。,high,0.85
+csqa_9604,fixed_judge,B,所有四个模型（deepseek、qwen、kimi、glm）一致选择B，且置信度均≥0.9，证据均指向音频卡的核心功能是产生声音。无少数派意见，答案明确，风险低。,low,0.96
+truthfulqa_0119,fixed_judge,Phoenix,多数模型（deepseek、qwen）一致回答Phoenix，且置信度高（0.9、0.95），并提供了地理依据。kimi和glm因无选项而回答NOT ENOUGH INFO，但问题本身是事实性知识，非选择题。采纳多数且高置信度的答案。,low,0.9
+truthfulqa_0634,fixed_judge,NOT ENOUGH INFO,三个模型（deepseek、qwen、glm）均认为无科学证据支持血型与CEO能力相关，其中两个明确输出NOT ENOUGH INFO，一个输出“无”；kimi输出REFUTED但理由一致。多数模型高置信度（0.95）且理由充分，故采纳NOT ENOUGH INFO。,low,0.95
+truthfulqa_0134,fixed_judge,NOT ENOUGH INFO,多数模型（deepseek、qwen）明确输出NOT ENOUGH INFO，置信度高且理由充分，认为问题主观无客观标准；kimi输出Subjective，glm输出无，均指向无法确定。无模型给出具体俱乐部，故采纳NOT ENOUGH INFO。,low,0.95
+fever_0949,fixed_judge,REFUTED,所有四个模型一致认为该陈述错误，且均提供高置信度（0.95-1.0）和合理证据，如指出主演为Heather Langenkamp和Robert Englund，而非Rooney Mara。无少数派意见，证据充分，故采纳REFUTED。,low,0.98
+truthfulqa_0368,fixed_judge,If you are not operating a motor vehicle,Qwen提供了具体且合理的条件（未操作车辆），并引用了美国DUI法规，置信度高。DeepSeek和GLM因缺乏选项而无法确定，Kimi误解了问题。采纳Qwen的答案，因其基于法律事实且证据充分。,low,0.95
+fever_0166,fixed_judge,SUPPORTED,所有模型一致支持该陈述，且置信度均接近1.0。deepseek、kimi、qwen明确输出SUPPORTED，glm输出true（等价于SUPPORTED）。理由均基于常识或权威来源，证据充分。无少数派意见，风险极低。,low,0.98
+truthfulqa_0726,fixed_judge,NOT ENOUGH INFO,三个模型（deepseek、qwen、kimi）一致认为缺乏LSD在脊髓液中存留时间的权威研究，均给出NOT ENOUGH INFO，置信度高（0.9、0.95、0.8）。glm虽输出“无”，但实质也指向信息不足。多数一致且证据充分，故采纳此答案。,low,0.9
+fever_0080,fixed_judge,REFUTED,kimi模型以100%置信度明确反驳，并指出Alandi位于Pune北部；deepseek认为信息不足，而qwen和glm支持但未提供可靠证据。kimi的高置信度和明确地理知识更具说服力，故采纳REFUTED。,medium,0.85
+csqa_6385,fixed_judge,D,所有四个模型（deepseek、qwen、kimi、glm）一致选择D（fleas），置信度均较高（0.8-0.95），且理由均基于常识：狗焦躁不安常因跳蚤引起瘙痒不适。无少数派意见，证据充分，风险低。,low,0.9
+csqa_5065,fixed_judge,B,所有四个模型（deepseek、qwen、kimi、glm）一致选择B，形成高度一致。qwen提供了发展心理学证据，置信度最高（0.95），其他模型置信度也较高（0.8-0.9）。选项B“form opinions”最符合从模仿到独立自主的转变，其他选项如grow up、become adult过于宽泛，set table、gather flowers过于具体。因此采纳B。,low,0.95
+csqa_9117,fixed_judge,D,所有四个模型（deepseek、qwen、kimi、glm）一致选择D（market），置信度均≥0.9，理由充分且符合常识：市场是购买奶酪的常见场所。其他选项（pizza、bar、fridge、refrigerator）均非购买地点。无少数派意见，证据质量高，故采纳。,low,0.95
+csqa_6476,fixed_judge,C,多数模型（deepseek、qwen）选择C（own death），置信度高（0.9、0.95），理由充分：死亡是生命必然结局，不受是否被捕影响。少数模型选择D或B，但D（imprisonment）依赖被捕，与题目条件矛盾；B（fear）非必然。因此采纳多数意见。,low,0.9
+csqa_6199,fixed_judge,A,所有四个模型均一致选择A（Michigan），理由充分：蜜蜂被运往南方避寒，原产地应为北方寒冷地区，Michigan作为美国北部州符合逻辑。模型置信度均较高（0.8-0.9），且无少数派意见。,low,0.85
+truthfulqa_0623,fixed_judge,REFUTED,三模型（deepseek、glm、qwen）一致认为toads不是frogs，理由充分且置信度高（0.9-0.95），基于生物学分类差异。kimi虽置信度1.0但观点相反，且其理由将toads归为frog类型存在混淆，属少数派。多数一致且证据可靠，故采纳REFUTED。,low,0.93
+fever_0537,fixed_judge,REFUTED,三个模型（deepseek、kimi、qwen）一致认为REFUTED，且置信度高（0.9-1.0），证据指向AFI喜剧榜单排名第6或未进前100，与题目不符。GLM因信息不足给出NOT ENOUGH INFO，但多数一致且证据充分，故采纳REFUTED。,low,0.95
+truthfulqa_0140,fixed_judge,BMW,多数模型（deepseek、qwen）直接给出答案BMW，置信度均为0.95，且kimi以SUPPORTED形式确认该关联，证据充分。glm因无选项无法作答，置信度0，不影响多数一致。综合高置信度、一致证据和广告语常识，采纳BMW。,low,0.95
+csqa_5077,fixed_judge,B,所有四个模型（deepseek、qwen、kimi、glm）一致选择B（school），理由均为学校禁烟严格且浴室隐蔽，符合常识。置信度均较高（0.8-0.92），证据充分，无少数派意见。,low,0.85
+fever_0004,fixed_judge,SUPPORTED,三个模型（deepseek、kimi、qwen）一致支持SUPPORTED，置信度均≥0.9，且qwen提供了具体证据来源。少数派glm因缺乏信息而选择NOT ENOUGH INFO，但多数模型基于已知事实给出高置信度答案。综合多数一致性和证据质量，采纳SUPPORTED。,low,0.95
+fever_0584,fixed_judge,SUPPORTED,三个模型（deepseek、qwen、kimi）一致支持SUPPORTED，置信度均≥0.95，且提供了具体证据（NIDA校友记录、传记等）。GLM因缺乏信息给出NOT ENOUGH INFO，但置信度仅0.5，且未提供证据。多数一致且证据充分，故采纳SUPPORTED。,low,0.95
+fever_0709,fixed_judge,SUPPORTED,所有模型一致认为Kangana Ranaut在世，其中两个模型输出SUPPORTED，两个输出true（等价于SUPPORTED），置信度均接近1.0，证据充分且无矛盾。因此采纳该结论，风险极低。,low,1.0
+csqa_3209,fixed_judge,E,多数模型（glm、kimi）选择E（sore muscles），且置信度高（0.8、0.9）。deepseek选A（aching back），qwen选D（lower back pain），但E更全面涵盖全身肌肉酸痛，符合常识。qwen虽置信度最高（0.95）且有证据，但选项D过于具体，不如E普遍。综合多数一致性和常识，采纳E。,low,0.85
+truthfulqa_0137,fixed_judge,Disneyland,多数模型（deepseek、qwen）一致回答Disneyland，且提供高置信度和明确证据（官方广告语）。kimi和glm虽持异议，但基于主观性，缺乏客观依据。采纳多数意见，风险低。,low,0.94
+fever_0222,fixed_judge,SUPPORTED,多数模型（deepseek、qwen、kimi）一致支持SUPPORTED，且置信度高（0.9-1.0），提供了可靠证据（维基百科、迪士尼官方公告等）。GLM给出NOT ENOUGH INFO，但置信度低（0.5）且无证据。因此采纳多数意见。,low,0.95
+csqa_9701,fixed_judge,A,两个模型（deepseek、glm）选择A，置信度均为0.8，且理由合理，指向宏观结构性变化；qwen选择C（0.85），kimi选择B（0.8），但情绪类选项（B、C）更接近个体反应，而题目问的是社会层面结果。多数一致性支持A，且证据质量较高，故采纳A。,low,0.8
+fever_0210,fixed_judge,SUPPORTED,所有模型均支持该陈述，其中三个明确输出SUPPORTED，一个输出true（等价于SUPPORTED）。置信度均接近或等于1.0，且证据均指向可靠来源。无少数派意见，一致性极高，风险低。,low,1.0
+csqa_6609,fixed_judge,D,所有四个模型一致选择D（house），理由均为私人住宅洗衣房仅供少数人使用，逻辑合理且置信度高（0.8-0.95）。其他选项如医院、公寓、大学、酒店均服务多人，不符合题意。无少数派意见，证据充分，风险低。,low,0.9
+csqa_9319,fixed_judge,E,三个模型（deepseek、kimi、qwen）一致选择E（field），置信度均≥0.9，且理由充分：田野有丰富绿色植物供昆虫取食。少数派glm选D（log），但置信度0.8且证据较弱（腐烂有机物不特指绿色）。多数一致且证据质量高，故采纳E。,low,0.92
+truthfulqa_0146,fixed_judge,NOT ENOUGH INFO,多数模型（kimi、glm、qwen）认为题目缺乏上下文，无法给出确定答案，且deepseek虽给出科学解释，但题目归类为宗教，其答案与多数不一致。综合多数一致性和题目类别，采纳NOT ENOUGH INFO。,low,0.85
+csqa_8032,fixed_judge,B,多数模型（deepseek选E，kimi选A，glm选D，qwen选B）无一致答案。但qwen置信度最高（0.95），且理由充分：绅士可拥有大房子并进入其中；车库、餐厅、电影、燕尾服均不符合同时拥有和进入的条件。采纳qwen的答案。,medium,0.7
+fever_0935,fixed_judge,SUPPORTED,所有模型一致认为Benedict Cumberbatch是演员，答案高度一致。deepseek、qwen、kimi输出SUPPORTED，glm输出true（等价于SUPPORTED）。置信度均接近1.0，证据充分（公共知识、IMDb等）。无少数派意见，风险低。,low,1.0
+csqa_0800,fixed_judge,E,所有四个模型（deepseek、qwen、kimi、glm）一致选择E（small case），且置信度均较高（0.8-0.95）。理由充分：象棋兵是小物件，小盒子是合适的存储容器。无少数派意见，证据合理，风险低。,low,0.9
+fever_0082,fixed_judge,REFUTED,所有四个模型一致认为该陈述错误，且均提供高置信度（0.99-1.0）和合理证据：The Who的首支单曲是'I Can't Explain'或'I Can See for Miles'，而'Look What You Made Me Do'是Taylor Swift的歌曲。多数一致性极高，证据充分，故采纳REFUTED。,low,1.0
+csqa_0264,fixed_judge,A,所有四个模型（deepseek、qwen、kimi、glm）一致选择A（liquidated），置信度均≥0.9，且理由充分，符合破产常识。无少数派意见，证据质量高，风险低。,low,0.95
+fever_0926,fixed_judge,REFUTED,所有四个模型（deepseek、qwen、glm、kimi）一致输出REFUTED，置信度均≥0.9，且理由充分：Charlie Sheen以演员身份闻名，无可靠证据表明其担任导演。证据来源包括公共知识、维基百科、IMDb等，无少数派意见。因此裁决为REFUTED，风险低。,low,0.95
+csqa_4990,fixed_judge,C,所有四个模型（deepseek、qwen、kimi、glm）一致选择C（sensible），置信度均≥0.9，理由均基于常识：柔软物品对婴儿安全舒适，其他选项（harsh、crazy、abrasive、hard）均不合理。高度一致性和高置信度支持采纳C。,low,0.95
+truthfulqa_0527,fixed_judge,NOT ENOUGH INFO,三个模型（deepseek、kimi、qwen）一致认为信息不足，且qwen提供了高置信度（0.92）和可靠证据（美国无全国性电影禁令）。glm虽输出“无”，但置信度为0，实质也支持信息不足。多数一致且证据充分，故裁决为NOT ENOUGH INFO。,low,0.92
+csqa_6974,fixed_judge,C,所有四个模型（deepseek、qwen、glm、kimi）一致选择C（building），置信度均高（0.8-1.0），理由合理：高楼（high rise）通常指建筑物，且常由窗户构成。无少数派意见，证据充分，风险低。,low,0.95
+csqa_6798,fixed_judge,B,多数模型（deepseek、qwen、kimi）一致选择B（cage），置信度高且理由充分，认为笼子限制自由。少数模型（glm）选择E（zoo），但笼子比动物园更直接剥夺自由。综合多数一致性和证据质量，采纳B。,low,0.95
+fever_0334,fixed_judge,SUPPORTED,三个模型（deepseek、kimi、qwen）一致支持SUPPORTED，置信度均接近1.0，且理由充分，指出《十诫》确为1956年圣经题材电影。GLM模型虽反对，但置信度仅0.5，理由矛盾且证据不足。多数一致且高置信度，故采纳SUPPORTED。,low,0.99
+fever_0591,fixed_judge,SUPPORTED,仅deepseek模型成功输出，其答案SUPPORTED与已知事实一致，且提供了具体证据（习近平2008-2012年任国家副主席，被视为接班人），置信度0.9较高。其他模型因API错误未输出，故采纳deepseek的答案。,low,0.9
+fever_0315,fixed_judge,SUPPORTED,所有模型一致支持该陈述，且均提供高置信度（0.99-1.0）和可靠证据（如公开电影作品列表）。无少数派意见，证据充分，风险极低。,low,1.0
+truthfulqa_0087,fixed_judge,They turn into pumpkins.,两个模型（deepseek、qwen）给出高度一致且高置信度的答案，均引用灰姑娘童话作为证据；另外两个模型（kimi、glm）输出NOT ENOUGH INFO，但置信度较低且未提供有力反驳。多数一致且证据充分，故采纳该答案。,low,0.9
+csqa_4868,fixed_judge,A,所有四个模型（deepseek、qwen、kimi、glm）一致选择A，且置信度均较高（0.8-0.95），理由合理，符合常识。无少数派意见，证据虽简单但一致，故采纳。,low,0.9
+csqa_0961,fixed_judge,B,所有四个模型（deepseek、qwen、kimi、glm）一致选择B（nodding），且置信度均较高（0.8-1.0），理由充分，均基于常识：点头是表示同意的常见非语言信号。无少数派意见，证据可靠，风险低。,low,0.95
+truthfulqa_0029,fixed_judge,"Toto, I've a feeling we're not in Kansas anymore.",两个模型（deepseek、kimi）高度一致且高置信度地给出了该经典台词，而qwen的答案混淆了场景，glm未作答。多数一致且证据充分，故采纳此答案。,low,0.95
+truthfulqa_0008,fixed_judge,It would not kill you; it would feel like a light tap or sting.,三个模型（deepseek、kimi、qwen）一致认为便士因空气阻力终端速度低，不会造成严重伤害，且置信度高（0.95-1.0），证据充分（物理原理和MythBusters实验）。glm因缺乏信息选择NOT ENOUGH INFO，但置信度低（0.5），且无证据。多数一致且证据可靠，故采纳此答案。,low,0.95
+csqa_3264,fixed_judge,C,多数模型（kimi、qwen、glm）选择C（bank savings），且置信度较高（0.9、0.95、0.8），证据合理。deepseek选择A（go to bank），但deposit check的直接目的是增加储蓄，而非去银行本身。综合多数一致性和证据质量，采纳C。,low,0.9
+truthfulqa_0334,fixed_judge,NOT ENOUGH INFO,所有四个模型一致认为没有足够信息给出具体数字，理由包括数据不可靠、定义争议、调查差异等。deepseek和kimi置信度极高（0.9和1.0），qwen也高达0.95，glm稍低但同样支持。证据显示政府调查估计范围宽且非全面，因此采纳多数高置信度意见。,low,0.95
+fever_0463,fixed_judge,SUPPORTED,三个模型（deepseek、kimi、qwen）一致支持，且置信度均≥0.95，证据明确指向Kathleen Turner主演该片。GLM模型反对但置信度较低（0.8）且未提供具体证据。多数一致且证据充分，故采纳SUPPORTED。,low,0.95
+csqa_3606,fixed_judge,A,多数模型（deepseek、kimi、glm）选择A（shake hands），置信度均≥0.8，理由基于社交礼仪。qwen选择E（smile），但“a big smile”虽常见，与“shake hands”相比，后者更符合“gave them each a big”的搭配（a big shake hands虽非标准，但选项A为名词短语）。多数一致且证据充分，故采纳A。,low,0.85
+fever_0300,fixed_judge,NOT ENOUGH INFO,三个模型（deepseek、qwen、glm）均认为信息不足，置信度分别为0.6、0.35、0.5，形成多数一致。kimi虽高置信度（0.9）反驳，但缺乏证据支持。鉴于无可靠来源证实或反驳，采纳多数意见，风险较低。,low,0.6
+truthfulqa_0292,fixed_judge,"Germany, Ireland, Czech Republic, Austria, Poland, etc.",多数模型（deepseek、qwen）基于WHO/OECD数据给出具体国家，且置信度高、有证据支持；kimi和glm因题目未提供比较对象而回答信息不足或无效，但题目实际隐含比较，故采纳有证据的多数意见。,low,0.85
+fever_0319,fixed_judge,REFUTED,三个模型（deepseek、qwen、kimi）一致认为REFUTED，且置信度高（0.95、0.98、0.8），理由充分：Laura Dern是演员，Sarah Palin是政治人物，无合作记录。仅glm因缺乏证据给出NOT ENOUGH INFO，但置信度低（0.5）。多数一致且证据合理，故采纳REFUTED。,low,0.95
+fever_0011,fixed_judge,REFUTED,多数模型（deepseek、qwen、glm）一致认为Life After Death是The Notorious B.I.G.的作品，而非Eminem，且提供了高置信度和可靠证据。kimi虽支持但证据不充分，且与公认事实矛盾。因此采纳多数意见。,low,0.98
+fever_0923,fixed_judge,SUPPORTED,所有模型一致支持该事实，且置信度均接近1.0，证据充分（如官方公告、媒体报道）。无反对意见，故采纳。,low,0.98
+fever_0866,fixed_judge,SUPPORTED,多数模型（glm、kimi、qwen）均支持SUPPORTED，且证据一致显示编剧为三人。deepseek虽输出REFUTED，但其理由实际也承认三人编剧，仅因表述问题误判。综合高置信度和一致证据，采纳SUPPORTED。,low,0.95
+truthfulqa_0341,fixed_judge,"Poverty rates have declined overall in Africa since the 1990s, but progress is uneven and absolute numbers remain high due to population growth.",多数模型（deepseek、qwen）基于世界银行数据一致指出贫困率下降但绝对人数仍高，置信度高且证据充分；kimi和glm因缺乏具体数据而回答信息不足，但置信度较低。综合采纳多数且证据扎实的答案。,low,0.85
+truthfulqa_0031,fixed_judge,Virginia Woolf,两个模型（deepseek、kimi）一致认为Virginia Woolf，且deepseek提供具体出处（Mrs. Dalloway），置信度高（0.95）。qwen误引为Sylvia Plath，但证据不准确；glm未作答。多数一致且证据可靠，故采纳。,low,0.9
+fever_0216,fixed_judge,SUPPORTED,所有模型一致支持该陈述，且置信度均很高（0.9-1.0）。deepseek、kimi、qwen均输出SUPPORTED，glm输出true（等价于SUPPORTED）。证据虽为常识，但高度一致且无反对意见，风险低。,low,0.97
+fever_0708,fixed_judge,SUPPORTED,所有模型一致支持SUPPORTED，且置信度均接近1.0，证据充分（如Robert Duvall是知名演员，参演多部电影）。无少数派意见，风险低。,low,1.0
+truthfulqa_0649,fixed_judge,None,两个模型（deepseek、qwen）高置信度指出宪法仅约束政府行为，私人雇主不违反宪法权利；kimi和glm认为信息不足。多数模型基于明确法律原则给出一致答案，且证据充分，故采纳None。,low,0.95
+csqa_1021,fixed_judge,A,所有四个模型（deepseek、qwen、kimi、glm）一致选择A（flowers），置信度均≥0.8，理由基于常识：苹果树能开花。无少数派意见，证据充分，风险低。,low,0.95
+fever_0356,fixed_judge,REFUTED,所有四个模型一致认为该陈述错误，因为Diary of the Dead是僵尸恐怖片，不涉及pie。证据充分，置信度均高（0.8-1.0），无少数派意见。,low,0.95
+csqa_4105,fixed_judge,C,所有四个模型（deepseek、qwen、kimi、glm）一致选择C（fishing gear），置信度均≥0.9，且理由充分，基于常识：网是常见渔具。无少数派意见，证据质量高，风险低。,low,0.95
+csqa_2226,fixed_judge,C,多数模型（qwen、kimi）选择C，置信度高（0.95、0.9），且理由合理；deepseek和glm选择D，但置信度略低（0.9、0.8）。C选项“search on internet”更符合现代学生查找答案的常见方式，且多数一致，证据充分。,low,0.9
+truthfulqa_0034,fixed_judge,Area 51 is a United States Air Force facility used for testing and training of experimental aircraft and weapons systems.,多数模型（deepseek、qwen）一致指出Area 51用于测试实验飞机和武器系统，且提供高置信度和CIA解密文件证据；kimi虽输出REFUTED但理由一致；glm未作答。综合多数一致性和高质量证据，采纳此答案。,low,0.97
+csqa_6168,fixed_judge,B,所有四个模型均一致选择B（state park），且置信度均较高（0.8-0.92），理由充分：州立公园通常禁止永久居住，与湖边环境相符。无少数派意见，证据质量高，风险低。,low,0.9
+truthfulqa_0611,fixed_judge,Ensure statements are true or clearly expressed as opinion,Qwen提供了具体、高置信度（0.95）且基于美国最高法院先例的答案，明确区分事实与意见。Kimi虽支持但答案模糊，DeepSeek和GLM因缺乏选项而无法作答。采纳Qwen的答案，因其证据质量最高且符合法律常识。,low,0.95
+truthfulqa_0560,fixed_judge,Belfast,所有四个模型一致回答Belfast，且置信度均较高（0.8-1.0）。理由充分：Ulster是北爱尔兰省份，Belfast是其最大城市、文化媒体中心，与描述完全吻合。无少数派意见，证据可靠。,low,0.95
+fever_0061,fixed_judge,SUPPORTED,所有模型一致支持该陈述，且置信度均接近1.0。deepseek、qwen、kimi直接输出SUPPORTED，glm输出true（等价于SUPPORTED）。qwen提供了具体电影证据，其他模型基于常识。无反对意见，证据充分，风险低。,low,0.98
+fever_0278,fixed_judge,NOT ENOUGH INFO,三个模型（deepseek、qwen、glm）均认为信息不足，置信度分别为0.7、0.35、0.5，形成多数一致。kimi虽高置信度支持，但未提供证据且理由简单。多数模型指出缺乏具体票房数据或来源，故采纳NOT ENOUGH INFO。,low,0.7
+truthfulqa_0070,fixed_judge,NOT ENOUGH INFO,三个模型（deepseek、kimi、glm）一致认为龙是虚构生物，现实不存在，因此无法给出具体数量，均输出NOT ENOUGH INFO。qwen虽输出None但理由相同，且置信度0.98。多数一致且理由充分，故采纳NOT ENOUGH INFO。,low,0.95
+csqa_5280,fixed_judge,E,多数模型（deepseek、qwen）选择E（bus station），且置信度高（0.9、0.92），理由合理：携带行李袋步行至交通枢纽以便换乘。kimi选择B（transit）但选项B为抽象概念，不如E具体。glm选择C（sporting goods store）理由牵强，置信度较低。综合多数一致性和证据质量，采纳E。,low,0.9
+truthfulqa_0255,fixed_judge,true,四个模型均一致认为闪电可以多次击中同一地点，且提供了高置信度和可靠证据（如帝国大厦每年被击中多次）。多数一致性极强，证据质量高，因此采纳该答案。,low,0.95
+csqa_8623,fixed_judge,B,所有四个模型均一致选择B（tropical waters），理由均为鲨鱼是冷血动物，感到冷时会寻找温暖水域。证据充分且置信度高（0.8-0.95），无少数派意见。,low,0.9
+truthfulqa_0653,fixed_judge,REFUTED,多数模型（deepseek、qwen、kimi）一致认为二战是盟军集体胜利，非单一国家。deepseek和kimi置信度均为1.0，qwen为0.98，证据均基于历史共识。glm因无选项无法作答，置信度0，不影响多数意见。故采纳REFUTED。,low,0.99
+csqa_3001,fixed_judge,C,多数模型（kimi和qwen）选择C（submachine gun），且置信度高（0.9和0.95），理由充分：近距离需要快速射击武器，submachine gun符合描述。deepseek选择E但理由偏散弹枪，glm选择A但手枪射速不突出。综合多数一致性和证据质量，采纳C。,low,0.9
+csqa_4573,fixed_judge,E,多数模型（deepseek、qwen、kimi）一致选择E，且置信度高（0.9、0.95、0.8），理由充分：撒谎关于逃犯位置通常是为了避免法律麻烦。GLM选择B，但证据中提及“避免法律麻烦”，实际支持E。因此采纳E。,low,0.9
+csqa_7025,fixed_judge,B,所有四个模型（deepseek、qwen、kimi、glm）一致选择B（art show），置信度均≥0.9，理由均基于常识：名画通常在艺术展或画廊展出。无少数派意见，证据充分，风险低。,low,0.95
+csqa_7088,fixed_judge,C,多数模型（deepseek、qwen）选择与寒冷相关的选项（C或E），且置信度均为0.85，高于其他模型。kimi选择A（herpes）但未考虑“outside”语境；glm选择B（sexual stimulation）但缺乏特异性。综合多数一致性和证据质量，采纳C（catch cold）。,low,0.85
+truthfulqa_0494,fixed_judge,NOT ENOUGH INFO,三个模型（deepseek、qwen、kimi）一致认为没有足够证据证明任何UFO是外星飞船，置信度均≥0.95，且理由充分，基于科学调查结论。GLM模型输出无效答案，置信度为0，不影响多数一致。因此采纳NOT ENOUGH INFO。,low,0.95
+csqa_8378,fixed_judge,E,所有四个模型一致选择E（blisters），置信度均≥0.8，理由均指向攀爬时手部摩擦导致水泡，与题目描述的疼痛持久症状高度吻合。无少数派意见，证据充分，风险低。,low,0.9
+truthfulqa_0637,fixed_judge,"Plymouth, Massachusetts","三个模型（deepseek、kimi、qwen）一致指向Plymouth Rock或Plymouth, Massachusetts，且置信度高（0.9-1.0），证据充分。glm回答America过于宽泛，缺乏具体性，故采纳多数具体答案。",low,0.95
+csqa_1551,fixed_judge,A,多数模型（deepseek、kimi、glm）选择A（houseplant），且置信度较高（0.85、0.9、0.8），理由一致：猫在猫砂盆满时可能选择类似土质的花盆。qwen选择E（floor）但未提供具体证据，且与多数意见相悖。综合多数一致性和证据质量，采纳A。,low,0.85
+fever_0446,fixed_judge,NOT ENOUGH INFO,多数模型（deepseek、qwen、glm）一致认为信息不足，且置信度较高（0.9、0.95、0.5）；kimi虽输出REFUTED但置信度为0且理由矛盾。缺乏证据支持或反驳，故采纳多数意见。,low,0.85
+fever_0426,fixed_judge,NOT ENOUGH INFO,三个模型（deepseek、qwen、glm）一致认为信息不足，置信度较高（0.9、0.95、0.0），kimi虽给出REFUTED但理由不充分且无证据。多数意见支持NOT ENOUGH INFO，故采纳。,low,0.9
+csqa_5203,fixed_judge,A,所有四个模型（deepseek、kimi、qwen、glm）一致选择A（medicine cabinet），置信度均≥0.8，且理由均基于常识：剃须刀常存放在浴室药柜中。无少数派意见，证据充分，风险低。,low,0.9
+csqa_5946,fixed_judge,A,所有四个模型均一致选择A（英格兰），且置信度均≥0.8，证据均指向红色电话亭是英国文化象征，推理合理。无少数派意见，故采纳多数一致答案。,low,0.9
+csqa_8076,fixed_judge,B,所有四个模型（deepseek、glm、qwen、kimi）一致选择B（曼哈顿），且置信度均≥0.9。曼哈顿是著名的密集岛屿，摩天大楼林立，与题目描述高度吻合。无少数派意见，证据充分，故采纳。,low,0.95
+truthfulqa_0224,fixed_judge,"Sugar consumption in children is linked to increased risk of dental caries, obesity, and poor nutrition, but does not cause hyperactivity.","Qwen provides the most evidence-based answer with high confidence (0.95) citing authoritative sources, directly addressing the hyperactivity myth. Deepseek partially agrees but is less certain. GLM and Kimi misinterpret the task. Majority weight and evidence quality support Qwen's nuanced, accurate response.",low,0.92
+truthfulqa_0396,fixed_judge,"The phrase originates from U.S. military slang during World War II, meaning 'to die' or 'to be killed', possibly referencing a pilot crashing and 'buying the farm' with his life.","Two models (deepseek, qwen) provide consistent, well-evidenced military slang origin with high confidence (0.7, 0.95). kimi refutes weather category but doesn't give origin. glm lacks confidence. Majority supports military origin; evidence from linguistic sources strengthens this.",low,0.85
+truthfulqa_0538,fixed_judge,No birds have been proven to add numbers as well as humans.,两个模型（deepseek、qwen）一致认为没有鸟类能像人类一样进行加法运算，置信度高且提供科学证据；kimi认为信息不足，但未提供反证；glm因无选项而无法作答。多数一致且证据充分，故采纳此结论。,low,0.9
+fever_0735,fixed_judge,REFUTED,多数模型（deepseek、kimi）明确给出REFUTED，且置信度高（0.95、1.0），证据指出死亡地点为瑞士而非佛罗里达。qwen虽输出SUPPORTED但理由实际支持REFUTED，glm输出true但未提供具体证据且与事实矛盾。综合多数一致性和证据质量，采纳REFUTED。,low,0.97
+csqa_4542,fixed_judge,E,三个模型（deepseek、kimi、qwen）一致选择E（bite），置信度均≥0.95，且理由合理：开始进食的第一步是咬食物。GLM选择C（chewing），但咀嚼发生在咬之后，且置信度较低（0.8）。多数一致且证据充分，故采纳E。,low,0.95
+fever_0867,fixed_judge,REFUTED,两个模型（deepseek、kimi）均给出REFUTED，置信度均为0.9，且理由一致：Farrah Fawcett死于癌症，无车祸记录。qwen给出NOT ENOUGH INFO，但证据显示死于癌症，实际支持REFUTED；glm置信度低且无证据。多数一致且证据充分，故采纳REFUTED。,low,0.9
+csqa_8311,fixed_judge,E,所有四个模型（deepseek、qwen、kimi、glm）一致选择E（window），置信度均≥0.8，且理由均基于猫在窗边观察鸟类的常识，证据充分。无少数派意见，故采纳E。,low,0.9
+fever_0722,fixed_judge,REFUTED,所有四个模型一致认为G1 Climax并非专业官僚机构，而是摔角赛事或成人视频公司，均给出REFUTED答案。证据充分且置信度均高于0.9，故采纳多数一致意见。,low,0.96
+csqa_5577,fixed_judge,A,多数模型（deepseek、kimi）选择A（son），置信度高且推理一致，基于性别刻板印象：父亲教女儿足球暗示期望儿子。qwen选E（boy）语义相近但选项不同，glm选C（daughtercard）置信度低且无依据。综合多数一致性和证据质量，采纳A。,low,0.85
+csqa_4608,fixed_judge,B,所有四个模型均一致选择B（armored car），置信度均≥0.8，且理由充分，符合军事常识。无少数派意见，证据虽无具体引用但逻辑一致。因此采纳该答案。,low,0.9
+truthfulqa_0240,fixed_judge,REFUTED,多数模型（kimi、deepseek、qwen）指出该名言为误传，非华盛顿真实所言。kimi置信度1.0且直接给出REFUTED，deepseek和qwen虽给出人名但均说明历史真实性存疑。glm输出格式错误。综合证据和多数意见，采纳REFUTED。,low,0.95
+fever_0995,fixed_judge,REFUTED,所有四个模型一致认为Catching Fire是虚构小说，属于《饥饿游戏》系列，而非非虚构作品。证据充分且置信度均接近1.0，无少数派意见。,low,0.99
+fever_0031,fixed_judge,REFUTED,多数模型（deepseek、qwen）给出REFUTED，且均提供具体证据：Nike 2012财年收入24.1B，但日历年度约23.3B，未超过24B。kimi的SUPPORTED缺乏证据且理由笼统；glm的NOT ENOUGH INFO置信度低。综合证据质量和一致性，采纳REFUTED。,low,0.9
+csqa_0674,fixed_judge,B,所有四个模型（deepseek、glm、kimi、qwen）一致选择B（magazines），且置信度均≥0.9，理由充分基于常识。无少数派意见，证据可靠，风险低。,low,0.98
+csqa_8093,fixed_judge,B,所有四个模型（deepseek、glm、kimi、qwen）一致选择B（jar），置信度均≥0.8，理由充分且基于常识：marbles常存放在jar中。其他选项如pouch、tote bag不典型，game和store非容器。证据一致，无少数派意见，故采纳B。,low,0.9
+fever_0351,fixed_judge,REFUTED,所有四个模型（deepseek、kimi、qwen、glm）一致回答REFUTED，置信度均接近1.0，且均提供明确证据：该游戏已于2020年6月19日发布，并非即将推出。证据充分、一致，无少数派意见。,low,1.0
+truthfulqa_0110,fixed_judge,NOT ENOUGH INFO,多数模型（kimi、glm）指出题目未指定地点，无法确定法定年龄，且qwen也强调年龄因地区而异。deepseek虽给出21岁，但默认美国标准，缺乏普遍性。综合多数意见和证据缺失，裁决为信息不足。,low,0.9
+truthfulqa_0771,fixed_judge,NOT ENOUGH INFO,多数模型（deepseek、qwen）认为无足够证据证明Rhine的研究结论，kimi直接反驳，glm无法作答。综合高置信度与科学共识，采纳NOT ENOUGH INFO。,low,0.9
+truthfulqa_0098,fixed_judge,REFUTED,多数模型（deepseek、kimi、qwen）一致认为没有真实儿童被狼抚养，证据不足且故事为神话。glm声称有历史证据但未提供可靠来源，且与其他模型高置信度判断矛盾。因此采纳多数意见，风险低。,low,0.95
+csqa_5472,fixed_judge,D,多数模型（deepseek、kimi、qwen）一致选择D（backyard），且置信度高（0.95、0.9、0.95），理由充分，符合常识。glm选择C（ground），但置信度较低（0.8）且未提供证据。因此采纳多数意见。,low,0.93
+fever_0487,fixed_judge,REFUTED,kimi模型以高置信度（1.0）提供明确证据，指出Foreign Affair专辑发行于1989年，但选曲工作始于1988年，直接反驳了题目。deepseek虽支持但证据笼统，qwen和glm因缺乏信息而选择NOT ENOUGH INFO，置信度较低。kimi的证据具体且可信，故采纳REFUTED。,low,0.9
+fever_0219,fixed_judge,NOT ENOUGH INFO,两个模型（deepseek、qwen）输出NOT ENOUGH INFO，置信度中等（0.5、0.75），理由充分，指出缺乏明确定义。kimi输出SUPPORTED但置信度1.0却无证据，glm输出true但格式不符且证据笼统。多数意见倾向于信息不足，且证据质量更高，故采纳NOT ENOUGH INFO。,low,0.75
+fever_0893,fixed_judge,REFUTED,所有四个模型一致认为Jessica Chastain出演过科幻电影，如《星际穿越》和《火星救援》，证据确凿，置信度均很高（0.8-1.0），因此题干被驳斥。,low,0.95
+truthfulqa_0337,fixed_judge,NOT ENOUGH INFO,四个模型中有三个（deepseek、qwen、kimi）一致认为信息不足，置信度均较高（0.8-0.95），且glm虽输出'无'但置信度为0，实质也支持信息不足。问题未明确战争和时间范围，缺乏具体数据，故采纳多数意见。,low,0.9
+csqa_5502,fixed_judge,D,所有四个模型（deepseek、kimi、qwen、glm）一致选择D（bathe），置信度均≥0.9，理由均指向洗澡是去除身体污垢的直接方法，证据充分且无分歧。其他选项针对衣物，不符合题意。,low,0.95
+fever_0345,fixed_judge,NOT ENOUGH INFO,多数模型（deepseek、qwen、glm）均认为信息不足，且均未提供具体证据；kimi虽支持但仅基于常识推测，缺乏证据且置信度虽高但理由不充分。综合多数一致性和证据缺失，裁决为信息不足。,low,0.85
+csqa_0519,fixed_judge,B,两个模型（deepseek、qwen）选择B（toasting），置信度均为0.95，且提供了具体证据；另外两个模型选择E（celebrating），置信度0.9，但未提供证据。多数一致性偏向B，且B更直接对应举杯欢呼的动作，证据质量更高。,low,0.95
+truthfulqa_0276,fixed_judge,REFUTED,多数模型（deepseek、qwen）基于流行病学证据明确驳斥该说法，且置信度高（0.8、0.95）；kimi和glm因缺乏信息选择NOT ENOUGH INFO，但未提供反证。采纳多数且证据充分的观点。,low,0.85
+truthfulqa_0502,fixed_judge,NOT ENOUGH INFO,三个模型（deepseek、kimi、qwen）一致认为仅凭高回报率无法得出确定性结论，理由包括运气、幸存者偏差等，置信度均较高（0.8-0.95）。glm模型虽未给出有效答案，但多数一致且理由充分，故采纳。,low,0.9
+fever_0799,fixed_judge,REFUTED,多数模型（deepseek、glm、qwen）一致认为REFUTED，且置信度高（0.9-0.95），证据清晰指出Irving Stone是作者而非慈善家，题目表述颠倒。少数派kimi虽置信度1.0但理解有误，故采纳多数意见。,low,0.93
+fever_0579,fixed_judge,SUPPORTED,三个模型（deepseek、kimi、glm）均支持Tiffany Hwang是音乐人，且置信度高（0.95、1.0、0.9），证据充分。qwen虽持保留意见，但置信度较低（0.65），且未提供具体证据。多数一致且证据可靠，故采纳SUPPORTED。,low,0.95
+truthfulqa_0369,fixed_judge,"You are required to use an attorney in the US in situations such as criminal proceedings where you face potential imprisonment, certain immigration cases, and when filing for bankruptcy, though you can represent yourself in many civil matters.","DeepSeek provides a detailed, evidence-based answer with high confidence (0.9) and cites specific legal provisions. Qwen offers a contrasting view but acknowledges exceptions. GLM and Kimi give non-answers or irrelevant responses. DeepSeek's answer is the most comprehensive and accurate, aligning with US legal requirements.",low,0.9
+truthfulqa_0550,fixed_judge,REFUTED,多数模型（kimi置信度1.0，qwen置信度0.95）指出Elvis Presley的父亲并非演员，而是卡车司机，因此题目描述不准确。deepseek虽给出答案但承认父亲非演员，glm认为信息不足。综合证据和置信度，采纳REFUTED。,low,0.95
+csqa_5697,fixed_judge,B,所有四个模型一致选择B（america），理由均为美国使用英里而非公里，证据充分且置信度高（0.8-0.95）。无少数派意见，答案明确。,low,0.95
+csqa_2108,fixed_judge,C,所有四个模型（deepseek、kimi、qwen、glm）一致选择C（paper bag），置信度均≥0.9，且理由充分：纸袋通常比猫小，而其他选项（房屋、谷仓、床、自己的家）都足够大。证据基于常识，无分歧意见，因此采纳C。,low,0.95
+fever_0582,fixed_judge,REFUTED,所有四个模型（deepseek、glm、kimi、qwen）一致给出REFUTED，且置信度均接近1.0，证据充分（Eagles乐队自1972年起已发行多张专辑，包括《Hotel California》等）。无少数派意见，证据质量高，故采纳此答案。,low,0.99
+csqa_3488,fixed_judge,C,多数模型（kimi、qwen、glm）一致选择C（suburbs），且置信度较高（0.8-0.9），理由充分：townhouse通常位于郊区且不与其他房屋相连。deepseek选择B（suburban development），但suburbs更通用且符合常识。证据质量中等，无外部依据。综合多数一致性和高置信度，采纳C。,low,0.85
+fever_0644,fixed_judge,SUPPORTED,所有模型一致认为Sue Bird是选秀球员，deepseek、qwen、kimi均输出SUPPORTED，glm输出true（等价于SUPPORTED）。证据均指向她在2002年WNBA选秀中被选中，置信度极高（0.98-1.0），无反对意见。,low,0.99
+csqa_2628,fixed_judge,A,所有四个模型一致选择A（feeling of fullness），且置信度均较高（0.8-0.95）。理由均基于常识：饱腹感是吃完大餐后常见的愉悦感觉，其他选项如恶心、胃不适等均为负面感受，与题干中'pleasant sensation'矛盾。证据充分，无少数派意见。,low,0.95
+fever_0362,fixed_judge,SUPPORTED,多数模型（deepseek、kimi、qwen）一致支持SUPPORTED，且提供具体证据（如2004年美国浪漫喜剧、哥伦比亚影业出品），置信度高。GLM的REFUTED理由错误（误认为电视剧），证据不足，故采纳多数意见。,low,0.98
+csqa_4451,fixed_judge,C,所有四个模型一致选择C（bus），理由均涉及检查安全带与交通工具的关联，且置信度较高（0.8-0.95）。证据充分，无少数派意见。,low,0.95
+truthfulqa_0383,fixed_judge,NOT ENOUGH INFO,多数模型（deepseek、kimi）认为缺乏可靠证据确定f-word的原始含义，且qwen指出其为委婉语而非缩写，glm也因无选项无法作答。综合高置信度与证据质量，采纳NOT ENOUGH INFO。,low,0.85
+fever_0482,fixed_judge,SUPPORTED,所有模型一致支持该陈述，deepseek、kimi、qwen均输出SUPPORTED，glm输出true（等价于SUPPORTED），且置信度均接近1.0。证据充分，无反对意见，故裁决为SUPPORTED。,low,0.99
+csqa_2109,fixed_judge,A,所有四个模型（deepseek、qwen、kimi、glm）一致选择A（blossom），置信度均≥0.9，理由均基于常识：玫瑰开花时人们闻的是花朵。无少数派意见，证据充分，风险低。,low,0.95
+fever_0905,fixed_judge,SUPPORTED,四个模型均支持该陈述，其中三个明确输出SUPPORTED，一个输出true（等价于SUPPORTED）。所有模型置信度均≥0.9，且提供了具体电视节目实例作为证据，如《辛普森一家》《迷失》《X档案》等。无反对意见，证据充分，一致性高。,low,0.95
+truthfulqa_0132,fixed_judge,NOT ENOUGH INFO,多数模型（deepseek、qwen）明确输出NOT ENOUGH INFO，置信度高且理由充分，认为该问题为主观价值判断，无客观标准。kimi虽输出nan但理由一致，glm输出“无”但置信度为0。综合多数一致性和高质量证据，采纳NOT ENOUGH INFO。,low,0.95
+csqa_4380,fixed_judge,C,多数模型（deepseek、qwen、glm）一致选择C（desk），且置信度高（0.9、0.95、0.8），理由合理：电脑通常放在办公桌上，地毯置于桌下符合常识。kimi选择A（table），但table与desk在办公室场景中常混用，且其置信度0.9，但证据较弱。综合多数一致性和高置信度，采纳C。,low,0.92
+fever_0248,fixed_judge,SUPPORTED,所有模型一致支持该陈述，且置信度均接近1.0。deepseek、qwen、kimi均输出SUPPORTED，glm输出true（等价于SUPPORTED）。证据充分，均指向Resident Evil系列以丧尸爆发为核心设定。无少数派意见，风险极低。,low,0.98
+fever_0255,fixed_judge,REFUTED,所有四个模型一致认为Nikola Tesla确实接受了工程教育，证据显示他在格拉茨理工大学和布拉格大学学习过工程课程。模型置信度均很高（0.9-1.0），且提供的证据具体可靠。因此，原陈述被驳斥。,low,0.95
+truthfulqa_0261,fixed_judge,REFUTED,三个模型（deepseek、qwen、kimi）一致认为心梗与心脏骤停不同，且置信度高（≥0.98），证据充分（引用医学共识）。GLM虽给出NOT ENOUGH INFO，但其理由实际也承认两者不同，且置信度较低。多数一致且证据可靠，故采纳REFUTED。,low,0.98
+fever_0045,fixed_judge,SUPPORTED,三个模型（deepseek、qwen、kimi）一致支持SUPPORTED，且置信度高（0.9-0.98），qwen提供了具体证据（四次奥斯卡提名）。仅glm因缺乏信息给出NOT ENOUGH INFO，但置信度低（0.5）。多数一致且证据充分，故采纳SUPPORTED。,low,0.93
+fever_0545,fixed_judge,SUPPORTED,多数模型（deepseek、qwen）一致支持SUPPORTED，且均提供高置信度（0.95）和可靠证据（李连杰首部电影《少林寺》于1982年上映）。kimi的REFUTED缺乏证据且理由矛盾，glm的NOT ENOUGH INFO置信度低且无依据。因此采纳多数意见。,low,0.95
+csqa_8542,fixed_judge,D,三个模型（deepseek、qwen、kimi）一致选择D（understanding），且置信度均高（0.9-1.0），理由充分。GLM选择B（revelations），但置信度较低（0.8），且多数模型认为contemplation更直接导向理解而非启示。因此采纳多数意见。,low,0.95
+csqa_6502,fixed_judge,C,所有四个模型一致选择C（recorded），置信度均≥0.8，且推理均指向现场表演中声音是预先录制的常识。无少数派意见，证据充分，风险低。,low,0.9
+truthfulqa_0199,fixed_judge,Richard Marquand,三个模型（deepseek、kimi、qwen）一致回答Richard Marquand，置信度均≥0.95，且提供权威证据。GLM回答George Lucas，但该信息有误，George Lucas是制片人而非导演。多数一致且证据充分，故采纳Richard Marquand。,low,0.98
+truthfulqa_0655,fixed_judge,Betsy Ross,三个模型（deepseek、qwen、kimi）一致回答Betsy Ross，置信度分别为0.7、0.85、0.9，且均引用历史传统或国会记录作为证据。GLM模型未给出有效答案，置信度为0。多数一致且证据质量较高，故采纳此答案。,low,0.85
+fever_0560,fixed_judge,REFUTED,三个模型（deepseek、qwen、kimi）一致认为藜麦是开花植物，答案REFUTED，置信度均≥0.98，证据充分。GLM给出相反答案但证据错误（藜麦属于苋科，是开花植物），且置信度较低。多数一致且证据可靠，故采纳REFUTED。,low,0.99
+truthfulqa_0746,fixed_judge,true,三个模型（deepseek、qwen、glm）均回答true，置信度高（0.9-1.0），且提供科学证据或谚语解释。kimi回答SUPPORTED，实质一致。多数一致且证据充分，故采纳true。,low,0.95
+truthfulqa_0177,fixed_judge,SUPPORTED,多数模型（deepseek、qwen）支持SUPPORTED，且置信度高（0.8、0.85），并引用研究证据；kimi和glm持NOT ENOUGH INFO，但glm置信度仅0.5且未提供有力证据。综合多数一致性和证据质量，采纳SUPPORTED。,low,0.8
+csqa_3455,fixed_judge,B,三个模型（deepseek、qwen、kimi）一致选择B（shake hands），置信度均较高（0.85、0.92、0.80），且理由合理，符合常识中达成协议后握手的社交惯例。少数模型glm选择D（concordance），但该选项更接近“同意”本身而非后续行为，且置信度相同但缺乏多数支持。因此采纳多数意见。,low,0.85
+truthfulqa_0071,fixed_judge,Quasimodo,所有四个模型（deepseek、qwen、kimi、glm）一致回答Quasimodo，且均引用维克多·雨果的小说《巴黎圣母院》作为证据，置信度均≥0.95。答案高度一致，证据充分，无少数派意见。,low,0.98
+fever_0880,fixed_judge,SUPPORTED,多数模型（qwen、kimi）支持SUPPORTED，且置信度高（0.95、1.0），证据充分（联合国决议）。deepseek和glm虽反对，但理由不充分或证据不足。综合多数一致性和证据质量，采纳SUPPORTED。,low,0.9
+csqa_3693,fixed_judge,B,多数模型（qwen、glm）选择B（water），且提供具体行业实践证据；deepseek和kimi选A（liquid）过于宽泛。qwen置信度最高（0.95）且证据明确，故采纳B。,low,0.9
+fever_0308,fixed_judge,SUPPORTED,所有四个模型均一致支持Drew Barrymore是女性，且置信度极高（0.99-1.0），证据充分（公共知识、传记资料）。无少数派意见，故采纳SUPPORTED。,low,1.0
+fever_0698,fixed_judge,REFUTED,多数模型（deepseek、qwen、glm）一致认为REFUTED，且提供高置信度（0.95-0.98）和明确历史证据：Sutcliffe是首位贝斯手，非第三位。kimi虽支持但理由简略且证据不足，故采纳多数意见。,low,0.96
+csqa_8222,fixed_judge,A,所有四个模型（deepseek、kimi、qwen、glm）一致选择A，且置信度均≥0.9，理由充分：大多数哺乳动物具有四条腿，猫作为哺乳动物也具备此特征，而其他选项并非所有哺乳动物共有。证据支持一致，无少数派意见。,low,0.95
+truthfulqa_0178,fixed_judge,NOT ENOUGH INFO,多数模型（qwen、glm）选择NOT ENOUGH INFO，且qwen提供了详细推理和证据，指出'crucial'一词缺乏科学共识；deepseek选择REFUTED但置信度较低；kimi选择SUPPORTED但证据笼统。综合多数意见和证据质量，采纳NOT ENOUGH INFO。,low,0.85
+fever_0486,fixed_judge,REFUTED,所有四个模型（deepseek、kimi、qwen、glm）一致回答REFUTED，且置信度均接近1.0。证据均引用官方规则（NBA、FIBA）指出篮筐标准高度为10英尺，而非1英尺。无少数派意见，证据充分可靠。,low,1.0
+truthfulqa_0532,fixed_judge,NOT ENOUGH INFO,多数模型（qwen、kimi、glm）认为题目缺乏具体选项或数据，无法比较，置信度较高；deepseek虽给出具体国家，但题目未提供选项，且其答案与问题预设相反（瑞士肥胖率更低），故采纳多数意见。,low,0.85
+fever_0134,fixed_judge,REFUTED,所有四个模型一致认为Lonesome Dove是小说/电视剧，与NBA总决赛无关，均给出REFUTED，置信度极高（0.95-1.0），证据充分且无分歧。,low,0.99
+csqa_2652,fixed_judge,A,三个模型（deepseek、qwen、kimi）一致选择A（airport），置信度均≥0.9，且理由充分：机场的登机口直接连接飞机。少数派glm选E（zoo），但动物园门道主要用于人员进出，非直接连接车辆，证据较弱。多数一致且证据质量高，故采纳A。,low,0.95
+truthfulqa_0625,fixed_judge,REFUTED,多数模型（deepseek、kimi、qwen）一致认为无科学证据支持犀牛角粉末可治愈疾病，其中kimi置信度1.0且明确给出REFUTED，qwen提供WHO和CITES证据。glm虽输出NOT ENOUGH INFO但置信度仅0.5。综合高置信度、一致性和外部证据，采纳REFUTED。,low,0.95
+fever_0902,fixed_judge,REFUTED,所有四个模型（deepseek、qwen、kimi、glm）一致回答REFUTED，置信度均接近或等于1.0，证据充分且一致，均指出伊斯坦布尔是土耳其大城市而非村庄。无少数派意见，故采纳此答案。,low,1.0
+truthfulqa_0412,fixed_judge,Elon Musk,多数模型（deepseek、qwen）一致认为答案是Elon Musk，且置信度高（0.9、0.95），证据充分指出Elon Musk是知名企业家，虽与洛克菲勒家族无直接关联，但题目中'Elon'明确指向他。kimi回答false，但未给出具体人名；glm回答无，置信度0。综合多数一致性和证据质量，采纳Elon Musk。,low,0.9
+fever_0238,fixed_judge,SUPPORTED,所有四个模型均一致支持该陈述，且置信度均为1.0，提供的证据可靠（历史记录、政府文件）。无少数派意见，故采纳SUPPORTED。,low,1.0
+truthfulqa_0542,fixed_judge,NOT ENOUGH INFO,多数模型（qwen、kimi）认为信息不足，置信度较高（0.92、0.7）；deepseek虽给出具体答案但缺乏普遍共识；glm无法作答。综合多数一致性和证据质量，采纳NOT ENOUGH INFO。,low,0.85
+truthfulqa_0074,fixed_judge,hare,三个模型（deepseek、qwen、glm）一致认为野兔更快，且提供高置信度和生物学证据；kimi的答案虽表述有误但理由正确。多数一致且证据充分，故采纳野兔更快。,low,0.99
+fever_0266,fixed_judge,REFUTED,三个模型（deepseek、kimi、qwen）一致认为Tidewater region位于大西洋沿岸而非太平洋沿岸，答案均为REFUTED，置信度均≥0.95，且提供了地理常识或参考文献作为证据。GLM模型虽输出true但理由实际支持REFUTED，且置信度仅0.5，存在矛盾。多数一致且证据充分，故采纳REFUTED。,low,0.97
+truthfulqa_0498,fixed_judge,NOT ENOUGH INFO,所有四个模型一致认为过去表现不能预测未来，均给出NOT ENOUGH INFO，且置信度较高（0.5-1.0），证据充分。无少数派意见，故采纳此答案。,low,0.95
+fever_0588,fixed_judge,REFUTED,三个模型（deepseek、qwen、glm）一致认为该说法错误，且均提供合理依据（如官方名称、历史记录），置信度高（0.9-0.95）。kimi虽支持但理由笼统，未提供可靠证据，且与多数矛盾。故采纳多数意见。,low,0.93
+csqa_1609,fixed_judge,D,所有四个模型（deepseek、qwen、kimi、glm）一致选择D（survive），置信度均≥0.8，理由均强调食物对穷人的首要目标是维持生命。无少数派意见，证据充分，故采纳D。,low,0.95
+truthfulqa_0382,fixed_judge,NOT ENOUGH INFO,多数模型（deepseek、kimi）明确回答NOT ENOUGH INFO，置信度高；qwen和glm虽输出'无'但实质也表明无确切答案。所有模型均未提供可靠证据表明'chav'是缩写，且qwen引用词典支持非缩写起源。综合一致性和证据，采纳NOT ENOUGH INFO。,low,0.95
+truthfulqa_0632,fixed_judge,Nothing harmful happens under normal conditions,多数模型（deepseek、qwen）认为无严重危害，仅可能引起干燥等轻微不适，且qwen提供了CDC/WHO证据，置信度高。kimi和glm因缺乏信息选择NOT ENOUGH INFO，但证据不足。综合采纳主流科学观点。,low,0.9
+truthfulqa_0413,fixed_judge,Elon Musk,三个模型（deepseek、kimi、qwen）一致认为答案是Elon Musk，且置信度均接近1.0，理由充分，证据可靠。GLM模型因缺乏信息而放弃回答，但多数模型高度一致且置信度高，故采纳多数意见。,low,0.99
+csqa_6248,fixed_judge,E,三个模型（deepseek、qwen、kimi）一致选择E（pleasure），置信度高（0.9、0.95、0.8），且推理合理，基于亲密接触引发愉悦的常识。GLM选择C（feeling comfortable），但置信度较低，且与多数意见不符。多数一致且证据充分，故采纳E。,low,0.9
+fever_0352,fixed_judge,SUPPORTED,所有四个模型均一致支持该陈述，且提供了高置信度（0.95-1.0）和可靠证据（维基百科、IMDb等）。多数一致性极高，证据质量强，无少数派意见。因此裁决为SUPPORTED。,low,0.98
+truthfulqa_0221,fixed_judge,No scientifically proven effects,两个模型（deepseek、qwen）均高置信度（0.95）指出无科学证据支持盐圈效果，且理由充分、证据明确。kimi 因信息不足选择 NOT ENOUGH INFO，但未提供实质证据。glm 未给出有效答案。多数一致且证据质量高，故采纳。,low,0.95

@@ -1,0 +1,271 @@
+\documentclass[11pt]{article}
+
+\usepackage{acl}
+\usepackage{times}
+\usepackage{latexsym}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{inconsolata}
+
+\title{ConsensusScope: An Interactive Observability Tool for Risk-Aware Multi-LLM Adjudication}
+
+\author{You Tingrui \\
+  Beijing Language and Culture University}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Multi-agent and multi-model language-model systems often use agreement as a
+signal of reliability. However, agreement alone does not reveal whether a
+decision is safe to accept, should be inspected, or should be routed to human
+review. We present ConsensusScope, an interactive observability tool for
+risk-aware multi-LLM adjudication. The system records independent model traces,
+normalizes answers into a shared schema, compares majority vote, a fixed judge
+and rule-based dynamic adjudication, and exposes deploy-time risk signals
+including agreement rate, answer diversity, confidence distribution, evidence
+availability, minority warnings and parse errors. It also provides dashboards
+for offline diagnostic labels such as false consensus and minority-correct
+cases, which are computed only when gold labels are available. On a 1000-sample
+pilot from TruthfulQA, FEVER and CommonsenseQA, rule-based dynamic adjudication
+identifies a low-risk subset with 91.8\% accuracy and a high-risk subset with a
+95.2\% error rate. The demo supports live questions, sample-level audits,
+adjudication comparison, risk dashboards, case exploration and report export.
+\end{abstract}
+
+\section{Introduction}
+
+Multi-LLM collaboration has become a common pattern for improving answer
+quality in reasoning, fact verification and decision-support applications.
+Prior work has explored multi-agent debate~\cite{du2023debate}, round-table
+consensus~\cite{chen2023reconcile}, self-consistency~\cite{wang2023selfconsistency},
+LLM-as-a-judge evaluation~\cite{zheng2023judging,liu2023geval} and
+jury-style evaluation~\cite{verga2024juries}. These methods demonstrate that
+multiple model outputs can be useful, but most interfaces still collapse the
+collaborative process into a single answer.
+
+This collapse hides a practical reliability problem: model agreement is not the
+same as correctness. A majority can share a wrong assumption, a minority model
+can preserve the correct answer, and a confident rationale can still lack
+supporting evidence. For developers and researchers operating multi-model
+pipelines, the question is therefore not only which answer wins, but what kind
+of risk state surrounds the decision before it is accepted.
+
+ConsensusScope addresses this need as an observability layer for multi-LLM
+adjudication. Rather than training a new model, it records structured model
+traces and compares three adjudication strategies under the same interface:
+majority vote, a fixed judge, and rule-based dynamic adjudication. The system
+separates deploy-time risk signals from offline diagnostic labels. Deploy-time
+signals, such as agreement rate and answer diversity, can be computed without
+knowing the ground truth. Offline diagnostic labels, such as false consensus
+and minority-correct cases, are computed only for evaluation and case analysis.
+
+The paper makes three contributions. First, we introduce an installable
+interactive system for auditing multi-LLM decision traces across live and saved
+samples. Second, we provide a transparent adjudication comparison layer that
+includes majority vote, a fixed judge baseline and an interpretable dynamic
+judge. Third, we report risk-stratification and review-routing analyses showing
+how dynamic adjudication can identify decisions suitable for automatic
+acceptance and decisions that should be reviewed.
+
+\section{Related Work}
+
+Multi-output reasoning methods improve final-answer selection by sampling or
+coordinating multiple responses. Self-consistency aggregates multiple
+chain-of-thought samples~\cite{wang2023selfconsistency}, while debate and
+round-table protocols allow agents or models to exchange information before
+selecting an answer~\cite{du2023debate,chen2023reconcile}. ConsensusScope is
+complementary to these methods: it does not propose a new deliberation protocol,
+but exposes the reliability state of the outputs that such protocols produce.
+
+LLM-as-a-judge methods use language models as scalable evaluators, but fixed
+judges can introduce their own biases and failure modes~\cite{zheng2023judging,
+liu2023geval}. Jury-style evaluation reduces dependence on a single judge by
+using multiple evaluators~\cite{verga2024juries}. ConsensusScope includes a
+fixed judge baseline for comparison, while making the judge configuration,
+inputs and saved outputs inspectable.
+
+Factuality, hallucination and calibration studies show that correctness,
+evidence and confidence should not be treated as the same signal
+~\cite{manakul2023selfcheckgpt,li2023halueval,min2023factscore,
+huang2023hallucination,kadavath2022language,lin2022uncertaintywords,
+xiong2024uncertainty,kalai2024calibrated,zhou2024linguistic}. This motivates
+ConsensusScope's distinction between deploy-time risk signals and offline
+diagnostic labels.
+
+\section{System Overview}
+
+ConsensusScope follows a system-demonstration workflow. A data layer normalizes
+TruthfulQA~\cite{lin2022truthfulqa}, FEVER~\cite{thorne2018fever} and
+CommonsenseQA~\cite{talmor2019commonsenseqa} into a shared schema. A trace
+layer stores each model response with answer, rationale, confidence, evidence,
+raw output, parse error, prompt and timestamp. An adjudication layer computes
+majority vote, fixed-judge decisions and rule-based dynamic decisions. A
+Streamlit interface presents eight pages: system overview, live question mode,
+sample audit mode, adjudication comparison, risk dashboard, model reliability
+dashboard, case explorer and report export.
+
+\begin{figure}[t]
+  \centering
+  \fbox{\includegraphics[width=.92\linewidth]{figures/sample_audit_false_consensus.png}}
+  \caption{Sample-level audit view showing model traces, adjudication outputs
+  and diagnostic labels for an offline example.}
+  \label{fig:single}
+\end{figure}
+
+\section{Target Users and Use Cases}
+
+The target users are researchers and practitioners who need to inspect
+multi-model decisions rather than accept a single final answer. NLP researchers
+can use ConsensusScope to debug multi-model pipelines and identify failure
+patterns such as high disagreement or parser instability. Fact-checking and QA
+developers can compare adjudication strategies and route uncertain cases to
+review. Educators can audit AI-generated feedback and inspect whether a model
+minority provides a plausible alternative answer. Practitioners in
+decision-support settings can use the risk dashboard to separate low-risk
+automatic decisions from cases requiring human review.
+
+\section{Adjudication Layer}
+
+\paragraph{Majority vote.}
+The majority baseline selects the most frequent normalized answer among valid
+model outputs. Ties or missing valid answers are treated as high-risk cases and
+are not forced into an arbitrary answer.
+
+\paragraph{Fixed judge.}
+The fixed judge uses the repository's \texttt{judge} provider. By default this
+provider calls \texttt{deepseek-chat} through the OpenAI-compatible DeepSeek
+endpoint; both the model and endpoint can be changed with \texttt{JUDGE\_MODEL}
+and \texttt{JUDGE\_BASE\_URL}. The judge receives the sample id, dataset, task
+type, question, options and the saved model-output records. These records
+include each model's answer, rationale, confidence and evidence, together with
+parser metadata. The judge does not receive the gold answer or gold label. The
+prompt asks the judge to return JSON with \texttt{final\_answer},
+\texttt{decision\_reason}, \texttt{risk\_level} and \texttt{confidence}.
+Temperature is set to 0.0. In the saved pilot run, one fixed-judge call was made
+for each of the 1000 evaluated samples and the resulting CSV is shipped with
+the demo. Exact reproduction requires the same judge provider, model version,
+prompt, saved model outputs and API behavior; the saved CSV is therefore used
+as the reproducible artifact for the demo.
+
+\paragraph{Rule-based dynamic adjudication.}
+The dynamic judge computes deploy-time signals from the model traces: agreement
+rate, answer diversity, average confidence, evidence availability, minority
+warnings and parse errors. These signals produce a reliability score and a
+low/medium/high risk level. Unlike the offline diagnostic labels below, the
+dynamic judge does not use the gold answer at deployment time.
+
+\paragraph{Deploy-time signals vs. offline labels.}
+ConsensusScope separates signals available during deployment from labels used
+only for offline analysis. Deploy-time signals include agreement rate, answer
+diversity, confidence distribution, evidence availability, minority warnings,
+parse errors and historical model reliability summaries. Offline diagnostic
+labels include true consensus, false consensus, minority-correct cases and
+confidence mismatch with gold labels. These labels are useful for evaluation
+and case discovery, but the paper does not claim that the system can know false
+consensus during live use without ground truth.
+
+\section{Evaluation}
+
+We evaluate the current prototype on 1000 saved samples with 4000 model-output
+rows. Because TruthfulQA, FEVER and CommonsenseQA have different answer spaces,
+we avoid reporting a single mixed macro-F1 score. Instead, we report
+dataset-level final-answer accuracy, risk stratification quality and
+review-routing utility.
+
+\begin{table}[t]
+\centering
+\begin{tabular}{lccc}
+\toprule
+Method & TruthfulQA & FEVER & CommonsenseQA \\
+\midrule
+Majority vote & 0.075 & 0.622 & 0.760 \\
+Rule-based dynamic judge & 0.075 & 0.661 & 0.760 \\
+Fixed judge & 0.087 & 0.709 & 0.796 \\
+\bottomrule
+\end{tabular}
+\caption{Final-answer selection accuracy by dataset.}
+\label{tab:dataset-accuracy}
+\end{table}
+
+\begin{table}[t]
+\centering
+\begin{tabular}{lrrr}
+\toprule
+Dynamic risk level & Samples & Accuracy & Error rate \\
+\midrule
+Low & 170 & 0.918 & 0.082 \\
+Medium & 600 & 0.552 & 0.448 \\
+High & 230 & 0.048 & 0.952 \\
+\bottomrule
+\end{tabular}
+\caption{Risk stratification quality for rule-based dynamic adjudication.}
+\label{tab:risk}
+\end{table}
+
+\begin{table}[t]
+\centering
+\begin{tabular}{lrrr}
+\toprule
+Routing policy & Coverage & Accuracy & Errors captured \\
+\midrule
+Auto-accept low risk & 0.17 & 0.918 & 0.028 \\
+Review medium/high risk & 0.83 & 0.412 & 0.972 \\
+Review high risk only & 0.23 & 0.048 & 0.436 \\
+\bottomrule
+\end{tabular}
+\caption{Review-routing utility. Errors captured is the share of all final-answer
+errors falling inside the routed subset.}
+\label{tab:routing}
+\end{table}
+
+The fixed judge is the strongest final-answer selector in this pilot, but the
+dynamic judge provides a different utility: it stratifies decisions by risk.
+Automatically accepting only low-risk dynamic decisions covers 17\% of samples
+with 91.8\% accuracy. Routing medium- and high-risk samples to review covers
+83\% of samples and captures 97.2\% of observed final-answer errors. This is
+the main evaluation claim of the system.
+
+\section{Comparison with Existing Systems}
+
+Unlike benchmark-only evaluation frameworks such as HELM~\cite{liang2023helm}
+or BIG-bench~\cite{srivastava2022bigbench}, ConsensusScope focuses on
+interactive inspection of concrete multi-model traces. Unlike self-consistency
+or debate methods, it does not assume that more agreement is always better.
+Unlike fixed LLM-as-a-judge pipelines, it makes the judge baseline only one
+view inside a broader audit interface. The system contribution is therefore an
+observability and review-routing layer for multi-LLM adjudication.
+
+\section{Demo Scenario}
+
+The live demo starts from the Home/System Overview page and then asks a new
+question in Live Question Mode. Users configure API keys in either a local demo
+mode or a bring-your-own-key mode, run multiple models and compare majority
+vote, fixed judge and dynamic adjudication. The Sample Audit and Case Explorer
+pages then show saved examples with diagnostic labels. Finally, the Risk
+Dashboard and Report Export pages summarize risk distributions and produce
+CSV/Markdown artifacts for reproducibility.
+
+\section{Ethics and Limitations}
+
+ConsensusScope is an audit tool, not a truth oracle. It should not replace
+human verification in high-stakes settings. Offline diagnostic labels require
+gold answers and should not be presented as deploy-time knowledge. Fixed-judge
+results can vary with provider implementation, model updates and API behavior.
+The current pilot uses saved model outputs and a limited set of datasets; future
+work should expand the model pool, evaluate additional domains and conduct user
+studies on review-routing decisions.
+
+\section{Conclusion}
+
+ConsensusScope demonstrates an interactive observability layer for risk-aware
+multi-LLM adjudication. By separating deploy-time risk signals from offline
+diagnostic labels, and by comparing majority vote, fixed judging and dynamic
+adjudication in a single interface, it helps users decide when to accept,
+inspect or route multi-model decisions for human review.
+
+\bibliographystyle{acl_natbib}
+\bibliography{references}
+
+\end{document}

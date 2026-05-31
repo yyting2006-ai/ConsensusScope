@@ -1,0 +1,70 @@
+# ConsensusScope Deployment Guide
+
+This guide prepares ConsensusScope for a public Streamlit Community Cloud demo.
+The app entry point is:
+
+```text
+app/streamlit_app.py
+```
+
+## Recommended Demo Mode
+
+Use the app without live API calls for reviewer-facing access. The bundled
+processed samples, model outputs, adjudication results, risk labels, and figures
+are enough to demonstrate all eight pages.
+
+For a live conference recording, use Mode A only through local `.env` variables
+or Streamlit Cloud secrets. For public deployments, use Mode B so users provide
+their own API keys for the current request.
+
+Never put real API keys in the paper, README, source code, Git history, or demo
+video.
+
+## Streamlit Community Cloud
+
+1. Push this clean project to a GitHub repository.
+2. Create a new Streamlit app from that repository.
+3. Set the main file path to `app/streamlit_app.py`.
+4. Keep Python dependencies in `requirements.txt`.
+5. Optional: paste the contents of `.streamlit/secrets.toml.example` into the
+   Streamlit Secrets editor and fill in only the keys needed for Mode A.
+6. Deploy and test the pages listed below.
+
+## Local Smoke Test
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+pytest -q
+streamlit run app/streamlit_app.py
+```
+
+## Reviewer Smoke Checklist
+
+- Page 1: overview metrics load and show three adjudication methods.
+- Page 2: live mode opens without requiring API keys.
+- Page 3: sample audit shows question, model outputs, and three adjudicators.
+- Page 4: comparison table excludes experimental learned-meta results.
+- Page 5: risk dashboard clearly separates offline diagnostic labels from
+  deploy-time signals in the paper/README wording.
+- Page 6: model reliability table loads from precomputed outputs.
+- Page 7: case explorer opens error cases.
+- Page 8: report export downloads JSON/CSV/Markdown artifacts.
+
+## Fixed Judge Protocol
+
+The fixed judge is an optional baseline in live mode and an offline saved result
+in the bundled experiment files. By default it uses the `judge` provider
+configuration:
+
+```text
+JUDGE_MODEL=deepseek-chat
+JUDGE_BASE_URL=https://api.deepseek.com
+```
+
+The fixed judge prompt receives the sample id, dataset, task type, question,
+options, and model outputs. It does not receive the gold answer or gold label.
+It sees the other models' answers, rationales/reasons, confidence values,
+evidence fields, and parser metadata. Saved offline results are reproducible as
+artifacts, while exact reruns can vary with provider-side model/API changes.

@@ -1,0 +1,62 @@
+project:
+  name: "mllm_reliability_adjudication"
+  python_version: "3.11"
+  random_seed: 42
+
+paths:
+  raw_data_dir: "data/raw"
+  processed_data_dir: "data/processed"
+  outputs_dir: "data/outputs"
+  results_dir: "data/results"
+  figures_dir: "reports/figures"
+
+experiment:
+  sample_file: "data/processed/pilot_questions.jsonl"
+  output_file: "data/outputs/model_outputs.jsonl"
+  adjudication_file: "data/results/adjudication_results.csv"
+  metrics_file: "data/results/metrics_summary.csv"
+  max_workers: 4
+  temperature: 0.2
+  max_tokens: 800
+  request_timeout_sec: 60
+
+models:
+  enabled:
+    - deepseek
+    - qwen
+    - glm
+    - kimi
+  judge_model: deepseek
+  providers:
+    deepseek:
+      env_api_key: DEEPSEEK_API_KEY
+      env_base_url: DEEPSEEK_BASE_URL
+      env_model: DEEPSEEK_MODEL
+    qwen:
+      env_api_key: QWEN_API_KEY
+      env_base_url: QWEN_BASE_URL
+      env_model: QWEN_MODEL
+    glm:
+      env_api_key: GLM_API_KEY
+      env_base_url: GLM_BASE_URL
+      env_model: GLM_MODEL
+    kimi:
+      env_api_key: KIMI_API_KEY
+      env_base_url: KIMI_BASE_URL
+      env_model: KIMI_MODEL
+    openai:
+      env_api_key: OPENAI_API_KEY
+      env_base_url: OPENAI_BASE_URL
+      env_model: OPENAI_MODEL
+
+reliability:
+  high_consensus_threshold: 0.75
+  low_consensus_threshold: 0.50
+  evidence_support_threshold: 0.60
+  confidence_mismatch_threshold: 0.70
+  score_weights:
+    answer_consistency: 0.35
+    evidence_support: 0.25
+    answer_stability: 0.15
+    confidence_calibration: 0.15
+    minority_warning: 0.10
