@@ -264,16 +264,16 @@ python3 -m src.reports.generate_report
 
 ## 启动可视化系统
 
-启动中文大创答辩版：
-
-```bash
-streamlit run app/streamlit_app.py
-```
-
-启动英文投稿版：
+启动本地英文投稿 demo：
 
 ```bash
 streamlit run app/streamlit_app.py --server.port 8502
+```
+
+浏览器打开：
+
+```text
+http://localhost:8502
 ```
 
 当前英文公开原型包含八个页面：

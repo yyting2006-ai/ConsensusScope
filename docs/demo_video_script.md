@@ -2,12 +2,11 @@
 
 Target length: 2 minutes 25 seconds.
 
-Local draft video:
+Local draft screen-flow recording:
 
-- `docs/demo_video_draft_en.mp4`
 - Regenerate the browser recording with `node scripts/record_demo_video_en.mjs`.
-- Convert WebM to MP4 with `python3 scripts/convert_video_to_mp4.py`.
-- The draft is a silent screen-flow recording. For final submission, add
+- Convert the generated WebM to MP4 with `python3 scripts/convert_video_to_mp4.py` if needed.
+- The generated file is a silent screen-flow recording. For final submission, add
   narration using this script and upload the final video to an accessible URL.
 
 ## 0:00-0:15 Opening

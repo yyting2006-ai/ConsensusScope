@@ -34,16 +34,16 @@ Then open:
 http://localhost:8502
 ```
 
-## 4. Start the Chinese Project-Defense Demo
+## 4. Start the Local Demo Again
 
 ```bash
-streamlit run app/streamlit_app.py --server.port 8501
+streamlit run app/streamlit_app.py --server.port 8502
 ```
 
 Then open:
 
 ```text
-http://localhost:8501
+http://localhost:8502
 ```
 
 ## 5. One-Command Start
@@ -85,11 +85,9 @@ start_demo.bat
 ## 6. Included Materials
 
 - Main demo app: `app/streamlit_app.py`
-- Compatibility entrypoint: `app/streamlit_app_en.py`
 - Live Question Mode for entering new questions and calling configured APIs
 - No-API example data: `data/processed/`, `data/outputs/`, `data/results/`
 - Screenshots: `docs/screenshots_en/`
-- Video draft: `docs/demo_video_draft_en.mp4`
 - EMNLP demo paper draft: `paper/consensusscope_emnlp_demo.tex`
 - Casebook and release checklist: `docs/`
 

@@ -5,7 +5,7 @@ from __future__ import annotations
 The current fixed-judge baseline is implemented by
 ``src.decision.baselines.fixed_judge_decision`` and writes
 ``data/results/fixed_judge_results.csv``. This module remains only so the old
-``scripts/03_run_adjudication.py`` skeleton can be inspected without breaking
+``legacy/03_run_adjudication_placeholder.py`` skeleton can be inspected without breaking
 historical examples.
 """
 

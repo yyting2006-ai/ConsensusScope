@@ -216,17 +216,19 @@ High & 230 & 0.048 & 0.952 \\
 \centering
 \small
 \resizebox{\linewidth}{!}{%
-\begin{tabular}{lrrr}
+\begin{tabular}{lrrrr}
 \toprule
-Policy & Auto cov. & Auto acc. & Errors reviewed \\
+Policy & Auto share & Auto acc. & Review share & Errors reviewed \\
 \midrule
-Accept low & 0.17 & 0.918 & 0.028 \\
-Review med/high & 0.83 & 0.412 & 0.972 \\
-Review high & 0.23 & 0.048 & 0.436 \\
+Accept low; review med/high & 0.17 & 0.918 & 0.83 & 0.972 \\
+Accept low/med; review high & 0.77 & 0.632 & 0.23 & 0.436 \\
+Review all & 0.00 & -- & 1.00 & 1.000 \\
 \bottomrule
 \end{tabular}}
-\caption{Review-routing utility. Errors reviewed is the share of observed
-final-answer errors routed to review under each policy.}
+\caption{Review-routing utility. Auto share is the fraction of samples accepted
+without review, review share is the fraction routed to human review, and Errors
+reviewed is the fraction of observed final-answer errors sent to the human-review
+queue.}
 \label{tab:routing}
 \end{table}
 
@@ -234,12 +236,15 @@ The fixed judge is the strongest final-answer selector in this pilot, but the
 dynamic judge provides a different utility: it stratifies decisions by risk.
 Automatically accepting only low-risk dynamic decisions covers 17\% of samples
 with 91.8\% accuracy. Routing medium- and high-risk samples to review covers
-83\% of samples and reviews 97.2\% of observed final-answer errors. This is
-the main evaluation claim of the system, rather than state-of-the-art
-final-answer accuracy. TruthfulQA is evaluated with a conservative normalized
-string-match metric, which may undercount semantically equivalent open-ended
-answers. We therefore use TruthfulQA mainly for risk-case discovery rather than
-SOTA final-answer comparison.
+83\% of samples and sends 97.2\% of observed final-answer errors to the
+human-review queue. Accepting both low- and medium-risk decisions increases
+automatic coverage to 77\% with 63.2\% automatic accuracy, while reviewing only
+high-risk cases sends 43.6\% of observed errors to review. This is the main
+evaluation claim of the system, rather than state-of-the-art final-answer
+accuracy. TruthfulQA is evaluated with a conservative normalized string-match
+metric, which may undercount semantically equivalent open-ended answers. We
+therefore use TruthfulQA mainly for risk-case discovery rather than SOTA
+final-answer comparison.
 
 \section{Comparison with Existing Systems}
 
@@ -296,7 +301,6 @@ diagnostic labels, and by comparing majority vote, fixed judging and dynamic
 adjudication in a single interface, it helps users decide when to accept,
 inspect or route multi-model decisions for human review.
 
-\bibliographystyle{acl_natbib}
 \bibliography{references}
 
 \end{document}

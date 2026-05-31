@@ -212,8 +212,9 @@ def dynamic_decision(sample: Dict[str, Any], model_outputs: List[Dict[str, Any]]
 def estimate_model_reliability(samples_df: pd.DataFrame, outputs_df: pd.DataFrame) -> Dict[str, float]:
     """Estimate historical model reliability from the available audited corpus.
 
-    The estimate is used by the learned meta-judge. It is intentionally stored
-    as aggregate model-level calibration, not as API keys or private prompts.
+    The estimate supports experimental auxiliary analyses only. It is
+    intentionally stored as aggregate model-level calibration, not as API keys
+    or private prompts.
     """
 
     from src.evaluation.metrics import is_correct
@@ -244,12 +245,10 @@ def learned_meta_judge_decision(
     model_outputs: List[Dict[str, Any]],
     model_reliability: Dict[str, float] | None = None,
 ) -> Dict[str, Any]:
-    """Learned dynamic meta-judge over answer candidates.
+    """Experimental auxiliary learned meta-judge over answer candidates.
 
-    This lightweight meta-judge uses calibrated historical model reliability
-    plus live answer features. It is deterministic and explainable enough for
-    the demo, while behaving differently from plain majority vote and a fixed
-    judge model.
+    This variant is not part of the EMNLP 2026 main demo claim. The main demo
+    reports majority vote, fixed judge and rule-based dynamic adjudication.
     """
 
     model_reliability = model_reliability or {}

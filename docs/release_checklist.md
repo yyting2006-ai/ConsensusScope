@@ -22,11 +22,10 @@ This checklist turns the local prototype into a submission-ready demo package.
 - [x] Streamlit app starts locally
 - [x] Single-sample analysis page
 - [x] Overview statistics page
-- [x] Publication readiness page
+- [x] Report export page
 - [x] Screenshot generation script
-- [x] English submission interface: `app/streamlit_app_en.py`
+- [x] English submission interface: `app/streamlit_app.py`
 - [x] English screenshots: `docs/screenshots_en/`
-- [x] Local silent draft video: `docs/demo_video_draft_en.mp4`
 - [ ] Final narrated demo video URL under 2.5 minutes
 
 ## Paper

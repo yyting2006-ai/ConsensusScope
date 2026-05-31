@@ -37,7 +37,7 @@ python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 pytest -q
-streamlit run app/streamlit_app.py
+streamlit run app/streamlit_app.py --server.port 8502
 ```
 
 ## Reviewer Smoke Checklist

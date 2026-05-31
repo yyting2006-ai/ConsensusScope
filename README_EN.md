@@ -48,16 +48,16 @@ pip install -r requirements.txt
 Run the demo:
 
 ```bash
-streamlit run app/streamlit_app.py
+streamlit run app/streamlit_app.py --server.port 8502
 ```
 
 Then open:
 
 ```text
-http://localhost:8501
+http://localhost:8502
 ```
 
-For the English submission-oriented interface, run:
+The same command is used for the English submission-oriented interface:
 
 ```bash
 streamlit run app/streamlit_app.py --server.port 8502
@@ -128,15 +128,15 @@ quality and review-routing utility instead of a single mixed macro-F1 score.
 | Medium | 0.552 | 0.448 |
 | High | 0.048 | 0.952 |
 
-| Routing policy | Coverage | Accuracy | Errors reviewed |
-|---|---:|---:|---:|
-| Auto-accept low risk | 0.17 | 0.918 | 0.028 |
-| Review medium/high risk | 0.83 | 0.412 | 0.972 |
-| Review high risk only | 0.23 | 0.048 | 0.436 |
+| Routing policy | Auto share | Auto acc. | Review share | Errors reviewed |
+|---|---:|---:|---:|---:|
+| Accept low; review med/high | 0.17 | 0.918 | 0.83 | 0.972 |
+| Accept low/med; review high | 0.77 | 0.632 | 0.23 | 0.436 |
+| Review all | 0.00 | -- | 1.00 | 1.000 |
 
-`Errors reviewed` is the share of observed final-answer errors routed to
-review by the policy. The main evaluation claim is review-routing utility, not
-state-of-the-art final-answer accuracy.
+`Errors reviewed` is the share of observed final-answer errors sent to the
+human-review queue by the policy. The main evaluation claim is review-routing
+utility, not state-of-the-art final-answer accuracy.
 
 ## Fixed Judge Protocol
 
@@ -156,6 +156,11 @@ metadata. The judge does **not** receive the gold answer or gold label. In the
 saved pilot run, one fixed-judge call was made for each of the 1000 evaluated
 samples. The saved CSV is shipped as the reproducible artifact; exact reruns may
 vary if the external provider changes the model or API behavior.
+
+The EMNLP 2026 demo pipeline uses `src.decision.baselines.fixed_judge_decision`
+and `data/results/fixed_judge_results.csv` as the fixed-judge baseline. Legacy
+placeholder files are kept only under `legacy/` or `docs/legacy_results/` for
+historical inspection and are not part of the demo pipeline.
 
 ## Reproducibility
 
@@ -194,7 +199,6 @@ find src scripts app tests -name '._*' -prune -o -name '*.py' -print0 | xargs -0
 - Casebook: `docs/casebook.md`
 - Video script: `docs/demo_video_script.md`
 - English screenshots: `docs/screenshots_en/`
-- Local silent draft video: `docs/demo_video_draft_en.mp4`
 - Ethics and limitations: `docs/ethics_limitations.md`
 - Public release notes: `docs/public_release_notes.md`
 - Release checklist: `docs/release_checklist.md`

@@ -38,9 +38,10 @@ await page.goto(baseUrl, { waitUntil: "networkidle", timeout: 60000 });
 await page.getByText("ConsensusScope").first().waitFor({ timeout: 60000 });
 await pause(4500);
 
-await clickText(page, "Aggregate Statistics");
-await clickText(page, "Submission Readiness");
-await clickText(page, "Sample Audit");
+await clickText(page, "Page 2: Live Question Mode");
+await clickText(page, "Page 3: Sample Audit Mode");
+await clickText(page, "Page 5: Risk Dashboard");
+await clickText(page, "Page 8: Report Export");
 await pause(2500);
 
 const video = page.video();

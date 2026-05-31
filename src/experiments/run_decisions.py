@@ -71,6 +71,8 @@ def run_dynamic(samples_df: pd.DataFrame, outputs_df: pd.DataFrame, output_path:
 
 
 def run_learned_meta(samples_df: pd.DataFrame, outputs_df: pd.DataFrame, output_path: Path) -> pd.DataFrame:
+    """Run the experimental auxiliary variant, outside the EMNLP 2026 main claim."""
+
     outputs_by_sample = _records_by_sample(outputs_df)
     reliability = estimate_model_reliability(samples_df, outputs_df)
     rows: List[Dict[str, Any]] = []
