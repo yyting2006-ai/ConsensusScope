@@ -11,7 +11,7 @@ from typing import Any, Dict, Iterable, List, Optional
 import pandas as pd
 import requests
 
-from src.evaluation.metrics import is_correct
+from src.evaluation.simple_correctness import is_correct
 from src.llm.clients import PROVIDER_CONFIG, parse_json_from_text
 
 
