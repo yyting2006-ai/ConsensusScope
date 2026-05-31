@@ -276,12 +276,16 @@ streamlit run app/streamlit_app.py
 streamlit run app/streamlit_app.py --server.port 8502
 ```
 
-当前原型包含三个页面：
+当前英文公开原型包含八个页面：
 
-- `Live Question Mode`：现场输入问题，配置 API，选择模型，运行多模型回答，查看动态裁决、风险解释并导出报告。
-- `单样本分析`：查看同一问题下多个模型的答案、理由、置信度、证据、多数投票结果、动态裁决结果和风险标签。
-- `总体统计`：查看不同裁决方法的准确率、风险类型分布、风险等级错误率和报告图表。
-- `投稿准备`：对照 EMNLP System Demonstration 要求，展示当前系统准备度、2.5 分钟演示脚本和二区及以上期刊路线。
+- `Page 1: Home / System Overview`：查看样本、模型输出和裁决器概览。
+- `Page 2: Live Question Mode`：现场输入问题，配置 API，选择模型，运行多模型回答，查看动态裁决、风险解释并导出报告。
+- `Page 3: Sample Audit Mode`：查看同一问题下多个模型的答案、理由、置信度、证据、多数投票、固定裁判、动态裁决和离线风险标签。
+- `Page 4: Adjudication Comparison`：比较 majority vote、fixed judge 和 rule-based dynamic adjudication。
+- `Page 5: Risk Dashboard`：查看离线诊断标签分布和风险等级效果。
+- `Page 6: Model Reliability Dashboard`：查看保存输出中的模型历史可靠性摘要。
+- `Page 7: Case Explorer`：浏览错误案例和风险案例。
+- `Page 8: Report Export`：导出 summary、metrics 和 risk-label 文件。
 
 更多发表规划见：
 

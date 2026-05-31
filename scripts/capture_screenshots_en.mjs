@@ -29,13 +29,14 @@ const browser = await chromium.launch({ headless: true });
 const page = await browser.newPage({ viewport: { width: 1440, height: 1100 } });
 
 await waitForApp(page);
+await clickText(page, "Page 3: Sample Audit Mode");
 await page.screenshot({ path: `${outputDir}/sample_audit_false_consensus.png`, fullPage: true });
 
-await clickText(page, "Aggregate Statistics");
+await clickText(page, "Page 5: Risk Dashboard");
 await page.screenshot({ path: `${outputDir}/aggregate_statistics.png`, fullPage: true });
 
-await clickText(page, "Submission Readiness");
-await page.screenshot({ path: `${outputDir}/submission_readiness.png`, fullPage: true });
+await clickText(page, "Page 8: Report Export");
+await page.screenshot({ path: `${outputDir}/report_export.png`, fullPage: true });
 
 await browser.close();
 

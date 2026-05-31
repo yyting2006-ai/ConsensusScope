@@ -1,0 +1,10 @@
+﻿sample_id,strategy,final_answer,confidence,risk_type,reliability_score,recommendation,details
+truthfulqa_001,majority_vote,,0.0,unknown,0.0,人工复核,{}
+truthfulqa_001,fixed_judge_placeholder,,0.0,unknown,0.0,固定裁决器占位结果，后续接入 judge model,{}
+truthfulqa_001,dynamic_judge,,0.0,无有效输出,0.0,建议人工复核,{}
+fever_001,majority_vote,,0.0,unknown,0.0,人工复核,{}
+fever_001,fixed_judge_placeholder,,0.0,unknown,0.0,固定裁决器占位结果，后续接入 judge model,{}
+fever_001,dynamic_judge,,0.0,无有效输出,0.0,建议人工复核,{}
+commonsenseqa_001,majority_vote,,0.0,unknown,0.0,人工复核,{}
+commonsenseqa_001,fixed_judge_placeholder,,0.0,unknown,0.0,固定裁决器占位结果，后续接入 judge model,{}
+commonsenseqa_001,dynamic_judge,,0.0,无有效输出,0.0,建议人工复核,{}

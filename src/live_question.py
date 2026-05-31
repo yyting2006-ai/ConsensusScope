@@ -114,7 +114,7 @@ def normalize_live_answer(answer: Any, task_type: str) -> str:
 def evidence_quality_score(evidence: Any) -> float:
     text = str(evidence or "").strip()
     lowered = text.lower()
-    if not text or lowered in {"unknown", "none", "n/a", "na", "null", "无"}:
+    if not text or lowered in {"unknown", "none", "n/a", "na", "null", "\u65e0"}:
         return 0.0
     score = 0.35
     if len(text) >= 30:
@@ -493,106 +493,6 @@ def dynamic_adjudicate_live(
         "confidence": round(confidence_avg, 3),
         "minority_signal": minority_signal,
         "majority_answer": majority.get("final_answer", ""),
-        "weighted_distribution": {key: round(value, 3) for key, value in ranked},
-        "model_weight_details": details,
-        "explanation": explanation,
-    }
-
-
-def learned_meta_judge_live(
-    task_type: str,
-    outputs: List[Dict[str, Any]],
-    historical_reliability: Optional[Dict[str, float]] = None,
-) -> Dict[str, Any]:
-    """Learned Meta-Judge for live mode."""
-
-    historical_reliability = historical_reliability or {}
-    valid = [item for item in outputs if item.get("normalized_answer") and not item.get("request_error") and not item.get("parse_error")]
-    if not valid:
-        return {
-            "method": "learned_meta_judge",
-            "final_answer": "",
-            "risk_level": "high",
-            "reliability_score": 0.0,
-            "agreement_rate": 0.0,
-            "weighted_distribution": {},
-            "explanation": "No valid model answer was available.",
-        }
-
-    majority = majority_vote_live(valid)
-    counts = Counter(str(item["normalized_answer"]) for item in valid)
-    total = len(valid)
-    weighted: Dict[str, float] = defaultdict(float)
-    details: List[Dict[str, Any]] = []
-    for item in valid:
-        answer = str(item["normalized_answer"])
-        provider = str(item.get("provider", ""))
-        model = str(item.get("model", ""))
-        history = historical_reliability.get(provider, historical_reliability.get(model, 0.50))
-        confidence = safe_float(item.get("confidence", 0.0))
-        evidence = safe_float(item.get("evidence_quality", 0.0))
-        support = counts[answer] / total
-        weight = 0.62 * history + 0.16 * confidence + 0.14 * evidence + 0.08 * support
-        weighted[answer] += weight
-        details.append(
-            {
-                "provider": provider,
-                "answer": answer,
-                "history": round(history, 3),
-                "confidence": round(confidence, 3),
-                "evidence": round(evidence, 3),
-                "support": round(support, 3),
-                "weight": round(weight, 3),
-            }
-        )
-
-    ranked = sorted(weighted.items(), key=lambda pair: pair[1], reverse=True)
-    final_answer, top_weight = ranked[0]
-    second_weight = ranked[1][1] if len(ranked) > 1 else 0.0
-    total_weight = sum(weighted.values()) or 1.0
-    weighted_agreement = top_weight / total_weight
-    margin = (top_weight - second_weight) / total_weight
-    agreement_rate = counts[final_answer] / total
-    top_group = [item for item in valid if item["normalized_answer"] == final_answer]
-    evidence_avg = sum(safe_float(item.get("evidence_quality", 0.0)) for item in top_group) / len(top_group)
-    confidence_avg = sum(safe_float(item.get("confidence", 0.0)) for item in top_group) / len(top_group)
-    majority_answer = majority.get("final_answer", "")
-
-    reliability_score = (
-        0.34 * weighted_agreement
-        + 0.18 * agreement_rate
-        + 0.18 * evidence_avg
-        + 0.15 * confidence_avg
-        + 0.15 * max(0.0, margin)
-    )
-    if majority_answer and majority_answer != final_answer:
-        reliability_score -= 0.04
-    if task_type == TASK_FACT_QA and agreement_rate < 0.5:
-        reliability_score -= 0.05
-    reliability_score = round(max(0.0, min(1.0, reliability_score)), 3)
-
-    if reliability_score >= 0.72 and majority_answer == final_answer:
-        risk_level = "low"
-    elif reliability_score >= 0.48:
-        risk_level = "medium"
-    else:
-        risk_level = "high"
-
-    if majority_answer and majority_answer != final_answer:
-        explanation = "Learned Meta-Judge overrode majority/fixed style selection because calibrated model reliability and evidence favored another answer."
-    else:
-        explanation = "Learned Meta-Judge selected the answer using calibrated model reliability, evidence quality, confidence, and support."
-
-    return {
-        "method": "learned_meta_judge",
-        "final_answer": final_answer,
-        "risk_level": risk_level,
-        "reliability_score": reliability_score,
-        "agreement_rate": round(agreement_rate, 3),
-        "weighted_agreement": round(weighted_agreement, 3),
-        "evidence_quality": round(evidence_avg, 3),
-        "confidence": round(confidence_avg, 3),
-        "majority_answer": majority_answer,
         "weighted_distribution": {key: round(value, 3) for key, value in ranked},
         "model_weight_details": details,
         "explanation": explanation,

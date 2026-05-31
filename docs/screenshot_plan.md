@@ -9,8 +9,9 @@ Recommended figures:
 
 1. `sample_audit_false_consensus.png`: model-level trace and risk labels for
    `fever_0366`.
-2. `aggregate_statistics.png`: aggregate method comparison and risk charts.
-3. `submission_readiness.png`: EMNLP checklist and journal targets.
+2. `aggregate_statistics.png`: current Risk Dashboard with offline diagnostic
+   label counts and risk-level effectiveness.
+3. `report_export.png`: current Report Export page with downloadable artifacts.
 
 Generation command:
 

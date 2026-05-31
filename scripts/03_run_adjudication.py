@@ -1,5 +1,13 @@
 from __future__ import annotations
 
+"""Deprecated legacy adjudication script.
+
+The EMNLP 2026 demo pipeline uses ``src.experiments.run_decisions`` for
+majority vote, rule-based dynamic adjudication and the real fixed-judge
+baseline. This script is kept only for the original skeleton workflow defined
+in ``config.yaml``.
+"""
+
 import sys
 from pathlib import Path
 

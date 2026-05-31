@@ -7,6 +7,7 @@
 \usepackage{graphicx}
 \usepackage{microtype}
 \usepackage{inconsolata}
+\usepackage{url}
 
 \title{ConsensusScope: An Interactive Observability Tool for Risk-Aware Multi-LLM Adjudication}
 
@@ -101,10 +102,10 @@ TruthfulQA~\cite{lin2022truthfulqa}, FEVER~\cite{thorne2018fever} and
 CommonsenseQA~\cite{talmor2019commonsenseqa} into a shared schema. A trace
 layer stores each model response with answer, rationale, confidence, evidence,
 raw output, parse error, prompt and timestamp. An adjudication layer computes
-majority vote, fixed-judge decisions and rule-based dynamic decisions. A
-Streamlit interface presents eight pages: system overview, live question mode,
-sample audit mode, adjudication comparison, risk dashboard, model reliability
-dashboard, case explorer and report export.
+majority vote, fixed-judge decisions and rule-based dynamic decisions. The
+current public Streamlit interface presents eight pages: Home/System Overview,
+Live Question Mode, Sample Audit Mode, Adjudication Comparison, Risk Dashboard,
+Model Reliability Dashboard, Case Explorer and Report Export.
 
 \begin{figure}[t]
   \centering
@@ -168,55 +169,64 @@ consensus during live use without ground truth.
 
 \section{Evaluation}
 
-We evaluate the current prototype on 1000 saved samples with 4000 model-output
-rows. Because TruthfulQA, FEVER and CommonsenseQA have different answer spaces,
-we avoid reporting a single mixed macro-F1 score. Instead, we report
+We evaluate the current prototype on 1000 saved samples: 334 from TruthfulQA,
+333 from FEVER and 333 from CommonsenseQA. For each sample, the demo stores
+four independent model outputs from DeepSeek, Qwen, GLM and Kimi, yielding
+4000 model-output rows. Because the three datasets have different answer
+spaces, we avoid reporting a single mixed macro-F1 score. Instead, we report
 dataset-level final-answer accuracy, risk stratification quality and
 review-routing utility.
 
 \begin{table}[t]
 \centering
+\small
+\resizebox{\linewidth}{!}{%
 \begin{tabular}{lccc}
 \toprule
-Method & TruthfulQA & FEVER & CommonsenseQA \\
+Method & TQA & FEVER & CSQA \\
 \midrule
-Majority vote & 0.075 & 0.622 & 0.760 \\
-Rule-based dynamic judge & 0.075 & 0.661 & 0.760 \\
+Majority & 0.075 & 0.622 & 0.760 \\
+Dynamic & 0.075 & 0.661 & 0.760 \\
 Fixed judge & 0.087 & 0.709 & 0.796 \\
 \bottomrule
-\end{tabular}
-\caption{Final-answer selection accuracy by dataset.}
+\end{tabular}}
+\caption{Final-answer accuracy by dataset. TQA denotes TruthfulQA and CSQA
+denotes CommonsenseQA.}
 \label{tab:dataset-accuracy}
 \end{table}
 
 \begin{table}[t]
 \centering
+\small
+\resizebox{\linewidth}{!}{%
 \begin{tabular}{lrrr}
 \toprule
-Dynamic risk level & Samples & Accuracy & Error rate \\
+Risk & Samples & Accuracy & Error \\
 \midrule
 Low & 170 & 0.918 & 0.082 \\
 Medium & 600 & 0.552 & 0.448 \\
 High & 230 & 0.048 & 0.952 \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \caption{Risk stratification quality for rule-based dynamic adjudication.}
 \label{tab:risk}
 \end{table}
 
 \begin{table}[t]
 \centering
+\small
+\resizebox{\linewidth}{!}{%
 \begin{tabular}{lrrr}
 \toprule
-Routing policy & Coverage & Accuracy & Errors captured \\
+Policy & Auto cov. & Auto acc. & Errors reviewed \\
 \midrule
-Auto-accept low risk & 0.17 & 0.918 & 0.028 \\
-Review medium/high risk & 0.83 & 0.412 & 0.972 \\
-Review high risk only & 0.23 & 0.048 & 0.436 \\
+Accept low & 0.17 & 0.918 & 0.028 \\
+Review med/high & 0.83 & 0.412 & 0.972 \\
+Review high & 0.23 & 0.048 & 0.436 \\
 \bottomrule
-\end{tabular}
-\caption{Review-routing utility. Errors captured is the share of all final-answer
-errors falling inside the routed subset.}
+\end{tabular}}
+\caption{Review-routing utility. Errors reviewed is the share of observed
+final-answer errors routed to review under each policy.}
 \label{tab:routing}
 \end{table}
 
@@ -224,8 +234,12 @@ The fixed judge is the strongest final-answer selector in this pilot, but the
 dynamic judge provides a different utility: it stratifies decisions by risk.
 Automatically accepting only low-risk dynamic decisions covers 17\% of samples
 with 91.8\% accuracy. Routing medium- and high-risk samples to review covers
-83\% of samples and captures 97.2\% of observed final-answer errors. This is
-the main evaluation claim of the system.
+83\% of samples and reviews 97.2\% of observed final-answer errors. This is
+the main evaluation claim of the system, rather than state-of-the-art
+final-answer accuracy. TruthfulQA is evaluated with a conservative normalized
+string-match metric, which may undercount semantically equivalent open-ended
+answers. We therefore use TruthfulQA mainly for risk-case discovery rather than
+SOTA final-answer comparison.
 
 \section{Comparison with Existing Systems}
 
@@ -246,6 +260,23 @@ vote, fixed judge and dynamic adjudication. The Sample Audit and Case Explorer
 pages then show saved examples with diagnostic labels. Finally, the Risk
 Dashboard and Report Export pages summarize risk distributions and produce
 CSV/Markdown artifacts for reproducibility.
+
+\section{Release, Installation and License}
+
+ConsensusScope is released as an installable demonstration package under the
+MIT License in the repository's \texttt{LICENSE} file. The release contains the
+Streamlit demo, saved model traces, decision results, evaluation scripts,
+screenshots and reproduction commands. The public code and demo URLs are:
+\url{https://github.com/yyting2006-ai/ConsensusScope} and
+\url{https://consensusscope-fzebywc3is3tducktjuvup.streamlit.app/}. A video URL
+will be added before submission: \url{TODO_VIDEO_URL}.
+% TODO: replace TODO_VIDEO_URL with the public demo video URL before submission.
+
+The local demo can be installed and run with:
+\begin{verbatim}
+pip install -r requirements.txt
+streamlit run app/streamlit_app.py
+\end{verbatim}
 
 \section{Ethics and Limitations}
 

@@ -48,20 +48,21 @@ DATA_PATHS = {
 
 ANSWER_PROVIDERS = [p for p in PROVIDER_CONFIG if p != "judge"]
 RISK_LABELS = ["true_consensus", "false_consensus", "minority_correct", "high_disagreement", "confidence_mismatch"]
+PUBLIC_TEXT_PLACEHOLDER = "Non-English provider text hidden in public UI."
 
 NOTE_TRANSLATIONS = {
-    "无有效模型输出，建议人工复核": "No valid model output; human review is recommended.",
-    "无唯一多数答案，建议人工复核": "No unique majority answer; human review is recommended.",
-    "低风险采纳": "Low-risk adoption.",
-    "一致但证据或置信度不足，标记为风险共识": "Agreement exists, but evidence or confidence is insufficient; mark as risky consensus.",
-    "事实核查非NEI共识仍需证据审查，避免低风险误判": "Fact-verification consensus still needs evidence review to avoid low-risk misclassification.",
-    "开放式真实性问答输出核查标签，避免低风险误判": "Open truthfulness QA produced a verification label; avoid low-risk misclassification.",
-    "触发少数派预警": "Minority warning triggered.",
-    "高分歧，建议人工复核": "High disagreement; human review is recommended.",
-    "事实核查存在分歧，避免低风险误判": "Fact verification contains disagreement; avoid low-risk misclassification.",
-    "采纳多数答案，并根据可靠性评分分级": "Adopt the majority answer and assign a risk level using reliability score.",
-    "采纳唯一最高票答案": "Adopt the unique top-voted answer.",
-    "最高票答案平票，建议人工复核": "Top-voted answers are tied; human review is recommended.",
+    "\u65e0\u6709\u6548\u6a21\u578b\u8f93\u51fa\uff0c\u5efa\u8bae\u4eba\u5de5\u590d\u6838": "No valid model output; human review is recommended.",
+    "\u65e0\u552f\u4e00\u591a\u6570\u7b54\u6848\uff0c\u5efa\u8bae\u4eba\u5de5\u590d\u6838": "No unique majority answer; human review is recommended.",
+    "\u4f4e\u98ce\u9669\u91c7\u7eb3": "Low-risk adoption.",
+    "\u4e00\u81f4\u4f46\u8bc1\u636e\u6216\u7f6e\u4fe1\u5ea6\u4e0d\u8db3\uff0c\u6807\u8bb0\u4e3a\u98ce\u9669\u5171\u8bc6": "Agreement exists, but evidence or confidence is insufficient; mark as risky consensus.",
+    "\u4e8b\u5b9e\u6838\u67e5\u975eNEI\u5171\u8bc6\u4ecd\u9700\u8bc1\u636e\u5ba1\u67e5\uff0c\u907f\u514d\u4f4e\u98ce\u9669\u8bef\u5224": "Fact-verification consensus still needs evidence review to avoid low-risk misclassification.",
+    "\u5f00\u653e\u5f0f\u771f\u5b9e\u6027\u95ee\u7b54\u8f93\u51fa\u6838\u67e5\u6807\u7b7e\uff0c\u907f\u514d\u4f4e\u98ce\u9669\u8bef\u5224": "Open truthfulness QA produced a verification label; avoid low-risk misclassification.",
+    "\u89e6\u53d1\u5c11\u6570\u6d3e\u9884\u8b66": "Minority warning triggered.",
+    "\u9ad8\u5206\u6b67\uff0c\u5efa\u8bae\u4eba\u5de5\u590d\u6838": "High disagreement; human review is recommended.",
+    "\u4e8b\u5b9e\u6838\u67e5\u5b58\u5728\u5206\u6b67\uff0c\u907f\u514d\u4f4e\u98ce\u9669\u8bef\u5224": "Fact verification contains disagreement; avoid low-risk misclassification.",
+    "\u91c7\u7eb3\u591a\u6570\u7b54\u6848\uff0c\u5e76\u6839\u636e\u53ef\u9760\u6027\u8bc4\u5206\u5206\u7ea7": "Adopt the majority answer and assign a risk level using reliability score.",
+    "\u91c7\u7eb3\u552f\u4e00\u6700\u9ad8\u7968\u7b54\u6848": "Adopt the unique top-voted answer.",
+    "\u6700\u9ad8\u7968\u7b54\u6848\u5e73\u7968\uff0c\u5efa\u8bae\u4eba\u5de5\u590d\u6838": "Top-voted answers are tied; human review is recommended.",
 }
 
 
@@ -78,7 +79,31 @@ def safe_str(value: Any) -> str:
 
 def english_note(value: Any) -> str:
     text = safe_str(value)
-    return NOTE_TRANSLATIONS.get(text, text)
+    translated = NOTE_TRANSLATIONS.get(text, text)
+    if any("\u4e00" <= char <= "\u9fff" for char in translated):
+        return "Saved judge rationale is available in the CSV; non-English provider text is hidden in the public UI."
+    return translated
+
+
+def public_text(value: Any) -> Any:
+    text = safe_str(value)
+    if not text:
+        return value
+    if text == "\u65e0":
+        return "No answer"
+    if any("\u4e00" <= char <= "\u9fff" for char in text):
+        return PUBLIC_TEXT_PLACEHOLDER
+    return value
+
+
+def public_display_frame(df: pd.DataFrame) -> pd.DataFrame:
+    if df.empty:
+        return df
+    display = df.copy()
+    for col in display.columns:
+        if display[col].dtype == "object":
+            display[col] = display[col].map(public_text)
+    return display
 
 
 @st.cache_data(show_spinner=False)
@@ -203,6 +228,23 @@ def first_record(df: pd.DataFrame) -> Dict[str, Any]:
     return {} if df.empty else df.iloc[0].to_dict()
 
 
+def decision_row(label: str, rec: Dict[str, Any], sample: Dict[str, Any]) -> Dict[str, Any]:
+    final_answer = safe_str(rec.get("final_answer", ""))
+    correct = (
+        is_correct(final_answer, sample.get("gold_answer", ""), sample.get("gold_label", ""))
+        if final_answer
+        else "Not available"
+    )
+    score = rec.get("reliability_score", rec.get("confidence", rec.get("agreement_rate", "")))
+    return {
+        "method": label,
+        "final_answer": final_answer or "Not available",
+        "correct_offline": correct,
+        "risk_or_confidence": safe_str(rec.get("risk_level", "")) or safe_str(score) or "Not available",
+        "reasoning": english_note(rec.get("decision_note", rec.get("decision_reason", ""))) or "Not available",
+    }
+
+
 def visible_method_metrics(metrics_df: pd.DataFrame) -> pd.DataFrame:
     if metrics_df.empty or "method" not in metrics_df.columns:
         return metrics_df
@@ -309,7 +351,7 @@ def render_model_outputs(outputs: List[Dict[str, Any]]) -> None:
         "latency_sec",
     ]
     df = pd.DataFrame(outputs)
-    st.dataframe(df[[c for c in cols if c in df.columns]], use_container_width=True, hide_index=True)
+    st.dataframe(public_display_frame(df[[c for c in cols if c in df.columns]]), use_container_width=True, hide_index=True)
 
 
 def render_adjudication_comparison(comparison: Optional[Dict[str, Any]]) -> None:
@@ -474,7 +516,7 @@ def page_sample_audit(samples_df: pd.DataFrame, outputs_df: pd.DataFrame, majori
         display = outputs.copy()
         if "correct" not in display.columns:
             display["correct"] = display["answer"].map(lambda ans: is_correct(ans, sample.get("gold_answer", ""), sample.get("gold_label", "")))
-        st.dataframe(display, use_container_width=True, hide_index=True)
+        st.dataframe(public_display_frame(display), use_container_width=True, hide_index=True)
 
     rows = []
     for label, df in [
@@ -483,15 +525,7 @@ def page_sample_audit(samples_df: pd.DataFrame, outputs_df: pd.DataFrame, majori
         ("Dynamic Rule-Based Judge", dynamic_df),
     ]:
         rec = first_record(dataframe_for_sample(df, "sample_id", sid))
-        rows.append(
-            {
-                "method": label,
-                "final_answer": rec.get("final_answer", ""),
-                "risk_level": rec.get("risk_level", ""),
-                "score": rec.get("reliability_score", rec.get("confidence", rec.get("agreement_rate", ""))),
-                "note": english_note(rec.get("decision_note", rec.get("decision_reason", ""))),
-            }
-        )
+        rows.append(decision_row(label, rec, sample))
     st.markdown('<div class="section-title">Adjudication Layer</div>', unsafe_allow_html=True)
     st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
 
@@ -561,12 +595,12 @@ def page_case_explorer(error_df: pd.DataFrame, samples_df: pd.DataFrame, outputs
     df = error_df.copy()
     if note_filter:
         df = df[df["notes"].fillna("").apply(lambda s: any(tag in str(s).split(";") for tag in note_filter))]
-    st.dataframe(df, use_container_width=True, hide_index=True)
+    st.dataframe(public_display_frame(df), use_container_width=True, hide_index=True)
     if not df.empty:
         sid = st.selectbox("Inspect case", df["sample_id"].astype(str).tolist())
         sample = first_record(dataframe_for_sample(samples_df, "id", sid))
         st.write(sample.get("question", ""))
-        st.dataframe(dataframe_for_sample(outputs_df, "sample_id", sid), use_container_width=True, hide_index=True)
+        st.dataframe(public_display_frame(dataframe_for_sample(outputs_df, "sample_id", sid)), use_container_width=True, hide_index=True)
 
 
 def page_report_export(samples_df: pd.DataFrame, outputs_df: pd.DataFrame, metrics_df: pd.DataFrame, risk_df: pd.DataFrame) -> None:

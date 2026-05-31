@@ -119,6 +119,13 @@ def _outputs_by_sample(outputs_df: pd.DataFrame) -> Dict[str, List[Dict[str, Any
     }
 
 
+def _samples_with_outputs(samples_df: pd.DataFrame, outputs_df: pd.DataFrame) -> pd.DataFrame:
+    if samples_df.empty or outputs_df.empty or "id" not in samples_df.columns or "sample_id" not in outputs_df.columns:
+        return samples_df.iloc[0:0].copy()
+    evaluated_ids = set(outputs_df["sample_id"].dropna().astype(str))
+    return samples_df[samples_df["id"].astype(str).isin(evaluated_ids)].copy()
+
+
 def _model_answers_json(rows: List[Dict[str, Any]]) -> str:
     compact = [
         {
@@ -212,20 +219,21 @@ def main() -> None:
     args = parse_args()
     samples_df = _read_table(args.samples)
     outputs_df = _read_table(args.outputs)
+    evaluated_samples_df = _samples_with_outputs(samples_df, outputs_df)
 
-    risk_df = label_risks(samples_df, outputs_df)
+    risk_df = label_risks(evaluated_samples_df, outputs_df)
     _write_csv(risk_df, args.risk_labels_out)
 
     decision_frames = _load_decision_frames(args)
-    metrics_df = _method_metrics(decision_frames, samples_df, risk_df)
+    metrics_df = _method_metrics(decision_frames, evaluated_samples_df, risk_df)
     _write_csv(metrics_df, args.method_metrics_out)
 
-    effectiveness_df = _all_risk_level_effectiveness(decision_frames, samples_df)
+    effectiveness_df = _all_risk_level_effectiveness(decision_frames, evaluated_samples_df)
     _write_csv(effectiveness_df, args.risk_effectiveness_out)
 
     majority_df = _read_table(args.majority, required=False)
     dynamic_df = _read_table(args.dynamic, required=False)
-    error_df = _error_cases(samples_df, outputs_df, risk_df, majority_df, dynamic_df)
+    error_df = _error_cases(evaluated_samples_df, outputs_df, risk_df, majority_df, dynamic_df)
     _write_csv(error_df, args.error_cases_out)
 
     print(f"Wrote risk labels to {args.risk_labels_out}")
