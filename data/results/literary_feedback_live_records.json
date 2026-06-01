@@ -1,0 +1,239 @@
+[
+  {
+    "id": "lit_esl_001",
+    "essay": "Mary Shelley write Frankenstein in 1847, and Jane Austen wrote Jane Eyre. Both novels shows how women are trapped by society.",
+    "kg_rows": [
+      {
+        "entity": "Frankenstein",
+        "relation": "author",
+        "value": "Mary Shelley",
+        "work": "Frankenstein",
+        "evidence": "Frankenstein; or, The Modern Prometheus is attributed to Mary Shelley.",
+        "source": "curated_demo_kg",
+        "match": "Frankenstein",
+        "match_score": "1.0"
+      },
+      {
+        "entity": "Frankenstein",
+        "relation": "publication_year",
+        "value": "1818",
+        "work": "Frankenstein",
+        "evidence": "Frankenstein was first published in 1818.",
+        "source": "curated_demo_kg",
+        "match": "Frankenstein",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Frankenstein",
+        "relation": "genre",
+        "value": "Gothic novel",
+        "work": "Frankenstein",
+        "evidence": "Frankenstein is commonly discussed as a Gothic novel.",
+        "source": "curated_demo_kg",
+        "match": "Frankenstein",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Frankenstein",
+        "relation": "central_character",
+        "value": "Victor Frankenstein",
+        "work": "Frankenstein",
+        "evidence": "Victor Frankenstein is the scientist who creates the creature.",
+        "source": "curated_demo_kg",
+        "match": "Frankenstein",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Frankenstein",
+        "relation": "central_character",
+        "value": "the creature",
+        "work": "Frankenstein",
+        "evidence": "The created being is often called the creature or monster, not Victor Frankenstein.",
+        "source": "curated_demo_kg",
+        "match": "Frankenstein",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "author",
+        "value": "Charlotte Bronte",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre is a novel by Charlotte Bronte.",
+        "source": "curated_demo_kg",
+        "match": "Jane Eyre",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "publication_year",
+        "value": "1847",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre was first published in 1847.",
+        "source": "curated_demo_kg",
+        "match": "Jane Eyre",
+        "match_score": "1.0"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "genre",
+        "value": "Bildungsroman",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre is frequently read as a Bildungsroman with Gothic elements.",
+        "source": "curated_demo_kg",
+        "match": "Jane Eyre",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "central_character",
+        "value": "Jane Eyre",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre is the protagonist and narrator of the novel.",
+        "source": "curated_demo_kg",
+        "match": "Jane Eyre",
+        "match_score": "1.0"
+      },
+      {
+        "entity": "Pride and Prejudice",
+        "relation": "author",
+        "value": "Jane Austen",
+        "work": "Pride and Prejudice",
+        "evidence": "Pride and Prejudice is a novel by Jane Austen.",
+        "source": "curated_demo_kg",
+        "match": "Jane Austen",
+        "match_score": "0.7"
+      },
+      {
+        "entity": "Wuthering Heights",
+        "relation": "publication_year",
+        "value": "1847",
+        "work": "Wuthering Heights",
+        "evidence": "Wuthering Heights was first published in 1847.",
+        "source": "curated_demo_kg",
+        "match": "1847",
+        "match_score": "0.7"
+      }
+    ],
+    "feedback": [
+      {
+        "reviewer": "deepseek_grammar",
+        "span": "Mary Shelley write Frankenstein in 1847",
+        "issue_type": "grammar",
+        "suggestion": "Change 'write' to 'wrote' for past tense consistency.",
+        "rationale": "The sentence refers to a past event, so the verb should be in past tense.",
+        "confidence": 0.95,
+        "knowledge_evidence": [
+          "Frankenstein was first published in 1818, not 1847, but the tense error is independent of the date."
+        ],
+        "meaning_change_risk": "low"
+      },
+      {
+        "reviewer": "deepseek_grammar",
+        "span": "Mary Shelley write Frankenstein in 1847",
+        "issue_type": "literary_fact",
+        "suggestion": "Change '1847' to '1818' to correct the publication year of Frankenstein.",
+        "rationale": "Frankenstein was published in 1818, not 1847. 1847 is the publication year of Jane Eyre.",
+        "confidence": 0.99,
+        "knowledge_evidence": [
+          "Frankenstein | publication_year | 1818"
+        ],
+        "meaning_change_risk": "high"
+      },
+      {
+        "reviewer": "deepseek_grammar",
+        "span": "Jane Austen wrote Jane Eyre",
+        "issue_type": "literary_fact",
+        "suggestion": "Change 'Jane Austen' to 'Charlotte Brontë'.",
+        "rationale": "Jane Eyre was written by Charlotte Brontë, not Jane Austen.",
+        "confidence": 0.99,
+        "knowledge_evidence": [
+          "Jane Eyre | author | Charlotte Bronte"
+        ],
+        "meaning_change_risk": "high"
+      },
+      {
+        "reviewer": "deepseek_grammar",
+        "span": "Both novels shows how women are trapped by society.",
+        "issue_type": "grammar",
+        "suggestion": "Change 'shows' to 'show' to agree with the plural subject 'novels'.",
+        "rationale": "The subject 'Both novels' is plural, so the verb should be 'show'.",
+        "confidence": 0.95,
+        "knowledge_evidence": [],
+        "meaning_change_risk": "low"
+      }
+    ],
+    "decisions": [
+      {
+        "span": "Jane Austen wrote Jane Eyre",
+        "issue_type": "literary_fact",
+        "selected_suggestion": "Change 'Jane Austen' to 'Charlotte Brontë'.",
+        "decision": "teacher_review",
+        "risk_level": "medium",
+        "teacher_action": "Verify factual correction",
+        "priority": 2,
+        "agreement": 1.0,
+        "avg_confidence": 0.99,
+        "kg_supported": true,
+        "evidence_count": 1,
+        "knowledge_evidence": "Jane Eyre | author | Charlotte Bronte",
+        "rationale": "Knowledge-supported factual correction; route to teacher review before changing the essay."
+      },
+      {
+        "span": "Mary Shelley write Frankenstein in 1847",
+        "issue_type": "literary_fact",
+        "selected_suggestion": "Change '1847' to '1818' to correct the publication year of Frankenstein.",
+        "decision": "teacher_review",
+        "risk_level": "medium",
+        "teacher_action": "Verify factual correction",
+        "priority": 2,
+        "agreement": 1.0,
+        "avg_confidence": 0.99,
+        "kg_supported": true,
+        "evidence_count": 1,
+        "knowledge_evidence": "Frankenstein | publication_year | 1818",
+        "rationale": "Knowledge-supported factual correction; route to teacher review before changing the essay."
+      },
+      {
+        "span": "Both novels shows how women are trapped by society.",
+        "issue_type": "grammar",
+        "selected_suggestion": "Change 'shows' to 'show' to agree with the plural subject 'novels'.",
+        "decision": "auto_accept",
+        "risk_level": "low",
+        "teacher_action": "Optional skim",
+        "priority": 3,
+        "agreement": 1.0,
+        "avg_confidence": 0.95,
+        "kg_supported": false,
+        "evidence_count": 0,
+        "knowledge_evidence": "",
+        "rationale": "Low-risk local language edit with reviewer agreement."
+      },
+      {
+        "span": "Mary Shelley write Frankenstein in 1847",
+        "issue_type": "grammar",
+        "selected_suggestion": "Change 'write' to 'wrote' for past tense consistency.",
+        "decision": "auto_accept",
+        "risk_level": "low",
+        "teacher_action": "Optional skim",
+        "priority": 3,
+        "agreement": 1.0,
+        "avg_confidence": 0.95,
+        "kg_supported": true,
+        "evidence_count": 1,
+        "knowledge_evidence": "Frankenstein was first published in 1818, not 1847, but the tense error is independent of the date.",
+        "rationale": "Low-risk local language edit with reviewer agreement."
+      }
+    ],
+    "reviewer_results": [
+      {
+        "provider": "deepseek",
+        "model": "deepseek-chat",
+        "reviewer_role": "grammar",
+        "feedback_items": 4,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 2.893
+      }
+    ]
+  }
+]

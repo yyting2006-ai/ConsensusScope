@@ -1,0 +1,6 @@
+id,essay,focus,expected_review_reason
+lit_esl_001,"Mary Shelley write Frankenstein in 1847, and Jane Austen wrote Jane Eyre. Both novels shows how women are trapped by society.","grammar_and_literary_fact","Grammar can be auto-corrected, but authorship and publication-year corrections need teacher review."
+lit_esl_002,"The monster is Victor Frankenstein, so the novel proves that people should never study knowledge.","character_fact_and_argument","The character confusion is KG-supported, while the broad interpretation changes student meaning."
+lit_esl_003,"In comparison, the two books are same because both main characters want freedom.","academic_style","The sentence needs academic phrasing, but a teacher should verify the intended contrast."
+lit_esl_004,"Frankenstein is only about science and Jane Eyre is only about love, so they are not useful for studying society.","argument_risk","Absolute interpretive claims should be routed to review rather than blindly rewritten."
+lit_esl_005,"Both novels shows the pressure of society, but they describe freedom in different ways.","grammar","A local subject-verb agreement correction can be safely auto-accepted."

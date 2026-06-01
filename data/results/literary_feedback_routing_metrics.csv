@@ -1,0 +1,6 @@
+id,focus,reviewer_source,total_suggestions,auto_accept,teacher_review,auto_share,review_share,high_risk,kg_supported
+lit_esl_001,grammar_and_literary_fact,deterministic,4,2,2,0.5,0.5,0,2
+lit_esl_002,character_fact_and_argument,deterministic,2,0,2,0.0,1.0,1,2
+lit_esl_003,academic_style,deterministic,1,0,1,0.0,1.0,0,0
+lit_esl_004,argument_risk,deterministic,1,0,1,0.0,1.0,1,0
+lit_esl_005,grammar,deterministic,1,1,0,1.0,0.0,0,0

@@ -42,6 +42,7 @@ from src.literary_feedback import (
     load_literary_kg,
     retrieve_literary_knowledge,
     review_queue,
+    run_live_literary_reviewers,
 )
 from src.llm.clients import PROVIDER_CONFIG
 
@@ -503,10 +504,24 @@ def render_literary_feedback_mode() -> None:
         example = st.selectbox("Demo essay", list(EXAMPLE_ESSAYS.keys()))
         default_essay = EXAMPLE_ESSAYS.get(example, DEFAULT_LITERARY_ESSAY)
         essay = st.text_area("Student essay excerpt", value=default_essay, height=230)
+        reviewer_source = st.radio(
+            "Reviewer source",
+            ["No-API deterministic reviewers", "Live API reviewers"],
+            horizontal=True,
+        )
         run_feedback = st.button("Run Knowledge-Grounded Feedback", use_container_width=True)
         if run_feedback:
             kg_rows = retrieve_literary_knowledge(essay, kg, limit=16)
-            feedback = generate_demo_literary_feedback(essay, kg)
+            reviewer_results: List[Dict[str, Any]] = []
+            if reviewer_source == "Live API reviewers":
+                configs = build_live_configs(api_mode, selected, user_inputs)
+                live_result = run_live_literary_reviewers(configs, essay, kg_rows)
+                feedback = live_result.get("feedback", [])
+                reviewer_results = live_result.get("reviewer_results", [])
+                if not feedback:
+                    feedback = generate_demo_literary_feedback(essay, kg)
+            else:
+                feedback = generate_demo_literary_feedback(essay, kg)
             decisions = adjudicate_literary_feedback(feedback)
             revised = apply_auto_accepted_edits(essay, decisions)
             st.session_state["literary_result"] = {
@@ -514,6 +529,8 @@ def render_literary_feedback_mode() -> None:
                 "revised": revised,
                 "kg_rows": kg_rows,
                 "feedback": feedback,
+                "reviewer_source": reviewer_source,
+                "reviewer_results": reviewer_results,
                 "decisions": decisions,
                 "report": build_literary_feedback_report(essay, kg_rows, feedback, decisions),
             }
@@ -584,6 +601,24 @@ def render_literary_feedback_mode() -> None:
         st.dataframe(decisions_df, use_container_width=True, hide_index=True)
 
     with tabs[3]:
+        reviewer_results = result.get("reviewer_results", [])
+        if reviewer_results:
+            st.markdown("**Live reviewer call status**")
+            status_df = pd.DataFrame(
+                [
+                    {
+                        "provider": item.get("provider", ""),
+                        "model": item.get("model", ""),
+                        "reviewer_role": item.get("reviewer_role", ""),
+                        "feedback_items": len(item.get("feedback", [])),
+                        "request_error": item.get("request_error", ""),
+                        "parse_error": item.get("parse_error", ""),
+                        "latency_sec": item.get("latency_sec", 0.0),
+                    }
+                    for item in reviewer_results
+                ]
+            )
+            st.dataframe(status_df, use_container_width=True, hide_index=True)
         feedback_df = pd.DataFrame(result.get("feedback", []))
         if not feedback_df.empty and "knowledge_evidence" in feedback_df.columns:
             feedback_df = feedback_df.copy()

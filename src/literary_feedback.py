@@ -2,10 +2,15 @@ from __future__ import annotations
 
 import json
 import re
+import time
 from collections import Counter, defaultdict
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Any, Dict, Iterable, List
 
 import pandas as pd
+import requests
+
+from src.llm.clients import format_http_error, parse_json_from_text
 
 
 DEFAULT_LITERARY_ESSAY = """Mary Shelley write Frankenstein in 1847, and Jane Austen wrote Jane Eyre. Both novels shows how women are trapped by society, but Frankenstein is only about science and Jane Eyre is only about love. The monster is Victor Frankenstein, so the novel proves that people should never study knowledge. In comparison, the two books are same because both main characters want freedom."""
@@ -33,6 +38,14 @@ def _safe_text(value: Any) -> str:
 
 def _norm(value: Any) -> str:
     return re.sub(r"\s+", " ", _safe_text(value).lower()).strip(" .,:;!?")
+
+
+def _safe_confidence(value: Any) -> float:
+    try:
+        parsed = float(value)
+    except Exception:
+        return 0.0
+    return max(0.0, min(1.0, parsed))
 
 
 def load_literary_kg(path: str) -> pd.DataFrame:
@@ -102,6 +115,170 @@ def _suggestion(
         "confidence": round(float(confidence), 3),
         "knowledge_evidence": list(evidence),
         "meaning_change_risk": risk,
+    }
+
+
+def build_literary_feedback_prompt(essay: str, kg_rows: List[Dict[str, str]], reviewer_role: str) -> str:
+    kg_text = "\n".join(
+        f"- {row.get('entity')} | {row.get('relation')} | {row.get('value')}: {row.get('evidence')}"
+        for row in kg_rows[:12]
+    )
+    return f"""You are an ESL writing feedback reviewer for comparative literature essays.
+
+Reviewer role: {reviewer_role}
+
+Student essay excerpt:
+{essay}
+
+Retrieved literary knowledge:
+{kg_text or "No retrieved knowledge."}
+
+Return exactly one JSON object with a key named "feedback".
+"feedback" must be a list of 1 to 5 objects. Each object must use this schema:
+span, issue_type, suggestion, rationale, confidence, knowledge_evidence, meaning_change_risk
+
+Allowed issue_type values:
+grammar, word_choice, academic_style, literary_fact, argument
+
+Allowed meaning_change_risk values:
+low, medium, high
+
+Rules:
+- Focus on concrete, inspectable feedback.
+- Do not rewrite the whole essay.
+- Mark grammar-only local edits as low risk.
+- Mark literary facts and interpretation-changing suggestions as medium or high risk.
+- Use knowledge_evidence only when the retrieved knowledge supports the suggestion.
+- confidence must be a number from 0 to 1.
+- Do not include Markdown.
+"""
+
+
+def normalize_feedback_items(raw_items: Any, reviewer: str) -> List[Dict[str, Any]]:
+    if not isinstance(raw_items, list):
+        return []
+    normalized: List[Dict[str, Any]] = []
+    allowed_types = set(ISSUE_ORDER)
+    allowed_risks = {"low", "medium", "high"}
+    for item in raw_items:
+        if not isinstance(item, dict):
+            continue
+        issue_type = _norm(item.get("issue_type"))
+        risk = _norm(item.get("meaning_change_risk"))
+        evidence = item.get("knowledge_evidence", [])
+        if isinstance(evidence, str):
+            evidence = [evidence] if evidence.strip() else []
+        if not isinstance(evidence, list):
+            evidence = []
+        normalized.append(
+            _suggestion(
+                reviewer=_safe_text(item.get("reviewer")) or reviewer,
+                span=_safe_text(item.get("span")),
+                issue_type=issue_type if issue_type in allowed_types else "academic_style",
+                suggestion=_safe_text(item.get("suggestion")),
+                rationale=_safe_text(item.get("rationale")),
+                confidence=_safe_confidence(item.get("confidence", 0.0)),
+                risk=risk if risk in allowed_risks else "medium",
+                evidence=[_safe_text(value) for value in evidence if _safe_text(value)],
+            )
+        )
+    return [item for item in normalized if item["span"] and item["suggestion"]]
+
+
+def call_literary_reviewer(
+    config: Any,
+    essay: str,
+    kg_rows: List[Dict[str, str]],
+    reviewer_role: str,
+    temperature: float = 0.1,
+    max_tokens: int = 1200,
+    timeout: int = 60,
+) -> Dict[str, Any]:
+    started = time.time()
+    base = {
+        "provider": getattr(config, "provider", ""),
+        "model": getattr(config, "model", ""),
+        "reviewer_role": reviewer_role,
+        "feedback": [],
+        "raw_output": "",
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 0.0,
+    }
+    if not getattr(config, "enabled", True):
+        return {**base, "request_error": "Model is disabled"}
+    if not getattr(config, "api_key", ""):
+        return {**base, "request_error": "Missing API key"}
+
+    payload = {
+        "model": config.model,
+        "messages": [
+            {"role": "system", "content": "You must output valid JSON only."},
+            {"role": "user", "content": build_literary_feedback_prompt(essay, kg_rows, reviewer_role)},
+        ],
+        "temperature": temperature,
+        "max_tokens": max_tokens,
+    }
+    headers = {
+        "Authorization": f"Bearer {config.api_key}",
+        "Content-Type": "application/json",
+    }
+    try:
+        response = requests.post(
+            f"{config.base_url.rstrip('/')}/chat/completions",
+            headers=headers,
+            json=payload,
+            timeout=timeout,
+        )
+        if not response.ok:
+            raise RuntimeError(format_http_error(response))
+        raw = str(response.json()["choices"][0]["message"]["content"])
+        parsed = parse_json_from_text(raw)
+        parse_error = _safe_text(parsed.get("parse_error"))
+        feedback = normalize_feedback_items(parsed.get("feedback", []), f"{config.provider}_{reviewer_role}")
+        return {
+            **base,
+            "feedback": feedback,
+            "raw_output": raw,
+            "parse_error": parse_error,
+            "latency_sec": round(time.time() - started, 3),
+        }
+    except Exception as exc:
+        return {
+            **base,
+            "request_error": str(exc),
+            "latency_sec": round(time.time() - started, 3),
+        }
+
+
+def run_live_literary_reviewers(
+    configs: Iterable[Any],
+    essay: str,
+    kg_rows: List[Dict[str, str]],
+    max_workers: int = 4,
+) -> Dict[str, Any]:
+    roles = ["grammar", "literary_fact", "argument"]
+    tasks = []
+    for idx, config in enumerate([cfg for cfg in configs if getattr(cfg, "enabled", True)]):
+        role = roles[idx % len(roles)]
+        tasks.append((config, role))
+    if not tasks:
+        return {"feedback": [], "reviewer_results": []}
+
+    results: List[Dict[str, Any]] = []
+    workers = max(1, min(max_workers, len(tasks)))
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        futures = [
+            pool.submit(call_literary_reviewer, config, essay, kg_rows, role)
+            for config, role in tasks
+        ]
+        for future in as_completed(futures):
+            results.append(future.result())
+
+    feedback = [item for result in results for item in result.get("feedback", [])]
+    return {
+        "feedback": feedback,
+        "reviewer_results": sorted(results, key=lambda item: str(item.get("provider", ""))),
     }
 
 

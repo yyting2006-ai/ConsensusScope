@@ -1,0 +1,624 @@
+[
+  {
+    "id": "lit_esl_001",
+    "essay": "Mary Shelley write Frankenstein in 1847, and Jane Austen wrote Jane Eyre. Both novels shows how women are trapped by society.",
+    "kg_rows": [
+      {
+        "entity": "Frankenstein",
+        "relation": "author",
+        "value": "Mary Shelley",
+        "work": "Frankenstein",
+        "evidence": "Frankenstein; or, The Modern Prometheus is attributed to Mary Shelley.",
+        "source": "curated_demo_kg",
+        "match": "Frankenstein",
+        "match_score": "1.0"
+      },
+      {
+        "entity": "Frankenstein",
+        "relation": "publication_year",
+        "value": "1818",
+        "work": "Frankenstein",
+        "evidence": "Frankenstein was first published in 1818.",
+        "source": "curated_demo_kg",
+        "match": "Frankenstein",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Frankenstein",
+        "relation": "genre",
+        "value": "Gothic novel",
+        "work": "Frankenstein",
+        "evidence": "Frankenstein is commonly discussed as a Gothic novel.",
+        "source": "curated_demo_kg",
+        "match": "Frankenstein",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Frankenstein",
+        "relation": "central_character",
+        "value": "Victor Frankenstein",
+        "work": "Frankenstein",
+        "evidence": "Victor Frankenstein is the scientist who creates the creature.",
+        "source": "curated_demo_kg",
+        "match": "Frankenstein",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Frankenstein",
+        "relation": "central_character",
+        "value": "the creature",
+        "work": "Frankenstein",
+        "evidence": "The created being is often called the creature or monster, not Victor Frankenstein.",
+        "source": "curated_demo_kg",
+        "match": "Frankenstein",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "author",
+        "value": "Charlotte Bronte",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre is a novel by Charlotte Bronte.",
+        "source": "curated_demo_kg",
+        "match": "Jane Eyre",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "publication_year",
+        "value": "1847",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre was first published in 1847.",
+        "source": "curated_demo_kg",
+        "match": "Jane Eyre",
+        "match_score": "1.0"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "genre",
+        "value": "Bildungsroman",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre is frequently read as a Bildungsroman with Gothic elements.",
+        "source": "curated_demo_kg",
+        "match": "Jane Eyre",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "central_character",
+        "value": "Jane Eyre",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre is the protagonist and narrator of the novel.",
+        "source": "curated_demo_kg",
+        "match": "Jane Eyre",
+        "match_score": "1.0"
+      },
+      {
+        "entity": "Pride and Prejudice",
+        "relation": "author",
+        "value": "Jane Austen",
+        "work": "Pride and Prejudice",
+        "evidence": "Pride and Prejudice is a novel by Jane Austen.",
+        "source": "curated_demo_kg",
+        "match": "Jane Austen",
+        "match_score": "0.7"
+      },
+      {
+        "entity": "Wuthering Heights",
+        "relation": "publication_year",
+        "value": "1847",
+        "work": "Wuthering Heights",
+        "evidence": "Wuthering Heights was first published in 1847.",
+        "source": "curated_demo_kg",
+        "match": "1847",
+        "match_score": "0.7"
+      }
+    ],
+    "feedback": [
+      {
+        "reviewer": "grammar_reviewer",
+        "span": "Mary Shelley write",
+        "issue_type": "grammar",
+        "suggestion": "Mary Shelley wrote",
+        "rationale": "Use past-tense subject-verb agreement when discussing publication history.",
+        "confidence": 0.94,
+        "knowledge_evidence": [],
+        "meaning_change_risk": "low"
+      },
+      {
+        "reviewer": "style_reviewer",
+        "span": "Mary Shelley write",
+        "issue_type": "grammar",
+        "suggestion": "Mary Shelley wrote",
+        "rationale": "The sentence needs a finite past-tense verb.",
+        "confidence": 0.9,
+        "knowledge_evidence": [],
+        "meaning_change_risk": "low"
+      },
+      {
+        "reviewer": "grammar_reviewer",
+        "span": "Both novels shows",
+        "issue_type": "grammar",
+        "suggestion": "Both novels show",
+        "rationale": "Plural subject 'novels' takes the base verb 'show'.",
+        "confidence": 0.96,
+        "knowledge_evidence": [],
+        "meaning_change_risk": "low"
+      },
+      {
+        "reviewer": "academic_reviewer",
+        "span": "Both novels shows",
+        "issue_type": "grammar",
+        "suggestion": "Both novels show",
+        "rationale": "This is a local grammar correction that preserves meaning.",
+        "confidence": 0.91,
+        "knowledge_evidence": [],
+        "meaning_change_risk": "low"
+      },
+      {
+        "reviewer": "kg_reviewer",
+        "span": "Both novels shows",
+        "issue_type": "grammar",
+        "suggestion": "Both novels show",
+        "rationale": "The change does not alter the literary claim.",
+        "confidence": 0.86,
+        "knowledge_evidence": [],
+        "meaning_change_risk": "low"
+      },
+      {
+        "reviewer": "kg_reviewer",
+        "span": "Frankenstein in 1847",
+        "issue_type": "literary_fact",
+        "suggestion": "Frankenstein was first published in 1818",
+        "rationale": "The knowledge base contradicts the stated publication year.",
+        "confidence": 0.88,
+        "knowledge_evidence": [
+          "Frankenstein was first published in 1818."
+        ],
+        "meaning_change_risk": "medium"
+      },
+      {
+        "reviewer": "fact_reviewer",
+        "span": "Frankenstein in 1847",
+        "issue_type": "literary_fact",
+        "suggestion": "Frankenstein was first published in 1818",
+        "rationale": "Correct the factual date before using the comparison as evidence.",
+        "confidence": 0.82,
+        "knowledge_evidence": [
+          "Frankenstein was first published in 1818."
+        ],
+        "meaning_change_risk": "medium"
+      },
+      {
+        "reviewer": "kg_reviewer",
+        "span": "Jane Austen wrote Jane Eyre",
+        "issue_type": "literary_fact",
+        "suggestion": "Charlotte Bronte wrote Jane Eyre",
+        "rationale": "The knowledge base attributes Jane Eyre to Charlotte Bronte, not Jane Austen.",
+        "confidence": 0.92,
+        "knowledge_evidence": [
+          "Jane Eyre is a novel by Charlotte Bronte."
+        ],
+        "meaning_change_risk": "medium"
+      },
+      {
+        "reviewer": "fact_reviewer",
+        "span": "Jane Austen wrote Jane Eyre",
+        "issue_type": "literary_fact",
+        "suggestion": "Jane Eyre is by Charlotte Bronte",
+        "rationale": "This is a factual correction supported by the literary knowledge base.",
+        "confidence": 0.86,
+        "knowledge_evidence": [
+          "Jane Eyre is a novel by Charlotte Bronte."
+        ],
+        "meaning_change_risk": "medium"
+      }
+    ],
+    "decisions": [
+      {
+        "span": "Frankenstein in 1847",
+        "issue_type": "literary_fact",
+        "selected_suggestion": "Frankenstein was first published in 1818",
+        "decision": "teacher_review",
+        "risk_level": "medium",
+        "teacher_action": "Verify factual correction",
+        "priority": 2,
+        "agreement": 1.0,
+        "avg_confidence": 0.85,
+        "kg_supported": true,
+        "evidence_count": 2,
+        "knowledge_evidence": "Frankenstein was first published in 1818.",
+        "rationale": "Knowledge-supported factual correction; route to teacher review before changing the essay."
+      },
+      {
+        "span": "Jane Austen wrote Jane Eyre",
+        "issue_type": "literary_fact",
+        "selected_suggestion": "Charlotte Bronte wrote Jane Eyre",
+        "decision": "teacher_review",
+        "risk_level": "medium",
+        "teacher_action": "Verify factual correction",
+        "priority": 2,
+        "agreement": 0.5,
+        "avg_confidence": 0.89,
+        "kg_supported": true,
+        "evidence_count": 2,
+        "knowledge_evidence": "Jane Eyre is a novel by Charlotte Bronte.",
+        "rationale": "Knowledge-supported factual correction; route to teacher review before changing the essay."
+      },
+      {
+        "span": "Both novels shows",
+        "issue_type": "grammar",
+        "selected_suggestion": "Both novels show",
+        "decision": "auto_accept",
+        "risk_level": "low",
+        "teacher_action": "Optional skim",
+        "priority": 3,
+        "agreement": 1.0,
+        "avg_confidence": 0.91,
+        "kg_supported": false,
+        "evidence_count": 0,
+        "knowledge_evidence": "",
+        "rationale": "Low-risk local language edit with reviewer agreement."
+      },
+      {
+        "span": "Mary Shelley write",
+        "issue_type": "grammar",
+        "selected_suggestion": "Mary Shelley wrote",
+        "decision": "auto_accept",
+        "risk_level": "low",
+        "teacher_action": "Optional skim",
+        "priority": 3,
+        "agreement": 1.0,
+        "avg_confidence": 0.92,
+        "kg_supported": false,
+        "evidence_count": 0,
+        "knowledge_evidence": "",
+        "rationale": "Low-risk local language edit with reviewer agreement."
+      }
+    ],
+    "reviewer_results": []
+  },
+  {
+    "id": "lit_esl_002",
+    "essay": "The monster is Victor Frankenstein, so the novel proves that people should never study knowledge.",
+    "kg_rows": [
+      {
+        "entity": "Frankenstein",
+        "relation": "author",
+        "value": "Mary Shelley",
+        "work": "Frankenstein",
+        "evidence": "Frankenstein; or, The Modern Prometheus is attributed to Mary Shelley.",
+        "source": "curated_demo_kg",
+        "match": "Frankenstein",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Frankenstein",
+        "relation": "publication_year",
+        "value": "1818",
+        "work": "Frankenstein",
+        "evidence": "Frankenstein was first published in 1818.",
+        "source": "curated_demo_kg",
+        "match": "Frankenstein",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Frankenstein",
+        "relation": "genre",
+        "value": "Gothic novel",
+        "work": "Frankenstein",
+        "evidence": "Frankenstein is commonly discussed as a Gothic novel.",
+        "source": "curated_demo_kg",
+        "match": "Frankenstein",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Frankenstein",
+        "relation": "central_character",
+        "value": "Victor Frankenstein",
+        "work": "Frankenstein",
+        "evidence": "Victor Frankenstein is the scientist who creates the creature.",
+        "source": "curated_demo_kg",
+        "match": "Frankenstein",
+        "match_score": "1.0"
+      },
+      {
+        "entity": "Frankenstein",
+        "relation": "central_character",
+        "value": "the creature",
+        "work": "Frankenstein",
+        "evidence": "The created being is often called the creature or monster, not Victor Frankenstein.",
+        "source": "curated_demo_kg",
+        "match": "Frankenstein",
+        "match_score": "0.85"
+      }
+    ],
+    "feedback": [
+      {
+        "reviewer": "kg_reviewer",
+        "span": "The monster is Victor Frankenstein",
+        "issue_type": "literary_fact",
+        "suggestion": "Victor Frankenstein is the scientist; the created being is the creature",
+        "rationale": "The statement conflates Victor Frankenstein with the creature.",
+        "confidence": 0.84,
+        "knowledge_evidence": [
+          "Victor Frankenstein is the scientist who creates the creature.",
+          "The created being is often called the creature or monster, not Victor Frankenstein."
+        ],
+        "meaning_change_risk": "medium"
+      },
+      {
+        "reviewer": "argument_reviewer",
+        "span": "The monster is Victor Frankenstein",
+        "issue_type": "argument",
+        "suggestion": "Clarify whether you mean Victor Frankenstein or the creature he creates",
+        "rationale": "The ambiguity affects the interpretation and should be reviewed.",
+        "confidence": 0.76,
+        "knowledge_evidence": [
+          "Victor Frankenstein is the scientist who creates the creature.",
+          "The created being is often called the creature or monster, not Victor Frankenstein."
+        ],
+        "meaning_change_risk": "high"
+      }
+    ],
+    "decisions": [
+      {
+        "span": "The monster is Victor Frankenstein",
+        "issue_type": "argument",
+        "selected_suggestion": "Clarify whether you mean Victor Frankenstein or the creature he creates",
+        "decision": "teacher_review",
+        "risk_level": "high",
+        "teacher_action": "Review meaning change",
+        "priority": 1,
+        "agreement": 1.0,
+        "avg_confidence": 0.76,
+        "kg_supported": true,
+        "evidence_count": 2,
+        "knowledge_evidence": "Victor Frankenstein is the scientist who creates the creature. | The created being is often called the creature or monster, not Victor Frankenstein.",
+        "rationale": "The suggestion may change interpretation, thesis framing, or student intent."
+      },
+      {
+        "span": "The monster is Victor Frankenstein",
+        "issue_type": "literary_fact",
+        "selected_suggestion": "Victor Frankenstein is the scientist; the created being is the creature",
+        "decision": "teacher_review",
+        "risk_level": "medium",
+        "teacher_action": "Verify factual correction",
+        "priority": 2,
+        "agreement": 1.0,
+        "avg_confidence": 0.84,
+        "kg_supported": true,
+        "evidence_count": 2,
+        "knowledge_evidence": "Victor Frankenstein is the scientist who creates the creature. | The created being is often called the creature or monster, not Victor Frankenstein.",
+        "rationale": "Knowledge-supported factual correction; route to teacher review before changing the essay."
+      }
+    ],
+    "reviewer_results": []
+  },
+  {
+    "id": "lit_esl_003",
+    "essay": "In comparison, the two books are same because both main characters want freedom.",
+    "kg_rows": [],
+    "feedback": [
+      {
+        "reviewer": "academic_reviewer",
+        "span": "the two books are same",
+        "issue_type": "academic_style",
+        "suggestion": "the two novels share important concerns, but they develop freedom differently",
+        "rationale": "The revision improves academic precision while preserving the student's comparative intent.",
+        "confidence": 0.8,
+        "knowledge_evidence": [],
+        "meaning_change_risk": "medium"
+      },
+      {
+        "reviewer": "style_reviewer",
+        "span": "the two books are same",
+        "issue_type": "academic_style",
+        "suggestion": "the two novels are similar in their concern with freedom",
+        "rationale": "This wording is more idiomatic and less absolute.",
+        "confidence": 0.78,
+        "knowledge_evidence": [],
+        "meaning_change_risk": "medium"
+      }
+    ],
+    "decisions": [
+      {
+        "span": "the two books are same",
+        "issue_type": "academic_style",
+        "selected_suggestion": "the two novels share important concerns, but they develop freedom differently",
+        "decision": "teacher_review",
+        "risk_level": "medium",
+        "teacher_action": "Review meaning change",
+        "priority": 2,
+        "agreement": 0.5,
+        "avg_confidence": 0.79,
+        "kg_supported": false,
+        "evidence_count": 0,
+        "knowledge_evidence": "",
+        "rationale": "The suggestion may change interpretation, thesis framing, or student intent."
+      }
+    ],
+    "reviewer_results": []
+  },
+  {
+    "id": "lit_esl_004",
+    "essay": "Frankenstein is only about science and Jane Eyre is only about love, so they are not useful for studying society.",
+    "kg_rows": [
+      {
+        "entity": "Frankenstein",
+        "relation": "author",
+        "value": "Mary Shelley",
+        "work": "Frankenstein",
+        "evidence": "Frankenstein; or, The Modern Prometheus is attributed to Mary Shelley.",
+        "source": "curated_demo_kg",
+        "match": "Frankenstein",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Frankenstein",
+        "relation": "publication_year",
+        "value": "1818",
+        "work": "Frankenstein",
+        "evidence": "Frankenstein was first published in 1818.",
+        "source": "curated_demo_kg",
+        "match": "Frankenstein",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Frankenstein",
+        "relation": "genre",
+        "value": "Gothic novel",
+        "work": "Frankenstein",
+        "evidence": "Frankenstein is commonly discussed as a Gothic novel.",
+        "source": "curated_demo_kg",
+        "match": "Frankenstein",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Frankenstein",
+        "relation": "central_character",
+        "value": "Victor Frankenstein",
+        "work": "Frankenstein",
+        "evidence": "Victor Frankenstein is the scientist who creates the creature.",
+        "source": "curated_demo_kg",
+        "match": "Frankenstein",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Frankenstein",
+        "relation": "central_character",
+        "value": "the creature",
+        "work": "Frankenstein",
+        "evidence": "The created being is often called the creature or monster, not Victor Frankenstein.",
+        "source": "curated_demo_kg",
+        "match": "Frankenstein",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "author",
+        "value": "Charlotte Bronte",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre is a novel by Charlotte Bronte.",
+        "source": "curated_demo_kg",
+        "match": "Jane Eyre",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "publication_year",
+        "value": "1847",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre was first published in 1847.",
+        "source": "curated_demo_kg",
+        "match": "Jane Eyre",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "genre",
+        "value": "Bildungsroman",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre is frequently read as a Bildungsroman with Gothic elements.",
+        "source": "curated_demo_kg",
+        "match": "Jane Eyre",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "central_character",
+        "value": "Jane Eyre",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre is the protagonist and narrator of the novel.",
+        "source": "curated_demo_kg",
+        "match": "Jane Eyre",
+        "match_score": "1.0"
+      }
+    ],
+    "feedback": [
+      {
+        "reviewer": "argument_reviewer",
+        "span": "only about science / only about love",
+        "issue_type": "argument",
+        "suggestion": "Use a more qualified claim about dominant themes instead of reducing each novel to one topic",
+        "rationale": "The absolute wording is interpretive and may oversimplify the literary comparison.",
+        "confidence": 0.74,
+        "knowledge_evidence": [],
+        "meaning_change_risk": "high"
+      }
+    ],
+    "decisions": [
+      {
+        "span": "only about science / only about love",
+        "issue_type": "argument",
+        "selected_suggestion": "Use a more qualified claim about dominant themes instead of reducing each novel to one topic",
+        "decision": "teacher_review",
+        "risk_level": "high",
+        "teacher_action": "Review meaning change",
+        "priority": 1,
+        "agreement": 1.0,
+        "avg_confidence": 0.74,
+        "kg_supported": false,
+        "evidence_count": 0,
+        "knowledge_evidence": "",
+        "rationale": "The suggestion may change interpretation, thesis framing, or student intent."
+      }
+    ],
+    "reviewer_results": []
+  },
+  {
+    "id": "lit_esl_005",
+    "essay": "Both novels shows the pressure of society, but they describe freedom in different ways.",
+    "kg_rows": [],
+    "feedback": [
+      {
+        "reviewer": "grammar_reviewer",
+        "span": "Both novels shows",
+        "issue_type": "grammar",
+        "suggestion": "Both novels show",
+        "rationale": "Plural subject 'novels' takes the base verb 'show'.",
+        "confidence": 0.96,
+        "knowledge_evidence": [],
+        "meaning_change_risk": "low"
+      },
+      {
+        "reviewer": "academic_reviewer",
+        "span": "Both novels shows",
+        "issue_type": "grammar",
+        "suggestion": "Both novels show",
+        "rationale": "This is a local grammar correction that preserves meaning.",
+        "confidence": 0.91,
+        "knowledge_evidence": [],
+        "meaning_change_risk": "low"
+      },
+      {
+        "reviewer": "kg_reviewer",
+        "span": "Both novels shows",
+        "issue_type": "grammar",
+        "suggestion": "Both novels show",
+        "rationale": "The change does not alter the literary claim.",
+        "confidence": 0.86,
+        "knowledge_evidence": [],
+        "meaning_change_risk": "low"
+      }
+    ],
+    "decisions": [
+      {
+        "span": "Both novels shows",
+        "issue_type": "grammar",
+        "selected_suggestion": "Both novels show",
+        "decision": "auto_accept",
+        "risk_level": "low",
+        "teacher_action": "Optional skim",
+        "priority": 3,
+        "agreement": 1.0,
+        "avg_confidence": 0.91,
+        "kg_supported": false,
+        "evidence_count": 0,
+        "knowledge_evidence": "",
+        "rationale": "Low-risk local language edit with reviewer agreement."
+      }
+    ],
+    "reviewer_results": []
+  }
+]

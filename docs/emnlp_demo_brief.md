@@ -25,6 +25,8 @@ ConsensusScope is a knowledge-grounded adjudication demo for ESL comparative lit
 - The teacher view shows the original essay next to an auto-accepted preview.
 - The review queue prioritizes meaning-changing and KG-supported suggestions.
 - Knowledge evidence and raw reviewer suggestions remain inspectable in separate tabs.
+- Live reviewer integration has been smoke-tested with DeepSeek, Qwen, GLM, and
+  Kimi on one benchmark essay; records are stored without API keys.
 
 ## Required pages for the submission video
 

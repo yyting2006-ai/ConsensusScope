@@ -6,9 +6,11 @@ from src.literary_feedback import (
     DEFAULT_LITERARY_ESSAY,
     adjudicate_literary_feedback,
     apply_auto_accepted_edits,
+    build_literary_feedback_prompt,
     decision_summary_by_type,
     generate_demo_literary_feedback,
     literary_routing_summary,
+    normalize_feedback_items,
     review_queue,
     retrieve_literary_knowledge,
 )
@@ -68,3 +70,27 @@ def test_literary_feedback_routes_low_risk_and_review_items() -> None:
     assert "Both novels show" in revised
     assert queue and all(item["decision"] == "teacher_review" for item in queue)
     assert any(item["issue_type"] == "grammar" for item in by_type)
+
+
+def test_live_reviewer_prompt_and_normalization() -> None:
+    rows = retrieve_literary_knowledge("Compare Frankenstein and Jane Eyre.", _kg())
+    prompt = build_literary_feedback_prompt("Essay", rows, "grammar")
+    items = normalize_feedback_items(
+        [
+            {
+                "span": "novels shows",
+                "issue_type": "grammar",
+                "suggestion": "novels show",
+                "rationale": "Plural agreement.",
+                "confidence": "0.91",
+                "knowledge_evidence": "",
+                "meaning_change_risk": "low",
+            }
+        ],
+        "test_reviewer",
+    )
+
+    assert '"feedback"' in prompt
+    assert items[0]["reviewer"] == "test_reviewer"
+    assert items[0]["confidence"] == 0.91
+    assert items[0]["meaning_change_risk"] == "low"

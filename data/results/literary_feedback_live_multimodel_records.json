@@ -1,0 +1,511 @@
+[
+  {
+    "id": "lit_esl_001",
+    "essay": "Mary Shelley write Frankenstein in 1847, and Jane Austen wrote Jane Eyre. Both novels shows how women are trapped by society.",
+    "kg_rows": [
+      {
+        "entity": "Frankenstein",
+        "relation": "author",
+        "value": "Mary Shelley",
+        "work": "Frankenstein",
+        "evidence": "Frankenstein; or, The Modern Prometheus is attributed to Mary Shelley.",
+        "source": "curated_demo_kg",
+        "match": "Frankenstein",
+        "match_score": "1.0"
+      },
+      {
+        "entity": "Frankenstein",
+        "relation": "publication_year",
+        "value": "1818",
+        "work": "Frankenstein",
+        "evidence": "Frankenstein was first published in 1818.",
+        "source": "curated_demo_kg",
+        "match": "Frankenstein",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Frankenstein",
+        "relation": "genre",
+        "value": "Gothic novel",
+        "work": "Frankenstein",
+        "evidence": "Frankenstein is commonly discussed as a Gothic novel.",
+        "source": "curated_demo_kg",
+        "match": "Frankenstein",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Frankenstein",
+        "relation": "central_character",
+        "value": "Victor Frankenstein",
+        "work": "Frankenstein",
+        "evidence": "Victor Frankenstein is the scientist who creates the creature.",
+        "source": "curated_demo_kg",
+        "match": "Frankenstein",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Frankenstein",
+        "relation": "central_character",
+        "value": "the creature",
+        "work": "Frankenstein",
+        "evidence": "The created being is often called the creature or monster, not Victor Frankenstein.",
+        "source": "curated_demo_kg",
+        "match": "Frankenstein",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "author",
+        "value": "Charlotte Bronte",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre is a novel by Charlotte Bronte.",
+        "source": "curated_demo_kg",
+        "match": "Jane Eyre",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "publication_year",
+        "value": "1847",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre was first published in 1847.",
+        "source": "curated_demo_kg",
+        "match": "Jane Eyre",
+        "match_score": "1.0"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "genre",
+        "value": "Bildungsroman",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre is frequently read as a Bildungsroman with Gothic elements.",
+        "source": "curated_demo_kg",
+        "match": "Jane Eyre",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "central_character",
+        "value": "Jane Eyre",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre is the protagonist and narrator of the novel.",
+        "source": "curated_demo_kg",
+        "match": "Jane Eyre",
+        "match_score": "1.0"
+      },
+      {
+        "entity": "Pride and Prejudice",
+        "relation": "author",
+        "value": "Jane Austen",
+        "work": "Pride and Prejudice",
+        "evidence": "Pride and Prejudice is a novel by Jane Austen.",
+        "source": "curated_demo_kg",
+        "match": "Jane Austen",
+        "match_score": "0.7"
+      },
+      {
+        "entity": "Wuthering Heights",
+        "relation": "publication_year",
+        "value": "1847",
+        "work": "Wuthering Heights",
+        "evidence": "Wuthering Heights was first published in 1847.",
+        "source": "curated_demo_kg",
+        "match": "1847",
+        "match_score": "0.7"
+      }
+    ],
+    "feedback": [
+      {
+        "reviewer": "deepseek_grammar",
+        "span": "Mary Shelley write Frankenstein in 1847",
+        "issue_type": "grammar",
+        "suggestion": "Change 'write' to 'wrote' to match past tense.",
+        "rationale": "The sentence describes a past event, so the verb should be in past tense.",
+        "confidence": 0.95,
+        "knowledge_evidence": [
+          "Frankenstein was first published in 1818, not 1847."
+        ],
+        "meaning_change_risk": "low"
+      },
+      {
+        "reviewer": "deepseek_grammar",
+        "span": "Mary Shelley write Frankenstein in 1847",
+        "issue_type": "literary_fact",
+        "suggestion": "Change '1847' to '1818'.",
+        "rationale": "Frankenstein was published in 1818, not 1847.",
+        "confidence": 0.99,
+        "knowledge_evidence": [
+          "Frankenstein | publication_year | 1818"
+        ],
+        "meaning_change_risk": "medium"
+      },
+      {
+        "reviewer": "deepseek_grammar",
+        "span": "Jane Austen wrote Jane Eyre",
+        "issue_type": "literary_fact",
+        "suggestion": "Change 'Jane Austen' to 'Charlotte Brontë'.",
+        "rationale": "Jane Eyre was written by Charlotte Brontë, not Jane Austen.",
+        "confidence": 0.99,
+        "knowledge_evidence": [
+          "Jane Eyre | author | Charlotte Bronte"
+        ],
+        "meaning_change_risk": "high"
+      },
+      {
+        "reviewer": "deepseek_grammar",
+        "span": "Both novels shows how women are trapped by society",
+        "issue_type": "grammar",
+        "suggestion": "Change 'shows' to 'show' to agree with the plural subject 'Both novels'.",
+        "rationale": "The subject is plural, so the verb should be in base form without -s.",
+        "confidence": 0.95,
+        "knowledge_evidence": [],
+        "meaning_change_risk": "low"
+      },
+      {
+        "reviewer": "kimi_grammar",
+        "span": "Mary Shelley write",
+        "issue_type": "grammar",
+        "suggestion": "Mary Shelley wrote",
+        "rationale": "The verb 'write' should be in the past tense to match the time frame of the publication year.",
+        "confidence": 1.0,
+        "knowledge_evidence": [
+          "Frankenstein | publication_year | 1818"
+        ],
+        "meaning_change_risk": "low"
+      },
+      {
+        "reviewer": "kimi_grammar",
+        "span": "in 1847",
+        "issue_type": "literary_fact",
+        "suggestion": "in 1818",
+        "rationale": "The novel Frankenstein was first published in 1818, not 1847.",
+        "confidence": 1.0,
+        "knowledge_evidence": [
+          "Frankenstein | publication_year | 1818"
+        ],
+        "meaning_change_risk": "medium"
+      },
+      {
+        "reviewer": "kimi_grammar",
+        "span": "and Jane Austen wrote Jane Eyre",
+        "issue_type": "literary_fact",
+        "suggestion": "and Charlotte Bronte wrote Jane Eyre",
+        "rationale": "Jane Eyre was written by Charlotte Bronte, not Jane Austen.",
+        "confidence": 1.0,
+        "knowledge_evidence": [
+          "Jane Eyre | author | Charlotte Bronte"
+        ],
+        "meaning_change_risk": "medium"
+      },
+      {
+        "reviewer": "kimi_grammar",
+        "span": "Both novels shows",
+        "issue_type": "grammar",
+        "suggestion": "Both novels show",
+        "rationale": "The verb 'shows' should agree in number with the plural subject 'novels'.",
+        "confidence": 1.0,
+        "knowledge_evidence": [],
+        "meaning_change_risk": "low"
+      },
+      {
+        "reviewer": "kimi_grammar",
+        "span": "how women are trapped by society",
+        "issue_type": "argument",
+        "suggestion": "how the female characters are constrained by societal norms",
+        "rationale": "The phrase 'trapped by society' is vague; specifying 'constrained by societal norms' provides a clearer connection to the themes of the novels.",
+        "confidence": 0.8,
+        "knowledge_evidence": [],
+        "meaning_change_risk": "medium"
+      },
+      {
+        "reviewer": "qwen_literary_fact",
+        "span": "Mary Shelley write Frankenstein in 1847",
+        "issue_type": "literary_fact",
+        "suggestion": "Mary Shelley wrote Frankenstein in 1818",
+        "rationale": "Frankenstein was first published in 1818, not 1847. The year 1847 is incorrectly attributed to Frankenstein but correctly belongs to Jane Eyre's publication.",
+        "confidence": 1.0,
+        "knowledge_evidence": [
+          "Frankenstein | publication_year | 1818",
+          "Jane Eyre | publication_year | 1847"
+        ],
+        "meaning_change_risk": "medium"
+      },
+      {
+        "reviewer": "qwen_literary_fact",
+        "span": "Jane Austen wrote Jane Eyre",
+        "issue_type": "literary_fact",
+        "suggestion": "Charlotte Brontë wrote Jane Eyre",
+        "rationale": "Jane Eyre was authored by Charlotte Brontë, not Jane Austen. Austen wrote novels such as Pride and Prejudice, but she died in 1817—decades before Jane Eyre’s 1847 publication.",
+        "confidence": 1.0,
+        "knowledge_evidence": [
+          "Jane Eyre | author | Charlotte Bronte",
+          "Pride and Prejudice | author | Jane Austen"
+        ],
+        "meaning_change_risk": "high"
+      },
+      {
+        "reviewer": "qwen_literary_fact",
+        "span": "Both novels shows how women are trapped by society",
+        "issue_type": "grammar",
+        "suggestion": "Both novels show how women are trapped by society",
+        "rationale": "Subject-verb agreement error: 'novels' (plural) requires the plural verb form 'show', not 'shows'.",
+        "confidence": 1.0,
+        "knowledge_evidence": [],
+        "meaning_change_risk": "low"
+      },
+      {
+        "reviewer": "glm_argument",
+        "span": "Mary Shelley write Frankenstein in 1847",
+        "issue_type": "grammar",
+        "suggestion": "Mary Shelley wrote Frankenstein in 1847",
+        "rationale": "The past tense 'write' should be corrected to 'wrote' for grammatical accuracy.",
+        "confidence": 1.0,
+        "knowledge_evidence": [
+          "Retrieved literary knowledge - Frankenstein | author | Mary Shelley: Frankenstein; or, The Modern Prometheus is attributed to Mary Shelley."
+        ],
+        "meaning_change_risk": "low"
+      },
+      {
+        "reviewer": "glm_argument",
+        "span": "and Jane Austen wrote Jane Eyre.",
+        "issue_type": "literary_fact",
+        "suggestion": "and Jane Austen wrote Pride and Prejudice.",
+        "rationale": "Jane Eyre was written by Charlotte Bronte, not Jane Austen. The correct novel by Jane Austen is Pride and Prejudice.",
+        "confidence": 1.0,
+        "knowledge_evidence": [
+          "Retrieved literary knowledge - Jane Eyre | author | Charlotte Bronte: Jane Eyre is a novel by Charlotte Bronte."
+        ],
+        "meaning_change_risk": "medium"
+      },
+      {
+        "reviewer": "glm_argument",
+        "span": "Both novels shows how women are trapped by society.",
+        "issue_type": "word_choice",
+        "suggestion": "Both novels demonstrate how women are trapped by society.",
+        "rationale": "The word 'shows' is informal and should be replaced with 'demonstrate' for a more formal academic style.",
+        "confidence": 1.0,
+        "knowledge_evidence": [
+          "Retrieved literary knowledge - Frankenstein | genre | Gothic novel: Frankenstein is commonly discussed as a Gothic novel."
+        ],
+        "meaning_change_risk": "low"
+      },
+      {
+        "reviewer": "glm_argument",
+        "span": "Both novels shows how women are trapped by society.",
+        "issue_type": "argument",
+        "suggestion": "Both novels explore the themes of women's societal constraints, though through different lenses. Frankenstein focuses on the consequences of scientific ambition, while Jane Eyre delves into the struggles of a young woman's independence and social class.",
+        "rationale": "The argument needs to be more nuanced to reflect the distinct themes and contexts of each novel.",
+        "confidence": 0.8,
+        "knowledge_evidence": [
+          "Retrieved literary knowledge - Frankenstein | central_character | the creature: The created being is often called the creature or monster, not Victor Frankenstein."
+        ],
+        "meaning_change_risk": "medium"
+      }
+    ],
+    "decisions": [
+      {
+        "span": "Jane Austen wrote Jane Eyre",
+        "issue_type": "literary_fact",
+        "selected_suggestion": "Change 'Jane Austen' to 'Charlotte Brontë'.",
+        "decision": "teacher_review",
+        "risk_level": "medium",
+        "teacher_action": "Verify factual correction",
+        "priority": 2,
+        "agreement": 0.5,
+        "avg_confidence": 0.995,
+        "kg_supported": true,
+        "evidence_count": 3,
+        "knowledge_evidence": "Jane Eyre | author | Charlotte Bronte | Pride and Prejudice | author | Jane Austen",
+        "rationale": "Knowledge-supported factual correction; route to teacher review before changing the essay."
+      },
+      {
+        "span": "Mary Shelley write Frankenstein in 1847",
+        "issue_type": "literary_fact",
+        "selected_suggestion": "Change '1847' to '1818'.",
+        "decision": "teacher_review",
+        "risk_level": "medium",
+        "teacher_action": "Verify factual correction",
+        "priority": 2,
+        "agreement": 0.5,
+        "avg_confidence": 0.995,
+        "kg_supported": true,
+        "evidence_count": 3,
+        "knowledge_evidence": "Frankenstein | publication_year | 1818 | Jane Eyre | publication_year | 1847",
+        "rationale": "Knowledge-supported factual correction; route to teacher review before changing the essay."
+      },
+      {
+        "span": "and Jane Austen wrote Jane Eyre",
+        "issue_type": "literary_fact",
+        "selected_suggestion": "and Charlotte Bronte wrote Jane Eyre",
+        "decision": "teacher_review",
+        "risk_level": "medium",
+        "teacher_action": "Verify factual correction",
+        "priority": 2,
+        "agreement": 0.5,
+        "avg_confidence": 1.0,
+        "kg_supported": true,
+        "evidence_count": 2,
+        "knowledge_evidence": "Jane Eyre | author | Charlotte Bronte | Retrieved literary knowledge - Jane Eyre | author | Charlotte Bronte: Jane Eyre is a novel by Charlotte Bronte.",
+        "rationale": "Knowledge-supported factual correction; route to teacher review before changing the essay."
+      },
+      {
+        "span": "in 1847",
+        "issue_type": "literary_fact",
+        "selected_suggestion": "in 1818",
+        "decision": "teacher_review",
+        "risk_level": "medium",
+        "teacher_action": "Verify factual correction",
+        "priority": 2,
+        "agreement": 1.0,
+        "avg_confidence": 1.0,
+        "kg_supported": true,
+        "evidence_count": 1,
+        "knowledge_evidence": "Frankenstein | publication_year | 1818",
+        "rationale": "Knowledge-supported factual correction; route to teacher review before changing the essay."
+      },
+      {
+        "span": "Both novels shows how women are trapped by society.",
+        "issue_type": "argument",
+        "selected_suggestion": "Both novels explore the themes of women's societal constraints, though through different lenses. Frankenstein focuses on the consequences of scientific ambition, while Jane Eyre delves into the struggles of a young woman's independence and social class.",
+        "decision": "teacher_review",
+        "risk_level": "medium",
+        "teacher_action": "Review meaning change",
+        "priority": 2,
+        "agreement": 1.0,
+        "avg_confidence": 0.8,
+        "kg_supported": true,
+        "evidence_count": 1,
+        "knowledge_evidence": "Retrieved literary knowledge - Frankenstein | central_character | the creature: The created being is often called the creature or monster, not Victor Frankenstein.",
+        "rationale": "The suggestion may change interpretation, thesis framing, or student intent."
+      },
+      {
+        "span": "how women are trapped by society",
+        "issue_type": "argument",
+        "selected_suggestion": "how the female characters are constrained by societal norms",
+        "decision": "teacher_review",
+        "risk_level": "medium",
+        "teacher_action": "Review meaning change",
+        "priority": 2,
+        "agreement": 1.0,
+        "avg_confidence": 0.8,
+        "kg_supported": false,
+        "evidence_count": 0,
+        "knowledge_evidence": "",
+        "rationale": "The suggestion may change interpretation, thesis framing, or student intent."
+      },
+      {
+        "span": "Both novels shows",
+        "issue_type": "grammar",
+        "selected_suggestion": "Both novels show",
+        "decision": "auto_accept",
+        "risk_level": "low",
+        "teacher_action": "Optional skim",
+        "priority": 3,
+        "agreement": 1.0,
+        "avg_confidence": 1.0,
+        "kg_supported": false,
+        "evidence_count": 0,
+        "knowledge_evidence": "",
+        "rationale": "Low-risk local language edit with reviewer agreement."
+      },
+      {
+        "span": "Both novels shows how women are trapped by society",
+        "issue_type": "grammar",
+        "selected_suggestion": "Change 'shows' to 'show' to agree with the plural subject 'Both novels'.",
+        "decision": "auto_accept",
+        "risk_level": "low",
+        "teacher_action": "Optional skim",
+        "priority": 3,
+        "agreement": 0.5,
+        "avg_confidence": 0.975,
+        "kg_supported": false,
+        "evidence_count": 0,
+        "knowledge_evidence": "",
+        "rationale": "Low-risk local language edit with reviewer agreement."
+      },
+      {
+        "span": "Mary Shelley write",
+        "issue_type": "grammar",
+        "selected_suggestion": "Mary Shelley wrote",
+        "decision": "auto_accept",
+        "risk_level": "low",
+        "teacher_action": "Optional skim",
+        "priority": 3,
+        "agreement": 1.0,
+        "avg_confidence": 1.0,
+        "kg_supported": true,
+        "evidence_count": 1,
+        "knowledge_evidence": "Frankenstein | publication_year | 1818",
+        "rationale": "Low-risk local language edit with reviewer agreement."
+      },
+      {
+        "span": "Mary Shelley write Frankenstein in 1847",
+        "issue_type": "grammar",
+        "selected_suggestion": "Change 'write' to 'wrote' to match past tense.",
+        "decision": "auto_accept",
+        "risk_level": "low",
+        "teacher_action": "Optional skim",
+        "priority": 3,
+        "agreement": 0.5,
+        "avg_confidence": 0.975,
+        "kg_supported": true,
+        "evidence_count": 2,
+        "knowledge_evidence": "Frankenstein was first published in 1818, not 1847. | Retrieved literary knowledge - Frankenstein | author | Mary Shelley: Frankenstein; or, The Modern Prometheus is attributed to Mary Shelley.",
+        "rationale": "Low-risk local language edit with reviewer agreement."
+      },
+      {
+        "span": "Both novels shows how women are trapped by society.",
+        "issue_type": "word_choice",
+        "selected_suggestion": "Both novels demonstrate how women are trapped by society.",
+        "decision": "auto_accept",
+        "risk_level": "low",
+        "teacher_action": "Optional skim",
+        "priority": 3,
+        "agreement": 1.0,
+        "avg_confidence": 1.0,
+        "kg_supported": true,
+        "evidence_count": 1,
+        "knowledge_evidence": "Retrieved literary knowledge - Frankenstein | genre | Gothic novel: Frankenstein is commonly discussed as a Gothic novel.",
+        "rationale": "Low-risk local language edit with reviewer agreement."
+      }
+    ],
+    "reviewer_results": [
+      {
+        "provider": "deepseek",
+        "model": "deepseek-chat",
+        "reviewer_role": "grammar",
+        "feedback_items": 4,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 2.462
+      },
+      {
+        "provider": "glm",
+        "model": "glm-4-flash",
+        "reviewer_role": "argument",
+        "feedback_items": 4,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 36.388
+      },
+      {
+        "provider": "kimi",
+        "model": "moonshot-v1-8k",
+        "reviewer_role": "grammar",
+        "feedback_items": 5,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 8.877
+      },
+      {
+        "provider": "qwen",
+        "model": "qwen-plus",
+        "reviewer_role": "literary_fact",
+        "feedback_items": 3,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 9.549
+      }
+    ]
+  }
+]

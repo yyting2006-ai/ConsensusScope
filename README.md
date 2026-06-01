@@ -132,6 +132,23 @@ model-output rows. Because TruthfulQA, FEVER and CommonsenseQA have different
 answer spaces, the paper reports dataset-level accuracy, risk stratification
 quality and review-routing utility instead of a single mixed macro-F1 score.
 
+For the ESL literary-feedback pivot, the repository also includes a small
+feedback-routing benchmark in `data/literary_feedback/benchmark.csv` and a
+runner:
+
+```bash
+PYTHONPATH=. python3 scripts/run_literary_feedback_benchmark.py
+```
+
+With local API keys, the same script can call live reviewers:
+
+```bash
+PYTHONPATH=. python3 scripts/run_literary_feedback_benchmark.py --live --providers deepseek,qwen,glm,kimi
+```
+
+The checked-in live sample records contain reviewer outputs and routing metrics
+only; API keys are not stored.
+
 | Method | TruthfulQA | FEVER | CommonsenseQA |
 |---|---:|---:|---:|
 | Majority vote | 0.075 | 0.622 | 0.760 |
