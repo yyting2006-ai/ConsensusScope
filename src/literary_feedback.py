@@ -10,8 +10,6 @@ from typing import Any, Dict, Iterable, List, Set, Tuple
 import pandas as pd
 import requests
 
-from src.llm.clients import format_http_error, parse_json_from_text
-
 
 DEFAULT_LITERARY_ESSAY = """Mary Shelley write Frankenstein in 1847, and Jane Austen wrote Jane Eyre. Both novels shows how women are trapped by society, but Frankenstein is only about science and Jane Eyre is only about love. The monster is Victor Frankenstein, so the novel proves that people should never study knowledge. In comparison, the two books are same because both main characters want freedom."""
 
@@ -72,6 +70,36 @@ def _safe_confidence(value: Any) -> float:
     except Exception:
         return 0.0
     return max(0.0, min(1.0, parsed))
+
+
+def _format_http_error(response: requests.Response) -> str:
+    body = response.text.strip()
+    if len(body) > 1000:
+        body = body[:1000] + "..."
+    detail = body or response.reason or "No response body"
+    return f"HTTP {response.status_code} from {response.url}: {detail}"
+
+
+def _parse_json_from_text(text: str) -> Dict[str, Any]:
+    raw = text or ""
+    candidates: List[str] = []
+    fenced = re.findall(r"```(?:json|JSON)?\s*(.*?)```", raw, flags=re.S)
+    candidates.extend(block.strip() for block in fenced if block.strip())
+    candidates.append(raw.strip())
+    object_match = re.search(r"\{.*\}", raw, flags=re.S)
+    if object_match:
+        candidates.append(object_match.group(0))
+
+    last_error = ""
+    for candidate in candidates:
+        try:
+            parsed = json.loads(candidate)
+            if isinstance(parsed, dict):
+                return parsed
+            raise ValueError("Parsed JSON is not an object")
+        except Exception as exc:
+            last_error = str(exc)
+    return {"raw_output": raw, "parse_error": last_error or "No JSON object found"}
 
 
 def load_literary_kg(path: str) -> pd.DataFrame:
@@ -284,9 +312,9 @@ def call_literary_reviewer(
             timeout=timeout,
         )
         if not response.ok:
-            raise RuntimeError(format_http_error(response))
+            raise RuntimeError(_format_http_error(response))
         raw = str(response.json()["choices"][0]["message"]["content"])
-        parsed = parse_json_from_text(raw)
+        parsed = _parse_json_from_text(raw)
         parse_error = _safe_text(parsed.get("parse_error"))
         feedback = normalize_feedback_items(parsed.get("feedback", []), f"{config.provider}_{reviewer_role}")
         return {
