@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ConsensusScope | Essay Review</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="essay">
+  <div class="mobile-top"><strong>ConsensusScope</strong><button data-menu>Menu</button></div>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand__name">ConsensusScope</div><div class="brand__meta">ESL literary feedback review routing.</div></div>
+      <nav class="nav">
+        <div class="nav__group">
+          <div class="nav__label">Teacher Workflow</div>
+          <a class="nav__link" data-nav="workspace" href="index.html">Review Workspace</a>
+          <a class="nav__link" data-nav="essay" href="essay-review.html">Essay Review</a>
+          <a class="nav__link" data-nav="detail" href="feedback-detail.html">Feedback Detail</a>
+          <a class="nav__link" data-nav="queue" href="teacher-queue.html">Teacher Queue</a>
+          <a class="nav__link" data-nav="knowledge" href="knowledge-base.html">Knowledge Base</a>
+          <a class="nav__link" data-nav="reports" href="reports.html">Reports</a>
+        </div>
+        <div class="nav__group"><div class="nav__label">System</div><a class="nav__link" data-nav="interface" href="interface.html">API & Data Contract</a><a class="nav__link" data-nav="settings" href="settings.html">Settings</a></div>
+      </nav>
+      <div class="sidebar-note">Do not design this as a generic chatbot. The task is feedback review for a teacher.</div>
+    </aside>
+
+    <main class="content">
+      <header class="topbar">
+        <div>
+          <div class="eyebrow">Essay Review</div>
+          <h1 class="page-title">Run a knowledge-grounded feedback review.</h1>
+          <p class="page-copy">This page defines the main input workflow: assignment context, anonymized essay text, reviewer mode, and standardized feedback output.</p>
+        </div>
+        <div class="actions"><button class="button">Load sample</button><button class="button primary">Run review</button></div>
+      </header>
+
+      <section class="grid two">
+        <article class="panel shadow">
+          <div class="panel__header">
+            <div><div class="panel__title">Essay Input</div><div class="panel__sub">The UI should feel like a teacher tool, not a prompt playground.</div></div>
+            <span class="chip blue">Sample mode</span>
+          </div>
+          <div class="panel__body">
+            <div class="form-grid">
+              <label>Assignment type<select><option>Comparative literary essay</option><option>Close reading</option><option>Response paper</option></select></label>
+              <label>Knowledge scope<select><option>Core literary knowledge base</option><option>Course-specific knowledge base</option><option>Uploaded reading list</option></select></label>
+              <label>Review mode<select><option>Prepared sample records</option><option>Live API reviewers</option></select></label>
+              <label>Student identity<select><option>Anonymized sample</option><option>Local hashed student id</option></select></label>
+            </div>
+            <div style="height:12px"></div>
+            <label>Essay excerpt<textarea>In the comparison between Hamlet and Jay Gatsby, both characters are controlled by destiny, but Gatsby is more passive because he only follows Daisy's order and never chooses his own dream.</textarea></label>
+          </div>
+        </article>
+
+        <aside class="panel shadow">
+          <div class="panel__header">
+            <div><div class="panel__title">Generated Feedback Items</div><div class="panel__sub">Every provider output must become this unified shape.</div></div>
+            <span class="chip teal">4 items</span>
+          </div>
+          <div class="panel__body">
+            <div class="feedback-list" style="margin-top:0;">
+              <div class="feedback-card medium">
+                <div class="feedback-head"><div><div class="feedback-title">Interpretation risk</div><div class="feedback-copy">Rewording improves fluency but may alter the student's literary claim.</div></div><span class="chip amber">Review</span></div>
+              </div>
+              <div class="feedback-card low">
+                <div class="feedback-head"><div><div class="feedback-title">Local grammar fix</div><div class="feedback-copy">A phrase-level edit that does not change the argument.</div></div><span class="chip green">Accept</span></div>
+              </div>
+              <div class="feedback-card high">
+                <div class="feedback-head"><div><div class="feedback-title">Potential character confusion</div><div class="feedback-copy">The feedback references an entity relation not supported by the knowledge base.</div></div><span class="chip red">High risk</span></div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="panel" style="margin-top:16px;">
+        <div class="panel__header"><div><div class="panel__title">Output Contract Preview</div><div class="panel__sub">This should be visible in design handoff, not necessarily in the final teacher UI.</div></div></div>
+        <div class="panel__body">
+          <div class="code-block">FeedbackItem {
+  item_id: "fb_013",
+  issue_type: "theme_interpretation",
+  suggestion: "Revise the description of Gatsby's agency...",
+  risk_level: "medium",
+  recommended_action: "teacher_review",
+  knowledge_evidence: [...],
+  consensus_summary: { agreement_rate: 0.67 }
+}</div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ConsensusScope | API & Data Contract</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="interface">
+  <div class="mobile-top"><strong>ConsensusScope</strong><button data-menu>Menu</button></div>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand__name">ConsensusScope</div><div class="brand__meta">Interface contract for product redesign.</div></div>
+      <nav class="nav">
+        <div class="nav__group">
+          <div class="nav__label">Teacher Workflow</div>
+          <a class="nav__link" data-nav="workspace" href="index.html">Review Workspace</a>
+          <a class="nav__link" data-nav="essay" href="essay-review.html">Essay Review</a>
+          <a class="nav__link" data-nav="detail" href="feedback-detail.html">Feedback Detail</a>
+          <a class="nav__link" data-nav="queue" href="teacher-queue.html">Teacher Queue</a>
+          <a class="nav__link" data-nav="knowledge" href="knowledge-base.html">Knowledge Base</a>
+          <a class="nav__link" data-nav="reports" href="reports.html">Reports</a>
+        </div>
+        <div class="nav__group"><div class="nav__label">System</div><a class="nav__link" data-nav="interface" href="interface.html">API & Data Contract</a><a class="nav__link" data-nav="settings" href="settings.html">Settings</a></div>
+      </nav>
+      <div class="sidebar-note">This page fixes the interface so design can proceed without chasing backend ambiguity.</div>
+    </aside>
+
+    <main class="content">
+      <header class="topbar">
+        <div>
+          <div class="eyebrow">API & Data Contract</div>
+          <h1 class="page-title">Freeze the product interface before visual design.</h1>
+          <p class="page-copy">The designer does not need to implement APIs, but field names and states should be stable before Figma work starts.</p>
+        </div>
+        <div class="actions">
+          <button class="button" data-copy="../consensusscope_api_contract.yaml">Copy path</button>
+          <a class="button primary" href="../consensusscope_api_contract.yaml">Open YAML</a>
+        </div>
+      </header>
+
+      <section class="grid four">
+        <div class="metric"><div class="metric__label">Primary objects</div><div class="metric__value">4</div><div class="metric__note">Session, item, evidence, action</div></div>
+        <div class="metric"><div class="metric__label">Main endpoints</div><div class="metric__value">8</div><div class="metric__note">Review and export flow</div></div>
+        <div class="metric"><div class="metric__label">Teacher states</div><div class="metric__value">7</div><div class="metric__note">Feedback lifecycle</div></div>
+        <div class="metric"><div class="metric__label">Secret exposure</div><div class="metric__value">0</div><div class="metric__note">Keys stay backend-only</div></div>
+      </section>
+
+      <section class="grid two" style="margin-top:16px;">
+        <article class="panel shadow">
+          <div class="panel__header"><div><div class="panel__title">Endpoint Map</div><div class="panel__sub">These are the interface surfaces the new front end should target.</div></div></div>
+          <div class="panel__body grid">
+            <div class="endpoint"><div class="method post">POST</div><div><code>/review-sessions</code><p>Create an essay review session.</p></div><a class="button" href="essay-review.html">View page</a></div>
+            <div class="endpoint"><div class="method post">POST</div><div><code>/review-sessions/{id}/run</code><p>Run feedback generation, knowledge retrieval, and routing.</p></div><a class="button" href="essay-review.html">View page</a></div>
+            <div class="endpoint"><div class="method">GET</div><div><code>/teacher-queue</code><p>List items requiring human review.</p></div><a class="button" href="teacher-queue.html">View page</a></div>
+            <div class="endpoint"><div class="method">GET</div><div><code>/knowledge/search</code><p>Search literary knowledge evidence.</p></div><a class="button" href="knowledge-base.html">View page</a></div>
+            <div class="endpoint"><div class="method patch">PATCH</div><div><code>/feedback-items/{id}/teacher-action</code><p>Save accept, edit, reject, or note actions.</p></div><a class="button" href="feedback-detail.html">View page</a></div>
+            <div class="endpoint"><div class="method post">POST</div><div><code>/reports</code><p>Create Markdown, PDF, JSON, or CSV reports.</p></div><a class="button" href="reports.html">View page</a></div>
+          </div>
+        </article>
+
+        <aside class="panel shadow" data-tabs>
+          <div class="panel__header">
+            <div><div class="panel__title">State Models</div><div class="panel__sub">Core states the designer should account for.</div></div>
+            <div class="tabs"><button class="tab is-active" data-tab="item">FeedbackItem</button><button class="tab" data-tab="session">Session</button><button class="tab" data-tab="risk">Risk</button></div>
+          </div>
+          <div class="panel__body">
+            <div class="tab-panel is-active" data-tab-panel="item">
+              <div class="code-block">generated
+auto_accepted
+needs_teacher_review
+teacher_accepted
+teacher_edited
+teacher_rejected
+exported</div>
+            </div>
+            <div class="tab-panel" data-tab-panel="session">
+              <div class="code-block">draft
+running
+ready_for_review
+partially_reviewed
+reviewed
+exported</div>
+            </div>
+            <div class="tab-panel" data-tab-panel="risk">
+              <div class="code-block">low
+medium
+high
+
+Show deploy-time signals:
+- agreement rate
+- evidence status
+- meaning-change risk
+- parse errors
+
+Do not show gold-label diagnostics as live facts.</div>
+            </div>
+          </div>
+        </aside>
+      </section>
+    </main>
+  </div>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

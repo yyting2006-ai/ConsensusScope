@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ConsensusScope | Feedback Detail</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="detail">
+  <div class="mobile-top"><strong>ConsensusScope</strong><button data-menu>Menu</button></div>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand__name">ConsensusScope</div><div class="brand__meta">Case-level decision explanation.</div></div>
+      <nav class="nav">
+        <div class="nav__group">
+          <div class="nav__label">Teacher Workflow</div>
+          <a class="nav__link" data-nav="workspace" href="index.html">Review Workspace</a>
+          <a class="nav__link" data-nav="essay" href="essay-review.html">Essay Review</a>
+          <a class="nav__link" data-nav="detail" href="feedback-detail.html">Feedback Detail</a>
+          <a class="nav__link" data-nav="queue" href="teacher-queue.html">Teacher Queue</a>
+          <a class="nav__link" data-nav="knowledge" href="knowledge-base.html">Knowledge Base</a>
+          <a class="nav__link" data-nav="reports" href="reports.html">Reports</a>
+        </div>
+        <div class="nav__group"><div class="nav__label">System</div><a class="nav__link" data-nav="interface" href="interface.html">API & Data Contract</a><a class="nav__link" data-nav="settings" href="settings.html">Settings</a></div>
+      </nav>
+      <div class="sidebar-note">Detail pages should answer: why did the system route this feedback to a teacher?</div>
+    </aside>
+
+    <main class="content">
+      <header class="topbar">
+        <div>
+          <div class="eyebrow">Feedback Detail</div>
+          <h1 class="page-title">Explain the risk before showing raw traces.</h1>
+          <p class="page-copy">The detail page is for teacher trust. It shows the original span, suggested feedback, knowledge support, model agreement, and final teacher actions.</p>
+        </div>
+        <div class="actions"><button class="button">Back to queue</button><button class="button primary">Save decision</button></div>
+      </header>
+
+      <section class="grid two">
+        <article class="panel shadow" data-tabs>
+          <div class="panel__header">
+            <div><div class="panel__title">Feedback Item fb_013</div><div class="panel__sub">Medium-risk interpretation feedback.</div></div>
+            <div class="tabs"><button class="tab is-active" data-tab="teacher">Teacher View</button><button class="tab" data-tab="evidence">Evidence</button><button class="tab" data-tab="trace">Trace</button></div>
+          </div>
+          <div class="panel__body">
+            <div class="tab-panel is-active" data-tab-panel="teacher">
+              <div class="essay-box"><strong>Original span</strong><br>Gatsby is more passive because he only follows Daisy's order and never chooses his own dream.</div>
+              <div class="feedback-card medium">
+                <div class="feedback-head">
+                  <div><div class="feedback-title">Suggested feedback</div><div class="feedback-copy">Consider changing the wording to "pursues Daisy's approval" while keeping the student's interpretation open for teacher review.</div></div>
+                  <span class="chip amber">Medium risk</span>
+                </div>
+                <div class="chip-row"><span class="chip blue">Knowledge checked</span><span class="chip amber">Meaning-change risk</span><span class="chip teal">Agreement 0.67</span></div>
+              </div>
+              <div class="grid four" style="margin-top:12px;">
+                <button class="button">Accept</button>
+                <button class="button">Edit</button>
+                <button class="button">Send to review</button>
+                <button class="button">Reject</button>
+              </div>
+            </div>
+            <div class="tab-panel" data-tab-panel="evidence">
+              <div class="grid two">
+                <div class="card"><div class="card__title">Supported relation</div><div class="card__copy">The Great Gatsby -> central_character -> Jay Gatsby.</div><span class="chip teal">Used</span></div>
+                <div class="card"><div class="card__title">Interpretive caution</div><div class="card__copy">The knowledge base supports factual context but does not settle the student's interpretation.</div><span class="chip amber">Teacher judgment</span></div>
+              </div>
+            </div>
+            <div class="tab-panel" data-tab-panel="trace">
+              <div class="status-strip">Raw model traces should be available only behind a diagnostic tab. They are useful for developers, but not the primary teacher experience.</div>
+              <div style="height:12px"></div>
+              <div class="code-block">consensus_summary:
+  reviewer_count: 3
+  agreement_rate: 0.67
+  confidence_mean: 0.71
+  parse_error_count: 0
+  minority_warning: true</div>
+            </div>
+          </div>
+        </article>
+
+        <aside class="grid">
+          <section class="panel shadow">
+            <div class="panel__header"><div><div class="panel__title">Decision Rationale</div><div class="panel__sub">The final UI should make this concise.</div></div></div>
+            <div class="panel__body">
+              <div class="card"><div class="card__title">Why teacher review?</div><div class="card__copy">The suggestion affects a literary interpretation. It should not be auto-released even if the phrase is more fluent.</div></div>
+            </div>
+          </section>
+          <section class="panel shadow">
+            <div class="panel__header"><div><div class="panel__title">Teacher Note</div><div class="panel__sub">Save human judgment as part of the audit trail.</div></div></div>
+            <div class="panel__body"><label>Note<textarea style="min-height:120px;">Keep the grammar clarification, but do not replace the student's interpretive claim.</textarea></label></div>
+          </section>
+        </aside>
+      </section>
+    </main>
+  </div>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

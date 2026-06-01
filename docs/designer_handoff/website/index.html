@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ConsensusScope | Review Workspace</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="workspace">
+  <div class="mobile-top"><strong>ConsensusScope</strong><button data-menu>Menu</button></div>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand__name">ConsensusScope</div>
+        <div class="brand__meta">ESL literary feedback review routing. Full website reference for designer handoff.</div>
+      </div>
+      <nav class="nav">
+        <div class="nav__group">
+          <div class="nav__label">Teacher Workflow</div>
+          <a class="nav__link" data-nav="workspace" href="index.html">Review Workspace</a>
+          <a class="nav__link" data-nav="essay" href="essay-review.html">Essay Review</a>
+          <a class="nav__link" data-nav="detail" href="feedback-detail.html">Feedback Detail</a>
+          <a class="nav__link" data-nav="queue" href="teacher-queue.html">Teacher Queue</a>
+          <a class="nav__link" data-nav="knowledge" href="knowledge-base.html">Knowledge Base</a>
+          <a class="nav__link" data-nav="reports" href="reports.html">Reports</a>
+        </div>
+        <div class="nav__group">
+          <div class="nav__label">System</div>
+          <a class="nav__link" data-nav="interface" href="interface.html">API & Data Contract</a>
+          <a class="nav__link" data-nav="settings" href="settings.html">Settings</a>
+        </div>
+      </nav>
+      <div class="sidebar-note">This is a reference site, not final visual design. The final conference UI should be redesigned by a human designer in Figma.</div>
+    </aside>
+
+    <main class="content">
+      <header class="topbar">
+        <div>
+          <div class="eyebrow">Review Workspace</div>
+          <h1 class="page-title">Decide which AI feedback is safe to release.</h1>
+          <p class="page-copy">The redesigned product should open on a teacher workflow: review risk, inspect knowledge evidence, and route uncertain feedback to human review.</p>
+        </div>
+        <div class="actions">
+          <a class="button" href="essay-review.html">New essay review</a>
+          <a class="button primary" href="reports.html">Create report</a>
+        </div>
+      </header>
+
+      <section class="grid five">
+        <div class="metric"><div class="metric__label">Feedback items</div><div class="metric__value">128</div><div class="metric__note">Current sample class</div></div>
+        <div class="metric"><div class="metric__label">Auto-accepted</div><div class="metric__value">62%</div><div class="metric__note">Low-risk local edits</div></div>
+        <div class="metric"><div class="metric__label">Teacher review</div><div class="metric__value">38%</div><div class="metric__note">Factual or interpretive risk</div></div>
+        <div class="metric"><div class="metric__label">Knowledge-supported</div><div class="metric__value">74%</div><div class="metric__note">Linked to evidence triples</div></div>
+        <div class="metric"><div class="metric__label">High-risk warnings</div><div class="metric__value">9</div><div class="metric__note">Meaning-changing feedback</div></div>
+      </section>
+
+      <section class="grid two" style="margin-top:16px;">
+        <article class="panel shadow">
+          <div class="panel__header">
+            <div><div class="panel__title">Current Essay Session</div><div class="panel__sub">The home page should center the teacher's review task.</div></div>
+            <span class="chip blue">Ready for review</span>
+          </div>
+          <div class="panel__body">
+            <div class="essay-box">
+              <strong>Student excerpt</strong><br>
+              In the comparison between Hamlet and Jay Gatsby, both characters are controlled by destiny, but Gatsby is more passive because he only follows Daisy's order and never chooses his own dream.
+            </div>
+            <div class="feedback-list">
+              <div class="feedback-card medium">
+                <div class="feedback-head">
+                  <div><div class="feedback-title">Review before release: interpretation risk</div><div class="feedback-copy">The suggestion improves fluency but may change the student's interpretation of Gatsby's agency.</div></div>
+                  <span class="chip amber">Medium risk</span>
+                </div>
+                <div class="chip-row"><span class="chip blue">Knowledge checked</span><span class="chip amber">Teacher review</span><span class="chip teal">2 / 3 reviewers agree</span></div>
+              </div>
+              <div class="feedback-card low">
+                <div class="feedback-head">
+                  <div><div class="feedback-title">Safe grammar clarification</div><div class="feedback-copy">Replace an unnatural phrase while preserving the student's original claim.</div></div>
+                  <span class="chip green">Low risk</span>
+                </div>
+                <div class="chip-row"><span class="chip green">Auto-accept candidate</span><span class="chip teal">No knowledge conflict</span></div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <aside class="panel shadow">
+          <div class="panel__header">
+            <div><div class="panel__title">Priority Teacher Queue</div><div class="panel__sub">Show why each item needs human review.</div></div>
+            <span class="chip red">9 high</span>
+          </div>
+          <div class="panel__body">
+            <table>
+              <thead><tr><th>Priority</th><th>Case</th><th>Reason</th><th>Action</th></tr></thead>
+              <tbody>
+                <tr><td><span class="chip red">High</span></td><td><div class="row-title">Character confusion</div><div class="row-sub">Hamlet / Gatsby comparison</div></td><td class="row-sub">Knowledge conflict and meaning shift</td><td><a class="button" href="feedback-detail.html">Open</a></td></tr>
+                <tr><td><span class="chip amber">Med</span></td><td><div class="row-title">Unsupported theme claim</div><div class="row-sub">Modernism paragraph</div></td><td class="row-sub">Evidence gap</td><td><a class="button" href="teacher-queue.html">Open</a></td></tr>
+                <tr><td><span class="chip amber">Med</span></td><td><div class="row-title">Over-correction</div><div class="row-sub">Thesis sentence</div></td><td class="row-sub">Student stance shifts</td><td><a class="button" href="feedback-detail.html">Edit</a></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </aside>
+      </section>
+
+      <section class="panel" style="margin-top:16px;">
+        <div class="panel__header">
+          <div><div class="panel__title">Product Flow</div><div class="panel__sub">This is the product structure the designer should preserve.</div></div>
+        </div>
+        <div class="panel__body">
+          <div class="flow">
+            <div class="flow-step"><div class="flow-step__num">1</div><div class="flow-step__title">Essay Input</div><div class="flow-step__copy">Teacher loads an anonymized ESL essay excerpt.</div></div>
+            <div class="flow-step"><div class="flow-step__num">2</div><div class="flow-step__title">Multi-Model Feedback</div><div class="flow-step__copy">Reviewers produce standardized feedback items.</div></div>
+            <div class="flow-step"><div class="flow-step__num">3</div><div class="flow-step__title">Knowledge Check</div><div class="flow-step__copy">Literary facts and relations are inspected.</div></div>
+            <div class="flow-step"><div class="flow-step__num">4</div><div class="flow-step__title">Risk Routing</div><div class="flow-step__copy">Low-risk items are separated from teacher-review items.</div></div>
+            <div class="flow-step"><div class="flow-step__num">5</div><div class="flow-step__title">Report Export</div><div class="flow-step__copy">The final audit trail is downloadable.</div></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

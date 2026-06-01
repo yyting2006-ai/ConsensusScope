@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ConsensusScope | Teacher Queue</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="queue">
+  <div class="mobile-top"><strong>ConsensusScope</strong><button data-menu>Menu</button></div>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand__name">ConsensusScope</div><div class="brand__meta">Prioritized human review queue.</div></div>
+      <nav class="nav">
+        <div class="nav__group">
+          <div class="nav__label">Teacher Workflow</div>
+          <a class="nav__link" data-nav="workspace" href="index.html">Review Workspace</a>
+          <a class="nav__link" data-nav="essay" href="essay-review.html">Essay Review</a>
+          <a class="nav__link" data-nav="detail" href="feedback-detail.html">Feedback Detail</a>
+          <a class="nav__link" data-nav="queue" href="teacher-queue.html">Teacher Queue</a>
+          <a class="nav__link" data-nav="knowledge" href="knowledge-base.html">Knowledge Base</a>
+          <a class="nav__link" data-nav="reports" href="reports.html">Reports</a>
+        </div>
+        <div class="nav__group"><div class="nav__label">System</div><a class="nav__link" data-nav="interface" href="interface.html">API & Data Contract</a><a class="nav__link" data-nav="settings" href="settings.html">Settings</a></div>
+      </nav>
+      <div class="sidebar-note">This is the key applied-value page: the product saves teacher attention by routing risky feedback.</div>
+    </aside>
+    <main class="content">
+      <header class="topbar">
+        <div>
+          <div class="eyebrow">Teacher Queue</div>
+          <h1 class="page-title">Review the feedback that should not be released automatically.</h1>
+          <p class="page-copy">The queue is organized around priority, evidence status, issue type, and the action expected from the teacher.</p>
+        </div>
+        <div class="actions"><button class="button" data-filter="all">All</button><button class="button" data-filter="high">High</button><button class="button" data-filter="medium">Medium</button></div>
+      </header>
+
+      <section class="grid four">
+        <div class="metric"><div class="metric__label">Open review items</div><div class="metric__value">45</div><div class="metric__note">Awaiting teacher action</div></div>
+        <div class="metric"><div class="metric__label">High priority</div><div class="metric__value">9</div><div class="metric__note">Meaning or fact risk</div></div>
+        <div class="metric"><div class="metric__label">Evidence conflicts</div><div class="metric__value">6</div><div class="metric__note">KG contradicts suggestion</div></div>
+        <div class="metric"><div class="metric__label">Estimated saved review</div><div class="metric__value">62%</div><div class="metric__note">Auto-accepted low risk</div></div>
+      </section>
+
+      <section class="panel shadow" style="margin-top:16px;">
+        <div class="panel__header"><div><div class="panel__title">Queue Items</div><div class="panel__sub">The table should be scan-friendly and action-oriented.</div></div></div>
+        <div class="panel__body">
+          <table>
+            <thead><tr><th>Priority</th><th>Excerpt</th><th>Issue type</th><th>Evidence</th><th>Reason</th><th>Action</th></tr></thead>
+            <tbody>
+              <tr data-risk-row="high"><td><span class="chip red">High</span></td><td><div class="row-title">Both characters are controlled by destiny...</div><div class="row-sub">Comparative essay 03</div></td><td>theme_interpretation</td><td><span class="chip amber">Conflict</span></td><td class="row-sub">Meaning-changing revision</td><td><a class="button" href="feedback-detail.html">Open</a></td></tr>
+              <tr data-risk-row="medium"><td><span class="chip amber">Med</span></td><td><div class="row-title">The poem belongs to Victorian realism...</div><div class="row-sub">Close reading 06</div></td><td>literary_fact</td><td><span class="chip blue">Missing</span></td><td class="row-sub">Needs source check</td><td><a class="button" href="feedback-detail.html">Open</a></td></tr>
+              <tr data-risk-row="high"><td><span class="chip red">High</span></td><td><div class="row-title">Daisy commands Gatsby to invent himself...</div><div class="row-sub">Comparative essay 08</div></td><td>character_relation</td><td><span class="chip amber">Conflict</span></td><td class="row-sub">Unsupported relation</td><td><a class="button" href="feedback-detail.html">Open</a></td></tr>
+              <tr data-risk-row="medium"><td><span class="chip amber">Med</span></td><td><div class="row-title">The thesis should become more objective...</div><div class="row-sub">Argument paragraph 11</div></td><td>thesis_argument</td><td><span class="chip teal">Supported</span></td><td class="row-sub">Student stance may shift</td><td><a class="button" href="feedback-detail.html">Edit</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

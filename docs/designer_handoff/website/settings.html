@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ConsensusScope | Settings</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="settings">
+  <div class="mobile-top"><strong>ConsensusScope</strong><button data-menu>Menu</button></div>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand__name">ConsensusScope</div><div class="brand__meta">Advanced setup belongs here, not on the first screen.</div></div>
+      <nav class="nav">
+        <div class="nav__group">
+          <div class="nav__label">Teacher Workflow</div>
+          <a class="nav__link" data-nav="workspace" href="index.html">Review Workspace</a>
+          <a class="nav__link" data-nav="essay" href="essay-review.html">Essay Review</a>
+          <a class="nav__link" data-nav="detail" href="feedback-detail.html">Feedback Detail</a>
+          <a class="nav__link" data-nav="queue" href="teacher-queue.html">Teacher Queue</a>
+          <a class="nav__link" data-nav="knowledge" href="knowledge-base.html">Knowledge Base</a>
+          <a class="nav__link" data-nav="reports" href="reports.html">Reports</a>
+        </div>
+        <div class="nav__group"><div class="nav__label">System</div><a class="nav__link" data-nav="interface" href="interface.html">API & Data Contract</a><a class="nav__link" data-nav="settings" href="settings.html">Settings</a></div>
+      </nav>
+      <div class="sidebar-note">Design instruction: settings should be available but visually secondary.</div>
+    </aside>
+
+    <main class="content">
+      <header class="topbar">
+        <div>
+          <div class="eyebrow">Settings</div>
+          <h1 class="page-title">Keep technical configuration out of the main workflow.</h1>
+          <p class="page-copy">This page isolates API settings, method diagnostics, raw traces, and auxiliary QA reliability from the teacher-facing review workflow.</p>
+        </div>
+        <div class="actions"><button class="button">Reset demo</button><button class="button primary">Save settings</button></div>
+      </header>
+
+      <section class="grid three">
+        <div class="panel shadow">
+          <div class="panel__header"><div><div class="panel__title">Demo Mode</div><div class="panel__sub">Safe public state.</div></div></div>
+          <div class="panel__body">
+            <label>Mode<select><option>Prepared sample records</option><option>Live API reviewers</option></select></label>
+            <div style="height:12px"></div>
+            <div class="status-strip">API keys are never shown in public UI or written into the paper.</div>
+          </div>
+        </div>
+        <div class="panel shadow">
+          <div class="panel__header"><div><div class="panel__title">Provider Setup</div><div class="panel__sub">Private deployment configuration.</div></div></div>
+          <div class="panel__body">
+            <label>Provider<select><option>OpenAI-compatible provider</option><option>Local sample records</option></select></label>
+            <div style="height:12px"></div>
+            <label>Key status<input value="Configured in backend secrets" readonly></label>
+          </div>
+        </div>
+        <div class="panel shadow">
+          <div class="panel__header"><div><div class="panel__title">Advanced Diagnostics</div><div class="panel__sub">For developers and researchers.</div></div></div>
+          <div class="panel__body">
+            <div class="chip-row"><span class="chip blue">Method comparison</span><span class="chip violet">Raw traces</span><span class="chip amber">Offline labels</span></div>
+            <div style="height:12px"></div>
+            <div class="status-strip">Keep this below the fold or in a separate advanced area.</div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

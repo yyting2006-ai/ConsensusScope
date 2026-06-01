@@ -30,11 +30,14 @@ ConsensusScope 需要被包装成：
 3. `ui_state_models.json`
    - 反馈项、复核队列、报告导出的核心状态。
 
-4. `site_reference.html`
-   - 新网站参考原型。它不是最终视觉稿，而是给设计师理解信息架构、页面层级和交互重点。
+4. `website/index.html`
+   - 完整多页面静态网站参考。它不是最终视觉稿，而是给设计师理解信息架构、页面层级和交互重点。
 
-5. `screenshots/site_reference_desktop.png`
-   - `site_reference.html` 的桌面截图，便于微信或邮件快速预览。
+5. `site_reference.html`
+   - 兼容入口，会自动跳转到 `website/index.html`。
+
+6. `screenshots/`
+   - 多页面网站截图，便于微信或邮件快速预览。
 
 ## 当前旧网站如何处理
 
@@ -55,7 +58,8 @@ ConsensusScope 需要被包装成：
 4. Teacher Queue
 5. Knowledge Base
 6. Reports
-7. Settings
+7. API & Data Contract
+8. Settings
 
 需要弱化到 Settings / Advanced 的内容：
 
@@ -72,4 +76,3 @@ ConsensusScope 需要被包装成：
 - 论文和 demo 中不要展示真实 API key。
 - 不要声称系统已经有大规模课堂验证。
 - 不要把系统描述成自动评分器或教师替代品。
-

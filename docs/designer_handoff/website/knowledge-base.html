@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ConsensusScope | Knowledge Base</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="knowledge">
+  <div class="mobile-top"><strong>ConsensusScope</strong><button data-menu>Menu</button></div>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand__name">ConsensusScope</div><div class="brand__meta">Inspectable literary knowledge evidence.</div></div>
+      <nav class="nav">
+        <div class="nav__group">
+          <div class="nav__label">Teacher Workflow</div>
+          <a class="nav__link" data-nav="workspace" href="index.html">Review Workspace</a>
+          <a class="nav__link" data-nav="essay" href="essay-review.html">Essay Review</a>
+          <a class="nav__link" data-nav="detail" href="feedback-detail.html">Feedback Detail</a>
+          <a class="nav__link" data-nav="queue" href="teacher-queue.html">Teacher Queue</a>
+          <a class="nav__link" data-nav="knowledge" href="knowledge-base.html">Knowledge Base</a>
+          <a class="nav__link" data-nav="reports" href="reports.html">Reports</a>
+        </div>
+        <div class="nav__group"><div class="nav__label">System</div><a class="nav__link" data-nav="interface" href="interface.html">API & Data Contract</a><a class="nav__link" data-nav="settings" href="settings.html">Settings</a></div>
+      </nav>
+      <div class="sidebar-note">Knowledge evidence is a product feature, not a hidden implementation detail.</div>
+    </aside>
+
+    <main class="content">
+      <header class="topbar">
+        <div>
+          <div class="eyebrow">Knowledge Base</div>
+          <h1 class="page-title">Make expert knowledge inspectable.</h1>
+          <p class="page-copy">The designer should present knowledge support as visible evidence: works, authors, characters, themes, genre, aliases, and course-specific sources.</p>
+        </div>
+        <div class="actions"><button class="button">Import readings</button><button class="button primary">Add evidence</button></div>
+      </header>
+
+      <section class="grid two">
+        <article class="panel shadow">
+          <div class="panel__header"><div><div class="panel__title">Entity Search</div><div class="panel__sub">Teachers need to understand what the system knows.</div></div><span class="chip teal">319 triples</span></div>
+          <div class="panel__body">
+            <div class="form-grid">
+              <label>Search entity<input value="The Great Gatsby"></label>
+              <label>Entity type<select><option>Work</option><option>Author</option><option>Character</option><option>Theme</option></select></label>
+            </div>
+            <div style="height:14px"></div>
+            <div class="grid two">
+              <div class="card"><div class="card__title">Work profile</div><div class="card__copy">The Great Gatsby. Novel. F. Scott Fitzgerald. Published in 1925.</div><span class="chip teal">Supported</span></div>
+              <div class="card"><div class="card__title">Coverage summary</div><div class="card__copy">Author, publication year, genre, form, central characters, themes, and title aliases.</div><span class="chip blue">Course KG</span></div>
+            </div>
+          </div>
+        </article>
+
+        <aside class="panel shadow">
+          <div class="panel__header"><div><div class="panel__title">Evidence Triples</div><div class="panel__sub">Simple enough for non-technical reviewers.</div></div></div>
+          <div class="panel__body">
+            <table>
+              <thead><tr><th>Entity</th><th>Relation</th><th>Value</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td>The Great Gatsby</td><td>author</td><td>F. Scott Fitzgerald</td><td><span class="chip teal">Supported</span></td></tr>
+                <tr><td>The Great Gatsby</td><td>central_character</td><td>Jay Gatsby</td><td><span class="chip teal">Supported</span></td></tr>
+                <tr><td>The Great Gatsby</td><td>theme</td><td>American Dream</td><td><span class="chip teal">Supported</span></td></tr>
+                <tr><td>Daisy Buchanan</td><td>commands</td><td>Jay Gatsby</td><td><span class="chip amber">Conflict</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </aside>
+      </section>
+
+      <section class="panel" style="margin-top:16px;">
+        <div class="panel__header"><div><div class="panel__title">Knowledge Use In Decisions</div><div class="panel__sub">Visualize how evidence affects routing.</div></div></div>
+        <div class="panel__body grid three">
+          <div class="card"><div class="card__title">Supported</div><div class="card__copy">Evidence supports a factual claim. The feedback may still need review if it changes interpretation.</div><span class="chip green">23 items</span></div>
+          <div class="card"><div class="card__title">Conflict</div><div class="card__copy">The feedback makes a relation or fact claim that contradicts the knowledge base.</div><span class="chip amber">6 items</span></div>
+          <div class="card"><div class="card__title">Missing</div><div class="card__copy">No reliable evidence is available. The teacher should inspect before release.</div><span class="chip blue">11 items</span></div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

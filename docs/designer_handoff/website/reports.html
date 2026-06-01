@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ConsensusScope | Reports</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="reports">
+  <div class="mobile-top"><strong>ConsensusScope</strong><button data-menu>Menu</button></div>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand__name">ConsensusScope</div><div class="brand__meta">Audit-ready report export.</div></div>
+      <nav class="nav">
+        <div class="nav__group">
+          <div class="nav__label">Teacher Workflow</div>
+          <a class="nav__link" data-nav="workspace" href="index.html">Review Workspace</a>
+          <a class="nav__link" data-nav="essay" href="essay-review.html">Essay Review</a>
+          <a class="nav__link" data-nav="detail" href="feedback-detail.html">Feedback Detail</a>
+          <a class="nav__link" data-nav="queue" href="teacher-queue.html">Teacher Queue</a>
+          <a class="nav__link" data-nav="knowledge" href="knowledge-base.html">Knowledge Base</a>
+          <a class="nav__link" data-nav="reports" href="reports.html">Reports</a>
+        </div>
+        <div class="nav__group"><div class="nav__label">System</div><a class="nav__link" data-nav="interface" href="interface.html">API & Data Contract</a><a class="nav__link" data-nav="settings" href="settings.html">Settings</a></div>
+      </nav>
+      <div class="sidebar-note">Reports make the system look like a deployable tool rather than a one-off demo.</div>
+    </aside>
+
+    <main class="content">
+      <header class="topbar">
+        <div>
+          <div class="eyebrow">Reports</div>
+          <h1 class="page-title">Export the review trail.</h1>
+          <p class="page-copy">The report page should produce teacher-readable summaries and machine-readable artifacts for reproducibility.</p>
+        </div>
+        <div class="actions"><button class="button">Preview</button><button class="button primary">Download report</button></div>
+      </header>
+
+      <section class="grid three">
+        <div class="card"><div class="card__title">Teacher report</div><div class="card__copy">Markdown or PDF summary of accepted feedback, review items, teacher actions, and limitations.</div><span class="chip blue">Recommended</span></div>
+        <div class="card"><div class="card__title">Structured export</div><div class="card__copy">JSON and CSV for feedback items, evidence, and routing decisions.</div><span class="chip teal">Reproducible</span></div>
+        <div class="card"><div class="card__title">Audit appendix</div><div class="card__copy">Knowledge evidence and decision rationale without exposing private API keys.</div><span class="chip violet">Appendix</span></div>
+      </section>
+
+      <section class="grid two" style="margin-top:16px;">
+        <article class="panel shadow">
+          <div class="panel__header"><div><div class="panel__title">Report Preview</div><div class="panel__sub">Designed for teacher inspection, not reviewer confusion.</div></div></div>
+          <div class="panel__body">
+            <div class="code-block">ConsensusScope Teacher Review Report
+
+Session: comparative-literature-sample-03
+Feedback items: 4
+Auto-accepted: 1
+Teacher review: 3
+High-risk warnings: 1
+
+Key note:
+Grammar-level edits may be released. Interpretation-changing suggestions remain teacher-facing.</div>
+          </div>
+        </article>
+        <aside class="panel shadow">
+          <div class="panel__header"><div><div class="panel__title">Honest Placeholders</div><div class="panel__sub">Do not fake missing validation.</div></div></div>
+          <div class="panel__body">
+            <div class="status-strip">Teacher annotation set: reserved<br>Classroom deployment study: planned<br>LMS integration: reserved<br>Video URL: add only after real recording</div>
+          </div>
+        </aside>
+      </section>
+    </main>
+  </div>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
