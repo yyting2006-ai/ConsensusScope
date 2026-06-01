@@ -77,6 +77,10 @@ OPENAI_API_KEY=your_key
 JUDGE_API_KEY=your_key
 ```
 
+如果要做带内置 key 的现场演示，请把 API key 和
+`CONSENSUS_SCOPE_DEMO_PASSWORD` 放在本地 `.env` 或 Streamlit Cloud
+Secrets 中。不要把真实 API key 或密码提交到 GitHub、README、论文或录屏里。
+
 所有模型客户端均使用 OpenAI-compatible `/chat/completions` 接口。若服务商地址或模型名不同，可修改对应 `*_BASE_URL` 和 `*_MODEL`。
 
 固定裁判使用 `judge` provider：默认 `JUDGE_MODEL=deepseek-chat`，默认 `JUDGE_BASE_URL=https://api.deepseek.com`，API key 从 `JUDGE_API_KEY` 读取。可按需替换为其他 OpenAI-compatible judge model。

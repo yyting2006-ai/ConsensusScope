@@ -85,6 +85,10 @@ The repository already contains a no-API demonstration package with processed
 samples, saved model outputs, adjudication results, risk labels and figures.
 You can inspect the demo without calling external LLM APIs.
 
+For a password-protected live demo, keep API keys in local `.env` or Streamlit
+Secrets and set `CONSENSUS_SCOPE_DEMO_PASSWORD`. Do not commit real API keys or
+password values to the repository.
+
 Expected local output:
 
 ```text

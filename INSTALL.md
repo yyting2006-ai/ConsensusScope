@@ -95,3 +95,5 @@ start_demo.bat
 
 This package intentionally excludes `.env` and private API keys. If you later
 add API keys, keep them in a local `.env` file and do not upload it publicly.
+For a password-protected live demo, set `CONSENSUS_SCOPE_DEMO_PASSWORD` in the
+local `.env` file or in Streamlit Cloud Secrets.

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hmac
 import io
 import json
 import os
@@ -106,6 +107,49 @@ def public_display_frame(df: pd.DataFrame) -> pd.DataFrame:
     return display
 
 
+def configured_value(key: str) -> str:
+    value = os.getenv(key, "")
+    if value:
+        return value
+    try:
+        secret_value = st.secrets.get(key, "")
+    except Exception:
+        secret_value = ""
+    return str(secret_value) if secret_value else ""
+
+
+def truthy(value: str) -> bool:
+    return value.strip().lower() in {"1", "true", "yes", "y", "on"}
+
+
+def demo_auth_required() -> bool:
+    return bool(configured_value("CONSENSUS_SCOPE_DEMO_PASSWORD")) or truthy(configured_value("CONSENSUS_SCOPE_AUTH_ENABLED"))
+
+
+def render_demo_auth_gate() -> bool:
+    expected = configured_value("CONSENSUS_SCOPE_DEMO_PASSWORD")
+    if not expected and not demo_auth_required():
+        return True
+    if st.session_state.get("demo_authenticated"):
+        return True
+
+    st.markdown('<div class="section-title">Demo Access</div>', unsafe_allow_html=True)
+    st.info("This live demo is password-protected to prevent unintended API usage.")
+    if not expected:
+        st.error("Demo authentication is enabled, but CONSENSUS_SCOPE_DEMO_PASSWORD is not configured.")
+        return False
+    with st.form("demo_auth_form"):
+        entered = st.text_input("Demo password", type="password")
+        submitted = st.form_submit_button("Unlock demo", use_container_width=True)
+    if submitted:
+        if hmac.compare_digest(entered, expected):
+            st.session_state["demo_authenticated"] = True
+            st.rerun()
+        else:
+            st.error("Invalid password.")
+    return False
+
+
 @st.cache_data(show_spinner=False)
 def read_table(path: str) -> pd.DataFrame:
     p = Path(path)
@@ -169,6 +213,7 @@ def ensure_state() -> None:
         "live_result": None,
         "audit_selection": None,
         "api_mode": "Mode A",
+        "demo_authenticated": False,
     }
     for key, value in defaults.items():
         if key not in st.session_state:
@@ -255,14 +300,7 @@ def visible_method_metrics(metrics_df: pd.DataFrame) -> pd.DataFrame:
 def provider_env_value(provider: str, field: str) -> str:
     cfg = PROVIDER_CONFIG[provider]
     key = cfg[field]
-    value = os.getenv(key, "")
-    if value:
-        return value
-    try:
-        secret_value = st.secrets.get(key, "")
-    except Exception:
-        secret_value = ""
-    return str(secret_value) if secret_value else ""
+    return configured_value(key)
 
 
 def build_live_configs(api_mode: str, selected: List[str], user_inputs: Dict[str, Dict[str, str]]) -> List[LiveModelConfig]:
@@ -662,9 +700,12 @@ def page_report_export(samples_df: pd.DataFrame, outputs_df: pd.DataFrame, metri
 
 def main() -> None:
     st.set_page_config(page_title="ConsensusScope", layout="wide")
+    load_dotenv(ROOT / ".env")
     inject_styles()
     ensure_state()
     topbar()
+    if not render_demo_auth_gate():
+        return
 
     samples_df = read_table(str(DATA_PATHS["samples"]))
     outputs_df = load_outputs()
@@ -677,6 +718,10 @@ def main() -> None:
     error_df = read_table(str(DATA_PATHS["error_cases"]))
 
     st.sidebar.markdown("### ConsensusScope")
+    if demo_auth_required() and st.session_state.get("demo_authenticated"):
+        if st.sidebar.button("Lock demo", use_container_width=True):
+            st.session_state["demo_authenticated"] = False
+            st.rerun()
     page = st.sidebar.radio(
         "Navigation",
         [

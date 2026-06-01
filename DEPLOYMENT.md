@@ -20,6 +20,10 @@ their own API keys for the current request.
 Never put real API keys in the paper, README, source code, Git history, or demo
 video.
 
+For a password-protected live demo, set `CONSENSUS_SCOPE_DEMO_PASSWORD` in
+Streamlit Secrets together with the Mode A API keys. The password gate is only a
+usage guard; it is not a substitute for keeping API keys out of the repository.
+
 ## Streamlit Community Cloud
 
 1. Push this clean project to a GitHub repository.
@@ -28,7 +32,9 @@ video.
 4. Keep Python dependencies in `requirements.txt`.
 5. Optional: paste the contents of `.streamlit/secrets.toml.example` into the
    Streamlit Secrets editor and fill in only the keys needed for Mode A.
-6. Deploy and test the pages listed below.
+6. For a private live demo, also set `CONSENSUS_SCOPE_DEMO_PASSWORD` in
+   Streamlit Secrets. Leave it blank for an open no-API reviewer demo.
+7. Deploy and test the pages listed below.
 
 ## Local Smoke Test
 
