@@ -354,6 +354,23 @@ def render_model_outputs(outputs: List[Dict[str, Any]]) -> None:
     ]
     df = pd.DataFrame(outputs)
     st.dataframe(public_display_frame(df[[c for c in cols if c in df.columns]]), use_container_width=True, hide_index=True)
+    error_rows = [
+        item
+        for item in outputs
+        if safe_str(item.get("request_error")) or safe_str(item.get("parse_error"))
+    ]
+    if error_rows:
+        with st.expander("Provider request errors", expanded=True):
+            for item in error_rows:
+                provider = safe_str(item.get("provider")) or "unknown provider"
+                model = safe_str(item.get("model")) or "unknown model"
+                request_error = safe_str(item.get("request_error"))
+                parse_error = safe_str(item.get("parse_error"))
+                st.markdown(f"**{provider} · {model}**")
+                if request_error:
+                    st.code(request_error, language="text")
+                if parse_error:
+                    st.code(f"Parse error: {parse_error}", language="text")
 
 
 def render_adjudication_comparison(comparison: Optional[Dict[str, Any]]) -> None:
