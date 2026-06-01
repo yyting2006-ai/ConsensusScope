@@ -1036,7 +1036,6 @@ def page_design_reference() -> None:
     )
     brief_path = ROOT / "docs" / "ui_esl_designer_reference.md"
     mockup_path = ROOT / "docs" / "ui_mockup_esl_reference.html"
-    screenshot_path = ROOT / "docs" / "screenshots_en" / "ui_mockup_esl_reference.png"
 
     c1, c2, c3 = st.columns([0.55, 0.23, 0.22])
     with c1:
@@ -1063,10 +1062,6 @@ def page_design_reference() -> None:
                 mime="text/html",
                 use_container_width=True,
             )
-
-    if screenshot_path.exists():
-        st.image(str(screenshot_path), caption="Proposed first-screen direction for the ESL teacher-review workspace.")
-        return
 
     if not mockup_path.exists():
         st.warning("Design reference mockup is not available in this package.")
