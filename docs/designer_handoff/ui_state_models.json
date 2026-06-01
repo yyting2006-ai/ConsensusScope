@@ -1,0 +1,74 @@
+{
+  "version": "v1",
+  "review_session_status": [
+    "draft",
+    "running",
+    "ready_for_review",
+    "partially_reviewed",
+    "reviewed",
+    "exported"
+  ],
+  "feedback_item_status": [
+    "generated",
+    "auto_accepted",
+    "needs_teacher_review",
+    "teacher_accepted",
+    "teacher_edited",
+    "teacher_rejected",
+    "exported"
+  ],
+  "issue_type": [
+    "grammar",
+    "style",
+    "coherence",
+    "literary_fact",
+    "character_relation",
+    "theme_interpretation",
+    "thesis_argument",
+    "citation"
+  ],
+  "risk_level": [
+    "low",
+    "medium",
+    "high"
+  ],
+  "recommended_action": [
+    "auto_accept",
+    "teacher_review",
+    "reject",
+    "needs_more_evidence"
+  ],
+  "teacher_action_type": [
+    "accept",
+    "edit",
+    "send_to_review",
+    "reject",
+    "add_note"
+  ],
+  "knowledge_match_status": [
+    "supported",
+    "conflict",
+    "missing",
+    "not_applicable"
+  ],
+  "page_visibility": {
+    "primary": [
+      "Review Workspace",
+      "Essay Review",
+      "Feedback Detail",
+      "Teacher Queue",
+      "Reports"
+    ],
+    "secondary": [
+      "Knowledge Base",
+      "Risk & Routing"
+    ],
+    "advanced": [
+      "API Settings",
+      "Method Diagnostics",
+      "Raw Traces",
+      "Auxiliary QA Reliability"
+    ]
+  }
+}
+

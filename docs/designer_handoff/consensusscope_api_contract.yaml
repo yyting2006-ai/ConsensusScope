@@ -1,0 +1,629 @@
+openapi: 3.1.0
+info:
+  title: ConsensusScope ESL Review API
+  version: "1.0.0"
+  summary: API contract for an ESL literary-feedback review-routing product.
+  description: >
+    This contract fixes the front-end/back-end interface for the redesigned
+    ConsensusScope product. It is intentionally independent from the current
+    Streamlit demo UI.
+servers:
+  - url: https://example.org/api/v1
+    description: Production placeholder
+  - url: http://localhost:8000/api/v1
+    description: Local development placeholder
+paths:
+  /review-sessions:
+    post:
+      summary: Create a review session for an essay excerpt.
+      operationId: createReviewSession
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateReviewSessionRequest"
+      responses:
+        "201":
+          description: Review session created.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReviewSession"
+    get:
+      summary: List review sessions.
+      operationId: listReviewSessions
+      parameters:
+        - name: status
+          in: query
+          schema:
+            $ref: "#/components/schemas/ReviewSessionStatus"
+        - name: course_id
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Review sessions.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sessions:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/ReviewSessionSummary"
+  /review-sessions/{session_id}:
+    get:
+      summary: Get a review session.
+      operationId: getReviewSession
+      parameters:
+        - $ref: "#/components/parameters/SessionId"
+      responses:
+        "200":
+          description: Review session.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReviewSession"
+  /review-sessions/{session_id}/run:
+    post:
+      summary: Run feedback generation, knowledge retrieval, and routing.
+      operationId: runReviewSession
+      parameters:
+        - $ref: "#/components/parameters/SessionId"
+      responses:
+        "202":
+          description: Review job accepted.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - session_id
+                  - status
+                properties:
+                  session_id:
+                    type: string
+                  status:
+                    $ref: "#/components/schemas/ReviewSessionStatus"
+  /review-sessions/{session_id}/feedback-items:
+    get:
+      summary: List feedback items for one review session.
+      operationId: listFeedbackItems
+      parameters:
+        - $ref: "#/components/parameters/SessionId"
+        - name: risk_level
+          in: query
+          schema:
+            $ref: "#/components/schemas/RiskLevel"
+        - name: status
+          in: query
+          schema:
+            $ref: "#/components/schemas/FeedbackItemStatus"
+      responses:
+        "200":
+          description: Feedback item list.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/FeedbackItem"
+  /feedback-items/{item_id}:
+    get:
+      summary: Get one feedback item.
+      operationId: getFeedbackItem
+      parameters:
+        - $ref: "#/components/parameters/ItemId"
+      responses:
+        "200":
+          description: Feedback item.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FeedbackItem"
+  /feedback-items/{item_id}/teacher-action:
+    patch:
+      summary: Save a teacher action for one feedback item.
+      operationId: updateTeacherAction
+      parameters:
+        - $ref: "#/components/parameters/ItemId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TeacherActionRequest"
+      responses:
+        "200":
+          description: Updated feedback item.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FeedbackItem"
+  /teacher-queue:
+    get:
+      summary: List feedback items requiring teacher review.
+      operationId: listTeacherQueue
+      parameters:
+        - name: risk_level
+          in: query
+          schema:
+            $ref: "#/components/schemas/RiskLevel"
+        - name: issue_type
+          in: query
+          schema:
+            $ref: "#/components/schemas/IssueType"
+        - name: evidence_status
+          in: query
+          schema:
+            $ref: "#/components/schemas/KnowledgeMatchStatus"
+      responses:
+        "200":
+          description: Teacher queue.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/QueueItem"
+  /knowledge/search:
+    get:
+      summary: Search the literary knowledge base.
+      operationId: searchKnowledge
+      parameters:
+        - name: query
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: entity_type
+          in: query
+          schema:
+            type: string
+            enum:
+              - work
+              - author
+              - character
+              - theme
+              - genre
+              - period
+      responses:
+        "200":
+          description: Knowledge evidence.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  evidence:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/KnowledgeEvidence"
+  /analytics/routing-summary:
+    get:
+      summary: Get review-routing summary for dashboard display.
+      operationId: getRoutingSummary
+      parameters:
+        - name: course_id
+          in: query
+          schema:
+            type: string
+        - name: from
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: to
+          in: query
+          schema:
+            type: string
+            format: date
+      responses:
+        "200":
+          description: Routing summary.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RoutingSummary"
+  /reports:
+    post:
+      summary: Create an exportable teacher review report.
+      operationId: createReport
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - session_id
+                - format
+              properties:
+                session_id:
+                  type: string
+                format:
+                  type: string
+                  enum:
+                    - markdown
+                    - pdf
+                    - json
+                    - csv
+      responses:
+        "201":
+          description: Report created.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Report"
+  /system/demo-status:
+    get:
+      summary: Get safe public system status.
+      operationId: getDemoStatus
+      responses:
+        "200":
+          description: Demo status without secrets.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  demo_mode:
+                    type: string
+                    enum:
+                      - sample_records
+                      - live_api
+                  api_keys_visible:
+                    type: boolean
+                    const: false
+                  available_providers:
+                    type: array
+                    items:
+                      type: string
+components:
+  parameters:
+    SessionId:
+      name: session_id
+      in: path
+      required: true
+      schema:
+        type: string
+    ItemId:
+      name: item_id
+      in: path
+      required: true
+      schema:
+        type: string
+  schemas:
+    CreateReviewSessionRequest:
+      type: object
+      required:
+        - essay
+        - review_mode
+      properties:
+        course_id:
+          type: string
+          nullable: true
+        essay:
+          $ref: "#/components/schemas/Essay"
+        review_mode:
+          type: string
+          enum:
+            - sample_records
+            - live_api
+        rubric_ids:
+          type: array
+          items:
+            type: string
+        knowledge_scope:
+          type: array
+          items:
+            type: string
+        reviewer_models:
+          type: array
+          items:
+            type: string
+    Essay:
+      type: object
+      required:
+        - text
+        - assignment_type
+      properties:
+        essay_id:
+          type: string
+        title:
+          type: string
+        text:
+          type: string
+        assignment_type:
+          type: string
+          enum:
+            - comparative_literary_essay
+            - close_reading
+            - response_paper
+        student_id_hash:
+          type: string
+          nullable: true
+        metadata:
+          type: object
+          additionalProperties: true
+    ReviewSession:
+      type: object
+      required:
+        - session_id
+        - essay
+        - status
+        - created_at
+      properties:
+        session_id:
+          type: string
+        essay:
+          $ref: "#/components/schemas/Essay"
+        status:
+          $ref: "#/components/schemas/ReviewSessionStatus"
+        created_at:
+          type: string
+          format: date-time
+        review_mode:
+          type: string
+        routing_summary:
+          $ref: "#/components/schemas/RoutingSummary"
+        feedback_items:
+          type: array
+          items:
+            $ref: "#/components/schemas/FeedbackItem"
+    ReviewSessionSummary:
+      type: object
+      properties:
+        session_id:
+          type: string
+        title:
+          type: string
+        status:
+          $ref: "#/components/schemas/ReviewSessionStatus"
+        total_feedback_items:
+          type: integer
+        teacher_review_count:
+          type: integer
+        high_risk_count:
+          type: integer
+        updated_at:
+          type: string
+          format: date-time
+    ReviewSessionStatus:
+      type: string
+      enum:
+        - draft
+        - running
+        - ready_for_review
+        - partially_reviewed
+        - reviewed
+        - exported
+    FeedbackItem:
+      type: object
+      required:
+        - item_id
+        - session_id
+        - issue_type
+        - suggestion
+        - risk_level
+        - recommended_action
+        - status
+      properties:
+        item_id:
+          type: string
+        session_id:
+          type: string
+        span:
+          type: object
+          properties:
+            start:
+              type: integer
+            end:
+              type: integer
+            text:
+              type: string
+        issue_type:
+          $ref: "#/components/schemas/IssueType"
+        suggestion:
+          type: string
+        rationale:
+          type: string
+        risk_level:
+          $ref: "#/components/schemas/RiskLevel"
+        risk_reasons:
+          type: array
+          items:
+            type: string
+        recommended_action:
+          $ref: "#/components/schemas/RecommendedAction"
+        knowledge_evidence:
+          type: array
+          items:
+            $ref: "#/components/schemas/KnowledgeEvidence"
+        consensus_summary:
+          $ref: "#/components/schemas/ConsensusSummary"
+        teacher_action:
+          $ref: "#/components/schemas/TeacherAction"
+        status:
+          $ref: "#/components/schemas/FeedbackItemStatus"
+    FeedbackItemStatus:
+      type: string
+      enum:
+        - generated
+        - auto_accepted
+        - needs_teacher_review
+        - teacher_accepted
+        - teacher_edited
+        - teacher_rejected
+        - exported
+    IssueType:
+      type: string
+      enum:
+        - grammar
+        - style
+        - coherence
+        - literary_fact
+        - character_relation
+        - theme_interpretation
+        - thesis_argument
+        - citation
+    RiskLevel:
+      type: string
+      enum:
+        - low
+        - medium
+        - high
+    RecommendedAction:
+      type: string
+      enum:
+        - auto_accept
+        - teacher_review
+        - reject
+        - needs_more_evidence
+    KnowledgeEvidence:
+      type: object
+      properties:
+        evidence_id:
+          type: string
+        entity:
+          type: string
+        relation:
+          type: string
+        value:
+          type: string
+        source:
+          type: string
+        match_status:
+          $ref: "#/components/schemas/KnowledgeMatchStatus"
+        used_for_decision:
+          type: boolean
+    KnowledgeMatchStatus:
+      type: string
+      enum:
+        - supported
+        - conflict
+        - missing
+        - not_applicable
+    ConsensusSummary:
+      type: object
+      properties:
+        reviewer_count:
+          type: integer
+        agreement_rate:
+          type: number
+          minimum: 0
+          maximum: 1
+        minority_warning:
+          type: boolean
+        parse_error_count:
+          type: integer
+        confidence_mean:
+          type: number
+          minimum: 0
+          maximum: 1
+    TeacherActionRequest:
+      type: object
+      required:
+        - action_type
+      properties:
+        action_type:
+          type: string
+          enum:
+            - accept
+            - edit
+            - send_to_review
+            - reject
+            - add_note
+        edited_feedback:
+          type: string
+        note:
+          type: string
+        actor:
+          type: string
+    TeacherAction:
+      type: object
+      properties:
+        action_id:
+          type: string
+        item_id:
+          type: string
+        action_type:
+          type: string
+        edited_feedback:
+          type: string
+        note:
+          type: string
+        actor:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+    QueueItem:
+      type: object
+      properties:
+        item_id:
+          type: string
+        session_id:
+          type: string
+        priority:
+          type: string
+          enum:
+            - urgent
+            - high
+            - medium
+            - low
+        essay_title:
+          type: string
+        excerpt:
+          type: string
+        issue_type:
+          $ref: "#/components/schemas/IssueType"
+        risk_level:
+          $ref: "#/components/schemas/RiskLevel"
+        risk_reason:
+          type: string
+        evidence_status:
+          $ref: "#/components/schemas/KnowledgeMatchStatus"
+        recommended_action:
+          $ref: "#/components/schemas/RecommendedAction"
+    RoutingSummary:
+      type: object
+      properties:
+        total_feedback_items:
+          type: integer
+        auto_accept_count:
+          type: integer
+        teacher_review_count:
+          type: integer
+        high_risk_count:
+          type: integer
+        knowledge_supported_count:
+          type: integer
+        auto_accept_share:
+          type: number
+        teacher_review_share:
+          type: number
+    Report:
+      type: object
+      properties:
+        report_id:
+          type: string
+        session_id:
+          type: string
+        format:
+          type: string
+        download_url:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+
