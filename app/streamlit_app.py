@@ -317,12 +317,14 @@ def render_api_sidebar() -> tuple[str, List[str], Dict[str, Dict[str, str]], boo
     )
     default_selected = [p for p in ["deepseek", "qwen", "glm", "kimi"] if p in ANSWER_PROVIDERS]
     selected = st.sidebar.multiselect("Answer generation models", ANSWER_PROVIDERS, default=default_selected)
+    st.sidebar.caption("Each selected provider needs its own matching API key. If you only have one key, select only that provider.")
     fixed_enabled = st.sidebar.checkbox("Enable Fixed Judge in Live mode", value=False)
     fixed_provider = st.sidebar.selectbox("Fixed judge model", selected or default_selected or ANSWER_PROVIDERS, index=0)
 
     user_inputs: Dict[str, Dict[str, str]] = {}
     defaults = default_live_model_configs()
     with st.sidebar.expander("Provider settings", expanded=(api_mode == "Mode B")):
+        st.caption("Use the provider base URL only; the app appends /chat/completions automatically.")
         for provider in ANSWER_PROVIDERS:
             st.markdown(f"**{provider}**")
             api_key = ""

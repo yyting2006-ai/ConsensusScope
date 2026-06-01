@@ -12,7 +12,7 @@ import pandas as pd
 import requests
 
 from src.evaluation.simple_correctness import is_correct
-from src.llm.clients import PROVIDER_CONFIG, parse_json_from_text
+from src.llm.clients import PROVIDER_CONFIG, format_http_error, parse_json_from_text
 
 
 TASK_FACT_QA = "fact_qa"
@@ -186,7 +186,8 @@ def call_live_model(
             json=payload,
             timeout=timeout,
         )
-        response.raise_for_status()
+        if not response.ok:
+            raise RuntimeError(format_http_error(response))
         raw = str(response.json()["choices"][0]["message"]["content"])
         parsed = parse_json_from_text(raw)
         parse_error = str(parsed.get("parse_error", "") or "")

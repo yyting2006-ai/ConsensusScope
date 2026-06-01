@@ -7,6 +7,7 @@ from typing import Any, Dict
 import requests
 
 from src.llm.base_client import BaseLLMClient
+from src.llm.clients import format_http_error
 from src.parsing.json_parser import parse_model_json
 from src.prompts.answer_prompt import build_answer_messages
 from src.schemas import ModelAnswer, QuestionSample
@@ -63,7 +64,8 @@ class OpenAICompatibleClient(BaseLLMClient):
                 json=payload,
                 timeout=self.timeout,
             )
-            response.raise_for_status()
+            if not response.ok:
+                raise RuntimeError(format_http_error(response))
             raw = response.json()["choices"][0]["message"]["content"]
             parsed = parse_model_json(raw)
             return ModelAnswer(

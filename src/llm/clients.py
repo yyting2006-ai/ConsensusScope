@@ -20,6 +20,7 @@ logger = logging.getLogger(__name__)
 
 DEFAULT_TIMEOUT_SEC = 60
 DEFAULT_RETRIES = 2
+MAX_ERROR_BODY_CHARS = 1000
 
 
 PROVIDER_CONFIG: Dict[str, Dict[str, str]] = {
@@ -88,6 +89,16 @@ class BaseLLMClient(ABC):
         """Call a model and return parsed JSON or an error dictionary."""
 
 
+def format_http_error(response: requests.Response) -> str:
+    """Return a concise provider error without exposing request headers."""
+
+    body = response.text.strip()
+    if len(body) > MAX_ERROR_BODY_CHARS:
+        body = body[:MAX_ERROR_BODY_CHARS] + "..."
+    detail = body or response.reason or "No response body"
+    return f"HTTP {response.status_code} from {response.url}: {detail}"
+
+
 class OpenAICompatibleClient(BaseLLMClient):
     """Client for OpenAI-compatible `/chat/completions` APIs."""
 
@@ -137,7 +148,8 @@ class OpenAICompatibleClient(BaseLLMClient):
                     json=payload,
                     timeout=self.config.timeout,
                 )
-                response.raise_for_status()
+                if not response.ok:
+                    raise RuntimeError(format_http_error(response))
                 raw_output = _extract_message_content(response.json())
                 parsed = parse_json_from_text(raw_output)
                 parsed.setdefault("raw_output", raw_output)

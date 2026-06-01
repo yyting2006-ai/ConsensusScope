@@ -1,4 +1,6 @@
-from src.llm.clients import get_client, parse_json_from_text
+from requests import Response
+
+from src.llm.clients import format_http_error, get_client, parse_json_from_text
 from src.llm.prompts import build_answer_prompt, build_judge_prompt
 
 
@@ -40,3 +42,17 @@ def test_get_openai_compatible_client_without_key() -> None:
     result = client.call_json('{"answer":"A"}', max_tokens=10)
     assert result["provider"] == "openai"
     assert "request_error" in result
+
+
+def test_format_http_error_keeps_provider_body() -> None:
+    response = Response()
+    response.status_code = 400
+    response.url = "https://api.example.test/chat/completions"
+    response.reason = "Bad Request"
+    response._content = b'{"error":{"message":"invalid model name"}}'
+
+    message = format_http_error(response)
+
+    assert "HTTP 400" in message
+    assert "invalid model name" in message
+    assert "Authorization" not in message
