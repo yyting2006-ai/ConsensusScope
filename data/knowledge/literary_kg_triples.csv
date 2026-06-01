@@ -1,16 +1,320 @@
 entity,relation,value,work,evidence,source
-Frankenstein,author,Mary Shelley,Frankenstein,"Frankenstein; or, The Modern Prometheus is attributed to Mary Shelley.",curated_demo_kg
-Frankenstein,publication_year,1818,Frankenstein,"Frankenstein was first published in 1818.",curated_demo_kg
-Frankenstein,genre,Gothic novel,Frankenstein,"Frankenstein is commonly discussed as a Gothic novel.",curated_demo_kg
-Frankenstein,central_character,Victor Frankenstein,Frankenstein,"Victor Frankenstein is the scientist who creates the creature.",curated_demo_kg
-Frankenstein,central_character,the creature,Frankenstein,"The created being is often called the creature or monster, not Victor Frankenstein.",curated_demo_kg
-Jane Eyre,author,Charlotte Bronte,Jane Eyre,"Jane Eyre is a novel by Charlotte Bronte.",curated_demo_kg
-Jane Eyre,publication_year,1847,Jane Eyre,"Jane Eyre was first published in 1847.",curated_demo_kg
-Jane Eyre,genre,Bildungsroman,Jane Eyre,"Jane Eyre is frequently read as a Bildungsroman with Gothic elements.",curated_demo_kg
-Jane Eyre,central_character,Jane Eyre,Jane Eyre,"Jane Eyre is the protagonist and narrator of the novel.",curated_demo_kg
-Pride and Prejudice,author,Jane Austen,Pride and Prejudice,"Pride and Prejudice is a novel by Jane Austen.",curated_demo_kg
-Pride and Prejudice,publication_year,1813,Pride and Prejudice,"Pride and Prejudice was first published in 1813.",curated_demo_kg
-Wuthering Heights,author,Emily Bronte,Wuthering Heights,"Wuthering Heights is a novel by Emily Bronte.",curated_demo_kg
-Wuthering Heights,publication_year,1847,Wuthering Heights,"Wuthering Heights was first published in 1847.",curated_demo_kg
-Hamlet,author,William Shakespeare,Hamlet,"Hamlet is a tragedy by William Shakespeare.",curated_demo_kg
-Hamlet,genre,tragedy,Hamlet,"Hamlet is commonly classified as a tragedy.",curated_demo_kg
+Frankenstein,author,Mary Shelley,Frankenstein,Frankenstein is attributed to Mary Shelley.,curated_literary_kg_v1
+Frankenstein,publication_year,1818,Frankenstein,Frankenstein is conventionally dated to 1818.,curated_literary_kg_v1
+Frankenstein,alias,"Frankenstein; or, The Modern Prometheus",Frankenstein,"Frankenstein; or, The Modern Prometheus is an alternate reference for Frankenstein.",curated_literary_kg_v1
+Frankenstein,form,novel,Frankenstein,Frankenstein is a novel.,curated_literary_kg_v1
+Frankenstein,genre,Gothic fiction,Frankenstein,Frankenstein is commonly described as Gothic fiction.,curated_literary_kg_v1
+Frankenstein,genre,science fiction,Frankenstein,Frankenstein is commonly described as science fiction.,curated_literary_kg_v1
+Frankenstein,central_character,Victor Frankenstein,Frankenstein,Victor Frankenstein is a central character in Frankenstein.,curated_literary_kg_v1
+Frankenstein,central_character,the creature,Frankenstein,the creature is a central character in Frankenstein.,curated_literary_kg_v1
+Frankenstein,theme,ambition,Frankenstein,Frankenstein is often discussed through the theme of ambition.,curated_literary_kg_v1
+Frankenstein,theme,creation,Frankenstein,Frankenstein is often discussed through the theme of creation.,curated_literary_kg_v1
+Frankenstein,theme,responsibility,Frankenstein,Frankenstein is often discussed through the theme of responsibility.,curated_literary_kg_v1
+Jane Eyre,author,Charlotte Bronte,Jane Eyre,Jane Eyre is attributed to Charlotte Bronte.,curated_literary_kg_v1
+Jane Eyre,publication_year,1847,Jane Eyre,Jane Eyre is conventionally dated to 1847.,curated_literary_kg_v1
+Jane Eyre,form,novel,Jane Eyre,Jane Eyre is a novel.,curated_literary_kg_v1
+Jane Eyre,genre,Bildungsroman,Jane Eyre,Jane Eyre is commonly described as Bildungsroman.,curated_literary_kg_v1
+Jane Eyre,genre,Gothic fiction,Jane Eyre,Jane Eyre is commonly described as Gothic fiction.,curated_literary_kg_v1
+Jane Eyre,central_character,Jane Eyre,Jane Eyre,Jane Eyre is a central character in Jane Eyre.,curated_literary_kg_v1
+Jane Eyre,central_character,Edward Rochester,Jane Eyre,Edward Rochester is a central character in Jane Eyre.,curated_literary_kg_v1
+Jane Eyre,theme,moral independence,Jane Eyre,Jane Eyre is often discussed through the theme of moral independence.,curated_literary_kg_v1
+Jane Eyre,theme,social class,Jane Eyre,Jane Eyre is often discussed through the theme of social class.,curated_literary_kg_v1
+Jane Eyre,theme,gender,Jane Eyre,Jane Eyre is often discussed through the theme of gender.,curated_literary_kg_v1
+Pride and Prejudice,author,Jane Austen,Pride and Prejudice,Pride and Prejudice is attributed to Jane Austen.,curated_literary_kg_v1
+Pride and Prejudice,publication_year,1813,Pride and Prejudice,Pride and Prejudice is conventionally dated to 1813.,curated_literary_kg_v1
+Pride and Prejudice,form,novel,Pride and Prejudice,Pride and Prejudice is a novel.,curated_literary_kg_v1
+Pride and Prejudice,genre,novel of manners,Pride and Prejudice,Pride and Prejudice is commonly described as novel of manners.,curated_literary_kg_v1
+Pride and Prejudice,central_character,Elizabeth Bennet,Pride and Prejudice,Elizabeth Bennet is a central character in Pride and Prejudice.,curated_literary_kg_v1
+Pride and Prejudice,central_character,Fitzwilliam Darcy,Pride and Prejudice,Fitzwilliam Darcy is a central character in Pride and Prejudice.,curated_literary_kg_v1
+Pride and Prejudice,theme,marriage,Pride and Prejudice,Pride and Prejudice is often discussed through the theme of marriage.,curated_literary_kg_v1
+Pride and Prejudice,theme,class,Pride and Prejudice,Pride and Prejudice is often discussed through the theme of class.,curated_literary_kg_v1
+Pride and Prejudice,theme,judgment,Pride and Prejudice,Pride and Prejudice is often discussed through the theme of judgment.,curated_literary_kg_v1
+Wuthering Heights,author,Emily Bronte,Wuthering Heights,Wuthering Heights is attributed to Emily Bronte.,curated_literary_kg_v1
+Wuthering Heights,publication_year,1847,Wuthering Heights,Wuthering Heights is conventionally dated to 1847.,curated_literary_kg_v1
+Wuthering Heights,form,novel,Wuthering Heights,Wuthering Heights is a novel.,curated_literary_kg_v1
+Wuthering Heights,genre,Gothic fiction,Wuthering Heights,Wuthering Heights is commonly described as Gothic fiction.,curated_literary_kg_v1
+Wuthering Heights,central_character,Heathcliff,Wuthering Heights,Heathcliff is a central character in Wuthering Heights.,curated_literary_kg_v1
+Wuthering Heights,central_character,Catherine Earnshaw,Wuthering Heights,Catherine Earnshaw is a central character in Wuthering Heights.,curated_literary_kg_v1
+Wuthering Heights,theme,revenge,Wuthering Heights,Wuthering Heights is often discussed through the theme of revenge.,curated_literary_kg_v1
+Wuthering Heights,theme,social class,Wuthering Heights,Wuthering Heights is often discussed through the theme of social class.,curated_literary_kg_v1
+Wuthering Heights,theme,destructive love,Wuthering Heights,Wuthering Heights is often discussed through the theme of destructive love.,curated_literary_kg_v1
+Hamlet,author,William Shakespeare,Hamlet,Hamlet is attributed to William Shakespeare.,curated_literary_kg_v1
+Hamlet,publication_year,1603,Hamlet,Hamlet is conventionally dated to 1603.,curated_literary_kg_v1
+Hamlet,alias,The Tragedy of Hamlet,Hamlet,The Tragedy of Hamlet is an alternate reference for Hamlet.,curated_literary_kg_v1
+Hamlet,form,play,Hamlet,Hamlet is a play.,curated_literary_kg_v1
+Hamlet,genre,tragedy,Hamlet,Hamlet is commonly described as tragedy.,curated_literary_kg_v1
+Hamlet,central_character,Hamlet,Hamlet,Hamlet is a central character in Hamlet.,curated_literary_kg_v1
+Hamlet,central_character,Claudius,Hamlet,Claudius is a central character in Hamlet.,curated_literary_kg_v1
+Hamlet,central_character,Ophelia,Hamlet,Ophelia is a central character in Hamlet.,curated_literary_kg_v1
+Hamlet,theme,revenge,Hamlet,Hamlet is often discussed through the theme of revenge.,curated_literary_kg_v1
+Hamlet,theme,mortality,Hamlet,Hamlet is often discussed through the theme of mortality.,curated_literary_kg_v1
+Hamlet,theme,uncertainty,Hamlet,Hamlet is often discussed through the theme of uncertainty.,curated_literary_kg_v1
+Macbeth,author,William Shakespeare,Macbeth,Macbeth is attributed to William Shakespeare.,curated_literary_kg_v1
+Macbeth,publication_year,1606,Macbeth,Macbeth is conventionally dated to 1606.,curated_literary_kg_v1
+Macbeth,alias,The Tragedy of Macbeth,Macbeth,The Tragedy of Macbeth is an alternate reference for Macbeth.,curated_literary_kg_v1
+Macbeth,form,play,Macbeth,Macbeth is a play.,curated_literary_kg_v1
+Macbeth,genre,tragedy,Macbeth,Macbeth is commonly described as tragedy.,curated_literary_kg_v1
+Macbeth,central_character,Macbeth,Macbeth,Macbeth is a central character in Macbeth.,curated_literary_kg_v1
+Macbeth,central_character,Lady Macbeth,Macbeth,Lady Macbeth is a central character in Macbeth.,curated_literary_kg_v1
+Macbeth,theme,ambition,Macbeth,Macbeth is often discussed through the theme of ambition.,curated_literary_kg_v1
+Macbeth,theme,guilt,Macbeth,Macbeth is often discussed through the theme of guilt.,curated_literary_kg_v1
+Macbeth,theme,power,Macbeth,Macbeth is often discussed through the theme of power.,curated_literary_kg_v1
+Othello,author,William Shakespeare,Othello,Othello is attributed to William Shakespeare.,curated_literary_kg_v1
+Othello,publication_year,1603,Othello,Othello is conventionally dated to 1603.,curated_literary_kg_v1
+Othello,alias,The Tragedy of Othello,Othello,The Tragedy of Othello is an alternate reference for Othello.,curated_literary_kg_v1
+Othello,form,play,Othello,Othello is a play.,curated_literary_kg_v1
+Othello,genre,tragedy,Othello,Othello is commonly described as tragedy.,curated_literary_kg_v1
+Othello,central_character,Othello,Othello,Othello is a central character in Othello.,curated_literary_kg_v1
+Othello,central_character,Desdemona,Othello,Desdemona is a central character in Othello.,curated_literary_kg_v1
+Othello,central_character,Iago,Othello,Iago is a central character in Othello.,curated_literary_kg_v1
+Othello,theme,jealousy,Othello,Othello is often discussed through the theme of jealousy.,curated_literary_kg_v1
+Othello,theme,race,Othello,Othello is often discussed through the theme of race.,curated_literary_kg_v1
+Othello,theme,manipulation,Othello,Othello is often discussed through the theme of manipulation.,curated_literary_kg_v1
+King Lear,author,William Shakespeare,King Lear,King Lear is attributed to William Shakespeare.,curated_literary_kg_v1
+King Lear,publication_year,1606,King Lear,King Lear is conventionally dated to 1606.,curated_literary_kg_v1
+King Lear,alias,The Tragedy of King Lear,King Lear,The Tragedy of King Lear is an alternate reference for King Lear.,curated_literary_kg_v1
+King Lear,form,play,King Lear,King Lear is a play.,curated_literary_kg_v1
+King Lear,genre,tragedy,King Lear,King Lear is commonly described as tragedy.,curated_literary_kg_v1
+King Lear,central_character,King Lear,King Lear,King Lear is a central character in King Lear.,curated_literary_kg_v1
+King Lear,central_character,Cordelia,King Lear,Cordelia is a central character in King Lear.,curated_literary_kg_v1
+King Lear,central_character,Goneril,King Lear,Goneril is a central character in King Lear.,curated_literary_kg_v1
+King Lear,central_character,Regan,King Lear,Regan is a central character in King Lear.,curated_literary_kg_v1
+King Lear,theme,authority,King Lear,King Lear is often discussed through the theme of authority.,curated_literary_kg_v1
+King Lear,theme,family,King Lear,King Lear is often discussed through the theme of family.,curated_literary_kg_v1
+King Lear,theme,madness,King Lear,King Lear is often discussed through the theme of madness.,curated_literary_kg_v1
+Great Expectations,author,Charles Dickens,Great Expectations,Great Expectations is attributed to Charles Dickens.,curated_literary_kg_v1
+Great Expectations,publication_year,1861,Great Expectations,Great Expectations is conventionally dated to 1861.,curated_literary_kg_v1
+Great Expectations,form,novel,Great Expectations,Great Expectations is a novel.,curated_literary_kg_v1
+Great Expectations,genre,Bildungsroman,Great Expectations,Great Expectations is commonly described as Bildungsroman.,curated_literary_kg_v1
+Great Expectations,central_character,Pip,Great Expectations,Pip is a central character in Great Expectations.,curated_literary_kg_v1
+Great Expectations,central_character,Estella,Great Expectations,Estella is a central character in Great Expectations.,curated_literary_kg_v1
+Great Expectations,central_character,Miss Havisham,Great Expectations,Miss Havisham is a central character in Great Expectations.,curated_literary_kg_v1
+Great Expectations,theme,class mobility,Great Expectations,Great Expectations is often discussed through the theme of class mobility.,curated_literary_kg_v1
+Great Expectations,theme,guilt,Great Expectations,Great Expectations is often discussed through the theme of guilt.,curated_literary_kg_v1
+Great Expectations,theme,moral growth,Great Expectations,Great Expectations is often discussed through the theme of moral growth.,curated_literary_kg_v1
+Oliver Twist,author,Charles Dickens,Oliver Twist,Oliver Twist is attributed to Charles Dickens.,curated_literary_kg_v1
+Oliver Twist,publication_year,1838,Oliver Twist,Oliver Twist is conventionally dated to 1838.,curated_literary_kg_v1
+Oliver Twist,form,novel,Oliver Twist,Oliver Twist is a novel.,curated_literary_kg_v1
+Oliver Twist,genre,social novel,Oliver Twist,Oliver Twist is commonly described as social novel.,curated_literary_kg_v1
+Oliver Twist,central_character,Oliver Twist,Oliver Twist,Oliver Twist is a central character in Oliver Twist.,curated_literary_kg_v1
+Oliver Twist,central_character,Fagin,Oliver Twist,Fagin is a central character in Oliver Twist.,curated_literary_kg_v1
+Oliver Twist,central_character,Nancy,Oliver Twist,Nancy is a central character in Oliver Twist.,curated_literary_kg_v1
+Oliver Twist,theme,poverty,Oliver Twist,Oliver Twist is often discussed through the theme of poverty.,curated_literary_kg_v1
+Oliver Twist,theme,childhood,Oliver Twist,Oliver Twist is often discussed through the theme of childhood.,curated_literary_kg_v1
+Oliver Twist,theme,social injustice,Oliver Twist,Oliver Twist is often discussed through the theme of social injustice.,curated_literary_kg_v1
+A Tale of Two Cities,author,Charles Dickens,A Tale of Two Cities,A Tale of Two Cities is attributed to Charles Dickens.,curated_literary_kg_v1
+A Tale of Two Cities,publication_year,1859,A Tale of Two Cities,A Tale of Two Cities is conventionally dated to 1859.,curated_literary_kg_v1
+A Tale of Two Cities,form,novel,A Tale of Two Cities,A Tale of Two Cities is a novel.,curated_literary_kg_v1
+A Tale of Two Cities,genre,historical novel,A Tale of Two Cities,A Tale of Two Cities is commonly described as historical novel.,curated_literary_kg_v1
+A Tale of Two Cities,central_character,Charles Darnay,A Tale of Two Cities,Charles Darnay is a central character in A Tale of Two Cities.,curated_literary_kg_v1
+A Tale of Two Cities,central_character,Sydney Carton,A Tale of Two Cities,Sydney Carton is a central character in A Tale of Two Cities.,curated_literary_kg_v1
+A Tale of Two Cities,central_character,Lucie Manette,A Tale of Two Cities,Lucie Manette is a central character in A Tale of Two Cities.,curated_literary_kg_v1
+A Tale of Two Cities,theme,revolution,A Tale of Two Cities,A Tale of Two Cities is often discussed through the theme of revolution.,curated_literary_kg_v1
+A Tale of Two Cities,theme,sacrifice,A Tale of Two Cities,A Tale of Two Cities is often discussed through the theme of sacrifice.,curated_literary_kg_v1
+A Tale of Two Cities,theme,resurrection,A Tale of Two Cities,A Tale of Two Cities is often discussed through the theme of resurrection.,curated_literary_kg_v1
+The Picture of Dorian Gray,author,Oscar Wilde,The Picture of Dorian Gray,The Picture of Dorian Gray is attributed to Oscar Wilde.,curated_literary_kg_v1
+The Picture of Dorian Gray,publication_year,1890,The Picture of Dorian Gray,The Picture of Dorian Gray is conventionally dated to 1890.,curated_literary_kg_v1
+The Picture of Dorian Gray,alias,Dorian Gray,The Picture of Dorian Gray,Dorian Gray is an alternate reference for The Picture of Dorian Gray.,curated_literary_kg_v1
+The Picture of Dorian Gray,form,novel,The Picture of Dorian Gray,The Picture of Dorian Gray is a novel.,curated_literary_kg_v1
+The Picture of Dorian Gray,genre,philosophical fiction,The Picture of Dorian Gray,The Picture of Dorian Gray is commonly described as philosophical fiction.,curated_literary_kg_v1
+The Picture of Dorian Gray,genre,Gothic fiction,The Picture of Dorian Gray,The Picture of Dorian Gray is commonly described as Gothic fiction.,curated_literary_kg_v1
+The Picture of Dorian Gray,central_character,Dorian Gray,The Picture of Dorian Gray,Dorian Gray is a central character in The Picture of Dorian Gray.,curated_literary_kg_v1
+The Picture of Dorian Gray,central_character,Lord Henry Wotton,The Picture of Dorian Gray,Lord Henry Wotton is a central character in The Picture of Dorian Gray.,curated_literary_kg_v1
+The Picture of Dorian Gray,central_character,Basil Hallward,The Picture of Dorian Gray,Basil Hallward is a central character in The Picture of Dorian Gray.,curated_literary_kg_v1
+The Picture of Dorian Gray,theme,aestheticism,The Picture of Dorian Gray,The Picture of Dorian Gray is often discussed through the theme of aestheticism.,curated_literary_kg_v1
+The Picture of Dorian Gray,theme,corruption,The Picture of Dorian Gray,The Picture of Dorian Gray is often discussed through the theme of corruption.,curated_literary_kg_v1
+The Picture of Dorian Gray,theme,art,The Picture of Dorian Gray,The Picture of Dorian Gray is often discussed through the theme of art.,curated_literary_kg_v1
+Dracula,author,Bram Stoker,Dracula,Dracula is attributed to Bram Stoker.,curated_literary_kg_v1
+Dracula,publication_year,1897,Dracula,Dracula is conventionally dated to 1897.,curated_literary_kg_v1
+Dracula,form,novel,Dracula,Dracula is a novel.,curated_literary_kg_v1
+Dracula,genre,Gothic fiction,Dracula,Dracula is commonly described as Gothic fiction.,curated_literary_kg_v1
+Dracula,genre,horror fiction,Dracula,Dracula is commonly described as horror fiction.,curated_literary_kg_v1
+Dracula,central_character,Count Dracula,Dracula,Count Dracula is a central character in Dracula.,curated_literary_kg_v1
+Dracula,central_character,Jonathan Harker,Dracula,Jonathan Harker is a central character in Dracula.,curated_literary_kg_v1
+Dracula,central_character,Mina Harker,Dracula,Mina Harker is a central character in Dracula.,curated_literary_kg_v1
+Dracula,theme,fear,Dracula,Dracula is often discussed through the theme of fear.,curated_literary_kg_v1
+Dracula,theme,modernity,Dracula,Dracula is often discussed through the theme of modernity.,curated_literary_kg_v1
+Dracula,theme,invasion,Dracula,Dracula is often discussed through the theme of invasion.,curated_literary_kg_v1
+The Strange Case of Dr Jekyll and Mr Hyde,author,Robert Louis Stevenson,The Strange Case of Dr Jekyll and Mr Hyde,The Strange Case of Dr Jekyll and Mr Hyde is attributed to Robert Louis Stevenson.,curated_literary_kg_v1
+The Strange Case of Dr Jekyll and Mr Hyde,publication_year,1886,The Strange Case of Dr Jekyll and Mr Hyde,The Strange Case of Dr Jekyll and Mr Hyde is conventionally dated to 1886.,curated_literary_kg_v1
+The Strange Case of Dr Jekyll and Mr Hyde,alias,Strange Case of Dr Jekyll and Mr Hyde,The Strange Case of Dr Jekyll and Mr Hyde,Strange Case of Dr Jekyll and Mr Hyde is an alternate reference for The Strange Case of Dr Jekyll and Mr Hyde.,curated_literary_kg_v1
+The Strange Case of Dr Jekyll and Mr Hyde,alias,Jekyll and Hyde,The Strange Case of Dr Jekyll and Mr Hyde,Jekyll and Hyde is an alternate reference for The Strange Case of Dr Jekyll and Mr Hyde.,curated_literary_kg_v1
+The Strange Case of Dr Jekyll and Mr Hyde,form,novella,The Strange Case of Dr Jekyll and Mr Hyde,The Strange Case of Dr Jekyll and Mr Hyde is a novella.,curated_literary_kg_v1
+The Strange Case of Dr Jekyll and Mr Hyde,genre,Gothic fiction,The Strange Case of Dr Jekyll and Mr Hyde,The Strange Case of Dr Jekyll and Mr Hyde is commonly described as Gothic fiction.,curated_literary_kg_v1
+The Strange Case of Dr Jekyll and Mr Hyde,central_character,Dr Jekyll,The Strange Case of Dr Jekyll and Mr Hyde,Dr Jekyll is a central character in The Strange Case of Dr Jekyll and Mr Hyde.,curated_literary_kg_v1
+The Strange Case of Dr Jekyll and Mr Hyde,central_character,Mr Hyde,The Strange Case of Dr Jekyll and Mr Hyde,Mr Hyde is a central character in The Strange Case of Dr Jekyll and Mr Hyde.,curated_literary_kg_v1
+The Strange Case of Dr Jekyll and Mr Hyde,central_character,Gabriel Utterson,The Strange Case of Dr Jekyll and Mr Hyde,Gabriel Utterson is a central character in The Strange Case of Dr Jekyll and Mr Hyde.,curated_literary_kg_v1
+The Strange Case of Dr Jekyll and Mr Hyde,theme,duality,The Strange Case of Dr Jekyll and Mr Hyde,The Strange Case of Dr Jekyll and Mr Hyde is often discussed through the theme of duality.,curated_literary_kg_v1
+The Strange Case of Dr Jekyll and Mr Hyde,theme,respectability,The Strange Case of Dr Jekyll and Mr Hyde,The Strange Case of Dr Jekyll and Mr Hyde is often discussed through the theme of respectability.,curated_literary_kg_v1
+The Strange Case of Dr Jekyll and Mr Hyde,theme,repression,The Strange Case of Dr Jekyll and Mr Hyde,The Strange Case of Dr Jekyll and Mr Hyde is often discussed through the theme of repression.,curated_literary_kg_v1
+Moby-Dick,author,Herman Melville,Moby-Dick,Moby-Dick is attributed to Herman Melville.,curated_literary_kg_v1
+Moby-Dick,publication_year,1851,Moby-Dick,Moby-Dick is conventionally dated to 1851.,curated_literary_kg_v1
+Moby-Dick,alias,Moby Dick,Moby-Dick,Moby Dick is an alternate reference for Moby-Dick.,curated_literary_kg_v1
+Moby-Dick,form,novel,Moby-Dick,Moby-Dick is a novel.,curated_literary_kg_v1
+Moby-Dick,genre,adventure fiction,Moby-Dick,Moby-Dick is commonly described as adventure fiction.,curated_literary_kg_v1
+Moby-Dick,central_character,Ishmael,Moby-Dick,Ishmael is a central character in Moby-Dick.,curated_literary_kg_v1
+Moby-Dick,central_character,Captain Ahab,Moby-Dick,Captain Ahab is a central character in Moby-Dick.,curated_literary_kg_v1
+Moby-Dick,central_character,Moby Dick,Moby-Dick,Moby Dick is a central character in Moby-Dick.,curated_literary_kg_v1
+Moby-Dick,theme,obsession,Moby-Dick,Moby-Dick is often discussed through the theme of obsession.,curated_literary_kg_v1
+Moby-Dick,theme,fate,Moby-Dick,Moby-Dick is often discussed through the theme of fate.,curated_literary_kg_v1
+Moby-Dick,theme,knowledge,Moby-Dick,Moby-Dick is often discussed through the theme of knowledge.,curated_literary_kg_v1
+The Scarlet Letter,author,Nathaniel Hawthorne,The Scarlet Letter,The Scarlet Letter is attributed to Nathaniel Hawthorne.,curated_literary_kg_v1
+The Scarlet Letter,publication_year,1850,The Scarlet Letter,The Scarlet Letter is conventionally dated to 1850.,curated_literary_kg_v1
+The Scarlet Letter,form,novel,The Scarlet Letter,The Scarlet Letter is a novel.,curated_literary_kg_v1
+The Scarlet Letter,genre,historical novel,The Scarlet Letter,The Scarlet Letter is commonly described as historical novel.,curated_literary_kg_v1
+The Scarlet Letter,central_character,Hester Prynne,The Scarlet Letter,Hester Prynne is a central character in The Scarlet Letter.,curated_literary_kg_v1
+The Scarlet Letter,central_character,Arthur Dimmesdale,The Scarlet Letter,Arthur Dimmesdale is a central character in The Scarlet Letter.,curated_literary_kg_v1
+The Scarlet Letter,central_character,Pearl,The Scarlet Letter,Pearl is a central character in The Scarlet Letter.,curated_literary_kg_v1
+The Scarlet Letter,theme,sin,The Scarlet Letter,The Scarlet Letter is often discussed through the theme of sin.,curated_literary_kg_v1
+The Scarlet Letter,theme,public shame,The Scarlet Letter,The Scarlet Letter is often discussed through the theme of public shame.,curated_literary_kg_v1
+The Scarlet Letter,theme,identity,The Scarlet Letter,The Scarlet Letter is often discussed through the theme of identity.,curated_literary_kg_v1
+The Adventures of Huckleberry Finn,author,Mark Twain,The Adventures of Huckleberry Finn,The Adventures of Huckleberry Finn is attributed to Mark Twain.,curated_literary_kg_v1
+The Adventures of Huckleberry Finn,publication_year,1884,The Adventures of Huckleberry Finn,The Adventures of Huckleberry Finn is conventionally dated to 1884.,curated_literary_kg_v1
+The Adventures of Huckleberry Finn,alias,Adventures of Huckleberry Finn,The Adventures of Huckleberry Finn,Adventures of Huckleberry Finn is an alternate reference for The Adventures of Huckleberry Finn.,curated_literary_kg_v1
+The Adventures of Huckleberry Finn,alias,Huckleberry Finn,The Adventures of Huckleberry Finn,Huckleberry Finn is an alternate reference for The Adventures of Huckleberry Finn.,curated_literary_kg_v1
+The Adventures of Huckleberry Finn,form,novel,The Adventures of Huckleberry Finn,The Adventures of Huckleberry Finn is a novel.,curated_literary_kg_v1
+The Adventures of Huckleberry Finn,genre,picaresque novel,The Adventures of Huckleberry Finn,The Adventures of Huckleberry Finn is commonly described as picaresque novel.,curated_literary_kg_v1
+The Adventures of Huckleberry Finn,central_character,Huckleberry Finn,The Adventures of Huckleberry Finn,Huckleberry Finn is a central character in The Adventures of Huckleberry Finn.,curated_literary_kg_v1
+The Adventures of Huckleberry Finn,central_character,Jim,The Adventures of Huckleberry Finn,Jim is a central character in The Adventures of Huckleberry Finn.,curated_literary_kg_v1
+The Adventures of Huckleberry Finn,theme,freedom,The Adventures of Huckleberry Finn,The Adventures of Huckleberry Finn is often discussed through the theme of freedom.,curated_literary_kg_v1
+The Adventures of Huckleberry Finn,theme,race,The Adventures of Huckleberry Finn,The Adventures of Huckleberry Finn is often discussed through the theme of race.,curated_literary_kg_v1
+The Adventures of Huckleberry Finn,theme,moral conscience,The Adventures of Huckleberry Finn,The Adventures of Huckleberry Finn is often discussed through the theme of moral conscience.,curated_literary_kg_v1
+The Great Gatsby,author,F. Scott Fitzgerald,The Great Gatsby,The Great Gatsby is attributed to F. Scott Fitzgerald.,curated_literary_kg_v1
+The Great Gatsby,publication_year,1925,The Great Gatsby,The Great Gatsby is conventionally dated to 1925.,curated_literary_kg_v1
+The Great Gatsby,alias,Great Gatsby,The Great Gatsby,Great Gatsby is an alternate reference for The Great Gatsby.,curated_literary_kg_v1
+The Great Gatsby,form,novel,The Great Gatsby,The Great Gatsby is a novel.,curated_literary_kg_v1
+The Great Gatsby,genre,modernist fiction,The Great Gatsby,The Great Gatsby is commonly described as modernist fiction.,curated_literary_kg_v1
+The Great Gatsby,central_character,Jay Gatsby,The Great Gatsby,Jay Gatsby is a central character in The Great Gatsby.,curated_literary_kg_v1
+The Great Gatsby,central_character,Nick Carraway,The Great Gatsby,Nick Carraway is a central character in The Great Gatsby.,curated_literary_kg_v1
+The Great Gatsby,central_character,Daisy Buchanan,The Great Gatsby,Daisy Buchanan is a central character in The Great Gatsby.,curated_literary_kg_v1
+The Great Gatsby,theme,wealth,The Great Gatsby,The Great Gatsby is often discussed through the theme of wealth.,curated_literary_kg_v1
+The Great Gatsby,theme,class,The Great Gatsby,The Great Gatsby is often discussed through the theme of class.,curated_literary_kg_v1
+The Great Gatsby,theme,American dream,The Great Gatsby,The Great Gatsby is often discussed through the theme of American dream.,curated_literary_kg_v1
+To the Lighthouse,author,Virginia Woolf,To the Lighthouse,To the Lighthouse is attributed to Virginia Woolf.,curated_literary_kg_v1
+To the Lighthouse,publication_year,1927,To the Lighthouse,To the Lighthouse is conventionally dated to 1927.,curated_literary_kg_v1
+To the Lighthouse,form,novel,To the Lighthouse,To the Lighthouse is a novel.,curated_literary_kg_v1
+To the Lighthouse,genre,modernist fiction,To the Lighthouse,To the Lighthouse is commonly described as modernist fiction.,curated_literary_kg_v1
+To the Lighthouse,central_character,Mrs Ramsay,To the Lighthouse,Mrs Ramsay is a central character in To the Lighthouse.,curated_literary_kg_v1
+To the Lighthouse,central_character,Mr Ramsay,To the Lighthouse,Mr Ramsay is a central character in To the Lighthouse.,curated_literary_kg_v1
+To the Lighthouse,central_character,Lily Briscoe,To the Lighthouse,Lily Briscoe is a central character in To the Lighthouse.,curated_literary_kg_v1
+To the Lighthouse,theme,time,To the Lighthouse,To the Lighthouse is often discussed through the theme of time.,curated_literary_kg_v1
+To the Lighthouse,theme,perception,To the Lighthouse,To the Lighthouse is often discussed through the theme of perception.,curated_literary_kg_v1
+To the Lighthouse,theme,family,To the Lighthouse,To the Lighthouse is often discussed through the theme of family.,curated_literary_kg_v1
+Mrs Dalloway,author,Virginia Woolf,Mrs Dalloway,Mrs Dalloway is attributed to Virginia Woolf.,curated_literary_kg_v1
+Mrs Dalloway,publication_year,1925,Mrs Dalloway,Mrs Dalloway is conventionally dated to 1925.,curated_literary_kg_v1
+Mrs Dalloway,form,novel,Mrs Dalloway,Mrs Dalloway is a novel.,curated_literary_kg_v1
+Mrs Dalloway,genre,modernist fiction,Mrs Dalloway,Mrs Dalloway is commonly described as modernist fiction.,curated_literary_kg_v1
+Mrs Dalloway,central_character,Clarissa Dalloway,Mrs Dalloway,Clarissa Dalloway is a central character in Mrs Dalloway.,curated_literary_kg_v1
+Mrs Dalloway,central_character,Septimus Warren Smith,Mrs Dalloway,Septimus Warren Smith is a central character in Mrs Dalloway.,curated_literary_kg_v1
+Mrs Dalloway,theme,consciousness,Mrs Dalloway,Mrs Dalloway is often discussed through the theme of consciousness.,curated_literary_kg_v1
+Mrs Dalloway,theme,memory,Mrs Dalloway,Mrs Dalloway is often discussed through the theme of memory.,curated_literary_kg_v1
+Mrs Dalloway,theme,war trauma,Mrs Dalloway,Mrs Dalloway is often discussed through the theme of war trauma.,curated_literary_kg_v1
+Heart of Darkness,author,Joseph Conrad,Heart of Darkness,Heart of Darkness is attributed to Joseph Conrad.,curated_literary_kg_v1
+Heart of Darkness,publication_year,1899,Heart of Darkness,Heart of Darkness is conventionally dated to 1899.,curated_literary_kg_v1
+Heart of Darkness,form,novella,Heart of Darkness,Heart of Darkness is a novella.,curated_literary_kg_v1
+Heart of Darkness,genre,modernist fiction,Heart of Darkness,Heart of Darkness is commonly described as modernist fiction.,curated_literary_kg_v1
+Heart of Darkness,central_character,Marlow,Heart of Darkness,Marlow is a central character in Heart of Darkness.,curated_literary_kg_v1
+Heart of Darkness,central_character,Kurtz,Heart of Darkness,Kurtz is a central character in Heart of Darkness.,curated_literary_kg_v1
+Heart of Darkness,theme,colonialism,Heart of Darkness,Heart of Darkness is often discussed through the theme of colonialism.,curated_literary_kg_v1
+Heart of Darkness,theme,violence,Heart of Darkness,Heart of Darkness is often discussed through the theme of violence.,curated_literary_kg_v1
+Heart of Darkness,theme,moral ambiguity,Heart of Darkness,Heart of Darkness is often discussed through the theme of moral ambiguity.,curated_literary_kg_v1
+The Turn of the Screw,author,Henry James,The Turn of the Screw,The Turn of the Screw is attributed to Henry James.,curated_literary_kg_v1
+The Turn of the Screw,publication_year,1898,The Turn of the Screw,The Turn of the Screw is conventionally dated to 1898.,curated_literary_kg_v1
+The Turn of the Screw,alias,Turn of the Screw,The Turn of the Screw,Turn of the Screw is an alternate reference for The Turn of the Screw.,curated_literary_kg_v1
+The Turn of the Screw,form,novella,The Turn of the Screw,The Turn of the Screw is a novella.,curated_literary_kg_v1
+The Turn of the Screw,genre,Gothic fiction,The Turn of the Screw,The Turn of the Screw is commonly described as Gothic fiction.,curated_literary_kg_v1
+The Turn of the Screw,central_character,the governess,The Turn of the Screw,the governess is a central character in The Turn of the Screw.,curated_literary_kg_v1
+The Turn of the Screw,central_character,Miles,The Turn of the Screw,Miles is a central character in The Turn of the Screw.,curated_literary_kg_v1
+The Turn of the Screw,central_character,Flora,The Turn of the Screw,Flora is a central character in The Turn of the Screw.,curated_literary_kg_v1
+The Turn of the Screw,theme,ambiguity,The Turn of the Screw,The Turn of the Screw is often discussed through the theme of ambiguity.,curated_literary_kg_v1
+The Turn of the Screw,theme,perception,The Turn of the Screw,The Turn of the Screw is often discussed through the theme of perception.,curated_literary_kg_v1
+The Turn of the Screw,theme,innocence,The Turn of the Screw,The Turn of the Screw is often discussed through the theme of innocence.,curated_literary_kg_v1
+The Awakening,author,Kate Chopin,The Awakening,The Awakening is attributed to Kate Chopin.,curated_literary_kg_v1
+The Awakening,publication_year,1899,The Awakening,The Awakening is conventionally dated to 1899.,curated_literary_kg_v1
+The Awakening,form,novel,The Awakening,The Awakening is a novel.,curated_literary_kg_v1
+The Awakening,genre,realist fiction,The Awakening,The Awakening is commonly described as realist fiction.,curated_literary_kg_v1
+The Awakening,central_character,Edna Pontellier,The Awakening,Edna Pontellier is a central character in The Awakening.,curated_literary_kg_v1
+The Awakening,central_character,Leonce Pontellier,The Awakening,Leonce Pontellier is a central character in The Awakening.,curated_literary_kg_v1
+The Awakening,central_character,Robert Lebrun,The Awakening,Robert Lebrun is a central character in The Awakening.,curated_literary_kg_v1
+The Awakening,theme,independence,The Awakening,The Awakening is often discussed through the theme of independence.,curated_literary_kg_v1
+The Awakening,theme,gender,The Awakening,The Awakening is often discussed through the theme of gender.,curated_literary_kg_v1
+The Awakening,theme,desire,The Awakening,The Awakening is often discussed through the theme of desire.,curated_literary_kg_v1
+The Yellow Wallpaper,author,Charlotte Perkins Gilman,The Yellow Wallpaper,The Yellow Wallpaper is attributed to Charlotte Perkins Gilman.,curated_literary_kg_v1
+The Yellow Wallpaper,publication_year,1892,The Yellow Wallpaper,The Yellow Wallpaper is conventionally dated to 1892.,curated_literary_kg_v1
+The Yellow Wallpaper,alias,Yellow Wallpaper,The Yellow Wallpaper,Yellow Wallpaper is an alternate reference for The Yellow Wallpaper.,curated_literary_kg_v1
+The Yellow Wallpaper,form,short story,The Yellow Wallpaper,The Yellow Wallpaper is a short story.,curated_literary_kg_v1
+The Yellow Wallpaper,genre,Gothic fiction,The Yellow Wallpaper,The Yellow Wallpaper is commonly described as Gothic fiction.,curated_literary_kg_v1
+The Yellow Wallpaper,central_character,the narrator,The Yellow Wallpaper,the narrator is a central character in The Yellow Wallpaper.,curated_literary_kg_v1
+The Yellow Wallpaper,central_character,John,The Yellow Wallpaper,John is a central character in The Yellow Wallpaper.,curated_literary_kg_v1
+The Yellow Wallpaper,theme,mental health,The Yellow Wallpaper,The Yellow Wallpaper is often discussed through the theme of mental health.,curated_literary_kg_v1
+The Yellow Wallpaper,theme,gender,The Yellow Wallpaper,The Yellow Wallpaper is often discussed through the theme of gender.,curated_literary_kg_v1
+The Yellow Wallpaper,theme,confinement,The Yellow Wallpaper,The Yellow Wallpaper is often discussed through the theme of confinement.,curated_literary_kg_v1
+Middlemarch,author,George Eliot,Middlemarch,Middlemarch is attributed to George Eliot.,curated_literary_kg_v1
+Middlemarch,publication_year,1871,Middlemarch,Middlemarch is conventionally dated to 1871.,curated_literary_kg_v1
+Middlemarch,form,novel,Middlemarch,Middlemarch is a novel.,curated_literary_kg_v1
+Middlemarch,genre,realist fiction,Middlemarch,Middlemarch is commonly described as realist fiction.,curated_literary_kg_v1
+Middlemarch,central_character,Dorothea Brooke,Middlemarch,Dorothea Brooke is a central character in Middlemarch.,curated_literary_kg_v1
+Middlemarch,central_character,Tertius Lydgate,Middlemarch,Tertius Lydgate is a central character in Middlemarch.,curated_literary_kg_v1
+Middlemarch,central_character,Will Ladislaw,Middlemarch,Will Ladislaw is a central character in Middlemarch.,curated_literary_kg_v1
+Middlemarch,theme,marriage,Middlemarch,Middlemarch is often discussed through the theme of marriage.,curated_literary_kg_v1
+Middlemarch,theme,reform,Middlemarch,Middlemarch is often discussed through the theme of reform.,curated_literary_kg_v1
+Middlemarch,theme,provincial life,Middlemarch,Middlemarch is often discussed through the theme of provincial life.,curated_literary_kg_v1
+Tess of the d'Urbervilles,author,Thomas Hardy,Tess of the d'Urbervilles,Tess of the d'Urbervilles is attributed to Thomas Hardy.,curated_literary_kg_v1
+Tess of the d'Urbervilles,publication_year,1891,Tess of the d'Urbervilles,Tess of the d'Urbervilles is conventionally dated to 1891.,curated_literary_kg_v1
+Tess of the d'Urbervilles,alias,Tess of the dUrbervilles,Tess of the d'Urbervilles,Tess of the dUrbervilles is an alternate reference for Tess of the d'Urbervilles.,curated_literary_kg_v1
+Tess of the d'Urbervilles,form,novel,Tess of the d'Urbervilles,Tess of the d'Urbervilles is a novel.,curated_literary_kg_v1
+Tess of the d'Urbervilles,genre,tragedy,Tess of the d'Urbervilles,Tess of the d'Urbervilles is commonly described as tragedy.,curated_literary_kg_v1
+Tess of the d'Urbervilles,genre,realist fiction,Tess of the d'Urbervilles,Tess of the d'Urbervilles is commonly described as realist fiction.,curated_literary_kg_v1
+Tess of the d'Urbervilles,central_character,Tess Durbeyfield,Tess of the d'Urbervilles,Tess Durbeyfield is a central character in Tess of the d'Urbervilles.,curated_literary_kg_v1
+Tess of the d'Urbervilles,central_character,Alec d'Urberville,Tess of the d'Urbervilles,Alec d'Urberville is a central character in Tess of the d'Urbervilles.,curated_literary_kg_v1
+Tess of the d'Urbervilles,central_character,Angel Clare,Tess of the d'Urbervilles,Angel Clare is a central character in Tess of the d'Urbervilles.,curated_literary_kg_v1
+Tess of the d'Urbervilles,theme,fate,Tess of the d'Urbervilles,Tess of the d'Urbervilles is often discussed through the theme of fate.,curated_literary_kg_v1
+Tess of the d'Urbervilles,theme,social judgment,Tess of the d'Urbervilles,Tess of the d'Urbervilles is often discussed through the theme of social judgment.,curated_literary_kg_v1
+Tess of the d'Urbervilles,theme,sexual double standards,Tess of the d'Urbervilles,Tess of the d'Urbervilles is often discussed through the theme of sexual double standards.,curated_literary_kg_v1
+The Mayor of Casterbridge,author,Thomas Hardy,The Mayor of Casterbridge,The Mayor of Casterbridge is attributed to Thomas Hardy.,curated_literary_kg_v1
+The Mayor of Casterbridge,publication_year,1886,The Mayor of Casterbridge,The Mayor of Casterbridge is conventionally dated to 1886.,curated_literary_kg_v1
+The Mayor of Casterbridge,alias,Mayor of Casterbridge,The Mayor of Casterbridge,Mayor of Casterbridge is an alternate reference for The Mayor of Casterbridge.,curated_literary_kg_v1
+The Mayor of Casterbridge,form,novel,The Mayor of Casterbridge,The Mayor of Casterbridge is a novel.,curated_literary_kg_v1
+The Mayor of Casterbridge,genre,realist fiction,The Mayor of Casterbridge,The Mayor of Casterbridge is commonly described as realist fiction.,curated_literary_kg_v1
+The Mayor of Casterbridge,central_character,Michael Henchard,The Mayor of Casterbridge,Michael Henchard is a central character in The Mayor of Casterbridge.,curated_literary_kg_v1
+The Mayor of Casterbridge,central_character,Elizabeth-Jane Newson,The Mayor of Casterbridge,Elizabeth-Jane Newson is a central character in The Mayor of Casterbridge.,curated_literary_kg_v1
+The Mayor of Casterbridge,central_character,Donald Farfrae,The Mayor of Casterbridge,Donald Farfrae is a central character in The Mayor of Casterbridge.,curated_literary_kg_v1
+The Mayor of Casterbridge,theme,character,The Mayor of Casterbridge,The Mayor of Casterbridge is often discussed through the theme of character.,curated_literary_kg_v1
+The Mayor of Casterbridge,theme,fate,The Mayor of Casterbridge,The Mayor of Casterbridge is often discussed through the theme of fate.,curated_literary_kg_v1
+The Mayor of Casterbridge,theme,social reputation,The Mayor of Casterbridge,The Mayor of Casterbridge is often discussed through the theme of social reputation.,curated_literary_kg_v1
+The Importance of Being Earnest,author,Oscar Wilde,The Importance of Being Earnest,The Importance of Being Earnest is attributed to Oscar Wilde.,curated_literary_kg_v1
+The Importance of Being Earnest,publication_year,1895,The Importance of Being Earnest,The Importance of Being Earnest is conventionally dated to 1895.,curated_literary_kg_v1
+The Importance of Being Earnest,alias,Importance of Being Earnest,The Importance of Being Earnest,Importance of Being Earnest is an alternate reference for The Importance of Being Earnest.,curated_literary_kg_v1
+The Importance of Being Earnest,form,play,The Importance of Being Earnest,The Importance of Being Earnest is a play.,curated_literary_kg_v1
+The Importance of Being Earnest,genre,comedy,The Importance of Being Earnest,The Importance of Being Earnest is commonly described as comedy.,curated_literary_kg_v1
+The Importance of Being Earnest,genre,farce,The Importance of Being Earnest,The Importance of Being Earnest is commonly described as farce.,curated_literary_kg_v1
+The Importance of Being Earnest,central_character,Jack Worthing,The Importance of Being Earnest,Jack Worthing is a central character in The Importance of Being Earnest.,curated_literary_kg_v1
+The Importance of Being Earnest,central_character,Algernon Moncrieff,The Importance of Being Earnest,Algernon Moncrieff is a central character in The Importance of Being Earnest.,curated_literary_kg_v1
+The Importance of Being Earnest,central_character,Gwendolen Fairfax,The Importance of Being Earnest,Gwendolen Fairfax is a central character in The Importance of Being Earnest.,curated_literary_kg_v1
+The Importance of Being Earnest,central_character,Cecily Cardew,The Importance of Being Earnest,Cecily Cardew is a central character in The Importance of Being Earnest.,curated_literary_kg_v1
+The Importance of Being Earnest,theme,identity,The Importance of Being Earnest,The Importance of Being Earnest is often discussed through the theme of identity.,curated_literary_kg_v1
+The Importance of Being Earnest,theme,marriage,The Importance of Being Earnest,The Importance of Being Earnest is often discussed through the theme of marriage.,curated_literary_kg_v1
+The Importance of Being Earnest,theme,social performance,The Importance of Being Earnest,The Importance of Being Earnest is often discussed through the theme of social performance.,curated_literary_kg_v1
+A Doll's House,author,Henrik Ibsen,A Doll's House,A Doll's House is attributed to Henrik Ibsen.,curated_literary_kg_v1
+A Doll's House,publication_year,1879,A Doll's House,A Doll's House is conventionally dated to 1879.,curated_literary_kg_v1
+A Doll's House,alias,Doll's House,A Doll's House,Doll's House is an alternate reference for A Doll's House.,curated_literary_kg_v1
+A Doll's House,form,play,A Doll's House,A Doll's House is a play.,curated_literary_kg_v1
+A Doll's House,genre,realist drama,A Doll's House,A Doll's House is commonly described as realist drama.,curated_literary_kg_v1
+A Doll's House,central_character,Nora Helmer,A Doll's House,Nora Helmer is a central character in A Doll's House.,curated_literary_kg_v1
+A Doll's House,central_character,Torvald Helmer,A Doll's House,Torvald Helmer is a central character in A Doll's House.,curated_literary_kg_v1
+A Doll's House,central_character,Krogstad,A Doll's House,Krogstad is a central character in A Doll's House.,curated_literary_kg_v1
+A Doll's House,central_character,Mrs Linde,A Doll's House,Mrs Linde is a central character in A Doll's House.,curated_literary_kg_v1
+A Doll's House,theme,marriage,A Doll's House,A Doll's House is often discussed through the theme of marriage.,curated_literary_kg_v1
+A Doll's House,theme,gender,A Doll's House,A Doll's House is often discussed through the theme of gender.,curated_literary_kg_v1
+A Doll's House,theme,selfhood,A Doll's House,A Doll's House is often discussed through the theme of selfhood.,curated_literary_kg_v1
+The Odyssey,author,Homer,The Odyssey,The Odyssey is attributed to Homer.,curated_literary_kg_v1
+The Odyssey,publication_year,8th century BCE,The Odyssey,The Odyssey is conventionally dated to 8th century BCE.,curated_literary_kg_v1
+The Odyssey,alias,Odyssey,The Odyssey,Odyssey is an alternate reference for The Odyssey.,curated_literary_kg_v1
+The Odyssey,form,epic poem,The Odyssey,The Odyssey is a epic poem.,curated_literary_kg_v1
+The Odyssey,genre,epic poetry,The Odyssey,The Odyssey is commonly described as epic poetry.,curated_literary_kg_v1
+The Odyssey,central_character,Odysseus,The Odyssey,Odysseus is a central character in The Odyssey.,curated_literary_kg_v1
+The Odyssey,central_character,Penelope,The Odyssey,Penelope is a central character in The Odyssey.,curated_literary_kg_v1
+The Odyssey,central_character,Telemachus,The Odyssey,Telemachus is a central character in The Odyssey.,curated_literary_kg_v1
+The Odyssey,theme,homecoming,The Odyssey,The Odyssey is often discussed through the theme of homecoming.,curated_literary_kg_v1
+The Odyssey,theme,identity,The Odyssey,The Odyssey is often discussed through the theme of identity.,curated_literary_kg_v1
+The Odyssey,theme,hospitality,The Odyssey,The Odyssey is often discussed through the theme of hospitality.,curated_literary_kg_v1

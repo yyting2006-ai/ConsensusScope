@@ -492,7 +492,7 @@ def page_home(samples_df: pd.DataFrame, outputs_df: pd.DataFrame, metrics_df: pd
             st.bar_chart(pd.Series(labels).value_counts())
 
 
-def render_literary_feedback_mode() -> None:
+def render_literary_feedback_mode(api_mode: str, selected: List[str], user_inputs: Dict[str, Dict[str, str]]) -> None:
     kg = load_literary_kg(str(DATA_PATHS["literary_kg"]))
     st.markdown('<div class="section-title">ESL Comparative Literature Essay Feedback</div>', unsafe_allow_html=True)
     st.caption(
@@ -544,6 +544,9 @@ def render_literary_feedback_mode() -> None:
         c3, c4 = st.columns(2)
         c3.metric("High risk", summary["high_risk"])
         c4.metric("KG-supported", summary["kg_supported"])
+        c5, c6 = st.columns(2)
+        c5.metric("KG works", int(kg["work"].nunique()) if not kg.empty and "work" in kg else 0)
+        c6.metric("KG triples", len(kg))
         if result:
             st.download_button(
                 "Download feedback report.md",
@@ -635,7 +638,7 @@ def page_live(api_mode: str, selected: List[str], user_inputs: Dict[str, Dict[st
         label_visibility="collapsed",
     )
     if mode == "ESL literary essay feedback":
-        render_literary_feedback_mode()
+        render_literary_feedback_mode(api_mode, selected, user_inputs)
         return
 
     left, right = st.columns([0.95, 1.05], gap="large")

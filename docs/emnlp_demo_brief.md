@@ -25,14 +25,21 @@ ConsensusScope is a knowledge-grounded adjudication demo for ESL comparative lit
 - The teacher view shows the original essay next to an auto-accepted preview.
 - The review queue prioritizes meaning-changing and KG-supported suggestions.
 - Knowledge evidence and raw reviewer suggestions remain inspectable in separate tabs.
-- Live reviewer integration has been smoke-tested with DeepSeek, Qwen, GLM, and
-  Kimi on one benchmark essay; records are stored without API keys.
+- The curated literary KG currently contains 319 triples over 30 commonly taught
+  works.
+- The deterministic no-API benchmark covers 30 ESL comparative-literature essay
+  snippets and produces 59 adjudicated feedback decisions.
+- Live reviewer integration has been validated on the first 10 benchmark cases
+  with DeepSeek, Qwen, GLM and Kimi: 40 provider calls, no request errors, no
+  parse errors, 43 live feedback decisions.
 
 ## Required pages for the submission video
 
-- Single Sample Analysis: concrete failure case where the majority is wrong.
-- Overview Statistics: aggregate risk distribution and method comparison.
-- Publication Readiness: EMNLP checklist, demo script, target venues.
+- Page 1: Home / System Overview.
+- Page 2: Live Question Mode, using the ESL literary-feedback path first.
+- Page 3: Sample Audit Mode.
+- Page 5: Risk Dashboard.
+- Page 8: Report Export.
 
 ## Evaluation already available
 
@@ -43,12 +50,13 @@ Current local files include:
 - `data/results/risk_level_effectiveness.csv`: risk-level error rates.
 - `reports/experiment_report.md`: generated experiment report.
 - `reports/figures/`: visual figures for the paper.
+- `data/results/literary_feedback_routing_metrics.csv`: ESL feedback routing
+  metrics over 30 curated benchmark cases.
+- `data/results/literary_feedback_records.json`: raw feedback, KG evidence and
+  adjudicated decisions for the ESL benchmark.
 
 ## Submission gaps
 
-- Add English README and installation instructions.
 - Add screenshots to the paper.
-- Add permissive license.
-- Prepare a no-API sample package.
 - Record a video under 2.5 minutes.
-- Add a short ethics and limitations section.
+- Add human teacher evaluation or annotation agreement before submission.

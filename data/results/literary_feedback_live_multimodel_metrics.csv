@@ -1,2 +1,11 @@
 id,focus,reviewer_source,total_suggestions,auto_accept,teacher_review,auto_share,review_share,high_risk,kg_supported
-lit_esl_001,grammar_and_literary_fact,live_api,11,5,6,0.455,0.545,0,8
+lit_esl_001,grammar_and_literary_fact,live_api,10,4,6,0.4,0.6,1,8
+lit_esl_002,character_fact_and_argument,live_api,4,0,4,0.0,1.0,2,4
+lit_esl_003,academic_style,live_api,5,2,3,0.4,0.6,0,5
+lit_esl_004,argument_risk,live_api,3,0,3,0.0,1.0,2,3
+lit_esl_005,grammar,live_api,3,2,1,0.667,0.333,0,3
+lit_esl_006,literary_fact,live_api,2,0,2,0.0,1.0,2,2
+lit_esl_007,genre_fact,live_api,3,0,3,0.0,1.0,1,3
+lit_esl_008,character_fact,live_api,4,0,4,0.0,1.0,2,4
+lit_esl_009,literary_fact_argument,live_api,4,0,4,0.0,1.0,1,4
+lit_esl_010,literary_fact_argument,live_api,5,0,5,0.0,1.0,3,5

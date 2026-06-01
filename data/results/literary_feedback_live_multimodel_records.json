@@ -8,8 +8,8 @@
         "relation": "author",
         "value": "Mary Shelley",
         "work": "Frankenstein",
-        "evidence": "Frankenstein; or, The Modern Prometheus is attributed to Mary Shelley.",
-        "source": "curated_demo_kg",
+        "evidence": "Frankenstein is attributed to Mary Shelley.",
+        "source": "curated_literary_kg_v1",
         "match": "Frankenstein",
         "match_score": "1.0"
       },
@@ -18,18 +18,38 @@
         "relation": "publication_year",
         "value": "1818",
         "work": "Frankenstein",
-        "evidence": "Frankenstein was first published in 1818.",
-        "source": "curated_demo_kg",
+        "evidence": "Frankenstein is conventionally dated to 1818.",
+        "source": "curated_literary_kg_v1",
+        "match": "Frankenstein",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Frankenstein",
+        "relation": "form",
+        "value": "novel",
+        "work": "Frankenstein",
+        "evidence": "Frankenstein is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "Frankenstein",
+        "match_score": "1.0"
+      },
+      {
+        "entity": "Frankenstein",
+        "relation": "genre",
+        "value": "Gothic fiction",
+        "work": "Frankenstein",
+        "evidence": "Frankenstein is commonly described as Gothic fiction.",
+        "source": "curated_literary_kg_v1",
         "match": "Frankenstein",
         "match_score": "0.85"
       },
       {
         "entity": "Frankenstein",
         "relation": "genre",
-        "value": "Gothic novel",
+        "value": "science fiction",
         "work": "Frankenstein",
-        "evidence": "Frankenstein is commonly discussed as a Gothic novel.",
-        "source": "curated_demo_kg",
+        "evidence": "Frankenstein is commonly described as science fiction.",
+        "source": "curated_literary_kg_v1",
         "match": "Frankenstein",
         "match_score": "0.85"
       },
@@ -38,8 +58,8 @@
         "relation": "central_character",
         "value": "Victor Frankenstein",
         "work": "Frankenstein",
-        "evidence": "Victor Frankenstein is the scientist who creates the creature.",
-        "source": "curated_demo_kg",
+        "evidence": "Victor Frankenstein is a central character in Frankenstein.",
+        "source": "curated_literary_kg_v1",
         "match": "Frankenstein",
         "match_score": "0.85"
       },
@@ -48,8 +68,18 @@
         "relation": "central_character",
         "value": "the creature",
         "work": "Frankenstein",
-        "evidence": "The created being is often called the creature or monster, not Victor Frankenstein.",
-        "source": "curated_demo_kg",
+        "evidence": "the creature is a central character in Frankenstein.",
+        "source": "curated_literary_kg_v1",
+        "match": "Frankenstein",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Frankenstein",
+        "relation": "theme",
+        "value": "ambition",
+        "work": "Frankenstein",
+        "evidence": "Frankenstein is often discussed through the theme of ambition.",
+        "source": "curated_literary_kg_v1",
         "match": "Frankenstein",
         "match_score": "0.85"
       },
@@ -58,8 +88,8 @@
         "relation": "author",
         "value": "Charlotte Bronte",
         "work": "Jane Eyre",
-        "evidence": "Jane Eyre is a novel by Charlotte Bronte.",
-        "source": "curated_demo_kg",
+        "evidence": "Jane Eyre is attributed to Charlotte Bronte.",
+        "source": "curated_literary_kg_v1",
         "match": "Jane Eyre",
         "match_score": "0.85"
       },
@@ -68,8 +98,18 @@
         "relation": "publication_year",
         "value": "1847",
         "work": "Jane Eyre",
-        "evidence": "Jane Eyre was first published in 1847.",
-        "source": "curated_demo_kg",
+        "evidence": "Jane Eyre is conventionally dated to 1847.",
+        "source": "curated_literary_kg_v1",
+        "match": "Jane Eyre",
+        "match_score": "1.0"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "form",
+        "value": "novel",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre is a novel.",
+        "source": "curated_literary_kg_v1",
         "match": "Jane Eyre",
         "match_score": "1.0"
       },
@@ -78,8 +118,28 @@
         "relation": "genre",
         "value": "Bildungsroman",
         "work": "Jane Eyre",
-        "evidence": "Jane Eyre is frequently read as a Bildungsroman with Gothic elements.",
-        "source": "curated_demo_kg",
+        "evidence": "Jane Eyre is commonly described as Bildungsroman.",
+        "source": "curated_literary_kg_v1",
+        "match": "Jane Eyre",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "genre",
+        "value": "Gothic fiction",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre is commonly described as Gothic fiction.",
+        "source": "curated_literary_kg_v1",
+        "match": "Jane Eyre",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "central_character",
+        "value": "Edward Rochester",
+        "work": "Jane Eyre",
+        "evidence": "Edward Rochester is a central character in Jane Eyre.",
+        "source": "curated_literary_kg_v1",
         "match": "Jane Eyre",
         "match_score": "0.85"
       },
@@ -88,30 +148,20 @@
         "relation": "central_character",
         "value": "Jane Eyre",
         "work": "Jane Eyre",
-        "evidence": "Jane Eyre is the protagonist and narrator of the novel.",
-        "source": "curated_demo_kg",
+        "evidence": "Jane Eyre is a central character in Jane Eyre.",
+        "source": "curated_literary_kg_v1",
         "match": "Jane Eyre",
         "match_score": "1.0"
       },
       {
-        "entity": "Pride and Prejudice",
-        "relation": "author",
-        "value": "Jane Austen",
-        "work": "Pride and Prejudice",
-        "evidence": "Pride and Prejudice is a novel by Jane Austen.",
-        "source": "curated_demo_kg",
-        "match": "Jane Austen",
-        "match_score": "0.7"
-      },
-      {
-        "entity": "Wuthering Heights",
-        "relation": "publication_year",
-        "value": "1847",
-        "work": "Wuthering Heights",
-        "evidence": "Wuthering Heights was first published in 1847.",
-        "source": "curated_demo_kg",
-        "match": "1847",
-        "match_score": "0.7"
+        "entity": "Jane Eyre",
+        "relation": "theme",
+        "value": "gender",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre is often discussed through the theme of gender.",
+        "source": "curated_literary_kg_v1",
+        "match": "Jane Eyre",
+        "match_score": "0.85"
       }
     ],
     "feedback": [
@@ -119,54 +169,54 @@
         "reviewer": "deepseek_grammar",
         "span": "Mary Shelley write Frankenstein in 1847",
         "issue_type": "grammar",
-        "suggestion": "Change 'write' to 'wrote' to match past tense.",
+        "suggestion": "Change 'write' to 'wrote' for past tense consistency.",
         "rationale": "The sentence describes a past event, so the verb should be in past tense.",
         "confidence": 0.95,
         "knowledge_evidence": [
-          "Frankenstein was first published in 1818, not 1847."
+          "Frankenstein is conventionally dated to 1818, not 1847, but the grammar issue is separate."
         ],
         "meaning_change_risk": "low"
       },
       {
         "reviewer": "deepseek_grammar",
-        "span": "Mary Shelley write Frankenstein in 1847",
-        "issue_type": "literary_fact",
-        "suggestion": "Change '1847' to '1818'.",
-        "rationale": "Frankenstein was published in 1818, not 1847.",
-        "confidence": 0.99,
-        "knowledge_evidence": [
-          "Frankenstein | publication_year | 1818"
-        ],
-        "meaning_change_risk": "medium"
+        "span": "Both novels shows",
+        "issue_type": "grammar",
+        "suggestion": "Change 'shows' to 'show' to agree with the plural subject 'Both novels'.",
+        "rationale": "The subject 'Both novels' is plural, so the verb should be plural.",
+        "confidence": 0.98,
+        "knowledge_evidence": [],
+        "meaning_change_risk": "low"
       },
       {
         "reviewer": "deepseek_grammar",
         "span": "Jane Austen wrote Jane Eyre",
         "issue_type": "literary_fact",
-        "suggestion": "Change 'Jane Austen' to 'Charlotte Brontë'.",
-        "rationale": "Jane Eyre was written by Charlotte Brontë, not Jane Austen.",
+        "suggestion": "Change 'Jane Austen' to 'Charlotte Bronte' as the author of Jane Eyre.",
+        "rationale": "Jane Eyre was written by Charlotte Bronte, not Jane Austen.",
         "confidence": 0.99,
         "knowledge_evidence": [
-          "Jane Eyre | author | Charlotte Bronte"
+          "Jane Eyre is attributed to Charlotte Bronte."
         ],
         "meaning_change_risk": "high"
       },
       {
         "reviewer": "deepseek_grammar",
-        "span": "Both novels shows how women are trapped by society",
-        "issue_type": "grammar",
-        "suggestion": "Change 'shows' to 'show' to agree with the plural subject 'Both novels'.",
-        "rationale": "The subject is plural, so the verb should be in base form without -s.",
-        "confidence": 0.95,
-        "knowledge_evidence": [],
-        "meaning_change_risk": "low"
+        "span": "Mary Shelley write Frankenstein in 1847",
+        "issue_type": "literary_fact",
+        "suggestion": "Change '1847' to '1818' for the correct publication year of Frankenstein.",
+        "rationale": "Frankenstein was published in 1818, not 1847.",
+        "confidence": 0.99,
+        "knowledge_evidence": [
+          "Frankenstein is conventionally dated to 1818."
+        ],
+        "meaning_change_risk": "medium"
       },
       {
         "reviewer": "kimi_grammar",
         "span": "Mary Shelley write",
         "issue_type": "grammar",
         "suggestion": "Mary Shelley wrote",
-        "rationale": "The verb 'write' should be in the past tense to match the time frame of the publication year.",
+        "rationale": "The past tense of 'write' is 'wrote', which is necessary to match the past context of the sentence.",
         "confidence": 1.0,
         "knowledge_evidence": [
           "Frankenstein | publication_year | 1818"
@@ -178,7 +228,7 @@
         "span": "in 1847",
         "issue_type": "literary_fact",
         "suggestion": "in 1818",
-        "rationale": "The novel Frankenstein was first published in 1818, not 1847.",
+        "rationale": "The correct publication year for 'Frankenstein' is 1818, not 1847.",
         "confidence": 1.0,
         "knowledge_evidence": [
           "Frankenstein | publication_year | 1818"
@@ -190,7 +240,7 @@
         "span": "and Jane Austen wrote Jane Eyre",
         "issue_type": "literary_fact",
         "suggestion": "and Charlotte Bronte wrote Jane Eyre",
-        "rationale": "Jane Eyre was written by Charlotte Bronte, not Jane Austen.",
+        "rationale": "The author of 'Jane Eyre' is Charlotte Bronte, not Jane Austen.",
         "confidence": 1.0,
         "knowledge_evidence": [
           "Jane Eyre | author | Charlotte Bronte"
@@ -202,27 +252,17 @@
         "span": "Both novels shows",
         "issue_type": "grammar",
         "suggestion": "Both novels show",
-        "rationale": "The verb 'shows' should agree in number with the plural subject 'novels'.",
+        "rationale": "The verb 'shows' should agree with the plural subject 'novels', so it should be 'show'.",
         "confidence": 1.0,
         "knowledge_evidence": [],
         "meaning_change_risk": "low"
-      },
-      {
-        "reviewer": "kimi_grammar",
-        "span": "how women are trapped by society",
-        "issue_type": "argument",
-        "suggestion": "how the female characters are constrained by societal norms",
-        "rationale": "The phrase 'trapped by society' is vague; specifying 'constrained by societal norms' provides a clearer connection to the themes of the novels.",
-        "confidence": 0.8,
-        "knowledge_evidence": [],
-        "meaning_change_risk": "medium"
       },
       {
         "reviewer": "qwen_literary_fact",
         "span": "Mary Shelley write Frankenstein in 1847",
         "issue_type": "literary_fact",
         "suggestion": "Mary Shelley wrote Frankenstein in 1818",
-        "rationale": "Frankenstein was first published in 1818, not 1847. The year 1847 is incorrectly attributed to Frankenstein but correctly belongs to Jane Eyre's publication.",
+        "rationale": "Frankenstein was first published in 1818, not 1847; the year 1847 corresponds to the publication of Jane Eyre, not Frankenstein.",
         "confidence": 1.0,
         "knowledge_evidence": [
           "Frankenstein | publication_year | 1818",
@@ -235,45 +275,37 @@
         "span": "Jane Austen wrote Jane Eyre",
         "issue_type": "literary_fact",
         "suggestion": "Charlotte Brontë wrote Jane Eyre",
-        "rationale": "Jane Eyre was authored by Charlotte Brontë, not Jane Austen. Austen wrote novels such as Pride and Prejudice, but she died in 1817—decades before Jane Eyre’s 1847 publication.",
+        "rationale": "Jane Eyre was authored by Charlotte Brontë, not Jane Austen; Austen died in 1817, over thirty years before Jane Eyre’s 1847 publication.",
         "confidence": 1.0,
         "knowledge_evidence": [
-          "Jane Eyre | author | Charlotte Bronte",
-          "Pride and Prejudice | author | Jane Austen"
+          "Jane Eyre | author | Charlotte Bronte"
         ],
         "meaning_change_risk": "high"
       },
       {
         "reviewer": "qwen_literary_fact",
         "span": "Both novels shows how women are trapped by society",
-        "issue_type": "grammar",
-        "suggestion": "Both novels show how women are trapped by society",
-        "rationale": "Subject-verb agreement error: 'novels' (plural) requires the plural verb form 'show', not 'shows'.",
-        "confidence": 1.0,
-        "knowledge_evidence": [],
-        "meaning_change_risk": "low"
+        "issue_type": "literary_fact",
+        "suggestion": "Both novels engage with gender and social constraint, but in distinct ways: Jane Eyre foregrounds a woman’s struggle for autonomy within patriarchal institutions, while Frankenstein centers male ambition and its consequences, with female characters largely marginalized or silenced.",
+        "rationale": "Attributing the same thematic focus—'women trapped by society'—to both novels oversimplifies their divergent gendered structures: Jane Eyre is a Bildungsroman centered on a female protagonist’s development, whereas Frankenstein features minimal agency for its female characters and prioritizes themes like ambition and responsibility.",
+        "confidence": 0.95,
+        "knowledge_evidence": [
+          "Jane Eyre | genre | Bildungsroman",
+          "Frankenstein | theme | ambition",
+          "Frankenstein | central_character | Victor Frankenstein",
+          "Frankenstein | central_character | the creature"
+        ],
+        "meaning_change_risk": "high"
       },
       {
         "reviewer": "glm_argument",
         "span": "Mary Shelley write Frankenstein in 1847",
-        "issue_type": "grammar",
-        "suggestion": "Mary Shelley wrote Frankenstein in 1847",
-        "rationale": "The past tense 'write' should be corrected to 'wrote' for grammatical accuracy.",
-        "confidence": 1.0,
-        "knowledge_evidence": [
-          "Retrieved literary knowledge - Frankenstein | author | Mary Shelley: Frankenstein; or, The Modern Prometheus is attributed to Mary Shelley."
-        ],
-        "meaning_change_risk": "low"
-      },
-      {
-        "reviewer": "glm_argument",
-        "span": "and Jane Austen wrote Jane Eyre.",
         "issue_type": "literary_fact",
-        "suggestion": "and Jane Austen wrote Pride and Prejudice.",
-        "rationale": "Jane Eyre was written by Charlotte Bronte, not Jane Austen. The correct novel by Jane Austen is Pride and Prejudice.",
+        "suggestion": "Mary Shelley wrote Frankenstein in 1818",
+        "rationale": "The correct publication year of Frankenstein is 1818, not 1847.",
         "confidence": 1.0,
         "knowledge_evidence": [
-          "Retrieved literary knowledge - Jane Eyre | author | Charlotte Bronte: Jane Eyre is a novel by Charlotte Bronte."
+          "Frankenstein | publication_year | 1818"
         ],
         "meaning_change_risk": "medium"
       },
@@ -282,22 +314,42 @@
         "span": "Both novels shows how women are trapped by society.",
         "issue_type": "word_choice",
         "suggestion": "Both novels demonstrate how women are trapped by society.",
-        "rationale": "The word 'shows' is informal and should be replaced with 'demonstrate' for a more formal academic style.",
+        "rationale": "The word 'shows' is more formal and appropriate for academic writing.",
         "confidence": 1.0,
-        "knowledge_evidence": [
-          "Retrieved literary knowledge - Frankenstein | genre | Gothic novel: Frankenstein is commonly discussed as a Gothic novel."
-        ],
+        "knowledge_evidence": [],
         "meaning_change_risk": "low"
       },
       {
         "reviewer": "glm_argument",
-        "span": "Both novels shows how women are trapped by society.",
-        "issue_type": "argument",
-        "suggestion": "Both novels explore the themes of women's societal constraints, though through different lenses. Frankenstein focuses on the consequences of scientific ambition, while Jane Eyre delves into the struggles of a young woman's independence and social class.",
-        "rationale": "The argument needs to be more nuanced to reflect the distinct themes and contexts of each novel.",
-        "confidence": 0.8,
+        "span": "Mary Shelley wrote Frankenstein in 1847",
+        "issue_type": "literary_fact",
+        "suggestion": "Mary Shelley wrote Frankenstein in 1818",
+        "rationale": "The correct publication year of Frankenstein is 1818, not 1847.",
+        "confidence": 1.0,
         "knowledge_evidence": [
-          "Retrieved literary knowledge - Frankenstein | central_character | the creature: The created being is often called the creature or monster, not Victor Frankenstein."
+          "Frankenstein | publication_year | 1818"
+        ],
+        "meaning_change_risk": "medium"
+      },
+      {
+        "reviewer": "glm_argument",
+        "span": "Both novels shows how women are trapped by society.",
+        "issue_type": "word_choice",
+        "suggestion": "Both novels demonstrate how women are trapped by society.",
+        "rationale": "The word 'shows' is more formal and appropriate for academic writing.",
+        "confidence": 1.0,
+        "knowledge_evidence": [],
+        "meaning_change_risk": "low"
+      },
+      {
+        "reviewer": "glm_argument",
+        "span": "Jane Austen wrote Jane Eyre",
+        "issue_type": "literary_fact",
+        "suggestion": "Charlotte Bronte wrote Jane Eyre",
+        "rationale": "Jane Eyre was written by Charlotte Bronte, not Jane Austen.",
+        "confidence": 1.0,
+        "knowledge_evidence": [
+          "Jane Eyre | author | Charlotte Bronte"
         ],
         "meaning_change_risk": "medium"
       }
@@ -306,31 +358,61 @@
       {
         "span": "Jane Austen wrote Jane Eyre",
         "issue_type": "literary_fact",
-        "selected_suggestion": "Change 'Jane Austen' to 'Charlotte Brontë'.",
+        "selected_suggestion": "Change 'Jane Austen' to 'Charlotte Bronte' as the author of Jane Eyre.",
+        "decision": "teacher_review",
+        "risk_level": "high",
+        "teacher_action": "Review meaning change",
+        "priority": 1,
+        "agreement": 0.333,
+        "avg_confidence": 0.997,
+        "kg_supported": true,
+        "evidence_count": 3,
+        "knowledge_evidence": "Jane Eyre is attributed to Charlotte Bronte. | Jane Eyre | author | Charlotte Bronte",
+        "rationale": "The suggestion may change interpretation, thesis framing, or student intent."
+      },
+      {
+        "span": "Both novels shows how women are trapped by society",
+        "issue_type": "literary_fact",
+        "selected_suggestion": "Both novels engage with gender and social constraint, but in distinct ways: Jane Eyre foregrounds a woman’s struggle for autonomy within patriarchal institutions, while Frankenstein centers male ambition and its consequences, with female characters largely marginalized or silenced.",
         "decision": "teacher_review",
         "risk_level": "medium",
         "teacher_action": "Verify factual correction",
         "priority": 2,
-        "agreement": 0.5,
-        "avg_confidence": 0.995,
+        "agreement": 1.0,
+        "avg_confidence": 0.95,
         "kg_supported": true,
-        "evidence_count": 3,
-        "knowledge_evidence": "Jane Eyre | author | Charlotte Bronte | Pride and Prejudice | author | Jane Austen",
+        "evidence_count": 4,
+        "knowledge_evidence": "Jane Eyre | genre | Bildungsroman | Frankenstein | theme | ambition | Frankenstein | central_character | Victor Frankenstein",
         "rationale": "Knowledge-supported factual correction; route to teacher review before changing the essay."
       },
       {
         "span": "Mary Shelley write Frankenstein in 1847",
         "issue_type": "literary_fact",
-        "selected_suggestion": "Change '1847' to '1818'.",
+        "selected_suggestion": "Mary Shelley wrote Frankenstein in 1818",
         "decision": "teacher_review",
         "risk_level": "medium",
         "teacher_action": "Verify factual correction",
         "priority": 2,
-        "agreement": 0.5,
-        "avg_confidence": 0.995,
+        "agreement": 0.667,
+        "avg_confidence": 0.997,
         "kg_supported": true,
-        "evidence_count": 3,
-        "knowledge_evidence": "Frankenstein | publication_year | 1818 | Jane Eyre | publication_year | 1847",
+        "evidence_count": 4,
+        "knowledge_evidence": "Frankenstein is conventionally dated to 1818. | Frankenstein | publication_year | 1818 | Jane Eyre | publication_year | 1847",
+        "rationale": "Knowledge-supported factual correction; route to teacher review before changing the essay."
+      },
+      {
+        "span": "Mary Shelley wrote Frankenstein in 1847",
+        "issue_type": "literary_fact",
+        "selected_suggestion": "Mary Shelley wrote Frankenstein in 1818",
+        "decision": "teacher_review",
+        "risk_level": "medium",
+        "teacher_action": "Verify factual correction",
+        "priority": 2,
+        "agreement": 1.0,
+        "avg_confidence": 1.0,
+        "kg_supported": true,
+        "evidence_count": 1,
+        "knowledge_evidence": "Frankenstein | publication_year | 1818",
         "rationale": "Knowledge-supported factual correction; route to teacher review before changing the essay."
       },
       {
@@ -341,11 +423,11 @@
         "risk_level": "medium",
         "teacher_action": "Verify factual correction",
         "priority": 2,
-        "agreement": 0.5,
+        "agreement": 1.0,
         "avg_confidence": 1.0,
         "kg_supported": true,
-        "evidence_count": 2,
-        "knowledge_evidence": "Jane Eyre | author | Charlotte Bronte | Retrieved literary knowledge - Jane Eyre | author | Charlotte Bronte: Jane Eyre is a novel by Charlotte Bronte.",
+        "evidence_count": 1,
+        "knowledge_evidence": "Jane Eyre | author | Charlotte Bronte",
         "rationale": "Knowledge-supported factual correction; route to teacher review before changing the essay."
       },
       {
@@ -364,52 +446,7 @@
         "rationale": "Knowledge-supported factual correction; route to teacher review before changing the essay."
       },
       {
-        "span": "Both novels shows how women are trapped by society.",
-        "issue_type": "argument",
-        "selected_suggestion": "Both novels explore the themes of women's societal constraints, though through different lenses. Frankenstein focuses on the consequences of scientific ambition, while Jane Eyre delves into the struggles of a young woman's independence and social class.",
-        "decision": "teacher_review",
-        "risk_level": "medium",
-        "teacher_action": "Review meaning change",
-        "priority": 2,
-        "agreement": 1.0,
-        "avg_confidence": 0.8,
-        "kg_supported": true,
-        "evidence_count": 1,
-        "knowledge_evidence": "Retrieved literary knowledge - Frankenstein | central_character | the creature: The created being is often called the creature or monster, not Victor Frankenstein.",
-        "rationale": "The suggestion may change interpretation, thesis framing, or student intent."
-      },
-      {
-        "span": "how women are trapped by society",
-        "issue_type": "argument",
-        "selected_suggestion": "how the female characters are constrained by societal norms",
-        "decision": "teacher_review",
-        "risk_level": "medium",
-        "teacher_action": "Review meaning change",
-        "priority": 2,
-        "agreement": 1.0,
-        "avg_confidence": 0.8,
-        "kg_supported": false,
-        "evidence_count": 0,
-        "knowledge_evidence": "",
-        "rationale": "The suggestion may change interpretation, thesis framing, or student intent."
-      },
-      {
         "span": "Both novels shows",
-        "issue_type": "grammar",
-        "selected_suggestion": "Both novels show",
-        "decision": "auto_accept",
-        "risk_level": "low",
-        "teacher_action": "Optional skim",
-        "priority": 3,
-        "agreement": 1.0,
-        "avg_confidence": 1.0,
-        "kg_supported": false,
-        "evidence_count": 0,
-        "knowledge_evidence": "",
-        "rationale": "Low-risk local language edit with reviewer agreement."
-      },
-      {
-        "span": "Both novels shows how women are trapped by society",
         "issue_type": "grammar",
         "selected_suggestion": "Change 'shows' to 'show' to agree with the plural subject 'Both novels'.",
         "decision": "auto_accept",
@@ -417,7 +454,7 @@
         "teacher_action": "Optional skim",
         "priority": 3,
         "agreement": 0.5,
-        "avg_confidence": 0.975,
+        "avg_confidence": 0.99,
         "kg_supported": false,
         "evidence_count": 0,
         "knowledge_evidence": "",
@@ -441,16 +478,16 @@
       {
         "span": "Mary Shelley write Frankenstein in 1847",
         "issue_type": "grammar",
-        "selected_suggestion": "Change 'write' to 'wrote' to match past tense.",
+        "selected_suggestion": "Change 'write' to 'wrote' for past tense consistency.",
         "decision": "auto_accept",
         "risk_level": "low",
         "teacher_action": "Optional skim",
         "priority": 3,
-        "agreement": 0.5,
-        "avg_confidence": 0.975,
+        "agreement": 1.0,
+        "avg_confidence": 0.95,
         "kg_supported": true,
-        "evidence_count": 2,
-        "knowledge_evidence": "Frankenstein was first published in 1818, not 1847. | Retrieved literary knowledge - Frankenstein | author | Mary Shelley: Frankenstein; or, The Modern Prometheus is attributed to Mary Shelley.",
+        "evidence_count": 1,
+        "knowledge_evidence": "Frankenstein is conventionally dated to 1818, not 1847, but the grammar issue is separate.",
         "rationale": "Low-risk local language edit with reviewer agreement."
       },
       {
@@ -463,9 +500,9 @@
         "priority": 3,
         "agreement": 1.0,
         "avg_confidence": 1.0,
-        "kg_supported": true,
-        "evidence_count": 1,
-        "knowledge_evidence": "Retrieved literary knowledge - Frankenstein | genre | Gothic novel: Frankenstein is commonly discussed as a Gothic novel.",
+        "kg_supported": false,
+        "evidence_count": 0,
+        "knowledge_evidence": "",
         "rationale": "Low-risk local language edit with reviewer agreement."
       }
     ],
@@ -477,25 +514,25 @@
         "feedback_items": 4,
         "request_error": "",
         "parse_error": "",
-        "latency_sec": 2.462
+        "latency_sec": 2.749
       },
       {
         "provider": "glm",
         "model": "glm-4-flash",
         "reviewer_role": "argument",
-        "feedback_items": 4,
+        "feedback_items": 5,
         "request_error": "",
         "parse_error": "",
-        "latency_sec": 36.388
+        "latency_sec": 32.239
       },
       {
         "provider": "kimi",
         "model": "moonshot-v1-8k",
         "reviewer_role": "grammar",
-        "feedback_items": 5,
+        "feedback_items": 4,
         "request_error": "",
         "parse_error": "",
-        "latency_sec": 8.877
+        "latency_sec": 9.096
       },
       {
         "provider": "qwen",
@@ -504,7 +541,2921 @@
         "feedback_items": 3,
         "request_error": "",
         "parse_error": "",
-        "latency_sec": 9.549
+        "latency_sec": 11.451
+      }
+    ]
+  },
+  {
+    "id": "lit_esl_002",
+    "essay": "The monster is Victor Frankenstein, so the novel proves that people should never study knowledge.",
+    "kg_rows": [
+      {
+        "entity": "Frankenstein",
+        "relation": "author",
+        "value": "Mary Shelley",
+        "work": "Frankenstein",
+        "evidence": "Frankenstein is attributed to Mary Shelley.",
+        "source": "curated_literary_kg_v1",
+        "match": "Frankenstein",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Frankenstein",
+        "relation": "publication_year",
+        "value": "1818",
+        "work": "Frankenstein",
+        "evidence": "Frankenstein is conventionally dated to 1818.",
+        "source": "curated_literary_kg_v1",
+        "match": "Frankenstein",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Frankenstein",
+        "relation": "form",
+        "value": "novel",
+        "work": "Frankenstein",
+        "evidence": "Frankenstein is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "Frankenstein",
+        "match_score": "1.0"
+      },
+      {
+        "entity": "Frankenstein",
+        "relation": "genre",
+        "value": "Gothic fiction",
+        "work": "Frankenstein",
+        "evidence": "Frankenstein is commonly described as Gothic fiction.",
+        "source": "curated_literary_kg_v1",
+        "match": "Frankenstein",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Frankenstein",
+        "relation": "genre",
+        "value": "science fiction",
+        "work": "Frankenstein",
+        "evidence": "Frankenstein is commonly described as science fiction.",
+        "source": "curated_literary_kg_v1",
+        "match": "Frankenstein",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Frankenstein",
+        "relation": "central_character",
+        "value": "Victor Frankenstein",
+        "work": "Frankenstein",
+        "evidence": "Victor Frankenstein is a central character in Frankenstein.",
+        "source": "curated_literary_kg_v1",
+        "match": "Frankenstein",
+        "match_score": "1.0"
+      },
+      {
+        "entity": "Frankenstein",
+        "relation": "central_character",
+        "value": "the creature",
+        "work": "Frankenstein",
+        "evidence": "the creature is a central character in Frankenstein.",
+        "source": "curated_literary_kg_v1",
+        "match": "Frankenstein",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Frankenstein",
+        "relation": "theme",
+        "value": "ambition",
+        "work": "Frankenstein",
+        "evidence": "Frankenstein is often discussed through the theme of ambition.",
+        "source": "curated_literary_kg_v1",
+        "match": "Frankenstein",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "form",
+        "value": "novel",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "novel",
+        "match_score": "0.7"
+      },
+      {
+        "entity": "Pride and Prejudice",
+        "relation": "form",
+        "value": "novel",
+        "work": "Pride and Prejudice",
+        "evidence": "Pride and Prejudice is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "novel",
+        "match_score": "0.7"
+      },
+      {
+        "entity": "Wuthering Heights",
+        "relation": "form",
+        "value": "novel",
+        "work": "Wuthering Heights",
+        "evidence": "Wuthering Heights is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "novel",
+        "match_score": "0.7"
+      },
+      {
+        "entity": "Great Expectations",
+        "relation": "form",
+        "value": "novel",
+        "work": "Great Expectations",
+        "evidence": "Great Expectations is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "novel",
+        "match_score": "0.7"
+      },
+      {
+        "entity": "Oliver Twist",
+        "relation": "form",
+        "value": "novel",
+        "work": "Oliver Twist",
+        "evidence": "Oliver Twist is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "novel",
+        "match_score": "0.7"
+      },
+      {
+        "entity": "A Tale of Two Cities",
+        "relation": "form",
+        "value": "novel",
+        "work": "A Tale of Two Cities",
+        "evidence": "A Tale of Two Cities is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "novel",
+        "match_score": "0.7"
+      },
+      {
+        "entity": "The Picture of Dorian Gray",
+        "relation": "form",
+        "value": "novel",
+        "work": "The Picture of Dorian Gray",
+        "evidence": "The Picture of Dorian Gray is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "novel",
+        "match_score": "0.7"
+      },
+      {
+        "entity": "Dracula",
+        "relation": "form",
+        "value": "novel",
+        "work": "Dracula",
+        "evidence": "Dracula is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "novel",
+        "match_score": "0.7"
+      }
+    ],
+    "feedback": [
+      {
+        "reviewer": "deepseek_grammar",
+        "span": "The monster is Victor Frankenstein",
+        "issue_type": "literary_fact",
+        "suggestion": "Consider clarifying that Victor Frankenstein is the scientist, not the monster. The creature is often referred to as the monster.",
+        "rationale": "The sentence conflates Victor Frankenstein with the monster, which is a common but inaccurate interpretation of the novel.",
+        "confidence": 0.9,
+        "knowledge_evidence": [
+          "Frankenstein | central_character | Victor Frankenstein: Victor Frankenstein is a central character in Frankenstein. Frankenstein | central_character | the creature: the creature is a central character in Frankenstein."
+        ],
+        "meaning_change_risk": "high"
+      },
+      {
+        "reviewer": "deepseek_grammar",
+        "span": "so the novel proves that people should never study knowledge",
+        "issue_type": "argument",
+        "suggestion": "Consider revising to reflect that the novel critiques unchecked ambition rather than condemning all knowledge-seeking.",
+        "rationale": "The claim that the novel proves people should never study knowledge is an oversimplification; the theme of ambition is more nuanced.",
+        "confidence": 0.8,
+        "knowledge_evidence": [
+          "Frankenstein | theme | ambition: Frankenstein is often discussed through the theme of ambition."
+        ],
+        "meaning_change_risk": "high"
+      },
+      {
+        "reviewer": "kimi_grammar",
+        "span": "The monster is Victor Frankenstein",
+        "issue_type": "literary_fact",
+        "suggestion": "The central character often referred to as 'the monster' is actually the creature, not Victor Frankenstein.",
+        "rationale": "The student's statement incorrectly identifies Victor Frankenstein as the 'monster', which is a common misconception. The creature is the one often referred to as the 'monster' in discussions about the novel.",
+        "confidence": 0.9,
+        "knowledge_evidence": [
+          "Frankenstein | central_character | the creature"
+        ],
+        "meaning_change_risk": "medium"
+      },
+      {
+        "reviewer": "kimi_grammar",
+        "span": "so the novel proves that people should never study knowledge",
+        "issue_type": "argument",
+        "suggestion": "Consider revising to 'the novel suggests caution in the pursuit of knowledge without considering ethical implications.'",
+        "rationale": "The original statement is too absolute and does not accurately reflect the nuanced themes of the novel. It is more accurate to say that the novel warns against the dangers of unchecked ambition and the ethical considerations of scientific discovery.",
+        "confidence": 0.8,
+        "knowledge_evidence": [
+          "Frankenstein | theme | ambition"
+        ],
+        "meaning_change_risk": "high"
+      },
+      {
+        "reviewer": "qwen_literary_fact",
+        "span": "The monster is Victor Frankenstein",
+        "issue_type": "literary_fact",
+        "suggestion": "Revise to: 'The creature is distinct from Victor Frankenstein, who is the scientist and creator.'",
+        "rationale": "Victor Frankenstein is the human protagonist and creator; the 'monster' (more accurately, the creature) is his artificial being. Conflating them misrepresents a foundational literary fact of the novel.",
+        "confidence": 1.0,
+        "knowledge_evidence": [
+          "Frankenstein | central_character | Victor Frankenstein",
+          "Frankenstein | central_character | the creature"
+        ],
+        "meaning_change_risk": "high"
+      },
+      {
+        "reviewer": "qwen_literary_fact",
+        "span": "the novel proves that people should never study knowledge",
+        "issue_type": "literary_fact",
+        "suggestion": "Revise to: 'the novel critically examines the ethical limits of scientific ambition and unchecked pursuit of knowledge.'",
+        "rationale": "Frankenstein does not condemn knowledge acquisition outright; it explores consequences of irresponsible ambition and lack of moral accountability—consistent with its thematic focus on ambition, not anti-intellectualism.",
+        "confidence": 0.95,
+        "knowledge_evidence": [
+          "Frankenstein | theme | ambition",
+          "Frankenstein | genre | science fiction",
+          "Frankenstein | genre | Gothic fiction"
+        ],
+        "meaning_change_risk": "high"
+      },
+      {
+        "reviewer": "glm_argument",
+        "span": "The monster is Victor Frankenstein, so the novel proves that people should never study knowledge.",
+        "issue_type": "argument",
+        "suggestion": "Reconsider the conclusion that the novel proves people should never study knowledge.",
+        "rationale": "The novel does not explicitly state that studying knowledge is inherently wrong. Instead, it explores the consequences of unchecked ambition and the moral implications of scientific endeavors.",
+        "confidence": 0.8,
+        "knowledge_evidence": [
+          "Frankenstein is often discussed through the theme of ambition, suggesting that the novel's focus is on the consequences of ambition rather than the act of studying knowledge."
+        ],
+        "meaning_change_risk": "medium"
+      },
+      {
+        "reviewer": "glm_argument",
+        "span": "The monster is Victor Frankenstein, so the novel proves that people should never study knowledge.",
+        "issue_type": "argument",
+        "suggestion": "Consider the role of the creature in the novel's message about knowledge.",
+        "rationale": "The creature's own pursuit of knowledge and his subsequent suffering highlight the complex relationship between knowledge and its consequences, rather than suggesting that knowledge itself is harmful.",
+        "confidence": 0.7,
+        "knowledge_evidence": [
+          "The creature is a central character in Frankenstein, and his story is an integral part of the novel's exploration of the theme of ambition."
+        ],
+        "meaning_change_risk": "medium"
+      },
+      {
+        "reviewer": "glm_argument",
+        "span": "The monster is Victor Frankenstein, so the novel proves that people should never study knowledge.",
+        "issue_type": "argument",
+        "suggestion": "Examine the broader context of Gothic fiction and science fiction in understanding the novel's message.",
+        "rationale": "Gothic fiction and science fiction often explore the dangers of ambition and the pursuit of knowledge, but they do not universally condemn knowledge itself. Understanding the genre can provide a more nuanced interpretation of the novel's message.",
+        "confidence": 0.9,
+        "knowledge_evidence": [
+          "Frankenstein is commonly described as Gothic fiction and science fiction, indicating that the novel's themes are reflective of these genres."
+        ],
+        "meaning_change_risk": "medium"
+      }
+    ],
+    "decisions": [
+      {
+        "span": "The monster is Victor Frankenstein",
+        "issue_type": "literary_fact",
+        "selected_suggestion": "Consider clarifying that Victor Frankenstein is the scientist, not the monster. The creature is often referred to as the monster.",
+        "decision": "teacher_review",
+        "risk_level": "high",
+        "teacher_action": "Review meaning change",
+        "priority": 1,
+        "agreement": 0.333,
+        "avg_confidence": 0.933,
+        "kg_supported": true,
+        "evidence_count": 4,
+        "knowledge_evidence": "Frankenstein | central_character | Victor Frankenstein: Victor Frankenstein is a central character in Frankenstein. Frankenstein | central_character | the creature: the creature is a central character in Frankenstein. | Frankenstein | central_character | the creature | Frankenstein | central_character | Victor Frankenstein",
+        "rationale": "The suggestion may change interpretation, thesis framing, or student intent."
+      },
+      {
+        "span": "so the novel proves that people should never study knowledge",
+        "issue_type": "argument",
+        "selected_suggestion": "Consider revising to reflect that the novel critiques unchecked ambition rather than condemning all knowledge-seeking.",
+        "decision": "teacher_review",
+        "risk_level": "high",
+        "teacher_action": "Review meaning change",
+        "priority": 1,
+        "agreement": 0.5,
+        "avg_confidence": 0.8,
+        "kg_supported": true,
+        "evidence_count": 2,
+        "knowledge_evidence": "Frankenstein | theme | ambition: Frankenstein is often discussed through the theme of ambition. | Frankenstein | theme | ambition",
+        "rationale": "The suggestion may change interpretation, thesis framing, or student intent."
+      },
+      {
+        "span": "the novel proves that people should never study knowledge",
+        "issue_type": "literary_fact",
+        "selected_suggestion": "Revise to: 'the novel critically examines the ethical limits of scientific ambition and unchecked pursuit of knowledge.'",
+        "decision": "teacher_review",
+        "risk_level": "medium",
+        "teacher_action": "Verify factual correction",
+        "priority": 2,
+        "agreement": 1.0,
+        "avg_confidence": 0.95,
+        "kg_supported": true,
+        "evidence_count": 3,
+        "knowledge_evidence": "Frankenstein | theme | ambition | Frankenstein | genre | science fiction | Frankenstein | genre | Gothic fiction",
+        "rationale": "Knowledge-supported factual correction; route to teacher review before changing the essay."
+      },
+      {
+        "span": "The monster is Victor Frankenstein, so the novel proves that people should never study knowledge.",
+        "issue_type": "argument",
+        "selected_suggestion": "Reconsider the conclusion that the novel proves people should never study knowledge.",
+        "decision": "teacher_review",
+        "risk_level": "medium",
+        "teacher_action": "Review meaning change",
+        "priority": 2,
+        "agreement": 0.333,
+        "avg_confidence": 0.8,
+        "kg_supported": true,
+        "evidence_count": 3,
+        "knowledge_evidence": "Frankenstein is often discussed through the theme of ambition, suggesting that the novel's focus is on the consequences of ambition rather than the act of studying knowledge. | The creature is a central character in Frankenstein, and his story is an integral part of the novel's exploration of the theme of ambition. | Frankenstein is commonly described as Gothic fiction and science fiction, indicating that the novel's themes are reflective of these genres.",
+        "rationale": "The suggestion may change interpretation, thesis framing, or student intent."
+      }
+    ],
+    "reviewer_results": [
+      {
+        "provider": "deepseek",
+        "model": "deepseek-chat",
+        "reviewer_role": "grammar",
+        "feedback_items": 2,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 2.239
+      },
+      {
+        "provider": "glm",
+        "model": "glm-4-flash",
+        "reviewer_role": "argument",
+        "feedback_items": 3,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 18.724
+      },
+      {
+        "provider": "kimi",
+        "model": "moonshot-v1-8k",
+        "reviewer_role": "grammar",
+        "feedback_items": 2,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 5.515
+      },
+      {
+        "provider": "qwen",
+        "model": "qwen-plus",
+        "reviewer_role": "literary_fact",
+        "feedback_items": 2,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 7.359
+      }
+    ]
+  },
+  {
+    "id": "lit_esl_003",
+    "essay": "In comparison, the two books are same because both main characters want freedom.",
+    "kg_rows": [
+      {
+        "entity": "The Mayor of Casterbridge",
+        "relation": "theme",
+        "value": "character",
+        "work": "The Mayor of Casterbridge",
+        "evidence": "The Mayor of Casterbridge is often discussed through the theme of character.",
+        "source": "curated_literary_kg_v1",
+        "match": "character",
+        "match_score": "0.7"
+      },
+      {
+        "entity": "The Adventures of Huckleberry Finn",
+        "relation": "theme",
+        "value": "freedom",
+        "work": "The Adventures of Huckleberry Finn",
+        "evidence": "The Adventures of Huckleberry Finn is often discussed through the theme of freedom.",
+        "source": "curated_literary_kg_v1",
+        "match": "freedom",
+        "match_score": "0.7"
+      }
+    ],
+    "feedback": [
+      {
+        "reviewer": "deepseek_grammar",
+        "span": "the two books are same",
+        "issue_type": "grammar",
+        "suggestion": "the two books are the same",
+        "rationale": "The adjective 'same' requires the definite article 'the' before it to be grammatically correct in this context.",
+        "confidence": 0.95,
+        "knowledge_evidence": [],
+        "meaning_change_risk": "low"
+      },
+      {
+        "reviewer": "deepseek_grammar",
+        "span": "both main characters want freedom",
+        "issue_type": "grammar",
+        "suggestion": "both main characters want freedom",
+        "rationale": "This phrase is grammatically correct, but consider adding 'the' before 'freedom' for specificity if referring to a particular concept of freedom in the novels.",
+        "confidence": 0.6,
+        "knowledge_evidence": [
+          "The Adventures of Huckleberry Finn is often discussed through the theme of freedom."
+        ],
+        "meaning_change_risk": "low"
+      },
+      {
+        "reviewer": "kimi_grammar",
+        "span": "the two books are same",
+        "issue_type": "grammar",
+        "suggestion": "the two books are the same",
+        "rationale": "The phrase 'same' should be preceded by the definite article 'the' to be grammatically correct.",
+        "confidence": 1.0,
+        "knowledge_evidence": [
+          "No specific literary knowledge is needed to correct this grammar issue."
+        ],
+        "meaning_change_risk": "low"
+      },
+      {
+        "reviewer": "qwen_literary_fact",
+        "span": "the two books are same because both main characters want freedom",
+        "issue_type": "literary_fact",
+        "suggestion": "revise to specify that freedom is a central theme in The Adventures of Huckleberry Finn, while The Mayor of Casterbridge is more commonly associated with themes of character and moral responsibility — not freedom",
+        "rationale": "The retrieved literary knowledge confirms that freedom is a defining thematic lens for Huckleberry Finn, but Casterbridge is linked to 'character' as its primary thematic concern; equating both novels on 'wanting freedom' misrepresents the latter's dominant critical framing",
+        "confidence": 0.95,
+        "knowledge_evidence": [
+          "The Adventures of Huckleberry Finn | theme | freedom",
+          "The Mayor of Casterbridge | theme | character: The Mayor of Casterbridge is often discussed through the theme of character."
+        ],
+        "meaning_change_risk": "medium"
+      },
+      {
+        "reviewer": "glm_argument",
+        "span": "In comparison, the two books are same because both main characters want freedom.",
+        "issue_type": "argument",
+        "suggestion": "Replace 'same' with 'similar' to avoid implying complete equivalence.",
+        "rationale": "The use of 'same' may oversimplify the comparison and downplay the unique aspects of each book.",
+        "confidence": 0.8,
+        "knowledge_evidence": [
+          "The themes of character and freedom in 'The Mayor of Casterbridge' and 'The Adventures of Huckleberry Finn' are distinct, emphasizing the importance of recognizing these differences in a comparative analysis."
+        ],
+        "meaning_change_risk": "medium"
+      },
+      {
+        "reviewer": "glm_argument",
+        "span": "both main characters want freedom",
+        "issue_type": "word_choice",
+        "suggestion": "Consider using 'strive for' or 'seek' instead of 'want' to convey a more nuanced desire for freedom.",
+        "rationale": "The word 'want' may imply a more immediate or basic desire, whereas 'strive for' or 'seek' suggests a more complex and active pursuit of freedom.",
+        "confidence": 0.7,
+        "knowledge_evidence": [
+          "The characters in both books demonstrate a complex journey towards freedom, which can be better conveyed with more nuanced language."
+        ],
+        "meaning_change_risk": "medium"
+      }
+    ],
+    "decisions": [
+      {
+        "span": "both main characters want freedom",
+        "issue_type": "word_choice",
+        "selected_suggestion": "Consider using 'strive for' or 'seek' instead of 'want' to convey a more nuanced desire for freedom.",
+        "decision": "teacher_review",
+        "risk_level": "medium",
+        "teacher_action": "Check manually",
+        "priority": 2,
+        "agreement": 1.0,
+        "avg_confidence": 0.7,
+        "kg_supported": true,
+        "evidence_count": 1,
+        "knowledge_evidence": "The characters in both books demonstrate a complex journey towards freedom, which can be better conveyed with more nuanced language.",
+        "rationale": "Insufficient agreement or evidence for automatic adoption."
+      },
+      {
+        "span": "the two books are same because both main characters want freedom",
+        "issue_type": "literary_fact",
+        "selected_suggestion": "revise to specify that freedom is a central theme in The Adventures of Huckleberry Finn, while The Mayor of Casterbridge is more commonly associated with themes of character and moral responsibility — not freedom",
+        "decision": "teacher_review",
+        "risk_level": "medium",
+        "teacher_action": "Verify factual correction",
+        "priority": 2,
+        "agreement": 1.0,
+        "avg_confidence": 0.95,
+        "kg_supported": true,
+        "evidence_count": 2,
+        "knowledge_evidence": "The Adventures of Huckleberry Finn | theme | freedom | The Mayor of Casterbridge | theme | character: The Mayor of Casterbridge is often discussed through the theme of character.",
+        "rationale": "Knowledge-supported factual correction; route to teacher review before changing the essay."
+      },
+      {
+        "span": "In comparison, the two books are same because both main characters want freedom.",
+        "issue_type": "argument",
+        "selected_suggestion": "Replace 'same' with 'similar' to avoid implying complete equivalence.",
+        "decision": "teacher_review",
+        "risk_level": "medium",
+        "teacher_action": "Review meaning change",
+        "priority": 2,
+        "agreement": 1.0,
+        "avg_confidence": 0.8,
+        "kg_supported": true,
+        "evidence_count": 1,
+        "knowledge_evidence": "The themes of character and freedom in 'The Mayor of Casterbridge' and 'The Adventures of Huckleberry Finn' are distinct, emphasizing the importance of recognizing these differences in a comparative analysis.",
+        "rationale": "The suggestion may change interpretation, thesis framing, or student intent."
+      },
+      {
+        "span": "both main characters want freedom",
+        "issue_type": "grammar",
+        "selected_suggestion": "both main characters want freedom",
+        "decision": "auto_accept",
+        "risk_level": "low",
+        "teacher_action": "Optional skim",
+        "priority": 3,
+        "agreement": 1.0,
+        "avg_confidence": 0.6,
+        "kg_supported": true,
+        "evidence_count": 1,
+        "knowledge_evidence": "The Adventures of Huckleberry Finn is often discussed through the theme of freedom.",
+        "rationale": "Low-risk local language edit with reviewer agreement."
+      },
+      {
+        "span": "the two books are same",
+        "issue_type": "grammar",
+        "selected_suggestion": "the two books are the same",
+        "decision": "auto_accept",
+        "risk_level": "low",
+        "teacher_action": "Optional skim",
+        "priority": 3,
+        "agreement": 1.0,
+        "avg_confidence": 0.975,
+        "kg_supported": true,
+        "evidence_count": 1,
+        "knowledge_evidence": "No specific literary knowledge is needed to correct this grammar issue.",
+        "rationale": "Low-risk local language edit with reviewer agreement."
+      }
+    ],
+    "reviewer_results": [
+      {
+        "provider": "deepseek",
+        "model": "deepseek-chat",
+        "reviewer_role": "grammar",
+        "feedback_items": 2,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 1.831
+      },
+      {
+        "provider": "glm",
+        "model": "glm-4-flash",
+        "reviewer_role": "argument",
+        "feedback_items": 2,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 16.791
+      },
+      {
+        "provider": "kimi",
+        "model": "moonshot-v1-8k",
+        "reviewer_role": "grammar",
+        "feedback_items": 1,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 2.544
+      },
+      {
+        "provider": "qwen",
+        "model": "qwen-plus",
+        "reviewer_role": "literary_fact",
+        "feedback_items": 1,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 5.21
+      }
+    ]
+  },
+  {
+    "id": "lit_esl_004",
+    "essay": "Frankenstein is only about science and Jane Eyre is only about love, so they are not useful for studying society.",
+    "kg_rows": [
+      {
+        "entity": "Frankenstein",
+        "relation": "author",
+        "value": "Mary Shelley",
+        "work": "Frankenstein",
+        "evidence": "Frankenstein is attributed to Mary Shelley.",
+        "source": "curated_literary_kg_v1",
+        "match": "Frankenstein",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Frankenstein",
+        "relation": "publication_year",
+        "value": "1818",
+        "work": "Frankenstein",
+        "evidence": "Frankenstein is conventionally dated to 1818.",
+        "source": "curated_literary_kg_v1",
+        "match": "Frankenstein",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Frankenstein",
+        "relation": "form",
+        "value": "novel",
+        "work": "Frankenstein",
+        "evidence": "Frankenstein is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "Frankenstein",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Frankenstein",
+        "relation": "genre",
+        "value": "Gothic fiction",
+        "work": "Frankenstein",
+        "evidence": "Frankenstein is commonly described as Gothic fiction.",
+        "source": "curated_literary_kg_v1",
+        "match": "Frankenstein",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Frankenstein",
+        "relation": "genre",
+        "value": "science fiction",
+        "work": "Frankenstein",
+        "evidence": "Frankenstein is commonly described as science fiction.",
+        "source": "curated_literary_kg_v1",
+        "match": "Frankenstein",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Frankenstein",
+        "relation": "central_character",
+        "value": "Victor Frankenstein",
+        "work": "Frankenstein",
+        "evidence": "Victor Frankenstein is a central character in Frankenstein.",
+        "source": "curated_literary_kg_v1",
+        "match": "Frankenstein",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Frankenstein",
+        "relation": "central_character",
+        "value": "the creature",
+        "work": "Frankenstein",
+        "evidence": "the creature is a central character in Frankenstein.",
+        "source": "curated_literary_kg_v1",
+        "match": "Frankenstein",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Frankenstein",
+        "relation": "theme",
+        "value": "ambition",
+        "work": "Frankenstein",
+        "evidence": "Frankenstein is often discussed through the theme of ambition.",
+        "source": "curated_literary_kg_v1",
+        "match": "Frankenstein",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "author",
+        "value": "Charlotte Bronte",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre is attributed to Charlotte Bronte.",
+        "source": "curated_literary_kg_v1",
+        "match": "Jane Eyre",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "publication_year",
+        "value": "1847",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre is conventionally dated to 1847.",
+        "source": "curated_literary_kg_v1",
+        "match": "Jane Eyre",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "form",
+        "value": "novel",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "Jane Eyre",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "genre",
+        "value": "Bildungsroman",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre is commonly described as Bildungsroman.",
+        "source": "curated_literary_kg_v1",
+        "match": "Jane Eyre",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "genre",
+        "value": "Gothic fiction",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre is commonly described as Gothic fiction.",
+        "source": "curated_literary_kg_v1",
+        "match": "Jane Eyre",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "central_character",
+        "value": "Edward Rochester",
+        "work": "Jane Eyre",
+        "evidence": "Edward Rochester is a central character in Jane Eyre.",
+        "source": "curated_literary_kg_v1",
+        "match": "Jane Eyre",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "central_character",
+        "value": "Jane Eyre",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre is a central character in Jane Eyre.",
+        "source": "curated_literary_kg_v1",
+        "match": "Jane Eyre",
+        "match_score": "1.0"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "theme",
+        "value": "gender",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre is often discussed through the theme of gender.",
+        "source": "curated_literary_kg_v1",
+        "match": "Jane Eyre",
+        "match_score": "0.85"
+      }
+    ],
+    "feedback": [
+      {
+        "reviewer": "deepseek_grammar",
+        "span": "Frankenstein is only about science and Jane Eyre is only about love",
+        "issue_type": "argument",
+        "suggestion": "Consider revising to acknowledge that both novels engage with social issues: for example, 'Frankenstein explores the social consequences of unchecked ambition and scientific progress, while Jane Eyre examines social class and gender inequality.'",
+        "rationale": "The student's claim that each novel is 'only about' one theme is an oversimplification that ignores the social commentary present in both works.",
+        "confidence": 0.9,
+        "knowledge_evidence": [
+          "Frankenstein | theme | ambition",
+          "Jane Eyre | genre | Bildungsroman"
+        ],
+        "meaning_change_risk": "high"
+      },
+      {
+        "reviewer": "deepseek_grammar",
+        "span": "so they are not useful for studying society",
+        "issue_type": "argument",
+        "suggestion": "Rephrase to show how the novels do contribute to social study: for instance, 'yet both novels offer valuable insights into society.'",
+        "rationale": "The conclusion that the novels are 'not useful' contradicts common literary analysis and the retrieved knowledge that Frankenstein deals with ambition and Jane Eyre is a Bildungsroman, both of which involve social contexts.",
+        "confidence": 0.85,
+        "knowledge_evidence": [
+          "Frankenstein | theme | ambition",
+          "Jane Eyre | genre | Bildungsroman"
+        ],
+        "meaning_change_risk": "high"
+      },
+      {
+        "reviewer": "qwen_literary_fact",
+        "span": "Frankenstein is only about science and Jane Eyre is only about love",
+        "issue_type": "literary_fact",
+        "suggestion": "Revise to acknowledge that Frankenstein explores themes beyond science (e.g., ambition, isolation, responsibility) and Jane Eyre extends beyond love to include class, gender, morality, and self-development.",
+        "rationale": "The claim oversimplifies both novels’ thematic complexity. Literary scholarship consistently identifies ambition as a central theme in Frankenstein and Bildungsroman structure—focusing on psychological and moral growth—in Jane Eyre.",
+        "confidence": 0.98,
+        "knowledge_evidence": [
+          "Frankenstein | theme | ambition",
+          "Jane Eyre | genre | Bildungsroman"
+        ],
+        "meaning_change_risk": "medium"
+      },
+      {
+        "reviewer": "kimi_grammar",
+        "span": "Frankenstein is only about science and Jane Eyre is only about love",
+        "issue_type": "argument",
+        "suggestion": "Frankenstein and Jane Eyre are not solely about science and love, respectively; they also explore societal themes.",
+        "rationale": "Both novels delve into societal issues and human conditions beyond their primary themes, making them useful for studying society.",
+        "confidence": 0.8,
+        "knowledge_evidence": [
+          "Frankenstein | theme | ambition, Jane Eyre | genre | Bildungsroman"
+        ],
+        "meaning_change_risk": "medium"
+      },
+      {
+        "reviewer": "glm_argument",
+        "span": "Frankenstein is only about science and Jane Eyre is only about love",
+        "issue_type": "argument",
+        "suggestion": "Reconsider the exclusive focus on science and love as the sole themes of Frankenstein and Jane Eyre.",
+        "rationale": "Both novels explore themes beyond their primary genres, contributing to a broader understanding of society.",
+        "confidence": 0.9,
+        "knowledge_evidence": [
+          "Frankenstein is commonly described as Gothic fiction and science fiction, with themes of ambition and morality. Jane Eyre is a Bildungsroman, focusing on personal growth and social class."
+        ],
+        "meaning_change_risk": "medium"
+      },
+      {
+        "reviewer": "glm_argument",
+        "span": "so they are not useful for studying society",
+        "issue_type": "argument",
+        "suggestion": "Reevaluate the utility of these novels for studying society by considering their broader thematic content.",
+        "rationale": "The novels' exploration of themes such as ambition, morality, and social class makes them valuable for studying society.",
+        "confidence": 0.8,
+        "knowledge_evidence": [
+          "Frankenstein addresses the consequences of ambition and the role of science in society, while Jane Eyre delves into issues of social class and gender roles."
+        ],
+        "meaning_change_risk": "medium"
+      }
+    ],
+    "decisions": [
+      {
+        "span": "Frankenstein is only about science and Jane Eyre is only about love",
+        "issue_type": "argument",
+        "selected_suggestion": "Consider revising to acknowledge that both novels engage with social issues: for example, 'Frankenstein explores the social consequences of unchecked ambition and scientific progress, while Jane Eyre examines social class and gender inequality.'",
+        "decision": "teacher_review",
+        "risk_level": "high",
+        "teacher_action": "Review meaning change",
+        "priority": 1,
+        "agreement": 0.333,
+        "avg_confidence": 0.867,
+        "kg_supported": true,
+        "evidence_count": 4,
+        "knowledge_evidence": "Frankenstein | theme | ambition | Jane Eyre | genre | Bildungsroman | Frankenstein | theme | ambition, Jane Eyre | genre | Bildungsroman",
+        "rationale": "The suggestion may change interpretation, thesis framing, or student intent."
+      },
+      {
+        "span": "so they are not useful for studying society",
+        "issue_type": "argument",
+        "selected_suggestion": "Rephrase to show how the novels do contribute to social study: for instance, 'yet both novels offer valuable insights into society.'",
+        "decision": "teacher_review",
+        "risk_level": "high",
+        "teacher_action": "Review meaning change",
+        "priority": 1,
+        "agreement": 0.5,
+        "avg_confidence": 0.825,
+        "kg_supported": true,
+        "evidence_count": 3,
+        "knowledge_evidence": "Frankenstein | theme | ambition | Jane Eyre | genre | Bildungsroman | Frankenstein addresses the consequences of ambition and the role of science in society, while Jane Eyre delves into issues of social class and gender roles.",
+        "rationale": "The suggestion may change interpretation, thesis framing, or student intent."
+      },
+      {
+        "span": "Frankenstein is only about science and Jane Eyre is only about love",
+        "issue_type": "literary_fact",
+        "selected_suggestion": "Revise to acknowledge that Frankenstein explores themes beyond science (e.g., ambition, isolation, responsibility) and Jane Eyre extends beyond love to include class, gender, morality, and self-development.",
+        "decision": "teacher_review",
+        "risk_level": "medium",
+        "teacher_action": "Verify factual correction",
+        "priority": 2,
+        "agreement": 1.0,
+        "avg_confidence": 0.98,
+        "kg_supported": true,
+        "evidence_count": 2,
+        "knowledge_evidence": "Frankenstein | theme | ambition | Jane Eyre | genre | Bildungsroman",
+        "rationale": "Knowledge-supported factual correction; route to teacher review before changing the essay."
+      }
+    ],
+    "reviewer_results": [
+      {
+        "provider": "deepseek",
+        "model": "deepseek-chat",
+        "reviewer_role": "grammar",
+        "feedback_items": 2,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 2.639
+      },
+      {
+        "provider": "glm",
+        "model": "glm-4-flash",
+        "reviewer_role": "argument",
+        "feedback_items": 2,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 15.541
+      },
+      {
+        "provider": "kimi",
+        "model": "moonshot-v1-8k",
+        "reviewer_role": "grammar",
+        "feedback_items": 1,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 5.332
+      },
+      {
+        "provider": "qwen",
+        "model": "qwen-plus",
+        "reviewer_role": "literary_fact",
+        "feedback_items": 1,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 4.685
+      }
+    ]
+  },
+  {
+    "id": "lit_esl_005",
+    "essay": "Both novels shows the pressure of society, but they describe freedom in different ways.",
+    "kg_rows": [
+      {
+        "entity": "Frankenstein",
+        "relation": "form",
+        "value": "novel",
+        "work": "Frankenstein",
+        "evidence": "Frankenstein is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "novel",
+        "match_score": "0.7"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "form",
+        "value": "novel",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "novel",
+        "match_score": "0.7"
+      },
+      {
+        "entity": "Pride and Prejudice",
+        "relation": "form",
+        "value": "novel",
+        "work": "Pride and Prejudice",
+        "evidence": "Pride and Prejudice is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "novel",
+        "match_score": "0.7"
+      },
+      {
+        "entity": "Wuthering Heights",
+        "relation": "form",
+        "value": "novel",
+        "work": "Wuthering Heights",
+        "evidence": "Wuthering Heights is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "novel",
+        "match_score": "0.7"
+      },
+      {
+        "entity": "Great Expectations",
+        "relation": "form",
+        "value": "novel",
+        "work": "Great Expectations",
+        "evidence": "Great Expectations is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "novel",
+        "match_score": "0.7"
+      },
+      {
+        "entity": "Oliver Twist",
+        "relation": "form",
+        "value": "novel",
+        "work": "Oliver Twist",
+        "evidence": "Oliver Twist is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "novel",
+        "match_score": "0.7"
+      },
+      {
+        "entity": "A Tale of Two Cities",
+        "relation": "form",
+        "value": "novel",
+        "work": "A Tale of Two Cities",
+        "evidence": "A Tale of Two Cities is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "novel",
+        "match_score": "0.7"
+      },
+      {
+        "entity": "The Picture of Dorian Gray",
+        "relation": "form",
+        "value": "novel",
+        "work": "The Picture of Dorian Gray",
+        "evidence": "The Picture of Dorian Gray is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "novel",
+        "match_score": "0.7"
+      },
+      {
+        "entity": "Dracula",
+        "relation": "form",
+        "value": "novel",
+        "work": "Dracula",
+        "evidence": "Dracula is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "novel",
+        "match_score": "0.7"
+      },
+      {
+        "entity": "Moby-Dick",
+        "relation": "form",
+        "value": "novel",
+        "work": "Moby-Dick",
+        "evidence": "Moby-Dick is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "novel",
+        "match_score": "0.7"
+      },
+      {
+        "entity": "The Scarlet Letter",
+        "relation": "form",
+        "value": "novel",
+        "work": "The Scarlet Letter",
+        "evidence": "The Scarlet Letter is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "novel",
+        "match_score": "0.7"
+      },
+      {
+        "entity": "The Adventures of Huckleberry Finn",
+        "relation": "form",
+        "value": "novel",
+        "work": "The Adventures of Huckleberry Finn",
+        "evidence": "The Adventures of Huckleberry Finn is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "novel",
+        "match_score": "0.7"
+      },
+      {
+        "entity": "The Great Gatsby",
+        "relation": "form",
+        "value": "novel",
+        "work": "The Great Gatsby",
+        "evidence": "The Great Gatsby is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "novel",
+        "match_score": "0.7"
+      },
+      {
+        "entity": "To the Lighthouse",
+        "relation": "form",
+        "value": "novel",
+        "work": "To the Lighthouse",
+        "evidence": "To the Lighthouse is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "novel",
+        "match_score": "0.7"
+      },
+      {
+        "entity": "Mrs Dalloway",
+        "relation": "form",
+        "value": "novel",
+        "work": "Mrs Dalloway",
+        "evidence": "Mrs Dalloway is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "novel",
+        "match_score": "0.7"
+      },
+      {
+        "entity": "The Awakening",
+        "relation": "form",
+        "value": "novel",
+        "work": "The Awakening",
+        "evidence": "The Awakening is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "novel",
+        "match_score": "0.7"
+      }
+    ],
+    "feedback": [
+      {
+        "reviewer": "deepseek_grammar",
+        "span": "Both novels shows",
+        "issue_type": "grammar",
+        "suggestion": "Both novels show",
+        "rationale": "The subject 'Both novels' is plural, so the verb should be 'show' instead of 'shows'.",
+        "confidence": 0.95,
+        "knowledge_evidence": [],
+        "meaning_change_risk": "low"
+      },
+      {
+        "reviewer": "kimi_grammar",
+        "span": "Both novels shows",
+        "issue_type": "grammar",
+        "suggestion": "Both novels show",
+        "rationale": "The subject 'Both novels' is plural, so the verb should also be in the plural form 'show' instead of 'shows'.",
+        "confidence": 1.0,
+        "knowledge_evidence": [
+          "None"
+        ],
+        "meaning_change_risk": "low"
+      },
+      {
+        "reviewer": "qwen_literary_fact",
+        "span": "Both novels shows",
+        "issue_type": "grammar",
+        "suggestion": "Both novels show",
+        "rationale": "Subject-verb agreement error: 'novels' (plural) requires the plural verb form 'show', not 'shows'.",
+        "confidence": 1.0,
+        "knowledge_evidence": [],
+        "meaning_change_risk": "low"
+      },
+      {
+        "reviewer": "glm_argument",
+        "span": "Both novels shows the pressure of society",
+        "issue_type": "word_choice",
+        "suggestion": "change 'shows' to 'portray' or 'depict'",
+        "rationale": "The word 'shows' is too casual for academic writing. 'Portray' or 'depict' are more precise and formal.",
+        "confidence": 0.8,
+        "knowledge_evidence": [
+          "Academic writing typically requires more formal language."
+        ],
+        "meaning_change_risk": "low"
+      },
+      {
+        "reviewer": "glm_argument",
+        "span": "but they describe freedom in different ways.",
+        "issue_type": "academic_style",
+        "suggestion": "consider adding a transition phrase for better flow",
+        "rationale": "Adding a transition phrase like 'however' or 'on the other hand' can improve the coherence of the sentence.",
+        "confidence": 0.9,
+        "knowledge_evidence": [
+          "Transition phrases are often used in academic writing to connect ideas smoothly."
+        ],
+        "meaning_change_risk": "low"
+      }
+    ],
+    "decisions": [
+      {
+        "span": "but they describe freedom in different ways.",
+        "issue_type": "academic_style",
+        "selected_suggestion": "consider adding a transition phrase for better flow",
+        "decision": "teacher_review",
+        "risk_level": "medium",
+        "teacher_action": "Review meaning change",
+        "priority": 2,
+        "agreement": 1.0,
+        "avg_confidence": 0.9,
+        "kg_supported": true,
+        "evidence_count": 1,
+        "knowledge_evidence": "Transition phrases are often used in academic writing to connect ideas smoothly.",
+        "rationale": "The suggestion may change interpretation, thesis framing, or student intent."
+      },
+      {
+        "span": "Both novels shows",
+        "issue_type": "grammar",
+        "selected_suggestion": "Both novels show",
+        "decision": "auto_accept",
+        "risk_level": "low",
+        "teacher_action": "Optional skim",
+        "priority": 3,
+        "agreement": 1.0,
+        "avg_confidence": 0.983,
+        "kg_supported": true,
+        "evidence_count": 1,
+        "knowledge_evidence": "None",
+        "rationale": "Low-risk local language edit with reviewer agreement."
+      },
+      {
+        "span": "Both novels shows the pressure of society",
+        "issue_type": "word_choice",
+        "selected_suggestion": "change 'shows' to 'portray' or 'depict'",
+        "decision": "auto_accept",
+        "risk_level": "low",
+        "teacher_action": "Optional skim",
+        "priority": 3,
+        "agreement": 1.0,
+        "avg_confidence": 0.8,
+        "kg_supported": true,
+        "evidence_count": 1,
+        "knowledge_evidence": "Academic writing typically requires more formal language.",
+        "rationale": "Low-risk local language edit with reviewer agreement."
+      }
+    ],
+    "reviewer_results": [
+      {
+        "provider": "deepseek",
+        "model": "deepseek-chat",
+        "reviewer_role": "grammar",
+        "feedback_items": 1,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 0.984
+      },
+      {
+        "provider": "glm",
+        "model": "glm-4-flash",
+        "reviewer_role": "argument",
+        "feedback_items": 2,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 13.809
+      },
+      {
+        "provider": "kimi",
+        "model": "moonshot-v1-8k",
+        "reviewer_role": "grammar",
+        "feedback_items": 1,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 2.544
+      },
+      {
+        "provider": "qwen",
+        "model": "qwen-plus",
+        "reviewer_role": "literary_fact",
+        "feedback_items": 1,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 2.766
+      }
+    ]
+  },
+  {
+    "id": "lit_esl_006",
+    "essay": "Charlotte Bronte wrote Pride and Prejudice, and Jane Austen wrote Jane Eyre. This shows the novels belong to the same author.",
+    "kg_rows": [
+      {
+        "entity": "Pride and Prejudice",
+        "relation": "author",
+        "value": "Jane Austen",
+        "work": "Pride and Prejudice",
+        "evidence": "Pride and Prejudice is attributed to Jane Austen.",
+        "source": "curated_literary_kg_v1",
+        "match": "Pride and Prejudice",
+        "match_score": "1.0"
+      },
+      {
+        "entity": "Pride and Prejudice",
+        "relation": "publication_year",
+        "value": "1813",
+        "work": "Pride and Prejudice",
+        "evidence": "Pride and Prejudice is conventionally dated to 1813.",
+        "source": "curated_literary_kg_v1",
+        "match": "Pride and Prejudice",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Pride and Prejudice",
+        "relation": "form",
+        "value": "novel",
+        "work": "Pride and Prejudice",
+        "evidence": "Pride and Prejudice is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "Pride and Prejudice",
+        "match_score": "1.0"
+      },
+      {
+        "entity": "Pride and Prejudice",
+        "relation": "genre",
+        "value": "novel of manners",
+        "work": "Pride and Prejudice",
+        "evidence": "Pride and Prejudice is commonly described as novel of manners.",
+        "source": "curated_literary_kg_v1",
+        "match": "Pride and Prejudice",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Pride and Prejudice",
+        "relation": "central_character",
+        "value": "Elizabeth Bennet",
+        "work": "Pride and Prejudice",
+        "evidence": "Elizabeth Bennet is a central character in Pride and Prejudice.",
+        "source": "curated_literary_kg_v1",
+        "match": "Pride and Prejudice",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Pride and Prejudice",
+        "relation": "central_character",
+        "value": "Fitzwilliam Darcy",
+        "work": "Pride and Prejudice",
+        "evidence": "Fitzwilliam Darcy is a central character in Pride and Prejudice.",
+        "source": "curated_literary_kg_v1",
+        "match": "Pride and Prejudice",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Pride and Prejudice",
+        "relation": "theme",
+        "value": "class",
+        "work": "Pride and Prejudice",
+        "evidence": "Pride and Prejudice is often discussed through the theme of class.",
+        "source": "curated_literary_kg_v1",
+        "match": "Pride and Prejudice",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Pride and Prejudice",
+        "relation": "theme",
+        "value": "judgment",
+        "work": "Pride and Prejudice",
+        "evidence": "Pride and Prejudice is often discussed through the theme of judgment.",
+        "source": "curated_literary_kg_v1",
+        "match": "Pride and Prejudice",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "author",
+        "value": "Charlotte Bronte",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre is attributed to Charlotte Bronte.",
+        "source": "curated_literary_kg_v1",
+        "match": "Jane Eyre",
+        "match_score": "1.0"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "publication_year",
+        "value": "1847",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre is conventionally dated to 1847.",
+        "source": "curated_literary_kg_v1",
+        "match": "Jane Eyre",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "form",
+        "value": "novel",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "Jane Eyre",
+        "match_score": "1.0"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "genre",
+        "value": "Bildungsroman",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre is commonly described as Bildungsroman.",
+        "source": "curated_literary_kg_v1",
+        "match": "Jane Eyre",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "genre",
+        "value": "Gothic fiction",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre is commonly described as Gothic fiction.",
+        "source": "curated_literary_kg_v1",
+        "match": "Jane Eyre",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "central_character",
+        "value": "Edward Rochester",
+        "work": "Jane Eyre",
+        "evidence": "Edward Rochester is a central character in Jane Eyre.",
+        "source": "curated_literary_kg_v1",
+        "match": "Jane Eyre",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "central_character",
+        "value": "Jane Eyre",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre is a central character in Jane Eyre.",
+        "source": "curated_literary_kg_v1",
+        "match": "Jane Eyre",
+        "match_score": "1.0"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "theme",
+        "value": "gender",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre is often discussed through the theme of gender.",
+        "source": "curated_literary_kg_v1",
+        "match": "Jane Eyre",
+        "match_score": "0.85"
+      }
+    ],
+    "feedback": [
+      {
+        "reviewer": "deepseek_grammar",
+        "span": "Charlotte Bronte wrote Pride and Prejudice, and Jane Austen wrote Jane Eyre.",
+        "issue_type": "literary_fact",
+        "suggestion": "Revise to: 'Jane Austen wrote Pride and Prejudice, and Charlotte Bronte wrote Jane Eyre.'",
+        "rationale": "The student has reversed the authors: Pride and Prejudice is by Jane Austen, and Jane Eyre is by Charlotte Bronte.",
+        "confidence": 1.0,
+        "knowledge_evidence": [
+          "Pride and Prejudice | author | Jane Austen",
+          "Jane Eyre | author | Charlotte Bronte"
+        ],
+        "meaning_change_risk": "high"
+      },
+      {
+        "reviewer": "deepseek_grammar",
+        "span": "This shows the novels belong to the same author.",
+        "issue_type": "argument",
+        "suggestion": "Revise to: 'This shows the novels belong to different authors.'",
+        "rationale": "The conclusion contradicts the corrected fact; the novels are by different authors.",
+        "confidence": 1.0,
+        "knowledge_evidence": [
+          "Pride and Prejudice | author | Jane Austen",
+          "Jane Eyre | author | Charlotte Bronte"
+        ],
+        "meaning_change_risk": "high"
+      },
+      {
+        "reviewer": "kimi_grammar",
+        "span": "Charlotte Bronte wrote Pride and Prejudice, and Jane Austen wrote Jane Eyre.",
+        "issue_type": "literary_fact",
+        "suggestion": "Jane Austen wrote Pride and Prejudice, and Charlotte Bronte wrote Jane Eyre.",
+        "rationale": "The original statement incorrectly attributes the authors of the novels. Correcting this error is essential for maintaining the accuracy of literary facts.",
+        "confidence": 1.0,
+        "knowledge_evidence": [
+          "Pride and Prejudice | author | Jane Austen",
+          "Jane Eyre | author | Charlotte Bronte"
+        ],
+        "meaning_change_risk": "medium"
+      },
+      {
+        "reviewer": "qwen_literary_fact",
+        "span": "Charlotte Bronte wrote Pride and Prejudice, and Jane Austen wrote Jane Eyre.",
+        "issue_type": "literary_fact",
+        "suggestion": "Charlotte Brontë wrote Jane Eyre, and Jane Austen wrote Pride and Prejudice.",
+        "rationale": "The sentence misattributes authorship: retrieved knowledge confirms 'Pride and Prejudice | author | Jane Austen' and 'Jane Eyre | author | Charlotte Bronte'. Correcting this is essential for factual accuracy in literary analysis.",
+        "confidence": 1.0,
+        "knowledge_evidence": [
+          "Pride and Prejudice | author | Jane Austen",
+          "Jane Eyre | author | Charlotte Bronte"
+        ],
+        "meaning_change_risk": "medium"
+      },
+      {
+        "reviewer": "glm_argument",
+        "span": "Charlotte Bronte wrote Pride and Prejudice, and Jane Austen wrote Jane Eyre.",
+        "issue_type": "literary_fact",
+        "suggestion": "Correct the attribution of the novels to their respective authors.",
+        "rationale": "The literary knowledge indicates that Jane Austen wrote Pride and Prejudice, while Charlotte Bronte wrote Jane Eyre.",
+        "confidence": 1.0,
+        "knowledge_evidence": [
+          "Pride and Prejudice | author | Jane Austen, Jane Eyre | author | Charlotte Bronte"
+        ],
+        "meaning_change_risk": "high"
+      },
+      {
+        "reviewer": "glm_argument",
+        "span": "This shows the novels belong to the same author.",
+        "issue_type": "argument",
+        "suggestion": "Reconsider the connection between the novels based on their authors.",
+        "rationale": "The novels are by different authors, which implies they may have different themes, styles, and characters.",
+        "confidence": 0.8,
+        "knowledge_evidence": [
+          "Pride and Prejudice | author | Jane Austen, Jane Eyre | author | Charlotte Bronte"
+        ],
+        "meaning_change_risk": "medium"
+      }
+    ],
+    "decisions": [
+      {
+        "span": "Charlotte Bronte wrote Pride and Prejudice, and Jane Austen wrote Jane Eyre.",
+        "issue_type": "literary_fact",
+        "selected_suggestion": "Revise to: 'Jane Austen wrote Pride and Prejudice, and Charlotte Bronte wrote Jane Eyre.'",
+        "decision": "teacher_review",
+        "risk_level": "high",
+        "teacher_action": "Review meaning change",
+        "priority": 1,
+        "agreement": 0.25,
+        "avg_confidence": 1.0,
+        "kg_supported": true,
+        "evidence_count": 7,
+        "knowledge_evidence": "Pride and Prejudice | author | Jane Austen | Jane Eyre | author | Charlotte Bronte",
+        "rationale": "The suggestion may change interpretation, thesis framing, or student intent."
+      },
+      {
+        "span": "This shows the novels belong to the same author.",
+        "issue_type": "argument",
+        "selected_suggestion": "Revise to: 'This shows the novels belong to different authors.'",
+        "decision": "teacher_review",
+        "risk_level": "high",
+        "teacher_action": "Review meaning change",
+        "priority": 1,
+        "agreement": 0.5,
+        "avg_confidence": 0.9,
+        "kg_supported": true,
+        "evidence_count": 3,
+        "knowledge_evidence": "Pride and Prejudice | author | Jane Austen | Jane Eyre | author | Charlotte Bronte | Pride and Prejudice | author | Jane Austen, Jane Eyre | author | Charlotte Bronte",
+        "rationale": "The suggestion may change interpretation, thesis framing, or student intent."
+      }
+    ],
+    "reviewer_results": [
+      {
+        "provider": "deepseek",
+        "model": "deepseek-chat",
+        "reviewer_role": "grammar",
+        "feedback_items": 2,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 1.749
+      },
+      {
+        "provider": "glm",
+        "model": "glm-4-flash",
+        "reviewer_role": "argument",
+        "feedback_items": 2,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 19.038
+      },
+      {
+        "provider": "kimi",
+        "model": "moonshot-v1-8k",
+        "reviewer_role": "grammar",
+        "feedback_items": 1,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 3.777
+      },
+      {
+        "provider": "qwen",
+        "model": "qwen-plus",
+        "reviewer_role": "literary_fact",
+        "feedback_items": 1,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 4.493
+      }
+    ]
+  },
+  {
+    "id": "lit_esl_007",
+    "essay": "Hamlet is a comedy because the ending makes the audience happy, and Macbeth is a romance about marriage.",
+    "kg_rows": [
+      {
+        "entity": "Hamlet",
+        "relation": "author",
+        "value": "William Shakespeare",
+        "work": "Hamlet",
+        "evidence": "Hamlet is attributed to William Shakespeare.",
+        "source": "curated_literary_kg_v1",
+        "match": "Hamlet",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Hamlet",
+        "relation": "publication_year",
+        "value": "1603",
+        "work": "Hamlet",
+        "evidence": "Hamlet is conventionally dated to 1603.",
+        "source": "curated_literary_kg_v1",
+        "match": "Hamlet",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Hamlet",
+        "relation": "form",
+        "value": "play",
+        "work": "Hamlet",
+        "evidence": "Hamlet is a play.",
+        "source": "curated_literary_kg_v1",
+        "match": "Hamlet",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Hamlet",
+        "relation": "genre",
+        "value": "tragedy",
+        "work": "Hamlet",
+        "evidence": "Hamlet is commonly described as tragedy.",
+        "source": "curated_literary_kg_v1",
+        "match": "Hamlet",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Hamlet",
+        "relation": "central_character",
+        "value": "Claudius",
+        "work": "Hamlet",
+        "evidence": "Claudius is a central character in Hamlet.",
+        "source": "curated_literary_kg_v1",
+        "match": "Hamlet",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Hamlet",
+        "relation": "central_character",
+        "value": "Hamlet",
+        "work": "Hamlet",
+        "evidence": "Hamlet is a central character in Hamlet.",
+        "source": "curated_literary_kg_v1",
+        "match": "Hamlet",
+        "match_score": "1.0"
+      },
+      {
+        "entity": "Hamlet",
+        "relation": "central_character",
+        "value": "Ophelia",
+        "work": "Hamlet",
+        "evidence": "Ophelia is a central character in Hamlet.",
+        "source": "curated_literary_kg_v1",
+        "match": "Hamlet",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Hamlet",
+        "relation": "theme",
+        "value": "mortality",
+        "work": "Hamlet",
+        "evidence": "Hamlet is often discussed through the theme of mortality.",
+        "source": "curated_literary_kg_v1",
+        "match": "Hamlet",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Macbeth",
+        "relation": "author",
+        "value": "William Shakespeare",
+        "work": "Macbeth",
+        "evidence": "Macbeth is attributed to William Shakespeare.",
+        "source": "curated_literary_kg_v1",
+        "match": "Macbeth",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Macbeth",
+        "relation": "publication_year",
+        "value": "1606",
+        "work": "Macbeth",
+        "evidence": "Macbeth is conventionally dated to 1606.",
+        "source": "curated_literary_kg_v1",
+        "match": "Macbeth",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Macbeth",
+        "relation": "form",
+        "value": "play",
+        "work": "Macbeth",
+        "evidence": "Macbeth is a play.",
+        "source": "curated_literary_kg_v1",
+        "match": "Macbeth",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Macbeth",
+        "relation": "genre",
+        "value": "tragedy",
+        "work": "Macbeth",
+        "evidence": "Macbeth is commonly described as tragedy.",
+        "source": "curated_literary_kg_v1",
+        "match": "Macbeth",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Macbeth",
+        "relation": "central_character",
+        "value": "Lady Macbeth",
+        "work": "Macbeth",
+        "evidence": "Lady Macbeth is a central character in Macbeth.",
+        "source": "curated_literary_kg_v1",
+        "match": "Macbeth",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Macbeth",
+        "relation": "central_character",
+        "value": "Macbeth",
+        "work": "Macbeth",
+        "evidence": "Macbeth is a central character in Macbeth.",
+        "source": "curated_literary_kg_v1",
+        "match": "Macbeth",
+        "match_score": "1.0"
+      },
+      {
+        "entity": "Macbeth",
+        "relation": "theme",
+        "value": "ambition",
+        "work": "Macbeth",
+        "evidence": "Macbeth is often discussed through the theme of ambition.",
+        "source": "curated_literary_kg_v1",
+        "match": "Macbeth",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Macbeth",
+        "relation": "theme",
+        "value": "guilt",
+        "work": "Macbeth",
+        "evidence": "Macbeth is often discussed through the theme of guilt.",
+        "source": "curated_literary_kg_v1",
+        "match": "Macbeth",
+        "match_score": "0.85"
+      }
+    ],
+    "feedback": [
+      {
+        "reviewer": "deepseek_grammar",
+        "span": "Hamlet is a comedy",
+        "issue_type": "literary_fact",
+        "suggestion": "Consider describing Hamlet as a tragedy instead of a comedy.",
+        "rationale": "The retrieved knowledge indicates that Hamlet is commonly described as a tragedy, not a comedy.",
+        "confidence": 0.95,
+        "knowledge_evidence": [
+          "Hamlet | genre | tragedy: Hamlet is commonly described as tragedy."
+        ],
+        "meaning_change_risk": "high"
+      },
+      {
+        "reviewer": "deepseek_grammar",
+        "span": "Macbeth is a romance about marriage",
+        "issue_type": "literary_fact",
+        "suggestion": "Consider describing Macbeth as a tragedy instead of a romance.",
+        "rationale": "The retrieved knowledge indicates that Macbeth is commonly described as a tragedy, and the play does not primarily focus on marriage.",
+        "confidence": 0.95,
+        "knowledge_evidence": [
+          "Macbeth | genre | tragedy: Macbeth is commonly described as tragedy."
+        ],
+        "meaning_change_risk": "high"
+      },
+      {
+        "reviewer": "kimi_grammar",
+        "span": "Hamlet is a comedy because the ending makes the audience happy",
+        "issue_type": "literary_fact",
+        "suggestion": "Hamlet is a tragedy, not a comedy, and its ending is often considered tragic rather than happy.",
+        "rationale": "The genre of Hamlet is widely recognized as tragedy, and its themes and ending are typically discussed in the context of tragedy rather than comedy.",
+        "confidence": 1.0,
+        "knowledge_evidence": [
+          "Hamlet | genre | tragedy"
+        ],
+        "meaning_change_risk": "high"
+      },
+      {
+        "reviewer": "kimi_grammar",
+        "span": "Macbeth is a romance about marriage",
+        "issue_type": "literary_fact",
+        "suggestion": "Macbeth is a tragedy, not a romance, and it does not focus on marriage as its central theme.",
+        "rationale": "Macbeth is categorized as a tragedy and its themes revolve around ambition, power, and the consequences of moral corruption, not romance or marriage.",
+        "confidence": 1.0,
+        "knowledge_evidence": [
+          "Macbeth | genre | tragedy"
+        ],
+        "meaning_change_risk": "high"
+      },
+      {
+        "reviewer": "qwen_literary_fact",
+        "span": "Hamlet is a comedy",
+        "issue_type": "literary_fact",
+        "suggestion": "Hamlet is a tragedy",
+        "rationale": "Hamlet is universally classified in literary scholarship as a tragedy, not a comedy. Its themes of mortality, revenge, and existential despair, along with its fatal ending involving multiple deaths, align with the conventions of Renaissance tragedy.",
+        "confidence": 1.0,
+        "knowledge_evidence": [
+          "Hamlet | genre | tragedy"
+        ],
+        "meaning_change_risk": "high"
+      },
+      {
+        "reviewer": "qwen_literary_fact",
+        "span": "Macbeth is a romance about marriage",
+        "issue_type": "literary_fact",
+        "suggestion": "Macbeth is a tragedy",
+        "rationale": "Macbeth is consistently categorized as a tragedy in literary scholarship; it explores ambition, guilt, and moral collapse, culminating in the protagonist's death. It contains no central romantic or marital plot that defines the genre 'romance' (a distinct Shakespearean category reserved for late plays like The Tempest).",
+        "confidence": 1.0,
+        "knowledge_evidence": [
+          "Macbeth | genre | tragedy"
+        ],
+        "meaning_change_risk": "high"
+      },
+      {
+        "reviewer": "glm_argument",
+        "span": "Hamlet is a comedy because the ending makes the audience happy",
+        "issue_type": "literary_fact",
+        "suggestion": "Hamlet is not a comedy; it is a tragedy.",
+        "rationale": "Hamlet is widely recognized as a tragedy, with themes of revenge, betrayal, and moral corruption.",
+        "confidence": 1.0,
+        "knowledge_evidence": [
+          "Hamlet | genre | tragedy"
+        ],
+        "meaning_change_risk": "high"
+      },
+      {
+        "reviewer": "glm_argument",
+        "span": "Macbeth is a romance about marriage",
+        "issue_type": "literary_fact",
+        "suggestion": "Macbeth is not a romance; it is a tragedy.",
+        "rationale": "Macbeth is known for its themes of ambition, guilt, and the supernatural, not romance.",
+        "confidence": 1.0,
+        "knowledge_evidence": [
+          "Macbeth | genre | tragedy"
+        ],
+        "meaning_change_risk": "high"
+      }
+    ],
+    "decisions": [
+      {
+        "span": "Macbeth is a romance about marriage",
+        "issue_type": "literary_fact",
+        "selected_suggestion": "Consider describing Macbeth as a tragedy instead of a romance.",
+        "decision": "teacher_review",
+        "risk_level": "high",
+        "teacher_action": "Review meaning change",
+        "priority": 1,
+        "agreement": 0.25,
+        "avg_confidence": 0.988,
+        "kg_supported": true,
+        "evidence_count": 4,
+        "knowledge_evidence": "Macbeth | genre | tragedy: Macbeth is commonly described as tragedy. | Macbeth | genre | tragedy",
+        "rationale": "The suggestion may change interpretation, thesis framing, or student intent."
+      },
+      {
+        "span": "Hamlet is a comedy",
+        "issue_type": "literary_fact",
+        "selected_suggestion": "Consider describing Hamlet as a tragedy instead of a comedy.",
+        "decision": "teacher_review",
+        "risk_level": "medium",
+        "teacher_action": "Verify factual correction",
+        "priority": 2,
+        "agreement": 0.5,
+        "avg_confidence": 0.975,
+        "kg_supported": true,
+        "evidence_count": 2,
+        "knowledge_evidence": "Hamlet | genre | tragedy: Hamlet is commonly described as tragedy. | Hamlet | genre | tragedy",
+        "rationale": "Knowledge-supported factual correction; route to teacher review before changing the essay."
+      },
+      {
+        "span": "Hamlet is a comedy because the ending makes the audience happy",
+        "issue_type": "literary_fact",
+        "selected_suggestion": "Hamlet is a tragedy, not a comedy, and its ending is often considered tragic rather than happy.",
+        "decision": "teacher_review",
+        "risk_level": "medium",
+        "teacher_action": "Verify factual correction",
+        "priority": 2,
+        "agreement": 0.5,
+        "avg_confidence": 1.0,
+        "kg_supported": true,
+        "evidence_count": 2,
+        "knowledge_evidence": "Hamlet | genre | tragedy",
+        "rationale": "Knowledge-supported factual correction; route to teacher review before changing the essay."
+      }
+    ],
+    "reviewer_results": [
+      {
+        "provider": "deepseek",
+        "model": "deepseek-chat",
+        "reviewer_role": "grammar",
+        "feedback_items": 2,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 1.726
+      },
+      {
+        "provider": "glm",
+        "model": "glm-4-flash",
+        "reviewer_role": "argument",
+        "feedback_items": 2,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 14.014
+      },
+      {
+        "provider": "kimi",
+        "model": "moonshot-v1-8k",
+        "reviewer_role": "grammar",
+        "feedback_items": 2,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 5.72
+      },
+      {
+        "provider": "qwen",
+        "model": "qwen-plus",
+        "reviewer_role": "literary_fact",
+        "feedback_items": 2,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 6.437
+      }
+    ]
+  },
+  {
+    "id": "lit_esl_008",
+    "essay": "In Wuthering Heights, Jane Eyre marries Heathcliff, so both novels describe the same romantic relationship.",
+    "kg_rows": [
+      {
+        "entity": "Wuthering Heights",
+        "relation": "author",
+        "value": "Emily Bronte",
+        "work": "Wuthering Heights",
+        "evidence": "Wuthering Heights is attributed to Emily Bronte.",
+        "source": "curated_literary_kg_v1",
+        "match": "Wuthering Heights",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Wuthering Heights",
+        "relation": "publication_year",
+        "value": "1847",
+        "work": "Wuthering Heights",
+        "evidence": "Wuthering Heights is conventionally dated to 1847.",
+        "source": "curated_literary_kg_v1",
+        "match": "Wuthering Heights",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Wuthering Heights",
+        "relation": "form",
+        "value": "novel",
+        "work": "Wuthering Heights",
+        "evidence": "Wuthering Heights is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "Wuthering Heights",
+        "match_score": "1.0"
+      },
+      {
+        "entity": "Wuthering Heights",
+        "relation": "genre",
+        "value": "Gothic fiction",
+        "work": "Wuthering Heights",
+        "evidence": "Wuthering Heights is commonly described as Gothic fiction.",
+        "source": "curated_literary_kg_v1",
+        "match": "Wuthering Heights",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Wuthering Heights",
+        "relation": "central_character",
+        "value": "Catherine Earnshaw",
+        "work": "Wuthering Heights",
+        "evidence": "Catherine Earnshaw is a central character in Wuthering Heights.",
+        "source": "curated_literary_kg_v1",
+        "match": "Wuthering Heights",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Wuthering Heights",
+        "relation": "central_character",
+        "value": "Heathcliff",
+        "work": "Wuthering Heights",
+        "evidence": "Heathcliff is a central character in Wuthering Heights.",
+        "source": "curated_literary_kg_v1",
+        "match": "Wuthering Heights",
+        "match_score": "1.0"
+      },
+      {
+        "entity": "Wuthering Heights",
+        "relation": "theme",
+        "value": "destructive love",
+        "work": "Wuthering Heights",
+        "evidence": "Wuthering Heights is often discussed through the theme of destructive love.",
+        "source": "curated_literary_kg_v1",
+        "match": "Wuthering Heights",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Wuthering Heights",
+        "relation": "theme",
+        "value": "revenge",
+        "work": "Wuthering Heights",
+        "evidence": "Wuthering Heights is often discussed through the theme of revenge.",
+        "source": "curated_literary_kg_v1",
+        "match": "Wuthering Heights",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "author",
+        "value": "Charlotte Bronte",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre is attributed to Charlotte Bronte.",
+        "source": "curated_literary_kg_v1",
+        "match": "Jane Eyre",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "publication_year",
+        "value": "1847",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre is conventionally dated to 1847.",
+        "source": "curated_literary_kg_v1",
+        "match": "Jane Eyre",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "form",
+        "value": "novel",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "Jane Eyre",
+        "match_score": "1.0"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "genre",
+        "value": "Bildungsroman",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre is commonly described as Bildungsroman.",
+        "source": "curated_literary_kg_v1",
+        "match": "Jane Eyre",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "genre",
+        "value": "Gothic fiction",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre is commonly described as Gothic fiction.",
+        "source": "curated_literary_kg_v1",
+        "match": "Jane Eyre",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "central_character",
+        "value": "Edward Rochester",
+        "work": "Jane Eyre",
+        "evidence": "Edward Rochester is a central character in Jane Eyre.",
+        "source": "curated_literary_kg_v1",
+        "match": "Jane Eyre",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "central_character",
+        "value": "Jane Eyre",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre is a central character in Jane Eyre.",
+        "source": "curated_literary_kg_v1",
+        "match": "Jane Eyre",
+        "match_score": "1.0"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "theme",
+        "value": "gender",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre is often discussed through the theme of gender.",
+        "source": "curated_literary_kg_v1",
+        "match": "Jane Eyre",
+        "match_score": "0.85"
+      }
+    ],
+    "feedback": [
+      {
+        "reviewer": "deepseek_grammar",
+        "span": "Jane Eyre marries Heathcliff",
+        "issue_type": "literary_fact",
+        "suggestion": "In Wuthering Heights, Catherine Earnshaw marries Heathcliff, while in Jane Eyre, the protagonist marries Mr. Rochester.",
+        "rationale": "The student confuses the characters: Jane Eyre is the protagonist of Charlotte Brontë's novel, not a character in Wuthering Heights, and she marries Mr. Rochester, not Heathcliff.",
+        "confidence": 1.0,
+        "knowledge_evidence": [
+          "Jane Eyre is attributed to Charlotte Bronte. Wuthering Heights central characters include Catherine Earnshaw and Heathcliff."
+        ],
+        "meaning_change_risk": "high"
+      },
+      {
+        "reviewer": "deepseek_grammar",
+        "span": "so both novels describe the same romantic relationship",
+        "issue_type": "argument",
+        "suggestion": "Consider revising to: 'so both novels explore intense, complex romantic relationships, though they differ in outcome and tone.'",
+        "rationale": "The claim that both novels describe the same romantic relationship is inaccurate; they involve different characters and dynamics. The suggestion preserves a comparative angle while correcting the factual error.",
+        "confidence": 0.9,
+        "knowledge_evidence": [
+          "Wuthering Heights is often discussed through the theme of destructive love; Jane Eyre is a Bildungsroman with a romantic plot involving Mr. Rochester."
+        ],
+        "meaning_change_risk": "high"
+      },
+      {
+        "reviewer": "kimi_grammar",
+        "span": "Jane Eyre marries Heathcliff",
+        "issue_type": "literary_fact",
+        "suggestion": "In Wuthering Heights, Catherine Earnshaw marries Edgar Linton, not Heathcliff. Jane Eyre is a separate novel with a different plot and characters.",
+        "rationale": "The student has confused characters and events from two different novels. Correcting this will help clarify the literary facts and prevent misunderstanding.",
+        "confidence": 1.0,
+        "knowledge_evidence": [
+          "Wuthering Heights | central_character | Catherine Earnshaw",
+          "Wuthering Heights | central_character | Heathcliff",
+          "Jane Eyre | author | Charlotte Bronte"
+        ],
+        "meaning_change_risk": "medium"
+      },
+      {
+        "reviewer": "qwen_literary_fact",
+        "span": "In Wuthering Heights, Jane Eyre marries Heathcliff",
+        "issue_type": "literary_fact",
+        "suggestion": "Revise to clarify that Jane Eyre and Heathcliff are characters from separate novels: Jane Eyre is the protagonist of Charlotte Brontë’s Jane Eyre, and Heathcliff is a central character in Emily Brontë’s Wuthering Heights.",
+        "rationale": "Jane Eyre does not appear in Wuthering Heights, nor does she marry Heathcliff; the two characters belong to distinct novels with no narrative overlap. Conflating them misrepresents fundamental literary facts about authorship, character distribution, and textual boundaries.",
+        "confidence": 1.0,
+        "knowledge_evidence": [
+          "Wuthering Heights | central_character | Heathcliff",
+          "Jane Eyre | author | Charlotte Bronte",
+          "Wuthering Heights | author | Emily Bronte"
+        ],
+        "meaning_change_risk": "high"
+      },
+      {
+        "reviewer": "glm_argument",
+        "span": "In Wuthering Heights, Jane Eyre marries Heathcliff, so both novels describe the same romantic relationship.",
+        "issue_type": "argument",
+        "suggestion": "Reconsider the assertion that Jane Eyre marries Heathcliff in Wuthering Heights, as this is not accurate.",
+        "rationale": "The romantic relationship between Jane Eyre and Heathcliff is a central plot point in Wuthering Heights, but Jane Eyre is a character from Charlotte Bronte's novel Jane Eyre.",
+        "confidence": 1.0,
+        "knowledge_evidence": [
+          "Wuthering Heights | author | Emily Bronte\nJane Eyre | author | Charlotte Bronte"
+        ],
+        "meaning_change_risk": "high"
+      },
+      {
+        "reviewer": "glm_argument",
+        "span": "so both novels describe the same romantic relationship.",
+        "issue_type": "argument",
+        "suggestion": "Clarify that the romantic relationships in both novels are distinct and not the same.",
+        "rationale": "The romantic relationships in Wuthering Heights and Jane Eyre are unique to each novel and do not share the same characters or outcomes.",
+        "confidence": 1.0,
+        "knowledge_evidence": [
+          "Wuthering Heights | central_character | Catherine Earnshaw\nWuthering Heights | central_character | Heathcliff\nJane Eyre | central_character | Jane Eyre\nJane Eyre | central_character | Rochester"
+        ],
+        "meaning_change_risk": "medium"
+      }
+    ],
+    "decisions": [
+      {
+        "span": "In Wuthering Heights, Jane Eyre marries Heathcliff, so both novels describe the same romantic relationship.",
+        "issue_type": "argument",
+        "selected_suggestion": "Reconsider the assertion that Jane Eyre marries Heathcliff in Wuthering Heights, as this is not accurate.",
+        "decision": "teacher_review",
+        "risk_level": "high",
+        "teacher_action": "Review meaning change",
+        "priority": 1,
+        "agreement": 1.0,
+        "avg_confidence": 1.0,
+        "kg_supported": true,
+        "evidence_count": 1,
+        "knowledge_evidence": "Wuthering Heights | author | Emily Bronte\nJane Eyre | author | Charlotte Bronte",
+        "rationale": "The suggestion may change interpretation, thesis framing, or student intent."
+      },
+      {
+        "span": "so both novels describe the same romantic relationship",
+        "issue_type": "argument",
+        "selected_suggestion": "Consider revising to: 'so both novels explore intense, complex romantic relationships, though they differ in outcome and tone.'",
+        "decision": "teacher_review",
+        "risk_level": "high",
+        "teacher_action": "Review meaning change",
+        "priority": 1,
+        "agreement": 0.5,
+        "avg_confidence": 0.95,
+        "kg_supported": true,
+        "evidence_count": 2,
+        "knowledge_evidence": "Wuthering Heights is often discussed through the theme of destructive love; Jane Eyre is a Bildungsroman with a romantic plot involving Mr. Rochester. | Wuthering Heights | central_character | Catherine Earnshaw\nWuthering Heights | central_character | Heathcliff\nJane Eyre | central_character | Jane Eyre\nJane Eyre | central_character | Rochester",
+        "rationale": "The suggestion may change interpretation, thesis framing, or student intent."
+      },
+      {
+        "span": "In Wuthering Heights, Jane Eyre marries Heathcliff",
+        "issue_type": "literary_fact",
+        "selected_suggestion": "Revise to clarify that Jane Eyre and Heathcliff are characters from separate novels: Jane Eyre is the protagonist of Charlotte Brontë’s Jane Eyre, and Heathcliff is a central character in Emily Brontë’s Wuthering Heights.",
+        "decision": "teacher_review",
+        "risk_level": "medium",
+        "teacher_action": "Verify factual correction",
+        "priority": 2,
+        "agreement": 1.0,
+        "avg_confidence": 1.0,
+        "kg_supported": true,
+        "evidence_count": 3,
+        "knowledge_evidence": "Wuthering Heights | central_character | Heathcliff | Jane Eyre | author | Charlotte Bronte | Wuthering Heights | author | Emily Bronte",
+        "rationale": "Knowledge-supported factual correction; route to teacher review before changing the essay."
+      },
+      {
+        "span": "Jane Eyre marries Heathcliff",
+        "issue_type": "literary_fact",
+        "selected_suggestion": "In Wuthering Heights, Catherine Earnshaw marries Heathcliff, while in Jane Eyre, the protagonist marries Mr. Rochester.",
+        "decision": "teacher_review",
+        "risk_level": "medium",
+        "teacher_action": "Verify factual correction",
+        "priority": 2,
+        "agreement": 0.5,
+        "avg_confidence": 1.0,
+        "kg_supported": true,
+        "evidence_count": 4,
+        "knowledge_evidence": "Jane Eyre is attributed to Charlotte Bronte. Wuthering Heights central characters include Catherine Earnshaw and Heathcliff. | Wuthering Heights | central_character | Catherine Earnshaw | Wuthering Heights | central_character | Heathcliff",
+        "rationale": "Knowledge-supported factual correction; route to teacher review before changing the essay."
+      }
+    ],
+    "reviewer_results": [
+      {
+        "provider": "deepseek",
+        "model": "deepseek-chat",
+        "reviewer_role": "grammar",
+        "feedback_items": 2,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 2.753
+      },
+      {
+        "provider": "glm",
+        "model": "glm-4-flash",
+        "reviewer_role": "argument",
+        "feedback_items": 2,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 22.208
+      },
+      {
+        "provider": "kimi",
+        "model": "moonshot-v1-8k",
+        "reviewer_role": "grammar",
+        "feedback_items": 1,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 4.777
+      },
+      {
+        "provider": "qwen",
+        "model": "qwen-plus",
+        "reviewer_role": "literary_fact",
+        "feedback_items": 1,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 5.414
+      }
+    ]
+  },
+  {
+    "id": "lit_esl_009",
+    "essay": "The Picture of Dorian Gray was written by Charles Dickens, and it proves Victorian society had no concern with art.",
+    "kg_rows": [
+      {
+        "entity": "The Picture of Dorian Gray",
+        "relation": "author",
+        "value": "Oscar Wilde",
+        "work": "The Picture of Dorian Gray",
+        "evidence": "The Picture of Dorian Gray is attributed to Oscar Wilde.",
+        "source": "curated_literary_kg_v1",
+        "match": "The Picture of Dorian Gray",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "The Picture of Dorian Gray",
+        "relation": "publication_year",
+        "value": "1890",
+        "work": "The Picture of Dorian Gray",
+        "evidence": "The Picture of Dorian Gray is conventionally dated to 1890.",
+        "source": "curated_literary_kg_v1",
+        "match": "The Picture of Dorian Gray",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "The Picture of Dorian Gray",
+        "relation": "form",
+        "value": "novel",
+        "work": "The Picture of Dorian Gray",
+        "evidence": "The Picture of Dorian Gray is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "The Picture of Dorian Gray",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "The Picture of Dorian Gray",
+        "relation": "genre",
+        "value": "Gothic fiction",
+        "work": "The Picture of Dorian Gray",
+        "evidence": "The Picture of Dorian Gray is commonly described as Gothic fiction.",
+        "source": "curated_literary_kg_v1",
+        "match": "The Picture of Dorian Gray",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "The Picture of Dorian Gray",
+        "relation": "genre",
+        "value": "philosophical fiction",
+        "work": "The Picture of Dorian Gray",
+        "evidence": "The Picture of Dorian Gray is commonly described as philosophical fiction.",
+        "source": "curated_literary_kg_v1",
+        "match": "The Picture of Dorian Gray",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "The Picture of Dorian Gray",
+        "relation": "central_character",
+        "value": "Basil Hallward",
+        "work": "The Picture of Dorian Gray",
+        "evidence": "Basil Hallward is a central character in The Picture of Dorian Gray.",
+        "source": "curated_literary_kg_v1",
+        "match": "The Picture of Dorian Gray",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "The Picture of Dorian Gray",
+        "relation": "central_character",
+        "value": "Dorian Gray",
+        "work": "The Picture of Dorian Gray",
+        "evidence": "Dorian Gray is a central character in The Picture of Dorian Gray.",
+        "source": "curated_literary_kg_v1",
+        "match": "The Picture of Dorian Gray",
+        "match_score": "1.0"
+      },
+      {
+        "entity": "The Picture of Dorian Gray",
+        "relation": "central_character",
+        "value": "Lord Henry Wotton",
+        "work": "The Picture of Dorian Gray",
+        "evidence": "Lord Henry Wotton is a central character in The Picture of Dorian Gray.",
+        "source": "curated_literary_kg_v1",
+        "match": "The Picture of Dorian Gray",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Great Expectations",
+        "relation": "author",
+        "value": "Charles Dickens",
+        "work": "Great Expectations",
+        "evidence": "Great Expectations is attributed to Charles Dickens.",
+        "source": "curated_literary_kg_v1",
+        "match": "Charles Dickens",
+        "match_score": "0.7"
+      },
+      {
+        "entity": "Oliver Twist",
+        "relation": "author",
+        "value": "Charles Dickens",
+        "work": "Oliver Twist",
+        "evidence": "Oliver Twist is attributed to Charles Dickens.",
+        "source": "curated_literary_kg_v1",
+        "match": "Charles Dickens",
+        "match_score": "0.7"
+      },
+      {
+        "entity": "A Tale of Two Cities",
+        "relation": "author",
+        "value": "Charles Dickens",
+        "work": "A Tale of Two Cities",
+        "evidence": "A Tale of Two Cities is attributed to Charles Dickens.",
+        "source": "curated_literary_kg_v1",
+        "match": "Charles Dickens",
+        "match_score": "0.7"
+      }
+    ],
+    "feedback": [
+      {
+        "reviewer": "deepseek_grammar",
+        "span": "The Picture of Dorian Gray was written by Charles Dickens",
+        "issue_type": "literary_fact",
+        "suggestion": "Change 'Charles Dickens' to 'Oscar Wilde'.",
+        "rationale": "The retrieved knowledge confirms that The Picture of Dorian Gray is authored by Oscar Wilde, not Charles Dickens.",
+        "confidence": 1.0,
+        "knowledge_evidence": [
+          "The Picture of Dorian Gray | author | Oscar Wilde"
+        ],
+        "meaning_change_risk": "high"
+      },
+      {
+        "reviewer": "kimi_grammar",
+        "span": "Charles Dickens",
+        "issue_type": "literary_fact",
+        "suggestion": "Oscar Wilde",
+        "rationale": "The author of 'The Picture of Dorian Gray' is Oscar Wilde, not Charles Dickens.",
+        "confidence": 1.0,
+        "knowledge_evidence": [
+          "The Picture of Dorian Gray | author | Oscar Wilde"
+        ],
+        "meaning_change_risk": "medium"
+      },
+      {
+        "reviewer": "qwen_literary_fact",
+        "span": "The Picture of Dorian Gray was written by Charles Dickens",
+        "issue_type": "literary_fact",
+        "suggestion": "Replace 'Charles Dickens' with 'Oscar Wilde'",
+        "rationale": "The authorship of The Picture of Dorian Gray is definitively attributed to Oscar Wilde, not Charles Dickens. Dickens authored other major Victorian novels (e.g., Great Expectations, Oliver Twist), but not this work.",
+        "confidence": 1.0,
+        "knowledge_evidence": [
+          "The Picture of Dorian Gray | author | Oscar Wilde",
+          "Great Expectations | author | Charles Dickens",
+          "Oliver Twist | author | Charles Dickens"
+        ],
+        "meaning_change_risk": "medium"
+      },
+      {
+        "reviewer": "qwen_literary_fact",
+        "span": "it proves Victorian society had no concern with art",
+        "issue_type": "literary_fact",
+        "suggestion": "Revise to reflect that the novel critically engages with Victorian attitudes toward art—particularly through the Aesthetic movement—and does not 'prove' a monolithic lack of concern",
+        "rationale": "The novel itself is a product of and commentary on late-Victorian aesthetic debates; it dramatizes conflicting views on art’s moral function (e.g., Basil’s idealism vs. Lord Henry’s hedonism), rather than asserting society’s wholesale indifference.",
+        "confidence": 0.95,
+        "knowledge_evidence": [
+          "The Picture of Dorian Gray | genre | philosophical fiction",
+          "The Picture of Dorian Gray | genre | Gothic fiction"
+        ],
+        "meaning_change_risk": "high"
+      },
+      {
+        "reviewer": "glm_argument",
+        "span": "The Picture of Dorian Gray was written by Charles Dickens",
+        "issue_type": "literary_fact",
+        "suggestion": "The Picture of Dorian Gray was written by Oscar Wilde, not Charles Dickens.",
+        "rationale": "The authorship of The Picture of Dorian Gray is a well-documented fact in literary history.",
+        "confidence": 1.0,
+        "knowledge_evidence": [
+          "The Picture of Dorian Gray | author | Oscar Wilde"
+        ],
+        "meaning_change_risk": "high"
+      },
+      {
+        "reviewer": "glm_argument",
+        "span": "Victorian society had no concern with art",
+        "issue_type": "argument",
+        "suggestion": "Reconsider the claim that Victorian society had no concern with art. The novel explores themes of art and morality, suggesting a complex relationship with art.",
+        "rationale": "The novel itself is a product of the Victorian era and addresses the role of art within society.",
+        "confidence": 0.8,
+        "knowledge_evidence": [
+          "The Picture of Dorian Gray | genre | Gothic fiction, The Picture of Dorian Gray | genre | philosophical fiction"
+        ],
+        "meaning_change_risk": "medium"
+      }
+    ],
+    "decisions": [
+      {
+        "span": "The Picture of Dorian Gray was written by Charles Dickens",
+        "issue_type": "literary_fact",
+        "selected_suggestion": "Change 'Charles Dickens' to 'Oscar Wilde'.",
+        "decision": "teacher_review",
+        "risk_level": "high",
+        "teacher_action": "Review meaning change",
+        "priority": 1,
+        "agreement": 0.333,
+        "avg_confidence": 1.0,
+        "kg_supported": true,
+        "evidence_count": 5,
+        "knowledge_evidence": "The Picture of Dorian Gray | author | Oscar Wilde | Great Expectations | author | Charles Dickens",
+        "rationale": "The suggestion may change interpretation, thesis framing, or student intent."
+      },
+      {
+        "span": "Charles Dickens",
+        "issue_type": "literary_fact",
+        "selected_suggestion": "Oscar Wilde",
+        "decision": "teacher_review",
+        "risk_level": "medium",
+        "teacher_action": "Verify factual correction",
+        "priority": 2,
+        "agreement": 1.0,
+        "avg_confidence": 1.0,
+        "kg_supported": true,
+        "evidence_count": 1,
+        "knowledge_evidence": "The Picture of Dorian Gray | author | Oscar Wilde",
+        "rationale": "Knowledge-supported factual correction; route to teacher review before changing the essay."
+      },
+      {
+        "span": "it proves Victorian society had no concern with art",
+        "issue_type": "literary_fact",
+        "selected_suggestion": "Revise to reflect that the novel critically engages with Victorian attitudes toward art—particularly through the Aesthetic movement—and does not 'prove' a monolithic lack of concern",
+        "decision": "teacher_review",
+        "risk_level": "medium",
+        "teacher_action": "Verify factual correction",
+        "priority": 2,
+        "agreement": 1.0,
+        "avg_confidence": 0.95,
+        "kg_supported": true,
+        "evidence_count": 2,
+        "knowledge_evidence": "The Picture of Dorian Gray | genre | philosophical fiction | The Picture of Dorian Gray | genre | Gothic fiction",
+        "rationale": "Knowledge-supported factual correction; route to teacher review before changing the essay."
+      },
+      {
+        "span": "Victorian society had no concern with art",
+        "issue_type": "argument",
+        "selected_suggestion": "Reconsider the claim that Victorian society had no concern with art. The novel explores themes of art and morality, suggesting a complex relationship with art.",
+        "decision": "teacher_review",
+        "risk_level": "medium",
+        "teacher_action": "Review meaning change",
+        "priority": 2,
+        "agreement": 1.0,
+        "avg_confidence": 0.8,
+        "kg_supported": true,
+        "evidence_count": 1,
+        "knowledge_evidence": "The Picture of Dorian Gray | genre | Gothic fiction, The Picture of Dorian Gray | genre | philosophical fiction",
+        "rationale": "The suggestion may change interpretation, thesis framing, or student intent."
+      }
+    ],
+    "reviewer_results": [
+      {
+        "provider": "deepseek",
+        "model": "deepseek-chat",
+        "reviewer_role": "grammar",
+        "feedback_items": 1,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 1.115
+      },
+      {
+        "provider": "glm",
+        "model": "glm-4-flash",
+        "reviewer_role": "argument",
+        "feedback_items": 2,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 20.877
+      },
+      {
+        "provider": "kimi",
+        "model": "moonshot-v1-8k",
+        "reviewer_role": "grammar",
+        "feedback_items": 1,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 2.649
+      },
+      {
+        "provider": "qwen",
+        "model": "qwen-plus",
+        "reviewer_role": "literary_fact",
+        "feedback_items": 2,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 8.077
+      }
+    ]
+  },
+  {
+    "id": "lit_esl_010",
+    "essay": "Dracula is written by Mary Shelley, and the novel is mainly about industrial education.",
+    "kg_rows": [
+      {
+        "entity": "Dracula",
+        "relation": "author",
+        "value": "Bram Stoker",
+        "work": "Dracula",
+        "evidence": "Dracula is attributed to Bram Stoker.",
+        "source": "curated_literary_kg_v1",
+        "match": "Dracula",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Dracula",
+        "relation": "publication_year",
+        "value": "1897",
+        "work": "Dracula",
+        "evidence": "Dracula is conventionally dated to 1897.",
+        "source": "curated_literary_kg_v1",
+        "match": "Dracula",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Dracula",
+        "relation": "form",
+        "value": "novel",
+        "work": "Dracula",
+        "evidence": "Dracula is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "Dracula",
+        "match_score": "1.0"
+      },
+      {
+        "entity": "Dracula",
+        "relation": "genre",
+        "value": "Gothic fiction",
+        "work": "Dracula",
+        "evidence": "Dracula is commonly described as Gothic fiction.",
+        "source": "curated_literary_kg_v1",
+        "match": "Dracula",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Dracula",
+        "relation": "genre",
+        "value": "horror fiction",
+        "work": "Dracula",
+        "evidence": "Dracula is commonly described as horror fiction.",
+        "source": "curated_literary_kg_v1",
+        "match": "Dracula",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Dracula",
+        "relation": "central_character",
+        "value": "Count Dracula",
+        "work": "Dracula",
+        "evidence": "Count Dracula is a central character in Dracula.",
+        "source": "curated_literary_kg_v1",
+        "match": "Dracula",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Dracula",
+        "relation": "central_character",
+        "value": "Jonathan Harker",
+        "work": "Dracula",
+        "evidence": "Jonathan Harker is a central character in Dracula.",
+        "source": "curated_literary_kg_v1",
+        "match": "Dracula",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Dracula",
+        "relation": "central_character",
+        "value": "Mina Harker",
+        "work": "Dracula",
+        "evidence": "Mina Harker is a central character in Dracula.",
+        "source": "curated_literary_kg_v1",
+        "match": "Dracula",
+        "match_score": "0.85"
+      },
+      {
+        "entity": "Frankenstein",
+        "relation": "author",
+        "value": "Mary Shelley",
+        "work": "Frankenstein",
+        "evidence": "Frankenstein is attributed to Mary Shelley.",
+        "source": "curated_literary_kg_v1",
+        "match": "Mary Shelley",
+        "match_score": "0.7"
+      },
+      {
+        "entity": "Frankenstein",
+        "relation": "form",
+        "value": "novel",
+        "work": "Frankenstein",
+        "evidence": "Frankenstein is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "novel",
+        "match_score": "0.7"
+      },
+      {
+        "entity": "Jane Eyre",
+        "relation": "form",
+        "value": "novel",
+        "work": "Jane Eyre",
+        "evidence": "Jane Eyre is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "novel",
+        "match_score": "0.7"
+      },
+      {
+        "entity": "Pride and Prejudice",
+        "relation": "form",
+        "value": "novel",
+        "work": "Pride and Prejudice",
+        "evidence": "Pride and Prejudice is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "novel",
+        "match_score": "0.7"
+      },
+      {
+        "entity": "Wuthering Heights",
+        "relation": "form",
+        "value": "novel",
+        "work": "Wuthering Heights",
+        "evidence": "Wuthering Heights is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "novel",
+        "match_score": "0.7"
+      },
+      {
+        "entity": "Great Expectations",
+        "relation": "form",
+        "value": "novel",
+        "work": "Great Expectations",
+        "evidence": "Great Expectations is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "novel",
+        "match_score": "0.7"
+      },
+      {
+        "entity": "Oliver Twist",
+        "relation": "form",
+        "value": "novel",
+        "work": "Oliver Twist",
+        "evidence": "Oliver Twist is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "novel",
+        "match_score": "0.7"
+      },
+      {
+        "entity": "A Tale of Two Cities",
+        "relation": "form",
+        "value": "novel",
+        "work": "A Tale of Two Cities",
+        "evidence": "A Tale of Two Cities is a novel.",
+        "source": "curated_literary_kg_v1",
+        "match": "novel",
+        "match_score": "0.7"
+      }
+    ],
+    "feedback": [
+      {
+        "reviewer": "deepseek_grammar",
+        "span": "Dracula is written by Mary Shelley",
+        "issue_type": "literary_fact",
+        "suggestion": "Change 'Mary Shelley' to 'Bram Stoker'.",
+        "rationale": "The student incorrectly attributes Dracula to Mary Shelley, who is the author of Frankenstein. Retrieved knowledge confirms Dracula is by Bram Stoker.",
+        "confidence": 0.99,
+        "knowledge_evidence": [
+          "Dracula | author | Bram Stoker"
+        ],
+        "meaning_change_risk": "high"
+      },
+      {
+        "reviewer": "deepseek_grammar",
+        "span": "industrial education",
+        "issue_type": "argument",
+        "suggestion": "Consider whether 'industrial education' is a central theme of Dracula. If not, revise to a more accurate theme such as 'the fear of modernity' or 'the conflict between science and superstition'.",
+        "rationale": "The phrase 'industrial education' does not align with common interpretations of Dracula, which is a Gothic horror novel. The student may have confused it with another work.",
+        "confidence": 0.85,
+        "knowledge_evidence": [
+          "Dracula | genre | Gothic fiction; Dracula | genre | horror fiction"
+        ],
+        "meaning_change_risk": "high"
+      },
+      {
+        "reviewer": "kimi_grammar",
+        "span": "Dracula is written by Mary Shelley",
+        "issue_type": "literary_fact",
+        "suggestion": "Dracula is written by Bram Stoker",
+        "rationale": "The author of Dracula is commonly known to be Bram Stoker, not Mary Shelley. This correction is necessary to maintain the accuracy of literary facts.",
+        "confidence": 1.0,
+        "knowledge_evidence": [
+          "Dracula | author | Bram Stoker"
+        ],
+        "meaning_change_risk": "medium"
+      },
+      {
+        "reviewer": "kimi_grammar",
+        "span": "and the novel is mainly about industrial education",
+        "issue_type": "word_choice",
+        "suggestion": "and the novel is mainly about a vampire and his victims",
+        "rationale": "The novel Dracula is not about industrial education but rather focuses on Gothic and horror themes involving a vampire, Count Dracula, and his interactions with various characters.",
+        "confidence": 1.0,
+        "knowledge_evidence": [
+          "Dracula | genre | Gothic fiction, Dracula | genre | horror fiction"
+        ],
+        "meaning_change_risk": "high"
+      },
+      {
+        "reviewer": "qwen_literary_fact",
+        "span": "Dracula is written by Mary Shelley",
+        "issue_type": "literary_fact",
+        "suggestion": "Dracula is written by Bram Stoker",
+        "rationale": "The retrieved knowledge explicitly states 'Dracula | author | Bram Stoker', while 'Frankenstein | author | Mary Shelley' confirms Mary Shelley authored Frankenstein, not Dracula.",
+        "confidence": 1.0,
+        "knowledge_evidence": [
+          "Dracula | author | Bram Stoker",
+          "Frankenstein | author | Mary Shelley"
+        ],
+        "meaning_change_risk": "medium"
+      },
+      {
+        "reviewer": "qwen_literary_fact",
+        "span": "the novel is mainly about industrial education",
+        "issue_type": "literary_fact",
+        "suggestion": "the novel is mainly about the threat of foreign evil, vampirism, and the clash between modernity and superstition",
+        "rationale": "The retrieved knowledge identifies Dracula as Gothic and horror fiction, centered on characters like Count Dracula, Jonathan Harker, and Mina Harker—none of which support 'industrial education' as a theme; that concept does not appear in any retrieved fact and contradicts established genre and character evidence.",
+        "confidence": 0.98,
+        "knowledge_evidence": [
+          "Dracula | genre | Gothic fiction",
+          "Dracula | genre | horror fiction",
+          "Dracula | central_character | Count Dracula",
+          "Dracula | central_character | Jonathan Harker",
+          "Dracula | central_character | Mina Harker"
+        ],
+        "meaning_change_risk": "high"
+      },
+      {
+        "reviewer": "glm_argument",
+        "span": "Dracula is written by Mary Shelley",
+        "issue_type": "literary_fact",
+        "suggestion": "Dracula is not written by Mary Shelley, but by Bram Stoker.",
+        "rationale": "The correct authorship of Dracula is a well-documented fact in literary history.",
+        "confidence": 1.0,
+        "knowledge_evidence": [
+          "Bram Stoker | author | Dracula"
+        ],
+        "meaning_change_risk": "high"
+      },
+      {
+        "reviewer": "glm_argument",
+        "span": "the novel is mainly about industrial education",
+        "issue_type": "argument",
+        "suggestion": "Dracula is primarily a Gothic and horror novel, not focused on industrial education.",
+        "rationale": "The themes of Dracula are centered around Gothic elements such as the supernatural, horror, and the vampire myth, not industrial education.",
+        "confidence": 1.0,
+        "knowledge_evidence": [
+          "Dracula | genre | Gothic fiction, Dracula | genre | horror fiction"
+        ],
+        "meaning_change_risk": "high"
+      }
+    ],
+    "decisions": [
+      {
+        "span": "and the novel is mainly about industrial education",
+        "issue_type": "word_choice",
+        "selected_suggestion": "and the novel is mainly about a vampire and his victims",
+        "decision": "teacher_review",
+        "risk_level": "high",
+        "teacher_action": "Review meaning change",
+        "priority": 1,
+        "agreement": 1.0,
+        "avg_confidence": 1.0,
+        "kg_supported": true,
+        "evidence_count": 1,
+        "knowledge_evidence": "Dracula | genre | Gothic fiction, Dracula | genre | horror fiction",
+        "rationale": "The suggestion may change interpretation, thesis framing, or student intent."
+      },
+      {
+        "span": "industrial education",
+        "issue_type": "argument",
+        "selected_suggestion": "Consider whether 'industrial education' is a central theme of Dracula. If not, revise to a more accurate theme such as 'the fear of modernity' or 'the conflict between science and superstition'.",
+        "decision": "teacher_review",
+        "risk_level": "high",
+        "teacher_action": "Review meaning change",
+        "priority": 1,
+        "agreement": 1.0,
+        "avg_confidence": 0.85,
+        "kg_supported": true,
+        "evidence_count": 1,
+        "knowledge_evidence": "Dracula | genre | Gothic fiction; Dracula | genre | horror fiction",
+        "rationale": "The suggestion may change interpretation, thesis framing, or student intent."
+      },
+      {
+        "span": "the novel is mainly about industrial education",
+        "issue_type": "argument",
+        "selected_suggestion": "Dracula is primarily a Gothic and horror novel, not focused on industrial education.",
+        "decision": "teacher_review",
+        "risk_level": "high",
+        "teacher_action": "Review meaning change",
+        "priority": 1,
+        "agreement": 1.0,
+        "avg_confidence": 1.0,
+        "kg_supported": true,
+        "evidence_count": 1,
+        "knowledge_evidence": "Dracula | genre | Gothic fiction, Dracula | genre | horror fiction",
+        "rationale": "The suggestion may change interpretation, thesis framing, or student intent."
+      },
+      {
+        "span": "Dracula is written by Mary Shelley",
+        "issue_type": "literary_fact",
+        "selected_suggestion": "Dracula is written by Bram Stoker",
+        "decision": "teacher_review",
+        "risk_level": "medium",
+        "teacher_action": "Verify factual correction",
+        "priority": 2,
+        "agreement": 0.5,
+        "avg_confidence": 0.998,
+        "kg_supported": true,
+        "evidence_count": 5,
+        "knowledge_evidence": "Dracula | author | Bram Stoker",
+        "rationale": "Knowledge-supported factual correction; route to teacher review before changing the essay."
+      },
+      {
+        "span": "the novel is mainly about industrial education",
+        "issue_type": "literary_fact",
+        "selected_suggestion": "the novel is mainly about the threat of foreign evil, vampirism, and the clash between modernity and superstition",
+        "decision": "teacher_review",
+        "risk_level": "medium",
+        "teacher_action": "Verify factual correction",
+        "priority": 2,
+        "agreement": 1.0,
+        "avg_confidence": 0.98,
+        "kg_supported": true,
+        "evidence_count": 5,
+        "knowledge_evidence": "Dracula | genre | Gothic fiction | Dracula | genre | horror fiction | Dracula | central_character | Count Dracula",
+        "rationale": "Knowledge-supported factual correction; route to teacher review before changing the essay."
+      }
+    ],
+    "reviewer_results": [
+      {
+        "provider": "deepseek",
+        "model": "deepseek-chat",
+        "reviewer_role": "grammar",
+        "feedback_items": 2,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 2.036
+      },
+      {
+        "provider": "glm",
+        "model": "glm-4-flash",
+        "reviewer_role": "argument",
+        "feedback_items": 2,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 14.535
+      },
+      {
+        "provider": "kimi",
+        "model": "moonshot-v1-8k",
+        "reviewer_role": "grammar",
+        "feedback_items": 2,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 7.533
+      },
+      {
+        "provider": "qwen",
+        "model": "qwen-plus",
+        "reviewer_role": "literary_fact",
+        "feedback_items": 2,
+        "request_error": "",
+        "parse_error": "",
+        "latency_sec": 8.036
       }
     ]
   }

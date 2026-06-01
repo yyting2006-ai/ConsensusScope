@@ -20,8 +20,9 @@ final revised text.
 ## Main Features
 
 - ESL Comparative Literature Essay Feedback Mode with a no-API demo path.
-- Curated literary knowledge base for authorship, publication year, genre and
-  character facts.
+- Curated literary knowledge graph with 319 triples over 30 commonly taught
+  literary works, covering authorship, publication date, form, genre, central
+  characters, themes and title aliases.
 - Knowledge-grounded routing of grammar, style, literary fact and argument
   suggestions.
 - Teacher-facing review queue with priority, risk level, suggested action and
@@ -140,6 +141,12 @@ runner:
 PYTHONPATH=. python3 scripts/run_literary_feedback_benchmark.py
 ```
 
+Rebuild the local literary knowledge graph:
+
+```bash
+PYTHONPATH=. python3 scripts/build_literary_kg.py
+```
+
 With local API keys, the same script can call live reviewers:
 
 ```bash
@@ -148,6 +155,26 @@ PYTHONPATH=. python3 scripts/run_literary_feedback_benchmark.py --live --provide
 
 The checked-in live sample records contain reviewer outputs and routing metrics
 only; API keys are not stored.
+
+Current ESL literary-feedback snapshot:
+
+| Scope | Value |
+|---|---:|
+| Benchmark essays | 30 |
+| Curated KG triples | 319 |
+| Adjudicated feedback decisions | 59 |
+| Auto-accepted low-risk edits | 14 |
+| Teacher-review decisions | 45 |
+| KG-supported decisions | 23 |
+
+The ESL demo claim is not that the system fully grades an essay. It shows a
+deployable review-routing pattern: local grammar edits can be accepted, while
+factual and interpretation-changing suggestions remain teacher-facing.
+
+Live API validation has also been run on the first 10 benchmark essays with
+DeepSeek, Qwen, GLM and Kimi. All 40 provider calls returned without request or
+parse errors; the resulting 43 live feedback decisions routed 35 items to
+teacher review and marked 41 decisions as KG-supported.
 
 | Method | TruthfulQA | FEVER | CommonsenseQA |
 |---|---:|---:|---:|

@@ -5,7 +5,7 @@ import re
 import time
 from collections import Counter, defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from typing import Any, Dict, Iterable, List
+from typing import Any, Dict, Iterable, List, Set, Tuple
 
 import pandas as pd
 import requests
@@ -30,6 +30,32 @@ ISSUE_ORDER = {
     "literary_fact": 3,
     "argument": 4,
 }
+
+KG_RELATION_PRIORITY = {
+    "author": 0,
+    "publication_year": 1,
+    "form": 2,
+    "genre": 3,
+    "central_character": 4,
+    "theme": 5,
+    "language": 6,
+    "literary_movement": 7,
+    "alias": 8,
+}
+
+KG_RELATION_CAP = {
+    "author": 2,
+    "publication_year": 2,
+    "form": 2,
+    "genre": 4,
+    "central_character": 5,
+    "theme": 3,
+    "language": 1,
+    "literary_movement": 2,
+    "alias": 2,
+}
+
+KG_WORK_CAP = 8
 
 
 def _safe_text(value: Any) -> str:
@@ -62,9 +88,9 @@ def load_literary_kg(path: str) -> pd.DataFrame:
 
 def retrieve_literary_knowledge(essay: str, kg: pd.DataFrame, limit: int = 12) -> List[Dict[str, str]]:
     text = _norm(essay)
-    rows: List[Dict[str, str]] = []
+    candidates_out: List[Dict[str, str]] = []
     if kg.empty:
-        return rows
+        return candidates_out
     for _, row in kg.iterrows():
         entity = _safe_text(row.get("entity"))
         work = _safe_text(row.get("work"))
@@ -75,10 +101,37 @@ def retrieve_literary_knowledge(essay: str, kg: pd.DataFrame, limit: int = 12) -
             out = {key: _safe_text(row.get(key)) for key in kg.columns}
             out["match"] = matched[0]
             out["match_score"] = str(round(min(1.0, 0.55 + 0.15 * len(matched)), 3))
-            rows.append(out)
-        if len(rows) >= limit:
+            candidates_out.append(out)
+
+    candidates_out.sort(
+        key=lambda item: (
+            text.find(_norm(item.get("work"))) if _norm(item.get("work")) in text else 9999,
+            KG_RELATION_PRIORITY.get(item.get("relation", ""), 99),
+            item.get("value", ""),
+        )
+    )
+    selected: List[Dict[str, str]] = []
+    relation_counts: Dict[tuple[str, str], int] = defaultdict(int)
+    work_counts: Dict[str, int] = defaultdict(int)
+    seen = set()
+    for item in candidates_out:
+        key = (item.get("work", ""), item.get("relation", ""), item.get("value", ""))
+        if key in seen:
+            continue
+        work = item.get("work", "")
+        if work_counts[work] >= KG_WORK_CAP:
+            continue
+        relation_key = (item.get("work", ""), item.get("relation", ""))
+        cap = KG_RELATION_CAP.get(item.get("relation", ""), 2)
+        if relation_counts[relation_key] >= cap:
+            continue
+        selected.append(item)
+        seen.add(key)
+        work_counts[work] += 1
+        relation_counts[relation_key] += 1
+        if len(selected) >= limit:
             break
-    return rows
+    return selected
 
 
 def _kg_evidence(kg_rows: Iterable[Dict[str, str]], entity: str, relation: str = "") -> List[str]:
@@ -282,189 +335,466 @@ def run_live_literary_reviewers(
     }
 
 
+def _term_source(term: str) -> str:
+    return re.escape(term).replace(r"\ ", r"\s+")
+
+
+def _term_pattern(term: str) -> re.Pattern[str]:
+    return re.compile(rf"(?<!\w){_term_source(term)}(?!\w)", flags=re.I)
+
+
+def _contains_term(text: str, term: str) -> bool:
+    return bool(term and _term_pattern(term).search(text))
+
+
+def _profiles_from_kg(kg: pd.DataFrame) -> Dict[str, Dict[str, Set[str]]]:
+    profiles: Dict[str, Dict[str, Set[str]]] = defaultdict(lambda: defaultdict(set))
+    if kg.empty:
+        return profiles
+    for _, row in kg.iterrows():
+        work = _safe_text(row.get("work")) or _safe_text(row.get("entity"))
+        relation = _safe_text(row.get("relation"))
+        value = _safe_text(row.get("value"))
+        if not work or not relation or not value:
+            continue
+        profiles[work][relation].add(value)
+    return profiles
+
+
+def _all_kg_rows(kg: pd.DataFrame) -> List[Dict[str, str]]:
+    if kg.empty:
+        return []
+    return [
+        {key: _safe_text(row.get(key)) for key in kg.columns}
+        for _, row in kg.iterrows()
+    ]
+
+
+def _work_aliases(work: str, profile: Dict[str, Set[str]]) -> List[str]:
+    aliases = [work, *sorted(profile.get("alias", set()), key=len, reverse=True)]
+    return list(dict.fromkeys([alias for alias in aliases if alias]))
+
+
+def _evidence_for_work(
+    kg_rows: Iterable[Dict[str, str]],
+    work: str,
+    relations: Iterable[str],
+    limit: int = 3,
+) -> List[str]:
+    relation_set = set(relations)
+    evidence: List[str] = []
+    for row in kg_rows:
+        if _safe_text(row.get("work")) != work:
+            continue
+        if relation_set and _safe_text(row.get("relation")) not in relation_set:
+            continue
+        text = _safe_text(row.get("evidence"))
+        if text:
+            evidence.append(text)
+    return list(dict.fromkeys(evidence))[:limit]
+
+
+def _author_alias_map(profiles: Dict[str, Dict[str, Set[str]]]) -> Dict[str, str]:
+    candidates: Dict[str, Set[str]] = defaultdict(set)
+    for profile in profiles.values():
+        for author in profile.get("author", set()):
+            candidates[author].add(author)
+            parts = author.replace(".", "").split()
+            if parts:
+                candidates[parts[-1]].add(author)
+            if len(parts) >= 2:
+                candidates[" ".join(parts[-2:])].add(author)
+    return {
+        alias: next(iter(authors))
+        for alias, authors in candidates.items()
+        if len(authors) == 1 and len(alias) >= 4
+    }
+
+
+def _character_alias_map(profiles: Dict[str, Dict[str, Set[str]]]) -> Dict[str, Set[str]]:
+    skip_first_names = {"the", "john", "jim", "mr", "mrs", "miss", "captain", "doctor", "dr"}
+    candidates: Dict[str, Set[str]] = defaultdict(set)
+    for work, profile in profiles.items():
+        for character in profile.get("central_character", set()):
+            candidates[character].add(work)
+            parts = re.sub(r"[^A-Za-z' -]", " ", character).split()
+            if parts:
+                first = parts[0].lower()
+                if len(first) >= 4 and first not in skip_first_names:
+                    candidates[parts[0]].add(work)
+    return {alias: works for alias, works in candidates.items() if alias}
+
+
+def _detected_work_mentions(
+    essay: str,
+    profiles: Dict[str, Dict[str, Set[str]]],
+) -> List[Tuple[str, str, int, int]]:
+    mentions: List[Tuple[str, str, int, int]] = []
+    for work, profile in profiles.items():
+        for alias in _work_aliases(work, profile):
+            for match in _term_pattern(alias).finditer(essay):
+                mentions.append((work, alias, match.start(), match.end()))
+    mentions.sort(key=lambda item: (item[2], -(item[3] - item[2])))
+    return mentions
+
+
+def _window(text: str, start: int, end: int, radius: int = 110) -> str:
+    return text[max(0, start - radius) : min(len(text), end + radius)]
+
+
+def _local_clause(text: str, start: int, end: int) -> str:
+    left = max(text.rfind(mark, 0, start) for mark in [".", ";", "\n", ","])
+    right_candidates = [idx for idx in [text.find(mark, end) for mark in [".", ";", "\n", ","]] if idx != -1]
+    right = min(right_candidates) if right_candidates else len(text)
+    return text[left + 1 : right]
+
+
+GRAMMAR_RULES = [
+    (r"\bMary Shelley write\b", "Mary Shelley wrote", "Use past-tense subject-verb agreement when discussing publication history."),
+    (r"\b(Both novels) shows\b", r"\1 show", "Plural subject 'novels' takes the base verb 'show'."),
+    (r"\b(was) wrote by\b", r"\1 written by", "Use the past participle in passive voice."),
+    (r"\b(Moby-Dick) are\b", r"\1 is", "A single work title takes a singular verb."),
+    (r"\b(The Yellow Wallpaper) are\b", r"\1 is", "A single work title takes a singular verb."),
+    (r"\b(Pride and Prejudice) are\b", r"\1 is", "A single work title takes a singular verb."),
+    (r"\b(To the Lighthouse and Mrs Dalloway) is both\b", r"\1 are both", "A compound subject takes a plural verb."),
+    (r"\b(Oliver Twist and Great Expectations) shows\b", r"\1 show", "A compound subject takes a plural verb."),
+    (r"\b(Macbeth and Lady Macbeth) is\b", r"\1 are", "A compound subject takes a plural verb."),
+    (r"\b(the essay) need\b", r"\1 needs", "A singular subject takes a third-person singular verb."),
+    (r"\bit are\b", "it is", "A singular pronoun takes a singular verb."),
+]
+
+
+def _grammar_feedback(essay: str) -> List[Dict[str, Any]]:
+    items: List[Dict[str, Any]] = []
+    seen: Set[str] = set()
+    for pattern, replacement, rationale in GRAMMAR_RULES:
+        for match in re.finditer(pattern, essay, flags=re.I):
+            span = match.group(0)
+            suggestion = match.expand(replacement)
+            key = _norm(span)
+            if key in seen:
+                continue
+            seen.add(key)
+            items.append(
+                _suggestion(
+                    "grammar_reviewer",
+                    span,
+                    "grammar",
+                    suggestion,
+                    rationale,
+                    0.91,
+                    "low",
+                )
+            )
+    return items
+
+
+def _authorship_feedback(
+    essay: str,
+    profiles: Dict[str, Dict[str, Set[str]]],
+    kg_rows: List[Dict[str, str]],
+) -> List[Dict[str, Any]]:
+    author_aliases = _author_alias_map(profiles)
+    items: List[Dict[str, Any]] = []
+    seen: Set[Tuple[str, str, str]] = set()
+    for work, profile in profiles.items():
+        expected_author = next(iter(profile.get("author", set())), "")
+        if not expected_author:
+            continue
+        work_sources = [_term_source(alias) for alias in _work_aliases(work, profile)]
+        for author_alias, observed_author in sorted(author_aliases.items(), key=lambda row: len(row[0]), reverse=True):
+            if observed_author == expected_author:
+                continue
+            author_source = _term_source(author_alias)
+            for work_source in work_sources:
+                regexes = [
+                    rf"(?<!\w){author_source}(?!\w)\s+(?:write|writes|wrote)\s+(?<!\w){work_source}(?!\w)",
+                    rf"(?<!\w){work_source}(?!\w).{{0,90}}\b(?:by|written by|wrote by|is by|was by|is written by|was written by|was wrote by)\s+(?<!\w){author_source}(?!\w)",
+                    rf"(?<!\w){work_source}(?!\w).{{0,90}}\b(?<!\w){author_source}(?!\w)\s+(?:tragedy|comedy|novel|play|poem|romance)",
+                ]
+                for regex in regexes:
+                    match = re.search(regex, essay, flags=re.I)
+                    if not match:
+                        continue
+                    key = (work, observed_author, "")
+                    if key in seen:
+                        continue
+                    seen.add(key)
+                    items.append(
+                        _suggestion(
+                            "kg_reviewer",
+                            match.group(0),
+                            "literary_fact",
+                            f"Attribute {work} to {expected_author}",
+                            f"The local knowledge graph attributes {work} to {expected_author}, not {observed_author}.",
+                            0.88,
+                            "medium",
+                            _evidence_for_work(kg_rows, work, ["author"]),
+                        )
+                    )
+    return items
+
+
+def _publication_year_feedback(
+    essay: str,
+    profiles: Dict[str, Dict[str, Set[str]]],
+    kg_rows: List[Dict[str, str]],
+) -> List[Dict[str, Any]]:
+    items: List[Dict[str, Any]] = []
+    seen: Set[Tuple[str, str]] = set()
+    for work, alias, start, end in _detected_work_mentions(essay, profiles):
+        expected_year = next(iter(profiles[work].get("publication_year", set())), "")
+        if not re.fullmatch(r"\d{4}", expected_year):
+            continue
+        segment = _local_clause(essay, start, end)
+        for year_match in re.finditer(r"\b(1[5-9]\d{2}|20\d{2})\b", segment):
+            observed_year = year_match.group(1)
+            if observed_year == expected_year:
+                continue
+            if not any(cue in segment.lower() for cue in ["published", "publication", "dated", "in "]):
+                continue
+            key = (work, observed_year)
+            if key in seen:
+                continue
+            seen.add(key)
+            span = f"{alias} ... {observed_year}"
+            items.append(
+                _suggestion(
+                    "kg_reviewer",
+                    span,
+                    "literary_fact",
+                    f"Use {expected_year} as the date for {work}",
+                    f"The local knowledge graph dates {work} to {expected_year}, not {observed_year}.",
+                    0.86,
+                    "medium",
+                    _evidence_for_work(kg_rows, work, ["publication_year"]),
+                )
+            )
+    return items
+
+
+GENRE_OR_FORM_TERMS = [
+    "modernist novel",
+    "historical novel",
+    "adventure novel",
+    "British novel",
+    "short story",
+    "epic poem",
+    "comedy",
+    "tragedy",
+    "romance",
+    "novella",
+    "novel",
+    "poem",
+    "play",
+]
+
+
+def _term_is_expected(term: str, expected_values: Iterable[str]) -> bool:
+    expected = " | ".join(_norm(value) for value in expected_values)
+    norm_term = _norm(term)
+    if norm_term in expected:
+        return True
+    if norm_term.endswith(" novel") and "novel" in expected:
+        return "modernist" not in norm_term or "modernist" in expected
+    if norm_term == "poem" and "poetry" in expected:
+        return True
+    if norm_term == "play" and ("drama" in expected or "tragedy" in expected or "comedy" in expected):
+        return True
+    return False
+
+
+def _genre_form_feedback(
+    essay: str,
+    profiles: Dict[str, Dict[str, Set[str]]],
+    kg_rows: List[Dict[str, str]],
+) -> List[Dict[str, Any]]:
+    items: List[Dict[str, Any]] = []
+    seen: Set[str] = set()
+    for work, alias, start, end in _detected_work_mentions(essay, profiles):
+        if work in seen:
+            continue
+        segment = _local_clause(essay, start, end)
+        expected_values = set(profiles[work].get("form", set())) | set(profiles[work].get("genre", set()))
+        if not expected_values:
+            continue
+        for term in GENRE_OR_FORM_TERMS:
+            if not _contains_term(segment, term) or _term_is_expected(term, expected_values):
+                continue
+            seen.add(work)
+            expected_text = ", ".join(sorted(expected_values)[:3])
+            items.append(
+                _suggestion(
+                    "kg_reviewer",
+                    f"{alias} ... {term}",
+                    "literary_fact",
+                    f"Check the genre/form of {work}; expected evidence points to {expected_text}",
+                    f"The observed genre or form label '{term}' conflicts with the local literary knowledge graph.",
+                    0.78,
+                    "medium",
+                    _evidence_for_work(kg_rows, work, ["form", "genre"]),
+                )
+            )
+            break
+    return items
+
+
+def _character_feedback(
+    essay: str,
+    profiles: Dict[str, Dict[str, Set[str]]],
+    kg_rows: List[Dict[str, str]],
+) -> List[Dict[str, Any]]:
+    items: List[Dict[str, Any]] = []
+    seen: Set[Tuple[str, str]] = set()
+    lowered = essay.lower()
+    if "monster is victor frankenstein" in lowered:
+        items.append(
+            _suggestion(
+                "kg_reviewer",
+                "The monster is Victor Frankenstein",
+                "literary_fact",
+                "Distinguish Victor Frankenstein from the creature he creates",
+                "The statement conflates Victor Frankenstein with the created being.",
+                0.84,
+                "medium",
+                _evidence_for_work(kg_rows, "Frankenstein", ["central_character"]),
+            )
+        )
+    character_map = _character_alias_map(profiles)
+    relation_cues = ["marries", "marry", "main character", "character", "narrator", "writes the whole story"]
+    for work, alias, start, end in _detected_work_mentions(essay, profiles):
+        segment = _local_clause(essay, start, end)
+        segment_lower = segment.lower()
+        for character_alias, owner_works in sorted(character_map.items(), key=lambda row: len(row[0]), reverse=True):
+            if not _contains_term(segment, character_alias):
+                continue
+            if work not in owner_works and any(cue in segment_lower for cue in relation_cues):
+                key = (work, character_alias)
+                if key in seen:
+                    continue
+                seen.add(key)
+                owner_text = ", ".join(sorted(owner_works))
+                items.append(
+                    _suggestion(
+                        "kg_reviewer",
+                        f"{alias} ... {character_alias}",
+                        "literary_fact",
+                        f"Check whether {character_alias} belongs to {work}",
+                        f"The knowledge graph links {character_alias} to {owner_text}, not to {work}.",
+                        0.75,
+                        "medium",
+                        _evidence_for_work(kg_rows, work, ["central_character"]),
+                    )
+                )
+            if work in owner_works and any(cue in segment_lower for cue in ["minor character", "not important"]):
+                key = (work, f"{character_alias}:importance")
+                if key in seen:
+                    continue
+                seen.add(key)
+                items.append(
+                    _suggestion(
+                        "kg_reviewer",
+                        f"{character_alias} ... minor/not important",
+                        "argument",
+                        f"Review the claim about {character_alias}'s importance in {work}",
+                        "The knowledge graph lists this figure as central, so the claim should be checked by a teacher.",
+                        0.72,
+                        "high",
+                        _evidence_for_work(kg_rows, work, ["central_character"]),
+                    )
+                )
+    if "king lear is the youngest daughter" in lowered:
+        items.append(
+            _suggestion(
+                "kg_reviewer",
+                "King Lear is the youngest daughter",
+                "literary_fact",
+                "Distinguish King Lear from Cordelia, his youngest daughter",
+                "The claim confuses a title character with another central character.",
+                0.8,
+                "medium",
+                _evidence_for_work(kg_rows, "King Lear", ["central_character"]),
+            )
+        )
+    return items
+
+
+ARGUMENT_PATTERNS = [
+    ("only about science / only about love", ["only about science", "only about love"], "Use a more qualified claim about dominant themes instead of reducing each work to one topic."),
+    ("never study knowledge", ["never study knowledge"], "Avoid turning a literary interpretation into an absolute moral rule."),
+    ("always destroys society", ["always destroys society"], "Review the causal interpretation before changing the student's thesis."),
+    ("exactly the same", ["exactly the same"], "Replace absolute similarity with a specific comparison and contrast."),
+    ("same because", ["are same because", "the same because"], "Clarify the comparative basis instead of treating the works as identical."),
+    ("no concern with art", ["no concern with art"], "Check this broad historical claim against textual evidence."),
+    ("industrial education", ["industrial education"], "Review whether this theme is supported by the text."),
+    ("friendly whale", ["friendly whale"], "Check whether the interpretation accounts for obsession and conflict."),
+    ("never thinks about obsession", ["never thinks about obsession"], "Avoid a categorical claim that erases a central interpretive issue."),
+    ("cheerful adventure", ["cheerful adventure"], "Review the tone and colonial context before accepting this interpretation."),
+    ("without any criticism", ["without any criticism"], "This may overstate the author's position and needs teacher review."),
+    ("definitely real", ["definitely real"], "Flag interpretive certainty in an ambiguous text."),
+    ("all readers should agree", ["all readers should agree"], "Avoid presenting one interpretation as mandatory for all readers."),
+    ("chooses her fate freely", ["chooses her fate freely"], "Review whether the claim ignores social constraint in the novel."),
+    ("no humor", ["no humor"], "Check the claim against the comic genre and dramatic irony."),
+    ("only moral instruction", ["only moral instruction"], "Avoid reducing authorial purpose to a single intention."),
+    ("modern Victorian hero", ["modern Victorian hero"], "Check the historical framing and genre context."),
+    ("Cordelia is the villain", ["Cordelia is the villain"], "Review the character interpretation before applying a rewrite."),
+    ("writes the whole story in first person", ["writes the whole story in first person"], "Check the narrator claim before applying a factual rewrite."),
+    ("exactly identical in motivation", ["exactly identical in motivation"], "Ask for a more precise contrast between motivations."),
+    ("does not explain why", ["does not explain why"], "Route thesis-development feedback to the teacher rather than auto-rewriting the student's argument."),
+]
+
+
+def _argument_feedback(essay: str) -> List[Dict[str, Any]]:
+    lowered = essay.lower()
+    items: List[Dict[str, Any]] = []
+    for span, triggers, suggestion in ARGUMENT_PATTERNS:
+        if any(trigger.lower() in lowered for trigger in triggers):
+            items.append(
+                _suggestion(
+                    "argument_reviewer",
+                    span,
+                    "argument",
+                    suggestion,
+                    "The suggested change may alter interpretation, emphasis, or the student's intended thesis.",
+                    0.73,
+                    "high",
+                )
+            )
+    return items
+
+
 def generate_demo_literary_feedback(essay: str, kg: pd.DataFrame) -> List[Dict[str, Any]]:
     """Generate deterministic multi-reviewer feedback for a no-API demo.
 
-    The output mirrors the schema expected from live LLM reviewers, so API-based
-    generation can later replace this fallback without changing the UI.
+    The output mirrors the schema expected from live LLM reviewers. It is a
+    rule-based local model: low-risk grammar edits are separated from literary
+    facts and interpretation-changing suggestions, which are grounded in the
+    curated literary knowledge graph when possible.
     """
 
-    kg_rows = retrieve_literary_knowledge(essay, kg, limit=30)
-    lowered = essay.lower()
+    kg_rows = retrieve_literary_knowledge(essay, kg, limit=40)
+    all_rows = _all_kg_rows(kg)
+    profiles = _profiles_from_kg(kg)
+
     feedback: List[Dict[str, Any]] = []
+    feedback.extend(_grammar_feedback(essay))
+    feedback.extend(_authorship_feedback(essay, profiles, all_rows))
+    feedback.extend(_publication_year_feedback(essay, profiles, all_rows))
+    feedback.extend(_genre_form_feedback(essay, profiles, all_rows))
+    feedback.extend(_character_feedback(essay, profiles, all_rows))
+    feedback.extend(_argument_feedback(essay))
 
-    if re.search(r"\bMary Shelley write\b", essay, flags=re.I):
-        feedback.extend(
-            [
-                _suggestion(
-                    "grammar_reviewer",
-                    "Mary Shelley write",
-                    "grammar",
-                    "Mary Shelley wrote",
-                    "Use past-tense subject-verb agreement when discussing publication history.",
-                    0.94,
-                    "low",
-                ),
-                _suggestion(
-                    "style_reviewer",
-                    "Mary Shelley write",
-                    "grammar",
-                    "Mary Shelley wrote",
-                    "The sentence needs a finite past-tense verb.",
-                    0.9,
-                    "low",
-                ),
-            ]
-        )
-
-    if re.search(r"\bnovels shows\b", essay, flags=re.I):
-        feedback.extend(
-            [
-                _suggestion(
-                    "grammar_reviewer",
-                    "Both novels shows",
-                    "grammar",
-                    "Both novels show",
-                    "Plural subject 'novels' takes the base verb 'show'.",
-                    0.96,
-                    "low",
-                ),
-                _suggestion(
-                    "academic_reviewer",
-                    "Both novels shows",
-                    "grammar",
-                    "Both novels show",
-                    "This is a local grammar correction that preserves meaning.",
-                    0.91,
-                    "low",
-                ),
-                _suggestion(
-                    "kg_reviewer",
-                    "Both novels shows",
-                    "grammar",
-                    "Both novels show",
-                    "The change does not alter the literary claim.",
-                    0.86,
-                    "low",
-                ),
-            ]
-        )
-
-    if "frankenstein in 1847" in lowered:
-        feedback.extend(
-            [
-                _suggestion(
-                    "kg_reviewer",
-                    "Frankenstein in 1847",
-                    "literary_fact",
-                    "Frankenstein was first published in 1818",
-                    "The knowledge base contradicts the stated publication year.",
-                    0.88,
-                    "medium",
-                    _kg_evidence(kg_rows, "Frankenstein", "publication_year"),
-                ),
-                _suggestion(
-                    "fact_reviewer",
-                    "Frankenstein in 1847",
-                    "literary_fact",
-                    "Frankenstein was first published in 1818",
-                    "Correct the factual date before using the comparison as evidence.",
-                    0.82,
-                    "medium",
-                    _kg_evidence(kg_rows, "Frankenstein", "publication_year"),
-                ),
-            ]
-        )
-
-    if "jane austen wrote jane eyre" in lowered:
-        evidence = _kg_evidence(kg_rows, "Jane Eyre", "author")
-        feedback.extend(
-            [
-                _suggestion(
-                    "kg_reviewer",
-                    "Jane Austen wrote Jane Eyre",
-                    "literary_fact",
-                    "Charlotte Bronte wrote Jane Eyre",
-                    "The knowledge base attributes Jane Eyre to Charlotte Bronte, not Jane Austen.",
-                    0.92,
-                    "medium",
-                    evidence,
-                ),
-                _suggestion(
-                    "fact_reviewer",
-                    "Jane Austen wrote Jane Eyre",
-                    "literary_fact",
-                    "Jane Eyre is by Charlotte Bronte",
-                    "This is a factual correction supported by the literary knowledge base.",
-                    0.86,
-                    "medium",
-                    evidence,
-                ),
-            ]
-        )
-
-    if "monster is victor frankenstein" in lowered:
-        evidence = _kg_evidence(kg_rows, "Frankenstein", "central_character")
-        feedback.extend(
-            [
-                _suggestion(
-                    "kg_reviewer",
-                    "The monster is Victor Frankenstein",
-                    "literary_fact",
-                    "Victor Frankenstein is the scientist; the created being is the creature",
-                    "The statement conflates Victor Frankenstein with the creature.",
-                    0.84,
-                    "medium",
-                    evidence,
-                ),
-                _suggestion(
-                    "argument_reviewer",
-                    "The monster is Victor Frankenstein",
-                    "argument",
-                    "Clarify whether you mean Victor Frankenstein or the creature he creates",
-                    "The ambiguity affects the interpretation and should be reviewed.",
-                    0.76,
-                    "high",
-                    evidence,
-                ),
-            ]
-        )
-
-    if "only about science" in lowered or "only about love" in lowered:
+    if "are same" in essay.lower() or "the same as" in essay.lower():
         feedback.append(
             _suggestion(
-                "argument_reviewer",
-                "only about science / only about love",
-                "argument",
-                "Use a more qualified claim about dominant themes instead of reducing each novel to one topic",
-                "The absolute wording is interpretive and may oversimplify the literary comparison.",
-                0.74,
-                "high",
+                "academic_reviewer",
+                "same comparison claim",
+                "academic_style",
+                "Name the shared concern and then explain the specific contrast between the works",
+                "The sentence needs a more precise comparative thesis, but the teacher should preserve the student's intended argument.",
+                0.78,
+                "medium",
             )
-        )
-
-    if "are same" in lowered:
-        feedback.extend(
-            [
-                _suggestion(
-                    "academic_reviewer",
-                    "the two books are same",
-                    "academic_style",
-                    "the two novels share important concerns, but they develop freedom differently",
-                    "The revision improves academic precision while preserving the student's comparative intent.",
-                    0.8,
-                    "medium",
-                ),
-                _suggestion(
-                    "style_reviewer",
-                    "the two books are same",
-                    "academic_style",
-                    "the two novels are similar in their concern with freedom",
-                    "This wording is more idiomatic and less absolute.",
-                    0.78,
-                    "medium",
-                ),
-            ]
         )
 
     if not feedback:
