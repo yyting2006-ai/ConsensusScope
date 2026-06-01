@@ -93,6 +93,8 @@ start_demo.bat
 - **Page 7: Auxiliary QA Case Explorer** inspects legacy/saved QA reliability
   cases without making them the main submission story.
 - **Page 8: Report Export** downloads Markdown, JSON, and CSV artifacts.
+- **Page 9: Design Reference** embeds the proposed ESL teacher-workspace UI
+  mockup and a downloadable Chinese design brief for UI/UX designers.
 
 ## Data Description
 

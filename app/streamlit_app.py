@@ -11,6 +11,7 @@ from typing import Any, Dict, List, Optional
 
 import pandas as pd
 import streamlit as st
+import streamlit.components.v1 as components
 from dotenv import load_dotenv
 
 
@@ -1027,6 +1028,53 @@ def page_report_export(samples_df: pd.DataFrame, outputs_df: pd.DataFrame, metri
         st.download_button("Download risk_labels.csv", data=buf.getvalue(), file_name="risk_labels.csv", mime="text/csv", use_container_width=True)
 
 
+def page_design_reference() -> None:
+    st.markdown('<div class="section-title">Page 9 · Design Reference</div>', unsafe_allow_html=True)
+    st.caption(
+        "Designer-facing preview for the proposed ESL teacher-review workspace. "
+        "This page is a reference mockup, not the current production interaction flow."
+    )
+    brief_path = ROOT / "docs" / "ui_esl_designer_reference.md"
+    mockup_path = ROOT / "docs" / "ui_mockup_esl_reference.html"
+    screenshot_path = ROOT / "docs" / "screenshots_en" / "ui_mockup_esl_reference.png"
+
+    c1, c2, c3 = st.columns([0.55, 0.23, 0.22])
+    with c1:
+        st.markdown(
+            "Use this page when sharing the live site with a UI/UX designer. "
+            "The intended design direction is a teacher workflow for reviewing ESL literary feedback, "
+            "with model diagnostics moved into an Advanced area."
+        )
+    with c2:
+        if brief_path.exists():
+            st.download_button(
+                "Download Chinese design brief",
+                brief_path.read_bytes(),
+                file_name="ConsensusScope_ESL_UI_designer_brief_zh.md",
+                mime="text/markdown",
+                use_container_width=True,
+            )
+    with c3:
+        if mockup_path.exists():
+            st.download_button(
+                "Download HTML mockup",
+                mockup_path.read_bytes(),
+                file_name="ConsensusScope_ESL_UI_reference.html",
+                mime="text/html",
+                use_container_width=True,
+            )
+
+    if screenshot_path.exists():
+        st.image(str(screenshot_path), caption="Proposed first-screen direction for the ESL teacher-review workspace.")
+        return
+
+    if not mockup_path.exists():
+        st.warning("Design reference mockup is not available in this package.")
+        return
+
+    components.html(mockup_path.read_text(encoding="utf-8"), height=1120, scrolling=True)
+
+
 def main() -> None:
     st.set_page_config(page_title="ConsensusScope", layout="wide")
     load_dotenv(ROOT / ".env")
@@ -1062,11 +1110,15 @@ def main() -> None:
             "Page 6: Model Reliability Dashboard",
             "Page 7: Auxiliary QA Case Explorer",
             "Page 8: Report Export",
+            "Page 9: Design Reference",
         ],
         label_visibility="collapsed",
     )
     st.sidebar.divider()
-    api_mode, selected, user_inputs, fixed_enabled, fixed_provider = render_api_sidebar()
+    if page.startswith("Page 9"):
+        api_mode, selected, user_inputs, fixed_enabled, fixed_provider = "Mode A", [], {}, False, ""
+    else:
+        api_mode, selected, user_inputs, fixed_enabled, fixed_provider = render_api_sidebar()
 
     if page.startswith("Page 1"):
         page_home(samples_df, outputs_df, metrics_df, risk_df)
@@ -1082,8 +1134,10 @@ def main() -> None:
         page_model_reliability(outputs_df, samples_df)
     elif page.startswith("Page 7"):
         page_case_explorer(error_df, samples_df, outputs_df)
-    else:
+    elif page.startswith("Page 8"):
         page_report_export(samples_df, outputs_df, metrics_df, risk_df)
+    else:
+        page_design_reference()
 
 
 if __name__ == "__main__":
