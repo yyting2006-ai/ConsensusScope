@@ -1,11 +1,28 @@
 # Public Release Notes
 
-Use this document when preparing an anonymous or public repository.
+Use this document when preparing the public ConsensusScope repository and
+Streamlit deployment for the EMNLP 2026 System Demonstrations submission.
+
+## Suggested Repository Name
+
+`ConsensusScope`
+
+## Suggested Short Description
+
+Knowledge-grounded multi-LLM review routing for ESL comparative-literature
+writing feedback.
+
+## Suggested Tags
+
+`llm-feedback`, `educational-nlp`, `writing-feedback`, `esl-writing`,
+`literary-analysis`, `comparative-literature`, `multi-llm`,
+`human-in-the-loop`, `streamlit`, `knowledge-graph`
 
 ## Keep
 
 - `README.md`
 - `README_EN.md`
+- `README_ZH.md`
 - `LICENSE`
 - `requirements.txt`
 - `config.yaml`
@@ -15,36 +32,41 @@ Use this document when preparing an anonymous or public repository.
 - `tests/`
 - `docs/`
 - `paper/`
-- `data/processed/clean_dataset.csv` if dataset redistribution is allowed
-- `data/outputs/model_outputs.csv` if model-output sharing is acceptable
-- `data/results/`
-- `reports/`
+- `data/knowledge/literary_kg_triples.csv`
+- `data/literary_feedback/benchmark.csv`
+- `data/results/literary_feedback_records.json`
+- `data/results/literary_feedback_routing_metrics.csv`
+- `data/results/literary_feedback_live_multimodel_records.json`
+- `data/results/literary_feedback_live_multimodel_metrics.csv`
+- auxiliary QA data only if it is clearly documented as an auxiliary reliability
+  module rather than the main ESL submission claim
 
-## Remove or Replace
+## Remove Or Replace Before Public Release
 
 - `.env`
-- API keys
-- personal contact information
+- API keys or copied secrets
 - private student data
 - raw classroom writing samples
-- operating-system files such as `._*`
-- oversized cache directories such as `__pycache__` and `.pytest_cache`
+- personal contact information not intended for publication
+- operating-system files such as `._*` and `.DS_Store`
+- cache directories such as `__pycache__/` and `.pytest_cache/`
+- draft screenshots or videos that tell the old QA-centered story
 
-## Suggested Anonymous Repository Name
+## Release Positioning
 
-`consensusscope-anonymous`
+The main public-facing story should be:
 
-## Suggested Public Repository Name
+> ConsensusScope helps teachers audit AI-generated feedback for ESL
+> comparative-literature essays by routing low-risk local edits separately from
+> feedback involving literary facts, character relations, themes, or
+> interpretation.
 
-`consensusscope`
+Do not present the system as an automatic essay scorer, teacher replacement, or
+truth oracle. Do not present the auxiliary QA reliability pages as the main
+system claim.
 
-## Suggested Short Description
+## Privacy Reminder
 
-Risk-aware observability and dynamic adjudication for multi-LLM collaborative
-decision-making.
-
-## Suggested Tags
-
-`llm-evaluation`, `multi-agent`, `reliability`, `fact-checking`,
-`llm-as-a-judge`, `streamlit`, `truthfulqa`, `fever`, `commonsenseqa`
-
+Before adding real student essays, remove names, IDs, emails, demographic
+details, school identifiers, and any personally identifying information. The
+packaged demo uses anonymized or synthetic examples.

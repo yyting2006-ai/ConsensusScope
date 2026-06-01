@@ -1,49 +1,47 @@
 # Ethics and Limitations
 
-ConsensusScope is designed as a reliability-observability and review-routing
-tool. It should not be presented as a truth oracle, automatic grader or final
-decision maker.
+ConsensusScope is designed as a teacher-support and audit tool for ESL
+comparative-literature writing feedback. It should not be presented as an
+automatic essay scorer, teacher replacement, truth oracle, or final decision
+maker.
 
 ## Intended Use
 
-- Inspect multi-LLM decision traces.
-- Identify false consensus, high disagreement and minority-correct warnings.
-- Route uncertain cases to evidence checking or human review.
-- Support research on LLM reliability, fact verification and educational
-  feedback auditing.
+- Inspect AI-generated feedback before it changes a student's writing.
+- Separate low-risk local grammar/style edits from feedback involving literary
+  facts, character relations, themes, thesis claims, or interpretation.
+- Route uncertain or meaning-changing suggestions to teacher review.
+- Support research on educational NLP, feedback reliability, human-in-the-loop
+  review, and multi-LLM adjudication.
 
 ## Out-of-Scope Use
 
-- Fully automated high-stakes decision-making.
-- Replacing teachers, reviewers, fact checkers or domain experts.
-- Ranking students or users without human oversight.
+- Fully automated grading or student ranking.
+- Replacing teachers, writing instructors, reviewers, or domain experts.
 - Treating model rationales as verified evidence.
+- Treating a small curated literary KG as a complete literary database.
+- Applying feedback to real student essays without privacy review.
 
 ## Data Privacy
 
-The current public-demo path should use only open benchmark samples or
-anonymized examples. If educational writing data is added later:
+The packaged demo uses anonymized or synthetic examples. If educational writing
+data is added later:
 
-- Remove names, student IDs, email addresses and classroom identifiers.
-- Replace rare personal details with placeholders.
-- Store human annotations separately from identifiable student records.
+- Remove names, student IDs, emails, school identifiers, demographic details,
+  and rare personal details.
+- Store teacher annotations separately from identifiable student records.
 - Report aggregate results unless explicit consent permits case-level excerpts.
-
-## Model Output Risks
-
-Model answers may contain hallucinations, unsupported reasoning, biased
-assumptions or misleading confidence scores. ConsensusScope exposes these
-signals for inspection, but the system itself can also misclassify risk levels.
-All exported reports should therefore be treated as audit material rather than
-ground truth.
+- Avoid uploading private classroom data to third-party model providers without
+  institutional approval.
 
 ## Current Limitations
 
-- The current demo uses saved outputs from four LLM providers and 1000
-  adjudicated samples.
-- Discussion-round traces are not yet fully represented.
-- Evidence support is still a lightweight feature, not a complete retrieval or
-  citation-verification module.
-- Risk labels are derived from gold labels and model outputs; future work should
-  include independent human validation.
-
+- The current KG contains 319 curated triples over 30 works; it is useful for
+  demonstration and diagnosis, not comprehensive literary scholarship.
+- The 30-case benchmark is intentionally small and diagnostic. It validates the
+  review-routing workflow, not state-of-the-art essay scoring or correction
+  accuracy.
+- Saved live validation records show API connectivity and schema compliance,
+  but they are not a classroom user study.
+- Future validation should include instructor-annotated ESL essays and teacher
+  review-priority judgments.

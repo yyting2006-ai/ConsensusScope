@@ -1,89 +1,110 @@
 # 2.5-Minute Demo Video Script
 
-Target length: 2 minutes 25 seconds.
+Target length: 2 minutes 30 seconds.
 
 Local draft screen-flow recording:
 
+- Start the app with `streamlit run app/streamlit_app.py --server.port 8502`.
 - Regenerate the browser recording with `node scripts/record_demo_video_en.mjs`.
-- Convert the generated WebM to MP4 with `python3 scripts/convert_video_to_mp4.py` if needed.
-- The generated file is a silent screen-flow recording. For final submission, add
-  narration using this script and upload the final video to an accessible URL.
+- Convert the generated WebM to MP4 with `python3 scripts/convert_video_to_mp4.py`
+  if needed.
+- The generated file is a silent screen-flow recording. For final submission,
+  add English narration using this script and submit the final screencast as
+  supplementary material or replace this note with a real confirmed video URL.
 
-## 0:00-0:15 Opening
-
-Narration:
-
-> ConsensusScope is a risk-aware observability tool for multi-LLM collaborative decision-making. It starts from a simple premise: multi-model agreement is useful, but agreement alone is not proof of correctness.
-
-Screen:
-
-- Show the app title.
-- Show the sidebar with the three pages.
-
-## 0:15-0:45 False Consensus Case
+## 0:00-0:20 Problem
 
 Narration:
 
-> In this FEVER example, three models agree that the claim should be refuted, but the gold label is not enough information. A simple majority vote produces a confident but wrong decision.
+> AI writing feedback can be fluent but unsafe. In ESL comparative-literature
+> essays, a model may fix grammar correctly while changing literary facts,
+> character relations, or the student's interpretation.
 
 Screen:
 
-- Open `Single Sample Analysis`.
-- Select `fever` and sample `fever_0366`.
-- Point to the gold answer, model cards and risk labels.
+- Open Page 1: Home / System Overview.
+- Point to the title and the review-routing workflow.
+
+## 0:20-0:45 System Overview
+
+Narration:
+
+> ConsensusScope compares multiple LLM feedback outputs and routes each
+> suggestion into either low-risk auto-accept or teacher review. It is not an
+> automatic essay scorer and it does not replace teacher judgment.
+
+Screen:
+
+- Click Page 2: ESL Feedback Review.
+- Show the demo essay, reviewer source selector, and Run Knowledge-Grounded
+  Feedback button.
+- Use the no-API deterministic reviewer path for the recording.
+
+## 0:45-1:10 Knowledge Grounding
+
+Narration:
+
+> The system retrieves evidence from a curated literary knowledge graph,
+> including author, work, genre, central characters, themes, and publication
+> year. These triples make factual feedback inspectable.
+
+Screen:
+
+- Run the feedback demo.
+- Open the Knowledge Evidence tab.
+- Point to author and publication-year rows.
+
+## 1:10-1:40 Feedback Adjudication
+
+Narration:
+
+> Low-risk local grammar or style edits can be accepted, but suggestions about
+> authorship, genre, character identity, thesis statements, or interpretation
+> remain in the teacher-review queue.
+
+Screen:
+
+- Open the Teacher View and Adjudication Trace tabs.
+- Point to auto-accepted preview and teacher-review decisions.
+
+## 1:40-2:05 Teacher Review Queue
+
+Narration:
+
+> The teacher review queue shows risk level, priority, model agreement,
+> knowledge support, and a short explanation for why human review is
+> recommended.
+
+Screen:
+
+- Click Page 3: Knowledge Grounding & Teacher Queue.
+- Show the queue and risk/priority fields.
+- If the auxiliary QA mode is visible, mention it only briefly.
 
 Key line:
 
-> The system marks this as false consensus, minority correct and confidence mismatch.
+> The system also includes auxiliary multi-model QA audit pages, but this demo
+> focuses on ESL literary feedback.
 
-## 0:45-1:15 High Disagreement Case
-
-Narration:
-
-> ConsensusScope also catches cases where the model group splits. Here the system avoids forcing a brittle final answer and recommends human review.
-
-Screen:
-
-- Select `commonsenseqa` and sample `csqa_4914`.
-- Show majority voting and dynamic adjudication.
-
-Key line:
-
-> Dynamic adjudication turns disagreement into a decision state, not only a final answer.
-
-## 1:15-1:50 Aggregate View
+## 2:05-2:25 Report Export
 
 Narration:
 
-> At the dataset level, the prototype compares majority voting, fixed judging and dynamic decision-making. The current pilot contains 1000 adjudicated samples and 4000 structured model-output rows.
+> The final page exports a Markdown feedback report and structured JSON or CSV
+> files so the decision process can be inspected and reproduced.
 
 Screen:
 
-- Open `Overview Statistics`.
-- Show method accuracy table and risk type distribution.
-- Show risk-level error-rate chart.
+- Click Page 8: Report Export.
+- Show the literary feedback report download and system summary export.
 
-Key line:
-
-> The most important result is risk stratification: low-risk dynamic decisions are much more accurate, while high-risk decisions concentrate errors.
-
-## 1:50-2:15 Publication Readiness
+## 2:25-2:30 Closing
 
 Narration:
 
-> The final page packages the system for a demo submission. It lists the EMNLP requirements, a video plan, and journal routes for a longer paper.
+> ConsensusScope helps decide when AI feedback requires human review.
 
 Screen:
 
-- Open `Publication Readiness`.
-- Show the checklist and venue table.
-
-## 2:15-2:25 Closing
-
-Narration:
-
-> ConsensusScope is not a new LLM and not a truth oracle. It is a reliability layer that helps researchers and practitioners inspect when multi-LLM collaboration should answer, warn, re-check or stop.
-
-Screen:
-
-- End on the `Publication Readiness` page.
+- Return to Page 1 or stop on Report Export.
+- Leave one second of silence before ending the recording.

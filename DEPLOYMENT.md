@@ -10,8 +10,9 @@ app/streamlit_app.py
 ## Recommended Demo Mode
 
 Use the app without live API calls for reviewer-facing access. The bundled ESL
-literary feedback demo, processed samples, model outputs, adjudication results,
-risk labels, and figures are enough to demonstrate all eight pages.
+literary feedback demo, curated knowledge graph, deterministic feedback records,
+saved live validation records, and routing metrics are enough to demonstrate
+the main ESL workflow.
 
 For a live conference recording, use Mode A only through local `.env` variables
 or Streamlit Cloud secrets. For public deployments, use Mode B so users provide
@@ -48,15 +49,18 @@ streamlit run app/streamlit_app.py --server.port 8502
 
 ## Reviewer Smoke Checklist
 
-- Page 1: overview metrics load and show three adjudication methods.
-- Page 2: ESL literary feedback mode retrieves the local knowledge base and
-  produces adjudicated feedback without requiring API keys.
-- Page 3: sample audit shows question, model outputs, and three adjudicators.
-- Page 4: comparison table excludes experimental learned-meta results.
-- Page 5: risk dashboard clearly separates offline diagnostic labels from
-  deploy-time signals in the paper/README wording.
+- Page 1: overview metrics load and state the ESL review-routing purpose.
+- Page 2: ESL Feedback Review retrieves the local knowledge base and produces
+  adjudicated feedback without requiring API keys.
+- Page 3: Knowledge Grounding & Teacher Queue shows KG evidence and
+  teacher-review decisions.
+- Page 4: comparison table excludes experimental learned-meta results and
+  presents auxiliary QA adjudication as auxiliary.
+- Page 5: risk dashboard loads and does not present old QA metrics as the main
+  submission result.
 - Page 6: model reliability table loads from precomputed outputs.
-- Page 7: case explorer opens error cases.
+- Page 7: auxiliary QA case explorer opens error cases and is labeled
+  auxiliary.
 - Page 8: report export downloads JSON/CSV/Markdown artifacts.
 
 ## Fixed Judge Protocol
@@ -75,3 +79,9 @@ options, and model outputs. It does not receive the gold answer or gold label.
 It sees the other models' answers, rationales/reasons, confidence values,
 evidence fields, and parser metadata. Saved offline results are reproducible as
 artifacts, while exact reruns can vary with provider-side model/API changes.
+
+## Privacy
+
+Before adding real student essays, remove names, IDs, emails, demographic
+details, school identifiers, and any personally identifying information. The
+packaged demo uses anonymized or synthetic examples.

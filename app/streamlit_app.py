@@ -59,6 +59,11 @@ DATA_PATHS = {
     "risk_effectiveness": ROOT / "data" / "results" / "risk_level_effectiveness.csv",
     "error_cases": ROOT / "data" / "results" / "error_cases.csv",
     "literary_kg": ROOT / "data" / "knowledge" / "literary_kg_triples.csv",
+    "literary_benchmark": ROOT / "data" / "literary_feedback" / "benchmark.csv",
+    "literary_records": ROOT / "data" / "results" / "literary_feedback_records.json",
+    "literary_metrics": ROOT / "data" / "results" / "literary_feedback_routing_metrics.csv",
+    "literary_live_records": ROOT / "data" / "results" / "literary_feedback_live_multimodel_records.json",
+    "literary_live_metrics": ROOT / "data" / "results" / "literary_feedback_live_multimodel_metrics.csv",
     "figures": ROOT / "reports" / "figures",
 }
 
@@ -126,6 +131,12 @@ def configured_value(key: str) -> str:
     value = os.getenv(key, "")
     if value:
         return value
+    local_secret_paths = [
+        Path.home() / ".streamlit" / "secrets.toml",
+        ROOT / ".streamlit" / "secrets.toml",
+    ]
+    if not any(path.exists() for path in local_secret_paths) and not truthy(os.getenv("STREAMLIT_SHARING_MODE", "")):
+        return ""
     try:
         secret_value = st.secrets.get(key, "")
     except Exception:
@@ -184,6 +195,19 @@ def load_outputs() -> pd.DataFrame:
     if not outputs.empty:
         return outputs
     return read_table(str(DATA_PATHS["outputs_jsonl"]))
+
+
+@st.cache_data(show_spinner=False)
+def read_json_records(path: str) -> List[Dict[str, Any]]:
+    p = Path(path)
+    if not p.exists():
+        return []
+    try:
+        data = json.loads(p.read_text(encoding="utf-8"))
+        return data if isinstance(data, list) else []
+    except Exception as exc:
+        st.warning(f"Failed to read {p}: {exc}")
+        return []
 
 
 def inject_styles() -> None:
@@ -463,26 +487,47 @@ def render_adjudication_comparison(comparison: Optional[Dict[str, Any]]) -> None
 
 def page_home(samples_df: pd.DataFrame, outputs_df: pd.DataFrame, metrics_df: pd.DataFrame, risk_df: pd.DataFrame) -> None:
     st.markdown('<div class="section-title">Page 1 · Home / System Overview</div>', unsafe_allow_html=True)
+    kg_df = read_table(str(DATA_PATHS["literary_kg"]))
+    benchmark_df = read_table(str(DATA_PATHS["literary_benchmark"]))
+    literary_metrics = read_table(str(DATA_PATHS["literary_metrics"]))
     metrics_df = visible_method_metrics(metrics_df)
+    teacher_review = int(literary_metrics["teacher_review"].sum()) if not literary_metrics.empty and "teacher_review" in literary_metrics else 0
     c1, c2, c3, c4 = st.columns(4)
     with c1:
-        metric_panel("Samples", str(len(samples_df)), "clean_dataset.csv")
+        works = int(kg_df["work"].nunique()) if not kg_df.empty and "work" in kg_df else 0
+        metric_panel("Literary Works", str(works), "curated KG")
     with c2:
-        metric_panel("Model Outputs", str(len(outputs_df)), "Unified CSV / JSONL outputs")
+        metric_panel("KG Triples", str(len(kg_df)), "author, genre, character, theme")
     with c3:
-        metric_panel("Adjudicators", "3", "Majority, Fixed, Rule")
+        metric_panel("Benchmark Essays", str(len(benchmark_df)), "diagnostic ESL snippets")
     with c4:
-        best = metrics_df["accuracy"].max() if not metrics_df.empty and "accuracy" in metrics_df else 0
-        metric_panel("Best Accuracy", f"{best:.3f}", "current result files")
+        metric_panel("Teacher Review", str(teacher_review), "routed feedback decisions")
     st.code(
         "Essay / Question Input -> Expert Knowledge Retrieval -> Multi-Model Feedback Generation -> "
         "Unified Output Format -> Knowledge-Grounded Adjudication -> Risk Dashboard -> Report Export",
         language="text",
     )
     st.markdown(
-        "**Adjudication Layer:** Majority Vote / Fixed Judge / Dynamic Rule-Based Judge / KG-grounded feedback routing"
+        "**Main demo claim:** ESL comparative-literature feedback review routing. "
+        "ConsensusScope separates low-risk local edits from literary facts, argument changes, "
+        "and interpretation changes that need teacher review."
     )
+    st.info(
+        "The auxiliary QA reliability module remains available for inspecting saved multi-model traces, "
+        "but it is not the main EMNLP 2026 demo claim."
+    )
+    if not literary_metrics.empty:
+        st.markdown('<div class="section-title">ESL Feedback Routing Snapshot</div>', unsafe_allow_html=True)
+        snapshot = {
+            "adjudicated_decisions": int(literary_metrics["total_suggestions"].sum()),
+            "auto_accept": int(literary_metrics["auto_accept"].sum()),
+            "teacher_review": int(literary_metrics["teacher_review"].sum()),
+            "high_risk": int(literary_metrics["high_risk"].sum()),
+            "kg_supported": int(literary_metrics["kg_supported"].sum()),
+        }
+        st.dataframe(pd.DataFrame([snapshot]), use_container_width=True, hide_index=True)
     if not metrics_df.empty:
+        st.markdown('<div class="section-title">Auxiliary QA Reliability Metrics</div>', unsafe_allow_html=True)
         st.dataframe(metrics_df, use_container_width=True, hide_index=True)
     if not risk_df.empty and "risk_labels" in risk_df:
         labels: List[str] = []
@@ -629,11 +674,91 @@ def render_literary_feedback_mode(api_mode: str, selected: List[str], user_input
         st.dataframe(feedback_df, use_container_width=True, hide_index=True)
 
 
+def saved_literary_result() -> Dict[str, Any]:
+    session_result = st.session_state.get("literary_result")
+    if session_result:
+        return session_result
+    records = read_json_records(str(DATA_PATHS["literary_records"]))
+    if not records:
+        return {}
+    record = records[0]
+    essay = record.get("essay", "")
+    kg_rows = record.get("kg_rows", [])
+    feedback = record.get("feedback", [])
+    decisions = record.get("decisions", [])
+    return {
+        "essay": essay,
+        "revised": apply_auto_accepted_edits(essay, decisions),
+        "kg_rows": kg_rows,
+        "feedback": feedback,
+        "reviewer_source": "Saved no-API deterministic reviewers",
+        "reviewer_results": [],
+        "decisions": decisions,
+        "report": build_literary_feedback_report(essay, kg_rows, feedback, decisions),
+    }
+
+
+def page_knowledge_teacher_queue() -> None:
+    st.markdown('<div class="section-title">Page 3 · Knowledge Grounding & Teacher Queue</div>', unsafe_allow_html=True)
+    result = saved_literary_result()
+    if not result:
+        st.info("Run Page 2 first or regenerate data/results/literary_feedback_records.json.")
+        return
+    st.caption(
+        "This page keeps the ESL feedback workflow in view: KG evidence supports inspection, "
+        "and meaning-changing feedback remains in the teacher-review queue."
+    )
+    decisions = result.get("decisions", [])
+    summary = literary_routing_summary(decisions)
+    c1, c2, c3, c4 = st.columns(4)
+    c1.metric("Auto-accept", summary["auto_accept"])
+    c2.metric("Teacher review", summary["teacher_review"])
+    c3.metric("High risk", summary["high_risk"])
+    c4.metric("KG-supported", summary["kg_supported"])
+
+    tabs = st.tabs(["Teacher Review Queue", "Knowledge Evidence", "Adjudication Trace", "Export Preview"])
+    with tabs[0]:
+        queue = review_queue(decisions)
+        if queue:
+            display_cols = [
+                "priority",
+                "risk_level",
+                "issue_type",
+                "span",
+                "selected_suggestion",
+                "teacher_action",
+                "agreement",
+                "kg_supported",
+                "rationale",
+            ]
+            queue_df = pd.DataFrame(queue)
+            st.dataframe(queue_df[[c for c in display_cols if c in queue_df.columns]], use_container_width=True, hide_index=True)
+        else:
+            st.success("No teacher-review items in the selected record.")
+    with tabs[1]:
+        kg_rows = result.get("kg_rows", [])
+        if kg_rows:
+            st.dataframe(pd.DataFrame(kg_rows), use_container_width=True, hide_index=True)
+        else:
+            st.info("No KG evidence is attached to this record.")
+    with tabs[2]:
+        st.dataframe(pd.DataFrame(decisions), use_container_width=True, hide_index=True)
+    with tabs[3]:
+        st.download_button(
+            "Download literary_feedback_report.md",
+            data=result.get("report", "").encode("utf-8"),
+            file_name="literary_feedback_report.md",
+            mime="text/markdown",
+            use_container_width=True,
+        )
+        st.text_area("Report preview", result.get("report", ""), height=260)
+
+
 def page_live(api_mode: str, selected: List[str], user_inputs: Dict[str, Dict[str, str]], fixed_enabled: bool, fixed_provider: str) -> None:
-    st.markdown('<div class="section-title">Page 2 · Live Feedback / Question Mode</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-title">Page 2 · ESL Feedback Review</div>', unsafe_allow_html=True)
     mode = st.radio(
         "Mode",
-        ["ESL literary essay feedback", "General QA live comparison"],
+        ["ESL literary essay feedback", "Auxiliary QA live comparison"],
         horizontal=True,
         label_visibility="collapsed",
     )
@@ -757,9 +882,13 @@ def page_sample_audit(samples_df: pd.DataFrame, outputs_df: pd.DataFrame, majori
 
 def page_comparison(metrics_df: pd.DataFrame) -> None:
     st.markdown('<div class="section-title">Page 4 · Adjudication Comparison</div>', unsafe_allow_html=True)
+    st.caption(
+        "For ESL feedback, the main routing decision is auto-accept versus teacher review. "
+        "The table below is retained for the auxiliary QA reliability module."
+    )
     live = st.session_state.get("live_result")
     render_adjudication_comparison((live or {}).get("comparison"))
-    st.markdown("### Offline Experiment Metrics")
+    st.markdown("### Auxiliary QA Offline Metrics")
     metrics_df = visible_method_metrics(metrics_df)
     if metrics_df.empty:
         st.info("Missing data/results/method_metrics.csv.")
@@ -771,9 +900,36 @@ def page_comparison(metrics_df: pd.DataFrame) -> None:
 
 def page_risk_dashboard(risk_df: pd.DataFrame, effectiveness_df: pd.DataFrame) -> None:
     st.markdown('<div class="section-title">Page 5 · Risk Dashboard</div>', unsafe_allow_html=True)
+    literary_metrics = read_table(str(DATA_PATHS["literary_metrics"]))
+    live_metrics = read_table(str(DATA_PATHS["literary_live_metrics"]))
+    if not literary_metrics.empty:
+        st.markdown("### ESL Feedback Routing Risk")
+        summary = {
+            "source": "no_api_benchmark",
+            "decisions": int(literary_metrics["total_suggestions"].sum()),
+            "auto_accept": int(literary_metrics["auto_accept"].sum()),
+            "teacher_review": int(literary_metrics["teacher_review"].sum()),
+            "high_risk": int(literary_metrics["high_risk"].sum()),
+            "kg_supported": int(literary_metrics["kg_supported"].sum()),
+        }
+        if not live_metrics.empty:
+            live_summary = {
+                "source": "saved_live_validation",
+                "decisions": int(live_metrics["total_suggestions"].sum()),
+                "auto_accept": int(live_metrics["auto_accept"].sum()),
+                "teacher_review": int(live_metrics["teacher_review"].sum()),
+                "high_risk": int(live_metrics["high_risk"].sum()),
+                "kg_supported": int(live_metrics["kg_supported"].sum()),
+            }
+            st.dataframe(pd.DataFrame([summary, live_summary]), use_container_width=True, hide_index=True)
+        else:
+            st.dataframe(pd.DataFrame([summary]), use_container_width=True, hide_index=True)
+        st.caption("These are review-routing counts, not automatic essay-scoring results.")
     if risk_df.empty:
-        st.info("Missing risk_labels.csv.")
+        st.info("Missing auxiliary QA risk_labels.csv.")
         return
+    st.markdown("### Auxiliary QA Offline Diagnostic Labels")
+    st.caption("These labels use gold answers and are not deploy-time knowledge.")
     labels: List[str] = []
     for item in risk_df.get("risk_labels", pd.Series(dtype=str)).fillna(""):
         labels.extend([x.strip() for x in str(item).split(";") if x.strip()])
@@ -807,7 +963,8 @@ def page_model_reliability(outputs_df: pd.DataFrame, samples_df: pd.DataFrame) -
 
 
 def page_case_explorer(error_df: pd.DataFrame, samples_df: pd.DataFrame, outputs_df: pd.DataFrame) -> None:
-    st.markdown('<div class="section-title">Page 7 · Case Explorer</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-title">Page 7 · Auxiliary QA Case Explorer</div>', unsafe_allow_html=True)
+    st.caption("Auxiliary reliability cases from saved QA traces. They are not the main ESL feedback demo claim.")
     if error_df.empty:
         st.info("Missing error_cases.csv.")
         return
@@ -826,7 +983,7 @@ def page_case_explorer(error_df: pd.DataFrame, samples_df: pd.DataFrame, outputs
 def page_report_export(samples_df: pd.DataFrame, outputs_df: pd.DataFrame, metrics_df: pd.DataFrame, risk_df: pd.DataFrame) -> None:
     st.markdown('<div class="section-title">Page 8 · Report Export</div>', unsafe_allow_html=True)
     live = st.session_state.get("live_result")
-    literary = st.session_state.get("literary_result")
+    literary = saved_literary_result()
     if literary:
         st.download_button(
             "Download literary_feedback_report.md",
@@ -898,12 +1055,12 @@ def main() -> None:
         "Navigation",
         [
             "Page 1: Home / System Overview",
-            "Page 2: ESL Literary Feedback Mode",
-            "Page 3: Sample Audit Mode",
+            "Page 2: ESL Feedback Review",
+            "Page 3: Knowledge Grounding & Teacher Queue",
             "Page 4: Adjudication Comparison",
             "Page 5: Risk Dashboard",
             "Page 6: Model Reliability Dashboard",
-            "Page 7: Case Explorer",
+            "Page 7: Auxiliary QA Case Explorer",
             "Page 8: Report Export",
         ],
         label_visibility="collapsed",
@@ -916,7 +1073,7 @@ def main() -> None:
     elif page.startswith("Page 2"):
         page_live(api_mode, selected, user_inputs, fixed_enabled, fixed_provider)
     elif page.startswith("Page 3"):
-        page_sample_audit(samples_df, outputs_df, majority_df, dynamic_df, fixed_df, risk_df)
+        page_knowledge_teacher_queue()
     elif page.startswith("Page 4"):
         page_comparison(metrics_df)
     elif page.startswith("Page 5"):

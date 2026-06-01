@@ -184,20 +184,20 @@ def build_doc() -> None:
     add_labeled_para(
         doc,
         "Main message: ",
-        "Multi-model agreement is useful evidence, but it is not proof of correctness. ConsensusScope exposes when to accept, inspect, or route a multi-LLM decision for human review.",
+        "AI writing feedback can be fluent but unsafe. ConsensusScope routes ESL comparative-literature feedback into low-risk auto-accept and teacher-review queues with literary knowledge evidence.",
     )
 
     doc.add_heading("1. Page-by-page Recording Plan", level=1)
     add_timeline_table(
         doc,
         [
-            ("0:00-0:20", "Page 1", "Open Home / System Overview. Keep the pointer near the title and pipeline.", "Problem and premise"),
-            ("0:20-0:45", "Page 2", "Show API Configuration. Then click Live Question Mode and show task input.", "Live workflow and API safety"),
-            ("0:45-1:10", "Page 3", "Click Sample Audit Mode. Select a saved benchmark sample and show model outputs.", "Structured traces"),
-            ("1:10-1:35", "Page 4", "Click Adjudication Comparison. Point to majority vote, fixed judge, dynamic judge.", "Adjudication layer"),
-            ("1:35-2:00", "Page 5", "Click Risk Dashboard. Point to low-risk accuracy and high-risk error rate.", "Risk stratification"),
-            ("2:00-2:20", "Page 7/8", "Click Case Explorer, then Report Export. Show case inspection and download buttons.", "Audit and export"),
-            ("2:20-2:30", "Page 1", "Return to Home. Stop moving the mouse and close with one sentence.", "Conclusion"),
+            ("0:00-0:20", "Page 1", "Open Home / System Overview. Keep the pointer near the title and workflow.", "Problem and premise"),
+            ("0:20-0:45", "Page 2", "Click ESL Feedback Review. Show the essay input and reviewer source selector.", "System overview"),
+            ("0:45-1:10", "Page 2", "Run the no-API demo and open Knowledge Evidence.", "Knowledge grounding"),
+            ("1:10-1:40", "Page 2/3", "Show Teacher View, Adjudication Trace, then Knowledge Grounding & Teacher Queue.", "Feedback routing"),
+            ("1:40-2:05", "Page 3", "Point to risk level, priority, model agreement, and KG support.", "Teacher review queue"),
+            ("2:05-2:25", "Page 8", "Click Report Export and show the report download buttons.", "Export"),
+            ("2:25-2:30", "Page 1/8", "Stop moving the mouse and close with one sentence.", "Conclusion"),
         ],
     )
 
@@ -211,72 +211,69 @@ def build_doc() -> None:
             "Keep the pointer near the title ConsensusScope.",
             "Briefly move the pointer over the system pipeline.",
         ],
-        "ConsensusScope is an interactive observability tool for risk-aware multi-LLM adjudication. It starts from a simple premise: multi-model agreement is useful evidence, but agreement alone is not proof of correctness.",
+        "AI writing feedback can be fluent but unsafe. In ESL comparative-literature essays, a model may fix grammar correctly while changing literary facts, character relations, or the student's interpretation.",
     )
 
     add_segment(
         doc,
         "0:20-0:45",
-        "API configuration and live mode",
+        "System overview",
         [
             "Move to the sidebar API Configuration panel.",
             "Show Mode A and Mode B without typing any real API key.",
-            "Click Page 2: Live Question Mode.",
-            "Show the task-type selector, question input, model selection area, and Run Live Comparison button.",
+            "Click Page 2: ESL Feedback Review.",
+            "Show the essay input, reviewer source selector, and Run Knowledge-Grounded Feedback button.",
         ],
-        "The system supports two API modes. Mode A is for controlled local demos using configured environment variables or deployment secrets. Mode B is for public deployment, where users provide their own temporary API keys. API keys are not written into the paper and are not hard-coded in the repository.",
+        "ConsensusScope compares multiple LLM feedback outputs and routes each suggestion into either low-risk auto-accept or teacher review. It is not an automatic essay scorer and it does not replace teacher judgment.",
     )
 
     add_segment(
         doc,
         "0:45-1:10",
-        "Structured multi-model traces",
+        "Knowledge grounding",
         [
-            "Click Page 3: Sample Audit Mode.",
-            "Select a dataset such as FEVER or CommonsenseQA.",
-            "Select a sample ID and scroll to the model-output area.",
-            "Point to answer, reason, confidence, and evidence fields.",
+            "Run the no-API deterministic feedback demo.",
+            "Open the Knowledge Evidence tab.",
+            "Point to author, genre, character, theme, and publication-year rows.",
         ],
-        "Each model output is stored in a unified schema, including answer, rationale, confidence, evidence, raw output, and parse metadata. This lets us inspect not only the final answer, but also whether models agree, whether evidence is available, and whether confidence signals are reliable.",
+        "The system retrieves evidence from a curated literary knowledge graph, including author, work, genre, central characters, themes, and publication year. These triples make factual feedback inspectable.",
     )
 
     add_segment(
         doc,
-        "1:10-1:35",
-        "Adjudication comparison",
+        "1:10-1:40",
+        "Feedback adjudication",
         [
-            "Click Page 4: Adjudication Comparison.",
-            "Point first to Majority Vote.",
-            "Move to Fixed Judge.",
-            "Move to Dynamic Rule-Based Judge.",
+            "Open the Teacher View tab.",
+            "Point to the auto-accepted preview.",
+            "Open the Adjudication Trace tab.",
+            "Click Page 3: Knowledge Grounding & Teacher Queue.",
         ],
-        "ConsensusScope compares three adjudication strategies. Majority vote is the frequency-based baseline. The fixed judge uses a configured judge model, by default deepseek-chat, and it does not see the gold answer. The rule-based dynamic judge uses deploy-time signals such as agreement rate, answer diversity, confidence distribution, evidence availability, minority warnings, and parse errors.",
+        "Low-risk local grammar or style edits can be accepted, but suggestions about authorship, genre, character identity, thesis statements, or interpretation remain in the teacher-review queue.",
     )
 
     add_segment(
         doc,
-        "1:35-2:00",
-        "Risk dashboard and evaluation",
+        "1:40-2:05",
+        "Teacher review queue",
         [
-            "Click Page 5: Risk Dashboard.",
-            "Point to the low, medium, and high risk levels.",
-            "Pause near the low-risk accuracy number.",
-            "Pause near the high-risk error-rate number.",
+            "Point to risk level, priority, agreement, and KG support fields.",
+            "Briefly mention the auxiliary QA pages only if visible.",
+            "Avoid presenting the old QA benchmark as the main system story.",
         ],
-        "In the 1000-sample pilot, we avoid a single mixed macro-F1 score because TruthfulQA, FEVER, and CommonsenseQA have different answer spaces. The key result is risk stratification: low-risk dynamic decisions reach 91.8 percent accuracy, while high-risk decisions concentrate errors with a 95.2 percent error rate.",
+        "The teacher review queue shows risk level, priority, model agreement, knowledge support, and a short explanation for why human review is recommended. The system also includes auxiliary multi-model QA audit pages, but this demo focuses on ESL literary feedback.",
     )
 
     add_segment(
         doc,
-        "2:00-2:20",
-        "Case explorer and report export",
+        "2:05-2:25",
+        "Report export",
         [
-            "Click Page 7: Case Explorer.",
-            "Open the Inspect case selector and choose one case.",
             "Click Page 8: Report Export.",
-            "Show system_summary.json, method_metrics.csv, and risk_labels.csv download buttons.",
+            "Show the literary feedback report download.",
+            "Show system_summary.json and CSV export buttons.",
         ],
-        "The case explorer supports sample-level auditing, while the export page packages reports and CSV files for reproducibility. Offline labels such as false consensus or minority-correct cases are used only when gold labels are available; live deployment relies on observable risk signals.",
+        "The final page exports a Markdown feedback report and structured JSON or CSV files so the decision process can be inspected and reproduced.",
     )
 
     add_segment(
@@ -284,11 +281,11 @@ def build_doc() -> None:
         "2:20-2:30",
         "Closing",
         [
-            "Click Page 1: Home / System Overview.",
+            "Return to Page 1 or stay on Report Export.",
             "Stop moving the mouse.",
             "Leave one second of silence after the final sentence before stopping the recording.",
         ],
-        "ConsensusScope is not a truth oracle. It is a reliability layer that helps researchers and practitioners decide when a multi-LLM system should answer, warn, re-check, or route the case for human review.",
+        "ConsensusScope helps decide when AI feedback requires human review.",
     )
 
     doc.add_heading("3. Presenter Checklist", level=1)
@@ -296,9 +293,9 @@ def build_doc() -> None:
         "Use English narration for international conference submission.",
         "Keep the video at or below 2 minutes 30 seconds.",
         "Do not type or reveal real API keys.",
-        "Do not claim that the system knows false consensus at deployment time.",
-        "Say clearly that offline diagnostic labels require gold labels.",
-        "Do not frame the dynamic judge as a stronger model; frame it as risk stratification and review routing.",
+        "Do not claim teacher-study or classroom annotation results that are not in the data.",
+        "Do not frame ConsensusScope as an automatic essay scorer or teacher replacement.",
+        "Keep auxiliary QA pages clearly secondary to the ESL literary-feedback workflow.",
     ]:
         p = doc.add_paragraph(style="List Bullet")
         r = p.add_run(item)

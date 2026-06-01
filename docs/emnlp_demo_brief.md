@@ -36,8 +36,8 @@ ConsensusScope is a knowledge-grounded adjudication demo for ESL comparative lit
 ## Required pages for the submission video
 
 - Page 1: Home / System Overview.
-- Page 2: Live Question Mode, using the ESL literary-feedback path first.
-- Page 3: Sample Audit Mode.
+- Page 2: ESL Feedback Review.
+- Page 3: Knowledge Grounding & Teacher Queue.
 - Page 5: Risk Dashboard.
 - Page 8: Report Export.
 
@@ -45,18 +45,19 @@ ConsensusScope is a knowledge-grounded adjudication demo for ESL comparative lit
 
 Current local files include:
 
-- `data/results/method_metrics.csv`: accuracy and risk rates for majority vote, dynamic decision and fixed judge.
-- `data/results/risk_labels.csv`: risk labels for 1000 evaluated samples.
-- `data/results/risk_level_effectiveness.csv`: risk-level error rates.
-- `reports/experiment_report.md`: generated experiment report.
-- `reports/figures/`: visual figures for the paper.
 - `data/results/literary_feedback_routing_metrics.csv`: ESL feedback routing
   metrics over 30 curated benchmark cases.
 - `data/results/literary_feedback_records.json`: raw feedback, KG evidence and
   adjudicated decisions for the ESL benchmark.
+- `data/results/literary_feedback_live_multimodel_records.json`: saved live
+  validation records over 10 benchmark cases and four providers.
+- `data/results/literary_feedback_live_multimodel_metrics.csv`: saved live
+  routing metrics.
+- Auxiliary QA reliability files are retained for secondary inspection, but
+  they are not the main EMNLP demo claim.
 
 ## Submission gaps
 
-- Add screenshots to the paper.
 - Record a video under 2.5 minutes.
-- Add human teacher evaluation or annotation agreement before submission.
+- Add a real screencast upload or submit the video as supplementary material.
+- Future work: extend the curated benchmark with instructor annotations.

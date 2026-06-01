@@ -171,9 +171,12 @@ edits were auto-accepted and which require manual judgment.
 
 The current release includes a small benchmark designed to validate the
 workflow rather than claim state-of-the-art correction accuracy. The benchmark
-contains 30 ESL comparative-literature snippets with grammar, literary-fact,
-genre, character and argument risks. Table~\ref{tab:kg} summarizes the
-knowledge graph and Table~\ref{tab:routing} summarizes the no-API routing run.
+is intentionally diagnostic: it tests whether the system can separate low-risk
+local edits from feedback that changes literary facts, character relations,
+themes or interpretation. It contains 30 ESL comparative-literature snippets
+with grammar, literary-fact, genre, character and argument risks.
+Table~\ref{tab:kg} summarizes the knowledge graph and Table~\ref{tab:routing}
+summarizes the no-API routing run.
 
 \begin{table}[t]
 \centering
@@ -270,13 +273,14 @@ ConsensusScope is released under the MIT License. The package includes the
 Streamlit app, curated literary KG, saved benchmark records, live validation
 records, scripts and tests. The public code and demo URLs are:
 \url{https://github.com/yyting2006-ai/ConsensusScope} and
-\url{https://consensusscope-fzebywc3is3tducktjuvup.streamlit.app/}. A narrated
-demo video URL will be added before submission: \url{TODO_VIDEO_URL}.
+\url{https://consensusscope-fzebywc3is3tducktjuvup.streamlit.app/}. The
+demonstration screencast is submitted as supplementary material.
 
 The local demo can be installed and run with:
 \begin{verbatim}
 pip install -r requirements.txt
-streamlit run app/streamlit_app.py --server.port 8502
+streamlit run app/streamlit_app.py \
+  --server.port 8502
 \end{verbatim}
 
 \section{Ethics and Limitations}
@@ -287,8 +291,12 @@ described as complete. Knowledge-supported feedback can still be inappropriate
 for a student's local argument, so factual and interpretation-changing
 suggestions remain routed to teacher review. Live API behavior can change with
 provider updates, and saved validation records are included to make the demo
-inspectable without exposing API keys. Future work should add teacher
-annotations, classroom usability studies and a larger literary knowledge base.
+inspectable without exposing API keys. We are extending the current curated
+benchmark with instructor-annotated ESL comparative-literature essays, where a
+domain teacher marks literary concepts, factual errors, comparison quality and
+review priority. These annotations will be used to evaluate whether
+ConsensusScope improves teacher review routing and detection of unsafe AI
+feedback.
 
 \section{Conclusion}
 

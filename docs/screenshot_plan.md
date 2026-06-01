@@ -1,17 +1,16 @@
 # Screenshot Plan
 
-The English screenshots in `docs/screenshots_en/` are generated from the local
-Streamlit demo and should be used in the EMNLP demo paper or submission
-appendix. The Chinese screenshots in `docs/screenshots/` are kept for local
-project defense.
+The English screenshots in `docs/screenshots_en/` should follow the ESL
+comparative-literature feedback storyline.
 
 Recommended figures:
 
-1. `sample_audit_false_consensus.png`: model-level trace and risk labels for
-   `fever_0366`.
-2. `aggregate_statistics.png`: current Risk Dashboard with offline diagnostic
-   label counts and risk-level effectiveness.
-3. `report_export.png`: current Report Export page with downloadable artifacts.
+1. `home_system_overview.png`: system purpose and ESL review-routing workflow.
+2. `esl_feedback_review.png`: essay input, no-API reviewer mode, and adjudicated
+   feedback.
+3. `knowledge_teacher_queue.png`: KG evidence and teacher-review queue.
+4. `risk_dashboard.png`: ESL routing risk summary plus auxiliary QA diagnostics.
+5. `report_export.png`: downloadable feedback report and reproducibility files.
 
 Generation command:
 
@@ -19,5 +18,5 @@ Generation command:
 node scripts/capture_screenshots_en.mjs
 ```
 
-The English Streamlit app must be running at `http://localhost:8502` before executing
+The Streamlit app must be running at `http://localhost:8502` before executing
 the command.
