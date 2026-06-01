@@ -1,9 +1,14 @@
-# 面向多大模型协同决策的可靠性评估与动态裁决机制研究
+# ConsensusScope：面向英语二语比较文学论文反馈的知识增强多模型裁决系统
 
-这是一个大学生创新训练项目的 Python 实验系统骨架。项目不训练大模型，而是研究多个大语言模型在同一批公开数据集问题上的协同决策可靠性。
+这是一个面向 NLP demo 和教学应用展示的 Python/Streamlit 系统。项目不训练大模型，而是把多模型裁决机制包装到英语二语写作场景中：多个模型或规则化 reviewer 生成论文修改建议，系统结合文学知识库、模型一致性、证据支持和意义改变风险，判断哪些低风险语言修改可以自动采纳，哪些文学事实、论证和解释性修改应交给教师复核。
 
 系统目标：
 
+- 面向英语二语学习者的比较文学论文纠错与反馈；
+- 检索小型文学知识库，覆盖作者、出版年份、体裁、人物等专家知识；
+- 统一生成 grammar、academic_style、literary_fact、argument 等反馈建议；
+- 在动态裁决中使用知识证据和 meaning-change risk；
+- 保留原有 TruthfulQA、FEVER、CommonsenseQA 多模型可靠性实验作为方法背景；
 - 整理 TruthfulQA、FEVER、CommonsenseQA 等公开数据集样本；
 - 调用 DeepSeek、Qwen、GLM、Kimi，并预留 OpenAI 兼容接口；
 - 要求模型以 JSON 输出 `answer`、`reason`、`confidence`、`evidence`；
@@ -39,6 +44,7 @@ mllm_reliability_adjudication/
 ├── config.yaml
 ├── data/
 │   ├── raw/
+│   ├── knowledge/
 │   ├── processed/
 │   ├── outputs/
 │   └── results/

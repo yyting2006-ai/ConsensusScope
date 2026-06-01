@@ -30,6 +30,15 @@ from src.live_question import (
     load_historical_reliability,
     run_live_models,
 )
+from src.literary_feedback import (
+    DEFAULT_LITERARY_ESSAY,
+    adjudicate_literary_feedback,
+    build_literary_feedback_report,
+    generate_demo_literary_feedback,
+    literary_routing_summary,
+    load_literary_kg,
+    retrieve_literary_knowledge,
+)
 from src.llm.clients import PROVIDER_CONFIG
 
 
@@ -44,6 +53,7 @@ DATA_PATHS = {
     "method_metrics": ROOT / "data" / "results" / "method_metrics.csv",
     "risk_effectiveness": ROOT / "data" / "results" / "risk_level_effectiveness.csv",
     "error_cases": ROOT / "data" / "results" / "error_cases.csv",
+    "literary_kg": ROOT / "data" / "knowledge" / "literary_kg_triples.csv",
     "figures": ROOT / "reports" / "figures",
 }
 
@@ -211,6 +221,7 @@ def inject_styles() -> None:
 def ensure_state() -> None:
     defaults = {
         "live_result": None,
+        "literary_result": None,
         "audit_selection": None,
         "api_mode": "Mode A",
         "demo_authenticated": False,
@@ -238,7 +249,7 @@ def topbar() -> None:
         """
         <div class="topbar">
           <div class="title">ConsensusScope</div>
-          <div class="subtitle">Multi-LLM reliability assessment, risk diagnosis, and dynamic adjudication system</div>
+          <div class="subtitle">Knowledge-grounded multi-LLM adjudication for ESL literary writing feedback</div>
         </div>
         """,
         unsafe_allow_html=True,
@@ -459,12 +470,12 @@ def page_home(samples_df: pd.DataFrame, outputs_df: pd.DataFrame, metrics_df: pd
         best = metrics_df["accuracy"].max() if not metrics_df.empty and "accuracy" in metrics_df else 0
         metric_panel("Best Accuracy", f"{best:.3f}", "current result files")
     st.code(
-        "API Configuration -> Multi-Model Answer Generation -> Unified Output Format -> "
-        "Adjudication Layer -> Risk Dashboard -> Reliability Dashboard -> Case Explorer -> Report Export",
+        "Essay / Question Input -> Expert Knowledge Retrieval -> Multi-Model Feedback Generation -> "
+        "Unified Output Format -> Knowledge-Grounded Adjudication -> Risk Dashboard -> Report Export",
         language="text",
     )
     st.markdown(
-        "**Adjudication Layer:** Majority Vote / Fixed Judge / Dynamic Rule-Based Judge"
+        "**Adjudication Layer:** Majority Vote / Fixed Judge / Dynamic Rule-Based Judge / KG-grounded feedback routing"
     )
     if not metrics_df.empty:
         st.dataframe(metrics_df, use_container_width=True, hide_index=True)
@@ -476,8 +487,80 @@ def page_home(samples_df: pd.DataFrame, outputs_df: pd.DataFrame, metrics_df: pd
             st.bar_chart(pd.Series(labels).value_counts())
 
 
+def render_literary_feedback_mode() -> None:
+    kg = load_literary_kg(str(DATA_PATHS["literary_kg"]))
+    st.markdown('<div class="section-title">ESL Comparative Literature Essay Feedback</div>', unsafe_allow_html=True)
+    st.caption(
+        "No-API demo path: reviewer suggestions are generated with a deterministic schema, "
+        "then adjudicated with agreement, literary KG evidence, and meaning-change risk."
+    )
+    left, right = st.columns([1.05, 0.95], gap="large")
+    with left:
+        essay = st.text_area("Student essay excerpt", value=DEFAULT_LITERARY_ESSAY, height=230)
+        if st.button("Run Knowledge-Grounded Feedback", use_container_width=True):
+            kg_rows = retrieve_literary_knowledge(essay, kg, limit=16)
+            feedback = generate_demo_literary_feedback(essay, kg)
+            decisions = adjudicate_literary_feedback(feedback)
+            st.session_state["literary_result"] = {
+                "essay": essay,
+                "kg_rows": kg_rows,
+                "feedback": feedback,
+                "decisions": decisions,
+                "report": build_literary_feedback_report(essay, kg_rows, feedback, decisions),
+            }
+    with right:
+        result = st.session_state.get("literary_result")
+        decisions = (result or {}).get("decisions", [])
+        summary = literary_routing_summary(decisions)
+        c1, c2 = st.columns(2)
+        c1.metric("Auto-accept", summary["auto_accept"])
+        c2.metric("Teacher review", summary["teacher_review"])
+        c3, c4 = st.columns(2)
+        c3.metric("High risk", summary["high_risk"])
+        c4.metric("KG-supported", summary["kg_supported"])
+        if result:
+            st.download_button(
+                "Download feedback report.md",
+                data=result["report"].encode("utf-8"),
+                file_name="literary_feedback_report.md",
+                mime="text/markdown",
+                use_container_width=True,
+            )
+
+    result = st.session_state.get("literary_result")
+    if not result:
+        st.info("Run the demo to inspect knowledge retrieval, reviewer suggestions, and adjudicated feedback.")
+        return
+
+    kg_rows = result.get("kg_rows", [])
+    if kg_rows:
+        st.markdown('<div class="section-title">Retrieved Expert Knowledge</div>', unsafe_allow_html=True)
+        st.dataframe(pd.DataFrame(kg_rows), use_container_width=True, hide_index=True)
+
+    st.markdown('<div class="section-title">Knowledge-Grounded Adjudication</div>', unsafe_allow_html=True)
+    decisions_df = pd.DataFrame(result.get("decisions", []))
+    st.dataframe(decisions_df, use_container_width=True, hide_index=True)
+
+    st.markdown('<div class="section-title">Multi-Reviewer Feedback Schema</div>', unsafe_allow_html=True)
+    feedback_df = pd.DataFrame(result.get("feedback", []))
+    if not feedback_df.empty and "knowledge_evidence" in feedback_df.columns:
+        feedback_df = feedback_df.copy()
+        feedback_df["knowledge_evidence"] = feedback_df["knowledge_evidence"].map(lambda values: " | ".join(values) if isinstance(values, list) else values)
+    st.dataframe(feedback_df, use_container_width=True, hide_index=True)
+
+
 def page_live(api_mode: str, selected: List[str], user_inputs: Dict[str, Dict[str, str]], fixed_enabled: bool, fixed_provider: str) -> None:
-    st.markdown('<div class="section-title">Page 2 · Live Question Mode</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-title">Page 2 · Live Feedback / Question Mode</div>', unsafe_allow_html=True)
+    mode = st.radio(
+        "Mode",
+        ["ESL literary essay feedback", "General QA live comparison"],
+        horizontal=True,
+        label_visibility="collapsed",
+    )
+    if mode == "ESL literary essay feedback":
+        render_literary_feedback_mode()
+        return
+
     left, right = st.columns([0.95, 1.05], gap="large")
     with left:
         task_type = st.selectbox(
@@ -663,6 +746,15 @@ def page_case_explorer(error_df: pd.DataFrame, samples_df: pd.DataFrame, outputs
 def page_report_export(samples_df: pd.DataFrame, outputs_df: pd.DataFrame, metrics_df: pd.DataFrame, risk_df: pd.DataFrame) -> None:
     st.markdown('<div class="section-title">Page 8 · Report Export</div>', unsafe_allow_html=True)
     live = st.session_state.get("live_result")
+    literary = st.session_state.get("literary_result")
+    if literary:
+        st.download_button(
+            "Download literary_feedback_report.md",
+            data=literary.get("report", "").encode("utf-8"),
+            file_name="literary_feedback_report.md",
+            mime="text/markdown",
+            use_container_width=True,
+        )
     if live:
         st.download_button(
             "Download Live report.md",
@@ -726,7 +818,7 @@ def main() -> None:
         "Navigation",
         [
             "Page 1: Home / System Overview",
-            "Page 2: Live Question Mode",
+            "Page 2: ESL Literary Feedback Mode",
             "Page 3: Sample Audit Mode",
             "Page 4: Adjudication Comparison",
             "Page 5: Risk Dashboard",

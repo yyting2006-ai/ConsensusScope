@@ -2,22 +2,22 @@
 
 ## One-line pitch
 
-ConsensusScope is a risk-aware observability tool for multi-LLM collaborative decision-making. It shows when multi-model agreement is reliable, when it becomes false consensus, and when minority answers or human review should be preserved.
+ConsensusScope is a knowledge-grounded adjudication demo for ESL comparative literature essay feedback. It shows how multi-model feedback suggestions can be checked against expert literary knowledge, agreement signals, and meaning-change risk before low-risk edits are accepted or high-risk revisions are routed to teachers.
 
 ## Target users
 
-- Researchers studying LLM reliability, hallucination, factuality, and multi-agent collaboration.
-- Product teams building multi-model QA, fact-checking, education feedback, or decision-support systems.
-- Teachers and evaluators who need to inspect AI-generated feedback rather than accept a single model answer.
+- NLP researchers studying LLM reliability, feedback generation, hallucination, factuality, and multi-agent collaboration.
+- Educational NLP developers building AI writing feedback tools for ESL learners.
+- Literature and writing teachers who need to inspect AI-generated feedback rather than accept a single model revision.
 
 ## Demo workflow
 
-1. Select a dataset and sample.
-2. Inspect independent answers from multiple LLMs.
-3. Compare majority voting and dynamic adjudication.
-4. Check risk labels: true consensus, false consensus, minority correct, high disagreement, confidence mismatch.
-5. Open global statistics: method accuracy, risk distribution, risk-level error rates.
-6. Export a sample-level CSV for audit or annotation.
+1. Enter or load an ESL comparative literature essay excerpt.
+2. Retrieve literary knowledge about authors, works, years, genres, and characters.
+3. Inspect grammar, style, literary-fact, and argument suggestions in a unified schema.
+4. Compare automatic acceptance with teacher-review routing.
+5. Audit why KG-supported factual corrections and meaning-changing interpretation edits are not blindly auto-applied.
+6. Export a feedback report for teacher review or annotation.
 
 ## Required pages for the submission video
 

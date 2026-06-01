@@ -1,11 +1,11 @@
 # ConsensusScope
 
-ConsensusScope is a risk-aware observability and adjudication prototype for
-multi-LLM collaborative decision-making. It does not train a new model. Instead,
-it records independent model answers, compares majority voting, fixed judging
-and rule-based dynamic adjudication, and surfaces deploy-time risk signals such
-as agreement rate, answer diversity, confidence distribution, evidence
-availability, minority warnings and parse errors.
+ConsensusScope is being refocused as an applied NLP demo for ESL literary
+writing feedback. It uses the original multi-LLM adjudication layer to inspect
+and route suggested corrections for comparative literature essays: low-risk
+grammar edits can be auto-accepted, while literary facts, interpretation changes
+and thesis-level revisions are checked against a small expert knowledge base and
+routed to teacher review.
 
 ## Why This Matters
 
@@ -14,12 +14,17 @@ trustworthiness. ConsensusScope is built around a different assumption:
 
 > Multi-model agreement is useful evidence, but it is not proof of correctness.
 
-The system therefore focuses on inspecting the decision process, not only the
-final answer.
+The system therefore focuses on inspecting the feedback process, not only the
+final revised text.
 
 ## Main Features
 
-- Live Question Mode for new user-entered questions.
+- ESL Comparative Literature Essay Feedback Mode with a no-API demo path.
+- Curated literary knowledge base for authorship, publication year, genre and
+  character facts.
+- Knowledge-grounded routing of grammar, style, literary fact and argument
+  suggestions.
+- Live Question Mode for backward-compatible user-entered QA comparisons.
 - Three live task types: open factual QA, claim true/false, and A/B/C/D multiple choice.
 - In-app OpenAI-compatible API configuration and model selection.
 - Unified sample format for TruthfulQA, FEVER and CommonsenseQA.
@@ -32,7 +37,8 @@ final answer.
   consensus, minority correct and confidence mismatch. These labels use gold
   answers and are not claimed to be available during live deployment.
 - Aggregate metrics and visual reports.
-- Streamlit demo for sample-level auditing and paper/demo preparation.
+- Streamlit demo for ESL feedback auditing, sample-level adjudication and
+  paper/demo preparation.
 
 ## Quick Start
 
@@ -99,8 +105,10 @@ Demo available at http://localhost:8502
 
 - **Page 1: Home / System Overview**: inspect corpus, trace and adjudicator
   counts.
-- **Page 2: Live Question Mode**: enter a new question, configure APIs, run
-  multiple LLMs, inspect dynamic adjudication, and export a Markdown/JSON report.
+- **Page 2: ESL Literary Feedback Mode**: enter a comparative literature essay,
+  retrieve expert literary knowledge, adjudicate multi-reviewer suggestions,
+  and export a feedback report. The original live QA comparison remains
+  available as a secondary mode.
 - **Page 3: Sample Audit Mode**: inspect model answers, rationales, confidence,
   evidence, majority voting, fixed judging, dynamic adjudication and offline
   diagnostic labels.

@@ -1,0 +1,16 @@
+entity,relation,value,work,evidence,source
+Frankenstein,author,Mary Shelley,Frankenstein,"Frankenstein; or, The Modern Prometheus is attributed to Mary Shelley.",curated_demo_kg
+Frankenstein,publication_year,1818,Frankenstein,"Frankenstein was first published in 1818.",curated_demo_kg
+Frankenstein,genre,Gothic novel,Frankenstein,"Frankenstein is commonly discussed as a Gothic novel.",curated_demo_kg
+Frankenstein,central_character,Victor Frankenstein,Frankenstein,"Victor Frankenstein is the scientist who creates the creature.",curated_demo_kg
+Frankenstein,central_character,the creature,Frankenstein,"The created being is often called the creature or monster, not Victor Frankenstein.",curated_demo_kg
+Jane Eyre,author,Charlotte Bronte,Jane Eyre,"Jane Eyre is a novel by Charlotte Bronte.",curated_demo_kg
+Jane Eyre,publication_year,1847,Jane Eyre,"Jane Eyre was first published in 1847.",curated_demo_kg
+Jane Eyre,genre,Bildungsroman,Jane Eyre,"Jane Eyre is frequently read as a Bildungsroman with Gothic elements.",curated_demo_kg
+Jane Eyre,central_character,Jane Eyre,Jane Eyre,"Jane Eyre is the protagonist and narrator of the novel.",curated_demo_kg
+Pride and Prejudice,author,Jane Austen,Pride and Prejudice,"Pride and Prejudice is a novel by Jane Austen.",curated_demo_kg
+Pride and Prejudice,publication_year,1813,Pride and Prejudice,"Pride and Prejudice was first published in 1813.",curated_demo_kg
+Wuthering Heights,author,Emily Bronte,Wuthering Heights,"Wuthering Heights is a novel by Emily Bronte.",curated_demo_kg
+Wuthering Heights,publication_year,1847,Wuthering Heights,"Wuthering Heights was first published in 1847.",curated_demo_kg
+Hamlet,author,William Shakespeare,Hamlet,"Hamlet is a tragedy by William Shakespeare.",curated_demo_kg
+Hamlet,genre,tragedy,Hamlet,"Hamlet is commonly classified as a tragedy.",curated_demo_kg
