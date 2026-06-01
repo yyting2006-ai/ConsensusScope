@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ConsensusScope UI Prototype</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Primary navigation">
+      <div class="brand">
+        <img class="brand__logo" src="assets/placeholder-logo.svg" alt="">
+        <div>
+          <div class="brand__name">ConsensusScope</div>
+          <div class="brand__tagline">Teacher review routing for ESL comparative-literature feedback</div>
+        </div>
+      </div>
+
+      <nav class="side-nav" id="sideNav" aria-label="Prototype pages"></nav>
+
+      <div class="sidebar-note">
+        <strong>Teacher question</strong>
+        <span>Can this AI feedback be safely given to the student, or does it require teacher review?</span>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="top-header">
+        <div>
+          <div class="product-name">ConsensusScope</div>
+          <div class="product-subtitle">Teacher review routing for ESL comparative-literature feedback</div>
+        </div>
+        <div class="top-status">
+          <span class="pill pill--blue">Saved demo data</span>
+          <span class="pill pill--neutral">No student PII stored in this prototype</span>
+        </div>
+      </header>
+
+      <section id="viewRoot" class="view-root" aria-live="polite"></section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
