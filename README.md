@@ -24,6 +24,10 @@ final revised text.
   character facts.
 - Knowledge-grounded routing of grammar, style, literary fact and argument
   suggestions.
+- Teacher-facing review queue with priority, risk level, suggested action and
+  knowledge evidence.
+- Auto-accepted preview that applies only low-risk local language edits while
+  keeping factual and interpretive revisions for teacher review.
 - Live Question Mode for backward-compatible user-entered QA comparisons.
 - Three live task types: open factual QA, claim true/false, and A/B/C/D multiple choice.
 - In-app OpenAI-compatible API configuration and model selection.

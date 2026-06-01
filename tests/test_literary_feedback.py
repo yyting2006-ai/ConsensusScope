@@ -5,8 +5,11 @@ import pandas as pd
 from src.literary_feedback import (
     DEFAULT_LITERARY_ESSAY,
     adjudicate_literary_feedback,
+    apply_auto_accepted_edits,
+    decision_summary_by_type,
     generate_demo_literary_feedback,
     literary_routing_summary,
+    review_queue,
     retrieve_literary_knowledge,
 )
 
@@ -53,9 +56,15 @@ def test_literary_feedback_routes_low_risk_and_review_items() -> None:
     feedback = generate_demo_literary_feedback(DEFAULT_LITERARY_ESSAY, _kg())
     decisions = adjudicate_literary_feedback(feedback)
     summary = literary_routing_summary(decisions)
+    revised = apply_auto_accepted_edits(DEFAULT_LITERARY_ESSAY, decisions)
+    queue = review_queue(decisions)
+    by_type = decision_summary_by_type(decisions)
 
     assert feedback
     assert any(item["decision"] == "auto_accept" for item in decisions)
     assert any(item["decision"] == "teacher_review" for item in decisions)
     assert summary["teacher_review"] >= 1
     assert any(item["kg_supported"] for item in decisions)
+    assert "Both novels show" in revised
+    assert queue and all(item["decision"] == "teacher_review" for item in queue)
+    assert any(item["issue_type"] == "grammar" for item in by_type)

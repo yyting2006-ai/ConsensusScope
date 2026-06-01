@@ -19,6 +19,13 @@ ConsensusScope is a knowledge-grounded adjudication demo for ESL comparative lit
 5. Audit why KG-supported factual corrections and meaning-changing interpretation edits are not blindly auto-applied.
 6. Export a feedback report for teacher review or annotation.
 
+## Current optimized demo path
+
+- The default essay contains grammar, literary-fact, style, and argument risks.
+- The teacher view shows the original essay next to an auto-accepted preview.
+- The review queue prioritizes meaning-changing and KG-supported suggestions.
+- Knowledge evidence and raw reviewer suggestions remain inspectable in separate tabs.
+
 ## Required pages for the submission video
 
 - Single Sample Analysis: concrete failure case where the majority is wrong.

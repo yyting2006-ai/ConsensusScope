@@ -32,12 +32,16 @@ from src.live_question import (
 )
 from src.literary_feedback import (
     DEFAULT_LITERARY_ESSAY,
+    EXAMPLE_ESSAYS,
     adjudicate_literary_feedback,
+    apply_auto_accepted_edits,
     build_literary_feedback_report,
+    decision_summary_by_type,
     generate_demo_literary_feedback,
     literary_routing_summary,
     load_literary_kg,
     retrieve_literary_knowledge,
+    review_queue,
 )
 from src.llm.clients import PROVIDER_CONFIG
 
@@ -491,18 +495,23 @@ def render_literary_feedback_mode() -> None:
     kg = load_literary_kg(str(DATA_PATHS["literary_kg"]))
     st.markdown('<div class="section-title">ESL Comparative Literature Essay Feedback</div>', unsafe_allow_html=True)
     st.caption(
-        "No-API demo path: reviewer suggestions are generated with a deterministic schema, "
-        "then adjudicated with agreement, literary KG evidence, and meaning-change risk."
+        "Teacher-facing workflow: low-risk language edits are separated from factual and interpretive suggestions "
+        "that need human review."
     )
     left, right = st.columns([1.05, 0.95], gap="large")
     with left:
-        essay = st.text_area("Student essay excerpt", value=DEFAULT_LITERARY_ESSAY, height=230)
-        if st.button("Run Knowledge-Grounded Feedback", use_container_width=True):
+        example = st.selectbox("Demo essay", list(EXAMPLE_ESSAYS.keys()))
+        default_essay = EXAMPLE_ESSAYS.get(example, DEFAULT_LITERARY_ESSAY)
+        essay = st.text_area("Student essay excerpt", value=default_essay, height=230)
+        run_feedback = st.button("Run Knowledge-Grounded Feedback", use_container_width=True)
+        if run_feedback:
             kg_rows = retrieve_literary_knowledge(essay, kg, limit=16)
             feedback = generate_demo_literary_feedback(essay, kg)
             decisions = adjudicate_literary_feedback(feedback)
+            revised = apply_auto_accepted_edits(essay, decisions)
             st.session_state["literary_result"] = {
                 "essay": essay,
+                "revised": revised,
                 "kg_rows": kg_rows,
                 "feedback": feedback,
                 "decisions": decisions,
@@ -532,21 +541,54 @@ def render_literary_feedback_mode() -> None:
         st.info("Run the demo to inspect knowledge retrieval, reviewer suggestions, and adjudicated feedback.")
         return
 
-    kg_rows = result.get("kg_rows", [])
-    if kg_rows:
-        st.markdown('<div class="section-title">Retrieved Expert Knowledge</div>', unsafe_allow_html=True)
-        st.dataframe(pd.DataFrame(kg_rows), use_container_width=True, hide_index=True)
+    decisions = result.get("decisions", [])
+    queue = review_queue(decisions)
+    tabs = st.tabs(["Teacher View", "Knowledge Evidence", "Adjudication Trace", "Raw Suggestions"])
+    with tabs[0]:
+        c1, c2 = st.columns(2, gap="large")
+        with c1:
+            st.markdown("**Original essay**")
+            st.text_area("Original", value=result.get("essay", ""), height=210, disabled=True, label_visibility="collapsed")
+        with c2:
+            st.markdown("**Auto-accepted preview**")
+            st.text_area("Preview", value=result.get("revised", result.get("essay", "")), height=210, disabled=True, label_visibility="collapsed")
+        if queue:
+            st.markdown('<div class="section-title">Teacher Review Queue</div>', unsafe_allow_html=True)
+            queue_df = pd.DataFrame(queue)
+            display_cols = [
+                "priority",
+                "risk_level",
+                "issue_type",
+                "span",
+                "selected_suggestion",
+                "teacher_action",
+                "agreement",
+                "kg_supported",
+                "rationale",
+            ]
+            st.dataframe(queue_df[[c for c in display_cols if c in queue_df.columns]], use_container_width=True, hide_index=True)
+        summary_rows = decision_summary_by_type(decisions)
+        if summary_rows:
+            st.markdown('<div class="section-title">Feedback Distribution</div>', unsafe_allow_html=True)
+            st.dataframe(pd.DataFrame(summary_rows), use_container_width=True, hide_index=True)
 
-    st.markdown('<div class="section-title">Knowledge-Grounded Adjudication</div>', unsafe_allow_html=True)
-    decisions_df = pd.DataFrame(result.get("decisions", []))
-    st.dataframe(decisions_df, use_container_width=True, hide_index=True)
+    with tabs[1]:
+        kg_rows = result.get("kg_rows", [])
+        if kg_rows:
+            st.dataframe(pd.DataFrame(kg_rows), use_container_width=True, hide_index=True)
+        else:
+            st.info("No literary knowledge entry matched this essay excerpt.")
 
-    st.markdown('<div class="section-title">Multi-Reviewer Feedback Schema</div>', unsafe_allow_html=True)
-    feedback_df = pd.DataFrame(result.get("feedback", []))
-    if not feedback_df.empty and "knowledge_evidence" in feedback_df.columns:
-        feedback_df = feedback_df.copy()
-        feedback_df["knowledge_evidence"] = feedback_df["knowledge_evidence"].map(lambda values: " | ".join(values) if isinstance(values, list) else values)
-    st.dataframe(feedback_df, use_container_width=True, hide_index=True)
+    with tabs[2]:
+        decisions_df = pd.DataFrame(decisions)
+        st.dataframe(decisions_df, use_container_width=True, hide_index=True)
+
+    with tabs[3]:
+        feedback_df = pd.DataFrame(result.get("feedback", []))
+        if not feedback_df.empty and "knowledge_evidence" in feedback_df.columns:
+            feedback_df = feedback_df.copy()
+            feedback_df["knowledge_evidence"] = feedback_df["knowledge_evidence"].map(lambda values: " | ".join(values) if isinstance(values, list) else values)
+        st.dataframe(feedback_df, use_container_width=True, hide_index=True)
 
 
 def page_live(api_mode: str, selected: List[str], user_inputs: Dict[str, Dict[str, str]], fixed_enabled: bool, fixed_provider: str) -> None:

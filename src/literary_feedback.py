@@ -11,6 +11,13 @@ import pandas as pd
 DEFAULT_LITERARY_ESSAY = """Mary Shelley write Frankenstein in 1847, and Jane Austen wrote Jane Eyre. Both novels shows how women are trapped by society, but Frankenstein is only about science and Jane Eyre is only about love. The monster is Victor Frankenstein, so the novel proves that people should never study knowledge. In comparison, the two books are same because both main characters want freedom."""
 
 
+EXAMPLE_ESSAYS = {
+    "Frankenstein vs Jane Eyre · error-rich demo": DEFAULT_LITERARY_ESSAY,
+    "Frankenstein vs Jane Eyre · argument-risk demo": """In Frankenstein and Jane Eyre, the protagonists search for freedom, but the essay should not treat both novels as the same story. Mary Shelley write about ambition and responsibility, while Jane Eyre focuses on moral independence. The monster is Victor Frankenstein, so the comparison shows that freedom always destroys society.""",
+    "Blank workspace": "",
+}
+
+
 ISSUE_ORDER = {
     "grammar": 0,
     "word_choice": 1,
@@ -50,8 +57,12 @@ def retrieve_literary_knowledge(essay: str, kg: pd.DataFrame, limit: int = 12) -
         work = _safe_text(row.get("work"))
         value = _safe_text(row.get("value"))
         candidates = [entity, work, value]
-        if any(candidate and _norm(candidate) in text for candidate in candidates):
-            rows.append({key: _safe_text(row.get(key)) for key in kg.columns})
+        matched = [candidate for candidate in candidates if candidate and _norm(candidate) in text]
+        if matched:
+            out = {key: _safe_text(row.get(key)) for key in kg.columns}
+            out["match"] = matched[0]
+            out["match_score"] = str(round(min(1.0, 0.55 + 0.15 * len(matched)), 3))
+            rows.append(out)
         if len(rows) >= limit:
             break
     return rows
@@ -320,18 +331,26 @@ def adjudicate_literary_feedback(feedback: List[Dict[str, Any]]) -> List[Dict[st
         if issue_type in {"grammar", "word_choice"} and agreement >= 0.5 and max_risk == "low":
             risk_level = "low"
             decision = "auto_accept"
+            teacher_action = "Optional skim"
+            priority = 3
             rationale = "Low-risk local language edit with reviewer agreement."
         elif issue_type == "literary_fact" and kg_supported and agreement >= 0.5:
             risk_level = "medium"
             decision = "teacher_review"
+            teacher_action = "Verify factual correction"
+            priority = 2
             rationale = "Knowledge-supported factual correction; route to teacher review before changing the essay."
         elif issue_type in {"argument", "academic_style"} or max_risk == "high":
             risk_level = "high" if max_risk == "high" else "medium"
             decision = "teacher_review"
+            teacher_action = "Review meaning change"
+            priority = 1 if risk_level == "high" else 2
             rationale = "The suggestion may change interpretation, thesis framing, or student intent."
         else:
             risk_level = "medium"
             decision = "teacher_review"
+            teacher_action = "Check manually"
+            priority = 2
             rationale = "Insufficient agreement or evidence for automatic adoption."
 
         decisions.append(
@@ -341,6 +360,8 @@ def adjudicate_literary_feedback(feedback: List[Dict[str, Any]]) -> List[Dict[st
                 "selected_suggestion": _safe_text(selected.get("suggestion")),
                 "decision": decision,
                 "risk_level": risk_level,
+                "teacher_action": teacher_action,
+                "priority": priority,
                 "agreement": round(agreement, 3),
                 "avg_confidence": round(avg_conf, 3),
                 "kg_supported": kg_supported,
@@ -350,7 +371,42 @@ def adjudicate_literary_feedback(feedback: List[Dict[str, Any]]) -> List[Dict[st
             }
         )
 
-    return sorted(decisions, key=lambda row: (ISSUE_ORDER.get(row["issue_type"], 99), row["risk_level"], row["span"]))
+    return sorted(decisions, key=lambda row: (row["priority"], ISSUE_ORDER.get(row["issue_type"], 99), row["span"]))
+
+
+def apply_auto_accepted_edits(essay: str, decisions: List[Dict[str, Any]]) -> str:
+    revised = essay
+    for item in decisions:
+        if item.get("decision") != "auto_accept":
+            continue
+        span = _safe_text(item.get("span"))
+        suggestion = _safe_text(item.get("selected_suggestion"))
+        if not span or not suggestion:
+            continue
+        revised = re.sub(re.escape(span), suggestion, revised, count=1, flags=re.I)
+    return revised
+
+
+def review_queue(decisions: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    return [item for item in decisions if item.get("decision") == "teacher_review"]
+
+
+def decision_summary_by_type(decisions: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    grouped: Dict[str, List[Dict[str, Any]]] = defaultdict(list)
+    for item in decisions:
+        grouped[_safe_text(item.get("issue_type"))].append(item)
+    rows = []
+    for issue_type, items in grouped.items():
+        rows.append(
+            {
+                "issue_type": issue_type,
+                "total": len(items),
+                "auto_accept": sum(1 for item in items if item.get("decision") == "auto_accept"),
+                "teacher_review": sum(1 for item in items if item.get("decision") == "teacher_review"),
+                "kg_supported": sum(1 for item in items if item.get("kg_supported")),
+            }
+        )
+    return sorted(rows, key=lambda row: ISSUE_ORDER.get(row["issue_type"], 99))
 
 
 def literary_routing_summary(decisions: List[Dict[str, Any]]) -> Dict[str, Any]:
@@ -375,6 +431,8 @@ def build_literary_feedback_report(
     decisions: List[Dict[str, Any]],
 ) -> str:
     summary = literary_routing_summary(decisions)
+    revised = apply_auto_accepted_edits(essay, decisions)
+    queue = review_queue(decisions)
     lines = [
         "# ConsensusScope ESL Literary Feedback Report",
         "",
@@ -388,10 +446,30 @@ def build_literary_feedback_report(
         f"- Auto-accepted low-risk edits: {summary['auto_accept']} ({summary['auto_share']})",
         f"- Teacher-review suggestions: {summary['teacher_review']} ({summary['review_share']})",
         f"- KG-supported suggestions: {summary['kg_supported']}",
+        f"- High-risk suggestions: {summary['high_risk']}",
+        "",
+        "## Auto-Accepted Preview",
+        "",
+        revised,
+        "",
+        "## Teacher Review Queue",
+        "",
+    ]
+    for item in queue:
+        lines.extend(
+            [
+                f"- [{item['risk_level']}] {item['span']} -> {item['selected_suggestion']}",
+                f"  - Action: {item['teacher_action']}",
+                f"  - Rationale: {item['rationale']}",
+            ]
+        )
+    lines.extend(
+        [
         "",
         "## Retrieved Literary Knowledge",
         "",
-    ]
+        ]
+    )
     for row in kg_rows:
         lines.append(f"- {row.get('entity')} / {row.get('relation')} / {row.get('value')}: {row.get('evidence')}")
     lines.extend(["", "## Adjudicated Feedback", ""])

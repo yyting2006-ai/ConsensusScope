@@ -8,6 +8,8 @@
 - 检索小型文学知识库，覆盖作者、出版年份、体裁、人物等专家知识；
 - 统一生成 grammar、academic_style、literary_fact、argument 等反馈建议；
 - 在动态裁决中使用知识证据和 meaning-change risk；
+- 生成教师复核队列，展示优先级、风险等级、建议动作和知识证据；
+- 自动预览低风险局部语言修改，但把事实纠错和解释性改写保留给教师复核；
 - 保留原有 TruthfulQA、FEVER、CommonsenseQA 多模型可靠性实验作为方法背景；
 - 整理 TruthfulQA、FEVER、CommonsenseQA 等公开数据集样本；
 - 调用 DeepSeek、Qwen、GLM、Kimi，并预留 OpenAI 兼容接口；
