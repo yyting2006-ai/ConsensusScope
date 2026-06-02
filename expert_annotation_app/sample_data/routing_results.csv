@@ -1,0 +1,13 @@
+feedback_item_id,risk_level,recommended_action,risk_reasons,meaning_preservation_predicted
+FB-001,low,auto_accept,local_language_edit,preserves_meaning
+FB-002,low,auto_accept,local_language_edit,preserves_meaning
+FB-003,high,teacher_review,meaning_change;introduces_new_argument,changes_meaning
+FB-004,medium,teacher_review,too_vague,unclear
+FB-005,low,auto_accept,local_language_edit,preserves_meaning
+FB-006,low,auto_accept,local_language_edit,preserves_meaning
+FB-007,high,teacher_review,overcorrection;meaning_change,changes_meaning
+FB-008,high,teacher_review,unsupported_claim;introduces_new_argument,changes_meaning
+FB-009,low,auto_accept,local_language_edit,preserves_meaning
+FB-010,high,teacher_review,wrong_correction,changes_meaning
+FB-011,high,teacher_review,meaning_change;introduces_new_argument,changes_meaning
+FB-012,medium,teacher_review,too_vague,unclear

@@ -1,0 +1,6 @@
+annotation_data/
+exports/
+__pycache__/
+*.pyc
+.DS_Store
+._*
