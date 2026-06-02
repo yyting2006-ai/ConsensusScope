@@ -37,6 +37,38 @@ usage guard; it is not a substitute for keeping API keys out of the repository.
    Streamlit Secrets. Leave it blank for an open no-API reviewer demo.
 7. Deploy and test the pages listed below.
 
+## External Database
+
+For durable teacher-review decisions and expert annotation data, use
+Supabase/PostgreSQL instead of Streamlit's local filesystem.
+
+1. Create a Supabase project.
+2. Open Supabase Dashboard -> SQL Editor.
+3. Run:
+
+```text
+consensusscope_supabase_schema.sql
+```
+
+4. In each ConsensusScope Streamlit app's Secrets editor, add:
+
+```toml
+SUPABASE_URL = "https://your-project-ref.supabase.co"
+SUPABASE_SERVICE_ROLE_KEY = "your-service-role-key"
+```
+
+For the main demo, teacher-queue decisions are stored externally when these
+secrets are configured. The main demo does not store full queue item text by
+default. To store queue payloads intentionally, add:
+
+```toml
+CONSENSUS_SCOPE_STORE_DECISION_PAYLOAD = true
+```
+
+For the expert annotation app, all expert sessions, essay annotations, feedback
+decisions, safety checks, and annotation logs are stored in Supabase when these
+secrets are configured. SQLite is retained only as a local fallback.
+
 ## Local Smoke Test
 
 ```bash

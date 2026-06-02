@@ -24,13 +24,16 @@ Public or private web deployment:
 1. Push the repository to GitHub.
 2. Create a separate Streamlit Community Cloud app.
 3. Set the main file path to `expert_annotation_app/app.py`.
-4. Set a site password as a root-level Streamlit Secret:
+4. Run `consensusscope_supabase_schema.sql` in Supabase SQL Editor.
+5. Set external storage and site password as root-level Streamlit Secrets:
 
 ```toml
 EXPERT_ANNOTATION_PASSWORD = "replace-with-a-private-password"
+SUPABASE_URL = "https://your-project-ref.supabase.co"
+SUPABASE_SERVICE_ROLE_KEY = "your-service-role-key"
 ```
 
-5. Share the deployed URL and password only with participating teachers.
+6. Share the deployed URL and password only with participating teachers.
 
 Do not hard-code the password in `app.py`, README files, the paper, screenshots,
 or video recordings.
@@ -64,15 +67,18 @@ or video recordings.
 
 ## Important Storage Boundary
 
-This first version uses SQLite because it is lightweight and easy to run
-locally. For a short controlled annotation round, this is acceptable if the
-researcher exports data frequently.
+This version supports Supabase/PostgreSQL external storage. When `SUPABASE_URL`
+and `SUPABASE_SERVICE_ROLE_KEY` are configured, teacher annotations are written
+to the external database.
 
-For long-term multi-teacher data collection, a managed database is safer than a
-local SQLite file inside a cloud app. Recommended next step:
+SQLite is kept only as a local development fallback. It is not durable on
+Streamlit Community Cloud and should not be used as the main research data
+store.
+
+For long-term multi-teacher data collection:
 
 - keep the same Streamlit interface;
-- replace SQLite with PostgreSQL/Supabase or another managed database;
+- use PostgreSQL/Supabase or another institution-approved managed database;
 - keep Blind Annotation Mode unchanged;
 - keep exports in the same CSV/JSON schema.
 
