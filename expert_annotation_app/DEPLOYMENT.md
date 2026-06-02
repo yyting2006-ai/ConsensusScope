@@ -24,7 +24,7 @@ Public or private web deployment:
 1. Push the repository to GitHub.
 2. Create a separate Streamlit Community Cloud app.
 3. Set the main file path to `expert_annotation_app/app.py`.
-4. Set a site password in Streamlit Secrets:
+4. Set a site password as a root-level Streamlit Secret:
 
 ```toml
 EXPERT_ANNOTATION_PASSWORD = "replace-with-a-private-password"
@@ -40,15 +40,27 @@ or video recordings.
 1. Teacher opens the expert annotation URL.
 2. Teacher enters the site password.
 3. Teacher creates or selects:
-   - `expert_id`, for example `TCH-001`
-   - `batch_id`, for example `ESL-BATCH-001`
-4. Teacher uses Blind Annotation Mode.
+   - teacher ID: `1` or `2`
+   - batch ID: `1` or `2`
+4. Teacher uses the default Blind Annotation Mode.
 5. Teacher completes:
+   - Expert Session
    - Essay Annotation
    - Feedback Annotation
    - Feedback Safety Check
-6. Researcher checks Progress.
-7. Researcher exports CSV/JSON files from Export.
+   - Progress
+   - Export
+6. Researcher exports CSV/JSON files from Export.
+
+## 中文给教师的流程
+
+正式标注时请按左侧页面从上到下完成：
+
+```text
+开始标注 -> 作文整体评价 -> 逐条反馈判断 -> 反馈风险判断 -> 查看进度 -> 导出结果
+```
+
+教师只需要选择教师编号 `1` 或 `2`，批次编号 `1` 或 `2`。默认盲标即可；“高级选项（研究者使用）”不要打开。
 
 ## Important Storage Boundary
 

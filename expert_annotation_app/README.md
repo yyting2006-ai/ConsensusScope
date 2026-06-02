@@ -4,6 +4,27 @@ This is an independent research annotation tool for collecting expert gold
 labels on AI-generated ESL writing feedback. It is separate from the main
 ConsensusScope demo and is not part of the paper UI.
 
+## 中文使用说明
+
+这个网页给英语教师做人工标注用，不是主 demo，也不是自动作文评分器。
+
+教师正式标注时只走一条线：
+
+```text
+开始标注 -> 作文整体评价 -> 逐条反馈判断 -> 反馈风险判断 -> 查看进度 -> 导出结果
+```
+
+教师只需要选择：
+
+- 教师编号：`1` 或 `2`
+- 批次编号：`1` 或 `2`
+
+默认使用盲标模式。盲标模式不会显示系统风险等级、推荐动作、模型一致性、模型名称或 ConsensusScope 决策，避免影响教师判断。
+
+“高级选项（研究者使用）”中的系统辅助信息只用于研究者事后核查，不建议教师正式标注时打开。
+
+作文备注为选填项；判断理由仍为必填项，因为后续需要分析教师为什么接受、修改或拒绝某条 AI 反馈。
+
 ## Purpose
 
 English teachers can read anonymized ESL essays and item-level AI feedback, then
@@ -11,9 +32,19 @@ label whether the feedback is correct, preserves the student's intended meaning,
 is safe to show to students, and should be accepted, edited, rejected, or marked
 as uncertain.
 
-The first version prioritizes **Blind Annotation Mode**. In blind mode, the app
-hides system `risk_level`, `recommended_action`, model agreement, model name,
-and ConsensusScope routing decisions.
+The teacher-facing workflow uses **Blind Annotation Mode** by default. In blind
+mode, the app hides system `risk_level`, `recommended_action`, model agreement,
+model name, and ConsensusScope routing decisions.
+
+Assisted Review Mode is kept only as a researcher/admin option for later
+inspection. Teachers should normally follow the single line:
+
+```text
+Start Annotation -> Essay Annotation -> Feedback Annotation -> Feedback Safety Check -> Progress -> Export
+```
+
+Teachers only need to select a teacher ID (`1` or `2`) and a batch ID (`1` or
+`2`) before annotation.
 
 The interface supports English and Chinese switching from the sidebar. Exported
 CSV/JSON field names and label values remain in English canonical form for
@@ -46,8 +77,9 @@ Optional password protection:
 EXPERT_ANNOTATION_PASSWORD = "replace-with-a-private-password"
 ```
 
-Set this value in Streamlit Secrets or a local environment variable. Do not
-hard-code it in the source code.
+Set this as a root-level Streamlit Secret or as a local environment variable.
+Root-level Streamlit secrets are read through environment variables by the app.
+Do not hard-code it in the source code.
 
 ## Pages
 
