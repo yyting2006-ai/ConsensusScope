@@ -1,30 +1,30 @@
 # Ethics and Limitations
 
-ConsensusScope is designed as a teacher-support and audit tool for ESL
-comparative-literature writing feedback. It should not be presented as an
-automatic essay scorer, teacher replacement, truth oracle, or final decision
-maker.
+ConsensusScope is designed as a teacher-support and audit tool for AI-generated
+ESL writing feedback. It should not be presented as an automatic essay scorer,
+teacher replacement, truth oracle, or final decision maker.
 
 ## Intended Use
 
-- Inspect AI-generated feedback before it changes a student's writing.
-- Separate low-risk local grammar/style edits from feedback involving literary
-  facts, character relations, themes, thesis claims, or interpretation.
+- Inspect AI-generated feedback before it changes a student's draft.
+- Separate low-risk local grammar/vocabulary edits from feedback that may change
+  meaning, add unsupported content, overcorrect a draft, or require teacher
+  judgment.
 - Route uncertain or meaning-changing suggestions to teacher review.
 - Support research on educational NLP, feedback reliability, human-in-the-loop
   review, and multi-LLM adjudication.
 
-## Out-of-Scope Use
+## Out-Of-Scope Use
 
 - Fully automated grading or student ranking.
 - Replacing teachers, writing instructors, reviewers, or domain experts.
 - Treating model rationales as verified evidence.
-- Treating a small curated literary KG as a complete literary database.
+- Treating review-routing labels as final truth.
 - Applying feedback to real student essays without privacy review.
 
 ## Data Privacy
 
-The packaged demo uses anonymized or synthetic examples. If educational writing
+The packaged ESL writing demo uses synthetic examples. If educational writing
 data is added later:
 
 - Remove names, student IDs, emails, school identifiers, demographic details,
@@ -36,12 +36,12 @@ data is added later:
 
 ## Current Limitations
 
-- The current KG contains 319 curated triples over 30 works; it is useful for
-  demonstration and diagnosis, not comprehensive literary scholarship.
-- The 30-case benchmark is intentionally small and diagnostic. It validates the
-  review-routing workflow, not state-of-the-art essay scoring or correction
-  accuracy.
-- Saved live validation records show API connectivity and schema compliance,
-  but they are not a classroom user study.
+- The current ESL writing data is synthetic and demonstration-oriented.
+- The deterministic routing function is transparent but simple; it should be
+  validated with teacher annotations before being presented as a measured
+  classroom tool.
+- Saved live validation records, if used, show API connectivity and schema
+  compliance, not a classroom user study.
 - Future validation should include instructor-annotated ESL essays and teacher
   review-priority judgments.
+

@@ -1,0 +1,16 @@
+feedback_item_id,risk_level,recommended_action,risk_reasons,meaning_preservation_predicted,status
+FW-001,low,auto_accept,local_language_edit,preserves_meaning,auto_accepted
+FW-002,low,auto_accept,local_language_edit,preserves_meaning,auto_accepted
+FW-003,high,teacher_review,meaning_change;introduces_new_argument,changes_meaning,needs_teacher_review
+FW-004,medium,teacher_review,too_vague,unclear,needs_teacher_review
+FW-005,medium,teacher_review,task_mismatch,unclear,needs_teacher_review
+FW-006,low,auto_accept,local_language_edit,preserves_meaning,auto_accepted
+FW-007,low,auto_accept,local_language_edit,preserves_meaning,auto_accepted
+FW-008,medium,teacher_review,too_vague,unclear,needs_teacher_review
+FW-009,high,teacher_review,overcorrection;meaning_change,changes_meaning,needs_teacher_review
+FW-010,high,teacher_review,meaning_change;unsupported_claim;introduces_new_argument,changes_meaning,needs_teacher_review
+FW-011,low,auto_accept,local_language_edit,preserves_meaning,auto_accepted
+FW-012,low,auto_accept,local_language_edit,preserves_meaning,auto_accepted
+FW-013,low,auto_accept,local_language_edit,preserves_meaning,auto_accepted
+FW-014,high,teacher_review,meaning_change;unsupported_claim;introduces_new_argument,changes_meaning,needs_teacher_review
+FW-015,medium,teacher_review,too_vague,unclear,needs_teacher_review

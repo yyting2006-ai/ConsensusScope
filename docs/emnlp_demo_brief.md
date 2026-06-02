@@ -1,63 +1,62 @@
 # ConsensusScope: EMNLP Demo Brief
 
-## One-line pitch
+## One-Line Pitch
 
-ConsensusScope is a knowledge-grounded adjudication demo for ESL comparative literature essay feedback. It shows how multi-model feedback suggestions can be checked against expert literary knowledge, agreement signals, and meaning-change risk before low-risk edits are accepted or high-risk revisions are routed to teachers.
+ConsensusScope is an interactive review-routing tool for safe AI feedback on
+ESL writing. It shows how multi-model feedback candidates can be normalized,
+screened for risk, and routed into teacher review before students see unsafe or
+meaning-changing suggestions.
 
-## Target users
+## Target Users
 
-- NLP researchers studying LLM reliability, feedback generation, hallucination, factuality, and multi-agent collaboration.
-- Educational NLP developers building AI writing feedback tools for ESL learners.
-- Literature and writing teachers who need to inspect AI-generated feedback rather than accept a single model revision.
+- NLP researchers studying LLM reliability, feedback generation, and
+  human-in-the-loop review.
+- Educational NLP developers building AI writing feedback tools for ESL
+  learners.
+- Writing teachers who need to inspect AI-generated feedback rather than accept
+  a single model revision.
 
-## Demo workflow
+## Demo Workflow
 
-1. Enter or load an ESL comparative literature essay excerpt.
-2. Retrieve literary knowledge about authors, works, years, genres, and characters.
-3. Inspect grammar, style, literary-fact, and argument suggestions in a unified schema.
-4. Compare automatic acceptance with teacher-review routing.
-5. Audit why KG-supported factual corrections and meaning-changing interpretation edits are not blindly auto-applied.
-6. Export a feedback report for teacher review or annotation.
+1. Open the review workspace.
+2. Load a synthetic anonymized ESL writing draft.
+3. Inspect AI feedback candidates in a unified schema.
+4. Compare low-risk auto-accepted local edits with teacher-review items.
+5. Open a feedback detail page and inspect routing reasons.
+6. Review the teacher queue by risk level and issue type.
+7. Export a teacher-readable report.
 
-## Current optimized demo path
+## Current Optimized Demo Path
 
-- The default essay contains grammar, literary-fact, style, and argument risks.
-- The teacher view shows the original essay next to an auto-accepted preview.
-- The review queue prioritizes meaning-changing and KG-supported suggestions.
-- Knowledge evidence and raw reviewer suggestions remain inspectable in separate tabs.
-- The curated literary KG currently contains 319 triples over 30 commonly taught
-  works.
-- The deterministic no-API benchmark covers 30 ESL comparative-literature essay
-  snippets and produces 59 adjudicated feedback decisions.
-- Live reviewer integration has been validated on the first 10 benchmark cases
-  with DeepSeek, Qwen, GLM and Kimi: 40 provider calls, no request errors, no
-  parse errors, 43 live feedback decisions.
+- The default synthetic essay contains local grammar/vocabulary edits, medium
+  organization/development advice, and high-risk meaning-change suggestions.
+- The teacher view separates low-risk local edits from items that may change
+  stance, add unsupported claims, or overcorrect the student's draft.
+- The Writing Rubric page shows deploy-time routing rules rather than hidden
+  gold labels.
+- The report page exports an audit trail with explicit limitations.
 
-## Required pages for the submission video
+## Required Pages For The Submission Video
 
-- Page 1: Home / System Overview.
-- Page 2: ESL Feedback Review.
-- Page 3: Knowledge Grounding & Teacher Queue.
-- Page 5: Risk Dashboard.
-- Page 8: Report Export.
+- Review Workspace.
+- Essay Review.
+- Feedback Detail.
+- Teacher Queue.
+- Writing Rubric.
+- Reports.
 
-## Evaluation already available
+## Evaluation Status
 
-Current local files include:
+The current ESL writing package contains synthetic demo data and deterministic
+routing output. It is ready for UI demonstration and interface review, but it is
+not yet a classroom evaluation. Future validation should add teacher annotations
+and report them as offline diagnostic results, separate from deploy-time routing
+signals.
 
-- `data/results/literary_feedback_routing_metrics.csv`: ESL feedback routing
-  metrics over 30 curated benchmark cases.
-- `data/results/literary_feedback_records.json`: raw feedback, KG evidence and
-  adjudicated decisions for the ESL benchmark.
-- `data/results/literary_feedback_live_multimodel_records.json`: saved live
-  validation records over 10 benchmark cases and four providers.
-- `data/results/literary_feedback_live_multimodel_metrics.csv`: saved live
-  routing metrics.
-- Auxiliary QA reliability files are retained for secondary inspection, but
-  they are not the main EMNLP demo claim.
-
-## Submission gaps
+## Submission Gaps
 
 - Record a video under 2.5 minutes.
 - Add a real screencast upload or submit the video as supplementary material.
-- Future work: extend the curated benchmark with instructor annotations.
+- Future work: collect instructor annotations for feedback safety,
+  accept/edit/reject decisions, and review-priority judgments.
+

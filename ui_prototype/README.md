@@ -32,11 +32,11 @@ No `npm install` is required.
 
 This prototype shows the intended product workflow for:
 
-> ConsensusScope: Knowledge-Grounded Multi-LLM Adjudication for ESL Comparative Literature Feedback
+> ConsensusScope: An Interactive Review-Routing Tool for Safe AI Feedback on ESL Writing
 
 The core teacher-facing question is:
 
-> Can this AI feedback be safely given to the student, or does it require teacher review?
+> Can this AI feedback be safely shown to the student, or should a teacher review it first?
 
 ## Pages
 
@@ -44,7 +44,7 @@ The core teacher-facing question is:
 2. Essay Review
 3. Feedback Detail
 4. Teacher Queue
-5. Knowledge Base
+5. Writing Rubric
 6. Reports
 7. Settings / Diagnostics
 
@@ -56,7 +56,7 @@ Review Workspace -> Essay Review -> Feedback Detail -> Teacher Queue -> Reports
 
 - `ReviewSession`
 - `FeedbackItem`
-- `KnowledgeEvidence`
+- `ReviewEvidence`
 - `TeacherAction`
 - `RoutingSummary`
 

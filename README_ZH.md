@@ -1,19 +1,21 @@
-# ConsensusScope：面向英语二语比较文学写作反馈的知识增强多模型裁决系统
+# ConsensusScope：面向 ESL 写作反馈的教师复核路由系统
 
-ConsensusScope 当前定位为一个 **knowledge-grounded multi-LLM review-routing
-tool**：它面向英语二语比较文学论文反馈，帮助教师判断哪些 AI 反馈可以低风险采纳，哪些反馈必须进入人工复核队列。
+**ConsensusScope: An Interactive Review-Routing Tool for Safe AI Feedback on ESL Writing**
 
-它不是自动作文评分系统，不是教师替代品，也不是所谓“真理判定器”。
+ConsensusScope 当前主线是 **teacher-in-the-loop review routing for safe
+AI-generated ESL writing feedback**。系统帮助教师判断 AI 写作反馈是否可以安全展示给学生，还是需要教师先复核、编辑或拒绝。
+
+它不是自动作文评分系统，不是教师替代品，也不是“真值判定器”。
 
 ## 核心用途
 
-AI 写作反馈可能很流畅，但并不一定安全。模型可以正确修改局部语法错误，也可能错误改写作者、出版年份、人物关系或学生的文学解释。ConsensusScope 的作用是把这些风险显性化：
+AI 写作反馈可能很流畅，但并不一定安全。模型可能正确修改局部语法错误，也可能改写学生原意、反转论点、加入无依据内容，或把本来合理的表达过度纠正。ConsensusScope 的作用是把这些风险显性化：
 
-- 多个 reviewer 输出统一反馈格式；
-- 检索 curated 文学知识图谱；
-- 区分低风险 grammar/style 修改与高风险 literary fact / argument / interpretation 修改；
+- 多模型反馈统一成同一反馈格式；
+- 使用部署时可获得的风险信号：模型一致性、issue type、meaning-change warning、unsupported-claim warning、parse error 等；
+- 将反馈路由为 low / medium / high risk；
 - 生成教师复核队列；
-- 导出可审计报告。
+- 提供 Writing Rubric 和 Reports 页面，方便教师检查和导出审计记录。
 
 ## 快速启动
 
@@ -31,40 +33,42 @@ streamlit run app/streamlit_app.py --server.port 8502
 http://localhost:8502
 ```
 
-## 当前 ESL 数据快照
+## 当前主线资产
 
-| 项目 | 数值 |
-|---|---:|
-| 文学作品数 | 30 |
-| KG triples | 319 |
-| Benchmark essays | 30 |
-| Adjudicated feedback decisions | 59 |
-| Auto-accepted low-risk edits | 14 |
-| Teacher-review decisions | 45 |
-| High-risk decisions | 20 |
-| KG-supported decisions | 23 |
+- `ui_prototype/index.html`：给设计师看的完整产品原型。
+- `profiles/esl_writing.yaml`：ESL 写作反馈 profile。
+- `data/esl_writing_demo/`：合成 ESL 作文、反馈项、review evidence 和 routing output。
+- `src/esl_writing_feedback.py`：规则型教师复核路由接口。
+- `src/prompts/esl_feedback_prompt.py`：ESL feedback 生成 prompt 模板。
+- `scripts/analyze_esl_feedback_experiment.py`：未来导入真实教师标注后的离线分析脚本。
 
-这个 30-case benchmark 是 workflow validation，不是大规模课堂实验，也不是 SOTA essay scoring 结果。
+## 主线页面
 
-## 页面说明
+1. Review Workspace
+2. Essay Review
+3. Feedback Detail
+4. Teacher Queue
+5. Writing Rubric
+6. Reports
+7. Settings / Diagnostics
 
-- Page 1: Home / System Overview
-- Page 2: ESL Feedback Review
-- Page 3: Knowledge Grounding & Teacher Queue
-- Page 4: Adjudication Comparison
-- Page 5: Risk Dashboard
-- Page 6: Model Reliability Dashboard
-- Page 7: Auxiliary QA Case Explorer
-- Page 8: Report Export
+核心工作流：
 
-旧的多模型 QA 可靠性文件仅作为辅助 reliability module / legacy artifact 保留，不能作为本次 EMNLP demo 的主线 claim。
+```text
+Review Workspace -> Essay Review -> Feedback Detail -> Teacher Queue -> Reports
+```
 
-## API Key 与隐私
+## 数据边界
 
-API key 只能放在本地 `.env` 或 Streamlit Secrets 中，不能写进论文、README、源码或录屏。公开部署建议使用用户自带 key 的 Mode B。
+当前 ESL writing demo 使用 3 篇合成匿名作文和 15 条合成反馈项，只用于产品演示和接口对齐，不是课堂实验结果。
 
-如需加入真实学生作文，必须先删除姓名、学号、邮箱、学校标识、人口统计信息和任何可识别个人身份的信息。当前打包 demo 使用匿名化或合成样例。
+后续如加入真实学生作文，必须先删除姓名、学号、邮箱、学校标识、人口统计信息和任何可识别个人身份的信息。
+
+## Legacy 说明
+
+仓库中早期比较文学反馈与 QA reliability 文件仅作为 legacy / auxiliary material 保留，不再是当前 EMNLP 2026 demo 的主线 claim。
 
 ## License
 
 MIT License。详见 `LICENSE`。
+

@@ -65,6 +65,10 @@ DATA_PATHS = {
     "literary_metrics": ROOT / "data" / "results" / "literary_feedback_routing_metrics.csv",
     "literary_live_records": ROOT / "data" / "results" / "literary_feedback_live_multimodel_records.json",
     "literary_live_metrics": ROOT / "data" / "results" / "literary_feedback_live_multimodel_metrics.csv",
+    "esl_essays": ROOT / "data" / "esl_writing_demo" / "essays.csv",
+    "esl_feedback": ROOT / "data" / "esl_writing_demo" / "feedback_items.csv",
+    "esl_evidence": ROOT / "data" / "esl_writing_demo" / "review_evidence.csv",
+    "esl_routing": ROOT / "data" / "esl_writing_demo" / "routing_results.csv",
     "figures": ROOT / "reports" / "figures",
 }
 
@@ -279,7 +283,7 @@ def topbar() -> None:
         """
         <div class="topbar">
           <div class="title">ConsensusScope</div>
-          <div class="subtitle">Knowledge-grounded multi-LLM adjudication for ESL literary writing feedback</div>
+          <div class="subtitle">Teacher-in-the-loop review routing for safe AI feedback on ESL writing</div>
         </div>
         """,
         unsafe_allow_html=True,
@@ -488,43 +492,43 @@ def render_adjudication_comparison(comparison: Optional[Dict[str, Any]]) -> None
 
 def page_home(samples_df: pd.DataFrame, outputs_df: pd.DataFrame, metrics_df: pd.DataFrame, risk_df: pd.DataFrame) -> None:
     st.markdown('<div class="section-title">Page 1 · Home / System Overview</div>', unsafe_allow_html=True)
-    kg_df = read_table(str(DATA_PATHS["literary_kg"]))
-    benchmark_df = read_table(str(DATA_PATHS["literary_benchmark"]))
-    literary_metrics = read_table(str(DATA_PATHS["literary_metrics"]))
+    esl_essays = read_table(str(DATA_PATHS["esl_essays"]))
+    esl_feedback = read_table(str(DATA_PATHS["esl_feedback"]))
+    esl_routing = read_table(str(DATA_PATHS["esl_routing"]))
     metrics_df = visible_method_metrics(metrics_df)
-    teacher_review = int(literary_metrics["teacher_review"].sum()) if not literary_metrics.empty and "teacher_review" in literary_metrics else 0
+    teacher_review = int((esl_routing.get("recommended_action", pd.Series(dtype=str)) == "teacher_review").sum()) if not esl_routing.empty else 0
+    auto_accept = int((esl_routing.get("recommended_action", pd.Series(dtype=str)) == "auto_accept").sum()) if not esl_routing.empty else 0
+    high_risk = int((esl_routing.get("risk_level", pd.Series(dtype=str)) == "high").sum()) if not esl_routing.empty else 0
     c1, c2, c3, c4 = st.columns(4)
     with c1:
-        works = int(kg_df["work"].nunique()) if not kg_df.empty and "work" in kg_df else 0
-        metric_panel("Literary Works", str(works), "curated KG")
+        metric_panel("Synthetic Essays", str(len(esl_essays)), "ESL writing demo")
     with c2:
-        metric_panel("KG Triples", str(len(kg_df)), "author, genre, character, theme")
+        metric_panel("Feedback Items", str(len(esl_feedback)), "unified schema")
     with c3:
-        metric_panel("Benchmark Essays", str(len(benchmark_df)), "diagnostic ESL snippets")
+        metric_panel("Auto Accept", str(auto_accept), "low-risk local edits")
     with c4:
-        metric_panel("Teacher Review", str(teacher_review), "routed feedback decisions")
+        metric_panel("Teacher Review", str(teacher_review), f"{high_risk} high-risk items")
     st.code(
-        "Essay / Question Input -> Expert Knowledge Retrieval -> Multi-Model Feedback Generation -> "
-        "Unified Output Format -> Knowledge-Grounded Adjudication -> Risk Dashboard -> Report Export",
+        "Review Workspace -> Essay Review -> Feedback Detail -> Teacher Queue -> Writing Rubric -> Reports",
         language="text",
     )
     st.markdown(
-        "**Main demo claim:** ESL comparative-literature feedback review routing. "
-        "ConsensusScope separates low-risk local edits from literary facts, argument changes, "
-        "and interpretation changes that need teacher review."
+        "**Main demo claim:** teacher-in-the-loop review routing for safe AI-generated ESL writing feedback. "
+        "ConsensusScope separates low-risk local edits from feedback that may change meaning, add unsupported content, "
+        "overcorrect a draft, or require teacher judgment."
     )
     st.info(
-        "The auxiliary QA reliability module remains available for inspecting saved multi-model traces, "
-        "but it is not the main EMNLP 2026 demo claim."
+        "The current product UI reference is ui_prototype/index.html. Streamlit retains technical and auxiliary modules "
+        "for inspection, but earlier modules are not the main EMNLP 2026 demo claim."
     )
-    if not literary_metrics.empty:
-        st.markdown('<div class="section-title">ESL Feedback Routing Snapshot</div>', unsafe_allow_html=True)
+    if not esl_routing.empty:
+        st.markdown('<div class="section-title">ESL Writing Feedback Routing Snapshot</div>', unsafe_allow_html=True)
         snapshot = {
-            "adjudicated_decisions": int(literary_metrics["total_suggestions"].sum()),
-            "auto_accept": int(literary_metrics["auto_accept"].sum()),
-            "teacher_review": int(literary_metrics["teacher_review"].sum()),
-            "high_risk": int(literary_metrics["high_risk"].sum()),
-            "kg_supported": int(literary_metrics["kg_supported"].sum()),
+            "synthetic_essays": len(esl_essays),
+            "feedback_items": len(esl_feedback),
+            "auto_accept": auto_accept,
+            "teacher_review": teacher_review,
+            "high_risk": high_risk,
         }
         st.dataframe(pd.DataFrame([snapshot]), use_container_width=True, hide_index=True)
     if not metrics_df.empty:
@@ -592,12 +596,12 @@ def render_literary_feedback_mode(api_mode: str, selected: List[str], user_input
         c4.metric("KG-supported", summary["kg_supported"])
         c5, c6 = st.columns(2)
         c5.metric("KG works", int(kg["work"].nunique()) if not kg.empty and "work" in kg else 0)
-        c6.metric("KG triples", len(kg))
+        c6.metric("Legacy triples", len(kg))
         if result:
             st.download_button(
-                "Download feedback report.md",
+                "Download legacy feedback report.md",
                 data=result["report"].encode("utf-8"),
-                file_name="literary_feedback_report.md",
+                file_name="legacy_feedback_report.md",
                 mime="text/markdown",
                 use_container_width=True,
             )
@@ -700,14 +704,13 @@ def saved_literary_result() -> Dict[str, Any]:
 
 
 def page_knowledge_teacher_queue() -> None:
-    st.markdown('<div class="section-title">Page 3 · Knowledge Grounding & Teacher Queue</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-title">Page 3 · Legacy Feedback Technical Demo</div>', unsafe_allow_html=True)
     result = saved_literary_result()
     if not result:
         st.info("Run Page 2 first or regenerate data/results/literary_feedback_records.json.")
         return
     st.caption(
-        "This page keeps the ESL feedback workflow in view: KG evidence supports inspection, "
-        "and meaning-changing feedback remains in the teacher-review queue."
+        "Legacy technical module retained for inspection. It is not the current main ESL writing feedback claim."
     )
     decisions = result.get("decisions", [])
     summary = literary_routing_summary(decisions)
@@ -746,9 +749,9 @@ def page_knowledge_teacher_queue() -> None:
         st.dataframe(pd.DataFrame(decisions), use_container_width=True, hide_index=True)
     with tabs[3]:
         st.download_button(
-            "Download literary_feedback_report.md",
+            "Download legacy feedback report.md",
             data=result.get("report", "").encode("utf-8"),
-            file_name="literary_feedback_report.md",
+            file_name="legacy_feedback_report.md",
             mime="text/markdown",
             use_container_width=True,
         )
@@ -756,14 +759,18 @@ def page_knowledge_teacher_queue() -> None:
 
 
 def page_live(api_mode: str, selected: List[str], user_inputs: Dict[str, Dict[str, str]], fixed_enabled: bool, fixed_provider: str) -> None:
-    st.markdown('<div class="section-title">Page 2 · ESL Feedback Review</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-title">Page 2 · Technical Demo / Live Mode</div>', unsafe_allow_html=True)
     mode = st.radio(
         "Mode",
-        ["ESL literary essay feedback", "Auxiliary QA live comparison"],
+        ["Legacy feedback technical demo", "Auxiliary QA live comparison"],
         horizontal=True,
         label_visibility="collapsed",
     )
-    if mode == "ESL literary essay feedback":
+    if mode == "Legacy feedback technical demo":
+        st.warning(
+            "This legacy module is retained for technical inspection. The current product storyline is ESL writing "
+            "teacher review routing, shown in ui_prototype/index.html."
+        )
         render_literary_feedback_mode(api_mode, selected, user_inputs)
         return
 
@@ -901,31 +908,25 @@ def page_comparison(metrics_df: pd.DataFrame) -> None:
 
 def page_risk_dashboard(risk_df: pd.DataFrame, effectiveness_df: pd.DataFrame) -> None:
     st.markdown('<div class="section-title">Page 5 · Risk Dashboard</div>', unsafe_allow_html=True)
-    literary_metrics = read_table(str(DATA_PATHS["literary_metrics"]))
-    live_metrics = read_table(str(DATA_PATHS["literary_live_metrics"]))
-    if not literary_metrics.empty:
-        st.markdown("### ESL Feedback Routing Risk")
+    esl_routing = read_table(str(DATA_PATHS["esl_routing"]))
+    if not esl_routing.empty:
+        st.markdown("### ESL Writing Feedback Routing Risk")
+        auto_accept = int((esl_routing["recommended_action"] == "auto_accept").sum()) if "recommended_action" in esl_routing else 0
+        teacher_review = int((esl_routing["recommended_action"] == "teacher_review").sum()) if "recommended_action" in esl_routing else 0
+        high_risk = int((esl_routing["risk_level"] == "high").sum()) if "risk_level" in esl_routing else 0
+        medium_risk = int((esl_routing["risk_level"] == "medium").sum()) if "risk_level" in esl_routing else 0
+        low_risk = int((esl_routing["risk_level"] == "low").sum()) if "risk_level" in esl_routing else 0
         summary = {
-            "source": "no_api_benchmark",
-            "decisions": int(literary_metrics["total_suggestions"].sum()),
-            "auto_accept": int(literary_metrics["auto_accept"].sum()),
-            "teacher_review": int(literary_metrics["teacher_review"].sum()),
-            "high_risk": int(literary_metrics["high_risk"].sum()),
-            "kg_supported": int(literary_metrics["kg_supported"].sum()),
+            "source": "synthetic_esl_writing_demo",
+            "feedback_items": len(esl_routing),
+            "auto_accept": auto_accept,
+            "teacher_review": teacher_review,
+            "low_risk": low_risk,
+            "medium_risk": medium_risk,
+            "high_risk": high_risk,
         }
-        if not live_metrics.empty:
-            live_summary = {
-                "source": "saved_live_validation",
-                "decisions": int(live_metrics["total_suggestions"].sum()),
-                "auto_accept": int(live_metrics["auto_accept"].sum()),
-                "teacher_review": int(live_metrics["teacher_review"].sum()),
-                "high_risk": int(live_metrics["high_risk"].sum()),
-                "kg_supported": int(live_metrics["kg_supported"].sum()),
-            }
-            st.dataframe(pd.DataFrame([summary, live_summary]), use_container_width=True, hide_index=True)
-        else:
-            st.dataframe(pd.DataFrame([summary]), use_container_width=True, hide_index=True)
-        st.caption("These are review-routing counts, not automatic essay-scoring results.")
+        st.dataframe(pd.DataFrame([summary]), use_container_width=True, hide_index=True)
+        st.caption("These are synthetic review-routing counts, not automatic essay-scoring results or classroom validation.")
     if risk_df.empty:
         st.info("Missing auxiliary QA risk_labels.csv.")
         return
@@ -984,12 +985,47 @@ def page_case_explorer(error_df: pd.DataFrame, samples_df: pd.DataFrame, outputs
 def page_report_export(samples_df: pd.DataFrame, outputs_df: pd.DataFrame, metrics_df: pd.DataFrame, risk_df: pd.DataFrame) -> None:
     st.markdown('<div class="section-title">Page 8 · Report Export</div>', unsafe_allow_html=True)
     live = st.session_state.get("live_result")
+    esl_essays = read_table(str(DATA_PATHS["esl_essays"]))
+    esl_feedback = read_table(str(DATA_PATHS["esl_feedback"]))
+    esl_routing = read_table(str(DATA_PATHS["esl_routing"]))
+    if not esl_routing.empty:
+        auto_accept = int((esl_routing["recommended_action"] == "auto_accept").sum()) if "recommended_action" in esl_routing else 0
+        teacher_review = int((esl_routing["recommended_action"] == "teacher_review").sum()) if "recommended_action" in esl_routing else 0
+        high_risk = int((esl_routing["risk_level"] == "high").sum()) if "risk_level" in esl_routing else 0
+        esl_report = f"""ConsensusScope ESL Writing Feedback Routing Report
+
+Data status: synthetic demo data
+Essays: {len(esl_essays)}
+Feedback items: {len(esl_feedback)}
+Auto accepted: {auto_accept}
+Teacher review: {teacher_review}
+High risk: {high_risk}
+
+Limitations:
+- The packaged ESL writing demo uses synthetic records.
+- The system routes AI feedback for teacher review; it does not grade essays.
+- Offline teacher annotations must be reported separately from deploy-time routing signals.
+"""
+        st.download_button(
+            "Download esl_writing_routing_report.md",
+            data=esl_report.encode("utf-8"),
+            file_name="esl_writing_routing_report.md",
+            mime="text/markdown",
+            use_container_width=True,
+        )
+        st.download_button(
+            "Download esl_writing_routing_results.csv",
+            data=esl_routing.to_csv(index=False, encoding="utf-8-sig"),
+            file_name="esl_writing_routing_results.csv",
+            mime="text/csv",
+            use_container_width=True,
+        )
     literary = saved_literary_result()
     if literary:
         st.download_button(
-            "Download literary_feedback_report.md",
+            "Download legacy_feedback_report.md",
             data=literary.get("report", "").encode("utf-8"),
-            file_name="literary_feedback_report.md",
+            file_name="legacy_feedback_report.md",
             mime="text/markdown",
             use_container_width=True,
         )
@@ -1002,6 +1038,9 @@ def page_report_export(samples_df: pd.DataFrame, outputs_df: pd.DataFrame, metri
             use_container_width=True,
         )
     report = {
+        "esl_writing_essays": len(esl_essays),
+        "esl_writing_feedback_items": len(esl_feedback),
+        "esl_writing_routing_items": len(esl_routing),
         "samples": len(samples_df),
         "model_outputs": len(outputs_df),
         "method_metrics": metrics_df.to_dict(orient="records") if not metrics_df.empty else [],
@@ -1031,25 +1070,25 @@ def page_report_export(samples_df: pd.DataFrame, outputs_df: pd.DataFrame, metri
 def page_design_reference() -> None:
     st.markdown('<div class="section-title">Page 9 · Design Reference</div>', unsafe_allow_html=True)
     st.caption(
-        "Designer-facing preview for the proposed ESL teacher-review workspace. "
-        "This page is a reference mockup, not the current production interaction flow."
+        "Designer-facing preview for the current ESL writing teacher-review workspace. "
+        "The standalone source is ui_prototype/index.html."
     )
-    brief_path = ROOT / "docs" / "ui_esl_designer_reference.md"
-    mockup_path = ROOT / "docs" / "ui_mockup_esl_reference.html"
+    brief_path = ROOT / "ui_prototype" / "README.md"
+    mockup_path = ROOT / "ui_prototype" / "index.html"
 
     c1, c2, c3 = st.columns([0.55, 0.23, 0.22])
     with c1:
         st.markdown(
             "Use this page when sharing the live site with a UI/UX designer. "
-            "The intended design direction is a teacher workflow for reviewing ESL literary feedback, "
-            "with model diagnostics moved into an Advanced area."
+            "The intended design direction is a teacher workflow for reviewing ESL writing feedback, "
+            "with model diagnostics moved into Settings / Diagnostics."
         )
     with c2:
         if brief_path.exists():
             st.download_button(
                 "Download Chinese design brief",
                 brief_path.read_bytes(),
-                file_name="ConsensusScope_ESL_UI_designer_brief_zh.md",
+                file_name="ConsensusScope_ESL_UI_prototype_readme.md",
                 mime="text/markdown",
                 use_container_width=True,
             )
@@ -1058,7 +1097,7 @@ def page_design_reference() -> None:
             st.download_button(
                 "Download HTML mockup",
                 mockup_path.read_bytes(),
-                file_name="ConsensusScope_ESL_UI_reference.html",
+                file_name="ConsensusScope_ESL_writing_UI_prototype.html",
                 mime="text/html",
                 use_container_width=True,
             )
@@ -1098,9 +1137,9 @@ def main() -> None:
         "Navigation",
         [
             "Page 1: Home / System Overview",
-            "Page 2: ESL Feedback Review",
-            "Page 3: Knowledge Grounding & Teacher Queue",
-            "Page 4: Adjudication Comparison",
+            "Page 2: Technical Demo / Live Mode",
+            "Page 3: Legacy Feedback Technical Demo",
+            "Page 4: Auxiliary QA Comparison",
             "Page 5: Risk Dashboard",
             "Page 6: Model Reliability Dashboard",
             "Page 7: Auxiliary QA Case Explorer",

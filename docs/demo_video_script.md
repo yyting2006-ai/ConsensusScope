@@ -4,107 +4,101 @@ Target length: 2 minutes 30 seconds.
 
 Local draft screen-flow recording:
 
-- Start the app with `streamlit run app/streamlit_app.py --server.port 8502`.
+- Open `ui_prototype/index.html`, or run `python3 -m http.server 8080` inside
+  `ui_prototype/`.
 - Regenerate the browser recording with `node scripts/record_demo_video_en.mjs`.
-- Convert the generated WebM to MP4 with `python3 scripts/convert_video_to_mp4.py`
-  if needed.
+- Convert the generated WebM to MP4 with
+  `python3 scripts/convert_video_to_mp4.py` if needed.
 - The generated file is a silent screen-flow recording. For final submission,
-  add English narration using this script and submit the final screencast as
-  supplementary material or replace this note with a real confirmed video URL.
+  add English narration and submit the final screencast as supplementary
+  material or replace this note with a confirmed video URL.
 
 ## 0:00-0:20 Problem
 
 Narration:
 
-> AI writing feedback can be fluent but unsafe. In ESL comparative-literature
-> essays, a model may fix grammar correctly while changing literary facts,
-> character relations, or the student's interpretation.
+> AI writing feedback can be fluent but unsafe. A model may fix a local grammar
+> issue while also changing a student's intended meaning, adding unsupported
+> content, or overcorrecting a reasonable ESL draft.
 
 Screen:
 
-- Open Page 1: Home / System Overview.
-- Point to the title and the review-routing workflow.
+- Open Page 1: Review Workspace.
+- Point to the teacher-facing question and workflow summary.
 
 ## 0:20-0:45 System Overview
 
 Narration:
 
-> ConsensusScope compares multiple LLM feedback outputs and routes each
-> suggestion into either low-risk auto-accept or teacher review. It is not an
-> automatic essay scorer and it does not replace teacher judgment.
+> ConsensusScope routes AI-generated ESL writing feedback before it reaches
+> students. Low-risk local edits can be accepted, while feedback that may change
+> meaning or require pedagogical judgment goes to the teacher queue.
 
 Screen:
 
-- Click Page 2: ESL Feedback Review.
-- Show the demo essay, reviewer source selector, and Run Knowledge-Grounded
-  Feedback button.
-- Use the no-API deterministic reviewer path for the recording.
+- Click Page 2: Essay Review.
+- Show the anonymized synthetic essay, assignment prompt, and routing summary.
 
-## 0:45-1:10 Knowledge Grounding
+## 0:45-1:15 Feedback Detail
 
 Narration:
 
-> The system retrieves evidence from a curated literary knowledge graph,
-> including author, work, genre, central characters, themes, and publication
-> year. These triples make factual feedback inspectable.
+> Each feedback item has a unified schema: issue type, target span, suggestion,
+> student-facing draft, risk level, routing reason, and review evidence.
 
 Screen:
 
-- Run the feedback demo.
-- Open the Knowledge Evidence tab.
-- Point to author and publication-year rows.
+- Click Page 3: Feedback Detail.
+- Show the high-risk thesis-reversal example.
+- Point to the routing explanation and teacher action buttons.
 
-## 1:10-1:40 Feedback Adjudication
+## 1:15-1:45 Teacher Queue
 
 Narration:
 
-> Low-risk local grammar or style edits can be accepted, but suggestions about
-> authorship, genre, character identity, thesis statements, or interpretation
-> remain in the teacher-review queue.
+> The teacher queue prioritizes high-risk feedback first. Teachers can filter by
+> risk, issue type, and status, so the system supports human review rather than
+> hiding uncertainty behind a single automatic decision.
 
 Screen:
 
-- Open the Teacher View and Adjudication Trace tabs.
-- Point to auto-accepted preview and teacher-review decisions.
+- Click Page 4: Teacher Queue.
+- Filter or point to high-risk meaning-change and unsupported-claim items.
 
-## 1:40-2:05 Teacher Review Queue
+## 1:45-2:10 Writing Rubric
 
 Narration:
 
-> The teacher review queue shows risk level, priority, model agreement,
-> knowledge support, and a short explanation for why human review is
-> recommended.
+> The Writing Rubric page makes routing rules inspectable. The system uses
+> deploy-time signals such as meaning preservation, local edit scope, task
+> response, organization, tone, and parse quality. It does not use hidden gold
+> labels at deployment time.
 
 Screen:
 
-- Click Page 3: Knowledge Grounding & Teacher Queue.
-- Show the queue and risk/priority fields.
-- If the auxiliary QA mode is visible, mention it only briefly.
+- Click Page 5: Writing Rubric.
+- Point to the low, medium, and high risk rules.
 
-Key line:
-
-> The system also includes auxiliary multi-model QA audit pages, but this demo
-> focuses on ESL literary feedback.
-
-## 2:05-2:25 Report Export
+## 2:10-2:25 Report Export
 
 Narration:
 
-> The final page exports a Markdown feedback report and structured JSON or CSV
-> files so the decision process can be inspected and reproduced.
+> The report exports a teacher-readable audit trail with accepted edits,
+> review-routed items, routing reasons, and limitations.
 
 Screen:
 
-- Click Page 8: Report Export.
-- Show the literary feedback report download and system summary export.
+- Click Page 6: Reports.
+- Show the report preview.
 
 ## 2:25-2:30 Closing
 
 Narration:
 
-> ConsensusScope helps decide when AI feedback requires human review.
+> ConsensusScope helps teachers decide when AI feedback is safe to show and when
+> it needs human review.
 
 Screen:
 
-- Return to Page 1 or stop on Report Export.
-- Leave one second of silence before ending the recording.
+- Stop on Reports or return to Review Workspace.
+

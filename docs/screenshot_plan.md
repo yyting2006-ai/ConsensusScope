@@ -1,22 +1,29 @@
 # Screenshot Plan
 
-The English screenshots in `docs/screenshots_en/` should follow the ESL
-comparative-literature feedback storyline.
+The English screenshots should follow the current ESL writing feedback
+review-routing storyline.
 
 Recommended figures:
 
-1. `home_system_overview.png`: system purpose and ESL review-routing workflow.
-2. `esl_feedback_review.png`: essay input, no-API reviewer mode, and adjudicated
-   feedback.
-3. `knowledge_teacher_queue.png`: KG evidence and teacher-review queue.
-4. `risk_dashboard.png`: ESL routing risk summary plus auxiliary QA diagnostics.
-5. `report_export.png`: downloadable feedback report and reproducibility files.
+1. `review_workspace.png`: system purpose, teacher-facing question, and routing
+   workflow.
+2. `essay_review.png`: anonymized synthetic ESL essay, assignment prompt, and
+   routing summary.
+3. `feedback_detail.png`: high-risk feedback item with routing explanation and
+   teacher actions.
+4. `teacher_queue.png`: queue filters and prioritized review items.
+5. `writing_rubric.png`: deploy-time routing rules.
+6. `reports.png`: teacher-readable report preview and limitations.
 
-Generation command:
+For the static prototype, open:
 
-```bash
-node scripts/capture_screenshots_en.mjs
+```text
+ui_prototype/index.html
 ```
 
-The Streamlit app must be running at `http://localhost:8502` before executing
-the command.
+For the Streamlit technical demo, start:
+
+```bash
+streamlit run app/streamlit_app.py --server.port 8502
+```
+

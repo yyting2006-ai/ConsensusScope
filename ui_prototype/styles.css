@@ -688,7 +688,7 @@ textarea {
   gap: 10px;
 }
 
-.kg-profile {
+.rubric-profile {
   display: grid;
   grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
   gap: 14px;
@@ -774,7 +774,7 @@ textarea {
   .grid.two,
   .grid.three,
   .detail-layout,
-  .kg-profile {
+  .rubric-profile {
     grid-template-columns: 1fr;
   }
 }

@@ -1,0 +1,16 @@
+evidence_id,feedback_item_id,evidence_type,evidence_text,criterion,match_status,used_for_decision
+EV-001,FW-001,rubric,"Vocabulary improvement preserves the student's claim about flexibility.",vocabulary,supported,true
+EV-002,FW-002,rubric,"Natural phrasing improves clarity without adding a new idea.",vocabulary,supported,true
+EV-003,FW-003,safety_rule,"The suggestion reverses the student's thesis about keeping online learning.",meaning_preservation,conflict,true
+EV-004,FW-004,rubric,"Specific examples can improve argument clarity.",task_response,supported,true
+EV-005,FW-005,rubric,"Moving a counterargument may affect organization but not necessarily meaning.",organization,supported,true
+EV-006,FW-006,rubric,"Subject-verb agreement correction is local and meaning-preserving.",grammar,supported,true
+EV-007,FW-007,rubric,"The phrase remains semantically aligned with the original claim.",vocabulary,supported,true
+EV-008,FW-008,rubric,"Concrete examples can improve coherence and development.",coherence,supported,true
+EV-009,FW-009,safety_rule,"The suggestion overstates the student's position and changes the intended meaning.",meaning_preservation,conflict,true
+EV-010,FW-010,safety_rule,"The exam-score claim is not present in the essay and is unsupported.",task_response,missing,true
+EV-011,FW-011,rubric,"Punctuation edit is local and safe.",grammar,supported,true
+EV-012,FW-012,rubric,"Vocabulary improves precision without changing the intended meaning.",vocabulary,supported,true
+EV-013,FW-013,rubric,"Countable noun correction is local and meaning-preserving.",grammar,supported,true
+EV-014,FW-014,safety_rule,"Closing factories immediately introduces a new unsupported argument.",meaning_preservation,conflict,true
+EV-015,FW-015,rubric,"Transition advice supports coherence between proposed solutions.",coherence,supported,true

@@ -1,79 +1,92 @@
-# ConsensusScope ESL Casebook
+# ConsensusScope ESL Writing Casebook
 
-This casebook lists representative ESL comparative-literature feedback cases
-for the paper, video, and qualitative demo walkthrough.
+This casebook lists representative ESL writing feedback cases for the paper,
+video, and qualitative demo walkthrough. All examples are synthetic and
+anonymized.
 
-## Case 1: Grammar Can Be Local, Facts Need Review
+## Case 1: Local Grammar Can Be Auto-Accepted
 
-Sample: `lit_esl_001`
+Sample: `FW-006`
 
-Student excerpt:
+Student span:
 
-> Mary Shelley write Frankenstein in 1847, and Jane Austen wrote Jane Eyre.
-> Both novels shows how women are trapped by society.
+> it also make students
 
-Why it matters:
+AI feedback:
 
-- `write` to `wrote` and `shows` to `show` are low-risk local grammar edits.
-- The publication year of *Frankenstein* and the authorship of *Jane Eyre* are
-  literary-fact issues that should remain teacher-reviewable.
-- KG evidence supports the review by showing *Frankenstein* as a Mary Shelley
-  work conventionally dated to 1818.
-
-## Case 2: Character Confusion With Interpretation Risk
-
-Sample: `lit_esl_002`
-
-Student excerpt:
-
-> The monster is Victor Frankenstein, so the novel proves that people should
-> never study knowledge.
+> Change `make` to `makes`.
 
 Why it matters:
 
-- The KG can flag central-character confusion.
-- The broad interpretive rewrite changes the student's argument and should not
-  be auto-applied.
-- This demonstrates why ConsensusScope routes factual and interpretation-level
-  feedback to teacher review.
+- The correction is local and inspectable.
+- It preserves the student's intended meaning.
+- The router assigns low risk and recommends auto-accept.
 
-## Case 3: Academic Style Without Overwriting Meaning
+## Case 2: Thesis Reversal Must Be Reviewed
 
-Sample: `lit_esl_003`
+Sample: `FW-003`
 
-Student excerpt:
+Student span:
 
-> In comparison, the two books are same because both main characters want
-> freedom.
+> universities should keep online learning
 
-Why it matters:
+AI feedback:
 
-- The sentence needs academic phrasing.
-- A model may over-specify the comparison and change the student's intended
-  contrast.
-- The teacher queue keeps style suggestions inspectable.
-
-## Case 4: Genre And Publication-Year Evidence
-
-Sample: `lit_esl_012`
+> Rewrite the thesis to argue that universities should end online learning completely.
 
 Why it matters:
 
-- Genre and publication-year suggestions can be checked against KG triples.
-- Knowledge support is useful evidence, but it does not automatically make a
-  suggestion pedagogically appropriate.
-- Teacher review remains the safer route for fact-linked feedback.
+- The suggestion reverses the student's stance.
+- This is not a local language edit.
+- The router assigns high risk and sends it to teacher review.
+
+## Case 3: Overcorrection Changes Student Intent
+
+Sample: `FW-009`
+
+Student span:
+
+> instead of only saying it is bad
+
+AI feedback:
+
+> Tell the student that social media is always harmful and should be banned.
+
+Why it matters:
+
+- The feedback replaces a balanced opinion with an extreme claim.
+- It may be fluent but unsafe as student-facing feedback.
+- Teacher review is required.
+
+## Case 4: Unsupported New Claim
+
+Sample: `FW-010`
+
+Student span:
+
+> learn about the world
+
+AI feedback:
+
+> Add a claim that social media improves teenagers' exam scores.
+
+Why it matters:
+
+- The claim is not in the draft or assignment.
+- The system flags unsupported content and low agreement.
+- This illustrates why routing should preserve uncertainty.
 
 ## Case 5: Report Export For Reproducibility
 
-The exported Markdown report records:
+The exported report records:
 
-- original student excerpt;
-- retrieved KG evidence;
+- anonymized essay metadata;
 - feedback suggestions;
-- selected decision for each suggestion group;
-- auto-accept versus teacher-review routing;
-- rationale for teacher review.
+- route for each suggestion;
+- risk level and risk reasons;
+- teacher action status;
+- limitations and privacy notes.
 
 This supports reproducible inspection without claiming that the system grades
 the essay.
+

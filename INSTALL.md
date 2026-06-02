@@ -1,17 +1,17 @@
 # ConsensusScope Installation Guide
 
-This package contains a no-API local demo of ConsensusScope for ESL
-comparative-literature writing feedback review routing.
+This package contains a no-API local demo of ConsensusScope for ESL writing
+feedback review routing.
 
 ## 1. Requirements
 
-- macOS, Linux or Windows
+- macOS, Linux, or Windows
 - Python 3.10 or newer
 - Internet access for installing Python packages the first time
 
-The demo can run without external LLM API keys because it includes a curated
-literary knowledge graph, deterministic feedback records, saved live validation
-records, and adjudication results.
+The packaged ESL writing demo can run without external LLM API keys because it
+includes synthetic essays, synthetic feedback items, review evidence, and saved
+routing output.
 
 ## 2. Install
 
@@ -24,7 +24,7 @@ pip install -U pip
 pip install -r requirements.txt
 ```
 
-## 3. Start the English Submission Demo
+## 3. Start The Streamlit Demo
 
 ```bash
 streamlit run app/streamlit_app.py --server.port 8502
@@ -36,21 +36,30 @@ Then open:
 http://localhost:8502
 ```
 
-## 4. Start the Local Demo Again
+## 4. Open The Product UI Prototype
+
+Open this file directly in a browser:
+
+```text
+ui_prototype/index.html
+```
+
+Or run a static server:
 
 ```bash
-streamlit run app/streamlit_app.py --server.port 8502
+cd ui_prototype
+python3 -m http.server 8080
 ```
 
 Then open:
 
 ```text
-http://localhost:8502
+http://localhost:8080
 ```
 
 ## 5. One-Command Start
 
-On macOS, the easiest way is to double-click:
+On macOS, double-click:
 
 ```text
 start_demo_mac.command
@@ -70,8 +79,6 @@ On Linux or Terminal-only macOS usage, run:
 bash start_demo.sh
 ```
 
-This starts the English demo on port `8502`.
-
 On Windows, double-click:
 
 ```text
@@ -84,27 +91,27 @@ or run it from Command Prompt:
 start_demo.bat
 ```
 
-## 6. Included Materials
+## 6. Included Main Materials
 
-- Main demo app: `app/streamlit_app.py`
-- ESL Feedback Review Mode for comparative-literature essay feedback
-- Knowledge graph data: `data/knowledge/literary_kg_triples.csv`
-- Diagnostic benchmark: `data/literary_feedback/benchmark.csv`
-- No-API feedback records and routing metrics: `data/results/`
-- Optional auxiliary QA reliability files, clearly separated from the main ESL
-  demo claim
-- Screenshots: `docs/screenshots_en/`
+- Main Streamlit app: `app/streamlit_app.py`
+- Product UI prototype: `ui_prototype/index.html`
+- ESL writing profile: `profiles/esl_writing.yaml`
+- Synthetic ESL writing demo data: `data/esl_writing_demo/`
+- Review-routing interface: `src/esl_writing_feedback.py`
+- Prompt template: `src/prompts/esl_feedback_prompt.py`
+- Offline analysis script: `scripts/analyze_esl_feedback_experiment.py`
 - EMNLP demo paper draft: `paper/consensusscope_emnlp_demo.tex`
-- Casebook and release checklist: `docs/`
+- Release checklist and ethics notes: `docs/`
 
 ## 7. Safety Notes
 
-This package intentionally excludes `.env` and private API keys. If you later
-add API keys, keep them in a local `.env` file and do not upload it publicly.
-For a password-protected live demo, set `CONSENSUS_SCOPE_DEMO_PASSWORD` in the
-local `.env` file or in Streamlit Cloud Secrets.
+This package intentionally excludes private API keys. If you later add API keys,
+keep them in a local `.env` file or Streamlit Secrets and do not upload them
+publicly. For a password-protected live demo, set
+`CONSENSUS_SCOPE_DEMO_PASSWORD` in local `.env` or Streamlit Cloud Secrets.
 
 Before adding real student essays, remove names, IDs, emails, school
 identifiers, demographic details, and any personally identifying information.
 ConsensusScope supports teacher review; it is not an automatic essay scorer or
 teacher replacement.
+

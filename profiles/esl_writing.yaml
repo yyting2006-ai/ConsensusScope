@@ -1,0 +1,72 @@
+domain_name: ESL Writing Feedback
+
+issue_types:
+  - grammar
+  - vocabulary
+  - sentence_structure
+  - coherence
+  - organization
+  - task_response
+  - argument_clarity
+  - tone_register
+  - meaning_change
+  - overcorrection
+  - other
+
+feedback_correctness_labels:
+  - correct
+  - partially_correct
+  - incorrect
+  - unclear
+
+meaning_preservation_labels:
+  - preserves_meaning
+  - changes_meaning
+  - unclear
+
+teacher_safety_labels:
+  - safe_to_show_student
+  - unsafe_without_revision
+  - uncertain_needs_review
+
+teacher_acceptability_labels:
+  - accept
+  - edit
+  - reject
+  - uncertain
+
+risk_levels:
+  low:
+    description: Local grammar, spelling, or wording edit that preserves the student's intended meaning.
+  medium:
+    description: Revision advice that may affect expression, organization, or argument clarity.
+  high:
+    description: Feedback that may be incorrect, over-written, misleading, or may change the student's intended meaning.
+
+recommended_actions:
+  - auto_accept
+  - teacher_review
+  - reject
+  - needs_more_evidence
+
+risk_reasons:
+  - local_language_edit
+  - wrong_correction
+  - meaning_change
+  - overcorrection
+  - introduces_new_argument
+  - too_vague
+  - too_harsh
+  - unsupported_claim
+  - task_mismatch
+  - low_model_agreement
+  - parse_error
+
+rubric_dimensions:
+  - task_response
+  - organization
+  - coherence
+  - grammar
+  - vocabulary
+  - tone_register
+

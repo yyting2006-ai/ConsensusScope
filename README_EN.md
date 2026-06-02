@@ -1,18 +1,16 @@
 # ConsensusScope
 
-ConsensusScope is a knowledge-grounded multi-LLM review-routing tool for ESL
-comparative-literature writing feedback. It helps teachers decide which
-AI-generated feedback can be safely accepted and which feedback needs human
-review.
+**ConsensusScope: An Interactive Review-Routing Tool for Safe AI Feedback on ESL Writing**
 
-It is not an automatic essay scorer, not a teacher replacement, and not a truth
-oracle.
+ConsensusScope helps teachers review AI-generated ESL writing feedback before it
+is shown to students. It separates low-risk local language edits from feedback
+that may change meaning, add unsupported content, overcorrect a draft, or require
+teacher judgment.
 
-For the current EMNLP 2026 System Demonstrations package, the canonical English
-README is `README.md`. This file is kept as a compatibility entry point and
-summarizes the same ESL-focused direction.
+The canonical English README is `README.md`; this file is kept as a short
+compatibility entry point.
 
-## Run The Demo
+## Run
 
 ```bash
 python3 -m venv .venv
@@ -24,40 +22,30 @@ streamlit run app/streamlit_app.py --server.port 8502
 
 Then open `http://localhost:8502`.
 
-## What The Demo Shows
+## Current Main Assets
 
-- ESL comparative-literature feedback review.
-- Curated literary KG: 319 triples over 30 works.
-- No-API deterministic reviewers for reproducible demos.
-- Optional live OpenAI-compatible reviewers.
-- Low-risk local grammar/style edits routed to auto-accept.
-- Literary facts, argument changes, and interpretation changes routed to
-  teacher review.
-- Exportable reports for teacher inspection.
-- Auxiliary QA reliability pages, clearly separated from the main ESL claim.
+- `ui_prototype/index.html`: designer-facing product prototype.
+- `profiles/esl_writing.yaml`: ESL writing feedback profile.
+- `data/esl_writing_demo/`: synthetic ESL essays, feedback items, evidence, and
+  routing output.
+- `src/esl_writing_feedback.py`: rule-based review-routing interface.
+- `src/prompts/esl_feedback_prompt.py`: structured feedback prompt template.
+- `scripts/analyze_esl_feedback_experiment.py`: offline analysis script for
+  future teacher annotations.
 
-## Current ESL Snapshot
+## Main Prototype Pages
 
-| Scope | Value |
-|---|---:|
-| Literary works | 30 |
-| Curated KG triples | 319 |
-| Benchmark essays | 30 |
-| Adjudicated feedback decisions | 59 |
-| Auto-accepted low-risk edits | 14 |
-| Teacher-review decisions | 45 |
-| High-risk decisions | 20 |
-| KG-supported decisions | 23 |
+1. Review Workspace
+2. Essay Review
+3. Feedback Detail
+4. Teacher Queue
+5. Writing Rubric
+6. Reports
+7. Settings / Diagnostics
 
-The benchmark is diagnostic and workflow-oriented. It is not a large classroom
-study and not a state-of-the-art essay-scoring benchmark.
+## Boundary
 
-## Privacy
-
-Before adding real student essays, remove names, IDs, emails, demographic
-details, school identifiers, and any personally identifying information. The
-packaged demo uses anonymized or synthetic examples.
-
-## License
-
-MIT License. See `LICENSE`.
+ConsensusScope is not an automatic essay scorer, not a teacher replacement, and
+not a truth oracle. Earlier domain-specific feedback and QA reliability modules
+remain in the repository only as legacy or auxiliary materials and are not the
+current main demo claim.

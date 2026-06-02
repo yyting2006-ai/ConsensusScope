@@ -184,20 +184,20 @@ def build_doc() -> None:
     add_labeled_para(
         doc,
         "Main message: ",
-        "AI writing feedback can be fluent but unsafe. ConsensusScope routes ESL comparative-literature feedback into low-risk auto-accept and teacher-review queues with literary knowledge evidence.",
+        "AI writing feedback can be fluent but unsafe. ConsensusScope routes ESL writing feedback into low-risk auto-accept and teacher-review queues before students see unsafe suggestions.",
     )
 
     doc.add_heading("1. Page-by-page Recording Plan", level=1)
     add_timeline_table(
         doc,
         [
-            ("0:00-0:20", "Page 1", "Open Home / System Overview. Keep the pointer near the title and workflow.", "Problem and premise"),
-            ("0:20-0:45", "Page 2", "Click ESL Feedback Review. Show the essay input and reviewer source selector.", "System overview"),
-            ("0:45-1:10", "Page 2", "Run the no-API demo and open Knowledge Evidence.", "Knowledge grounding"),
-            ("1:10-1:40", "Page 2/3", "Show Teacher View, Adjudication Trace, then Knowledge Grounding & Teacher Queue.", "Feedback routing"),
-            ("1:40-2:05", "Page 3", "Point to risk level, priority, model agreement, and KG support.", "Teacher review queue"),
-            ("2:05-2:25", "Page 8", "Click Report Export and show the report download buttons.", "Export"),
-            ("2:25-2:30", "Page 1/8", "Stop moving the mouse and close with one sentence.", "Conclusion"),
+            ("0:00-0:20", "Page 1", "Open Review Workspace. Keep the pointer near the teacher-facing question and workflow.", "Problem and premise"),
+            ("0:20-0:45", "Page 2", "Click Essay Review. Show the assignment prompt, essay, and routing summary.", "System overview"),
+            ("0:45-1:15", "Page 3", "Click Feedback Detail. Show target span, suggestion, risk, routing explanation, and teacher actions.", "Feedback detail"),
+            ("1:15-1:45", "Page 4", "Click Teacher Queue. Point to filters and high-risk items.", "Teacher review queue"),
+            ("1:45-2:10", "Page 5", "Click Writing Rubric. Point to deploy-time routing rules.", "Routing rules"),
+            ("2:10-2:25", "Page 6", "Click Reports and show the report preview.", "Export"),
+            ("2:25-2:30", "Page 1/6", "Stop moving the mouse and close with one sentence.", "Conclusion"),
         ],
     )
 
@@ -207,11 +207,11 @@ def build_doc() -> None:
         "0:00-0:20",
         "Opening",
         [
-            "Click Page 1: Home / System Overview in the sidebar.",
+            "Click Page 1: Review Workspace in the sidebar.",
             "Keep the pointer near the title ConsensusScope.",
-            "Briefly move the pointer over the system pipeline.",
+            "Briefly move the pointer over the teacher-facing workflow.",
         ],
-        "AI writing feedback can be fluent but unsafe. In ESL comparative-literature essays, a model may fix grammar correctly while changing literary facts, character relations, or the student's interpretation.",
+        "AI writing feedback can be fluent but unsafe. A model may fix a local grammar issue while changing a student's intended meaning, adding unsupported content, or overcorrecting a reasonable ESL draft.",
     )
 
     add_segment(
@@ -219,49 +219,47 @@ def build_doc() -> None:
         "0:20-0:45",
         "System overview",
         [
-            "Move to the sidebar API Configuration panel.",
-            "Show Mode A and Mode B without typing any real API key.",
-            "Click Page 2: ESL Feedback Review.",
-            "Show the essay input, reviewer source selector, and Run Knowledge-Grounded Feedback button.",
+            "Click Page 2: Essay Review.",
+            "Show the anonymized synthetic essay.",
+            "Point to the assignment prompt and routing summary.",
         ],
-        "ConsensusScope compares multiple LLM feedback outputs and routes each suggestion into either low-risk auto-accept or teacher review. It is not an automatic essay scorer and it does not replace teacher judgment.",
+        "ConsensusScope routes AI-generated ESL writing feedback before it reaches students. Low-risk local edits can be accepted, while feedback that may change meaning or require pedagogical judgment goes to the teacher queue.",
     )
 
     add_segment(
         doc,
-        "0:45-1:10",
-        "Knowledge grounding",
+        "0:45-1:15",
+        "Feedback detail",
         [
-            "Run the no-API deterministic feedback demo.",
-            "Open the Knowledge Evidence tab.",
-            "Point to author, genre, character, theme, and publication-year rows.",
+            "Click Page 3: Feedback Detail.",
+            "Point to the high-risk thesis-reversal example.",
+            "Show routing explanation and teacher action buttons.",
         ],
-        "The system retrieves evidence from a curated literary knowledge graph, including author, work, genre, central characters, themes, and publication year. These triples make factual feedback inspectable.",
+        "Each feedback item has a unified schema: issue type, target span, suggestion, student-facing draft, risk level, routing reason, and review evidence.",
     )
 
     add_segment(
         doc,
-        "1:10-1:40",
-        "Feedback adjudication",
-        [
-            "Open the Teacher View tab.",
-            "Point to the auto-accepted preview.",
-            "Open the Adjudication Trace tab.",
-            "Click Page 3: Knowledge Grounding & Teacher Queue.",
-        ],
-        "Low-risk local grammar or style edits can be accepted, but suggestions about authorship, genre, character identity, thesis statements, or interpretation remain in the teacher-review queue.",
-    )
-
-    add_segment(
-        doc,
-        "1:40-2:05",
+        "1:15-1:45",
         "Teacher review queue",
         [
-            "Point to risk level, priority, agreement, and KG support fields.",
-            "Briefly mention the auxiliary QA pages only if visible.",
-            "Avoid presenting the old QA benchmark as the main system story.",
+            "Click Page 4: Teacher Queue.",
+            "Point to high-risk meaning-change and unsupported-claim items.",
+            "Show risk, issue type, and status filters.",
         ],
-        "The teacher review queue shows risk level, priority, model agreement, knowledge support, and a short explanation for why human review is recommended. The system also includes auxiliary multi-model QA audit pages, but this demo focuses on ESL literary feedback.",
+        "The teacher queue prioritizes high-risk feedback first. Teachers can filter by risk, issue type, and status, so the system supports human review rather than hiding uncertainty behind one automatic decision.",
+    )
+
+    add_segment(
+        doc,
+        "1:45-2:10",
+        "Writing rubric",
+        [
+            "Click Page 5: Writing Rubric.",
+            "Point to meaning preservation, local language edit, task response, and tone rules.",
+            "Mention that the router uses deploy-time signals, not hidden gold labels.",
+        ],
+        "The Writing Rubric page makes routing rules inspectable. The system uses deploy-time signals such as meaning preservation, local edit scope, task response, organization, tone, and parse quality.",
     )
 
     add_segment(
@@ -269,11 +267,11 @@ def build_doc() -> None:
         "2:05-2:25",
         "Report export",
         [
-            "Click Page 8: Report Export.",
-            "Show the literary feedback report download.",
-            "Show system_summary.json and CSV export buttons.",
+            "Click Page 6: Reports.",
+            "Show the teacher-readable report preview.",
+            "Point to accepted edits, review-routed items, routing reasons, and limitations.",
         ],
-        "The final page exports a Markdown feedback report and structured JSON or CSV files so the decision process can be inspected and reproduced.",
+        "The report exports a teacher-readable audit trail with accepted edits, review-routed items, routing reasons, and limitations.",
     )
 
     add_segment(
@@ -285,7 +283,7 @@ def build_doc() -> None:
             "Stop moving the mouse.",
             "Leave one second of silence after the final sentence before stopping the recording.",
         ],
-        "ConsensusScope helps decide when AI feedback requires human review.",
+        "ConsensusScope helps teachers decide when AI feedback is safe to show and when it needs human review.",
     )
 
     doc.add_heading("3. Presenter Checklist", level=1)

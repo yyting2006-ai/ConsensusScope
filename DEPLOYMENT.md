@@ -9,10 +9,9 @@ app/streamlit_app.py
 
 ## Recommended Demo Mode
 
-Use the app without live API calls for reviewer-facing access. The bundled ESL
-literary feedback demo, curated knowledge graph, deterministic feedback records,
-saved live validation records, and routing metrics are enough to demonstrate
-the main ESL workflow.
+Use the packaged no-API mode for reviewer-facing access. The current main demo
+uses synthetic ESL writing drafts, synthetic AI feedback items, review evidence,
+and deterministic routing results to demonstrate teacher review routing.
 
 For a live conference recording, use Mode A only through local `.env` variables
 or Streamlit Cloud secrets. For public deployments, use Mode B so users provide
@@ -49,24 +48,18 @@ streamlit run app/streamlit_app.py --server.port 8502
 
 ## Reviewer Smoke Checklist
 
-- Page 1: overview metrics load and state the ESL review-routing purpose.
-- Page 2: ESL Feedback Review retrieves the local knowledge base and produces
-  adjudicated feedback without requiring API keys.
-- Page 3: Knowledge Grounding & Teacher Queue shows KG evidence and
-  teacher-review decisions.
-- Page 4: comparison table excludes experimental learned-meta results and
-  presents auxiliary QA adjudication as auxiliary.
-- Page 5: risk dashboard loads and does not present old QA metrics as the main
-  submission result.
-- Page 6: model reliability table loads from precomputed outputs.
-- Page 7: auxiliary QA case explorer opens error cases and is labeled
-  auxiliary.
-- Page 8: report export downloads JSON/CSV/Markdown artifacts.
+- The README states the ESL writing feedback review-routing purpose.
+- `ui_prototype/index.html` opens and shows the 7-page product workflow.
+- The Streamlit app starts from `app/streamlit_app.py`.
+- Mode A and Mode B API configuration text is visible and does not expose keys.
+- The auxiliary QA and earlier feedback modules are clearly separated from the
+  current main demo claim.
+- Report export works without requiring real API calls.
 
 ## Fixed Judge Protocol
 
 The fixed judge is an optional baseline in live mode and an offline saved result
-in the bundled experiment files. By default it uses the `judge` provider
+in bundled auxiliary QA files. By default it uses the `judge` provider
 configuration:
 
 ```text
@@ -84,4 +77,5 @@ artifacts, while exact reruns can vary with provider-side model/API changes.
 
 Before adding real student essays, remove names, IDs, emails, demographic
 details, school identifiers, and any personally identifying information. The
-packaged demo uses anonymized or synthetic examples.
+packaged ESL writing demo uses synthetic examples.
+

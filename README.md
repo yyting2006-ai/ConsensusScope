@@ -1,45 +1,59 @@
 # ConsensusScope
 
-ConsensusScope is a knowledge-grounded multi-LLM review-routing tool for ESL
-comparative-literature writing feedback. It helps teachers decide which
-AI-generated feedback can be safely accepted and which feedback needs human
-review.
+**ConsensusScope: An Interactive Review-Routing Tool for Safe AI Feedback on ESL Writing**
+
+ConsensusScope is a teacher-in-the-loop review-routing tool for AI-generated
+ESL writing feedback. It helps teachers decide which feedback can be safely
+shown to students and which feedback should be reviewed, edited, or rejected
+before release.
 
 It is not an automatic essay scorer, not a teacher replacement, and not a truth
 oracle.
 
-## Purpose
+## Main Direction
 
-AI writing feedback can be fluent but unsafe. A model may correctly fix a local
-grammar error while also changing a student's literary interpretation, confusing
-an author, or inventing a character relation. ConsensusScope makes that risk
-visible by combining:
+AI writing feedback can be fluent but unsafe. A feedback model may fix a local
+grammar error, but it may also change a student's intended meaning, rewrite the
+thesis, add unsupported content, or overcorrect a reasonable draft. ConsensusScope
+makes those risks visible through:
 
-- multiple reviewer outputs in a unified feedback schema;
-- a curated literary knowledge graph;
-- transparent routing into low-risk auto-accept and teacher-review queues;
-- dashboards and exports for auditability.
+- multi-model feedback candidates normalized into one feedback schema;
+- deploy-time routing signals such as agreement, issue type, meaning-change
+  warnings, unsupported-claim warnings, and parse errors;
+- transparent low/medium/high risk routing;
+- a teacher queue for feedback that needs human judgment;
+- writing rubric and report pages for inspection and auditability.
 
 The packaged demo runs without external API calls. Live OpenAI-compatible API
 reviewers are optional and should be configured through local environment
 variables, Streamlit Secrets, or user-provided keys.
 
-## Main Features
+## Current Product Prototype
 
-- ESL comparative-literature feedback review for student essay excerpts.
-- Curated literary knowledge graph with 319 triples over 30 commonly taught
-  literary works.
-- Knowledge evidence for author, publication year, form, genre, character,
-  theme, and alias relations.
-- Deterministic no-API reviewers for conference/demo environments.
-- Optional live reviewers through OpenAI-compatible providers.
-- Unified feedback fields: span, issue type, suggestion, rationale, confidence,
-  knowledge evidence, and meaning-change risk.
-- Teacher Review Queue with priority, risk level, suggested action, agreement,
-  and KG support.
-- Report export for teacher inspection and reproducibility.
-- Auxiliary QA Reliability Module for inspecting saved multi-model QA traces.
-  This auxiliary module is not the main EMNLP 2026 demo claim.
+The designer-facing static prototype is the current UI reference:
+
+```text
+ui_prototype/index.html
+```
+
+It uses synthetic ESL writing data and can be opened directly in a browser. No
+student PII and no real API keys are included.
+
+Prototype pages:
+
+1. Review Workspace
+2. Essay Review
+3. Feedback Detail
+4. Teacher Queue
+5. Writing Rubric
+6. Reports
+7. Settings / Diagnostics
+
+Frozen teacher workflow:
+
+```text
+Review Workspace -> Essay Review -> Feedback Detail -> Teacher Queue -> Reports
+```
 
 ## Quick Start
 
@@ -52,7 +66,7 @@ pip install -U pip
 pip install -r requirements.txt
 ```
 
-Run the demo:
+Run the Streamlit technical demo:
 
 ```bash
 streamlit run app/streamlit_app.py --server.port 8502
@@ -76,63 +90,46 @@ On Windows, double-click:
 start_demo.bat
 ```
 
-## Demo Pages
+## ESL Writing Data And Interface
 
-- **Page 1: Home / System Overview** shows the ESL review-routing workflow and
-  packaged data summary.
-- **Page 2: ESL Feedback Review** runs deterministic or live multi-reviewer
-  feedback on a comparative-literature essay excerpt.
-- **Page 3: Knowledge Grounding & Teacher Queue** focuses on retrieved literary
-  evidence, adjudicated feedback, and teacher-review decisions.
-- **Page 4: Adjudication Comparison** compares majority vote, fixed judge, and
-  dynamic rule-based adjudication for the auxiliary QA module and live QA mode.
-- **Page 5: Risk Dashboard** reports risk distributions and review-routing
-  signals.
-- **Page 6: Model Reliability Dashboard** summarizes historical model behavior
-  from saved traces.
-- **Page 7: Auxiliary QA Case Explorer** inspects legacy/saved QA reliability
-  cases without making them the main submission story.
-- **Page 8: Report Export** downloads Markdown, JSON, and CSV artifacts.
-- **Page 9: Design Reference** embeds the proposed ESL teacher-workspace UI
-  mockup and a downloadable Chinese design brief for UI/UX designers.
+New ESL writing review-routing assets:
 
-## Data Description
+- `profiles/esl_writing.yaml`: issue types, risk labels, teacher safety labels,
+  and recommended actions for ESL writing feedback.
+- `data/esl_writing_demo/essays.csv`: three anonymized synthetic ESL writing
+  drafts.
+- `data/esl_writing_demo/feedback_items.csv`: synthetic AI feedback candidates
+  with unified fields.
+- `data/esl_writing_demo/review_evidence.csv`: rubric and safety-rule evidence
+  used by the router.
+- `data/esl_writing_demo/routing_results.csv`: deterministic routing output for
+  the packaged demo.
+- `src/esl_writing_feedback.py`: main rule-based routing interface.
+- `src/prompts/esl_feedback_prompt.py`: structured feedback-generation prompt
+  template.
+- `scripts/analyze_esl_feedback_experiment.py`: offline analysis script for
+  future teacher annotations.
 
-Core ESL demo data:
+The current ESL writing demo contains 3 synthetic essays and 15 synthetic
+feedback items. These are demonstration records, not classroom evaluation
+results.
 
-- `data/knowledge/literary_kg_triples.csv`: curated literary KG.
-- `data/literary_feedback/benchmark.csv`: 30 diagnostic ESL essay snippets.
-- `data/results/literary_feedback_records.json`: deterministic no-API feedback
-  records and adjudication decisions.
-- `data/results/literary_feedback_routing_metrics.csv`: no-API routing metrics.
-- `data/results/literary_feedback_live_multimodel_records.json`: saved live API
-  validation records.
-- `data/results/literary_feedback_live_multimodel_metrics.csv`: saved live API
-  routing metrics.
+## Routing Output Schema
 
-Current ESL validation snapshot:
+The ESL routing layer returns:
 
-| Scope | Value |
-|---|---:|
-| Literary works | 30 |
-| Curated KG triples | 319 |
-| Benchmark essays | 30 |
-| Adjudicated feedback decisions | 59 |
-| Auto-accepted low-risk edits | 14 |
-| Teacher-review decisions | 45 |
-| High-risk decisions | 20 |
-| KG-supported decisions | 23 |
+- `feedback_item_id`
+- `risk_level`: `low`, `medium`, or `high`
+- `recommended_action`: `auto_accept`, `teacher_review`, `reject`, or
+  `needs_more_evidence`
+- `risk_reasons`: semicolon-separated deploy-time risk reasons
+- `meaning_preservation_predicted`: `preserves_meaning`, `changes_meaning`, or
+  `unclear`
+- `status`: `auto_accepted` or `needs_teacher_review`
 
-Live API validation on the first 10 benchmark essays produced 40 provider
-calls, 76 raw feedback items, 43 adjudicated feedback decisions, 8 auto-accepted
-decisions, 35 teacher-review decisions, 14 high-risk decisions, and 41
-KG-supported decisions. The saved records contain reviewer outputs and routing
-metrics only; API keys are not stored.
-
-The benchmark is intentionally small and diagnostic. It validates whether the
-system separates low-risk local edits from feedback that changes literary facts,
-character relations, themes, or interpretation. It is not a large classroom
-study and not a state-of-the-art essay-scoring benchmark.
+Deploy-time signals are separated from offline diagnostic labels. Teacher
+annotations, if collected later, should be analyzed as offline evaluation data,
+not as information available to the live router.
 
 ## API Configuration
 
@@ -148,18 +145,6 @@ source code. For a password-protected live demo, set
 
 ## Reproducibility
 
-Check ESL paper numbers:
-
-```bash
-PYTHONPATH=. python3 scripts/check_esl_paper_numbers.py
-```
-
-Rebuild the deterministic ESL benchmark records:
-
-```bash
-PYTHONPATH=. python3 scripts/run_literary_feedback_benchmark.py
-```
-
 Run tests:
 
 ```bash
@@ -172,37 +157,62 @@ Run a Python syntax check:
 find src scripts app tests -name '._*' -prune -o -name '*.py' -print0 | xargs -0 python3 -m py_compile
 ```
 
-## Auxiliary QA Reliability Module
+Analyze future teacher annotations:
 
-The repository retains saved QA traces and baseline adjudication files for
-reliability inspection. They support examples of majority vote, fixed judge,
-dynamic rule-based adjudication, disagreement, and offline diagnostic labels.
-These labels require gold answers and are used only for offline analysis. They
-are not deploy-time knowledge and are not the main claim of the ESL system demo.
+```bash
+PYTHONPATH=. python3 scripts/analyze_esl_feedback_experiment.py \
+  --annotations-dir path/to/teacher_annotations \
+  --routing data/esl_writing_demo/routing_results.csv
+```
 
-The main fixed-judge baseline for this auxiliary module is implemented in
+Expected annotation file name:
+
+```text
+feedback_decisions.csv
+```
+
+Expected annotation columns include `feedback_item_id`, `teacher_safety_label`,
+`feedback_correctness`, `meaning_preservation`, and `teacher_final_action`.
+
+## Legacy / Auxiliary Modules
+
+Earlier domain-specific feedback modules and multi-model QA reliability files
+are retained for historical inspection and auxiliary experiments. They are not
+the current main EMNLP 2026 demo claim.
+
+Legacy examples include:
+
+- `src/literary_feedback.py`
+- `legacy/literary_feedback_scripts/run_literary_feedback_benchmark.py`
+- `data/literary_feedback/`
+- `data/knowledge/literary_kg_triples.csv`
+- saved auxiliary QA traces under `data/results/`
+
+The main fixed-judge baseline for the auxiliary QA module is implemented in
 `src/decision/baselines.py` as `fixed_judge_decision`, with saved results in
 `data/results/fixed_judge_results.csv`. Historical placeholders are isolated
-under `legacy/` and `docs/legacy_results/`.
+under `legacy/`.
 
 ## Submission Materials
 
 - EMNLP demo paper draft: `paper/consensusscope_emnlp_demo.tex`
 - Demo video script: `docs/demo_video_script.md`
-- Narration script Word file: `docs/ConsensusScope_EMNLP_demo_script_2min30_en.docx`
+- Narration script Word file:
+  `docs/ConsensusScope_EMNLP_demo_script_2min30_en.docx`
 - Public release notes: `docs/public_release_notes.md`
 - Release checklist: `docs/release_checklist.md`
 - Ethics and limitations: `docs/ethics_limitations.md`
+- UI designer reference: `ui_prototype/README.md` and `ui_prototype/index.html`
 
 ## Privacy And Safety
 
 Before adding real student essays, remove names, IDs, emails, demographic
 details, school identifiers, and any personally identifying information. The
-packaged demo uses anonymized or synthetic examples.
+packaged ESL writing demo uses synthetic examples.
 
-ConsensusScope should support teacher judgment, not replace it. Literary facts,
-interpretations, thesis revisions, and meaning-changing suggestions should
-remain reviewable by a qualified instructor.
+ConsensusScope should support teacher judgment. Meaning-changing suggestions,
+unsupported claims, thesis rewrites, overcorrections, vague advice, and harsh
+feedback should remain reviewable by a qualified instructor.
 
 ## License
 

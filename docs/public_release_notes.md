@@ -9,20 +9,21 @@ Streamlit deployment for the EMNLP 2026 System Demonstrations submission.
 
 ## Suggested Short Description
 
-Knowledge-grounded multi-LLM review routing for ESL comparative-literature
-writing feedback.
+Interactive teacher review routing for safe AI feedback on ESL writing.
 
 ## Suggested Tags
 
 `llm-feedback`, `educational-nlp`, `writing-feedback`, `esl-writing`,
-`literary-analysis`, `comparative-literature`, `multi-llm`,
-`human-in-the-loop`, `streamlit`, `knowledge-graph`
+`human-in-the-loop`, `teacher-support`, `multi-llm`, `streamlit`,
+`review-routing`
 
 ## Keep
 
 - `README.md`
 - `README_EN.md`
 - `README_ZH.md`
+- `INSTALL.md`
+- `DEPLOYMENT.md`
 - `LICENSE`
 - `requirements.txt`
 - `config.yaml`
@@ -32,14 +33,11 @@ writing feedback.
 - `tests/`
 - `docs/`
 - `paper/`
-- `data/knowledge/literary_kg_triples.csv`
-- `data/literary_feedback/benchmark.csv`
-- `data/results/literary_feedback_records.json`
-- `data/results/literary_feedback_routing_metrics.csv`
-- `data/results/literary_feedback_live_multimodel_records.json`
-- `data/results/literary_feedback_live_multimodel_metrics.csv`
-- auxiliary QA data only if it is clearly documented as an auxiliary reliability
-  module rather than the main ESL submission claim
+- `profiles/esl_writing.yaml`
+- `data/esl_writing_demo/`
+- `ui_prototype/`
+- auxiliary QA and earlier demo data only if clearly documented as legacy or
+  auxiliary material rather than the main ESL writing submission claim
 
 ## Remove Or Replace Before Public Release
 
@@ -50,23 +48,24 @@ writing feedback.
 - personal contact information not intended for publication
 - operating-system files such as `._*` and `.DS_Store`
 - cache directories such as `__pycache__/` and `.pytest_cache/`
-- draft screenshots or videos that tell the old QA-centered story
+- draft screenshots or videos that tell the old story
 
 ## Release Positioning
 
 The main public-facing story should be:
 
-> ConsensusScope helps teachers audit AI-generated feedback for ESL
-> comparative-literature essays by routing low-risk local edits separately from
-> feedback involving literary facts, character relations, themes, or
-> interpretation.
+> ConsensusScope helps teachers review AI-generated ESL writing feedback by
+> routing low-risk local edits separately from feedback that may change meaning,
+> introduce unsupported content, overcorrect a draft, or require teacher
+> judgment.
 
 Do not present the system as an automatic essay scorer, teacher replacement, or
-truth oracle. Do not present the auxiliary QA reliability pages as the main
-system claim.
+truth oracle. Do not present auxiliary QA reliability pages or earlier feedback
+modules as the main system claim.
 
 ## Privacy Reminder
 
 Before adding real student essays, remove names, IDs, emails, demographic
 details, school identifiers, and any personally identifying information. The
-packaged demo uses anonymized or synthetic examples.
+packaged ESL writing demo uses synthetic examples.
+
