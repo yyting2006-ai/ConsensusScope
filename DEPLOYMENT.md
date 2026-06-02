@@ -10,8 +10,9 @@ app/streamlit_app.py
 ## Recommended Demo Mode
 
 Use the packaged no-API mode for reviewer-facing access. The current main demo
-uses synthetic ESL writing drafts, synthetic AI feedback items, review evidence,
-and deterministic routing results to demonstrate teacher review routing.
+uses synthetic ESL writing drafts, synthetic AI feedback items, AI-review stress
+cases, review evidence, and deterministic routing results to demonstrate
+teacher review routing.
 
 For a live conference recording, use Mode A only through local `.env` variables
 or Streamlit Cloud secrets. For public deployments, use Mode B so users provide
@@ -55,7 +56,8 @@ streamlit run app/streamlit_app.py --server.port 8502
 - Page 3 Batch Review can process the packaged synthetic CSV.
 - Page 4 AI Feedback Comparison shows reviewer/risk comparison rows.
 - Page 5 Teacher Queue shows review-routed items and local teacher actions.
-- Page 6 Effectiveness Evaluation reports synthetic expectation-label metrics.
+- Page 6 Effectiveness Evaluation reports synthetic expectation-label and
+  AI-review stress-test metrics.
 - Page 7 Reports exports routed feedback and Markdown report artifacts.
 - Mode A and Mode B API configuration text is visible and does not expose keys.
 - The auxiliary QA and earlier feedback modules are clearly separated from the

@@ -21,10 +21,12 @@ if str(ROOT) not in sys.path:
 
 from src.evaluation.simple_correctness import is_correct
 from src.esl_writing_feedback import (
+    build_review_evidence,
     compare_esl_feedback,
     evaluate_routing_against_expected,
     review_esl_batch,
     review_esl_essay,
+    route_feedback_dataframe,
     summarize_routing,
 )
 from src.live_question import (
@@ -77,6 +79,7 @@ DATA_PATHS = {
     "esl_evidence": ROOT / "data" / "esl_writing_demo" / "review_evidence.csv",
     "esl_routing": ROOT / "data" / "esl_writing_demo" / "routing_results.csv",
     "esl_expected": ROOT / "data" / "esl_writing_demo" / "expected_routing_labels.csv",
+    "esl_stress": ROOT / "data" / "esl_writing_demo" / "ai_review_stress_cases.csv",
     "figures": ROOT / "reports" / "figures",
 }
 
@@ -533,12 +536,13 @@ def current_esl_result() -> Dict[str, Any]:
 
 
 def display_esl_summary(summary: Dict[str, Any]) -> None:
-    c1, c2, c3, c4, c5 = st.columns(5)
+    c1, c2, c3, c4, c5, c6 = st.columns(6)
     c1.metric("Feedback items", summary.get("feedback_items", 0))
     c2.metric("Auto accepted", summary.get("auto_accept", 0))
     c3.metric("Teacher review", summary.get("teacher_review", 0))
     c4.metric("High risk", summary.get("high_risk", 0))
-    c5.metric("Review share", summary.get("review_share", 0.0))
+    c5.metric("Urgent", summary.get("urgent_review", 0))
+    c6.metric("Mean risk", summary.get("mean_risk_score", 0.0))
 
 
 def teacher_queue_frame(result: Dict[str, Any]) -> pd.DataFrame:
@@ -566,8 +570,13 @@ def display_esl_feedback_table(df: pd.DataFrame, title: str = "Routed feedback")
         "ai_suggestion",
         "risk_level",
         "recommended_action",
+        "risk_score",
+        "review_confidence",
+        "evidence_signal",
+        "review_priority",
         "risk_reasons",
         "meaning_preservation_predicted",
+        "review_explanation",
     ]
     st.dataframe(df[[c for c in cols if c in df.columns]], use_container_width=True, hide_index=True)
 
@@ -707,10 +716,21 @@ def page_teacher_queue() -> None:
     filtered = queue[queue["risk_level"].isin(risk_filter) & queue["issue_type_predicted"].isin(issue_filter)].copy()
     for _, row in filtered.iterrows():
         item_id = safe_str(row.get("feedback_item_id"))
-        with st.expander(f"{item_id} · {row.get('risk_level')} · {row.get('issue_type_predicted')}", expanded=row.get("risk_level") == "high"):
+        priority = safe_str(row.get("review_priority")) or "normal"
+        score = safe_str(row.get("risk_score")) or "n/a"
+        with st.expander(
+            f"{item_id} · {row.get('risk_level')} · priority={priority} · score={score}",
+            expanded=row.get("risk_level") == "high",
+        ):
             st.write(f"**Target span:** {row.get('target_span')}")
             st.write(f"**AI suggestion:** {row.get('ai_suggestion')}")
             st.write(f"**Routing reason:** {row.get('risk_reasons')}")
+            if safe_str(row.get("review_explanation")):
+                st.write(f"**AI review explanation:** {row.get('review_explanation')}")
+            cols = st.columns(3)
+            cols[0].metric("Review confidence", safe_str(row.get("review_confidence")) or "n/a")
+            cols[1].metric("Evidence signal", safe_str(row.get("evidence_signal")) or "none")
+            cols[2].metric("Priority", priority)
             action = st.radio(
                 "Teacher action",
                 ["pending", "accept", "edit", "reject", "needs_more_evidence"],
@@ -733,7 +753,7 @@ def page_teacher_queue() -> None:
 def page_effectiveness_evaluation() -> None:
     st.markdown('<div class="section-title">Page 6 · Effectiveness Evaluation</div>', unsafe_allow_html=True)
     st.caption(
-        "This page evaluates implementation behavior on synthetic expectation labels. "
+        "This page evaluates implementation behavior on synthetic expectation labels and AI-review stress cases. "
         "It is a sanity check for routing logic, not evidence from real classroom use."
     )
     feedback = read_table(str(DATA_PATHS["esl_feedback"]))
@@ -742,22 +762,54 @@ def page_effectiveness_evaluation() -> None:
     result = review_esl_batch(read_table(str(DATA_PATHS["esl_essays"])), include_stress_tests=False)
     demo_routing = result["routing"] if result else pd.DataFrame()
     if not feedback.empty and not evidence.empty:
-        from src.esl_writing_feedback import route_feedback_dataframe
-
         demo_routing = route_feedback_dataframe(feedback, evidence)
+    stress = read_table(str(DATA_PATHS["esl_stress"]))
+    stress_routing = pd.DataFrame()
+    stress_expected = pd.DataFrame()
+    if not stress.empty:
+        stress_expected = stress[["feedback_item_id", "expected_risk_level", "expected_action", "expected_reason"]].copy()
+        stress_feedback = stress.drop(columns=["expected_risk_level", "expected_action", "expected_reason"])
+        stress_routing = route_feedback_dataframe(stress_feedback, build_review_evidence(stress_feedback))
+    combined_routing = pd.concat([demo_routing, stress_routing], ignore_index=True)
+    combined_expected = pd.concat([expected, stress_expected], ignore_index=True)
     metrics = evaluate_routing_against_expected(demo_routing, expected)
+    stress_metrics = evaluate_routing_against_expected(stress_routing, stress_expected)
+    combined_metrics = evaluate_routing_against_expected(combined_routing, combined_expected)
     c1, c2, c3, c4, c5 = st.columns(5)
-    c1.metric("Items", metrics["items"])
-    c2.metric("Action accuracy", metrics["action_accuracy"])
-    c3.metric("Risk accuracy", metrics["risk_accuracy"])
-    c4.metric("High-risk recall", metrics["high_risk_recall"])
-    c5.metric("Auto precision", metrics["auto_accept_precision"])
-    st.info(metrics["note"])
+    c1.metric("Combined items", combined_metrics["items"])
+    c2.metric("Action accuracy", combined_metrics["action_accuracy"])
+    c3.metric("Risk accuracy", combined_metrics["risk_accuracy"])
+    c4.metric("High-risk recall", combined_metrics["high_risk_recall"])
+    c5.metric("Auto precision", combined_metrics["auto_accept_precision"])
+    st.info(combined_metrics["note"])
+    st.markdown("### Evaluation sets")
+    st.dataframe(
+        pd.DataFrame(
+            [
+                {"set": "packaged synthetic demo", **metrics},
+                {"set": "AI-review stress cases", **stress_metrics},
+                {"set": "combined", **combined_metrics},
+            ]
+        ),
+        use_container_width=True,
+        hide_index=True,
+    )
     merged = demo_routing.merge(expected, on="feedback_item_id", how="left") if not demo_routing.empty and not expected.empty else pd.DataFrame()
     if not merged.empty:
         merged["action_match"] = merged["recommended_action"] == merged["expected_action"]
         merged["risk_match"] = merged["risk_level"] == merged["expected_risk_level"]
+        st.markdown("### Packaged synthetic demo")
         st.dataframe(merged, use_container_width=True, hide_index=True)
+    stress_merged = (
+        stress_routing.merge(stress_expected, on="feedback_item_id", how="left")
+        if not stress_routing.empty and not stress_expected.empty
+        else pd.DataFrame()
+    )
+    if not stress_merged.empty:
+        stress_merged["action_match"] = stress_merged["recommended_action"] == stress_merged["expected_action"]
+        stress_merged["risk_match"] = stress_merged["risk_level"] == stress_merged["expected_risk_level"]
+        st.markdown("### AI-review stress cases")
+        st.dataframe(stress_merged, use_container_width=True, hide_index=True)
     st.markdown("### Validity assessment")
     st.write(
         "Current evidence supports a demo-level claim: the system can operationalize a teacher-review workflow and reliably "
@@ -833,6 +885,7 @@ def page_home(samples_df: pd.DataFrame, outputs_df: pd.DataFrame, metrics_df: pd
     esl_essays = read_table(str(DATA_PATHS["esl_essays"]))
     esl_feedback = read_table(str(DATA_PATHS["esl_feedback"]))
     esl_routing = read_table(str(DATA_PATHS["esl_routing"]))
+    esl_stress = read_table(str(DATA_PATHS["esl_stress"]))
     metrics_df = visible_method_metrics(metrics_df)
     teacher_review = int((esl_routing.get("recommended_action", pd.Series(dtype=str)) == "teacher_review").sum()) if not esl_routing.empty else 0
     auto_accept = int((esl_routing.get("recommended_action", pd.Series(dtype=str)) == "auto_accept").sum()) if not esl_routing.empty else 0
@@ -864,9 +917,11 @@ def page_home(samples_df: pd.DataFrame, outputs_df: pd.DataFrame, metrics_df: pd
         snapshot = {
             "synthetic_essays": len(esl_essays),
             "feedback_items": len(esl_feedback),
+            "ai_review_stress_cases": len(esl_stress),
             "auto_accept": auto_accept,
             "teacher_review": teacher_review,
             "high_risk": high_risk,
+            "mean_risk_score": round(float(pd.to_numeric(esl_routing.get("risk_score", pd.Series(dtype=float)), errors="coerce").fillna(0).mean()), 3),
         }
         st.dataframe(pd.DataFrame([snapshot]), use_container_width=True, hide_index=True)
     if not metrics_df.empty:

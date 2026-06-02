@@ -4,8 +4,8 @@
 
 ConsensusScope is an interactive review-routing tool for safe AI feedback on
 ESL writing. It shows how multi-model feedback candidates can be normalized,
-screened for risk, and routed into teacher review before students see unsafe or
-meaning-changing suggestions.
+screened for risk with interpretable review signals, and routed into teacher
+review before students see unsafe or meaning-changing suggestions.
 
 ## Target Users
 
@@ -32,6 +32,8 @@ meaning-changing suggestions.
   organization/development advice, and high-risk meaning-change suggestions.
 - The teacher view separates low-risk local edits from items that may change
   stance, add unsupported claims, or overcorrect the student's draft.
+- The AI review layer reports risk scores, evidence signals, route confidence,
+  review priorities, and short explanations for each routed item.
 - The Writing Rubric page shows deploy-time routing rules rather than hidden
   gold labels.
 - The report page exports an audit trail with explicit limitations.
@@ -47,11 +49,11 @@ meaning-changing suggestions.
 
 ## Evaluation Status
 
-The current ESL writing package contains synthetic demo data and deterministic
-routing output. It is ready for UI demonstration and interface review, but it is
-not yet a classroom evaluation. Future validation should add teacher annotations
-and report them as offline diagnostic results, separate from deploy-time routing
-signals.
+The current ESL writing package contains synthetic demo data, deterministic
+routing output, and AI-review stress cases. It is ready for UI demonstration and
+interface review, but it is not yet a classroom evaluation. Future validation
+should add teacher annotations and report them as offline diagnostic results,
+separate from deploy-time routing signals.
 
 ## Submission Gaps
 
@@ -59,4 +61,3 @@ signals.
 - Add a real screencast upload or submit the video as supplementary material.
 - Future work: collect instructor annotations for feedback safety,
   accept/edit/reject decisions, and review-priority judgments.
-

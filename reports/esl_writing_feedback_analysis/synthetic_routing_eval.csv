@@ -1,16 +1,16 @@
-feedback_item_id,risk_level,recommended_action,risk_reasons,meaning_preservation_predicted,status,expected_risk_level,expected_action,expected_reason
-FW-001,low,auto_accept,local_language_edit,preserves_meaning,auto_accepted,low,auto_accept,local vocabulary edit
-FW-002,low,auto_accept,local_language_edit,preserves_meaning,auto_accepted,low,auto_accept,local vocabulary edit
-FW-003,high,teacher_review,meaning_change;introduces_new_argument,changes_meaning,needs_teacher_review,high,teacher_review,thesis meaning change
-FW-004,medium,teacher_review,too_vague,unclear,needs_teacher_review,medium,teacher_review,argument development advice
-FW-005,medium,teacher_review,task_mismatch,unclear,needs_teacher_review,medium,teacher_review,organization change
-FW-006,low,auto_accept,local_language_edit,preserves_meaning,auto_accepted,low,auto_accept,local grammar edit
-FW-007,low,auto_accept,local_language_edit,preserves_meaning,auto_accepted,low,auto_accept,local vocabulary edit
-FW-008,medium,teacher_review,too_vague,unclear,needs_teacher_review,medium,teacher_review,coherence development advice
-FW-009,high,teacher_review,overcorrection;meaning_change,changes_meaning,needs_teacher_review,high,teacher_review,overcorrection and meaning change
-FW-010,high,teacher_review,meaning_change;unsupported_claim;introduces_new_argument,changes_meaning,needs_teacher_review,high,teacher_review,unsupported new claim
-FW-011,low,auto_accept,local_language_edit,preserves_meaning,auto_accepted,low,auto_accept,local punctuation edit
-FW-012,low,auto_accept,local_language_edit,preserves_meaning,auto_accepted,low,auto_accept,local vocabulary edit
-FW-013,low,auto_accept,local_language_edit,preserves_meaning,auto_accepted,low,auto_accept,local grammar edit
-FW-014,high,teacher_review,meaning_change;unsupported_claim;introduces_new_argument,changes_meaning,needs_teacher_review,high,teacher_review,unsupported meaning-changing argument
-FW-015,medium,teacher_review,too_vague,unclear,needs_teacher_review,medium,teacher_review,coherence transition advice
+feedback_item_id,risk_level,recommended_action,risk_reasons,meaning_preservation_predicted,status,risk_score,review_confidence,evidence_signal,review_priority,review_explanation,expected_risk_level,expected_action,expected_reason
+FW-001,low,auto_accept,local_language_edit,preserves_meaning,auto_accepted,0.02,0.85,supported,low,Low-risk local edit; evidence=supported; risk_score=0.020; reasons=local_language_edit.,low,auto_accept,local vocabulary edit
+FW-002,low,auto_accept,local_language_edit,preserves_meaning,auto_accepted,0.02,0.85,supported,low,Low-risk local edit; evidence=supported; risk_score=0.020; reasons=local_language_edit.,low,auto_accept,local vocabulary edit
+FW-003,high,teacher_review,meaning_change;introduces_new_argument,changes_meaning,needs_teacher_review,1.0,0.86,conflict,urgent,"High-risk feedback is routed to teacher review; evidence=conflict; risk_score=1.000; reasons=meaning_change, introduces_new_argument.",high,teacher_review,thesis meaning change
+FW-004,medium,teacher_review,too_vague,unclear,needs_teacher_review,0.44,0.78,supported,normal,Medium-risk feedback is routed to teacher review; evidence=supported; risk_score=0.440; reasons=too_vague.,medium,teacher_review,argument development advice
+FW-005,medium,teacher_review,too_vague;task_mismatch,unclear,needs_teacher_review,0.44,0.78,supported,normal,"Medium-risk feedback is routed to teacher review; evidence=supported; risk_score=0.440; reasons=too_vague, task_mismatch.",medium,teacher_review,organization change
+FW-006,low,auto_accept,local_language_edit,preserves_meaning,auto_accepted,0.02,0.85,supported,low,Low-risk local edit; evidence=supported; risk_score=0.020; reasons=local_language_edit.,low,auto_accept,local grammar edit
+FW-007,low,auto_accept,local_language_edit,preserves_meaning,auto_accepted,0.02,0.85,supported,low,Low-risk local edit; evidence=supported; risk_score=0.020; reasons=local_language_edit.,low,auto_accept,local vocabulary edit
+FW-008,medium,teacher_review,too_vague,unclear,needs_teacher_review,0.44,0.78,supported,normal,Medium-risk feedback is routed to teacher review; evidence=supported; risk_score=0.440; reasons=too_vague.,medium,teacher_review,coherence development advice
+FW-009,high,teacher_review,meaning_change;overcorrection,changes_meaning,needs_teacher_review,1.0,0.86,conflict,urgent,"High-risk feedback is routed to teacher review; evidence=conflict; risk_score=1.000; reasons=meaning_change, overcorrection.",high,teacher_review,overcorrection and meaning change
+FW-010,high,teacher_review,meaning_change;unsupported_claim;introduces_new_argument;task_mismatch,changes_meaning,needs_teacher_review,1.0,0.86,missing,urgent,"High-risk feedback is routed to teacher review; evidence=missing; risk_score=1.000; reasons=meaning_change, unsupported_claim, introduces_new_argument, task_mismatch.",high,teacher_review,unsupported new claim
+FW-011,low,auto_accept,local_language_edit,preserves_meaning,auto_accepted,0.02,0.85,supported,low,Low-risk local edit; evidence=supported; risk_score=0.020; reasons=local_language_edit.,low,auto_accept,local punctuation edit
+FW-012,low,auto_accept,local_language_edit,preserves_meaning,auto_accepted,0.02,0.85,supported,low,Low-risk local edit; evidence=supported; risk_score=0.020; reasons=local_language_edit.,low,auto_accept,local vocabulary edit
+FW-013,low,auto_accept,local_language_edit,preserves_meaning,auto_accepted,0.02,0.85,supported,low,Low-risk local edit; evidence=supported; risk_score=0.020; reasons=local_language_edit.,low,auto_accept,local grammar edit
+FW-014,high,teacher_review,meaning_change;unsupported_claim;introduces_new_argument;too_vague,changes_meaning,needs_teacher_review,1.0,0.86,conflict,urgent,"High-risk feedback is routed to teacher review; evidence=conflict; risk_score=1.000; reasons=meaning_change, unsupported_claim, introduces_new_argument, too_vague.",high,teacher_review,unsupported meaning-changing argument
+FW-015,medium,teacher_review,too_vague,unclear,needs_teacher_review,0.44,0.78,supported,normal,Medium-risk feedback is routed to teacher review; evidence=supported; risk_score=0.440; reasons=too_vague.,medium,teacher_review,coherence transition advice

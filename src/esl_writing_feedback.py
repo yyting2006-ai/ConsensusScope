@@ -39,6 +39,35 @@ MEANING_CHANGE_HINTS = {
 }
 UNSUPPORTED_HINTS = {"add a claim", "not present", "unsupported", "new argument", "factories should be closed"}
 VAGUE_HINTS = {"improve", "add evidence", "add a short explanation", "add a transition", "clearer", "more persuasive"}
+WHOLE_REWRITE_HINTS = {
+    "rewrite the whole essay",
+    "rewrite the entire essay",
+    "replace the whole draft",
+    "write a new essay",
+    "change the whole paragraph",
+}
+HARSH_FEEDBACK_HINTS = {
+    "terrible",
+    "nonsense",
+    "lazy",
+    "weak student",
+    "bad writer",
+    "unacceptable",
+    "obviously wrong",
+}
+EXTERNAL_CLAIM_HINTS = {
+    "add a statistic",
+    "add statistics",
+    "research shows",
+    "studies show",
+    "according to experts",
+    "exam scores",
+    "survey data",
+    "citation",
+    "source",
+}
+ABSOLUTE_REVISION_HINTS = {"always", "never", "must be banned", "should be banned", "completely wrong"}
+BROAD_TARGET_HINTS = {"overall draft", "whole essay", "entire essay", "supporting evidence", "overall paragraph structure"}
 DEFAULT_ASSIGNMENT = "Write a clear ESL essay that responds to the prompt with organized reasons and examples."
 
 
@@ -52,7 +81,11 @@ def _norm(value: Any) -> str:
 
 def _contains_any(text: str, phrases: Iterable[str]) -> bool:
     lowered = _norm(text)
-    return any(phrase in lowered for phrase in phrases)
+    for phrase in phrases:
+        normalized_phrase = _norm(phrase)
+        if normalized_phrase and re.search(rf"(?<![a-z0-9]){re.escape(normalized_phrase)}(?![a-z0-9])", lowered):
+            return True
+    return False
 
 
 def _as_float(value: Any) -> float | None:
@@ -103,8 +136,200 @@ def _evidence_text(review_evidence: Any) -> str:
     return " ".join(text for text in texts if text)
 
 
+def _clamp(value: float, lower: float = 0.0, upper: float = 1.0) -> float:
+    return max(lower, min(upper, value))
+
+
 def _status_for_action(action: str) -> str:
     return "auto_accepted" if action == "auto_accept" else "needs_teacher_review"
+
+
+def extract_review_signals(
+    issue_type_predicted: str,
+    ai_suggestion: str = "",
+    target_span: str = "",
+    surrounding_context: str = "",
+    model_agreement: float | None = None,
+    review_evidence: Any = None,
+) -> Dict[str, Any]:
+    """Extract deploy-time review signals for one AI feedback item.
+
+    These signals are intentionally observable at review time. They do not use
+    gold labels, hidden teacher decisions, or post-hoc classroom outcomes.
+    """
+    issue = _norm(issue_type_predicted).replace("-", "_").replace(" ", "_")
+    suggestion_blob = " ".join([ai_suggestion, target_span, surrounding_context, _evidence_text(review_evidence)])
+    statuses = _evidence_statuses(review_evidence)
+    agreement = _as_float(model_agreement)
+    target_norm = _norm(target_span)
+
+    low_issue = issue in LOW_RISK_ISSUES
+    medium_issue = issue in MEDIUM_RISK_ISSUES
+    high_issue = issue in HIGH_RISK_ISSUES
+    parse_error = not issue or issue in {"other", "unknown", "parse_error"}
+    conflict_evidence = "conflict" in statuses
+    missing_evidence = "missing" in statuses
+    supported_evidence = "supported" in statuses
+    meaning_hint = _contains_any(suggestion_blob, MEANING_CHANGE_HINTS)
+    unsupported_hint = _contains_any(suggestion_blob, UNSUPPORTED_HINTS) or _contains_any(
+        suggestion_blob, EXTERNAL_CLAIM_HINTS
+    )
+    whole_rewrite = _contains_any(suggestion_blob, WHOLE_REWRITE_HINTS)
+    harsh_feedback = _contains_any(suggestion_blob, HARSH_FEEDBACK_HINTS)
+    vague_feedback = _contains_any(suggestion_blob, VAGUE_HINTS) or (
+        len(_safe_text(ai_suggestion).split()) <= 4 and not low_issue
+    )
+    absolute_revision = _contains_any(suggestion_blob, ABSOLUTE_REVISION_HINTS)
+    broad_target = target_norm in BROAD_TARGET_HINTS or _contains_any(target_span, BROAD_TARGET_HINTS)
+    low_agreement = agreement is not None and agreement < 0.5
+    introduces_new_argument = _contains_any(
+        suggestion_blob,
+        {
+            "new argument",
+            "rewrite the thesis",
+            "opposite position",
+            "exam scores",
+            "closed immediately",
+            "make the essay stronger",
+        },
+    )
+
+    score = 0.08
+    if low_issue:
+        score += 0.02
+    if medium_issue:
+        score += 0.24
+    if high_issue:
+        score += 0.44
+    if parse_error:
+        score += 0.34
+    if conflict_evidence:
+        score += 0.34
+    if missing_evidence:
+        score += 0.24
+    if meaning_hint:
+        score += 0.26
+    if unsupported_hint:
+        score += 0.25
+    if whole_rewrite:
+        score += 0.32
+    if harsh_feedback:
+        score += 0.28
+    if absolute_revision:
+        score += 0.22
+    if introduces_new_argument:
+        score += 0.18
+    if vague_feedback:
+        score += 0.12
+    if broad_target:
+        score += 0.10
+    if low_agreement:
+        score += 0.22
+    if low_issue and supported_evidence and not low_agreement:
+        score -= 0.08
+
+    evidence_signal = "none"
+    if conflict_evidence:
+        evidence_signal = "conflict"
+    elif missing_evidence:
+        evidence_signal = "missing"
+    elif supported_evidence:
+        evidence_signal = "supported"
+
+    return {
+        "issue": issue,
+        "agreement": agreement,
+        "evidence_signal": evidence_signal,
+        "low_issue": low_issue,
+        "medium_issue": medium_issue,
+        "high_issue": high_issue,
+        "parse_error": parse_error,
+        "conflict_evidence": conflict_evidence,
+        "missing_evidence": missing_evidence,
+        "supported_evidence": supported_evidence,
+        "meaning_hint": meaning_hint,
+        "unsupported_hint": unsupported_hint,
+        "whole_rewrite": whole_rewrite,
+        "harsh_feedback": harsh_feedback,
+        "vague_feedback": vague_feedback,
+        "absolute_revision": absolute_revision,
+        "broad_target": broad_target,
+        "low_agreement": low_agreement,
+        "introduces_new_argument": introduces_new_argument,
+        "risk_score": round(_clamp(score), 3),
+    }
+
+
+def _risk_reasons_from_signals(signals: Mapping[str, Any]) -> List[str]:
+    reasons: List[str] = []
+    issue = _safe_text(signals.get("issue"))
+    if signals.get("parse_error"):
+        reasons.append("parse_error" if issue == "parse_error" else "too_vague")
+    if signals.get("low_agreement"):
+        reasons.append("low_model_agreement")
+    if signals.get("low_issue"):
+        reasons.append("local_language_edit")
+    if signals.get("meaning_hint") or signals.get("conflict_evidence") or issue in {"meaning_change", "wrong_correction"}:
+        reasons.append("meaning_change")
+    if signals.get("absolute_revision") or issue == "overcorrection":
+        reasons.append("overcorrection")
+    if signals.get("whole_rewrite"):
+        reasons.append("overcorrection")
+        reasons.append("meaning_change")
+    if signals.get("unsupported_hint") or signals.get("missing_evidence") or issue in {"task_response", "unsupported_claim"}:
+        reasons.append("unsupported_claim")
+    if signals.get("introduces_new_argument"):
+        reasons.append("introduces_new_argument")
+    if signals.get("harsh_feedback"):
+        reasons.append("too_harsh")
+    if signals.get("vague_feedback") or signals.get("broad_target") or signals.get("medium_issue"):
+        reasons.append("too_vague")
+    if issue in {"task_response", "organization", "tone_register"} and not signals.get("low_issue"):
+        reasons.append("task_mismatch")
+    return _dedupe(reasons)
+
+
+def _confidence_from_signals(signals: Mapping[str, Any], risk_level: str) -> float:
+    score = float(signals.get("risk_score") or 0.0)
+    confidence = 0.62
+    if signals.get("low_issue") or signals.get("medium_issue") or signals.get("high_issue"):
+        confidence += 0.08
+    if signals.get("conflict_evidence") or signals.get("missing_evidence") or signals.get("supported_evidence"):
+        confidence += 0.08
+    if signals.get("agreement") is not None and float(signals.get("agreement") or 0.0) >= 0.7:
+        confidence += 0.05
+    if signals.get("low_agreement") or signals.get("parse_error"):
+        confidence -= 0.10
+    if risk_level == "high" and score >= 0.85:
+        confidence += 0.08
+    if risk_level == "low" and score <= 0.18:
+        confidence += 0.07
+    return round(_clamp(confidence, 0.42, 0.95), 3)
+
+
+def _priority_from_score(risk_level: str, risk_score: float, recommended_action: str) -> str:
+    if recommended_action == "auto_accept":
+        return "low"
+    if risk_level == "high" and risk_score >= 0.85:
+        return "urgent"
+    if risk_level == "high":
+        return "high"
+    return "normal"
+
+
+def _explanation_from_route(
+    risk_level: str,
+    recommended_action: str,
+    reasons: Sequence[str],
+    evidence_signal: str,
+    risk_score: float,
+) -> str:
+    reason_text = ", ".join(reasons)
+    if recommended_action == "auto_accept":
+        return f"Low-risk local edit; evidence={evidence_signal}; risk_score={risk_score:.3f}; reasons={reason_text}."
+    if recommended_action == "needs_more_evidence":
+        return f"More evidence is required before student-facing use; evidence={evidence_signal}; risk_score={risk_score:.3f}; reasons={reason_text}."
+    return f"{risk_level.title()}-risk feedback is routed to teacher review; evidence={evidence_signal}; risk_score={risk_score:.3f}; reasons={reason_text}."
 
 
 def rule_based_route(
@@ -121,84 +346,54 @@ def rule_based_route(
     local context, model agreement, parse/evidence status, and rubric/safety
     evidence. It does not use gold labels or teacher decisions.
     """
-    issue = _norm(issue_type_predicted).replace("-", "_").replace(" ", "_")
-    suggestion_blob = " ".join([ai_suggestion, target_span, surrounding_context, _evidence_text(review_evidence)])
-    statuses = _evidence_statuses(review_evidence)
-    agreement = _as_float(model_agreement)
-
-    reasons: List[str] = []
-    meaning = "unclear"
-
-    if not issue or issue in {"other", "unknown", "parse_error"}:
-        reasons.append("parse_error" if issue == "parse_error" else "too_vague")
-        return {
-            "risk_level": "medium",
-            "recommended_action": "needs_more_evidence",
-            "risk_reasons": reasons,
-            "meaning_preservation_predicted": "unclear",
-            "status": "needs_teacher_review",
-        }
-
-    if agreement is not None and agreement < 0.5:
-        reasons.append("low_model_agreement")
-
-    high_signal = (
-        issue in HIGH_RISK_ISSUES
-        or _contains_any(suggestion_blob, MEANING_CHANGE_HINTS)
-        or "conflict" in statuses
+    signals = extract_review_signals(
+        issue_type_predicted=issue_type_predicted,
+        ai_suggestion=ai_suggestion,
+        target_span=target_span,
+        surrounding_context=surrounding_context,
+        model_agreement=model_agreement,
+        review_evidence=review_evidence,
     )
-    unsupported_signal = (
-        "missing" in statuses
-        or _contains_any(suggestion_blob, UNSUPPORTED_HINTS)
-        or issue in {"task_response", "unsupported_claim"}
-    )
+    risk_score = float(signals["risk_score"])
+    reasons = _risk_reasons_from_signals(signals)
+    evidence_signal = _safe_text(signals.get("evidence_signal"))
 
-    if high_signal or unsupported_signal:
-        if issue == "overcorrection" or _contains_any(suggestion_blob, {"always harmful", "should be banned"}):
-            reasons.append("overcorrection")
-        if issue in {"meaning_change", "wrong_correction"} or high_signal:
-            reasons.append("meaning_change")
-        if unsupported_signal:
-            reasons.append("unsupported_claim")
-        if _contains_any(suggestion_blob, {"new argument", "rewrite the thesis", "exam scores", "closed immediately"}):
-            reasons.append("introduces_new_argument")
-        meaning = "changes_meaning"
-        return {
-            "risk_level": "high",
-            "recommended_action": "teacher_review",
-            "risk_reasons": _dedupe(reasons),
-            "meaning_preservation_predicted": meaning,
-            "status": "needs_teacher_review",
-        }
-
-    if issue in LOW_RISK_ISSUES and not reasons:
-        reasons.append("local_language_edit")
-        return {
-            "risk_level": "low",
-            "recommended_action": "auto_accept",
-            "risk_reasons": reasons,
-            "meaning_preservation_predicted": "preserves_meaning",
-            "status": "auto_accepted",
-        }
-
-    if issue in LOW_RISK_ISSUES:
-        reasons.append("local_language_edit")
-    elif issue in {"task_response"}:
-        reasons.append("task_mismatch")
-    elif issue in MEDIUM_RISK_ISSUES or _contains_any(suggestion_blob, VAGUE_HINTS):
-        if issue in {"organization", "tone_register"}:
-            reasons.append("task_mismatch")
-        else:
-            reasons.append("too_vague")
+    if signals.get("parse_error"):
+        risk_level = "medium"
+        recommended_action = "needs_more_evidence"
+        meaning = "unclear"
+    elif risk_score >= 0.72:
+        risk_level = "high"
+        recommended_action = "teacher_review"
+        meaning = "changes_meaning" if any(
+            reason in reasons
+            for reason in ["meaning_change", "overcorrection", "introduces_new_argument", "unsupported_claim"]
+        ) else "unclear"
+    elif risk_score >= 0.32:
+        risk_level = "medium"
+        recommended_action = "teacher_review"
+        meaning = "unclear"
     else:
-        reasons.append("too_vague")
+        risk_level = "low"
+        recommended_action = "auto_accept"
+        meaning = "preserves_meaning"
+
+    status = _status_for_action(recommended_action)
+    review_confidence = _confidence_from_signals(signals, risk_level)
+    review_priority = _priority_from_score(risk_level, risk_score, recommended_action)
+    explanation = _explanation_from_route(risk_level, recommended_action, reasons, evidence_signal, risk_score)
 
     return {
-        "risk_level": "medium",
-        "recommended_action": "teacher_review",
-        "risk_reasons": _dedupe(reasons),
+        "risk_level": risk_level,
+        "recommended_action": recommended_action,
+        "risk_reasons": reasons,
         "meaning_preservation_predicted": meaning,
-        "status": "needs_teacher_review",
+        "status": status,
+        "risk_score": risk_score,
+        "review_confidence": review_confidence,
+        "evidence_signal": evidence_signal,
+        "review_priority": review_priority,
+        "review_explanation": explanation,
     }
 
 
@@ -244,6 +439,11 @@ def route_feedback_dataframe(feedback_items: pd.DataFrame, review_evidence: pd.D
                 "risk_reasons",
                 "meaning_preservation_predicted",
                 "status",
+                "risk_score",
+                "review_confidence",
+                "evidence_signal",
+                "review_priority",
+                "review_explanation",
             ]
         )
     out["risk_reasons"] = out["risk_reasons"].apply(lambda values: ";".join(values) if isinstance(values, list) else values)
@@ -255,6 +455,11 @@ def route_feedback_dataframe(feedback_items: pd.DataFrame, review_evidence: pd.D
             "risk_reasons",
             "meaning_preservation_predicted",
             "status",
+            "risk_score",
+            "review_confidence",
+            "evidence_signal",
+            "review_priority",
+            "review_explanation",
         ]
     ]
 
@@ -381,6 +586,32 @@ def generate_esl_feedback_candidates(
             0.42,
             context=essay[:220],
         )
+        add(
+            "stress_test_reviewer",
+            "overall draft",
+            "Rewrite the whole essay with a new thesis and stronger claims.",
+            "Stress-test item: whole-draft rewriting can overwrite the student's own voice and argument.",
+            "overcorrection",
+            0.39,
+            context=essay[:220],
+        )
+        add(
+            "tone_safety_reviewer",
+            thesis,
+            "Tell the student this argument is terrible and obviously wrong.",
+            "Stress-test item: feedback tone may be harmful or inappropriate for student-facing use.",
+            "tone_register",
+            0.44,
+        )
+        add(
+            "evidence_safety_reviewer",
+            "supporting evidence",
+            "Add a statistic saying research shows this policy improves exam scores.",
+            "Stress-test item: feedback may inject an unsupported external factual claim.",
+            "unsupported_claim",
+            0.41,
+            context=essay[:220],
+        )
 
     if not rows:
         add(
@@ -403,21 +634,41 @@ def build_review_evidence(feedback_items: pd.DataFrame) -> pd.DataFrame:
     for _, row in feedback_items.fillna("").iterrows():
         issue = _norm(row.get("issue_type_predicted"))
         suggestion = _safe_text(row.get("ai_suggestion"))
-        if issue in LOW_RISK_ISSUES:
+        has_safety_hint = (
+            _contains_any(suggestion, MEANING_CHANGE_HINTS)
+            or _contains_any(suggestion, WHOLE_REWRITE_HINTS)
+            or _contains_any(suggestion, UNSUPPORTED_HINTS)
+            or _contains_any(suggestion, EXTERNAL_CLAIM_HINTS)
+            or _contains_any(suggestion, HARSH_FEEDBACK_HINTS)
+        )
+        if issue in LOW_RISK_ISSUES and not has_safety_hint:
             evidence_type = "rubric"
             criterion = "local_language_edit"
             match_status = "supported"
             evidence_text = "The suggestion is a local grammar, vocabulary, or tone edit and does not add a new claim."
-        elif issue in {"meaning_change", "overcorrection"} or _contains_any(suggestion, MEANING_CHANGE_HINTS):
+        elif (
+            issue in {"meaning_change", "overcorrection", "wrong_correction"}
+            or _contains_any(suggestion, MEANING_CHANGE_HINTS)
+            or _contains_any(suggestion, WHOLE_REWRITE_HINTS)
+        ):
             evidence_type = "safety_rule"
             criterion = "meaning_preservation"
             match_status = "conflict"
             evidence_text = "The suggestion may change the student's stance, thesis, or intended meaning."
-        elif issue in {"task_response", "unsupported_claim"} or _contains_any(suggestion, UNSUPPORTED_HINTS):
+        elif (
+            issue in {"task_response", "unsupported_claim"}
+            or _contains_any(suggestion, UNSUPPORTED_HINTS)
+            or _contains_any(suggestion, EXTERNAL_CLAIM_HINTS)
+        ):
             evidence_type = "safety_rule"
             criterion = "task_response"
             match_status = "missing"
             evidence_text = "The suggestion may introduce content that is not present in the draft or assignment."
+        elif _contains_any(suggestion, HARSH_FEEDBACK_HINTS):
+            evidence_type = "safety_rule"
+            criterion = "student_facing_tone"
+            match_status = "conflict"
+            evidence_text = "The suggestion may use harsh or inappropriate student-facing language."
         else:
             evidence_type = "rubric"
             criterion = issue or "coherence"
@@ -520,11 +771,15 @@ def summarize_routing(routing: pd.DataFrame) -> Dict[str, Any]:
             "low_risk": 0,
             "medium_risk": 0,
             "high_risk": 0,
+            "urgent_review": 0,
+            "mean_risk_score": 0.0,
             "review_share": 0.0,
         }
     total = len(routing)
     action = routing["recommended_action"].fillna("")
     risk = routing["risk_level"].fillna("")
+    priority = routing["review_priority"].fillna("") if "review_priority" in routing else pd.Series([], dtype=str)
+    risk_score = pd.to_numeric(routing.get("risk_score", pd.Series([0.0] * total)), errors="coerce").fillna(0.0)
     review_count = int(action.isin({"teacher_review", "needs_more_evidence", "reject"}).sum())
     return {
         "feedback_items": total,
@@ -534,6 +789,8 @@ def summarize_routing(routing: pd.DataFrame) -> Dict[str, Any]:
         "low_risk": int((risk == "low").sum()),
         "medium_risk": int((risk == "medium").sum()),
         "high_risk": int((risk == "high").sum()),
+        "urgent_review": int((priority == "urgent").sum()) if len(priority) else 0,
+        "mean_risk_score": round(float(risk_score.mean()), 3) if total else 0.0,
         "review_share": round(review_count / total, 3) if total else 0.0,
     }
 
@@ -635,6 +892,8 @@ def build_esl_review_report(
         f"- Teacher review: {summary.get('teacher_review', 0)}",
         f"- Needs more evidence: {summary.get('needs_more_evidence', 0)}",
         f"- High risk: {summary.get('high_risk', 0)}",
+        f"- Urgent review: {summary.get('urgent_review', 0)}",
+        f"- Mean risk score: {summary.get('mean_risk_score', 0.0)}",
         "",
         "Auto-accepted local edits",
     ]
@@ -642,15 +901,19 @@ def build_esl_review_report(
         lines.append("- None")
     else:
         for _, row in auto.iterrows():
-            lines.append(f"- {row.get('feedback_item_id')}: {row.get('ai_suggestion')} ({row.get('risk_reasons')})")
+            lines.append(
+                f"- {row.get('feedback_item_id')}: {row.get('ai_suggestion')} "
+                f"(score={row.get('risk_score')}, reasons={row.get('risk_reasons')})"
+            )
     lines.extend(["", "Teacher-review items"])
     if queue.empty:
         lines.append("- None")
     else:
         for _, row in queue.iterrows():
             lines.append(
-                f"- {row.get('feedback_item_id')}: [{row.get('risk_level')}] {row.get('ai_suggestion')} "
-                f"Reason: {row.get('risk_reasons')}"
+                f"- {row.get('feedback_item_id')}: [{row.get('risk_level')}, priority={row.get('review_priority')}] "
+                f"{row.get('ai_suggestion')} Reason: {row.get('risk_reasons')}. "
+                f"{row.get('review_explanation')}"
             )
     lines.extend(
         [

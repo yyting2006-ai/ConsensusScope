@@ -38,7 +38,7 @@ http://localhost:8502
 - `app/streamlit_app.py`：可运行的教师工作台，包含单篇、批量、比对、队列、评估和报告窗口。
 - `ui_prototype/index.html`：给设计师看的完整视觉原型。
 - `profiles/esl_writing.yaml`：ESL 写作反馈 profile。
-- `data/esl_writing_demo/`：合成 ESL 作文、反馈项、review evidence 和 routing output。
+- `data/esl_writing_demo/`：合成 ESL 作文、反馈项、review evidence、routing output 和 AI 评审压力测试集。
 - `src/esl_writing_feedback.py`：规则型教师复核路由接口。
 - `src/prompts/esl_feedback_prompt.py`：ESL feedback 生成 prompt 模板。
 - `scripts/evaluate_esl_routing_demo.py`：合成期望标签上的路由有效性评估脚本。
@@ -51,7 +51,7 @@ http://localhost:8502
 3. Batch Review：上传或使用 CSV 批量处理多篇作文。
 4. AI Feedback Comparison：比较不同 AI reviewer 的反馈候选、风险和一致性状态。
 5. Teacher Queue：教师复核、接受、编辑、拒绝或要求更多证据。
-6. Effectiveness Evaluation：在合成期望标签上评估路由行为。
+6. Effectiveness Evaluation：在合成期望标签和 AI-review stress cases 上评估路由行为。
 7. Reports：导出反馈表和教师可读报告。
 8. Settings / Diagnostics：API 设置和旧辅助诊断。
 9. Design Reference：设计师视觉参考。
@@ -64,11 +64,25 @@ Single Essay Review -> Batch Review -> AI Feedback Comparison -> Teacher Queue -
 
 ## 数据边界
 
-当前 ESL writing demo 使用 3 篇合成匿名作文和 15 条合成反馈项，只用于产品演示和接口对齐，不是课堂实验结果。
+当前 ESL writing demo 使用 3 篇合成匿名作文、15 条合成反馈项和 16 条 AI 评审压力测试项，只用于产品演示、接口对齐和实现级测试，不是课堂实验结果。
+
+## AI 评审输出
+
+ESL 路由层现在会为每条 AI 反馈输出：
+
+- `risk_level`：low / medium / high。
+- `recommended_action`：auto_accept / teacher_review / needs_more_evidence / reject。
+- `risk_score`：部署时可见信号计算出的风险分，不使用 gold label。
+- `review_confidence`：对路由判断本身的置信度，不等于反馈内容一定正确。
+- `evidence_signal`：supported / missing / conflict / none。
+- `review_priority`：low / normal / high / urgent。
+- `review_explanation`：给教师看的简短解释。
+
+当前 AI 评审重点拦截：改写学生立场、整篇代写、引入外部事实或统计、伤害性语气、低模型一致性、解析失败、过于模糊的反馈。
 
 ## 当前有效性评估
 
-当前评估属于 **synthetic sanity check**：它检验系统路由规则在 15 条人工设定的合成期望标签上是否按预期工作。
+当前评估属于 **synthetic sanity check**：它检验系统路由规则在 15 条人工设定的合成期望标签和 16 条 AI 评审压力测试项上是否按预期工作。
 
 ```bash
 PYTHONPATH=. python3 scripts/evaluate_esl_routing_demo.py
@@ -78,7 +92,7 @@ PYTHONPATH=. python3 scripts/evaluate_esl_routing_demo.py
 
 | 指标 | 数值 |
 |---|---:|
-| Items | 15 |
+| Items | 31 |
 | Action accuracy | 1.000 |
 | Risk accuracy | 1.000 |
 | High-risk recall | 1.000 |

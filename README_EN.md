@@ -5,7 +5,8 @@
 ConsensusScope helps teachers review AI-generated ESL writing feedback before it
 is shown to students. It separates low-risk local language edits from feedback
 that may change meaning, add unsupported content, overcorrect a draft, or require
-teacher judgment.
+teacher judgment. The AI review layer now reports item-level risk scores,
+evidence signals, review priorities, and short explanations for teacher review.
 
 The canonical English README is `README.md`; this file is kept as a short
 compatibility entry point.
@@ -28,8 +29,8 @@ Then open `http://localhost:8502`.
   batch review, AI feedback comparison, teacher queue, evaluation, and reports.
 - `ui_prototype/index.html`: designer-facing product prototype.
 - `profiles/esl_writing.yaml`: ESL writing feedback profile.
-- `data/esl_writing_demo/`: synthetic ESL essays, feedback items, evidence, and
-  routing output.
+- `data/esl_writing_demo/`: synthetic ESL essays, feedback items, evidence,
+  routing output, and AI-review stress cases.
 - `src/esl_writing_feedback.py`: rule-based review-routing interface.
 - `src/prompts/esl_feedback_prompt.py`: structured feedback prompt template.
 - `scripts/evaluate_esl_routing_demo.py`: synthetic routing sanity-check
@@ -54,4 +55,5 @@ Then open `http://localhost:8502`.
 ConsensusScope is not an automatic essay scorer, not a teacher replacement, and
 not a truth oracle. Earlier domain-specific feedback and QA reliability modules
 remain in the repository only as legacy or auxiliary materials and are not the
-current main demo claim.
+current main demo claim. The packaged evaluation is an implementation-level
+synthetic sanity check, not classroom effectiveness evidence.

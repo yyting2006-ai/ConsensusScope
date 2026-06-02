@@ -10,8 +10,9 @@ feedback review routing.
 - Internet access for installing Python packages the first time
 
 The packaged ESL writing demo can run without external LLM API keys because it
-includes synthetic essays, synthetic feedback items, review evidence, and saved
-routing output.
+includes synthetic essays, synthetic feedback items, review evidence, saved
+routing output, and AI-review stress cases for unsafe feedback patterns such as
+thesis reversal, unsupported factual claims, harsh tone, and parse failures.
 
 ## 2. Install
 

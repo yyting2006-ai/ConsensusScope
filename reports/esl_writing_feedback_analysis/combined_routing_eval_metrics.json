@@ -1,0 +1,9 @@
+{
+  "items": 31,
+  "action_accuracy": 1.0,
+  "risk_accuracy": 1.0,
+  "high_risk_recall": 1.0,
+  "review_recall": 1.0,
+  "auto_accept_precision": 1.0,
+  "note": "Synthetic expectation labels test implementation behavior only; they are not classroom teacher annotations."
+}

@@ -1,6 +1,7 @@
 import pandas as pd
 
 from src.esl_writing_feedback import (
+    build_review_evidence,
     evaluate_routing_against_expected,
     review_esl_batch,
     review_esl_essay,
@@ -51,6 +52,57 @@ def test_unknown_issue_needs_more_evidence():
     assert route["risk_level"] == "medium"
     assert route["recommended_action"] == "needs_more_evidence"
     assert route["status"] == "needs_teacher_review"
+    assert route["review_priority"] == "normal"
+
+
+def test_harsh_student_facing_feedback_routes_high():
+    route = rule_based_route(
+        issue_type_predicted="tone_register",
+        ai_suggestion="Tell the student this argument is terrible and obviously wrong.",
+        review_evidence={"match_status": "conflict", "criterion": "student_facing_tone"},
+    )
+
+    assert route["risk_level"] == "high"
+    assert route["recommended_action"] == "teacher_review"
+    assert "too_harsh" in route["risk_reasons"]
+    assert route["risk_score"] >= 0.72
+
+
+def test_whole_essay_rewrite_routes_high():
+    route = rule_based_route(
+        issue_type_predicted="overcorrection",
+        ai_suggestion="Rewrite the whole essay with a new thesis and stronger claims.",
+        target_span="overall draft",
+    )
+
+    assert route["risk_level"] == "high"
+    assert route["review_priority"] in {"high", "urgent"}
+    assert "meaning_change" in route["risk_reasons"]
+
+
+def test_unsupported_external_statistic_routes_high():
+    route = rule_based_route(
+        issue_type_predicted="unsupported_claim",
+        ai_suggestion="Add a statistic saying research shows social media improves teenagers' exam scores.",
+        review_evidence={"match_status": "missing", "criterion": "task_response"},
+    )
+
+    assert route["risk_level"] == "high"
+    assert "unsupported_claim" in route["risk_reasons"]
+    assert route["meaning_preservation_predicted"] == "changes_meaning"
+
+
+def test_low_agreement_blocks_auto_release():
+    route = rule_based_route(
+        issue_type_predicted="vocabulary",
+        ai_suggestion="Change to 'compare themselves with others excessively'.",
+        model_agreement=0.31,
+        review_evidence={"match_status": "supported", "criterion": "local_language_edit"},
+    )
+
+    assert route["risk_level"] == "medium"
+    assert route["recommended_action"] == "teacher_review"
+    assert "low_model_agreement" in route["risk_reasons"]
 
 
 def test_route_feedback_dataframe_matches_demo_ids():
@@ -99,3 +151,17 @@ def test_synthetic_expected_label_evaluation():
     assert metrics["items"] == len(expected)
     assert metrics["action_accuracy"] >= 0.9
     assert metrics["high_risk_recall"] >= 0.9
+
+
+def test_ai_review_stress_case_evaluation():
+    stress = pd.read_csv("data/esl_writing_demo/ai_review_stress_cases.csv")
+    expected = stress[["feedback_item_id", "expected_risk_level", "expected_action", "expected_reason"]]
+    feedback = stress.drop(columns=["expected_risk_level", "expected_action", "expected_reason"])
+    evidence = build_review_evidence(feedback)
+    routed = route_feedback_dataframe(feedback, evidence)
+    metrics = evaluate_routing_against_expected(routed, expected)
+
+    assert metrics["items"] == len(stress)
+    assert metrics["action_accuracy"] >= 0.9
+    assert metrics["risk_accuracy"] >= 0.9
+    assert metrics["high_risk_recall"] >= 0.95

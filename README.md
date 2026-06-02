@@ -19,8 +19,11 @@ makes those risks visible through:
 
 - multi-model feedback candidates normalized into one feedback schema;
 - deploy-time routing signals such as agreement, issue type, meaning-change
-  warnings, unsupported-claim warnings, and parse errors;
+  warnings, unsupported-claim warnings, harsh-tone warnings, evidence status,
+  and parse errors;
 - transparent low/medium/high risk routing;
+- item-level AI review scores, confidence estimates, evidence signals, review
+  priorities, and short explanations for why an item is blocked or released;
 - a teacher queue for feedback that needs human judgment;
 - writing rubric and report pages for inspection and auditability.
 
@@ -40,8 +43,8 @@ The Streamlit app now contains operational teacher-facing windows:
   reviewer, issue type, risk level, and consensus state.
 - **Teacher Queue**: inspect medium/high-risk items and record local teacher
   actions such as accept, edit, reject, or needs more evidence.
-- **Effectiveness Evaluation**: run a synthetic expectation-label sanity check
-  for routing behavior.
+- **Effectiveness Evaluation**: run synthetic expectation-label and AI-review
+  stress-test checks for routing behavior.
 - **Reports**: export routed feedback tables and teacher-readable reports.
 
 The packaged practical workflow runs without external API calls. It is suitable
@@ -123,6 +126,10 @@ New ESL writing review-routing assets:
   the packaged demo.
 - `data/esl_writing_demo/expected_routing_labels.csv`: synthetic expectation
   labels for implementation-level routing evaluation.
+- `data/esl_writing_demo/ai_review_stress_cases.csv`: synthetic stress cases
+  for dangerous AI feedback, including thesis reversal, whole-essay rewriting,
+  unsupported factual claims, harsh student-facing language, low agreement, and
+  parse failures.
 - `src/esl_writing_feedback.py`: main rule-based routing interface.
 - `src/prompts/esl_feedback_prompt.py`: structured feedback-generation prompt
   template.
@@ -130,9 +137,9 @@ New ESL writing review-routing assets:
 - `scripts/analyze_esl_feedback_experiment.py`: offline analysis script for
   future teacher annotations.
 
-The current ESL writing demo contains 3 synthetic essays and 15 synthetic
-feedback items. These are demonstration records, not classroom evaluation
-results.
+The current ESL writing demo contains 3 synthetic essays, 15 packaged synthetic
+feedback items, and 16 AI-review stress cases. These are demonstration and
+implementation-test records, not classroom evaluation results.
 
 ## Routing Output Schema
 
@@ -146,6 +153,12 @@ The ESL routing layer returns:
 - `meaning_preservation_predicted`: `preserves_meaning`, `changes_meaning`, or
   `unclear`
 - `status`: `auto_accepted` or `needs_teacher_review`
+- `risk_score`: deploy-time risk score in `[0, 1]`
+- `review_confidence`: confidence in the route, not in the correctness of the
+  feedback itself
+- `evidence_signal`: `supported`, `missing`, `conflict`, or `none`
+- `review_priority`: `low`, `normal`, `high`, or `urgent`
+- `review_explanation`: short human-readable explanation of the route
 
 Deploy-time signals are separated from offline diagnostic labels. Teacher
 annotations, if collected later, should be analyzed as offline evaluation data,
@@ -159,12 +172,13 @@ The current evaluation is an implementation-level synthetic sanity check:
 PYTHONPATH=. python3 scripts/evaluate_esl_routing_demo.py
 ```
 
-On the packaged 15 feedback-item synthetic expectation set, the router currently
-matches the expected action and risk labels exactly:
+On the packaged 15 feedback-item synthetic expectation set and the 16-item AI
+review stress-test set, the router currently matches the expected action and
+risk labels exactly:
 
 | Metric | Value |
 |---|---:|
-| Items | 15 |
+| Items | 31 |
 | Action accuracy | 1.000 |
 | Risk accuracy | 1.000 |
 | High-risk recall | 1.000 |
@@ -172,9 +186,10 @@ matches the expected action and risk labels exactly:
 | Auto-accept precision | 1.000 |
 
 This supports the claim that the demo routing logic behaves as designed on the
-synthetic test set. It does **not** prove classroom effectiveness, teacher
-acceptability, student learning gains, or real LLM feedback quality. Those
-claims require instructor annotations and real anonymized classroom data.
+synthetic demo and stress-test sets. It does **not** prove classroom
+effectiveness, teacher acceptability, student learning gains, or real LLM
+feedback quality. Those claims require instructor annotations and real
+anonymized classroom data.
 
 ## API Configuration
 

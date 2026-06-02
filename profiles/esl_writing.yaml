@@ -2,15 +2,18 @@ domain_name: ESL Writing Feedback
 
 issue_types:
   - grammar
+  - punctuation
   - vocabulary
   - sentence_structure
   - coherence
   - organization
   - task_response
+  - unsupported_claim
   - argument_clarity
   - tone_register
   - meaning_change
   - overcorrection
+  - wrong_correction
   - other
 
 feedback_correctness_labels:
@@ -49,6 +52,13 @@ recommended_actions:
   - reject
   - needs_more_evidence
 
+review_output_fields:
+  - risk_score
+  - review_confidence
+  - evidence_signal
+  - review_priority
+  - review_explanation
+
 risk_reasons:
   - local_language_edit
   - wrong_correction
@@ -69,4 +79,3 @@ rubric_dimensions:
   - grammar
   - vocabulary
   - tone_register
-

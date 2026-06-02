@@ -29,7 +29,9 @@ Narration:
 
 > In the single essay window, a teacher can paste an ESL draft, provide the
 > assignment prompt, and generate AI-style feedback candidates. The system then
-> routes each feedback item before it reaches the student.
+> routes each feedback item before it reaches the student. Each item receives a
+> risk score, evidence signal, review priority, and short explanation for the
+> teacher.
 
 Screen:
 
@@ -37,6 +39,7 @@ Screen:
 - Load a demo essay.
 - Click Generate and route AI feedback.
 - Point to auto-accepted local edits and teacher-review items.
+- Point to risk score, evidence signal, and review explanation columns.
 
 ## 0:50-1:15 Batch Review
 
@@ -78,6 +81,7 @@ Screen:
 
 - Click Page 5: Teacher Queue.
 - Open a high-risk item.
+- Point to review confidence, evidence signal, priority, and explanation.
 - Select one teacher action.
 
 ## 2:00-2:20 Effectiveness And Reports
@@ -85,8 +89,8 @@ Screen:
 Narration:
 
 > The current evaluation is a synthetic sanity check: it verifies that the
-> routing logic catches expected high-risk items in the demo set. It is not yet
-> a classroom effectiveness study.
+> routing logic catches expected high-risk items in the demo set and dedicated
+> AI-review stress cases. It is not yet a classroom effectiveness study.
 
 Screen:
 
@@ -105,4 +109,3 @@ Narration:
 Screen:
 
 - Stop on Reports or return to Review Workspace.
-
