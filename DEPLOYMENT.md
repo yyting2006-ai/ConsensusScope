@@ -51,10 +51,15 @@ streamlit run app/streamlit_app.py --server.port 8502
 - The README states the ESL writing feedback review-routing purpose.
 - `ui_prototype/index.html` opens and shows the 7-page product workflow.
 - The Streamlit app starts from `app/streamlit_app.py`.
+- Page 2 Single Essay Review can generate and route feedback without API keys.
+- Page 3 Batch Review can process the packaged synthetic CSV.
+- Page 4 AI Feedback Comparison shows reviewer/risk comparison rows.
+- Page 5 Teacher Queue shows review-routed items and local teacher actions.
+- Page 6 Effectiveness Evaluation reports synthetic expectation-label metrics.
+- Page 7 Reports exports routed feedback and Markdown report artifacts.
 - Mode A and Mode B API configuration text is visible and does not expose keys.
 - The auxiliary QA and earlier feedback modules are clearly separated from the
   current main demo claim.
-- Report export works without requiring real API calls.
 
 ## Fixed Judge Protocol
 
@@ -78,4 +83,3 @@ artifacts, while exact reruns can vary with provider-side model/API changes.
 Before adding real student essays, remove names, IDs, emails, demographic
 details, school identifiers, and any personally identifying information. The
 packaged ESL writing demo uses synthetic examples.
-

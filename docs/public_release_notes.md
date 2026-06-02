@@ -59,6 +59,10 @@ The main public-facing story should be:
 > introduce unsupported content, overcorrect a draft, or require teacher
 > judgment.
 
+The public demo should show the practical Streamlit workflow: single essay
+review, batch review, AI feedback comparison, teacher queue, synthetic
+effectiveness evaluation, and report export.
+
 Do not present the system as an automatic essay scorer, teacher replacement, or
 truth oracle. Do not present auxiliary QA reliability pages or earlier feedback
 modules as the main system claim.
@@ -68,4 +72,3 @@ modules as the main system claim.
 Before adding real student essays, remove names, IDs, emails, demographic
 details, school identifiers, and any personally identifying information. The
 packaged ESL writing demo uses synthetic examples.
-

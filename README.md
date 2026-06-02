@@ -28,31 +28,48 @@ The packaged demo runs without external API calls. Live OpenAI-compatible API
 reviewers are optional and should be configured through local environment
 variables, Streamlit Secrets, or user-provided keys.
 
-## Current Product Prototype
+## Current Practical Workflow
 
-The designer-facing static prototype is the current UI reference:
+The Streamlit app now contains operational teacher-facing windows:
+
+- **Single Essay Review**: paste one ESL essay, generate no-API AI-style
+  feedback candidates, route each feedback item, and export a report.
+- **Batch Review**: upload a CSV or use packaged demo essays, process multiple
+  drafts, and export routed feedback.
+- **AI Feedback Comparison**: compare feedback candidates by target span,
+  reviewer, issue type, risk level, and consensus state.
+- **Teacher Queue**: inspect medium/high-risk items and record local teacher
+  actions such as accept, edit, reject, or needs more evidence.
+- **Effectiveness Evaluation**: run a synthetic expectation-label sanity check
+  for routing behavior.
+- **Reports**: export routed feedback tables and teacher-readable reports.
+
+The packaged practical workflow runs without external API calls. It is suitable
+for demo and interface validation, but it is not yet validated as a classroom
+deployment.
+
+The designer-facing static prototype remains available as a visual reference:
 
 ```text
 ui_prototype/index.html
 ```
 
-It uses synthetic ESL writing data and can be opened directly in a browser. No
-student PII and no real API keys are included.
-
-Prototype pages:
+Streamlit app pages:
 
 1. Review Workspace
-2. Essay Review
-3. Feedback Detail
-4. Teacher Queue
-5. Writing Rubric
-6. Reports
-7. Settings / Diagnostics
+2. Single Essay Review
+3. Batch Review
+4. AI Feedback Comparison
+5. Teacher Queue
+6. Effectiveness Evaluation
+7. Reports
+8. Settings / Diagnostics
+9. Design Reference
 
-Frozen teacher workflow:
+Operational teacher workflow:
 
 ```text
-Review Workspace -> Essay Review -> Feedback Detail -> Teacher Queue -> Reports
+Single Essay Review -> Batch Review -> AI Feedback Comparison -> Teacher Queue -> Effectiveness Evaluation -> Reports
 ```
 
 ## Quick Start
@@ -104,9 +121,12 @@ New ESL writing review-routing assets:
   used by the router.
 - `data/esl_writing_demo/routing_results.csv`: deterministic routing output for
   the packaged demo.
+- `data/esl_writing_demo/expected_routing_labels.csv`: synthetic expectation
+  labels for implementation-level routing evaluation.
 - `src/esl_writing_feedback.py`: main rule-based routing interface.
 - `src/prompts/esl_feedback_prompt.py`: structured feedback-generation prompt
   template.
+- `scripts/evaluate_esl_routing_demo.py`: synthetic routing evaluation script.
 - `scripts/analyze_esl_feedback_experiment.py`: offline analysis script for
   future teacher annotations.
 
@@ -130,6 +150,31 @@ The ESL routing layer returns:
 Deploy-time signals are separated from offline diagnostic labels. Teacher
 annotations, if collected later, should be analyzed as offline evaluation data,
 not as information available to the live router.
+
+## Current Effectiveness Evidence
+
+The current evaluation is an implementation-level synthetic sanity check:
+
+```bash
+PYTHONPATH=. python3 scripts/evaluate_esl_routing_demo.py
+```
+
+On the packaged 15 feedback-item synthetic expectation set, the router currently
+matches the expected action and risk labels exactly:
+
+| Metric | Value |
+|---|---:|
+| Items | 15 |
+| Action accuracy | 1.000 |
+| Risk accuracy | 1.000 |
+| High-risk recall | 1.000 |
+| Review recall | 1.000 |
+| Auto-accept precision | 1.000 |
+
+This supports the claim that the demo routing logic behaves as designed on the
+synthetic test set. It does **not** prove classroom effectiveness, teacher
+acceptability, student learning gains, or real LLM feedback quality. Those
+claims require instructor annotations and real anonymized classroom data.
 
 ## API Configuration
 
@@ -155,6 +200,12 @@ Run a Python syntax check:
 
 ```bash
 find src scripts app tests -name '._*' -prune -o -name '*.py' -print0 | xargs -0 python3 -m py_compile
+```
+
+Run synthetic ESL routing evaluation:
+
+```bash
+PYTHONPATH=. python3 scripts/evaluate_esl_routing_demo.py
 ```
 
 Analyze future teacher annotations:

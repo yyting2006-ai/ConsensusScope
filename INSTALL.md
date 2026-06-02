@@ -36,6 +36,9 @@ Then open:
 http://localhost:8502
 ```
 
+The app includes single-essay review, batch review, AI feedback comparison,
+teacher queue, effectiveness evaluation, reports, settings, and diagnostics.
+
 ## 4. Open The Product UI Prototype
 
 Open this file directly in a browser:
@@ -99,6 +102,7 @@ start_demo.bat
 - Synthetic ESL writing demo data: `data/esl_writing_demo/`
 - Review-routing interface: `src/esl_writing_feedback.py`
 - Prompt template: `src/prompts/esl_feedback_prompt.py`
+- Synthetic routing evaluation script: `scripts/evaluate_esl_routing_demo.py`
 - Offline analysis script: `scripts/analyze_esl_feedback_experiment.py`
 - EMNLP demo paper draft: `paper/consensusscope_emnlp_demo.tex`
 - Release checklist and ethics notes: `docs/`
@@ -114,4 +118,3 @@ Before adding real student essays, remove names, IDs, emails, school
 identifiers, demographic details, and any personally identifying information.
 ConsensusScope supports teacher review; it is not an automatic essay scorer or
 teacher replacement.
-

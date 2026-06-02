@@ -22,10 +22,11 @@ This checklist turns the local prototype into a submission-ready demo package.
 - [x] Streamlit app starts locally
 - [x] Product UI prototype opens locally: `ui_prototype/index.html`
 - [x] Review Workspace page
-- [x] Essay Review page
-- [x] Feedback Detail page
+- [x] Single Essay Review page
+- [x] Batch Review page
+- [x] AI Feedback Comparison page
 - [x] Teacher Queue page
-- [x] Writing Rubric page
+- [x] Effectiveness Evaluation page
 - [x] Reports page
 - [x] Screenshot generation script
 - [x] English submission interface: `app/streamlit_app.py`

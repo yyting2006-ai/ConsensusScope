@@ -24,24 +24,30 @@ Then open `http://localhost:8502`.
 
 ## Current Main Assets
 
+- `app/streamlit_app.py`: practical teacher workspace with single-essay review,
+  batch review, AI feedback comparison, teacher queue, evaluation, and reports.
 - `ui_prototype/index.html`: designer-facing product prototype.
 - `profiles/esl_writing.yaml`: ESL writing feedback profile.
 - `data/esl_writing_demo/`: synthetic ESL essays, feedback items, evidence, and
   routing output.
 - `src/esl_writing_feedback.py`: rule-based review-routing interface.
 - `src/prompts/esl_feedback_prompt.py`: structured feedback prompt template.
+- `scripts/evaluate_esl_routing_demo.py`: synthetic routing sanity-check
+  evaluation script.
 - `scripts/analyze_esl_feedback_experiment.py`: offline analysis script for
   future teacher annotations.
 
-## Main Prototype Pages
+## Main App Pages
 
 1. Review Workspace
-2. Essay Review
-3. Feedback Detail
-4. Teacher Queue
-5. Writing Rubric
-6. Reports
-7. Settings / Diagnostics
+2. Single Essay Review
+3. Batch Review
+4. AI Feedback Comparison
+5. Teacher Queue
+6. Effectiveness Evaluation
+7. Reports
+8. Settings / Diagnostics
+9. Design Reference
 
 ## Boundary
 
