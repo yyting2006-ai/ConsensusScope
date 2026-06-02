@@ -114,6 +114,274 @@ def safe_str(value: Any) -> str:
     return str(value).strip()
 
 
+MAIN_TRANSLATIONS = {
+    "en": {
+        "language_label": "Language / 语言",
+        "topbar_subtitle": "Teacher-in-the-loop review routing for safe AI feedback on ESL writing",
+        "demo_access": "Demo Access",
+        "demo_access_info": "This live demo is password-protected to prevent unintended API usage.",
+        "demo_password": "Demo password",
+        "unlock_demo": "Unlock demo",
+        "invalid_password": "Invalid password.",
+        "api_configuration": "API Configuration",
+        "api_mode": "API mode",
+        "mode_a": "Mode A · Built-in API keys for live demos",
+        "mode_b": "Mode B · User-provided API keys for public deployment",
+        "api_caption": "Mode A uses local .env or deployment secrets. Mode B uses user-provided keys only for the current request. API keys must not appear in the paper or be hard-coded.",
+        "answer_models": "Answer generation models",
+        "answer_models_help": "Each selected provider needs its own matching API key. If you only have one key, select only that provider.",
+        "enable_fixed_judge": "Enable Fixed Judge in Live mode",
+        "fixed_judge_model": "Fixed judge model",
+        "provider_settings": "Provider settings",
+        "provider_settings_help": "Use the provider base URL only; the app appends /chat/completions automatically.",
+        "lock_demo": "Lock demo",
+        "navigation": "Navigation",
+        "page_home": "Page 1: Review Workspace",
+        "page_single": "Page 2: Single Essay Review",
+        "page_batch": "Page 3: Batch Review",
+        "page_compare": "Page 4: AI Feedback Comparison",
+        "page_queue": "Page 5: Teacher Queue",
+        "page_eval": "Page 6: Effectiveness Evaluation",
+        "page_reports": "Page 7: Reports",
+        "page_settings": "Page 8: Settings / Diagnostics",
+        "page_design": "Page 9: Design Reference",
+        "feedback_items": "Feedback items",
+        "auto_accepted": "Auto accepted",
+        "teacher_review": "Teacher review",
+        "high_risk": "High risk",
+        "urgent": "Urgent",
+        "mean_risk": "Mean risk",
+        "no_feedback": "No feedback items available.",
+        "single_title": "Page 2 · Single Essay Review",
+        "single_caption": "Paste one ESL writing draft, generate local AI-style feedback candidates, route them, and inspect what needs teacher review.",
+        "load_demo": "Load a demo essay or start blank",
+        "blank_workspace": "Blank workspace",
+        "essay_id": "Essay ID",
+        "assignment_prompt": "Assignment prompt",
+        "student_level": "Student level",
+        "student_draft": "Student essay draft",
+        "include_stress": "Include unsafe stress-test suggestions for demo",
+        "generate_route": "Generate and route AI feedback",
+        "what_window_does": "What this window does",
+        "single_explain": "It simulates multiple AI feedback reviewers in a no-API mode, normalizes every suggestion into the same schema, then routes low-risk local edits separately from items that need teacher review.",
+        "single_info": "For public deployment, this page can run without API keys. Live LLM providers can later write into the same feedback schema.",
+        "paste_essay_error": "Please paste an essay draft before running review.",
+        "review_result": "Review Result",
+        "routed_feedback": "Routed feedback",
+        "teacher_queue_table": "Teacher-review queue",
+        "download_single_report": "Download single essay report.md",
+        "batch_title": "Page 3 · Batch Review",
+        "batch_caption": "Upload or use a CSV of ESL essays, then generate feedback candidates and teacher-review routing for every row.",
+        "upload_csv": "Upload CSV",
+        "upload_help": "Expected columns: essay_id, assignment_prompt, student_level, essay_text or essay_text_anonymized.",
+        "include_stress_batch": "Include unsafe stress-test suggestions for demo batch",
+        "using_demo_data": "Using packaged synthetic ESL writing demo data. Upload a CSV to process your own essays.",
+        "no_essays": "No essays are available.",
+        "run_batch": "Run batch AI feedback review",
+        "csv_required": "CSV must include essay_text or essay_text_anonymized.",
+        "batch_result": "Batch Result",
+        "all_routed_feedback": "All routed feedback",
+        "download_batch_feedback": "Download batch routed feedback.csv",
+        "download_batch_summary": "Download batch summary.csv",
+        "compare_title": "Page 4 · AI Feedback Comparison",
+        "run_first": "Run Single Essay Review or Batch Review first, or use the packaged demo data.",
+        "compare_caption": "This page compares AI feedback candidates by target span, issue type, reviewers, routed risk, and consensus state.",
+        "no_comparison": "No comparison rows are available.",
+        "consensus_states": "Consensus states",
+        "queue_title": "Page 5 · Teacher Queue",
+        "queue_empty": "No teacher-review items are currently queued.",
+        "queue_caption": "Teachers can accept, edit, reject, or defer feedback. Decisions are stored in the local Streamlit session.",
+        "risk_level": "Risk level",
+        "issue_type": "Issue type",
+        "target_span": "Target span",
+        "ai_suggestion": "AI suggestion",
+        "routing_reason": "Routing reason",
+        "ai_review_explanation": "AI review explanation",
+        "review_confidence": "Review confidence",
+        "evidence_signal": "Evidence signal",
+        "priority": "Priority",
+        "teacher_action": "Teacher action",
+        "download_queue": "Download teacher queue.csv",
+        "eval_title": "Page 6 · Effectiveness Evaluation",
+        "eval_caption": "This page evaluates implementation behavior on synthetic expectation labels and AI-review stress cases. It is a sanity check for routing logic, not evidence from real classroom use.",
+        "combined_items": "Combined items",
+        "action_accuracy": "Action accuracy",
+        "risk_accuracy": "Risk accuracy",
+        "high_risk_recall": "High-risk recall",
+        "auto_precision": "Auto precision",
+        "evaluation_sets": "Evaluation sets",
+        "packaged_demo": "Packaged synthetic demo",
+        "stress_cases": "AI-review stress cases",
+        "validity_assessment": "Validity assessment",
+        "validity_text": "Current evidence supports a demo-level claim: the system can operationalize a teacher-review workflow and reliably route synthetic high-risk feedback to review. It does not yet support a classroom effectiveness claim because no real teacher annotations, student outcomes, or time-on-task measurements have been collected.",
+        "reports_title": "Page 7 · Reports",
+        "report_table": "Report table",
+        "report_preview": "Report preview",
+        "download_routed_csv": "Download routed feedback.csv",
+        "download_report_md": "Download report.md",
+        "settings_title": "Page 8 · Settings / Diagnostics",
+        "settings_info": "Operational teacher workflow pages are now Pages 2-7. This page keeps API settings and legacy diagnostics secondary.",
+        "api_diagnostics": "API diagnostics",
+        "legacy_feedback": "Legacy feedback technical demo",
+        "aux_qa_comparison": "Auxiliary QA comparison",
+        "aux_qa_risk": "Auxiliary QA risk dashboard",
+        "aux_qa_case": "Auxiliary QA case explorer",
+        "home_title": "Page 1 · Home / System Overview",
+        "synthetic_essays": "Synthetic Essays",
+        "esl_demo": "ESL writing demo",
+        "unified_schema": "unified schema",
+        "low_risk_edits": "low-risk local edits",
+        "high_risk_items": "{count} high-risk items",
+        "main_claim": "Main demo claim: teacher-in-the-loop review routing for safe AI-generated ESL writing feedback. Teachers can run single-essay or batch feedback review, inspect AI feedback comparisons, and route risky feedback into a teacher queue before student release.",
+        "prototype_info": "The current product UI reference is ui_prototype/index.html. Streamlit retains technical and auxiliary modules for inspection, but earlier modules are not the main EMNLP 2026 demo claim.",
+        "routing_snapshot": "ESL Writing Feedback Routing Snapshot",
+        "design_title": "Page 9 · Design Reference",
+        "design_caption": "Designer-facing preview for the current ESL writing teacher-review workspace. The standalone source is ui_prototype/index.html.",
+        "design_text": "Use this page when sharing the live site with a UI/UX designer. The intended design direction is a teacher workflow for reviewing ESL writing feedback, with model diagnostics moved into Settings / Diagnostics.",
+        "download_design_brief": "Download Chinese design brief",
+        "download_html_mockup": "Download HTML mockup",
+        "design_missing": "Design reference mockup is not available in this package.",
+    },
+    "zh": {
+        "language_label": "Language / 语言",
+        "topbar_subtitle": "面向 ESL 写作 AI 反馈的教师在环安全复核路由",
+        "demo_access": "演示访问",
+        "demo_access_info": "该在线演示已启用密码保护，以避免无意调用 API。",
+        "demo_password": "演示密码",
+        "unlock_demo": "解锁演示",
+        "invalid_password": "密码错误。",
+        "api_configuration": "API 配置",
+        "api_mode": "API 模式",
+        "mode_a": "Mode A · 内置 API key，适合现场演示",
+        "mode_b": "Mode B · 用户自带 API key，适合公开部署",
+        "api_caption": "Mode A 使用本地 .env 或部署 Secrets。Mode B 仅在当前请求中使用用户输入的 key。API key 不应写入论文或硬编码进代码。",
+        "answer_models": "回答生成模型",
+        "answer_models_help": "每个 provider 都需要对应 API key。如果你只有一个 key，只选择对应 provider。",
+        "enable_fixed_judge": "Live 模式启用 Fixed Judge",
+        "fixed_judge_model": "固定裁判模型",
+        "provider_settings": "Provider 设置",
+        "provider_settings_help": "只填写 provider base URL；应用会自动追加 /chat/completions。",
+        "lock_demo": "锁定演示",
+        "navigation": "导航",
+        "page_home": "第 1 页：评审工作台",
+        "page_single": "第 2 页：单篇作文评审",
+        "page_batch": "第 3 页：批量评审",
+        "page_compare": "第 4 页：AI 反馈对比",
+        "page_queue": "第 5 页：教师复核队列",
+        "page_eval": "第 6 页：有效性评估",
+        "page_reports": "第 7 页：报告导出",
+        "page_settings": "第 8 页：设置 / 诊断",
+        "page_design": "第 9 页：设计参考",
+        "feedback_items": "反馈项",
+        "auto_accepted": "自动接受",
+        "teacher_review": "教师复核",
+        "high_risk": "高风险",
+        "urgent": "紧急",
+        "mean_risk": "平均风险",
+        "no_feedback": "暂无反馈项。",
+        "single_title": "第 2 页 · 单篇作文评审",
+        "single_caption": "粘贴一篇 ESL 作文，生成本地 AI 风格反馈候选，完成路由，并查看哪些反馈需要教师复核。",
+        "load_demo": "加载 demo 作文或新建空白工作区",
+        "blank_workspace": "空白工作区",
+        "essay_id": "作文 ID",
+        "assignment_prompt": "作文题目",
+        "student_level": "学生水平",
+        "student_draft": "学生作文草稿",
+        "include_stress": "包含不安全 stress-test 建议用于演示",
+        "generate_route": "生成并路由 AI 反馈",
+        "what_window_does": "该窗口的作用",
+        "single_explain": "它在 no-API 模式下模拟多个 AI feedback reviewer，将每条建议规范到同一 schema，再把低风险局部语言修改和需要教师复核的项目分开。",
+        "single_info": "公开部署时，本页无需 API key 即可运行。真实 LLM provider 后续也可以写入同一反馈 schema。",
+        "paste_essay_error": "请先粘贴作文草稿。",
+        "review_result": "评审结果",
+        "routed_feedback": "路由后的反馈",
+        "teacher_queue_table": "教师复核队列",
+        "download_single_report": "下载单篇作文报告.md",
+        "batch_title": "第 3 页 · 批量评审",
+        "batch_caption": "上传或使用 ESL 作文 CSV，为每篇作文生成反馈候选并进行教师复核路由。",
+        "upload_csv": "上传 CSV",
+        "upload_help": "期望字段：essay_id, assignment_prompt, student_level, essay_text 或 essay_text_anonymized。",
+        "include_stress_batch": "批量演示包含不安全 stress-test 建议",
+        "using_demo_data": "正在使用内置合成 ESL 写作 demo 数据。上传 CSV 可处理你自己的作文。",
+        "no_essays": "暂无可用作文。",
+        "run_batch": "运行批量 AI 反馈评审",
+        "csv_required": "CSV 必须包含 essay_text 或 essay_text_anonymized。",
+        "batch_result": "批量结果",
+        "all_routed_feedback": "全部路由反馈",
+        "download_batch_feedback": "下载批量路由反馈.csv",
+        "download_batch_summary": "下载批量摘要.csv",
+        "compare_title": "第 4 页 · AI 反馈对比",
+        "run_first": "请先运行单篇作文评审或批量评审，或使用内置 demo 数据。",
+        "compare_caption": "本页按目标片段、问题类型、reviewer、路由风险和一致性状态对比 AI 反馈候选。",
+        "no_comparison": "暂无对比结果。",
+        "consensus_states": "一致性状态",
+        "queue_title": "第 5 页 · 教师复核队列",
+        "queue_empty": "当前没有需要教师复核的项目。",
+        "queue_caption": "教师可以接受、编辑、拒绝或暂缓反馈。决策会保存在本地 Streamlit session 中。",
+        "risk_level": "风险等级",
+        "issue_type": "问题类型",
+        "target_span": "目标片段",
+        "ai_suggestion": "AI 建议",
+        "routing_reason": "路由原因",
+        "ai_review_explanation": "AI 评审解释",
+        "review_confidence": "评审置信度",
+        "evidence_signal": "证据信号",
+        "priority": "优先级",
+        "teacher_action": "教师动作",
+        "download_queue": "下载教师队列.csv",
+        "eval_title": "第 6 页 · 有效性评估",
+        "eval_caption": "本页在合成期望标签和 AI-review stress cases 上评估实现行为。这是路由逻辑 sanity check，不是真实课堂有效性证据。",
+        "combined_items": "合并项目数",
+        "action_accuracy": "动作准确率",
+        "risk_accuracy": "风险准确率",
+        "high_risk_recall": "高风险召回",
+        "auto_precision": "自动接受精确率",
+        "evaluation_sets": "评估集合",
+        "packaged_demo": "内置合成 demo",
+        "stress_cases": "AI 评审压力测试",
+        "validity_assessment": "有效性说明",
+        "validity_text": "当前证据支持 demo 级主张：系统可以实现教师复核工作流，并按设计将合成高风险反馈送入复核。但它还不能证明真实课堂有效性，因为尚未收集真实教师标注、学生结果或耗时数据。",
+        "reports_title": "第 7 页 · 报告导出",
+        "report_table": "报告表格",
+        "report_preview": "报告预览",
+        "download_routed_csv": "下载路由反馈.csv",
+        "download_report_md": "下载报告.md",
+        "settings_title": "第 8 页 · 设置 / 诊断",
+        "settings_info": "当前主线教师工作流位于第 2-7 页。本页保留 API 设置和旧辅助诊断。",
+        "api_diagnostics": "API 诊断",
+        "legacy_feedback": "旧反馈技术 demo",
+        "aux_qa_comparison": "辅助 QA 对比",
+        "aux_qa_risk": "辅助 QA 风险面板",
+        "aux_qa_case": "辅助 QA 案例浏览",
+        "home_title": "第 1 页 · 首页 / 系统概览",
+        "synthetic_essays": "合成作文",
+        "esl_demo": "ESL 写作 demo",
+        "unified_schema": "统一 schema",
+        "low_risk_edits": "低风险局部修改",
+        "high_risk_items": "{count} 个高风险项目",
+        "main_claim": "主 demo 主张：面向 AI 生成 ESL 写作反馈的教师在环复核路由。教师可以进行单篇或批量反馈评审，查看 AI 反馈对比，并在学生看到反馈前将风险反馈送入教师队列。",
+        "prototype_info": "当前产品 UI 参考为 ui_prototype/index.html。Streamlit 保留技术和辅助模块供检查，但早期模块不是当前 EMNLP 2026 demo 主张。",
+        "routing_snapshot": "ESL 写作反馈路由快照",
+        "design_title": "第 9 页 · 设计参考",
+        "design_caption": "面向设计师的当前 ESL 写作教师复核工作台预览。独立源文件是 ui_prototype/index.html。",
+        "design_text": "将 live site 分享给 UI/UX 设计师时可使用本页。目标设计方向是 ESL 写作反馈教师复核工作流，模型诊断移至设置 / 诊断中。",
+        "download_design_brief": "下载中文设计说明",
+        "download_html_mockup": "下载 HTML 原型",
+        "design_missing": "该包中没有设计参考 mockup。",
+    },
+}
+
+
+def ui_lang() -> str:
+    return safe_str(st.session_state.get("ui_language") or "en")
+
+
+def mt(key: str, **kwargs: Any) -> str:
+    text = MAIN_TRANSLATIONS.get(ui_lang(), MAIN_TRANSLATIONS["en"]).get(key, key)
+    return text.format(**kwargs) if kwargs else text
+
+
+
 def english_note(value: Any) -> str:
     text = safe_str(value)
     translated = NOTE_TRANSLATIONS.get(text, text)
@@ -175,20 +443,20 @@ def render_demo_auth_gate() -> bool:
     if st.session_state.get("demo_authenticated"):
         return True
 
-    st.markdown('<div class="section-title">Demo Access</div>', unsafe_allow_html=True)
-    st.info("This live demo is password-protected to prevent unintended API usage.")
+    st.markdown(f'<div class="section-title">{mt("demo_access")}</div>', unsafe_allow_html=True)
+    st.info(mt("demo_access_info"))
     if not expected:
         st.error("Demo authentication is enabled, but CONSENSUS_SCOPE_DEMO_PASSWORD is not configured.")
         return False
     with st.form("demo_auth_form"):
-        entered = st.text_input("Demo password", type="password")
-        submitted = st.form_submit_button("Unlock demo", use_container_width=True)
+        entered = st.text_input(mt("demo_password"), type="password")
+        submitted = st.form_submit_button(mt("unlock_demo"), use_container_width=True)
     if submitted:
         if hmac.compare_digest(entered, expected):
             st.session_state["demo_authenticated"] = True
             st.rerun()
         else:
-            st.error("Invalid password.")
+            st.error(mt("invalid_password"))
     return False
 
 
@@ -294,10 +562,10 @@ def metric_panel(label: str, value: str, note: str = "") -> None:
 
 def topbar() -> None:
     st.markdown(
-        """
+        f"""
         <div class="topbar">
           <div class="title">ConsensusScope</div>
-          <div class="subtitle">Teacher-in-the-loop review routing for safe AI feedback on ESL writing</div>
+          <div class="subtitle">{mt("topbar_subtitle")}</div>
         </div>
         """,
         unsafe_allow_html=True,
@@ -401,27 +669,25 @@ def build_fixed_judge_config(api_mode: str, provider: str, user_inputs: Dict[str
 
 def render_api_sidebar() -> tuple[str, List[str], Dict[str, Dict[str, str]], bool, str]:
     load_dotenv(ROOT / ".env")
-    st.sidebar.markdown("#### API Configuration")
+    st.sidebar.markdown(f"#### {mt('api_configuration')}")
     api_mode = st.sidebar.radio(
-        "API mode",
+        mt("api_mode"),
         ["Mode A", "Mode B"],
-        format_func=lambda x: "Mode A · Built-in API keys for live demos" if x == "Mode A" else "Mode B · User-provided API keys for public deployment",
+        format_func=lambda x: mt("mode_a") if x == "Mode A" else mt("mode_b"),
         index=0 if st.session_state["api_mode"] == "Mode A" else 1,
     )
     st.session_state["api_mode"] = api_mode
-    st.sidebar.caption(
-        "Mode A uses local .env or deployment secrets. Mode B uses user-provided keys only for the current request. API keys must not appear in the paper or be hard-coded."
-    )
+    st.sidebar.caption(mt("api_caption"))
     default_selected = [p for p in ["deepseek", "qwen", "glm", "kimi"] if p in ANSWER_PROVIDERS]
-    selected = st.sidebar.multiselect("Answer generation models", ANSWER_PROVIDERS, default=default_selected)
-    st.sidebar.caption("Each selected provider needs its own matching API key. If you only have one key, select only that provider.")
-    fixed_enabled = st.sidebar.checkbox("Enable Fixed Judge in Live mode", value=False)
-    fixed_provider = st.sidebar.selectbox("Fixed judge model", selected or default_selected or ANSWER_PROVIDERS, index=0)
+    selected = st.sidebar.multiselect(mt("answer_models"), ANSWER_PROVIDERS, default=default_selected)
+    st.sidebar.caption(mt("answer_models_help"))
+    fixed_enabled = st.sidebar.checkbox(mt("enable_fixed_judge"), value=False)
+    fixed_provider = st.sidebar.selectbox(mt("fixed_judge_model"), selected or default_selected or ANSWER_PROVIDERS, index=0)
 
     user_inputs: Dict[str, Dict[str, str]] = {}
     defaults = default_live_model_configs()
-    with st.sidebar.expander("Provider settings", expanded=(api_mode == "Mode B")):
-        st.caption("Use the provider base URL only; the app appends /chat/completions automatically.")
+    with st.sidebar.expander(mt("provider_settings"), expanded=(api_mode == "Mode B")):
+        st.caption(mt("provider_settings_help"))
         for provider in ANSWER_PROVIDERS:
             st.markdown(f"**{provider}**")
             api_key = ""
@@ -537,12 +803,12 @@ def current_esl_result() -> Dict[str, Any]:
 
 def display_esl_summary(summary: Dict[str, Any]) -> None:
     c1, c2, c3, c4, c5, c6 = st.columns(6)
-    c1.metric("Feedback items", summary.get("feedback_items", 0))
-    c2.metric("Auto accepted", summary.get("auto_accept", 0))
-    c3.metric("Teacher review", summary.get("teacher_review", 0))
-    c4.metric("High risk", summary.get("high_risk", 0))
-    c5.metric("Urgent", summary.get("urgent_review", 0))
-    c6.metric("Mean risk", summary.get("mean_risk_score", 0.0))
+    c1.metric(mt("feedback_items"), summary.get("feedback_items", 0))
+    c2.metric(mt("auto_accepted"), summary.get("auto_accept", 0))
+    c3.metric(mt("teacher_review"), summary.get("teacher_review", 0))
+    c4.metric(mt("high_risk"), summary.get("high_risk", 0))
+    c5.metric(mt("urgent"), summary.get("urgent_review", 0))
+    c6.metric(mt("mean_risk"), summary.get("mean_risk_score", 0.0))
 
 
 def teacher_queue_frame(result: Dict[str, Any]) -> pd.DataFrame:
@@ -559,7 +825,7 @@ def teacher_queue_frame(result: Dict[str, Any]) -> pd.DataFrame:
 def display_esl_feedback_table(df: pd.DataFrame, title: str = "Routed feedback") -> None:
     st.markdown(f"### {title}")
     if df.empty:
-        st.info("No feedback items available.")
+        st.info(mt("no_feedback"))
         return
     cols = [
         "essay_id",
@@ -582,36 +848,34 @@ def display_esl_feedback_table(df: pd.DataFrame, title: str = "Routed feedback")
 
 
 def page_single_essay_review() -> None:
-    st.markdown('<div class="section-title">Page 2 · Single Essay Review</div>', unsafe_allow_html=True)
-    st.caption("Paste one ESL writing draft, generate local AI-style feedback candidates, route them, and inspect what needs teacher review.")
+    st.markdown(f'<div class="section-title">{mt("single_title")}</div>', unsafe_allow_html=True)
+    st.caption(mt("single_caption"))
     demo_essays = read_table(str(DATA_PATHS["esl_essays"]))
     demo_choice = "Blank workspace"
     if not demo_essays.empty:
-        demo_choice = st.selectbox("Load a demo essay or start blank", ["Blank workspace"] + demo_essays["essay_id"].astype(str).tolist())
-    selected = first_record(demo_essays[demo_essays["essay_id"].astype(str) == demo_choice]) if demo_choice != "Blank workspace" and not demo_essays.empty else {}
+        blank = mt("blank_workspace")
+        demo_choice = st.selectbox(mt("load_demo"), [blank] + demo_essays["essay_id"].astype(str).tolist())
+    selected = first_record(demo_essays[demo_essays["essay_id"].astype(str) == demo_choice]) if demo_choice != mt("blank_workspace") and not demo_essays.empty else {}
     default_prompt = safe_str(selected.get("assignment_prompt")) or "Write an ESL essay responding clearly to the assignment prompt."
     default_level = safe_str(selected.get("student_level")) or "upper-intermediate"
     default_essay = safe_str(selected.get("essay_text_anonymized"))
 
     left, right = st.columns([0.92, 1.08], gap="large")
     with left:
-        essay_id = st.text_input("Essay ID", value=safe_str(selected.get("essay_id")) or "USER-ESSAY-001")
-        assignment = st.text_area("Assignment prompt", value=default_prompt, height=92)
-        level = st.selectbox("Student level", ["intermediate", "upper-intermediate", "advanced", "not specified"], index=1)
-        essay_text = st.text_area("Student essay draft", value=default_essay, height=260)
-        include_stress = st.checkbox("Include unsafe stress-test suggestions for demo", value=True)
-        run = st.button("Generate and route AI feedback", use_container_width=True, type="primary")
+        essay_id = st.text_input(mt("essay_id"), value=safe_str(selected.get("essay_id")) or "USER-ESSAY-001")
+        assignment = st.text_area(mt("assignment_prompt"), value=default_prompt, height=92)
+        level = st.selectbox(mt("student_level"), ["intermediate", "upper-intermediate", "advanced", "not specified"], index=1)
+        essay_text = st.text_area(mt("student_draft"), value=default_essay, height=260)
+        include_stress = st.checkbox(mt("include_stress"), value=True)
+        run = st.button(mt("generate_route"), use_container_width=True, type="primary")
     with right:
-        st.markdown("### What this window does")
-        st.write(
-            "It simulates multiple AI feedback reviewers in a no-API mode, normalizes every suggestion into the same schema, "
-            "then routes low-risk local edits separately from items that need teacher review."
-        )
-        st.info("For public deployment, this page can run without API keys. Live LLM providers can later write into the same feedback schema.")
+        st.markdown(f"### {mt('what_window_does')}")
+        st.write(mt("single_explain"))
+        st.info(mt("single_info"))
 
     if run:
         if not essay_text.strip():
-            st.error("Please paste an essay draft before running review.")
+            st.error(mt("paste_essay_error"))
         else:
             st.session_state["esl_single_result"] = review_esl_essay(
                 essay_text=essay_text,
@@ -625,13 +889,13 @@ def page_single_essay_review() -> None:
     result = st.session_state.get("esl_single_result")
     if not result:
         return
-    st.markdown('<div class="section-title">Review Result</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="section-title">{mt("review_result")}</div>', unsafe_allow_html=True)
     display_esl_summary(result["summary"])
-    display_esl_feedback_table(result["merged"])
+    display_esl_feedback_table(result["merged"], mt("routed_feedback"))
     queue = teacher_queue_frame(result)
-    display_esl_feedback_table(queue, "Teacher-review queue")
+    display_esl_feedback_table(queue, mt("teacher_queue_table"))
     st.download_button(
-        "Download single essay report.md",
+        mt("download_single_report"),
         data=result["report"].encode("utf-8"),
         file_name=f"{result.get('essay_id', 'essay')}_review_report.md",
         mime="text/markdown",
@@ -640,44 +904,44 @@ def page_single_essay_review() -> None:
 
 
 def page_batch_review() -> None:
-    st.markdown('<div class="section-title">Page 3 · Batch Review</div>', unsafe_allow_html=True)
-    st.caption("Upload or use a CSV of ESL essays, then generate feedback candidates and teacher-review routing for every row.")
+    st.markdown(f'<div class="section-title">{mt("batch_title")}</div>', unsafe_allow_html=True)
+    st.caption(mt("batch_caption"))
     uploaded = st.file_uploader(
-        "Upload CSV",
+        mt("upload_csv"),
         type=["csv"],
-        help="Expected columns: essay_id, assignment_prompt, student_level, essay_text or essay_text_anonymized.",
+        help=mt("upload_help"),
     )
-    include_stress = st.checkbox("Include unsafe stress-test suggestions for demo batch", value=True)
+    include_stress = st.checkbox(mt("include_stress_batch"), value=True)
     if uploaded is not None:
         essays = pd.read_csv(uploaded).fillna("")
     else:
         essays = read_table(str(DATA_PATHS["esl_essays"]))
-        st.info("Using packaged synthetic ESL writing demo data. Upload a CSV to process your own essays.")
+        st.info(mt("using_demo_data"))
     if essays.empty:
-        st.warning("No essays are available.")
+        st.warning(mt("no_essays"))
         return
     st.dataframe(essays.head(10), use_container_width=True, hide_index=True)
-    if st.button("Run batch AI feedback review", use_container_width=True, type="primary"):
+    if st.button(mt("run_batch"), use_container_width=True, type="primary"):
         if "essay_text" not in essays.columns and "essay_text_anonymized" not in essays.columns:
-            st.error("CSV must include essay_text or essay_text_anonymized.")
+            st.error(mt("csv_required"))
         else:
             st.session_state["esl_batch_result"] = review_esl_batch(essays, include_stress_tests=include_stress)
             st.session_state["esl_single_result"] = None
     result = st.session_state.get("esl_batch_result")
     if not result:
         return
-    st.markdown('<div class="section-title">Batch Result</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="section-title">{mt("batch_result")}</div>', unsafe_allow_html=True)
     st.dataframe(result["summary"], use_container_width=True, hide_index=True)
-    display_esl_feedback_table(result["merged"], "All routed feedback")
+    display_esl_feedback_table(result["merged"], mt("all_routed_feedback"))
     st.download_button(
-        "Download batch routed feedback.csv",
+        mt("download_batch_feedback"),
         data=result["merged"].to_csv(index=False, encoding="utf-8-sig"),
         file_name="batch_esl_routed_feedback.csv",
         mime="text/csv",
         use_container_width=True,
     )
     st.download_button(
-        "Download batch summary.csv",
+        mt("download_batch_summary"),
         data=result["summary"].to_csv(index=False, encoding="utf-8-sig"),
         file_name="batch_esl_summary.csv",
         mime="text/csv",
@@ -686,33 +950,33 @@ def page_batch_review() -> None:
 
 
 def page_ai_feedback_comparison() -> None:
-    st.markdown('<div class="section-title">Page 4 · AI Feedback Comparison</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="section-title">{mt("compare_title")}</div>', unsafe_allow_html=True)
     result = current_esl_result()
     if not result:
-        st.info("Run Single Essay Review or Batch Review first, or use the packaged demo data.")
+        st.info(mt("run_first"))
         return
-    st.caption("This page compares AI feedback candidates by target span, issue type, reviewers, routed risk, and consensus state.")
+    st.caption(mt("compare_caption"))
     comparison = result.get("comparison", pd.DataFrame())
     if comparison.empty:
-        st.info("No comparison rows are available.")
+        st.info(mt("no_comparison"))
         return
     st.dataframe(comparison, use_container_width=True, hide_index=True)
     counts = comparison["consensus_state"].value_counts().rename_axis("consensus_state").reset_index(name="items")
-    st.markdown("### Consensus states")
+    st.markdown(f"### {mt('consensus_states')}")
     st.dataframe(counts, use_container_width=True, hide_index=True)
 
 
 def page_teacher_queue() -> None:
-    st.markdown('<div class="section-title">Page 5 · Teacher Queue</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="section-title">{mt("queue_title")}</div>', unsafe_allow_html=True)
     result = current_esl_result()
     queue = teacher_queue_frame(result)
     if queue.empty:
-        st.success("No teacher-review items are currently queued.")
+        st.success(mt("queue_empty"))
         return
-    st.caption("Teachers can accept, edit, reject, or defer feedback. Decisions are stored in the local Streamlit session.")
-    risk_filter = st.multiselect("Risk level", ["high", "medium", "low"], default=["high", "medium"])
+    st.caption(mt("queue_caption"))
+    risk_filter = st.multiselect(mt("risk_level"), ["high", "medium", "low"], default=["high", "medium"])
     issue_options = sorted(queue["issue_type_predicted"].fillna("").astype(str).unique().tolist())
-    issue_filter = st.multiselect("Issue type", issue_options, default=issue_options)
+    issue_filter = st.multiselect(mt("issue_type"), issue_options, default=issue_options)
     filtered = queue[queue["risk_level"].isin(risk_filter) & queue["issue_type_predicted"].isin(issue_filter)].copy()
     for _, row in filtered.iterrows():
         item_id = safe_str(row.get("feedback_item_id"))
@@ -722,17 +986,17 @@ def page_teacher_queue() -> None:
             f"{item_id} · {row.get('risk_level')} · priority={priority} · score={score}",
             expanded=row.get("risk_level") == "high",
         ):
-            st.write(f"**Target span:** {row.get('target_span')}")
-            st.write(f"**AI suggestion:** {row.get('ai_suggestion')}")
-            st.write(f"**Routing reason:** {row.get('risk_reasons')}")
+            st.write(f"**{mt('target_span')}:** {row.get('target_span')}")
+            st.write(f"**{mt('ai_suggestion')}:** {row.get('ai_suggestion')}")
+            st.write(f"**{mt('routing_reason')}:** {row.get('risk_reasons')}")
             if safe_str(row.get("review_explanation")):
-                st.write(f"**AI review explanation:** {row.get('review_explanation')}")
+                st.write(f"**{mt('ai_review_explanation')}:** {row.get('review_explanation')}")
             cols = st.columns(3)
-            cols[0].metric("Review confidence", safe_str(row.get("review_confidence")) or "n/a")
-            cols[1].metric("Evidence signal", safe_str(row.get("evidence_signal")) or "none")
-            cols[2].metric("Priority", priority)
+            cols[0].metric(mt("review_confidence"), safe_str(row.get("review_confidence")) or "n/a")
+            cols[1].metric(mt("evidence_signal"), safe_str(row.get("evidence_signal")) or "none")
+            cols[2].metric(mt("priority"), priority)
             action = st.radio(
-                "Teacher action",
+                mt("teacher_action"),
                 ["pending", "accept", "edit", "reject", "needs_more_evidence"],
                 horizontal=True,
                 key=f"teacher_action_{item_id}",
@@ -742,7 +1006,7 @@ def page_teacher_queue() -> None:
             )
             st.session_state["teacher_decisions"][item_id] = action
     st.download_button(
-        "Download teacher queue.csv",
+        mt("download_queue"),
         data=filtered.to_csv(index=False, encoding="utf-8-sig"),
         file_name="teacher_queue.csv",
         mime="text/csv",
@@ -751,11 +1015,8 @@ def page_teacher_queue() -> None:
 
 
 def page_effectiveness_evaluation() -> None:
-    st.markdown('<div class="section-title">Page 6 · Effectiveness Evaluation</div>', unsafe_allow_html=True)
-    st.caption(
-        "This page evaluates implementation behavior on synthetic expectation labels and AI-review stress cases. "
-        "It is a sanity check for routing logic, not evidence from real classroom use."
-    )
+    st.markdown(f'<div class="section-title">{mt("eval_title")}</div>', unsafe_allow_html=True)
+    st.caption(mt("eval_caption"))
     feedback = read_table(str(DATA_PATHS["esl_feedback"]))
     evidence = read_table(str(DATA_PATHS["esl_evidence"]))
     expected = read_table(str(DATA_PATHS["esl_expected"]))
@@ -776,18 +1037,18 @@ def page_effectiveness_evaluation() -> None:
     stress_metrics = evaluate_routing_against_expected(stress_routing, stress_expected)
     combined_metrics = evaluate_routing_against_expected(combined_routing, combined_expected)
     c1, c2, c3, c4, c5 = st.columns(5)
-    c1.metric("Combined items", combined_metrics["items"])
-    c2.metric("Action accuracy", combined_metrics["action_accuracy"])
-    c3.metric("Risk accuracy", combined_metrics["risk_accuracy"])
-    c4.metric("High-risk recall", combined_metrics["high_risk_recall"])
-    c5.metric("Auto precision", combined_metrics["auto_accept_precision"])
+    c1.metric(mt("combined_items"), combined_metrics["items"])
+    c2.metric(mt("action_accuracy"), combined_metrics["action_accuracy"])
+    c3.metric(mt("risk_accuracy"), combined_metrics["risk_accuracy"])
+    c4.metric(mt("high_risk_recall"), combined_metrics["high_risk_recall"])
+    c5.metric(mt("auto_precision"), combined_metrics["auto_accept_precision"])
     st.info(combined_metrics["note"])
-    st.markdown("### Evaluation sets")
+    st.markdown(f"### {mt('evaluation_sets')}")
     st.dataframe(
         pd.DataFrame(
             [
-                {"set": "packaged synthetic demo", **metrics},
-                {"set": "AI-review stress cases", **stress_metrics},
+                {"set": mt("packaged_demo"), **metrics},
+                {"set": mt("stress_cases"), **stress_metrics},
                 {"set": "combined", **combined_metrics},
             ]
         ),
@@ -798,7 +1059,7 @@ def page_effectiveness_evaluation() -> None:
     if not merged.empty:
         merged["action_match"] = merged["recommended_action"] == merged["expected_action"]
         merged["risk_match"] = merged["risk_level"] == merged["expected_risk_level"]
-        st.markdown("### Packaged synthetic demo")
+        st.markdown(f"### {mt('packaged_demo')}")
         st.dataframe(merged, use_container_width=True, hide_index=True)
     stress_merged = (
         stress_routing.merge(stress_expected, on="feedback_item_id", how="left")
@@ -808,21 +1069,17 @@ def page_effectiveness_evaluation() -> None:
     if not stress_merged.empty:
         stress_merged["action_match"] = stress_merged["recommended_action"] == stress_merged["expected_action"]
         stress_merged["risk_match"] = stress_merged["risk_level"] == stress_merged["expected_risk_level"]
-        st.markdown("### AI-review stress cases")
+        st.markdown(f"### {mt('stress_cases')}")
         st.dataframe(stress_merged, use_container_width=True, hide_index=True)
-    st.markdown("### Validity assessment")
-    st.write(
-        "Current evidence supports a demo-level claim: the system can operationalize a teacher-review workflow and reliably "
-        "route synthetic high-risk feedback to review. It does not yet support a classroom effectiveness claim because no "
-        "real teacher annotations, student outcomes, or time-on-task measurements have been collected."
-    )
+    st.markdown(f"### {mt('validity_assessment')}")
+    st.write(mt("validity_text"))
 
 
 def page_reports() -> None:
-    st.markdown('<div class="section-title">Page 7 · Reports</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="section-title">{mt("reports_title")}</div>', unsafe_allow_html=True)
     result = current_esl_result()
     if not result:
-        st.info("Run Single Essay Review or Batch Review first.")
+        st.info(mt("run_first"))
         return
     merged = result.get("merged", pd.DataFrame())
     summary = result.get("summary", {})
@@ -830,20 +1087,20 @@ def page_reports() -> None:
         st.dataframe(summary, use_container_width=True, hide_index=True)
     else:
         display_esl_summary(summary)
-    display_esl_feedback_table(merged, "Report table")
+    display_esl_feedback_table(merged, mt("report_table"))
     report_text = result.get("report", "")
     if not report_text and not merged.empty:
         report_text = "ConsensusScope batch report\n\nDownload the routed feedback CSV for item-level details."
-    st.text_area("Report preview", value=report_text, height=260)
+    st.text_area(mt("report_preview"), value=report_text, height=260)
     st.download_button(
-        "Download routed feedback.csv",
+        mt("download_routed_csv"),
         data=merged.to_csv(index=False, encoding="utf-8-sig") if not merged.empty else "",
         file_name="esl_routed_feedback.csv",
         mime="text/csv",
         use_container_width=True,
     )
     st.download_button(
-        "Download report.md",
+        mt("download_report_md"),
         data=report_text.encode("utf-8"),
         file_name="esl_feedback_review_report.md",
         mime="text/markdown",
@@ -864,24 +1121,24 @@ def page_settings_diagnostics(
     effectiveness_df: pd.DataFrame,
     error_df: pd.DataFrame,
 ) -> None:
-    st.markdown('<div class="section-title">Page 8 · Settings / Diagnostics</div>', unsafe_allow_html=True)
-    st.info("Operational teacher workflow pages are now Pages 2-7. This page keeps API settings and legacy diagnostics secondary.")
-    with st.expander("API diagnostics", expanded=False):
+    st.markdown(f'<div class="section-title">{mt("settings_title")}</div>', unsafe_allow_html=True)
+    st.info(mt("settings_info"))
+    with st.expander(mt("api_diagnostics"), expanded=False):
         st.write(f"API mode: {api_mode}")
         st.write(f"Selected providers: {', '.join(selected) if selected else 'none'}")
         st.write(f"Fixed judge enabled: {fixed_enabled}; provider: {fixed_provider or 'not selected'}")
-    with st.expander("Legacy feedback technical demo", expanded=False):
+    with st.expander(mt("legacy_feedback"), expanded=False):
         render_literary_feedback_mode(api_mode, selected, user_inputs)
-    with st.expander("Auxiliary QA comparison", expanded=False):
+    with st.expander(mt("aux_qa_comparison"), expanded=False):
         page_comparison(metrics_df)
-    with st.expander("Auxiliary QA risk dashboard", expanded=False):
+    with st.expander(mt("aux_qa_risk"), expanded=False):
         page_risk_dashboard(risk_df, effectiveness_df)
-    with st.expander("Auxiliary QA case explorer", expanded=False):
+    with st.expander(mt("aux_qa_case"), expanded=False):
         page_case_explorer(error_df, samples_df, outputs_df)
 
 
 def page_home(samples_df: pd.DataFrame, outputs_df: pd.DataFrame, metrics_df: pd.DataFrame, risk_df: pd.DataFrame) -> None:
-    st.markdown('<div class="section-title">Page 1 · Home / System Overview</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="section-title">{mt("home_title")}</div>', unsafe_allow_html=True)
     esl_essays = read_table(str(DATA_PATHS["esl_essays"]))
     esl_feedback = read_table(str(DATA_PATHS["esl_feedback"]))
     esl_routing = read_table(str(DATA_PATHS["esl_routing"]))
@@ -892,28 +1149,23 @@ def page_home(samples_df: pd.DataFrame, outputs_df: pd.DataFrame, metrics_df: pd
     high_risk = int((esl_routing.get("risk_level", pd.Series(dtype=str)) == "high").sum()) if not esl_routing.empty else 0
     c1, c2, c3, c4 = st.columns(4)
     with c1:
-        metric_panel("Synthetic Essays", str(len(esl_essays)), "ESL writing demo")
+        metric_panel(mt("synthetic_essays"), str(len(esl_essays)), mt("esl_demo"))
     with c2:
-        metric_panel("Feedback Items", str(len(esl_feedback)), "unified schema")
+        metric_panel(mt("feedback_items"), str(len(esl_feedback)), mt("unified_schema"))
     with c3:
-        metric_panel("Auto Accept", str(auto_accept), "low-risk local edits")
+        metric_panel(mt("auto_accepted"), str(auto_accept), mt("low_risk_edits"))
     with c4:
-        metric_panel("Teacher Review", str(teacher_review), f"{high_risk} high-risk items")
+        metric_panel(mt("teacher_review"), str(teacher_review), mt("high_risk_items", count=high_risk))
     st.code(
         "Single Essay Review -> Batch Review -> AI Feedback Comparison -> Teacher Queue -> Effectiveness Evaluation -> Reports",
         language="text",
     )
     st.markdown(
-        "**Main demo claim:** teacher-in-the-loop review routing for safe AI-generated ESL writing feedback. "
-        "Teachers can run single-essay or batch feedback review, inspect AI feedback comparisons, and route risky feedback "
-        "into a teacher queue before student release."
+        mt("main_claim")
     )
-    st.info(
-        "The current product UI reference is ui_prototype/index.html. Streamlit retains technical and auxiliary modules "
-        "for inspection, but earlier modules are not the main EMNLP 2026 demo claim."
-    )
+    st.info(mt("prototype_info"))
     if not esl_routing.empty:
-        st.markdown('<div class="section-title">ESL Writing Feedback Routing Snapshot</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="section-title">{mt("routing_snapshot")}</div>', unsafe_allow_html=True)
         snapshot = {
             "synthetic_essays": len(esl_essays),
             "feedback_items": len(esl_feedback),
@@ -1461,25 +1713,18 @@ Limitations:
 
 
 def page_design_reference() -> None:
-    st.markdown('<div class="section-title">Page 9 · Design Reference</div>', unsafe_allow_html=True)
-    st.caption(
-        "Designer-facing preview for the current ESL writing teacher-review workspace. "
-        "The standalone source is ui_prototype/index.html."
-    )
+    st.markdown(f'<div class="section-title">{mt("design_title")}</div>', unsafe_allow_html=True)
+    st.caption(mt("design_caption"))
     brief_path = ROOT / "ui_prototype" / "README.md"
     mockup_path = ROOT / "ui_prototype" / "index.html"
 
     c1, c2, c3 = st.columns([0.55, 0.23, 0.22])
     with c1:
-        st.markdown(
-            "Use this page when sharing the live site with a UI/UX designer. "
-            "The intended design direction is a teacher workflow for reviewing ESL writing feedback, "
-            "with model diagnostics moved into Settings / Diagnostics."
-        )
+        st.markdown(mt("design_text"))
     with c2:
         if brief_path.exists():
             st.download_button(
-                "Download Chinese design brief",
+                mt("download_design_brief"),
                 brief_path.read_bytes(),
                 file_name="ConsensusScope_ESL_UI_prototype_readme.md",
                 mime="text/markdown",
@@ -1488,7 +1733,7 @@ def page_design_reference() -> None:
     with c3:
         if mockup_path.exists():
             st.download_button(
-                "Download HTML mockup",
+                mt("download_html_mockup"),
                 mockup_path.read_bytes(),
                 file_name="ConsensusScope_ESL_writing_UI_prototype.html",
                 mime="text/html",
@@ -1496,7 +1741,7 @@ def page_design_reference() -> None:
             )
 
     if not mockup_path.exists():
-        st.warning("Design reference mockup is not available in this package.")
+        st.warning(mt("design_missing"))
         return
 
     components.html(mockup_path.read_text(encoding="utf-8"), height=1120, scrolling=True)
@@ -1507,6 +1752,13 @@ def main() -> None:
     load_dotenv(ROOT / ".env")
     inject_styles()
     ensure_state()
+    language_choice = st.sidebar.selectbox(
+        mt("language_label"),
+        ["English", "中文"],
+        index=0 if ui_lang() == "en" else 1,
+        key="main_language_selector",
+    )
+    st.session_state["ui_language"] = "zh" if language_choice == "中文" else "en"
     topbar()
     if not render_demo_auth_gate():
         return
@@ -1523,45 +1775,48 @@ def main() -> None:
 
     st.sidebar.markdown("### ConsensusScope")
     if demo_auth_required() and st.session_state.get("demo_authenticated"):
-        if st.sidebar.button("Lock demo", use_container_width=True):
+        if st.sidebar.button(mt("lock_demo"), use_container_width=True):
             st.session_state["demo_authenticated"] = False
             st.rerun()
-    page = st.sidebar.radio(
-        "Navigation",
-        [
-            "Page 1: Review Workspace",
-            "Page 2: Single Essay Review",
-            "Page 3: Batch Review",
-            "Page 4: AI Feedback Comparison",
-            "Page 5: Teacher Queue",
-            "Page 6: Effectiveness Evaluation",
-            "Page 7: Reports",
-            "Page 8: Settings / Diagnostics",
-            "Page 9: Design Reference",
-        ],
+    page_keys = [
+        "page_home",
+        "page_single",
+        "page_batch",
+        "page_compare",
+        "page_queue",
+        "page_eval",
+        "page_reports",
+        "page_settings",
+        "page_design",
+    ]
+    page_labels = [mt(key) for key in page_keys]
+    page_label = st.sidebar.radio(
+        mt("navigation"),
+        page_labels,
         label_visibility="collapsed",
     )
+    page_key = page_keys[page_labels.index(page_label)]
     st.sidebar.divider()
-    if page.startswith("Page 9"):
+    if page_key == "page_design":
         api_mode, selected, user_inputs, fixed_enabled, fixed_provider = "Mode A", [], {}, False, ""
     else:
         api_mode, selected, user_inputs, fixed_enabled, fixed_provider = render_api_sidebar()
 
-    if page.startswith("Page 1"):
+    if page_key == "page_home":
         page_home(samples_df, outputs_df, metrics_df, risk_df)
-    elif page.startswith("Page 2"):
+    elif page_key == "page_single":
         page_single_essay_review()
-    elif page.startswith("Page 3"):
+    elif page_key == "page_batch":
         page_batch_review()
-    elif page.startswith("Page 4"):
+    elif page_key == "page_compare":
         page_ai_feedback_comparison()
-    elif page.startswith("Page 5"):
+    elif page_key == "page_queue":
         page_teacher_queue()
-    elif page.startswith("Page 6"):
+    elif page_key == "page_eval":
         page_effectiveness_evaluation()
-    elif page.startswith("Page 7"):
+    elif page_key == "page_reports":
         page_reports()
-    elif page.startswith("Page 8"):
+    elif page_key == "page_settings":
         page_settings_diagnostics(
             api_mode,
             selected,

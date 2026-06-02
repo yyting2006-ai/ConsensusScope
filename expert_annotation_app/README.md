@@ -15,6 +15,10 @@ The first version prioritizes **Blind Annotation Mode**. In blind mode, the app
 hides system `risk_level`, `recommended_action`, model agreement, model name,
 and ConsensusScope routing decisions.
 
+The interface supports English and Chinese switching from the sidebar. Exported
+CSV/JSON field names and label values remain in English canonical form for
+analysis.
+
 ## Run
 
 From this folder:

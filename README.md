@@ -35,6 +35,8 @@ variables, Streamlit Secrets, or user-provided keys.
 
 The Streamlit app now contains operational teacher-facing windows:
 
+- **Language switch**: the main demo can switch between English and Chinese
+  from the sidebar without changing exported CSV schemas.
 - **Single Essay Review**: paste one ESL essay, generate no-API AI-style
   feedback candidates, route each feedback item, and export a report.
 - **Batch Review**: upload a CSV or use packaged demo essays, process multiple
