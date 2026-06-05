@@ -104,39 +104,18 @@ personally identifying information.
 
 ## Storage
 
-For formal teacher annotation, use Supabase/PostgreSQL external storage. Run
-the repository-level SQL file before deployment:
-
-```text
-consensusscope_supabase_schema.sql
-```
-
-Then configure Streamlit Secrets:
-
-```toml
-SUPABASE_URL = "https://your-project-ref.supabase.co"
-SUPABASE_SERVICE_ROLE_KEY = "your-service-role-key"
-```
-
-When these secrets are present, the app writes to these Supabase tables:
-
-- `consensusscope_expert_sessions`
-- `consensusscope_essay_annotations`
-- `consensusscope_feedback_decisions`
-- `consensusscope_feedback_safety_checks`
-- `consensusscope_annotation_logs`
-
-If Supabase is not configured, the app falls back to local SQLite for local
-development only:
+The current expert annotation website uses local SQLite storage:
 
 ```text
 annotation_data/expert_annotations.sqlite3
 ```
 
-Local SQLite is not durable on Streamlit Community Cloud and should not be used
-as the main research data store.
+On Streamlit Community Cloud, local SQLite is convenient for the demo but may be
+reset by the hosting platform. For formal teacher annotation, export the
+CSV/JSON files from the Export page after each session and back them up outside
+Streamlit Cloud.
 
-The local SQLite fallback creates these tables:
+The local SQLite database creates these tables:
 
 - `expert_sessions`
 - `essay_annotations`

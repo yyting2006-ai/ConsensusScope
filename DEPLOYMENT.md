@@ -37,37 +37,17 @@ usage guard; it is not a substitute for keeping API keys out of the repository.
    Streamlit Secrets. Leave it blank for an open no-API reviewer demo.
 7. Deploy and test the pages listed below.
 
-## External Database
+## Storage Boundary
 
-For durable teacher-review decisions and expert annotation data, use
-Supabase/PostgreSQL instead of Streamlit's local filesystem.
+This public demo package does not use an external database. The main demo keeps
+teacher-queue decisions in the current browser session. The expert annotation
+app writes annotations to a local SQLite file inside the Streamlit app container
+and provides CSV/JSON export buttons.
 
-1. Create a Supabase project.
-2. Open Supabase Dashboard -> SQL Editor.
-3. Run:
-
-```text
-consensusscope_supabase_schema.sql
-```
-
-4. In each ConsensusScope Streamlit app's Secrets editor, add:
-
-```toml
-SUPABASE_URL = "https://your-project-ref.supabase.co"
-SUPABASE_SERVICE_ROLE_KEY = "your-service-role-key"
-```
-
-For the main demo, teacher-queue decisions are stored externally when these
-secrets are configured. The main demo does not store full queue item text by
-default. To store queue payloads intentionally, add:
-
-```toml
-CONSENSUS_SCOPE_STORE_DECISION_PAYLOAD = true
-```
-
-For the expert annotation app, all expert sessions, essay annotations, feedback
-decisions, safety checks, and annotation logs are stored in Supabase when these
-secrets are configured. SQLite is retained only as a local fallback.
+For formal data collection on Streamlit Community Cloud, export the annotation
+files after each teacher session and back them up outside Streamlit Cloud. Local
+container storage may be reset by the hosting platform and should not be treated
+as the only copy of research data.
 
 ## Local Smoke Test
 

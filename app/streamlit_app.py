@@ -346,13 +346,10 @@ MAIN_TRANSLATIONS = {
         "model_label": "{provider} model",
         "base_url_label": "{provider} base URL",
         "storage_backend": "Storage backend",
-        "external_db": "Supabase/PostgreSQL",
         "session_only": "Browser session only",
         "reviewer_id": "Reviewer ID",
-        "reviewer_id_help": "Used to save teacher queue decisions in the external database. Use an anonymous ID.",
+        "reviewer_id_help": "Anonymous label used only in the current browser session.",
         "decision_saved": "Decision saved.",
-        "external_db_error": "External database is configured but not ready. Teacher queue decisions will stay in the browser session. Run consensusscope_supabase_schema.sql in Supabase and verify SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY. Error: {error}",
-        "external_db_disabled": "Supabase unavailable; browser session only",
         },
     "zh": {
         "language_label": "Language / 语言",
@@ -585,13 +582,10 @@ MAIN_TRANSLATIONS = {
         "model_label": "{provider} 模型名称",
         "base_url_label": "{provider} Base URL",
         "storage_backend": "存储后端",
-        "external_db": "Supabase/PostgreSQL 外部数据库",
         "session_only": "仅当前浏览器会话",
         "reviewer_id": "教师编号",
-        "reviewer_id_help": "用于将教师复核队列决策保存到外部数据库。请使用匿名编号。",
+        "reviewer_id_help": "仅作为当前浏览器会话中的匿名标识。",
         "decision_saved": "决策已保存。",
-        "external_db_error": "外部数据库已配置，但当前不可用。教师队列决策会暂时只保存在浏览器会话中。请在 Supabase SQL Editor 运行 consensusscope_supabase_schema.sql，并检查 SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY。错误：{error}",
-        "external_db_disabled": "Supabase 不可用；仅当前浏览器会话",
     },
 }
 
@@ -827,106 +821,8 @@ def configured_value(key: str) -> str:
     return str(secret_value) if secret_value else ""
 
 
-@st.cache_resource(show_spinner=False)
-def supabase_client():
-    url = configured_value("SUPABASE_URL")
-    key = configured_value("SUPABASE_SERVICE_ROLE_KEY") or configured_value("SUPABASE_KEY")
-    if not url or not key:
-        return None
-    try:
-        from supabase import create_client
-    except Exception as exc:
-        st.warning(mt("read_error", path="supabase", error=exc))
-        return None
-    return create_client(url, key)
-
-
-def supabase_disabled_reason() -> str:
-    return safe_str(st.session_state.get("supabase_disabled_reason"))
-
-
-def supabase_error_text(exc: Exception) -> str:
-    details = []
-    for attr in ("code", "message", "details", "hint"):
-        value = getattr(exc, attr, None)
-        if value:
-            details.append(f"{attr}={value}")
-    raw = safe_str(exc)
-    if raw and raw not in details:
-        details.append(raw)
-    return "; ".join(details) or type(exc).__name__
-
-
-def disable_supabase_for_session(exc: Exception) -> None:
-    message = supabase_error_text(exc)
-    st.session_state["supabase_disabled_reason"] = message
-    st.warning(mt("external_db_error", error=message))
-
-
-def active_supabase_client():
-    if supabase_disabled_reason():
-        return None
-    return supabase_client()
-
-
-def using_external_db() -> bool:
-    return active_supabase_client() is not None
-
-
 def storage_backend_name() -> str:
-    if supabase_disabled_reason():
-        return mt("external_db_disabled")
-    return mt("external_db") if using_external_db() else mt("session_only")
-
-
-def store_decision_payload() -> bool:
-    return truthy(configured_value("CONSENSUS_SCOPE_STORE_DECISION_PAYLOAD"))
-
-
-def json_safe(value: Any) -> Any:
-    return json.loads(json.dumps(value, ensure_ascii=False, default=str))
-
-
-def load_external_teacher_decisions(reviewer_id: str) -> Dict[str, str]:
-    client = active_supabase_client()
-    if not client or not reviewer_id:
-        return {}
-    try:
-        result = (
-            client.table("consensusscope_main_teacher_decisions")
-            .select("feedback_item_id,teacher_action")
-            .eq("reviewer_id", reviewer_id)
-            .execute()
-        )
-        return {safe_str(row.get("feedback_item_id")): safe_str(row.get("teacher_action")) for row in result.data or []}
-    except Exception as exc:
-        disable_supabase_for_session(exc)
-        return {}
-
-
-def save_external_teacher_decision(reviewer_id: str, feedback_item_id: str, action: str, row: Mapping[str, Any]) -> None:
-    client = active_supabase_client()
-    if not client or not reviewer_id or not feedback_item_id:
-        return
-    payload = row.to_dict() if hasattr(row, "to_dict") else dict(row)
-    item_payload = json_safe(payload) if store_decision_payload() else None
-    now = datetime.now().replace(microsecond=0).isoformat()
-    try:
-        client.table("consensusscope_main_teacher_decisions").upsert(
-            {
-                "reviewer_id": reviewer_id,
-                "feedback_item_id": feedback_item_id,
-                "teacher_action": action,
-                "risk_level": safe_str(payload.get("risk_level")),
-                "issue_type": safe_str(payload.get("issue_type_predicted") or payload.get("issue_type")),
-                "review_priority": safe_str(payload.get("review_priority")),
-                "item_payload": item_payload,
-                "updated_at": now,
-            },
-            on_conflict="reviewer_id,feedback_item_id",
-        ).execute()
-    except Exception as exc:
-        disable_supabase_for_session(exc)
+    return mt("session_only")
 
 
 def truthy(value: str) -> bool:
@@ -1483,8 +1379,6 @@ def page_teacher_queue() -> None:
         help=mt("reviewer_id_help"),
     )
     st.session_state["main_reviewer_id"] = reviewer_id
-    if using_external_db():
-        st.session_state["teacher_decisions"].update(load_external_teacher_decisions(reviewer_id))
     risk_filter = st.multiselect(mt("risk_level"), ["high", "medium", "low"], default=["high", "medium"], format_func=value_label)
     issue_options = sorted(queue["issue_type_predicted"].fillna("").astype(str).unique().tolist())
     issue_filter = st.multiselect(mt("issue_type"), issue_options, default=issue_options, format_func=value_label)
@@ -1517,8 +1411,6 @@ def page_teacher_queue() -> None:
                 ),
             )
             st.session_state["teacher_decisions"][item_id] = action
-            if using_external_db():
-                save_external_teacher_decision(reviewer_id, item_id, action, row)
     st.download_button(
         mt("download_queue"),
         data=filtered.to_csv(index=False, encoding="utf-8-sig"),
