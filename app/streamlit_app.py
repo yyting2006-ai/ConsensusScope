@@ -351,6 +351,8 @@ MAIN_TRANSLATIONS = {
         "reviewer_id": "Reviewer ID",
         "reviewer_id_help": "Used to save teacher queue decisions in the external database. Use an anonymous ID.",
         "decision_saved": "Decision saved.",
+        "external_db_error": "External database is configured but not ready. Teacher queue decisions will stay in the browser session. Run consensusscope_supabase_schema.sql in Supabase and verify SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY. Error: {error}",
+        "external_db_disabled": "Supabase unavailable; browser session only",
         },
     "zh": {
         "language_label": "Language / 语言",
@@ -588,6 +590,8 @@ MAIN_TRANSLATIONS = {
         "reviewer_id": "教师编号",
         "reviewer_id_help": "用于将教师复核队列决策保存到外部数据库。请使用匿名编号。",
         "decision_saved": "决策已保存。",
+        "external_db_error": "外部数据库已配置，但当前不可用。教师队列决策会暂时只保存在浏览器会话中。请在 Supabase SQL Editor 运行 consensusscope_supabase_schema.sql，并检查 SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY。错误：{error}",
+        "external_db_disabled": "Supabase 不可用；仅当前浏览器会话",
     },
 }
 
@@ -837,8 +841,42 @@ def supabase_client():
     return create_client(url, key)
 
 
+def supabase_disabled_reason() -> str:
+    return safe_str(st.session_state.get("supabase_disabled_reason"))
+
+
+def supabase_error_text(exc: Exception) -> str:
+    details = []
+    for attr in ("code", "message", "details", "hint"):
+        value = getattr(exc, attr, None)
+        if value:
+            details.append(f"{attr}={value}")
+    raw = safe_str(exc)
+    if raw and raw not in details:
+        details.append(raw)
+    return "; ".join(details) or type(exc).__name__
+
+
+def disable_supabase_for_session(exc: Exception) -> None:
+    message = supabase_error_text(exc)
+    st.session_state["supabase_disabled_reason"] = message
+    st.warning(mt("external_db_error", error=message))
+
+
+def active_supabase_client():
+    if supabase_disabled_reason():
+        return None
+    return supabase_client()
+
+
 def using_external_db() -> bool:
-    return supabase_client() is not None
+    return active_supabase_client() is not None
+
+
+def storage_backend_name() -> str:
+    if supabase_disabled_reason():
+        return mt("external_db_disabled")
+    return mt("external_db") if using_external_db() else mt("session_only")
 
 
 def store_decision_payload() -> bool:
@@ -850,38 +888,45 @@ def json_safe(value: Any) -> Any:
 
 
 def load_external_teacher_decisions(reviewer_id: str) -> Dict[str, str]:
-    client = supabase_client()
+    client = active_supabase_client()
     if not client or not reviewer_id:
         return {}
-    result = (
-        client.table("consensusscope_main_teacher_decisions")
-        .select("feedback_item_id,teacher_action")
-        .eq("reviewer_id", reviewer_id)
-        .execute()
-    )
-    return {safe_str(row.get("feedback_item_id")): safe_str(row.get("teacher_action")) for row in result.data or []}
+    try:
+        result = (
+            client.table("consensusscope_main_teacher_decisions")
+            .select("feedback_item_id,teacher_action")
+            .eq("reviewer_id", reviewer_id)
+            .execute()
+        )
+        return {safe_str(row.get("feedback_item_id")): safe_str(row.get("teacher_action")) for row in result.data or []}
+    except Exception as exc:
+        disable_supabase_for_session(exc)
+        return {}
 
 
 def save_external_teacher_decision(reviewer_id: str, feedback_item_id: str, action: str, row: Mapping[str, Any]) -> None:
-    client = supabase_client()
+    client = active_supabase_client()
     if not client or not reviewer_id or not feedback_item_id:
         return
     payload = row.to_dict() if hasattr(row, "to_dict") else dict(row)
     item_payload = json_safe(payload) if store_decision_payload() else None
     now = datetime.now().replace(microsecond=0).isoformat()
-    client.table("consensusscope_main_teacher_decisions").upsert(
-        {
-            "reviewer_id": reviewer_id,
-            "feedback_item_id": feedback_item_id,
-            "teacher_action": action,
-            "risk_level": safe_str(payload.get("risk_level")),
-            "issue_type": safe_str(payload.get("issue_type_predicted") or payload.get("issue_type")),
-            "review_priority": safe_str(payload.get("review_priority")),
-            "item_payload": item_payload,
-            "updated_at": now,
-        },
-        on_conflict="reviewer_id,feedback_item_id",
-    ).execute()
+    try:
+        client.table("consensusscope_main_teacher_decisions").upsert(
+            {
+                "reviewer_id": reviewer_id,
+                "feedback_item_id": feedback_item_id,
+                "teacher_action": action,
+                "risk_level": safe_str(payload.get("risk_level")),
+                "issue_type": safe_str(payload.get("issue_type_predicted") or payload.get("issue_type")),
+                "review_priority": safe_str(payload.get("review_priority")),
+                "item_payload": item_payload,
+                "updated_at": now,
+            },
+            on_conflict="reviewer_id,feedback_item_id",
+        ).execute()
+    except Exception as exc:
+        disable_supabase_for_session(exc)
 
 
 def truthy(value: str) -> bool:
@@ -1431,8 +1476,7 @@ def page_teacher_queue() -> None:
         st.success(mt("queue_empty"))
         return
     st.caption(mt("queue_caption"))
-    backend = mt("external_db") if using_external_db() else mt("session_only")
-    st.caption(f"{mt('storage_backend')}: {backend}")
+    st.caption(f"{mt('storage_backend')}: {storage_backend_name()}")
     reviewer_id = st.text_input(
         mt("reviewer_id"),
         value=safe_str(st.session_state.get("main_reviewer_id")) or "demo_teacher",
@@ -1601,7 +1645,7 @@ def page_settings_diagnostics(
         st.write(f"{mt('api_mode')}: {api_mode}")
         st.write(f"{mt('answer_models')}: {', '.join(selected) if selected else mt('none')}")
         st.write(f"{mt('enable_fixed_judge')}: {fixed_enabled}; {mt('fixed_judge_model')}: {fixed_provider or mt('not_available')}")
-        st.write(f"{mt('storage_backend')}: {mt('external_db') if using_external_db() else mt('session_only')}")
+        st.write(f"{mt('storage_backend')}: {storage_backend_name()}")
     with st.expander(mt("legacy_feedback"), expanded=False):
         render_literary_feedback_mode(api_mode, selected, user_inputs)
     with st.expander(mt("aux_qa_comparison"), expanded=False):
@@ -2280,7 +2324,7 @@ def main() -> None:
         api_mode, selected, user_inputs, fixed_enabled, fixed_provider = "Mode A", [], {}, False, ""
     else:
         api_mode, selected, user_inputs, fixed_enabled, fixed_provider = render_api_sidebar()
-        st.sidebar.caption(f"{mt('storage_backend')}: {mt('external_db') if using_external_db() else mt('session_only')}")
+        st.sidebar.caption(f"{mt('storage_backend')}: {storage_backend_name()}")
 
     if page_key == "page_home":
         page_home(samples_df, outputs_df, metrics_df, risk_df)

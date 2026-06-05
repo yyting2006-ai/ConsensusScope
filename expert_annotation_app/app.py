@@ -242,6 +242,8 @@ TRANSLATIONS = {
         "essay_item": "Essay review",
         "feedback_decision_item": "Feedback judgment",
         "feedback_safety_item": "Feedback safety check",
+        "external_db_error": "External database is configured but not ready. The page is using a temporary SQLite fallback for this session. Run consensusscope_supabase_schema.sql in Supabase and verify SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY. Error: {error}",
+        "external_db_disabled": "Supabase unavailable; temporary SQLite fallback",
     },
     "zh": {
         "language_label": "Language / 语言",
@@ -383,6 +385,8 @@ TRANSLATIONS = {
         "essay_item": "作文整体评价",
         "feedback_decision_item": "逐条反馈判断",
         "feedback_safety_item": "反馈风险判断",
+        "external_db_error": "外部数据库已配置，但当前不可用。本次页面会临时回退到 SQLite。请在 Supabase SQL Editor 运行 consensusscope_supabase_schema.sql，并检查 SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY。错误：{error}",
+        "external_db_disabled": "Supabase 不可用；临时 SQLite 回退",
     }
 }
 
@@ -521,11 +525,41 @@ def supabase_client():
     return create_client(url, key)
 
 
+def supabase_disabled_reason() -> str:
+    return safe_str(st.session_state.get("supabase_disabled_reason"))
+
+
+def supabase_error_text(exc: Exception) -> str:
+    details = []
+    for attr in ("code", "message", "details", "hint"):
+        value = getattr(exc, attr, None)
+        if value:
+            details.append(f"{attr}={value}")
+    raw = safe_str(exc)
+    if raw and raw not in details:
+        details.append(raw)
+    return "; ".join(details) or type(exc).__name__
+
+
+def disable_supabase_for_session(exc: Exception) -> None:
+    message = supabase_error_text(exc)
+    st.session_state["supabase_disabled_reason"] = message
+    st.warning(t("external_db_error", error=message))
+
+
+def active_supabase_client():
+    if supabase_disabled_reason():
+        return None
+    return supabase_client()
+
+
 def using_external_db() -> bool:
-    return supabase_client() is not None
+    return active_supabase_client() is not None
 
 
 def storage_backend_label() -> str:
+    if supabase_disabled_reason():
+        return t("external_db_disabled")
     return "Supabase/PostgreSQL" if using_external_db() else "SQLite local fallback"
 
 
@@ -565,8 +599,6 @@ def connect() -> sqlite3.Connection:
 
 
 def init_db() -> None:
-    if using_external_db():
-        return
     with connect() as conn:
         conn.executescript(
             """
@@ -704,35 +736,38 @@ def session_id_for(expert_id: str, batch_id: str, mode: str) -> str:
 def create_or_select_session(expert_id: str, batch_id: str, mode: str) -> None:
     current_time = now_iso()
     sid = session_id_for(expert_id, batch_id, mode)
-    client = supabase_client()
+    client = active_supabase_client()
     if client:
-        existing = (
-            client.table(SUPABASE_TABLES["expert_sessions"])
-            .select("created_at")
-            .eq("expert_id", expert_id)
-            .eq("batch_id", batch_id)
-            .eq("annotation_mode", mode)
-            .limit(1)
-            .execute()
-        )
-        created_at = (existing.data or [{}])[0].get("created_at") or current_time
-        client.table(SUPABASE_TABLES["expert_sessions"]).upsert(
-            {
-                "session_id": sid,
-                "expert_id": expert_id,
-                "batch_id": batch_id,
-                "annotation_mode": mode,
-                "created_at": created_at,
-                "updated_at": current_time,
-                "duration_seconds": 0,
-            },
-            on_conflict="expert_id,batch_id,annotation_mode",
-        ).execute()
-        st.session_state["expert_id"] = expert_id
-        st.session_state["batch_id"] = batch_id
-        st.session_state["annotation_mode"] = mode
-        st.session_state["session_timer_started_at"] = time.time()
-        return
+        try:
+            existing = (
+                client.table(SUPABASE_TABLES["expert_sessions"])
+                .select("created_at")
+                .eq("expert_id", expert_id)
+                .eq("batch_id", batch_id)
+                .eq("annotation_mode", mode)
+                .limit(1)
+                .execute()
+            )
+            created_at = (existing.data or [{}])[0].get("created_at") or current_time
+            client.table(SUPABASE_TABLES["expert_sessions"]).upsert(
+                {
+                    "session_id": sid,
+                    "expert_id": expert_id,
+                    "batch_id": batch_id,
+                    "annotation_mode": mode,
+                    "created_at": created_at,
+                    "updated_at": current_time,
+                    "duration_seconds": 0,
+                },
+                on_conflict="expert_id,batch_id,annotation_mode",
+            ).execute()
+            st.session_state["expert_id"] = expert_id
+            st.session_state["batch_id"] = batch_id
+            st.session_state["annotation_mode"] = mode
+            st.session_state["session_timer_started_at"] = time.time()
+            return
+        except Exception as exc:
+            disable_supabase_for_session(exc)
 
     with connect() as conn:
         conn.execute(
@@ -761,20 +796,23 @@ def touch_session() -> None:
     st.session_state["session_timer_started_at"] = time.time()
     sid = session_id_for(session["expert_id"], session["batch_id"], session["annotation_mode"])
     current_time = now_iso()
-    client = supabase_client()
+    client = active_supabase_client()
     if client:
-        result = (
-            client.table(SUPABASE_TABLES["expert_sessions"])
-            .select("duration_seconds")
-            .eq("session_id", sid)
-            .limit(1)
-            .execute()
-        )
-        previous = float((result.data or [{}])[0].get("duration_seconds") or 0.0)
-        client.table(SUPABASE_TABLES["expert_sessions"]).update(
-            {"updated_at": current_time, "duration_seconds": previous + elapsed}
-        ).eq("session_id", sid).execute()
-        return
+        try:
+            result = (
+                client.table(SUPABASE_TABLES["expert_sessions"])
+                .select("duration_seconds")
+                .eq("session_id", sid)
+                .limit(1)
+                .execute()
+            )
+            previous = float((result.data or [{}])[0].get("duration_seconds") or 0.0)
+            client.table(SUPABASE_TABLES["expert_sessions"]).update(
+                {"updated_at": current_time, "duration_seconds": previous + elapsed}
+            ).eq("session_id", sid).execute()
+            return
+        except Exception as exc:
+            disable_supabase_for_session(exc)
 
     with connect() as conn:
         row = conn.execute("SELECT duration_seconds FROM expert_sessions WHERE session_id=?", (sid,)).fetchone()
@@ -786,16 +824,19 @@ def touch_session() -> None:
 
 
 def read_sessions() -> pd.DataFrame:
-    client = supabase_client()
+    client = active_supabase_client()
     if client:
-        result = (
-            client.table(SUPABASE_TABLES["expert_sessions"])
-            .select("*")
-            .order("updated_at", desc=True)
-            .order("created_at", desc=True)
-            .execute()
-        )
-        return pd.DataFrame(result.data or [])
+        try:
+            result = (
+                client.table(SUPABASE_TABLES["expert_sessions"])
+                .select("*")
+                .order("updated_at", desc=True)
+                .order("created_at", desc=True)
+                .execute()
+            )
+            return pd.DataFrame(result.data or [])
+        except Exception as exc:
+            disable_supabase_for_session(exc)
     with connect() as conn:
         return pd.read_sql_query(
             "SELECT * FROM expert_sessions ORDER BY updated_at DESC, created_at DESC",
@@ -807,17 +848,20 @@ def read_annotation_table(table: str) -> pd.DataFrame:
     session = get_session()
     if not session_ready():
         return pd.DataFrame()
-    client = supabase_client()
+    client = active_supabase_client()
     if client:
-        result = (
-            client.table(SUPABASE_TABLES[table])
-            .select("*")
-            .eq("expert_id", session["expert_id"])
-            .eq("batch_id", session["batch_id"])
-            .order("updated_at", desc=True)
-            .execute()
-        )
-        return pd.DataFrame(result.data or [])
+        try:
+            result = (
+                client.table(SUPABASE_TABLES[table])
+                .select("*")
+                .eq("expert_id", session["expert_id"])
+                .eq("batch_id", session["batch_id"])
+                .order("updated_at", desc=True)
+                .execute()
+            )
+            return pd.DataFrame(result.data or [])
+        except Exception as exc:
+            disable_supabase_for_session(exc)
     with connect() as conn:
         return pd.read_sql_query(
             f"SELECT * FROM {table} WHERE expert_id=? AND batch_id=? ORDER BY updated_at DESC",
@@ -830,18 +874,21 @@ def fetch_one(table: str, key_column: str, key_value: str) -> Dict[str, Any]:
     session = get_session()
     if not session_ready():
         return {}
-    client = supabase_client()
+    client = active_supabase_client()
     if client:
-        result = (
-            client.table(SUPABASE_TABLES[table])
-            .select("*")
-            .eq("expert_id", session["expert_id"])
-            .eq("batch_id", session["batch_id"])
-            .eq(key_column, key_value)
-            .limit(1)
-            .execute()
-        )
-        return (result.data or [{}])[0] if result.data else {}
+        try:
+            result = (
+                client.table(SUPABASE_TABLES[table])
+                .select("*")
+                .eq("expert_id", session["expert_id"])
+                .eq("batch_id", session["batch_id"])
+                .eq(key_column, key_value)
+                .limit(1)
+                .execute()
+            )
+            return (result.data or [{}])[0] if result.data else {}
+        except Exception as exc:
+            disable_supabase_for_session(exc)
     with connect() as conn:
         row = conn.execute(
             f"SELECT * FROM {table} WHERE expert_id=? AND batch_id=? AND {key_column}=?",
@@ -853,22 +900,25 @@ def fetch_one(table: str, key_column: str, key_value: str) -> Dict[str, Any]:
 def add_log(item_type: str, item_id: str, action: str, details: Mapping[str, Any] | None, duration: float) -> None:
     session = get_session()
     current_time = now_iso()
-    client = supabase_client()
+    client = active_supabase_client()
     if client:
-        client.table(SUPABASE_TABLES["annotation_logs"]).insert(
-            {
-                "expert_id": session["expert_id"],
-                "batch_id": session["batch_id"],
-                "item_type": item_type,
-                "item_id": item_id,
-                "action": action,
-                "details": details or {},
-                "created_at": current_time,
-                "updated_at": current_time,
-                "duration_seconds": duration,
-            }
-        ).execute()
-        return
+        try:
+            client.table(SUPABASE_TABLES["annotation_logs"]).insert(
+                {
+                    "expert_id": session["expert_id"],
+                    "batch_id": session["batch_id"],
+                    "item_type": item_type,
+                    "item_id": item_id,
+                    "action": action,
+                    "details": details or {},
+                    "created_at": current_time,
+                    "updated_at": current_time,
+                    "duration_seconds": duration,
+                }
+            ).execute()
+            return
+        except Exception as exc:
+            disable_supabase_for_session(exc)
     with connect() as conn:
         conn.execute(
             """
@@ -1103,16 +1153,19 @@ def save_essay_annotation(essay_id: str, values: Mapping[str, Any], duration: fl
         "updated_at": current_time,
         "duration_seconds": previous + duration,
     }
-    client = supabase_client()
+    client = active_supabase_client()
     if client:
-        params["created_at"] = safe_str(existing.get("created_at")) or current_time
-        client.table(SUPABASE_TABLES["essay_annotations"]).upsert(
-            params,
-            on_conflict="expert_id,batch_id,essay_id",
-        ).execute()
-        add_log("essay", essay_id, "save_essay_annotation", values, duration)
-        touch_session()
-        return
+        try:
+            params["created_at"] = safe_str(existing.get("created_at")) or current_time
+            client.table(SUPABASE_TABLES["essay_annotations"]).upsert(
+                params,
+                on_conflict="expert_id,batch_id,essay_id",
+            ).execute()
+            add_log("essay", essay_id, "save_essay_annotation", values, duration)
+            touch_session()
+            return
+        except Exception as exc:
+            disable_supabase_for_session(exc)
 
     with connect() as conn:
         conn.execute(
@@ -1166,16 +1219,19 @@ def save_feedback_decision(feedback_item_id: str, essay_id: str, values: Mapping
         "updated_at": current_time,
         "duration_seconds": previous + duration,
     }
-    client = supabase_client()
+    client = active_supabase_client()
     if client:
-        params["created_at"] = safe_str(existing.get("created_at")) or current_time
-        client.table(SUPABASE_TABLES["feedback_decisions"]).upsert(
-            params,
-            on_conflict="expert_id,batch_id,feedback_item_id",
-        ).execute()
-        add_log("feedback", feedback_item_id, "save_feedback_decision", values, duration)
-        touch_session()
-        return
+        try:
+            params["created_at"] = safe_str(existing.get("created_at")) or current_time
+            client.table(SUPABASE_TABLES["feedback_decisions"]).upsert(
+                params,
+                on_conflict="expert_id,batch_id,feedback_item_id",
+            ).execute()
+            add_log("feedback", feedback_item_id, "save_feedback_decision", values, duration)
+            touch_session()
+            return
+        except Exception as exc:
+            disable_supabase_for_session(exc)
 
     with connect() as conn:
         conn.execute(
@@ -1230,16 +1286,19 @@ def save_safety_check(feedback_item_id: str, essay_id: str, values: Mapping[str,
         "updated_at": current_time,
         "duration_seconds": previous + duration,
     }
-    client = supabase_client()
+    client = active_supabase_client()
     if client:
-        params["created_at"] = safe_str(existing.get("created_at")) or current_time
-        client.table(SUPABASE_TABLES["feedback_safety_checks"]).upsert(
-            params,
-            on_conflict="expert_id,batch_id,feedback_item_id",
-        ).execute()
-        add_log("feedback_safety", feedback_item_id, "save_feedback_safety_check", values, duration)
-        touch_session()
-        return
+        try:
+            params["created_at"] = safe_str(existing.get("created_at")) or current_time
+            client.table(SUPABASE_TABLES["feedback_safety_checks"]).upsert(
+                params,
+                on_conflict="expert_id,batch_id,feedback_item_id",
+            ).execute()
+            add_log("feedback_safety", feedback_item_id, "save_feedback_safety_check", values, duration)
+            touch_session()
+            return
+        except Exception as exc:
+            disable_supabase_for_session(exc)
 
     with connect() as conn:
         conn.execute(
