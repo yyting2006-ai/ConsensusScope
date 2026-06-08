@@ -1,0 +1,9 @@
+dataset,split,sample_id,source,reference
+synthetic_smoke,dev,SMK-001,"Many student thinks online classes is convenient.","Many students think online classes are convenient."
+synthetic_smoke,dev,SMK-002,"The essay give two reason but it need more example.","The essay gives two reasons, but it needs more examples."
+synthetic_smoke,dev,SMK-003,"In my opinion, read literature help people understand culture.","In my opinion, reading literature helps people understand culture."
+synthetic_smoke,dev,SMK-004,"The character is very interesting because he change his mind in the end.","The character is very interesting because he changes his mind in the end."
+synthetic_smoke,test,SMK-005,"Government should provide more buses because it reduce pollution.","Governments should provide more buses because they reduce pollution."
+synthetic_smoke,test,SMK-006,"This paragraph has many idea, however the organization are not clear.","This paragraph has many ideas; however, the organization is not clear."
+synthetic_smoke,test,SMK-007,"Students can learns vocabulary from reading novels and compare different society.","Students can learn vocabulary from reading novels and compare different societies."
+synthetic_smoke,test,SMK-008,"The conclusion repeat the thesis and do not answer the question fully.","The conclusion repeats the thesis and does not answer the question fully."

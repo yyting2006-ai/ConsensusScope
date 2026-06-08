@@ -138,10 +138,87 @@ New ESL writing review-routing assets:
 - `scripts/evaluate_esl_routing_demo.py`: synthetic routing evaluation script.
 - `scripts/analyze_esl_feedback_experiment.py`: offline analysis script for
   future teacher annotations.
+- `scripts/run_public_gec_benchmark.py`: offline public learner-corpus
+  benchmark runner for JFLEG-style parallel files, `.m2` GEC files, or a simple
+  source/reference CSV.
+- `src/public_gec_benchmark.py`: conversion and evaluation utilities that turn
+  public learner-correction pairs into feedback-level gold labels.
 
 The current ESL writing demo contains 3 synthetic essays, 15 packaged synthetic
 feedback items, and 16 AI-review stress cases. These are demonstration and
 implementation-test records, not classroom evaluation results.
+
+## Public Learner-Corpus Empirical Benchmark
+
+If private expert annotations are unavailable, ConsensusScope can still be
+evaluated against public annotated learner-writing correction corpora. This is
+an offline empirical benchmark, not a classroom deployment claim.
+
+Supported inputs:
+
+- **JFLEG**: download the public JFLEG repository, then pass its root directory.
+- **BEA-2019 W&I+LOCNESS / FCE / NUCLE / CoNLL-style GEC files**: pass `.m2`
+  files directly.
+- **Generic CSV**: provide columns such as `dataset`, `sample_id`, `source`, and
+  `reference`.
+
+Run the packaged smoke test:
+
+```bash
+PYTHONPATH=. python3 scripts/run_public_gec_benchmark.py
+```
+
+Run on a local JFLEG checkout:
+
+```bash
+PYTHONPATH=. python3 scripts/run_public_gec_benchmark.py \
+  --jfleg-dir path/to/jfleg \
+  --max-samples 200 \
+  --out-dir reports/public_gec_benchmark_jfleg
+```
+
+Or let the script download JFLEG from GitHub for a local experiment:
+
+```bash
+PYTHONPATH=. python3 scripts/run_public_gec_benchmark.py \
+  --download-jfleg \
+  --max-samples 200 \
+  --out-dir reports/public_gec_benchmark_jfleg
+```
+
+Run on an `.m2` file:
+
+```bash
+PYTHONPATH=. python3 scripts/run_public_gec_benchmark.py \
+  --m2-file path/to/wi_locness.m2 \
+  --m2-dataset-name WI_LOCNESS \
+  --out-dir reports/public_gec_benchmark_wi
+```
+
+The benchmark writes:
+
+- `public_gec_gold_feedback.csv`
+- `public_gec_feedback_candidates.csv`
+- `public_gec_review_evidence.csv`
+- `public_gec_gold_labels.csv`
+- `public_gec_routing_results.csv`
+- `public_gec_item_analysis.csv`
+- `public_gec_metrics.csv`
+- `public_gec_policy_metrics.csv`
+- `public_gec_report.md`
+
+Metric definitions:
+
+- `auto_share`: fraction of feedback candidates released without teacher review.
+- `auto_acc`: correctness rate among auto-released feedback candidates.
+- `review_share`: fraction of feedback candidates routed to teacher review.
+- `errors_reviewed`: fraction of observed incorrect feedback candidates sent to
+  review.
+
+Public GEC corpora provide correction gold labels, not full teacher
+acceptability judgments. The benchmark therefore supports claims about
+feedback-level correction/routing behavior, not claims about student learning,
+teacher satisfaction, or automatic essay scoring.
 
 ## Routing Output Schema
 
@@ -223,6 +300,12 @@ Run synthetic ESL routing evaluation:
 
 ```bash
 PYTHONPATH=. python3 scripts/evaluate_esl_routing_demo.py
+```
+
+Run the public learner-corpus benchmark smoke test:
+
+```bash
+PYTHONPATH=. python3 scripts/run_public_gec_benchmark.py
 ```
 
 Analyze future teacher annotations:
