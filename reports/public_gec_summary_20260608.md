@@ -1,0 +1,24 @@
+# Public GEC Benchmark Summary
+
+Generated on 2026-06-08. This summary contains aggregate metrics only, not redistributed corpus text.
+
+| dataset_run          | status    |   parallel_records |   gold_edits |   feedback_candidates |   auto_share |   auto_acc |   review_share |   errors_reviewed |   correct_items |   incorrect_items | source_note                                 | report_dir                                        |
+|:---------------------|:----------|-------------------:|-------------:|----------------------:|-------------:|-----------:|---------------:|------------------:|----------------:|------------------:|:--------------------------------------------|:--------------------------------------------------|
+| JFLEG_FULL           | completed |               1501 |         3938 |                 11587 |       0.3202 |          1 |         0.6798 |                 1 |            3938 |              7649 | direct public CC BY-NC-SA 4.0               | reports/public_gec_benchmark_jfleg_full           |
+| CoNLL2014_A0         | completed |               1312 |         2102 |                  6204 |       0.3224 |          1 |         0.6776 |                 1 |            2102 |              4102 | official annotated test data                | reports/public_gec_benchmark_conll2014_a0         |
+| CoNLL2014_A1         | completed |               1312 |         3008 |                  8922 |       0.3257 |          1 |         0.6743 |                 1 |            3008 |              5914 | official annotated test data                | reports/public_gec_benchmark_conll2014_a1         |
+| FCE_TRAIN            | completed |              28350 |        38858 |                115757 |       0.3286 |          1 |         0.6714 |                 1 |           38858 |             76899 | BEA-2019 downloadable non-commercial corpus | reports/public_gec_benchmark_fce_train            |
+| FCE_DEV              | completed |               2191 |         3079 |                  9173 |       0.3284 |          1 |         0.6716 |                 1 |            3079 |              6094 | BEA-2019 downloadable non-commercial corpus | reports/public_gec_benchmark_fce_dev              |
+| FCE_TEST             | completed |               2695 |         4032 |                 12004 |       0.3282 |          1 |         0.6718 |                 1 |            4032 |              7972 | BEA-2019 downloadable non-commercial corpus | reports/public_gec_benchmark_fce_test             |
+| WI_LOCNESS_TRAIN_ABC | completed |              34308 |        55704 |                166201 |       0.3294 |          1 |         0.6706 |                 1 |           55704 |            110497 | BEA-2019 downloadable non-commercial corpus | reports/public_gec_benchmark_wi_locness_train_abc |
+| WI_LOCNESS_DEV_ABCN  | completed |               4384 |         6680 |                 19934 |       0.3288 |          1 |         0.6712 |                 1 |            6680 |             13254 | BEA-2019 downloadable non-commercial corpus | reports/public_gec_benchmark_wi_locness_dev_abcn  |
+
+## Not Run
+
+- Lang-8: requires request/form and is not directly downloadable from the official BEA page.
+- NUCLE training corpus: requires license form/submission through the official NUS page.
+- W&I+LOCNESS test: downloadable package includes original test sentences but no gold M2 labels, so it is not usable for this offline gold evaluation.
+
+## Interpretation
+
+The benchmark evaluates deploy-time routing against public correction gold labels. It does not measure classroom teacher acceptability or student learning gains.

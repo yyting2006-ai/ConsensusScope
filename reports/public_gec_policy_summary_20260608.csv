@@ -1,0 +1,25 @@
+dataset_run,policy,items,auto_share,auto_acc,review_share,errors_reviewed,correct_items,incorrect_items
+JFLEG_FULL,Accept low; review med/high,11587,0.3202,1.0,0.6798,1.0,3938,7649
+JFLEG_FULL,Accept low/med; review high,11587,0.3399,1.0,0.6601,1.0,3938,7649
+JFLEG_FULL,Review all,11587,0.0,,1.0,1.0,3938,7649
+CoNLL2014_A0,Accept low; review med/high,6204,0.3224,1.0,0.6776,1.0,2102,4102
+CoNLL2014_A0,Accept low/med; review high,6204,0.3388,1.0,0.6612,1.0,2102,4102
+CoNLL2014_A0,Review all,6204,0.0,,1.0,1.0,2102,4102
+CoNLL2014_A1,Accept low; review med/high,8922,0.3257,1.0,0.6743,1.0,3008,5914
+CoNLL2014_A1,Accept low/med; review high,8922,0.3371,1.0,0.6629,1.0,3008,5914
+CoNLL2014_A1,Review all,8922,0.0,,1.0,1.0,3008,5914
+FCE_TRAIN,Accept low; review med/high,115757,0.3286,1.0,0.6714,1.0,38858,76899
+FCE_TRAIN,Accept low/med; review high,115757,0.3357,1.0,0.6643,1.0,38858,76899
+FCE_TRAIN,Review all,115757,0.0,,1.0,1.0,38858,76899
+FCE_DEV,Accept low; review med/high,9173,0.3284,1.0,0.6716,1.0,3079,6094
+FCE_DEV,Accept low/med; review high,9173,0.3357,1.0,0.6643,1.0,3079,6094
+FCE_DEV,Review all,9173,0.0,,1.0,1.0,3079,6094
+FCE_TEST,Accept low; review med/high,12004,0.3282,1.0,0.6718,1.0,4032,7972
+FCE_TEST,Accept low/med; review high,12004,0.3359,1.0,0.6641,1.0,4032,7972
+FCE_TEST,Review all,12004,0.0,,1.0,1.0,4032,7972
+WI_LOCNESS_TRAIN_ABC,Accept low; review med/high,166201,0.3294,1.0,0.6706,1.0,55704,110497
+WI_LOCNESS_TRAIN_ABC,Accept low/med; review high,166201,0.3352,1.0,0.6648,1.0,55704,110497
+WI_LOCNESS_TRAIN_ABC,Review all,166201,0.0,,1.0,1.0,55704,110497
+WI_LOCNESS_DEV_ABCN,Accept low; review med/high,19934,0.3288,1.0,0.6712,1.0,6680,13254
+WI_LOCNESS_DEV_ABCN,Accept low/med; review high,19934,0.3351,1.0,0.6649,1.0,6680,13254
+WI_LOCNESS_DEV_ABCN,Review all,19934,0.0,,1.0,1.0,6680,13254
