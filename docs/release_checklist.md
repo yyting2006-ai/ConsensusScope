@@ -13,7 +13,8 @@ This checklist turns the local prototype into a submission-ready demo package.
 - [x] Video script included
 - [x] Ethics and limitations note included
 - [x] Public release notes included
-- [ ] Public repository URL confirmed
+- [x] Public learner-corpus benchmark summaries included
+- [x] Public repository URL confirmed
 - [ ] Remove private `.env` before public release
 - [ ] Confirm no personal phone numbers, emails or student identifiers are in public files
 
@@ -28,6 +29,7 @@ This checklist turns the local prototype into a submission-ready demo package.
 - [x] Teacher Queue page
 - [x] Effectiveness Evaluation page
 - [x] Reports page
+- [x] Public GEC benchmark table on Effectiveness Evaluation page
 - [x] Screenshot generation script
 - [x] English submission interface: `app/streamlit_app.py`
 - [x] English screenshots: `docs/screenshots_en/`
@@ -38,9 +40,9 @@ This checklist turns the local prototype into a submission-ready demo package.
 - [x] Six-page demo-paper draft scaffold
 - [x] BibTeX file
 - [x] System description
-- [x] Evaluation snapshot
+- [x] Public GEC evaluation snapshot
 - [x] Ethics and limitations section
-- [ ] Convert to official ACL style files
+- [ ] Regenerate final ACL-style PDF and LaTeX source package
 - [ ] Add final video/supplementary file in the submission system
 
 ## Before Public Upload
@@ -50,4 +52,7 @@ This checklist turns the local prototype into a submission-ready demo package.
 3. Confirm educational data, if added later, is anonymized.
 4. Keep only the no-API ESL sample package plus clearly marked auxiliary QA data
    if repository size becomes too large.
-5. Add a short model/data card if the dataset package is shared publicly.
+5. Do not commit raw public corpora or per-item derived public corpus text;
+   keep only aggregate metrics unless the dataset license explicitly permits
+   redistribution.
+6. Add a short model/data card if the dataset package is shared publicly.

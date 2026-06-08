@@ -88,15 +88,18 @@ Screen:
 
 Narration:
 
-> The current evaluation is a synthetic sanity check: it verifies that the
-> routing logic catches expected high-risk items in the demo set and dedicated
-> AI-review stress cases. It is not yet a classroom effectiveness study.
+> The evaluation page separates two kinds of evidence. The synthetic checks
+> verify implementation behavior, while the public learner-corpus benchmark
+> evaluates routing on JFLEG, CoNLL-2014, FCE, and W&I plus LOCNESS correction
+> data. These results validate review routing, not classroom learning outcomes.
 
 Screen:
 
 - Click Page 6: Effectiveness Evaluation.
 - Show action accuracy, risk accuracy, high-risk recall, review recall, and
   auto-accept precision.
+- Scroll to the public learner-corpus benchmark table and point to auto share,
+  review share, and errors reviewed.
 - Click Page 7: Reports and show export buttons.
 
 ## 2:20-2:30 Closing

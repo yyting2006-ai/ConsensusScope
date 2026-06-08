@@ -220,6 +220,36 @@ acceptability judgments. The benchmark therefore supports claims about
 feedback-level correction/routing behavior, not claims about student learning,
 teacher satisfaction, or automatic essay scoring.
 
+Completed public-corpus runs are summarized in
+`reports/public_gec_summary_20260608.csv` and
+`reports/public_gec_summary_20260608.md`. These files contain aggregate metrics
+only, not redistributed learner-corpus text.
+
+| Dataset run | Records | Gold edits | Candidates | Auto share | Review share | Errors reviewed |
+|---|---:|---:|---:|---:|---:|---:|
+| JFLEG full | 1,501 | 3,938 | 11,587 | 0.320 | 0.680 | 1.000 |
+| CoNLL-2014 A0 | 1,312 | 2,102 | 6,204 | 0.322 | 0.678 | 1.000 |
+| CoNLL-2014 A1 | 1,312 | 3,008 | 8,922 | 0.326 | 0.674 | 1.000 |
+| FCE train | 28,350 | 38,858 | 115,757 | 0.329 | 0.671 | 1.000 |
+| FCE dev | 2,191 | 3,079 | 9,173 | 0.328 | 0.672 | 1.000 |
+| FCE test | 2,695 | 4,032 | 12,004 | 0.328 | 0.672 | 1.000 |
+| W&I+LOCNESS train | 34,308 | 55,704 | 166,201 | 0.329 | 0.671 | 1.000 |
+| W&I+LOCNESS dev | 4,384 | 6,680 | 19,934 | 0.329 | 0.671 | 1.000 |
+
+The high auto-accuracy in this table should be read narrowly: correct feedback
+candidates are derived from public gold corrections and compared with
+constructed risk distractors. The result validates review-routing behavior
+under controlled conditions; it does not show that real LLM feedback is always
+correct.
+
+Not run:
+
+- Lang-8 requires an official request form.
+- NUCLE training data requires the official NUS license process.
+- W&I+LOCNESS test contains original test sentences but no released gold M2
+  labels in the downloadable package, so it is not usable for this offline gold
+  routing evaluation.
+
 ## Routing Output Schema
 
 The ESL routing layer returns:
@@ -267,8 +297,9 @@ risk labels exactly:
 This supports the claim that the demo routing logic behaves as designed on the
 synthetic demo and stress-test sets. It does **not** prove classroom
 effectiveness, teacher acceptability, student learning gains, or real LLM
-feedback quality. Those claims require instructor annotations and real
-anonymized classroom data.
+feedback quality. The public learner-corpus benchmark extends the evidence to
+offline correction-gold routing evaluation, but classroom claims still require
+instructor annotations and real anonymized classroom data.
 
 ## API Configuration
 

@@ -50,14 +50,23 @@ review before students see unsafe or meaning-changing suggestions.
 ## Evaluation Status
 
 The current ESL writing package contains synthetic demo data, deterministic
-routing output, and AI-review stress cases. It is ready for UI demonstration and
-interface review, but it is not yet a classroom evaluation. Future validation
-should add teacher annotations and report them as offline diagnostic results,
-separate from deploy-time routing signals.
+routing output, AI-review stress cases, and public learner-corpus routing
+benchmarks. The public benchmark covers JFLEG, CoNLL-2014 official annotated
+test data, FCE, and W&I+LOCNESS train/dev splits with gold correction labels.
+Across 349,782 feedback candidates generated from public correction data, the
+default policy auto-routes about 32.9% of candidates and routes all constructed
+incorrect or unsafe candidates to review.
+
+This is evidence for the review-routing layer, not classroom effectiveness.
+The high auto-accuracy is expected because correct candidates are derived from
+public gold corrections and compared with constructed risk distractors. Future
+validation should add teacher annotations and report them as offline diagnostic
+results, separate from deploy-time routing signals.
 
 ## Submission Gaps
 
 - Record a video under 2.5 minutes.
 - Add a real screencast upload or submit the video as supplementary material.
+- Regenerate the final LaTeX PDF/package after the paper text is updated.
 - Future work: collect instructor annotations for feedback safety,
   accept/edit/reject decisions, and review-priority judgments.

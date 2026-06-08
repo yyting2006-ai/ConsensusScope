@@ -42,6 +42,8 @@ http://localhost:8502
 - `src/esl_writing_feedback.py`：规则型教师复核路由接口。
 - `src/prompts/esl_feedback_prompt.py`：ESL feedback 生成 prompt 模板。
 - `scripts/evaluate_esl_routing_demo.py`：合成期望标签上的路由有效性评估脚本。
+- `scripts/run_public_gec_benchmark.py`：公开学习者纠错语料路由评测脚本，支持 JFLEG、`.m2` GEC 文件和 source/reference CSV。
+- `reports/public_gec_summary_20260608.md`：公开语料聚合评测结果，不包含重新分发的原始语料文本。
 - `scripts/analyze_esl_feedback_experiment.py`：未来导入真实教师标注后的离线分析脚本。
 
 ## 主线页面
@@ -82,7 +84,7 @@ ESL 路由层现在会为每条 AI 反馈输出：
 
 ## 当前有效性评估
 
-当前评估属于 **synthetic sanity check**：它检验系统路由规则在 15 条人工设定的合成期望标签和 16 条 AI 评审压力测试项上是否按预期工作。
+当前评估包含两部分：一是 **synthetic sanity check**，检验系统路由规则在 15 条人工设定的合成期望标签和 16 条 AI 评审压力测试项上是否按预期工作；二是公开学习者纠错语料上的离线路由评测。
 
 ```bash
 PYTHONPATH=. python3 scripts/evaluate_esl_routing_demo.py
@@ -100,6 +102,14 @@ PYTHONPATH=. python3 scripts/evaluate_esl_routing_demo.py
 | Auto-accept precision | 1.000 |
 
 这说明 demo 路由逻辑在合成测试集上按设计运行；它还不能证明真实课堂有效性、教师满意度、学生学习提升或真实 LLM 反馈质量。投稿前如果要增强实证说服力，需要收集教师标注或真实匿名作文数据。
+
+公开语料评测已覆盖 JFLEG、CoNLL-2014 官方测试标注、FCE 和 W&I+LOCNESS train/dev。结果汇总见：
+
+```text
+reports/public_gec_summary_20260608.md
+```
+
+这些结果验证的是“复核路由层”能否把构造出的错误/风险反馈送入教师复核队列，不表示真实 LLM 反馈质量达到 100%，也不表示已经完成课堂实验。
 
 后续如加入真实学生作文，必须先删除姓名、学号、邮箱、学校标识、人口统计信息和任何可识别个人身份的信息。
 

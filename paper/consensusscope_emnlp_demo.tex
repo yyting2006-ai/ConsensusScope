@@ -9,7 +9,7 @@
 \usepackage{inconsolata}
 \usepackage{url}
 
-\title{ConsensusScope: Knowledge-Grounded Multi-LLM Adjudication for ESL Comparative Literature Feedback}
+\title{ConsensusScope: An Interactive Review-Routing Tool for Safe AI Feedback on ESL Writing}
 
 \author{You Tingrui \\
   Beijing Language and Culture University}
@@ -18,293 +18,281 @@
 \maketitle
 
 \begin{abstract}
-Large language models can provide fluent writing feedback, but in educational
-settings the most useful question is often not whether a model can rewrite a
-sentence, but whether a suggested change is safe to accept without a teacher.
-This is especially important for English-as-a-second-language comparative
-literature writing, where low-risk grammar edits coexist with factual claims
-about authors, dates, genres and characters, and with interpretation-changing
-argument revisions. We present ConsensusScope, an interactive system demo for
-knowledge-grounded multi-LLM feedback adjudication. The system retrieves a
-curated literary knowledge graph, asks deterministic or live OpenAI-compatible
-reviewers to produce feedback in a unified schema, and routes suggestions
-through a transparent adjudication layer. Low-risk local language edits can be
-auto-accepted, while literary facts and meaning-changing revisions are routed
-to a teacher-facing review queue with evidence and rationale. The current
-release contains 319 curated knowledge triples over 30 commonly taught literary
-works, a 30-case ESL feedback-routing benchmark, and a live validation run with
-DeepSeek, Qwen, GLM and Kimi. ConsensusScope also retains general multi-model
-QA audit pages as an auxiliary reliability module, but the main demo claim is
-review-routing for educational feedback rather than fully automatic essay
-grading.
+AI writing-feedback systems can produce fluent comments, but teachers still
+need to decide which suggestions are safe to show to students. A local grammar
+edit may be acceptable, while an equally fluent suggestion may change the
+student's intended meaning, add unsupported content, overcorrect a draft, or
+use inappropriate student-facing language. We present ConsensusScope, an
+interactive system demo for teacher-in-the-loop review routing of AI-generated
+English-as-a-second-language (ESL) writing feedback. The system normalizes
+feedback candidates into a shared schema, extracts deploy-time risk signals,
+routes low-risk local edits separately from items that require teacher review,
+and exports an auditable report. ConsensusScope runs without external API
+calls for reproducible demonstrations, while optional live providers can write
+into the same schema. We evaluate the routing layer with two complementary
+checks: a packaged synthetic stress-test suite and an offline benchmark derived
+from public learner-correction corpora, including JFLEG, CoNLL-2014 annotated
+test data, FCE, and W\&I+LOCNESS. Across 349,782 generated feedback candidates
+from public correction data, the default policy auto-routes 32.9\% of
+candidates while sending all constructed incorrect or unsafe candidates to
+review. These results validate the review-routing mechanism, not classroom
+learning outcomes or real LLM feedback quality.
 \end{abstract}
 
 \section{Introduction}
 
-Automated writing feedback has long been studied in educational NLP, including
-grammatical error correction shared tasks~\cite{ng-etal-2014-conll,
-bryant-etal-2019-bea}, automated writing evaluation systems
-~\cite{madnani-etal-2018-writing}, and work on how learners use automated
-written corrective feedback~\cite{ranalli2018automated}. Recent LLMs make such
-feedback easier to generate, but they also make a familiar classroom problem
-more acute: a fluent suggestion may be locally grammatical while being
-pedagogically unsafe, factually wrong, or overly interventionist.
+AI writing feedback is useful only when teachers can control what reaches a
+student. Existing educational NLP work includes grammatical error correction
+(GEC) shared tasks~\cite{ng-etal-2014-conll,bryant-etal-2019-bea},
+learner-writing corpora such as FCE and JFLEG~\cite{yannakoudakis2011fce,
+napoles-etal-2017-jfleg}, and writing-support systems that help students revise
+drafts~\cite{madnani-etal-2018-writing}. Recent LLMs make feedback generation
+easier, but they also increase the need for review: a fluent comment may be
+locally grammatical while being pedagogically unsafe, unsupported, or too
+interventionist.
 
-This issue is visible in ESL comparative literature essays. A model may safely
-correct ``Both novels shows'' to ``Both novels show.'' The same model, however,
-may also rewrite a student's thesis, assert that \textit{Jane Eyre} was written
-by Jane Austen, or erase an interpretive ambiguity in \textit{The Turn of the
-Screw}. In this setting, treating all feedback as equally safe is inappropriate.
-The system should distinguish local language edits from suggestions that
-require expert verification.
+ConsensusScope addresses this problem as a review-routing system rather than an
+automatic essay scorer. Given an ESL draft and a set of AI-style feedback
+candidates, the system asks a narrower deploy-time question: should this
+specific feedback item be released directly, or should a teacher inspect it
+first? This framing is intentionally practical. It supports teachers who need
+to triage AI feedback before student release, educational NLP developers who
+need observable failure modes, and researchers studying reliability in
+human-in-the-loop feedback pipelines.
 
-ConsensusScope addresses this problem as a review-routing layer for
-multi-LLM feedback. Instead of presenting a single model revision as final, the
-system collects feedback suggestions from multiple reviewers, grounds relevant
-claims in a small literary knowledge graph, estimates meaning-change risk, and
-separates auto-accepted edits from teacher-review items. The goal is not to
-replace teachers or grade full essays automatically. The goal is to make AI
-feedback auditable before it changes a student's text.
-
-The demo makes three contributions. First, it reframes multi-model
-adjudication as an applied educational NLP workflow for ESL comparative
-literature feedback. Second, it introduces a transparent knowledge-grounded
-feedback schema and teacher-review routing policy. Third, it provides an
-installable Streamlit interface with no-API deterministic reviewers, live
-OpenAI-compatible reviewers, saved benchmark records, risk dashboards and
-report export.
+The demo contributes: (1) a usable Streamlit workflow for single-essay review,
+batch review, feedback comparison, teacher queueing, evaluation, and report
+export; (2) a unified feedback schema and transparent rule-based routing layer
+using deploy-time signals rather than hidden gold labels; and (3) a
+reproducible public learner-corpus benchmark that converts correction gold
+labels into feedback-level routing diagnostics.
 
 \section{Related Work}
 
-\paragraph{Learner writing feedback.}
-Grammatical error correction has developed through shared tasks and learner
-corpora~\cite{ng-etal-2014-conll,bryant-etal-2019-bea}. Automated writing
-systems also support higher-level feedback and self-regulated revision
-~\cite{madnani-etal-2018-writing}. At the same time, automated written
-corrective feedback can be uneven across error types and may require careful
-classroom interpretation~\cite{ranalli2018automated}. ConsensusScope follows
-this caution: it does not assume that generated feedback should be directly
-applied.
+\paragraph{Learner writing and GEC.}
+GEC benchmarks have provided standardized correction tasks and learner-writing
+data, including CoNLL-2014~\cite{ng-etal-2014-conll}, BEA-2019
+W\&I+LOCNESS~\cite{bryant-etal-2019-bea}, FCE~\cite{yannakoudakis2011fce}, and
+JFLEG~\cite{napoles-etal-2017-jfleg}. These datasets primarily evaluate
+correction quality. ConsensusScope instead uses their correction annotations as
+offline evidence for a downstream question: whether a feedback-routing policy
+keeps risky or incorrect suggestions in a review queue.
 
-\paragraph{Multi-LLM adjudication.}
-Multi-output methods such as self-consistency~\cite{wang2023selfconsistency}
-and debate~\cite{du2023debate} can improve final-answer selection, while
-LLM-as-a-judge methods provide scalable evaluation~\cite{zheng2023judging,
-liu2023geval}. However, agreement and judge confidence are not the same as
-safety. ConsensusScope therefore treats consensus as one signal among others
-and exposes the routing decision to the user.
+\paragraph{Automated writing feedback.}
+Automated writing systems can provide revision support, but classroom use
+depends on how learners and teachers interpret the feedback
+~\cite{madnani-etal-2018-writing,ranalli2018automated}. ConsensusScope follows
+this caution by avoiding a teacher-replacement claim. It is designed to make AI
+feedback inspectable and triageable before it becomes student-facing.
 
-\paragraph{Factuality and evidence.}
-Prior work on hallucination, factuality and uncertainty shows that fluent
-generations can be unsupported or miscalibrated~\cite{manakul2023selfcheckgpt,
-min2023factscore,kadavath2022language}. Our system applies this lesson to
-writing feedback: suggestions that involve literary facts or interpretation
-should carry evidence and remain reviewable.
+\paragraph{LLM reliability and adjudication.}
+Multi-output and judge-based methods can help select answers or evaluate
+generations~\cite{wang2023selfconsistency,zheng2023judging,liu2023geval}.
+However, consensus or judge confidence is not equivalent to educational safety.
+Our demo treats model agreement as one observable signal, alongside issue type,
+evidence status, meaning-change warnings, unsupported-claim cues, tone-safety
+cues, and parse errors.
 
 \section{System Overview}
 
-Figure~\ref{fig:workflow} summarizes the demo workflow. A user enters an ESL
-comparative literature essay excerpt or selects a prepared example. The system
-retrieves relevant knowledge triples, generates feedback suggestions, normalizes
-them into a shared schema, adjudicates them by risk, and presents a teacher
-review queue. The current Streamlit app contains eight pages: Home/System
-Overview, Live Question Mode, Sample Audit Mode, Adjudication Comparison, Risk
-Dashboard, Model Reliability Dashboard, Case Explorer and Report Export. The
-ESL feedback workflow is the default path in Live Question Mode; the original
-multi-model QA audit workflow remains available as a secondary mode.
+ConsensusScope is organized around a teacher-facing feedback-review workflow
+(Figure~\ref{fig:workflow}). A teacher can paste a single anonymized ESL draft
+or upload a batch CSV. The system generates no-API AI-style feedback candidates
+or accepts live provider outputs in the same schema. Each feedback item is then
+screened by the routing layer and displayed as either a low-risk local edit or
+a teacher-review item.
 
 \begin{figure}[t]
 \centering
 \fbox{
 \begin{minipage}{0.92\linewidth}
 \small
-\textbf{Student essay} $\rightarrow$
-\textbf{Literary KG retrieval} $\rightarrow$
-\textbf{Multi-reviewer feedback} $\rightarrow$
-\textbf{Unified schema} $\rightarrow$
-\textbf{Risk-aware adjudication} $\rightarrow$
-\textbf{Teacher queue / report export}
+\textbf{ESL draft(s)} $\rightarrow$
+\textbf{feedback candidates} $\rightarrow$
+\textbf{unified schema} $\rightarrow$
+\textbf{risk signals} $\rightarrow$
+\textbf{auto-accept / teacher review} $\rightarrow$
+\textbf{report export}
 \end{minipage}}
-\caption{ConsensusScope routes ESL literary-writing feedback through
-knowledge retrieval, multi-reviewer generation and risk-aware adjudication.}
+\caption{ConsensusScope turns AI writing feedback into an auditable
+teacher-review workflow rather than a final automatic rewrite.}
 \label{fig:workflow}
 \end{figure}
 
-\paragraph{Knowledge graph.}
-The current release includes a curated task-specific literary knowledge graph,
-not a complete open-domain literary database. It contains 319 triples over 30
-commonly taught works. Relations cover authorship, publication date, literary
-form, genre, central characters, themes and title aliases. The graph is used to
-support inspectable feedback, for example correcting an authorship claim or
-flagging a genre mismatch.
+\paragraph{Interface.}
+The Streamlit demo has nine pages: Review Workspace, Single Essay Review, Batch
+Review, AI Feedback Comparison, Teacher Queue, Effectiveness Evaluation,
+Reports, Settings/Diagnostics, and Design Reference. The first seven pages form
+the primary demo path. Settings/Diagnostics retains optional API configuration
+and legacy auxiliary modules, but those modules are not part of the main demo
+claim.
 
-\paragraph{Feedback generation.}
-ConsensusScope supports two generation modes. The no-API mode uses deterministic
-local reviewers so the demo can run in a classroom or reviewer environment
-without external calls. The live mode calls OpenAI-compatible providers such as
-DeepSeek, Qwen, GLM and Kimi. Every reviewer returns the same schema:
-\texttt{span}, \texttt{issue\_type}, \texttt{suggestion}, \texttt{rationale},
-\texttt{confidence}, \texttt{knowledge\_evidence} and
-\texttt{meaning\_change\_risk}. This uniform schema makes model outputs
-auditable even when providers differ.
+\paragraph{Unified feedback schema.}
+Every feedback candidate is represented with a stable item-level schema:
+\texttt{feedback\_item\_id}, \texttt{essay\_id}, \texttt{target\_span},
+\texttt{surrounding\_context}, \texttt{ai\_suggestion},
+\texttt{ai\_rationale}, \texttt{model\_source},
+\texttt{issue\_type\_predicted}, and optional \texttt{model\_agreement}. This
+schema lets deterministic demo reviewers and live OpenAI-compatible providers
+feed the same routing and reporting components.
 
-\paragraph{Adjudication.}
-The adjudication layer groups suggestions by issue span and type, then assigns
-each decision to \texttt{auto\_accept} or \texttt{teacher\_review}. Local
-grammar and word-choice edits with low meaning-change risk may be auto-accepted.
-Literary facts supported by the knowledge graph are routed to teacher review,
-because evidence still needs pedagogical inspection. Argument, thesis and
-interpretation suggestions are also routed to review because they may change
-the student's intended meaning.
+\paragraph{Deploy-time risk signals.}
+The router uses signals observable at review time: predicted issue type,
+suggestion text, target span, local context, model agreement, evidence status,
+parse errors, and textual cues for meaning change, unsupported claims,
+overcorrection, harsh tone, or whole-draft rewriting. It explicitly does not
+use teacher decisions, public corpus gold corrections, or post-hoc labels when
+making deploy-time routes.
+
+\paragraph{Routing outputs.}
+For each feedback item, the system outputs \texttt{risk\_level},
+\texttt{recommended\_action}, \texttt{risk\_reasons},
+\texttt{meaning\_preservation\_predicted}, \texttt{risk\_score},
+\texttt{review\_confidence}, \texttt{evidence\_signal},
+\texttt{review\_priority}, and a short explanation. Low-risk grammar,
+spelling, punctuation, and vocabulary edits can be routed to
+\texttt{auto\_accept}; medium- and high-risk items are routed to teacher
+review, more-evidence, or reject states.
 
 \section{Target Users and Use Cases}
 
-The primary users are NLP researchers and educational-technology developers who
-need to inspect feedback pipelines, and teachers who need to audit AI-generated
-feedback before it reaches students. Researchers can use the system to compare
-deterministic and live feedback generation, inspect evidence usage and identify
-failure modes. Developers can use the unified schema and saved records to test
-review-routing policies. Teachers can use the exported report to see which
-edits were auto-accepted and which require manual judgment.
+The primary users are writing teachers, educational NLP developers, and NLP
+researchers. Teachers can inspect which AI suggestions require judgment before
+student release. Developers can use the normalized schema and saved routing
+records to debug feedback pipelines. Researchers can test review-routing
+policies, compare risk signals, and analyze cases where generated feedback may
+be grammatically fluent but educationally unsafe. The system is especially
+suited for settings that need human-review routing rather than fully automatic
+writing evaluation.
 
-\section{Evaluation and Validation}
+\section{Evaluation}
 
-The current release includes a small benchmark designed to validate the
-workflow rather than claim state-of-the-art correction accuracy. The benchmark
-is intentionally diagnostic: it tests whether the system can separate low-risk
-local edits from feedback that changes literary facts, character relations,
-themes or interpretation. It contains 30 ESL comparative-literature snippets
-with grammar, literary-fact, genre, character and argument risks.
-Table~\ref{tab:kg} summarizes the knowledge graph and Table~\ref{tab:routing}
-summarizes the no-API routing run.
+We evaluate the implemented routing layer, not a full writing-feedback
+generation model. The evaluation asks whether the system separates safe local
+edits from feedback that is incorrect, meaning-changing, unsupported, or
+unsafe. We use two types of evidence.
 
-\begin{table}[t]
+\paragraph{Synthetic implementation checks.}
+The packaged demo contains 15 feedback items with expected routes and 16
+stress-test cases for dangerous suggestions such as thesis reversal,
+whole-essay rewriting, unsupported factual claims, harsh tone, low agreement,
+and parse failures. The current router matches the expected action and risk
+labels on all 31 items. This is an implementation sanity check rather than a
+classroom outcome study.
+
+\paragraph{Public learner-corpus benchmark.}
+We construct an offline routing benchmark from public learner-correction
+corpora. For each original/corrected sentence pair, we align source and
+reference tokens to create feedback-level gold edits. We then generate one
+gold-derived correct feedback candidate and one or more deliberately risky
+distractor candidates for each edit. The router sees only the deploy-time
+feedback fields; gold labels are used afterward to compute whether incorrect
+or unsafe candidates were routed to review. Table~\ref{tab:public} reports the
+runs completed on directly downloadable public data.
+
+\begin{table*}[t]
 \centering
 \small
-\begin{tabular}{lr}
+\begin{tabular}{lrrrrr}
 \toprule
-KG component & Count \\
+Dataset run & Records & Gold edits & Candidates & Auto share & Review share \\
 \midrule
-Works & 30 \\
-Triples & 319 \\
-Theme triples & 90 \\
-Character triples & 84 \\
-Genre triples & 36 \\
-Author triples & 30 \\
-Publication-year triples & 30 \\
-Form triples & 30 \\
-Alias triples & 19 \\
+JFLEG full & 1,501 & 3,938 & 11,587 & 0.320 & 0.680 \\
+CoNLL-2014 A0 & 1,312 & 2,102 & 6,204 & 0.322 & 0.678 \\
+CoNLL-2014 A1 & 1,312 & 3,008 & 8,922 & 0.326 & 0.674 \\
+FCE train & 28,350 & 38,858 & 115,757 & 0.329 & 0.671 \\
+FCE dev & 2,191 & 3,079 & 9,173 & 0.328 & 0.672 \\
+FCE test & 2,695 & 4,032 & 12,004 & 0.328 & 0.672 \\
+W\&I+LOCNESS train & 34,308 & 55,704 & 166,201 & 0.329 & 0.671 \\
+W\&I+LOCNESS dev & 4,384 & 6,680 & 19,934 & 0.329 & 0.671 \\
 \bottomrule
 \end{tabular}
-\caption{Curated literary knowledge graph included in the current release.}
-\label{tab:kg}
-\end{table}
+\caption{Public learner-corpus routing benchmark. W\&I+LOCNESS test is not
+included because the downloadable package contains original test sentences but
+no gold M2 labels. Lang-8 and NUCLE training data require separate forms or
+licenses and are not redistributed.}
+\label{tab:public}
+\end{table*}
 
-\begin{table}[t]
-\centering
-\small
-\begin{tabular}{lr}
-\toprule
-No-API benchmark item & Count \\
-\midrule
-Benchmark essays & 30 \\
-Adjudicated feedback decisions & 59 \\
-Auto-accepted low-risk edits & 14 \\
-Teacher-review decisions & 45 \\
-High-risk decisions & 20 \\
-KG-supported decisions & 23 \\
-\bottomrule
-\end{tabular}
-\caption{Deterministic feedback-routing results over 30 ESL comparative
-literature snippets.}
-\label{tab:routing}
-\end{table}
-
-We also ran a live API validation on the first 10 benchmark snippets with four
-providers. All 40 provider calls returned without request errors or JSON parse
-errors. The live run produced 43 adjudicated feedback decisions, of which 35
-were routed to teacher review and 41 carried knowledge-graph support. Table
-~\ref{tab:live} reports provider-level call statistics. These numbers are
-reported as a system validation record, not as a claim that one provider is a
-better teacher.
+\paragraph{Review-routing utility.}
+Table~\ref{tab:policy} summarizes the pooled policy results over 349,782
+feedback candidates. The default policy accepts only low-risk items and routes
+medium/high-risk items to review. It auto-routes 32.9\% of candidates while
+preserving all constructed incorrect or unsafe candidates in the review queue.
+The 1.000 auto accuracy should be interpreted narrowly: correct candidates are
+derived from public gold corrections, and incorrect candidates are constructed
+risk distractors. The number validates routing behavior under controlled
+conditions; it is not a claim that real LLM feedback is always correct.
 
 \begin{table}[t]
 \centering
 \small
 \begin{tabular}{lrrrr}
 \toprule
-Provider & Calls & Items & Errors & Parse errors \\
+Policy & Auto share & Auto acc. & Review share & Errors reviewed \\
 \midrule
-DeepSeek & 10 & 20 & 0 & 0 \\
-Qwen & 10 & 16 & 0 & 0 \\
-GLM & 10 & 24 & 0 & 0 \\
-Kimi & 10 & 16 & 0 & 0 \\
+Accept low; review med/high & 0.329 & 1.000 & 0.671 & 1.000 \\
+Accept low/med; review high & 0.336 & 1.000 & 0.664 & 1.000 \\
+Review all & 0.000 & -- & 1.000 & 1.000 \\
 \bottomrule
 \end{tabular}
-\caption{Live validation on 10 benchmark snippets. Items denotes raw feedback
-items returned before adjudication.}
-\label{tab:live}
+\caption{Pooled review-routing utility over the public learner-corpus
+benchmark. Errors reviewed is the fraction of observed incorrect or unsafe
+feedback candidates routed to the human-review queue.}
+\label{tab:policy}
 \end{table}
-
-\paragraph{Auxiliary reliability module.}
-The repository also retains saved multi-model QA traces over TruthfulQA,
-FEVER and CommonsenseQA~\cite{lin2022truthfulqa,thorne2018fever,
-talmor2019commonsenseqa}. These pages support sample audit, risk dashboarding
-and comparison among majority vote, a fixed judge and rule-based dynamic
-adjudication. We keep this module as background infrastructure, but do not use
-mixed-task macro-F1 as the paper's headline metric.
 
 \section{Demo Scenario}
 
-The two-and-a-half-minute demo begins on the Home/System Overview page, then
-opens Live Question Mode with the ESL literary feedback option. The presenter
-loads the \textit{Frankenstein} and \textit{Jane Eyre} example, runs
-knowledge-grounded feedback, and shows the split between auto-accepted grammar
-edits and teacher-review items. The Knowledge Evidence tab displays author and
-publication-year triples. The Adjudication Trace tab shows why factual and
-argument-level suggestions were not automatically applied. The demo then
-briefly visits Sample Audit Mode and Risk Dashboard to show that the same
-observability framework also supports saved multi-model QA traces. Finally,
-Report Export downloads a Markdown feedback report.
+The two-and-a-half-minute demo follows a teacher workflow. The presenter opens
+Review Workspace, runs Single Essay Review on a packaged anonymized ESL draft,
+shows routed feedback items, and compares auto-accepted local edits with
+teacher-review items. The demo then processes a batch CSV, opens AI Feedback
+Comparison, selects a high-risk item in Teacher Queue, and exports a Markdown
+report. The Effectiveness Evaluation page shows the synthetic stress-test
+metrics and the public learner-corpus aggregate table.
 
 \section{Release and Reproducibility}
 
-ConsensusScope is released under the MIT License. The package includes the
-Streamlit app, curated literary KG, saved benchmark records, live validation
-records, scripts and tests. The public code and demo URLs are:
+ConsensusScope is released under the MIT License. The public repository and
+live demo are available at:
 \url{https://github.com/yyting2006-ai/ConsensusScope} and
-\url{https://consensusscope-fzebywc3is3tducktjuvup.streamlit.app/}. The
-demonstration screencast is submitted as supplementary material.
+\url{https://consensusscope-fzebywc3is3tducktjuvup.streamlit.app/}. The demo
+can be installed and run with:
 
-The local demo can be installed and run with:
 \begin{verbatim}
 pip install -r requirements.txt
 streamlit run app/streamlit_app.py \
   --server.port 8502
 \end{verbatim}
 
+The public benchmark can be reproduced with
+\texttt{scripts/run\_public\_gec\_benchmark.py}. JFLEG can be downloaded
+automatically by the script. CoNLL-2014 annotated test data and BEA-2019 FCE
+and W\&I+LOCNESS data are downloaded from their official release pages. Raw
+corpora and per-item derived outputs are not committed to the repository;
+aggregate result tables are included for inspection.
+
 \section{Ethics and Limitations}
 
-ConsensusScope is a teacher-support and audit tool, not an automatic grading
-system. The curated knowledge graph is intentionally small and should not be
-described as complete. Knowledge-supported feedback can still be inappropriate
-for a student's local argument, so factual and interpretation-changing
-suggestions remain routed to teacher review. Live API behavior can change with
-provider updates, and saved validation records are included to make the demo
-inspectable without exposing API keys. We are extending the current curated
-benchmark with instructor-annotated ESL comparative-literature essays, where a
-domain teacher marks literary concepts, factual errors, comparison quality and
-review priority. These annotations will be used to evaluate whether
-ConsensusScope improves teacher review routing and detection of unsafe AI
-feedback.
+ConsensusScope is a teacher-support tool, not an automatic essay scorer or
+teacher replacement. Users should upload only anonymized student writing; names,
+student IDs, emails, class identifiers, and other personally identifiable
+information should be removed before use. The current benchmark validates
+review-routing behavior with public correction labels and constructed
+distractors. It does not measure student learning, teacher satisfaction,
+time-on-task, or real LLM feedback quality. Future work should add teacher
+annotations that label accept/edit/reject decisions on authentic anonymized
+feedback, while keeping deploy-time routing signals separate from offline gold
+labels.
 
 \section{Conclusion}
 
-ConsensusScope demonstrates a practical review-routing layer for
-knowledge-grounded multi-LLM writing feedback. By separating low-risk local
-language edits from factual and interpretation-changing suggestions, the system
-turns multi-model agreement into an auditable classroom workflow rather than a
-black-box final rewrite.
+ConsensusScope demonstrates a practical review-routing layer for AI-generated
+ESL writing feedback. By normalizing feedback candidates, exposing deploy-time
+risk signals, and routing uncertain or unsafe suggestions into a teacher queue,
+the system turns AI feedback from a final rewrite into an auditable educational
+workflow.
 
 \bibliography{references}
 

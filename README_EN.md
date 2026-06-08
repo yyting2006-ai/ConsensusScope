@@ -35,6 +35,10 @@ Then open `http://localhost:8502`.
 - `src/prompts/esl_feedback_prompt.py`: structured feedback prompt template.
 - `scripts/evaluate_esl_routing_demo.py`: synthetic routing sanity-check
   evaluation script.
+- `scripts/run_public_gec_benchmark.py`: public learner-corpus benchmark runner
+  for JFLEG-style files, `.m2` GEC files, and source/reference CSV files.
+- `reports/public_gec_summary_20260608.md`: aggregate public-corpus benchmark
+  results without redistributed corpus text.
 - `scripts/analyze_esl_feedback_experiment.py`: offline analysis script for
   future teacher annotations.
 
@@ -55,5 +59,7 @@ Then open `http://localhost:8502`.
 ConsensusScope is not an automatic essay scorer, not a teacher replacement, and
 not a truth oracle. Earlier domain-specific feedback and QA reliability modules
 remain in the repository only as legacy or auxiliary materials and are not the
-current main demo claim. The packaged evaluation is an implementation-level
-synthetic sanity check, not classroom effectiveness evidence.
+current main demo claim. The packaged evaluation includes synthetic stress
+checks and an offline public learner-corpus routing benchmark. It validates the
+review-routing layer, not classroom effectiveness, student learning gains, or
+real LLM feedback quality.

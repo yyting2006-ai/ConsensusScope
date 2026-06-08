@@ -80,6 +80,8 @@ DATA_PATHS = {
     "esl_routing": ROOT / "data" / "esl_writing_demo" / "routing_results.csv",
     "esl_expected": ROOT / "data" / "esl_writing_demo" / "expected_routing_labels.csv",
     "esl_stress": ROOT / "data" / "esl_writing_demo" / "ai_review_stress_cases.csv",
+    "public_gec_summary": ROOT / "reports" / "public_gec_summary_20260608.csv",
+    "public_gec_policy_summary": ROOT / "reports" / "public_gec_policy_summary_20260608.csv",
     "figures": ROOT / "reports" / "figures",
 }
 
@@ -203,7 +205,7 @@ MAIN_TRANSLATIONS = {
         "teacher_action": "Teacher action",
         "download_queue": "Download teacher queue.csv",
         "eval_title": "Page 6 · Effectiveness Evaluation",
-        "eval_caption": "This page evaluates implementation behavior on synthetic expectation labels and AI-review stress cases. It is a sanity check for routing logic, not evidence from real classroom use.",
+        "eval_caption": "This page evaluates implementation behavior on synthetic expectation labels, AI-review stress cases, and public learner-correction corpora. The public-corpus results evaluate routing against offline gold corrections, not classroom impact.",
         "combined_items": "Combined items",
         "action_accuracy": "Action accuracy",
         "risk_accuracy": "Risk accuracy",
@@ -212,8 +214,12 @@ MAIN_TRANSLATIONS = {
         "evaluation_sets": "Evaluation sets",
         "packaged_demo": "Packaged synthetic demo",
         "stress_cases": "AI-review stress cases",
+        "public_gec_results": "Public learner-corpus benchmark",
+        "public_gec_caption": "Aggregate offline routing results from JFLEG, CoNLL-2014 official test annotations, FCE, and W&I+LOCNESS. The benchmark uses public correction gold labels after routing; deploy-time routing does not see these labels.",
+        "public_gec_policy": "Review-routing policy comparison",
+        "public_gec_note": "Interpretation note: auto accuracy is high because correct feedback candidates are derived from public gold corrections and evaluated against constructed risk distractors. These numbers validate the routing layer, not real LLM feedback quality or classroom effectiveness.",
         "validity_assessment": "Validity assessment",
-        "validity_text": "Current evidence supports a demo-level claim: the system can operationalize a teacher-review workflow and reliably route synthetic high-risk feedback to review. It does not yet support a classroom effectiveness claim because no real teacher annotations, student outcomes, or time-on-task measurements have been collected.",
+        "validity_text": "Current evidence supports a review-routing claim: the system operationalizes a teacher-review workflow, routes synthetic high-risk feedback to review, and reproduces this routing behavior on public learner-correction corpora converted into feedback-level gold labels. It does not yet support a classroom effectiveness claim because no real teacher annotations, student outcomes, or time-on-task measurements have been collected.",
         "reports_title": "Page 7 · Reports",
         "report_table": "Report table",
         "report_preview": "Report preview",
@@ -439,7 +445,7 @@ MAIN_TRANSLATIONS = {
         "teacher_action": "教师动作",
         "download_queue": "下载教师队列.csv",
         "eval_title": "第 6 页 · 有效性评估",
-        "eval_caption": "本页在合成期望标签和 AI 评审压力测试案例上评估实现行为。这是路由逻辑检查，不是真实课堂有效性证据。",
+        "eval_caption": "本页在合成期望标签、AI 评审压力测试案例和公开学习者纠错语料上评估实现行为。公开语料结果是基于离线 gold correction 的路由评估，不是真实课堂效果。",
         "combined_items": "合并项目数",
         "action_accuracy": "动作准确率",
         "risk_accuracy": "风险准确率",
@@ -448,8 +454,12 @@ MAIN_TRANSLATIONS = {
         "evaluation_sets": "评估集合",
         "packaged_demo": "内置合成演示",
         "stress_cases": "AI 评审压力测试",
+        "public_gec_results": "公开学习者语料评测",
+        "public_gec_caption": "来自 JFLEG、CoNLL-2014 官方测试标注、FCE 和 W&I+LOCNESS 的聚合离线路由结果。公开纠错 gold label 只在路由后用于评估，部署时路由器不可见。",
+        "public_gec_policy": "复核路由策略对比",
+        "public_gec_note": "解释说明：自动接受准确率高，是因为正确反馈候选来自公开 gold correction，并与构造的风险干扰项对比评估。这些数字验证的是路由层，不代表真实 LLM 反馈质量或课堂有效性。",
         "validity_assessment": "有效性说明",
-        "validity_text": "当前证据支持演示级主张：系统可以实现教师复核工作流，并按设计将合成高风险反馈送入复核。但它还不能证明真实课堂有效性，因为尚未收集真实教师标注、学生结果或耗时数据。",
+        "validity_text": "当前证据支持复核路由主张：系统可以实现教师复核工作流，将合成高风险反馈送入复核，并能在转换为反馈级 gold label 的公开学习者纠错语料上复现该路由行为。但它还不能证明真实课堂有效性，因为尚未收集真实教师标注、学生结果或耗时数据。",
         "reports_title": "第 7 页 · 报告导出",
         "report_table": "报告表格",
         "report_preview": "报告预览",
@@ -617,6 +627,16 @@ FIELD_LABELS_ZH = {
     "meaning_preservation_predicted": "是否保留原意",
     "review_explanation": "复核解释",
     "teacher_action": "教师动作",
+    "dataset_run": "数据集运行",
+    "parallel_records": "平行句记录",
+    "gold_edits": "Gold 修改数",
+    "feedback_candidates": "反馈候选数",
+    "auto_share": "自动接受占比",
+    "auto_acc": "自动接受准确率",
+    "review_share": "复核占比",
+    "errors_reviewed": "错误送审占比",
+    "policy": "策略",
+    "items": "项目数",
     "assignment_prompt": "作文题目",
     "student_level": "学生水平",
     "essay_text_anonymized": "匿名作文文本",
@@ -1477,6 +1497,35 @@ def page_effectiveness_evaluation() -> None:
         stress_merged["risk_match"] = stress_merged["risk_level"] == stress_merged["expected_risk_level"]
         st.markdown(f"### {mt('stress_cases')}")
         st.dataframe(display_frame(stress_merged), use_container_width=True, hide_index=True)
+    public_summary = read_table(str(DATA_PATHS["public_gec_summary"]))
+    public_policy = read_table(str(DATA_PATHS["public_gec_policy_summary"]))
+    if not public_summary.empty:
+        st.markdown(f"### {mt('public_gec_results')}")
+        st.caption(mt("public_gec_caption"))
+        public_cols = [
+            "dataset_run",
+            "parallel_records",
+            "gold_edits",
+            "feedback_candidates",
+            "auto_share",
+            "auto_acc",
+            "review_share",
+            "errors_reviewed",
+        ]
+        st.dataframe(
+            display_frame(public_summary[[c for c in public_cols if c in public_summary.columns]]),
+            use_container_width=True,
+            hide_index=True,
+        )
+        st.info(mt("public_gec_note"))
+    if not public_policy.empty:
+        st.markdown(f"### {mt('public_gec_policy')}")
+        policy_cols = ["dataset_run", "policy", "items", "auto_share", "auto_acc", "review_share", "errors_reviewed"]
+        st.dataframe(
+            display_frame(public_policy[[c for c in policy_cols if c in public_policy.columns]]),
+            use_container_width=True,
+            hide_index=True,
+        )
     st.markdown(f"### {mt('validity_assessment')}")
     st.write(mt("validity_text"))
 
