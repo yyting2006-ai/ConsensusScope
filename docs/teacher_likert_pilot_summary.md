@@ -18,6 +18,13 @@ for student learning outcomes.
 - Use of labels: offline diagnostics only; ratings are not visible to the
   deploy-time router.
 
+## Expansion Status
+
+The annotation website now contains an additional Batch 2 with 18 new feedback
+items, bringing the available teacher-annotation pool to 30 items. The results
+below are still the completed 12-item Batch 1 pilot only. Do not report Batch 2
+metrics until both teachers have completed the new ratings.
+
 ## Main Finding
 
 The pilot identified a borderline auto-release pattern: feedback phrased as

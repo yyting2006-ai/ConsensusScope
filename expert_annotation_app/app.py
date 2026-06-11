@@ -142,6 +142,7 @@ TRANSLATIONS = {
         "session_id_required": "Teacher ID and Batch ID are required.",
         "session_ready": "Session is ready. Continue with the Feedback Likert Questionnaire.",
         "data_loaded": "Data Loaded",
+        "active_batch_scope": "Current Batch {batch_id}: {count} feedback items are active.",
         "blind_active": "Blind Annotation Mode is active. System risk, recommended action, model agreement, model name, and ConsensusScope decisions are hidden.",
         "assisted_warning": "Assisted Review Mode can show optional system signals in an expander. Use Blind Annotation Mode for unbiased gold-label collection.",
         "linear_workflow": "Recommended order: Expert Session -> Feedback Likert Questionnaire -> Progress -> Export.",
@@ -300,6 +301,7 @@ TRANSLATIONS = {
         "session_id_required": "请选择教师编号和批次编号。",
         "session_ready": "已进入标注会话，请继续完成“逐条反馈 1–5 分问卷”。",
         "data_loaded": "当前数据",
+        "active_batch_scope": "当前批次 {batch_id}：需要标注 {count} 条反馈项。",
         "blind_active": "当前为盲标模式：系统风险等级、推荐动作、模型一致性、模型名称和 ConsensusScope 决策均不会显示。",
         "assisted_warning": "当前为辅助复核模式，会显示部分系统信号。正式收集教师 gold labels 时建议使用盲标模式。",
         "linear_workflow": "推荐顺序：开始标注 -> 逐条反馈 1–5 分问卷 -> 查看进度 -> 导出结果。",
@@ -734,6 +736,11 @@ def session_id_for(expert_id: str, batch_id: str, mode: str) -> str:
 
 
 def create_or_select_session(expert_id: str, batch_id: str, mode: str) -> None:
+    previous_session = (
+        safe_str(st.session_state.get("expert_id")),
+        safe_str(st.session_state.get("batch_id")),
+        safe_str(st.session_state.get("annotation_mode")),
+    )
     current_time = now_iso()
     sid = session_id_for(expert_id, batch_id, mode)
     with connect() as conn:
@@ -752,6 +759,9 @@ def create_or_select_session(expert_id: str, batch_id: str, mode: str) -> None:
     st.session_state["batch_id"] = batch_id
     st.session_state["annotation_mode"] = mode
     st.session_state["session_timer_started_at"] = time.time()
+    if previous_session != (expert_id, batch_id, mode):
+        for key in ["feedback_index", "safety_index", "likert_index"]:
+            st.session_state[key] = 0
 
 
 def touch_session() -> None:
@@ -859,6 +869,15 @@ def as_records(df: pd.DataFrame, key: str) -> Dict[str, Dict[str, Any]]:
     if df.empty or key not in df:
         return {}
     return {safe_str(row[key]): row.to_dict() for _, row in df.iterrows()}
+
+
+def active_feedback_for_session(feedback: pd.DataFrame) -> pd.DataFrame:
+    if feedback.empty or "annotation_batch" not in feedback.columns or not session_ready():
+        return feedback.copy()
+    batch_id = safe_str(get_session()["batch_id"])
+    batch_values = feedback["annotation_batch"].map(safe_str)
+    active = feedback[batch_values.eq(batch_id)].copy()
+    return active if not active.empty else feedback.copy()
 
 
 def missing_text(value: Any) -> bool:
@@ -1293,6 +1312,9 @@ def page_expert_session(data: Mapping[str, pd.DataFrame]) -> None:
             st.rerun()
 
     st.markdown(f"### {t('data_loaded')}")
+    if session_ready():
+        active_feedback = active_feedback_for_session(data["feedback"])
+        st.info(t("active_batch_scope", batch_id=get_session()["batch_id"], count=len(active_feedback)))
     st.dataframe(
         pd.DataFrame(
             [
@@ -1369,7 +1391,7 @@ def page_feedback_annotation(data: Mapping[str, pd.DataFrame]) -> None:
     st.header(t("feedback_annotation"))
     if not require_session():
         return
-    feedback = data["feedback"].reset_index(drop=True)
+    feedback = active_feedback_for_session(data["feedback"]).reset_index(drop=True)
     if feedback.empty:
         st.error(t("no_feedback"))
         return
@@ -1425,7 +1447,7 @@ def page_feedback_safety(data: Mapping[str, pd.DataFrame]) -> None:
     st.header(t("feedback_safety_check"))
     if not require_session():
         return
-    feedback = data["feedback"].reset_index(drop=True)
+    feedback = active_feedback_for_session(data["feedback"]).reset_index(drop=True)
     if feedback.empty:
         st.error(t("no_feedback"))
         return
@@ -1485,7 +1507,7 @@ def page_likert_questionnaire(data: Mapping[str, pd.DataFrame]) -> None:
     st.info(t("scale_note"))
     if not require_session():
         return
-    feedback = data["feedback"].reset_index(drop=True)
+    feedback = active_feedback_for_session(data["feedback"]).reset_index(drop=True)
     if feedback.empty:
         st.error(t("no_feedback"))
         return
@@ -1554,7 +1576,7 @@ def page_likert_questionnaire(data: Mapping[str, pd.DataFrame]) -> None:
 
 
 def build_progress(data: Mapping[str, pd.DataFrame]) -> pd.DataFrame:
-    feedback = data["feedback"]
+    feedback = active_feedback_for_session(data["feedback"])
     likert_records = as_records(read_annotation_table("likert_feedback_ratings"), "feedback_item_id")
 
     rows: List[Dict[str, Any]] = []
@@ -1627,6 +1649,7 @@ def dataframe_to_csv_bytes(df: pd.DataFrame) -> bytes:
 
 def build_combined_json(data: Mapping[str, pd.DataFrame]) -> Dict[str, Any]:
     session = get_session()
+    active_feedback = active_feedback_for_session(data["feedback"])
     return {
         "metadata": {
             "expert_id": session["expert_id"],
@@ -1636,7 +1659,7 @@ def build_combined_json(data: Mapping[str, pd.DataFrame]) -> Dict[str, Any]:
             "data_policy": "anonymous_esl_writing_feedback_research_annotation_only",
         },
         "source_essays": data["essays"].to_dict(orient="records"),
-        "source_feedback_items": data["feedback"].to_dict(orient="records"),
+        "source_feedback_items": active_feedback.to_dict(orient="records"),
         "likert_feedback_ratings": read_annotation_table("likert_feedback_ratings").to_dict(orient="records"),
         "annotation_logs": read_annotation_table("annotation_logs").to_dict(orient="records"),
     }

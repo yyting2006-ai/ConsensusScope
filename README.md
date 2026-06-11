@@ -204,6 +204,11 @@ dimensions: correctness, meaning preservation, student readiness, usefulness,
 clarity, and direct-release suitability. These ratings are offline diagnostics;
 they are not used by the deploy-time router.
 
+The expert annotation website now also includes an additional 18-item Batch 2
+for expanding this pilot. The reported numbers below use only the completed
+12-item pilot; Batch 2 should be reported only after both teachers complete the
+new ratings.
+
 The pilot exposed one borderline auto-release pattern: feedback phrased as
 teacher-dependent advice, such as "if the teacher wants", should remain
 reviewable even when the local edit is low-risk. The router now includes a
@@ -427,7 +432,7 @@ Analyze future two-teacher Likert ratings:
 ```bash
 PYTHONPATH=. python3 scripts/analyze_teacher_likert_pilot.py \
   --ratings path/to/exported_teacher_ratings \
-  --routing data/esl_writing_demo/routing_results.csv
+  --routing expert_annotation_app/sample_data/routing_results.csv
 ```
 
 Expected annotation file name:
@@ -441,6 +446,10 @@ include `expert_id`, `batch_id`, `feedback_item_id`, `essay_id`,
 `correctness_score`, `meaning_preservation_score`, `student_readiness_score`,
 `usefulness_score`, `clarity_score`, and `direct_release_score`. All score
 columns must use the 1-5 scale.
+
+For the expanded pilot, put all exported `likert_feedback_ratings*.csv` files
+from Teacher 1/2 and Batch 1/2 into one folder; the analysis script can read
+multiple exports from that folder.
 
 ## Legacy / Auxiliary Modules
 

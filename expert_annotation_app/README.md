@@ -20,6 +20,14 @@ ConsensusScope demo and is not a student-facing grading system.
 - 教师编号：`1` 或 `2`
 - 批次编号：`1` 或 `2`
 
+批次含义：
+
+- `1`：原始 pilot 批次，12 条 AI feedback items。
+- `2`：新增扩展批次，18 条 AI feedback items。
+
+如果老师已经完成过批次 `1`，请继续使用同一个教师编号，选择批次 `2`
+完成新增样本。不要让老师重复标注已经完成的批次。
+
 默认使用盲标模式。盲标模式不会显示系统风险等级、推荐动作、模型一致性、
 模型名称或 ConsensusScope 决策，避免影响教师判断。
 
@@ -91,7 +99,8 @@ Do not hard-code it in the source code.
 Sample CSV files are stored in `sample_data/`:
 
 - `essays.csv`
-- `feedback_items.csv`
+- `feedback_items.csv`, including 30 feedback items across two annotation
+  batches
 - `routing_results.csv` optional, used only when researcher-assisted signals
   are enabled
 
@@ -140,13 +149,17 @@ After exporting the ratings, run:
 
 ```bash
 PYTHONPATH=. python3 ../scripts/analyze_teacher_likert_pilot.py \
-  --ratings exports/1_1 \
-  --routing ../data/esl_writing_demo/routing_results.csv
+  --ratings exports_or_combined_csv_folder \
+  --routing sample_data/routing_results.csv
 ```
 
 The analysis reports teacher score averages, two-teacher agreement when both
 teachers rated the same items, and how well system routing covers feedback that
 teachers marked as needing review.
+
+For the expanded pilot, put all exported `likert_feedback_ratings*.csv` files
+from both teachers and both batches into one folder. The analysis script can
+read that folder directly.
 
 ## Research And Privacy Boundary
 

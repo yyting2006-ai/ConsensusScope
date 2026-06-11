@@ -4,10 +4,10 @@ import pytest
 from scripts.analyze_teacher_likert_pilot import SCORE_FIELDS, _read_ratings, analyze
 
 
-def _rating_row(expert_id, item_id, essay_id, scores):
+def _rating_row(expert_id, item_id, essay_id, scores, batch_id="1"):
     row = {
         "expert_id": str(expert_id),
-        "batch_id": "1",
+        "batch_id": str(batch_id),
         "feedback_item_id": item_id,
         "essay_id": essay_id,
         "created_at": "2026-06-11T10:00:00",
@@ -66,3 +66,23 @@ def test_likert_reader_rejects_more_than_two_teachers(tmp_path):
 
     with pytest.raises(ValueError, match="at most two teachers"):
         _read_ratings(path)
+
+
+def test_likert_reader_accepts_multiple_export_files(tmp_path):
+    batch_one = tmp_path / "teacher1_batch1"
+    batch_two = tmp_path / "teacher1_batch2"
+    batch_one.mkdir()
+    batch_two.mkdir()
+    pd.DataFrame([_rating_row(1, "A", "E1", [5, 5, 5, 5, 5, 5], batch_id="1")]).to_csv(
+        batch_one / "likert_feedback_ratings.csv",
+        index=False,
+    )
+    pd.DataFrame([_rating_row(1, "B", "E2", [4, 4, 4, 4, 4, 4], batch_id="2")]).to_csv(
+        batch_two / "likert_feedback_ratings_batch2.csv",
+        index=False,
+    )
+
+    ratings = _read_ratings(tmp_path)
+
+    assert set(ratings["feedback_item_id"]) == {"A", "B"}
+    assert set(ratings["batch_id"]) == {"1", "2"}

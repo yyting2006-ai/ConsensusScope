@@ -10,7 +10,7 @@ import pandas as pd
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_ROUTING = ROOT / "data" / "esl_writing_demo" / "routing_results.csv"
+DEFAULT_ROUTING = ROOT / "expert_annotation_app" / "sample_data" / "routing_results.csv"
 DEFAULT_OUT = ROOT / "reports" / "teacher_likert_pilot"
 
 SCORE_FIELDS = [
@@ -35,13 +35,19 @@ def _safe_div(num: float, den: float) -> float:
 
 
 def _read_ratings(path: Path) -> pd.DataFrame:
-    rating_file = path / "likert_feedback_ratings.csv" if path.is_dir() else path
-    if not rating_file.exists():
+    if path.is_dir():
+        direct = path / "likert_feedback_ratings.csv"
+        rating_files = [direct] if direct.exists() else sorted(path.rglob("likert_feedback_ratings*.csv"))
+    else:
+        rating_files = [path]
+    rating_files = [file for file in rating_files if file.exists()]
+    if not rating_files:
         raise FileNotFoundError(
-            f"Missing Likert rating file: {rating_file}. "
-            "Expected export file name: likert_feedback_ratings.csv."
+            f"Missing Likert rating file under: {path}. "
+            "Expected likert_feedback_ratings.csv or likert_feedback_ratings*.csv."
         )
-    ratings = pd.read_csv(rating_file).fillna("")
+    frames = [pd.read_csv(file).fillna("") for file in rating_files]
+    ratings = pd.concat(frames, ignore_index=True)
     required = {"expert_id", "batch_id", "feedback_item_id", "essay_id", *SCORE_FIELDS}
     missing = sorted(required.difference(ratings.columns))
     if missing:
