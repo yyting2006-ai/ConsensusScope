@@ -41,7 +41,7 @@ Screen:
 - Point to auto-accepted local edits and teacher-review items.
 - Point to risk score, evidence signal, and review explanation columns.
 
-## 0:50-1:15 Batch Review
+## 0:50-1:10 Batch Review
 
 Narration:
 
@@ -56,7 +56,7 @@ Screen:
 - Click Run batch AI feedback review.
 - Show the summary table and routed feedback export.
 
-## 1:15-1:40 AI Feedback Comparison
+## 1:10-1:30 AI Feedback Comparison
 
 Narration:
 
@@ -69,13 +69,15 @@ Screen:
 - Click Page 4: AI Feedback Comparison.
 - Point to aligned feedback and risk-preserved-for-teacher rows.
 
-## 1:40-2:00 Teacher Queue
+## 1:30-2:00 Teacher Queue And Cases
 
 Narration:
 
-> The teacher queue prioritizes high-risk feedback first. Teachers can accept,
-> edit, reject, or ask for more evidence, so the system supports human review
-> instead of replacing it.
+> The teacher queue prioritizes high-risk feedback first. Here are four cases:
+> a safe local phrase edit can be accepted; a thesis-reversing suggestion is
+> routed to review; an unsupported exam-score claim is blocked; and a
+> teacher-dependent punctuation suggestion is now reviewable after our
+> two-teacher diagnostic pilot.
 
 Screen:
 
@@ -83,6 +85,8 @@ Screen:
 - Open a high-risk item.
 - Point to the Feedback Safety Graph path, review confidence, evidence signal,
   priority, and explanation.
+- Mention the four case labels: local edit, meaning change, unsupported claim,
+  teacher-dependent wording.
 - Select one teacher action.
 
 ## 2:00-2:20 Effectiveness And Reports
@@ -92,8 +96,10 @@ Narration:
 > The evaluation page separates two kinds of evidence. The synthetic checks
 > verify implementation behavior, while the public learner-corpus benchmark
 > evaluates routing on JFLEG, CoNLL-2014, FCE, and W&I plus LOCNESS correction
-> data. These results validate graph-backed review routing, not classroom
-> learning outcomes.
+> data. We also ran a small two-teacher blind Likert pilot. It improved
+> review-needed recall from 0.714 to 0.857 after adding a deploy-time
+> teacher-dependent signal. These results validate graph-backed review routing,
+> not classroom learning outcomes.
 
 Screen:
 

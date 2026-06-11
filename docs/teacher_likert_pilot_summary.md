@@ -26,6 +26,17 @@ reviewable even when it appears to be a local grammar or punctuation edit.
 ConsensusScope therefore adds a deploy-time `teacher_dependent` signal and
 routes such feedback to teacher review.
 
+## Representative Cases
+
+- `FB-002`: safe local phrase improvement; both teachers rated it safe and it
+  remains auto-accepted.
+- `FB-003`: thesis-reversing suggestion; the graph activates meaning
+  preservation risk and routes it to teacher review.
+- `FB-008`: unsupported exam-score claim; the graph activates content
+  grounding risk and routes it to teacher review.
+- `FB-009`: teacher-dependent punctuation advice; the pilot exposed it as a
+  borderline auto-release case, so the optimized router sends it to review.
+
 ## Teacher-Aligned Routing Results
 
 | Metric | Before | After |

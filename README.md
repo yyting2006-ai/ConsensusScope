@@ -83,6 +83,20 @@ Operational teacher workflow:
 Single Essay Review -> Batch Review -> AI Feedback Comparison -> Teacher Queue -> Effectiveness Evaluation -> Reports
 ```
 
+## Submission Assets
+
+For demo-track review, the repository includes:
+
+- `paper/consensusscope_emnlp_demo.tex`: EMNLP-style demo paper source.
+- `docs/screenshots_en/`: main screenshots for the system paper and video.
+- `docs/demo_video_script.md`: 2.5-minute English recording script.
+- `docs/demo_stability_checklist.md`: public URL, local fallback, and recording
+  checks.
+- `docs/teacher_likert_pilot_summary.md`: compact two-teacher diagnostic pilot
+  summary.
+- `expert_annotation_app/`: separate teacher annotation website for collecting
+  blind 1-5 Likert ratings.
+
 ## Feedback Safety Graph
 
 The main methodological unit is not an essay-level score. It is a feedback-item

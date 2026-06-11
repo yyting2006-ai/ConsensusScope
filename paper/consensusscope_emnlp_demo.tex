@@ -107,6 +107,35 @@ Our demo treats model agreement as one observable signal, alongside issue type,
 evidence status, meaning-change warnings, unsupported-claim cues, tone-safety
 cues, and parse errors.
 
+\section{Comparison with Existing Systems}
+
+ConsensusScope differs from existing writing-support and evaluation systems in
+the unit of decision it makes visible. GEC and automated writing-feedback tools
+focus on producing or scoring revisions; essay-scoring systems assign
+essay-level quality signals; and LLM-as-judge workflows assess generations
+after they are produced. ConsensusScope instead routes each \emph{feedback
+item} before it reaches a student, exposing the graph evidence behind release
+or review decisions (Table~\ref{tab:comparison}).
+
+\begin{table*}[t]
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}p{0.18\linewidth}p{0.15\linewidth}p{0.17\linewidth}p{0.39\linewidth}@{}}
+\toprule
+System type & Main object & Typical output & ConsensusScope distinction \\
+\midrule
+GEC / revision tools & Sentence edit & Corrected text & Audits whether feedback should be student-facing \\
+Essay scoring systems & Whole essay & Score or rubric label & Avoids grading; routes item-level AI feedback \\
+LLM-as-judge workflows & Model output & Preference or quality score & Uses graph-backed deploy-time safety signals \\
+Feedback dashboards & Review records & Tables or filters & Connects target span, suggestion, risk, and route \\
+\bottomrule
+\end{tabular}
+\caption{ConsensusScope is positioned as feedback safety routing rather than
+automatic correction, essay scoring, or generic model judging.}
+\label{tab:comparison}
+\end{table*}
+
 \section{System Overview}
 
 ConsensusScope is organized around a teacher-facing feedback-review workflow
@@ -140,6 +169,17 @@ Reports, Settings/Diagnostics, and Design Reference. The first seven pages form
 the primary demo path. Settings/Diagnostics retains optional API configuration
 and legacy auxiliary modules, but those modules are not part of the main demo
 claim.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.48\linewidth]{figures/review_workspace.png}
+\hfill
+\includegraphics[width=0.48\linewidth]{figures/teacher_queue.png}
+\caption{Teacher-facing demo screens. Left: the review workspace summarizes
+the safety-routing workflow. Right: the teacher queue prioritizes feedback
+items that need review before student release.}
+\label{fig:screenshots}
+\end{figure*}
 
 \paragraph{Unified feedback schema.}
 Every feedback candidate is represented with a stable item-level schema:
@@ -260,28 +300,44 @@ to the deploy-time router. An initial analysis identified a borderline
 auto-accepted item whose wording made student release dependent on teacher
 preference (``if the teacher wants''). We therefore added an observable
 \texttt{teacher\_dependent} signal that routes such items to review. As shown
-in Table~\ref{tab:teacherpilot}, this update improves recall for
+in Figure~\ref{fig:teacherpilot}, this update improves recall for
 teacher-marked review-needed items while preserving recall for teacher-marked
 unsafe items.
 
-\begin{table}[t]
+\begin{figure}[t]
 \centering
-\small
-\begin{tabular}{lrr}
-\toprule
-Metric & Before & After \\
-\midrule
-Auto share & 0.417 & 0.333 \\
-Review share & 0.583 & 0.667 \\
-Review-needed recall & 0.714 & 0.857 \\
-Unsafe reviewed recall & 1.000 & 1.000 \\
-Auto precision vs. safe & 0.400 & 0.500 \\
-\bottomrule
-\end{tabular}
+\includegraphics[width=\linewidth]{figures/teacher_pilot_before_after.pdf}
 \caption{Two-teacher offline diagnostic pilot on 12 AI feedback items. Teacher
 ratings are post-hoc diagnostics and are not used during routing.}
-\label{tab:teacherpilot}
-\end{table}
+\label{fig:teacherpilot}
+\end{figure}
+
+\paragraph{Case analysis.}
+Table~\ref{tab:cases} illustrates how the same graph layer handles safe local
+edits, meaning-changing suggestions, unsupported claims, and borderline
+teacher-dependent advice. The pilot did not make the router use teacher
+ratings at deploy time; it exposed which observable signal should be added to
+the rule set.
+
+\begin{table*}[t]
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}p{0.08\linewidth}p{0.30\linewidth}p{0.25\linewidth}p{0.27\linewidth}@{}}
+\toprule
+Case & AI feedback pattern & Graph route & Diagnostic value \\
+\midrule
+FB-002 & Local phrase improvement & local edit $\rightarrow$ auto-accept & Both teachers rate it safe \\
+FB-003 & Reverses the student's thesis & meaning preservation $\rightarrow$ review & Blocks meaning change \\
+FB-008 & Adds unsupported exam-score claim & content grounding $\rightarrow$ review & Blocks unsupported evidence \\
+FB-009 & ``if the teacher wants'' punctuation advice & specificity $\rightarrow$ review & Reveals teacher-dependent wording \\
+\bottomrule
+\end{tabular}
+\caption{Representative cases from the teacher diagnostic pilot. The graph
+route is constructed from deploy-time signals; teacher ratings are used only
+for offline analysis.}
+\label{tab:cases}
+\end{table*}
 
 \paragraph{Review-routing utility.}
 Table~\ref{tab:policy} summarizes the pooled policy results over 349,782
