@@ -160,7 +160,7 @@ TRANSLATIONS = {
         "clarity_help": "1 = unclear or vague; 5 = clear and actionable.",
         "direct_release_score": "Direct-release score",
         "direct_release_help": "1 = must be reviewed or rejected; 5 = can be released directly.",
-        "save_likert_rating": "Save 1-5 questionnaire",
+        "save_likert_rating": "Save and go to next",
         "likert_saved": "Likert questionnaire saved for {item_id}.",
         "essay_annotation": "Essay Annotation",
         "no_essays": "No essays are available in sample_data/essays.csv.",
@@ -318,7 +318,7 @@ TRANSLATIONS = {
         "clarity_help": "1 = 含混、难操作；5 = 清晰、可操作。",
         "direct_release_score": "直接放行评分",
         "direct_release_help": "1 = 必须复核或拒绝；5 = 可以直接放行。",
-        "save_likert_rating": "保存 1–5 分问卷",
+        "save_likert_rating": "保存并进入下一条",
         "likert_saved": "已保存 {item_id} 的 1–5 分问卷。",
         "essay_annotation": "作文整体评价",
         "no_essays": "sample_data/essays.csv 中没有可用作文。",
@@ -941,31 +941,53 @@ def text_default(row: Mapping[str, Any], field: str) -> str:
     return safe_str(row.get(field))
 
 
+def set_item_index(item_type: str, index_key: str, total: int, index: int, sync_jump: bool = True) -> None:
+    if total <= 0:
+        st.session_state[index_key] = 0
+        return
+    clamped = min(total - 1, max(0, int(index)))
+    st.session_state[index_key] = clamped
+    if sync_jump:
+        st.session_state[f"{item_type}_jump"] = clamped + 1
+
+
+def sync_jump_to_index(item_type: str, index_key: str, total: int) -> None:
+    jump_key = f"{item_type}_jump"
+    try:
+        selected = int(st.session_state.get(jump_key, 1))
+    except Exception:
+        selected = 1
+    set_item_index(item_type, index_key, total, selected - 1, sync_jump=False)
+
+
 def nav_buttons(item_type: str, total: int, index_key: str, first_incomplete: int) -> None:
+    set_item_index(item_type, index_key, total, int(st.session_state.get(index_key, 0)))
+    jump_key = f"{item_type}_jump"
     col1, col2, col3, col4 = st.columns([1, 1, 1.5, 2])
     with col1:
         if st.button(t("previous"), key=f"{item_type}_prev", disabled=total <= 1):
-            st.session_state[index_key] = max(0, int(st.session_state.get(index_key, 0)) - 1)
+            set_item_index(item_type, index_key, total, int(st.session_state.get(index_key, 0)) - 1)
             st.rerun()
     with col2:
         if st.button(t("next"), key=f"{item_type}_next", disabled=total <= 1):
-            st.session_state[index_key] = min(total - 1, int(st.session_state.get(index_key, 0)) + 1)
+            set_item_index(item_type, index_key, total, int(st.session_state.get(index_key, 0)) + 1)
             st.rerun()
     with col3:
         if st.button(t("first_incomplete"), key=f"{item_type}_first_incomplete", disabled=total == 0):
-            st.session_state[index_key] = first_incomplete
+            set_item_index(item_type, index_key, total, first_incomplete)
             st.rerun()
     with col4:
         if total:
-            selected = st.number_input(
+            st.number_input(
                 t("jump_to_item"),
                 min_value=1,
                 max_value=total,
                 value=int(st.session_state.get(index_key, 0)) + 1,
                 step=1,
-                key=f"{item_type}_jump",
+                key=jump_key,
+                on_change=sync_jump_to_index,
+                args=(item_type, index_key, total),
             )
-            st.session_state[index_key] = int(selected) - 1
 
 
 def render_essay_card(essay: Mapping[str, Any]) -> None:
@@ -1476,6 +1498,9 @@ def page_likert_questionnaire(data: Mapping[str, pd.DataFrame]) -> None:
     st.session_state["likert_index"] = min(max(0, int(st.session_state["likert_index"])), total - 1)
     first_incomplete = first_incomplete_index(feedback, "feedback_item_id", records, likert_missing_fields)
     nav_buttons("likert", total, "likert_index", first_incomplete)
+    saved_message = safe_str(st.session_state.pop("likert_saved_message", ""))
+    if saved_message:
+        st.success(saved_message)
 
     row = feedback.iloc[int(st.session_state["likert_index"])].to_dict()
     feedback_item_id = safe_str(row.get("feedback_item_id"))
@@ -1516,10 +1541,16 @@ def page_likert_questionnaire(data: Mapping[str, pd.DataFrame]) -> None:
     if submitted:
         missing = likert_missing_fields(values)
         if validate_and_show(missing):
+            current_index = int(st.session_state.get("likert_index", 0))
             duration = elapsed_for_item("likert")
             save_likert_feedback_rating(feedback_item_id, essay_id, values, duration)
             reset_item_timer("likert")
-            st.success(t("likert_saved", item_id=feedback_item_id))
+            message = t("likert_saved", item_id=feedback_item_id)
+            if current_index < total - 1:
+                set_item_index("likert", "likert_index", total, current_index + 1, sync_jump=False)
+                st.session_state["likert_saved_message"] = message
+                st.rerun()
+            st.success(message)
 
 
 def build_progress(data: Mapping[str, pd.DataFrame]) -> pd.DataFrame:
