@@ -2,10 +2,13 @@
 
 ## One-Line Pitch
 
-ConsensusScope is an interactive review-routing tool for safe AI feedback on
-ESL writing. It shows how multi-model feedback candidates can be normalized,
-screened for risk with interpretable review signals, and routed into teacher
-review before students see unsafe or meaning-changing suggestions.
+ConsensusScope is an interactive Feedback Safety Graph system for safe AI
+feedback on ESL writing. Its core mechanism turns each AI
+feedback item into an auditable object linking the student target span, AI
+suggestion, evidence status, active safety dimensions, and routing decision.
+The system shows how multi-model feedback candidates can be normalized,
+screened for meaning-change and safety risks, and routed into teacher review
+before students see unsafe or meaning-changing suggestions.
 
 ## Target Users
 
@@ -21,10 +24,11 @@ review before students see unsafe or meaning-changing suggestions.
 1. Open the review workspace.
 2. Load a synthetic anonymized ESL writing draft.
 3. Inspect AI feedback candidates in a unified schema.
-4. Compare low-risk auto-accepted local edits with teacher-review items.
-5. Open a feedback detail page and inspect routing reasons.
-6. Review the teacher queue by risk level and issue type.
-7. Export a teacher-readable report.
+4. Inspect the Feedback Safety Graph path for selected items.
+5. Compare low-risk auto-accepted local edits with teacher-review items.
+6. Open a feedback detail page and inspect routing reasons.
+7. Review the teacher queue by risk level and issue type.
+8. Export a teacher-readable report.
 
 ## Current Optimized Demo Path
 
@@ -32,8 +36,9 @@ review before students see unsafe or meaning-changing suggestions.
   organization/development advice, and high-risk meaning-change suggestions.
 - The teacher view separates low-risk local edits from items that may change
   stance, add unsupported claims, or overcorrect the student's draft.
-- The AI review layer reports risk scores, evidence signals, route confidence,
-  review priorities, and short explanations for each routed item.
+- The AI review layer reports active Feedback Safety Graph dimensions, graph
+  paths, risk scores, evidence signals, route confidence, review priorities,
+  and short explanations for each routed item.
 - The Writing Rubric page shows deploy-time routing rules rather than hidden
   gold labels.
 - The report page exports an audit trail with explicit limitations.

@@ -1,19 +1,22 @@
-# ConsensusScope：面向 ESL 写作反馈的教师复核路由系统
+# ConsensusScope：基于反馈安全图谱的 ESL 写作反馈教师复核路由系统
 
-**ConsensusScope: An Interactive Review-Routing Tool for Safe AI Feedback on ESL Writing**
+**ConsensusScope: Feedback Safety Graphs for Teacher-in-the-Loop Review Routing of AI Feedback on ESL Writing**
 
 ConsensusScope 当前主线是 **teacher-in-the-loop review routing for safe
-AI-generated ESL writing feedback**。系统帮助教师判断 AI 写作反馈是否可以安全展示给学生，还是需要教师先复核、编辑或拒绝。
+AI-generated ESL writing feedback**。系统的核心机制是 **反馈安全图谱
+（Feedback Safety Graph）**：把学生原文片段、AI 建议、证据信号、被触发的安全维度和最终路由决策连起来，帮助教师判断 AI 写作反馈是否可以安全展示给学生，还是需要先复核、编辑或拒绝。
 
 它不是自动作文评分系统，不是教师替代品，也不是“真值判定器”。
 
 ## 核心用途
 
-AI 写作反馈可能很流畅，但并不一定安全。模型可能正确修改局部语法错误，也可能改写学生原意、反转论点、加入无依据内容，或把本来合理的表达过度纠正。ConsensusScope 的作用是把这些风险显性化：
+AI 写作反馈可能很流畅，但并不一定安全。模型可能正确修改局部语法错误，也可能改写学生原意、反转论点、加入无依据内容，或把本来合理的表达过度纠正。ConsensusScope 的作用不是给作文自动打分，而是把每条 AI 反馈变成可审计的安全图谱：
 
 - 多模型反馈统一成同一反馈格式；
-- 使用部署时可获得的风险信号：模型一致性、issue type、meaning-change warning、unsupported-claim warning、parse error 等；
+- 使用部署时可获得的图谱节点：目标片段、上下文、AI 建议、预测问题类型、证据信号、安全维度、路由决策；
+- 标记图谱安全维度：局部语言修改、保留原意、内容依据、教学语气、反馈具体性、模型一致性；
 - 将反馈路由为 low / medium / high risk；
+- 导出安全图谱路径，例如 `target_span -> ai_suggestion -> meaning_preservation -> teacher_review`；
 - 生成教师复核队列；
 - 提供 Writing Rubric 和 Reports 页面，方便教师检查和导出审计记录。
 
@@ -39,7 +42,7 @@ http://localhost:8502
 - `ui_prototype/index.html`：给设计师看的完整视觉原型。
 - `profiles/esl_writing.yaml`：ESL 写作反馈 profile。
 - `data/esl_writing_demo/`：合成 ESL 作文、反馈项、review evidence、routing output 和 AI 评审压力测试集。
-- `src/esl_writing_feedback.py`：规则型教师复核路由接口。
+- `src/esl_writing_feedback.py`：反馈安全图谱构建与规则型教师复核路由接口。
 - `src/prompts/esl_feedback_prompt.py`：ESL feedback 生成 prompt 模板。
 - `scripts/evaluate_esl_routing_demo.py`：合成期望标签上的路由有效性评估脚本。
 - `scripts/run_public_gec_benchmark.py`：公开学习者纠错语料路由评测脚本，支持 JFLEG、`.m2` GEC 文件和 source/reference CSV。
@@ -51,7 +54,7 @@ http://localhost:8502
 1. Review Workspace
 2. Single Essay Review：教师粘贴单篇作文，生成并路由 AI 反馈。
 3. Batch Review：上传或使用 CSV 批量处理多篇作文。
-4. AI Feedback Comparison：比较不同 AI reviewer 的反馈候选、风险和一致性状态。
+4. AI Feedback Comparison：比较不同 AI reviewer 的反馈候选、风险、安全图谱维度和一致性状态。
 5. Teacher Queue：教师复核、接受、编辑、拒绝或要求更多证据。
 6. Effectiveness Evaluation：在合成期望标签和 AI-review stress cases 上评估路由行为。
 7. Reports：导出反馈表和教师可读报告。
@@ -79,6 +82,11 @@ ESL 路由层现在会为每条 AI 反馈输出：
 - `evidence_signal`：supported / missing / conflict / none。
 - `review_priority`：low / normal / high / urgent。
 - `review_explanation`：给教师看的简短解释。
+- `safety_graph_active_dimensions`：被触发的安全图谱维度。
+- `safety_graph_active_signals`：触发这些维度的具体风险信号。
+- `safety_graph_path`：从反馈项到路由决策的可读路径。
+- `safety_graph_summary`：给教师看的图谱摘要。
+- `safety_graph_nodes` / `safety_graph_edges`：用于审计和复现的 JSON 图谱记录。
 
 当前 AI 评审重点拦截：改写学生立场、整篇代写、引入外部事实或统计、伤害性语气、低模型一致性、解析失败、过于模糊的反馈。
 

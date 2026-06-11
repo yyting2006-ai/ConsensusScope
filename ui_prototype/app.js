@@ -576,7 +576,7 @@ function renderWorkspace() {
     ${pageHeading(
       "Review workspace",
       "Route AI writing feedback before it reaches students.",
-      "ConsensusScope is a teacher-in-the-loop review workspace for ESL writing feedback. It separates safe local language edits from feedback that may change meaning, add unsupported content, or require teacher judgment.",
+      "ConsensusScope is a teacher-in-the-loop review workspace for ESL writing feedback. Each AI suggestion is represented as a Feedback Safety Graph linking the target span, suggestion, evidence signal, safety dimension, and route.",
       '<button class="button primary" data-open-session="ESL-WR-001">Start current review</button><button class="button secondary" data-page-jump="queue">Open teacher queue</button>'
     )}
 
@@ -589,7 +589,7 @@ function renderWorkspace() {
 
     <div class="routing-card">
       <strong>Primary workflow.</strong>
-      Multi-model feedback candidates are normalized into one schema, evaluated by rule-based review-routing signals, then shown as either student-ready local edits or teacher-review items. The system supports teacher judgment; it does not replace grading or final feedback decisions.
+      Multi-model feedback candidates are normalized into one schema, converted into item-level Feedback Safety Graphs, then shown as either student-ready local edits or teacher-review items. The system supports teacher judgment; it does not replace grading or final feedback decisions.
     </div>
 
     <div class="grid three">
@@ -965,7 +965,7 @@ function renderSettings() {
     ${pageHeading(
       "Settings / diagnostics",
       "Keep technical configuration behind the teacher workflow.",
-      "This page is for deployment and debugging controls. It stays secondary so the demo remains focused on teacher review routing rather than raw model infrastructure.",
+      "This page is for deployment and debugging controls. It stays secondary so the demo remains focused on Feedback Safety Graph review routing rather than raw model infrastructure.",
       ""
     )}
 

@@ -21,6 +21,8 @@ def test_grammar_edit_routes_to_low_auto_accept():
     assert route["recommended_action"] == "auto_accept"
     assert route["meaning_preservation_predicted"] == "preserves_meaning"
     assert "local_language_edit" in route["risk_reasons"]
+    assert route["safety_graph_active_dimensions"] == "local_edit"
+    assert route["safety_graph_path"].endswith("local_edit -> auto_accept")
 
 
 def test_meaning_change_routes_to_teacher_review():
@@ -33,6 +35,8 @@ def test_meaning_change_routes_to_teacher_review():
     assert route["recommended_action"] == "teacher_review"
     assert route["meaning_preservation_predicted"] == "changes_meaning"
     assert "meaning_change" in route["risk_reasons"]
+    assert "meaning_preservation" in route["safety_graph_active_dimensions"]
+    assert route["safety_graph_path"].endswith("meaning_preservation -> teacher_review")
 
 
 def test_overcorrection_routes_to_teacher_review():
@@ -113,6 +117,7 @@ def test_route_feedback_dataframe_matches_demo_ids():
 
     assert len(routed) == len(feedback)
     assert set(routed["feedback_item_id"]) == set(feedback["feedback_item_id"])
+    assert {"safety_graph_summary", "safety_graph_nodes", "safety_graph_edges"}.issubset(routed.columns)
     assert routed.loc[routed["feedback_item_id"] == "FW-006", "recommended_action"].item() == "auto_accept"
     assert routed.loc[routed["feedback_item_id"] == "FW-014", "recommended_action"].item() == "teacher_review"
 

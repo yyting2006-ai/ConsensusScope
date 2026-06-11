@@ -119,7 +119,7 @@ def safe_str(value: Any) -> str:
 MAIN_TRANSLATIONS = {
     "en": {
         "language_label": "Language / 语言",
-        "topbar_subtitle": "Teacher-in-the-loop review routing for safe AI feedback on ESL writing",
+        "topbar_subtitle": "Feedback Safety Graphs for teacher-in-the-loop ESL writing feedback review",
         "demo_access": "Demo Access",
         "demo_access_info": "This live demo is password-protected to prevent unintended API usage.",
         "demo_password": "Demo password",
@@ -155,7 +155,7 @@ MAIN_TRANSLATIONS = {
         "mean_risk": "Mean risk",
         "no_feedback": "No feedback items available.",
         "single_title": "Page 2 · Single Essay Review",
-        "single_caption": "Paste one ESL writing draft, generate local AI-style feedback candidates, route them, and inspect what needs teacher review.",
+        "single_caption": "Paste one ESL writing draft, generate local AI-style feedback candidates, build a Feedback Safety Graph for each item, and inspect what needs teacher review.",
         "load_demo": "Load a demo essay or start blank",
         "blank_workspace": "Blank workspace",
         "essay_id": "Essay ID",
@@ -165,7 +165,7 @@ MAIN_TRANSLATIONS = {
         "include_stress": "Include unsafe stress-test suggestions for demo",
         "generate_route": "Generate and route AI feedback",
         "what_window_does": "What this window does",
-        "single_explain": "It simulates multiple AI feedback reviewers in a no-API mode, normalizes every suggestion into the same schema, then routes low-risk local edits separately from items that need teacher review.",
+        "single_explain": "It simulates multiple AI feedback reviewers in a no-API mode, normalizes every suggestion into the same schema, then builds an item-level Feedback Safety Graph linking the target span, suggestion, evidence signal, safety dimensions, and routing decision.",
         "single_info": "For public deployment, this page can run without API keys. Live LLM providers can later write into the same feedback schema.",
         "paste_essay_error": "Please paste an essay draft before running review.",
         "review_result": "Review Result",
@@ -173,7 +173,7 @@ MAIN_TRANSLATIONS = {
         "teacher_queue_table": "Teacher-review queue",
         "download_single_report": "Download single essay report.md",
         "batch_title": "Page 3 · Batch Review",
-        "batch_caption": "Upload or use a CSV of ESL essays, then generate feedback candidates and teacher-review routing for every row.",
+        "batch_caption": "Upload or use a CSV of ESL essays, then generate feedback candidates, Feedback Safety Graphs, and teacher-review routes for every row.",
         "upload_csv": "Upload CSV",
         "upload_help": "Expected columns: essay_id, assignment_prompt, student_level, essay_text or essay_text_anonymized.",
         "include_stress_batch": "Include unsafe stress-test suggestions for demo batch",
@@ -187,7 +187,7 @@ MAIN_TRANSLATIONS = {
         "download_batch_summary": "Download batch summary.csv",
         "compare_title": "Page 4 · AI Feedback Comparison",
         "run_first": "Run Single Essay Review or Batch Review first, or use the packaged demo data.",
-        "compare_caption": "This page compares AI feedback candidates by target span, issue type, reviewers, routed risk, and consensus state.",
+        "compare_caption": "This page compares AI feedback candidates by target span, issue type, reviewers, routed risk, safety-graph dimensions, and consensus state.",
         "no_comparison": "No comparison rows are available.",
         "consensus_states": "Consensus states",
         "queue_title": "Page 5 · Teacher Queue",
@@ -199,6 +199,11 @@ MAIN_TRANSLATIONS = {
         "ai_suggestion": "AI suggestion",
         "routing_reason": "Routing reason",
         "ai_review_explanation": "AI review explanation",
+        "feedback_safety_graph": "Feedback Safety Graph",
+        "safety_graph_summary": "Safety graph summary",
+        "safety_graph_path": "Safety graph path",
+        "active_safety_dimensions": "Active safety dimensions",
+        "safety_graph_mechanism": "Each feedback item is represented as a deploy-time safety graph: target span -> AI suggestion -> active safety dimension -> route. The graph uses observable signals only and does not use gold labels or teacher decisions.",
         "review_confidence": "Review confidence",
         "evidence_signal": "Evidence signal",
         "priority": "Priority",
@@ -219,7 +224,7 @@ MAIN_TRANSLATIONS = {
         "public_gec_policy": "Review-routing policy comparison",
         "public_gec_note": "Interpretation note: auto accuracy is high because correct feedback candidates are derived from public gold corrections and evaluated against constructed risk distractors. These numbers validate the routing layer, not real LLM feedback quality or classroom effectiveness.",
         "validity_assessment": "Validity assessment",
-        "validity_text": "Current evidence supports a review-routing claim: the system operationalizes a teacher-review workflow, routes synthetic high-risk feedback to review, and reproduces this routing behavior on public learner-correction corpora converted into feedback-level gold labels. It does not yet support a classroom effectiveness claim because no real teacher annotations, student outcomes, or time-on-task measurements have been collected.",
+        "validity_text": "Current evidence supports a graph-backed review-routing claim: the system operationalizes a teacher-review workflow, constructs deploy-time Feedback Safety Graphs, routes synthetic high-risk feedback to review, and reproduces this routing behavior on public learner-correction corpora converted into feedback-level gold labels. It does not yet support a classroom effectiveness claim because no real teacher annotations, student outcomes, or time-on-task measurements have been collected.",
         "reports_title": "Page 7 · Reports",
         "report_table": "Report table",
         "report_preview": "Report preview",
@@ -238,7 +243,7 @@ MAIN_TRANSLATIONS = {
         "unified_schema": "unified schema",
         "low_risk_edits": "low-risk local edits",
         "high_risk_items": "{count} high-risk items",
-        "main_claim": "Main demo claim: teacher-in-the-loop review routing for safe AI-generated ESL writing feedback. Teachers can run single-essay or batch feedback review, inspect AI feedback comparisons, and route risky feedback into a teacher queue before student release.",
+        "main_claim": "Main demo claim: Feedback Safety Graph-driven teacher review routing for AI-generated ESL writing feedback. Teachers can run single-essay or batch feedback review, inspect why each item activates meaning-preservation, content-grounding, tone, specificity, or agreement signals, and route risky feedback into a teacher queue before student release.",
         "prototype_info": "The current product UI reference is ui_prototype/index.html. Streamlit retains technical and auxiliary modules for inspection, but earlier modules are not the main EMNLP 2026 demo claim.",
         "routing_snapshot": "ESL Writing Feedback Routing Snapshot",
         "design_title": "Page 9 · Design Reference",
@@ -359,7 +364,7 @@ MAIN_TRANSLATIONS = {
         },
     "zh": {
         "language_label": "Language / 语言",
-        "topbar_subtitle": "面向 ESL 写作 AI 反馈的教师在环安全复核路由",
+        "topbar_subtitle": "基于反馈安全图谱的 ESL 写作 AI 反馈教师复核路由",
         "demo_access": "演示访问",
         "demo_access_info": "该在线演示已启用密码保护，以避免无意调用 API。",
         "demo_password": "演示密码",
@@ -395,7 +400,7 @@ MAIN_TRANSLATIONS = {
         "mean_risk": "平均风险",
         "no_feedback": "暂无反馈项。",
         "single_title": "第 2 页 · 单篇作文评审",
-        "single_caption": "粘贴一篇 ESL 作文，生成本地 AI 风格反馈候选，完成路由，并查看哪些反馈需要教师复核。",
+        "single_caption": "粘贴一篇 ESL 作文，生成本地 AI 风格反馈候选，为每条反馈建立反馈安全图谱，并查看哪些反馈需要教师复核。",
         "load_demo": "加载 demo 作文或新建空白工作区",
         "blank_workspace": "空白工作区",
         "essay_id": "作文 ID",
@@ -405,7 +410,7 @@ MAIN_TRANSLATIONS = {
         "include_stress": "加入不安全压力测试建议用于演示",
         "generate_route": "生成并路由 AI 反馈",
         "what_window_does": "该窗口的作用",
-        "single_explain": "它在无需 API 的模式下模拟多个 AI 反馈评审器，将每条建议规范到同一数据格式，再把低风险局部语言修改和需要教师复核的项目分开。",
+        "single_explain": "它在无需 API 的模式下模拟多个 AI 反馈评审器，将每条建议规范到同一数据格式，再构建条目级反馈安全图谱，把目标片段、AI 建议、证据信号、安全维度和路由决策连起来。",
         "single_info": "公开部署时，本页无需 API key 即可运行。真实 LLM 服务商后续也可以写入同一反馈格式。",
         "paste_essay_error": "请先粘贴作文草稿。",
         "review_result": "评审结果",
@@ -413,7 +418,7 @@ MAIN_TRANSLATIONS = {
         "teacher_queue_table": "教师复核队列",
         "download_single_report": "下载单篇作文报告.md",
         "batch_title": "第 3 页 · 批量评审",
-        "batch_caption": "上传或使用 ESL 作文 CSV，为每篇作文生成反馈候选并进行教师复核路由。",
+        "batch_caption": "上传或使用 ESL 作文 CSV，为每篇作文生成反馈候选、反馈安全图谱和教师复核路由。",
         "upload_csv": "上传 CSV",
         "upload_help": "期望字段：essay_id, assignment_prompt, student_level, essay_text 或 essay_text_anonymized。",
         "include_stress_batch": "批量演示加入不安全压力测试建议",
@@ -427,7 +432,7 @@ MAIN_TRANSLATIONS = {
         "download_batch_summary": "下载批量摘要.csv",
         "compare_title": "第 4 页 · AI 反馈对比",
         "run_first": "请先运行单篇作文评审或批量评审，或使用内置 demo 数据。",
-        "compare_caption": "本页按目标片段、问题类型、评审器、路由风险和一致性状态对比 AI 反馈候选。",
+        "compare_caption": "本页按目标片段、问题类型、评审器、路由风险、安全图谱维度和一致性状态对比 AI 反馈候选。",
         "no_comparison": "暂无对比结果。",
         "consensus_states": "一致性状态",
         "queue_title": "第 5 页 · 教师复核队列",
@@ -439,6 +444,11 @@ MAIN_TRANSLATIONS = {
         "ai_suggestion": "AI 建议",
         "routing_reason": "路由原因",
         "ai_review_explanation": "AI 评审解释",
+        "feedback_safety_graph": "反馈安全图谱",
+        "safety_graph_summary": "安全图谱摘要",
+        "safety_graph_path": "安全图谱路径",
+        "active_safety_dimensions": "激活的安全维度",
+        "safety_graph_mechanism": "每条反馈都会被表示为部署时安全图谱：目标片段 -> AI 建议 -> 激活的安全维度 -> 路由决策。图谱只使用部署时可见信号，不使用标准答案或教师标注。",
         "review_confidence": "评审置信度",
         "evidence_signal": "证据信号",
         "priority": "优先级",
@@ -459,7 +469,7 @@ MAIN_TRANSLATIONS = {
         "public_gec_policy": "复核路由策略对比",
         "public_gec_note": "解释说明：自动接受准确率高，是因为正确反馈候选来自公开 gold correction，并与构造的风险干扰项对比评估。这些数字验证的是路由层，不代表真实 LLM 反馈质量或课堂有效性。",
         "validity_assessment": "有效性说明",
-        "validity_text": "当前证据支持复核路由主张：系统可以实现教师复核工作流，将合成高风险反馈送入复核，并能在转换为反馈级 gold label 的公开学习者纠错语料上复现该路由行为。但它还不能证明真实课堂有效性，因为尚未收集真实教师标注、学生结果或耗时数据。",
+        "validity_text": "当前证据支持图谱驱动的复核路由主张：系统可以实现教师复核工作流，为每条反馈构建部署时反馈安全图谱，将合成高风险反馈送入复核，并能在转换为反馈级 gold label 的公开学习者纠错语料上复现该路由行为。但它还不能证明真实课堂有效性，因为尚未收集真实教师标注、学生结果或耗时数据。",
         "reports_title": "第 7 页 · 报告导出",
         "report_table": "报告表格",
         "report_preview": "报告预览",
@@ -478,7 +488,7 @@ MAIN_TRANSLATIONS = {
         "unified_schema": "统一数据格式",
         "low_risk_edits": "低风险局部修改",
         "high_risk_items": "{count} 个高风险项目",
-        "main_claim": "主演示主张：面向 AI 生成 ESL 写作反馈的教师在环复核路由。教师可以进行单篇或批量反馈评审，查看 AI 反馈对比，并在学生看到反馈前将风险反馈送入教师队列。",
+        "main_claim": "主演示主张：基于反馈安全图谱的 AI 生成 ESL 写作反馈教师复核路由。教师可以进行单篇或批量反馈评审，查看每条反馈为什么触发保留原意、内容依据、语气安全、具体性或一致性信号，并在学生看到反馈前将风险反馈送入教师队列。",
         "prototype_info": "当前产品 UI 参考为 ui_prototype/index.html。Streamlit 保留技术和辅助模块供检查，但早期模块不是当前 EMNLP 2026 演示主张。",
         "routing_snapshot": "ESL 写作反馈路由快照",
         "design_title": "第 9 页 · 设计参考",
@@ -626,6 +636,12 @@ FIELD_LABELS_ZH = {
     "risk_reasons": "风险原因",
     "meaning_preservation_predicted": "是否保留原意",
     "review_explanation": "复核解释",
+    "safety_graph_active_dimensions": "安全图谱维度",
+    "safety_graph_active_signals": "安全图谱信号",
+    "safety_graph_path": "安全图谱路径",
+    "safety_graph_summary": "安全图谱摘要",
+    "safety_graph_nodes": "安全图谱节点",
+    "safety_graph_edges": "安全图谱边",
     "teacher_action": "教师动作",
     "dataset_run": "数据集运行",
     "parallel_records": "平行句记录",
@@ -666,6 +682,7 @@ FIELD_LABELS_ZH = {
     "parse_error": "解析错误",
     "latency_sec": "延迟（秒）",
     "consensus_state": "一致性状态",
+    "safety_dimensions": "安全维度",
     "items": "项目数",
     "set": "评估集合",
     "action_accuracy": "动作准确率",
@@ -737,6 +754,12 @@ VALUE_LABELS_ZH = {
     "too_harsh": "语气过重",
     "unsupported_claim": "无依据内容",
     "task_mismatch": "偏离任务",
+    "local_edit": "局部语言修改",
+    "meaning_preservation": "保留原意",
+    "content_grounding": "内容依据",
+    "pedagogical_tone": "教学语气",
+    "specificity": "反馈具体性",
+    "model_agreement": "模型一致性",
     "preserves_meaning": "保留原意",
     "changes_meaning": "改变原意",
     "unclear": "不确定",
@@ -1259,6 +1282,9 @@ def display_esl_feedback_table(df: pd.DataFrame, title: str = "Routed feedback")
         "evidence_signal",
         "review_priority",
         "risk_reasons",
+        "safety_graph_active_dimensions",
+        "safety_graph_path",
+        "safety_graph_summary",
         "meaning_preservation_predicted",
         "review_explanation",
     ]
@@ -1414,6 +1440,14 @@ def page_teacher_queue() -> None:
             st.write(f"**{mt('target_span')}:** {row.get('target_span')}")
             st.write(f"**{mt('ai_suggestion')}:** {row.get('ai_suggestion')}")
             st.write(f"**{mt('routing_reason')}:** {row.get('risk_reasons')}")
+            if safe_str(row.get("safety_graph_summary")) or safe_str(row.get("safety_graph_path")):
+                st.markdown(f"**{mt('feedback_safety_graph')}**")
+                if safe_str(row.get("safety_graph_summary")):
+                    st.write(row.get("safety_graph_summary"))
+                if safe_str(row.get("safety_graph_path")):
+                    st.code(row.get("safety_graph_path"), language="text")
+                if safe_str(row.get("safety_graph_active_dimensions")):
+                    st.write(f"**{mt('active_safety_dimensions')}:** {value_label(row.get('safety_graph_active_dimensions'))}")
             if safe_str(row.get("review_explanation")):
                 st.write(f"**{mt('ai_review_explanation')}:** {row.get('review_explanation')}")
             cols = st.columns(3)
@@ -1620,6 +1654,7 @@ def page_home(samples_df: pd.DataFrame, outputs_df: pd.DataFrame, metrics_df: pd
     st.markdown(
         mt("main_claim")
     )
+    st.info(mt("safety_graph_mechanism"))
     st.info(mt("prototype_info"))
     if not esl_routing.empty:
         st.markdown(f'<div class="section-title">{mt("routing_snapshot")}</div>', unsafe_allow_html=True)

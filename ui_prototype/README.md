@@ -32,7 +32,7 @@ No `npm install` is required.
 
 This prototype shows the intended product workflow for:
 
-> ConsensusScope: An Interactive Review-Routing Tool for Safe AI Feedback on ESL Writing
+> ConsensusScope: Feedback Safety Graphs for Teacher-in-the-Loop Review Routing of AI Feedback on ESL Writing
 
 The core teacher-facing question is:
 

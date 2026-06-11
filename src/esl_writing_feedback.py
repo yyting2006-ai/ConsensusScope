@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import re
+import json
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Sequence
 
@@ -69,6 +70,39 @@ EXTERNAL_CLAIM_HINTS = {
 ABSOLUTE_REVISION_HINTS = {"always", "never", "must be banned", "should be banned", "completely wrong"}
 BROAD_TARGET_HINTS = {"overall draft", "whole essay", "entire essay", "supporting evidence", "overall paragraph structure"}
 DEFAULT_ASSIGNMENT = "Write a clear ESL essay that responds to the prompt with organized reasons and examples."
+
+SAFETY_GRAPH_DIMENSIONS = {
+    "local_edit": {
+        "label": "Local language edit",
+        "reasons": {"local_language_edit"},
+        "severity": "low",
+    },
+    "meaning_preservation": {
+        "label": "Meaning preservation",
+        "reasons": {"meaning_change", "overcorrection", "introduces_new_argument"},
+        "severity": "high",
+    },
+    "content_grounding": {
+        "label": "Content grounding",
+        "reasons": {"unsupported_claim", "task_mismatch"},
+        "severity": "high",
+    },
+    "pedagogical_tone": {
+        "label": "Pedagogical tone",
+        "reasons": {"too_harsh"},
+        "severity": "high",
+    },
+    "specificity": {
+        "label": "Feedback specificity",
+        "reasons": {"too_vague", "parse_error"},
+        "severity": "medium",
+    },
+    "model_agreement": {
+        "label": "Reviewer agreement",
+        "reasons": {"low_model_agreement"},
+        "severity": "medium",
+    },
+}
 
 
 def _safe_text(value: Any) -> str:
@@ -289,6 +323,166 @@ def _risk_reasons_from_signals(signals: Mapping[str, Any]) -> List[str]:
     return _dedupe(reasons)
 
 
+def _json_for_csv(value: Any) -> str:
+    return json.dumps(value, ensure_ascii=False, sort_keys=True)
+
+
+def _active_safety_dimensions(reasons: Sequence[str], signals: Mapping[str, Any]) -> List[Dict[str, str]]:
+    reason_set = set(reasons)
+    active: List[Dict[str, str]] = []
+    for dimension, spec in SAFETY_GRAPH_DIMENSIONS.items():
+        matched = sorted(reason_set.intersection(spec["reasons"]))
+        if matched:
+            active.append(
+                {
+                    "dimension": dimension,
+                    "label": str(spec["label"]),
+                    "severity": str(spec["severity"]),
+                    "signals": ",".join(matched),
+                }
+            )
+    if not active and signals.get("low_issue"):
+        spec = SAFETY_GRAPH_DIMENSIONS["local_edit"]
+        active.append(
+            {
+                "dimension": "local_edit",
+                "label": str(spec["label"]),
+                "severity": str(spec["severity"]),
+                "signals": "local_language_edit",
+            }
+        )
+    return active
+
+
+def build_feedback_safety_graph(
+    *,
+    feedback_item_id: str = "",
+    issue_type_predicted: str = "",
+    ai_suggestion: str = "",
+    ai_rationale: str = "",
+    target_span: str = "",
+    surrounding_context: str = "",
+    signals: Mapping[str, Any],
+    reasons: Sequence[str],
+    risk_level: str,
+    recommended_action: str,
+    meaning_preservation_predicted: str,
+    evidence_signal: str,
+    risk_score: float,
+) -> Dict[str, Any]:
+    """Build an item-level Feedback Safety Graph for audit and UI display.
+
+    The graph is deliberately small and deploy-time only. Nodes represent the
+    observed feedback item, rubric/safety dimensions, evidence status, and the
+    route. Edges show which observed signals activated the route. No gold label
+    or teacher annotation is used to construct the graph.
+    """
+    item_id = _safe_text(feedback_item_id) or "feedback_item"
+    active_dimensions = _active_safety_dimensions(reasons, signals)
+    dimension_names = [item["dimension"] for item in active_dimensions]
+    active_signal_text = ";".join(_dedupe(reason for reason in reasons if reason != "local_language_edit"))
+    if not active_signal_text and "local_language_edit" in reasons:
+        active_signal_text = "local_language_edit"
+
+    nodes: List[Dict[str, Any]] = [
+        {
+            "id": f"{item_id}:target_span",
+            "type": "student_text",
+            "label": "Target span",
+            "value": _safe_text(target_span),
+        },
+        {
+            "id": f"{item_id}:context",
+            "type": "student_text",
+            "label": "Surrounding context",
+            "value": _safe_text(surrounding_context)[:260],
+        },
+        {
+            "id": f"{item_id}:suggestion",
+            "type": "ai_feedback",
+            "label": "AI suggestion",
+            "value": _safe_text(ai_suggestion),
+        },
+        {
+            "id": f"{item_id}:issue",
+            "type": "rubric",
+            "label": "Predicted issue type",
+            "value": _safe_text(issue_type_predicted),
+        },
+        {
+            "id": f"{item_id}:evidence",
+            "type": "evidence_status",
+            "label": "Evidence signal",
+            "value": evidence_signal or "none",
+        },
+        {
+            "id": f"{item_id}:route",
+            "type": "routing_decision",
+            "label": "Routing decision",
+            "value": recommended_action,
+            "risk_level": risk_level,
+            "risk_score": risk_score,
+            "meaning_preservation_predicted": meaning_preservation_predicted,
+        },
+    ]
+    if _safe_text(ai_rationale):
+        nodes.insert(
+            3,
+            {
+                "id": f"{item_id}:rationale",
+                "type": "ai_feedback",
+                "label": "AI rationale",
+                "value": _safe_text(ai_rationale),
+            },
+        )
+
+    for dimension in active_dimensions:
+        nodes.append(
+            {
+                "id": f"{item_id}:dimension:{dimension['dimension']}",
+                "type": "safety_dimension",
+                "label": dimension["label"],
+                "severity": dimension["severity"],
+                "active_signals": dimension["signals"],
+            }
+        )
+
+    edges: List[Dict[str, str]] = [
+        {"source": f"{item_id}:context", "target": f"{item_id}:target_span", "relation": "contains"},
+        {"source": f"{item_id}:target_span", "target": f"{item_id}:suggestion", "relation": "is_revised_by"},
+        {"source": f"{item_id}:issue", "target": f"{item_id}:route", "relation": "informs_route"},
+        {"source": f"{item_id}:evidence", "target": f"{item_id}:route", "relation": "informs_route"},
+    ]
+    if _safe_text(ai_rationale):
+        edges.append({"source": f"{item_id}:rationale", "target": f"{item_id}:suggestion", "relation": "explains"})
+    for dimension in active_dimensions:
+        dimension_id = f"{item_id}:dimension:{dimension['dimension']}"
+        edges.append({"source": f"{item_id}:suggestion", "target": dimension_id, "relation": "activates"})
+        edges.append({"source": dimension_id, "target": f"{item_id}:route", "relation": "justifies_route"})
+
+    if active_dimensions:
+        primary_dimension = sorted(
+            active_dimensions,
+            key=lambda item: {"high": 3, "medium": 2, "low": 1}.get(item["severity"], 0),
+            reverse=True,
+        )[0]["dimension"]
+    else:
+        primary_dimension = "no_active_risk"
+    path = f"target_span -> ai_suggestion -> {primary_dimension} -> {recommended_action}"
+    summary = (
+        f"Feedback Safety Graph activates {', '.join(dimension_names) if dimension_names else 'no active safety dimension'}; "
+        f"meaning={meaning_preservation_predicted}; evidence={evidence_signal}; route={recommended_action}."
+    )
+    return {
+        "nodes": nodes,
+        "edges": edges,
+        "active_dimensions": dimension_names,
+        "active_signals": active_signal_text,
+        "path": path,
+        "summary": summary,
+    }
+
+
 def _confidence_from_signals(signals: Mapping[str, Any], risk_level: str) -> float:
     score = float(signals.get("risk_score") or 0.0)
     confidence = 0.62
@@ -335,16 +529,20 @@ def _explanation_from_route(
 def rule_based_route(
     issue_type_predicted: str,
     ai_suggestion: str = "",
+    ai_rationale: str = "",
     target_span: str = "",
     surrounding_context: str = "",
     model_agreement: float | None = None,
     review_evidence: Any = None,
+    feedback_item_id: str = "",
 ) -> Dict[str, Any]:
-    """Route an AI feedback item to auto-accept or teacher review.
+    """Route an AI feedback item with a deploy-time Feedback Safety Graph.
 
     The function uses deploy-time signals only: issue type, suggestion text,
     local context, model agreement, parse/evidence status, and rubric/safety
-    evidence. It does not use gold labels or teacher decisions.
+    evidence. It does not use gold labels or teacher decisions. The returned
+    safety graph makes the route auditable by linking the target span,
+    suggestion, active safety dimensions, evidence signal, and final route.
     """
     signals = extract_review_signals(
         issue_type_predicted=issue_type_predicted,
@@ -382,6 +580,21 @@ def rule_based_route(
     review_confidence = _confidence_from_signals(signals, risk_level)
     review_priority = _priority_from_score(risk_level, risk_score, recommended_action)
     explanation = _explanation_from_route(risk_level, recommended_action, reasons, evidence_signal, risk_score)
+    graph = build_feedback_safety_graph(
+        feedback_item_id=feedback_item_id,
+        issue_type_predicted=issue_type_predicted,
+        ai_suggestion=ai_suggestion,
+        ai_rationale=ai_rationale,
+        target_span=target_span,
+        surrounding_context=surrounding_context,
+        signals=signals,
+        reasons=reasons,
+        risk_level=risk_level,
+        recommended_action=recommended_action,
+        meaning_preservation_predicted=meaning,
+        evidence_signal=evidence_signal,
+        risk_score=risk_score,
+    )
 
     return {
         "risk_level": risk_level,
@@ -394,6 +607,12 @@ def rule_based_route(
         "evidence_signal": evidence_signal,
         "review_priority": review_priority,
         "review_explanation": explanation,
+        "safety_graph_active_dimensions": ";".join(graph["active_dimensions"]),
+        "safety_graph_active_signals": graph["active_signals"],
+        "safety_graph_path": graph["path"],
+        "safety_graph_summary": graph["summary"],
+        "safety_graph_nodes": _json_for_csv(graph["nodes"]),
+        "safety_graph_edges": _json_for_csv(graph["edges"]),
     }
 
 
@@ -409,10 +628,12 @@ def route_feedback_item(item: Mapping[str, Any], evidence_rows: Any = None) -> D
     route = rule_based_route(
         issue_type_predicted=_safe_text(item.get("issue_type_predicted") or item.get("issue_type")),
         ai_suggestion=_safe_text(item.get("ai_suggestion") or item.get("suggestion")),
+        ai_rationale=_safe_text(item.get("ai_rationale") or item.get("rationale")),
         target_span=_safe_text(item.get("target_span")),
         surrounding_context=_safe_text(item.get("surrounding_context")),
         model_agreement=_as_float(item.get("model_agreement")),
         review_evidence=evidence_rows,
+        feedback_item_id=_safe_text(item.get("feedback_item_id") or item.get("id")),
     )
     return {"feedback_item_id": _safe_text(item.get("feedback_item_id") or item.get("id")), **route}
 
@@ -444,6 +665,12 @@ def route_feedback_dataframe(feedback_items: pd.DataFrame, review_evidence: pd.D
                 "evidence_signal",
                 "review_priority",
                 "review_explanation",
+                "safety_graph_active_dimensions",
+                "safety_graph_active_signals",
+                "safety_graph_path",
+                "safety_graph_summary",
+                "safety_graph_nodes",
+                "safety_graph_edges",
             ]
         )
     out["risk_reasons"] = out["risk_reasons"].apply(lambda values: ";".join(values) if isinstance(values, list) else values)
@@ -460,6 +687,12 @@ def route_feedback_dataframe(feedback_items: pd.DataFrame, review_evidence: pd.D
             "evidence_signal",
             "review_priority",
             "review_explanation",
+            "safety_graph_active_dimensions",
+            "safety_graph_active_signals",
+            "safety_graph_path",
+            "safety_graph_summary",
+            "safety_graph_nodes",
+            "safety_graph_edges",
         ]
     ]
 
@@ -797,7 +1030,17 @@ def summarize_routing(routing: pd.DataFrame) -> Dict[str, Any]:
 
 def compare_esl_feedback(feedback_items: pd.DataFrame, routing: pd.DataFrame | None = None) -> pd.DataFrame:
     if feedback_items.empty:
-        return pd.DataFrame(columns=["target_span", "issue_type", "reviewers", "suggestions", "risk_levels", "consensus_state"])
+        return pd.DataFrame(
+            columns=[
+                "target_span",
+                "issue_type",
+                "reviewers",
+                "suggestions",
+                "risk_levels",
+                "safety_dimensions",
+                "consensus_state",
+            ]
+        )
     merged = feedback_items.fillna("").copy()
     if routing is not None and not routing.empty:
         merged = merged.merge(routing, on="feedback_item_id", how="left")
@@ -807,6 +1050,10 @@ def compare_esl_feedback(feedback_items: pd.DataFrame, routing: pd.DataFrame | N
         suggestions = [f"{_safe_text(row.get('model_source'))}: {_safe_text(row.get('ai_suggestion'))}" for _, row in group.iterrows()]
         risks = sorted({_safe_text(v) for v in group.get("risk_level", []) if _safe_text(v)})
         actions = sorted({_safe_text(v) for v in group.get("recommended_action", []) if _safe_text(v)})
+        dimensions: List[str] = []
+        for raw in group.get("safety_graph_active_dimensions", []):
+            dimensions.extend([part.strip() for part in _safe_text(raw).split(";") if part.strip()])
+        dimensions = sorted(set(dimensions))
         if len(group) >= 2 and len(risks) <= 1 and len(actions) <= 1:
             state = "aligned_feedback"
         elif "high" in risks or any(action in {"teacher_review", "needs_more_evidence", "reject"} for action in actions):
@@ -820,6 +1067,7 @@ def compare_esl_feedback(feedback_items: pd.DataFrame, routing: pd.DataFrame | N
                 "reviewers": "; ".join(reviewers),
                 "suggestions": " | ".join(suggestions),
                 "risk_levels": "; ".join(risks),
+                "safety_dimensions": "; ".join(dimensions),
                 "recommended_actions": "; ".join(actions),
                 "consensus_state": state,
                 "items": len(group),
@@ -903,7 +1151,8 @@ def build_esl_review_report(
         for _, row in auto.iterrows():
             lines.append(
                 f"- {row.get('feedback_item_id')}: {row.get('ai_suggestion')} "
-                f"(score={row.get('risk_score')}, reasons={row.get('risk_reasons')})"
+                f"(score={row.get('risk_score')}, reasons={row.get('risk_reasons')}; "
+                f"safety_path={row.get('safety_graph_path')})"
             )
     lines.extend(["", "Teacher-review items"])
     if queue.empty:
@@ -913,7 +1162,7 @@ def build_esl_review_report(
             lines.append(
                 f"- {row.get('feedback_item_id')}: [{row.get('risk_level')}, priority={row.get('review_priority')}] "
                 f"{row.get('ai_suggestion')} Reason: {row.get('risk_reasons')}. "
-                f"{row.get('review_explanation')}"
+                f"{row.get('review_explanation')} Safety graph: {row.get('safety_graph_summary')}"
             )
     lines.extend(
         [

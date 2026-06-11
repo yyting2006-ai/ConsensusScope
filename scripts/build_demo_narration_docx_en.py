@@ -223,7 +223,7 @@ def build_doc() -> None:
             "Show the anonymized synthetic essay.",
             "Point to the assignment prompt and routing summary.",
         ],
-        "ConsensusScope routes AI-generated ESL writing feedback before it reaches students. Low-risk local edits can be accepted, while feedback that may change meaning or require pedagogical judgment goes to the teacher queue.",
+        "ConsensusScope builds a Feedback Safety Graph for each AI-generated ESL writing feedback item before it reaches students. Low-risk local edits can be accepted, while feedback that may change meaning or require pedagogical judgment goes to the teacher queue.",
     )
 
     add_segment(

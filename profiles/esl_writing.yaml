@@ -1,5 +1,30 @@
 domain_name: ESL Writing Feedback
 
+method_claim: Feedback Safety Graph review routing
+
+feedback_safety_graph:
+  description: >
+    Item-level deploy-time graph linking the student target span, AI suggestion,
+    predicted rubric dimension, evidence status, active safety signals, and
+    routing decision. The graph supports auditability without using gold labels
+    or teacher annotations at deployment time.
+  nodes:
+    - target_span
+    - surrounding_context
+    - ai_suggestion
+    - ai_rationale
+    - predicted_issue_type
+    - evidence_signal
+    - safety_dimension
+    - routing_decision
+  safety_dimensions:
+    - local_edit
+    - meaning_preservation
+    - content_grounding
+    - pedagogical_tone
+    - specificity
+    - model_agreement
+
 issue_types:
   - grammar
   - punctuation
@@ -58,6 +83,12 @@ review_output_fields:
   - evidence_signal
   - review_priority
   - review_explanation
+  - safety_graph_active_dimensions
+  - safety_graph_active_signals
+  - safety_graph_path
+  - safety_graph_summary
+  - safety_graph_nodes
+  - safety_graph_edges
 
 risk_reasons:
   - local_language_edit

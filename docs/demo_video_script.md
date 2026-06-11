@@ -81,7 +81,8 @@ Screen:
 
 - Click Page 5: Teacher Queue.
 - Open a high-risk item.
-- Point to review confidence, evidence signal, priority, and explanation.
+- Point to the Feedback Safety Graph path, review confidence, evidence signal,
+  priority, and explanation.
 - Select one teacher action.
 
 ## 2:00-2:20 Effectiveness And Reports
@@ -91,7 +92,8 @@ Narration:
 > The evaluation page separates two kinds of evidence. The synthetic checks
 > verify implementation behavior, while the public learner-corpus benchmark
 > evaluates routing on JFLEG, CoNLL-2014, FCE, and W&I plus LOCNESS correction
-> data. These results validate review routing, not classroom learning outcomes.
+> data. These results validate graph-backed review routing, not classroom
+> learning outcomes.
 
 Screen:
 

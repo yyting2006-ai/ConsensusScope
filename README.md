@@ -1,11 +1,13 @@
 # ConsensusScope
 
-**ConsensusScope: An Interactive Review-Routing Tool for Safe AI Feedback on ESL Writing**
+**ConsensusScope: Feedback Safety Graphs for Teacher-in-the-Loop Review Routing of AI Feedback on ESL Writing**
 
 ConsensusScope is a teacher-in-the-loop review-routing tool for AI-generated
-ESL writing feedback. It helps teachers decide which feedback can be safely
-shown to students and which feedback should be reviewed, edited, or rejected
-before release.
+ESL writing feedback. Its core mechanism is an item-level **Feedback Safety
+Graph** that links a student's target span, an AI suggestion, evidence status,
+active safety dimensions, and the final route. It helps teachers decide which
+feedback can be safely shown to students and which feedback should be reviewed,
+edited, or rejected before release.
 
 It is not an automatic essay scorer, not a teacher replacement, and not a truth
 oracle.
@@ -15,15 +17,18 @@ oracle.
 AI writing feedback can be fluent but unsafe. A feedback model may fix a local
 grammar error, but it may also change a student's intended meaning, rewrite the
 thesis, add unsupported content, or overcorrect a reasonable draft. ConsensusScope
-makes those risks visible through:
+makes those risks visible through a Feedback Safety Graph rather than a single
+opaque confidence score:
 
 - multi-model feedback candidates normalized into one feedback schema;
-- deploy-time routing signals such as agreement, issue type, meaning-change
-  warnings, unsupported-claim warnings, harsh-tone warnings, evidence status,
-  and parse errors;
+- deploy-time graph nodes for target span, surrounding context, AI suggestion,
+  predicted issue type, evidence signal, safety dimensions, and route;
+- graph-level safety dimensions for local edits, meaning preservation, content
+  grounding, pedagogical tone, feedback specificity, and model agreement;
 - transparent low/medium/high risk routing;
 - item-level AI review scores, confidence estimates, evidence signals, review
-  priorities, and short explanations for why an item is blocked or released;
+  priorities, graph paths, and short explanations for why an item is blocked or
+  released;
 - a teacher queue for feedback that needs human judgment;
 - writing rubric and report pages for inspection and auditability.
 
@@ -42,7 +47,8 @@ The Streamlit app now contains operational teacher-facing windows:
 - **Batch Review**: upload a CSV or use packaged demo essays, process multiple
   drafts, and export routed feedback.
 - **AI Feedback Comparison**: compare feedback candidates by target span,
-  reviewer, issue type, risk level, and consensus state.
+  reviewer, issue type, risk level, Feedback Safety Graph dimensions, and
+  consensus state.
 - **Teacher Queue**: inspect medium/high-risk items and record local teacher
   actions such as accept, edit, reject, or needs more evidence.
 - **Effectiveness Evaluation**: run synthetic expectation-label and AI-review
@@ -76,6 +82,33 @@ Operational teacher workflow:
 ```text
 Single Essay Review -> Batch Review -> AI Feedback Comparison -> Teacher Queue -> Effectiveness Evaluation -> Reports
 ```
+
+## Feedback Safety Graph
+
+The main methodological unit is not an essay-level score. It is a feedback-item
+graph:
+
+```text
+target span -> AI suggestion -> active safety dimension -> routing decision
+```
+
+Each graph is built from deploy-time fields only. It does **not** use public
+corpus gold corrections, teacher labels, or classroom outcomes when routing a
+new item. The exported route contains:
+
+- `safety_graph_active_dimensions`: active graph dimensions, such as
+  `meaning_preservation`, `content_grounding`, or `local_edit`.
+- `safety_graph_active_signals`: concrete risk reasons that activated those
+  dimensions.
+- `safety_graph_path`: compact teacher-readable path, for example
+  `target_span -> ai_suggestion -> meaning_preservation -> teacher_review`.
+- `safety_graph_summary`: one-sentence explanation for the route.
+- `safety_graph_nodes` and `safety_graph_edges`: JSON audit records for
+  reproducibility and debugging.
+
+This graph layer is the main innovation claim: ConsensusScope does not merely
+show a dashboard; it turns AI writing feedback into auditable safety objects
+that can be routed before reaching students.
 
 ## Quick Start
 
@@ -132,7 +165,8 @@ New ESL writing review-routing assets:
   for dangerous AI feedback, including thesis reversal, whole-essay rewriting,
   unsupported factual claims, harsh student-facing language, low agreement, and
   parse failures.
-- `src/esl_writing_feedback.py`: main rule-based routing interface.
+- `src/esl_writing_feedback.py`: Feedback Safety Graph construction and main
+  rule-based routing interface.
 - `src/prompts/esl_feedback_prompt.py`: structured feedback-generation prompt
   template.
 - `scripts/evaluate_esl_routing_demo.py`: synthetic routing evaluation script.
@@ -268,6 +302,11 @@ The ESL routing layer returns:
 - `evidence_signal`: `supported`, `missing`, `conflict`, or `none`
 - `review_priority`: `low`, `normal`, `high`, or `urgent`
 - `review_explanation`: short human-readable explanation of the route
+- `safety_graph_active_dimensions`: activated graph dimensions
+- `safety_graph_active_signals`: concrete safety signals behind the route
+- `safety_graph_path`: compact audit path from feedback item to route
+- `safety_graph_summary`: teacher-readable graph explanation
+- `safety_graph_nodes` / `safety_graph_edges`: JSON graph records for audit
 
 Deploy-time signals are separated from offline diagnostic labels. Teacher
 annotations, if collected later, should be analyzed as offline evaluation data,

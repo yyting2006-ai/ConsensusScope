@@ -1,12 +1,14 @@
 # ConsensusScope
 
-**ConsensusScope: An Interactive Review-Routing Tool for Safe AI Feedback on ESL Writing**
+**ConsensusScope: Feedback Safety Graphs for Teacher-in-the-Loop Review Routing of AI Feedback on ESL Writing**
 
 ConsensusScope helps teachers review AI-generated ESL writing feedback before it
 is shown to students. It separates low-risk local language edits from feedback
 that may change meaning, add unsupported content, overcorrect a draft, or require
-teacher judgment. The AI review layer now reports item-level risk scores,
-evidence signals, review priorities, and short explanations for teacher review.
+teacher judgment. The AI review layer now builds an item-level **Feedback Safety
+Graph** for every feedback candidate and reports active safety dimensions,
+graph paths, risk scores, evidence signals, review priorities, and short
+explanations for teacher review.
 
 The canonical English README is `README.md`; this file is kept as a short
 compatibility entry point.
@@ -31,7 +33,8 @@ Then open `http://localhost:8502`.
 - `profiles/esl_writing.yaml`: ESL writing feedback profile.
 - `data/esl_writing_demo/`: synthetic ESL essays, feedback items, evidence,
   routing output, and AI-review stress cases.
-- `src/esl_writing_feedback.py`: rule-based review-routing interface.
+- `src/esl_writing_feedback.py`: Feedback Safety Graph construction and
+  rule-based review-routing interface.
 - `src/prompts/esl_feedback_prompt.py`: structured feedback prompt template.
 - `scripts/evaluate_esl_routing_demo.py`: synthetic routing sanity-check
   evaluation script.

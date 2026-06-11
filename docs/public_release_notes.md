@@ -9,13 +9,13 @@ Streamlit deployment for the EMNLP 2026 System Demonstrations submission.
 
 ## Suggested Short Description
 
-Interactive teacher review routing for safe AI feedback on ESL writing.
+Feedback Safety Graphs for teacher review routing of AI feedback on ESL writing.
 
 ## Suggested Tags
 
 `llm-feedback`, `educational-nlp`, `writing-feedback`, `esl-writing`,
 `human-in-the-loop`, `teacher-support`, `multi-llm`, `streamlit`,
-`review-routing`
+`review-routing`, `feedback-safety-graph`
 
 ## Keep
 
@@ -55,7 +55,8 @@ Interactive teacher review routing for safe AI feedback on ESL writing.
 The main public-facing story should be:
 
 > ConsensusScope helps teachers review AI-generated ESL writing feedback by
-> routing low-risk local edits separately from feedback that may change meaning,
+> constructing a Feedback Safety Graph for each suggestion, then routing
+> low-risk local edits separately from feedback that may change meaning,
 > introduce unsupported content, overcorrect a draft, or require teacher
 > judgment.
 

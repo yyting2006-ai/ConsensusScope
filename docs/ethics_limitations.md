@@ -10,6 +10,8 @@ teacher replacement, truth oracle, or final decision maker.
 - Separate low-risk local grammar/vocabulary edits from feedback that may change
   meaning, add unsupported content, overcorrect a draft, or require teacher
   judgment.
+- Use the Feedback Safety Graph as an audit aid that explains why a feedback
+  item was routed to auto-accept or teacher review.
 - Route uncertain or meaning-changing suggestions to teacher review.
 - Support research on educational NLP, feedback reliability, human-in-the-loop
   review, and multi-LLM adjudication.
@@ -20,6 +22,8 @@ teacher replacement, truth oracle, or final decision maker.
 - Replacing teachers, writing instructors, reviewers, or domain experts.
 - Treating model rationales as verified evidence.
 - Treating review-routing labels as final truth.
+- Treating Feedback Safety Graph nodes as verified facts rather than
+  deploy-time warning signals.
 - Applying feedback to real student essays without privacy review.
 
 ## Data Privacy
@@ -44,4 +48,3 @@ data is added later:
   compliance, not a classroom user study.
 - Future validation should include instructor-annotated ESL essays and teacher
   review-priority judgments.
-
