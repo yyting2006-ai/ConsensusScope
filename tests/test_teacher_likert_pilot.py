@@ -45,8 +45,12 @@ def test_two_teacher_likert_analysis_merges_with_routing():
     assert summary["review_needed_recall"] == 1.0
     assert summary["unsafe_reviewed_recall"] == 1.0
     assert summary["auto_accept_precision_against_teacher_safe"] == 1.0
+    assert summary["any_teacher_review_needed_recall"] == 1.0
+    assert summary["any_teacher_unsafe_reviewed_recall"] == 1.0
     assert summary["agreement"]["items_with_two_ratings"] == 3
     assert "mean_correctness_score" in result["item_aggregates"].columns
+    assert "any_teacher_unsafe" in result["item_aggregates"].columns
+    assert not result["disagreement_hotspots"].empty
 
 
 def test_likert_reader_rejects_more_than_two_teachers(tmp_path):

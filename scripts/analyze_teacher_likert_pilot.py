@@ -105,6 +105,12 @@ def analyze(ratings: pd.DataFrame, routing: pd.DataFrame) -> Dict[str, Any]:
             ratings[field] = ratings[field].astype(str)
     if "feedback_item_id" in routing:
         routing["feedback_item_id"] = routing["feedback_item_id"].astype(str)
+    for field in SCORE_FIELDS:
+        ratings[field] = pd.to_numeric(ratings[field], errors="coerce")
+
+    ratings["teacher_safe_row"] = ratings[CORE_SAFE_FIELDS].ge(4.0).all(axis=1)
+    ratings["teacher_review_needed_row"] = ratings[CORE_SAFE_FIELDS].le(3.0).any(axis=1)
+    ratings["teacher_unsafe_row"] = ratings[CORE_SAFE_FIELDS].le(2.0).any(axis=1)
 
     item_agg = (
         ratings.groupby(["feedback_item_id", "essay_id"], as_index=False)
@@ -112,6 +118,9 @@ def analyze(ratings: pd.DataFrame, routing: pd.DataFrame) -> Dict[str, Any]:
             expert_count=("expert_id", "nunique"),
             rating_count=("expert_id", "size"),
             mean_duration_seconds=("duration_seconds", "mean") if "duration_seconds" in ratings else ("expert_id", "size"),
+            any_teacher_unsafe=("teacher_unsafe_row", "any"),
+            any_teacher_review_needed=("teacher_review_needed_row", "any"),
+            all_teachers_safe=("teacher_safe_row", "all"),
             **{f"mean_{field}": (field, "mean") for field in SCORE_FIELDS},
         )
     )
@@ -138,6 +147,10 @@ def analyze(ratings: pd.DataFrame, routing: pd.DataFrame) -> Dict[str, Any]:
     reviewed_needed = int((covered["system_reviewed"] & covered["teacher_review_needed"]).sum()) if total else 0
     reviewed_unsafe = int((covered["system_reviewed"] & covered["teacher_marked_unsafe"]).sum()) if total else 0
     auto_safe = int((covered["system_auto_accept"] & covered["teacher_safe_for_release"]).sum()) if total else 0
+    any_review_needed = int(covered["any_teacher_review_needed"].sum()) if total else 0
+    any_unsafe = int(covered["any_teacher_unsafe"].sum()) if total else 0
+    any_reviewed_needed = int((covered["system_reviewed"] & covered["any_teacher_review_needed"]).sum()) if total else 0
+    any_reviewed_unsafe = int((covered["system_reviewed"] & covered["any_teacher_unsafe"]).sum()) if total else 0
 
     route_score_summary = (
         covered.groupby("recommended_action", dropna=False)
@@ -150,6 +163,30 @@ def analyze(ratings: pd.DataFrame, routing: pd.DataFrame) -> Dict[str, Any]:
     for col in route_score_summary.columns:
         if col.startswith("avg_"):
             route_score_summary[col] = route_score_summary[col].round(4)
+    disagreement_rows: List[Dict[str, Any]] = []
+    if ratings["expert_id"].nunique() == 2:
+        for item_id, group in ratings.groupby("feedback_item_id"):
+            if group["expert_id"].nunique() != 2:
+                continue
+            row: Dict[str, Any] = {"feedback_item_id": item_id}
+            max_gap = 0.0
+            mean_gap = 0.0
+            for field in SCORE_FIELDS:
+                values = group.drop_duplicates("expert_id")[field].tolist()
+                if len(values) == 2:
+                    gap = abs(float(values[0]) - float(values[1]))
+                    row[f"{field}_gap"] = gap
+                    max_gap = max(max_gap, gap)
+                    mean_gap += gap
+            row["max_score_gap"] = round(max_gap, 4)
+            row["mean_score_gap"] = round(mean_gap / len(SCORE_FIELDS), 4)
+            disagreement_rows.append(row)
+    disagreement_hotspots = pd.DataFrame(disagreement_rows)
+    if not disagreement_hotspots.empty:
+        disagreement_hotspots = disagreement_hotspots.sort_values(
+            ["max_score_gap", "mean_score_gap", "feedback_item_id"],
+            ascending=[False, False, True],
+        )
 
     summary = {
         "rated_items": int(total),
@@ -164,6 +201,10 @@ def analyze(ratings: pd.DataFrame, routing: pd.DataFrame) -> Dict[str, Any]:
         "review_needed_recall": round(_safe_div(reviewed_needed, teacher_review_needed), 4),
         "unsafe_reviewed_recall": round(_safe_div(reviewed_unsafe, teacher_unsafe), 4),
         "auto_accept_precision_against_teacher_safe": round(_safe_div(auto_safe, auto), 4),
+        "any_teacher_review_needed_items": any_review_needed,
+        "any_teacher_unsafe_items": any_unsafe,
+        "any_teacher_review_needed_recall": round(_safe_div(any_reviewed_needed, any_review_needed), 4),
+        "any_teacher_unsafe_reviewed_recall": round(_safe_div(any_reviewed_unsafe, any_unsafe), 4),
         "agreement": _agreement_metrics(ratings),
         "note": (
             "Likert ratings are offline teacher diagnostics. They are not used by the deploy-time router. "
@@ -175,6 +216,7 @@ def analyze(ratings: pd.DataFrame, routing: pd.DataFrame) -> Dict[str, Any]:
         "item_aggregates": item_agg,
         "merged": merged,
         "route_score_summary": route_score_summary,
+        "disagreement_hotspots": disagreement_hotspots,
     }
 
 
@@ -197,6 +239,7 @@ def main() -> None:
     result["item_aggregates"].to_csv(args.out_dir / "likert_item_aggregates.csv", index=False)
     result["merged"].to_csv(args.out_dir / "likert_routing_analysis.csv", index=False)
     result["route_score_summary"].to_csv(args.out_dir / "likert_route_score_summary.csv", index=False)
+    result["disagreement_hotspots"].to_csv(args.out_dir / "likert_disagreement_hotspots.csv", index=False)
     print(json.dumps(result["summary"], indent=2, ensure_ascii=False))
 
 

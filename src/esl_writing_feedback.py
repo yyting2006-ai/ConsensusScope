@@ -40,6 +40,14 @@ MEANING_CHANGE_HINTS = {
 }
 UNSUPPORTED_HINTS = {"add a claim", "not present", "unsupported", "new argument", "factories should be closed"}
 VAGUE_HINTS = {"improve", "add evidence", "add a short explanation", "add a transition", "clearer", "more persuasive"}
+TEACHER_DEPENDENT_HINTS = {
+    "if the teacher wants",
+    "if your teacher wants",
+    "if required by the teacher",
+    "ask your teacher",
+    "teacher wants",
+    "teacher may want",
+}
 WHOLE_REWRITE_HINTS = {
     "rewrite the whole essay",
     "rewrite the entire essay",
@@ -94,7 +102,7 @@ SAFETY_GRAPH_DIMENSIONS = {
     },
     "specificity": {
         "label": "Feedback specificity",
-        "reasons": {"too_vague", "parse_error"},
+        "reasons": {"too_vague", "parse_error", "teacher_dependent"},
         "severity": "medium",
     },
     "model_agreement": {
@@ -213,6 +221,7 @@ def extract_review_signals(
     vague_feedback = _contains_any(suggestion_blob, VAGUE_HINTS) or (
         len(_safe_text(ai_suggestion).split()) <= 4 and not low_issue
     )
+    teacher_dependent = _contains_any(suggestion_blob, TEACHER_DEPENDENT_HINTS)
     absolute_revision = _contains_any(suggestion_blob, ABSOLUTE_REVISION_HINTS)
     broad_target = target_norm in BROAD_TARGET_HINTS or _contains_any(target_span, BROAD_TARGET_HINTS)
     low_agreement = agreement is not None and agreement < 0.5
@@ -255,6 +264,8 @@ def extract_review_signals(
         score += 0.18
     if vague_feedback:
         score += 0.12
+    if teacher_dependent:
+        score += 0.22
     if broad_target:
         score += 0.10
     if low_agreement:
@@ -286,6 +297,7 @@ def extract_review_signals(
         "whole_rewrite": whole_rewrite,
         "harsh_feedback": harsh_feedback,
         "vague_feedback": vague_feedback,
+        "teacher_dependent": teacher_dependent,
         "absolute_revision": absolute_revision,
         "broad_target": broad_target,
         "low_agreement": low_agreement,
@@ -318,6 +330,8 @@ def _risk_reasons_from_signals(signals: Mapping[str, Any]) -> List[str]:
         reasons.append("too_harsh")
     if signals.get("vague_feedback") or signals.get("broad_target") or signals.get("medium_issue"):
         reasons.append("too_vague")
+    if signals.get("teacher_dependent"):
+        reasons.append("teacher_dependent")
     if issue in {"task_response", "organization", "tone_register"} and not signals.get("low_issue"):
         reasons.append("task_mismatch")
     return _dedupe(reasons)

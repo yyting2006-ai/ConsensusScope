@@ -109,6 +109,19 @@ def test_low_agreement_blocks_auto_release():
     assert "low_model_agreement" in route["risk_reasons"]
 
 
+def test_teacher_dependent_feedback_routes_to_review():
+    route = rule_based_route(
+        issue_type_predicted="grammar",
+        ai_suggestion="Add commas consistently in the list if the teacher wants a clearer series.",
+        target_span="air pollution, plastic waste, and traffic problems",
+        review_evidence={"match_status": "supported", "criterion": "local_language_edit"},
+    )
+
+    assert route["risk_level"] == "medium"
+    assert route["recommended_action"] == "teacher_review"
+    assert "teacher_dependent" in route["risk_reasons"]
+
+
 def test_route_feedback_dataframe_matches_demo_ids():
     feedback = pd.read_csv("data/esl_writing_demo/feedback_items.csv")
     evidence = pd.read_csv("data/esl_writing_demo/review_evidence.csv")

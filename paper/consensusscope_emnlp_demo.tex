@@ -38,7 +38,9 @@ stress-test suite and an offline benchmark derived from public
 learner-correction corpora, including JFLEG, CoNLL-2014 annotated test data,
 FCE, and W\&I+LOCNESS. Across 349,782 generated feedback candidates from public
 correction data, the default policy auto-routes 32.9\% of candidates while
-sending all constructed incorrect or unsafe candidates to review. These
+sending all constructed incorrect or unsafe candidates to review. A small
+two-teacher diagnostic pilot further shows how teacher ratings can reveal
+borderline auto-release cases and guide conservative routing updates. These
 results validate the graph-backed review-routing mechanism, not classroom
 learning outcomes or real LLM feedback quality.
 \end{abstract}
@@ -204,7 +206,7 @@ writing evaluation.
 We evaluate the implemented routing layer, not a full writing-feedback
 generation model. The evaluation asks whether the system separates safe local
 edits from feedback that is incorrect, meaning-changing, unsupported, or
-unsafe. We use two types of evidence.
+unsafe. We use three types of evidence.
 
 \paragraph{Synthetic implementation checks.}
 The packaged demo contains 15 feedback items with expected routes and 16
@@ -247,6 +249,39 @@ no gold M2 labels. Lang-8 and NUCLE training data require separate forms or
 licenses and are not redistributed.}
 \label{tab:public}
 \end{table*}
+
+\paragraph{Two-teacher diagnostic pilot.}
+To test whether the review routes align with human judgments, we collected a
+small blind pilot from two English teachers over 12 anonymized AI feedback
+items. Each teacher rated correctness, meaning preservation, student
+readiness, usefulness, clarity, and direct-release suitability on 1--5 scales.
+The teacher ratings are used only as offline diagnostics. They are not visible
+to the deploy-time router. An initial analysis identified a borderline
+auto-accepted item whose wording made student release dependent on teacher
+preference (``if the teacher wants''). We therefore added an observable
+\texttt{teacher\_dependent} signal that routes such items to review. As shown
+in Table~\ref{tab:teacherpilot}, this update improves recall for
+teacher-marked review-needed items while preserving recall for teacher-marked
+unsafe items.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrr}
+\toprule
+Metric & Before & After \\
+\midrule
+Auto share & 0.417 & 0.333 \\
+Review share & 0.583 & 0.667 \\
+Review-needed recall & 0.714 & 0.857 \\
+Unsafe reviewed recall & 1.000 & 1.000 \\
+Auto precision vs. safe & 0.400 & 0.500 \\
+\bottomrule
+\end{tabular}
+\caption{Two-teacher offline diagnostic pilot on 12 AI feedback items. Teacher
+ratings are post-hoc diagnostics and are not used during routing.}
+\label{tab:teacherpilot}
+\end{table}
 
 \paragraph{Review-routing utility.}
 Table~\ref{tab:policy} summarizes the pooled policy results over 349,782
@@ -316,11 +351,12 @@ student IDs, emails, class identifiers, and other personally identifiable
 information should be removed before use. The current benchmark validates
 graph-backed review-routing behavior with public correction labels and
 constructed distractors. It does not measure student learning, teacher
-satisfaction, time-on-task, or real LLM feedback quality. Future work should
-add a small teacher-aligned pilot in which up to two instructors rate each
-feedback item on 1--5 scales for correctness, meaning preservation, student
-readiness, usefulness, clarity, and direct-release suitability, while keeping
-deploy-time graph signals separate from offline diagnostic ratings.
+satisfaction, time-on-task, or real LLM feedback quality. The two-teacher
+pilot is preliminary and covers only 12 feedback items; it should be read as a
+diagnostic check for routing behavior, not as a classroom user study. Future
+work should expand the teacher sample, add authentic anonymized classroom
+data, and keep deploy-time graph signals separate from offline diagnostic
+ratings.
 
 \section{Conclusion}
 

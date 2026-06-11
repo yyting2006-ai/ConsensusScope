@@ -182,6 +182,34 @@ The current ESL writing demo contains 3 synthetic essays, 15 packaged synthetic
 feedback items, and 16 AI-review stress cases. These are demonstration and
 implementation-test records, not classroom evaluation results.
 
+## Two-Teacher Diagnostic Pilot
+
+We also ran a small blind diagnostic pilot with two English teachers on the
+expert annotation website. Each teacher rated 12 AI feedback items on six 1-5
+dimensions: correctness, meaning preservation, student readiness, usefulness,
+clarity, and direct-release suitability. These ratings are offline diagnostics;
+they are not used by the deploy-time router.
+
+The pilot exposed one borderline auto-release pattern: feedback phrased as
+teacher-dependent advice, such as "if the teacher wants", should remain
+reviewable even when the local edit is low-risk. The router now includes a
+deploy-time `teacher_dependent` signal for this case.
+
+On the 12-item pilot set, the conservative update changes the teacher-aligned
+routing diagnostics as follows:
+
+| Metric | Before | After |
+|---|---:|---:|
+| Auto share | 0.417 | 0.333 |
+| Review share | 0.583 | 0.667 |
+| Review-needed recall | 0.714 | 0.857 |
+| Unsafe reviewed recall | 1.000 | 1.000 |
+| Auto precision vs. teacher-safe items | 0.400 | 0.500 |
+
+This is a preliminary pilot, not a classroom effectiveness study. It is useful
+for stress-testing routing behavior and identifying rule refinements before a
+larger teacher study.
+
 ## Public Learner-Corpus Empirical Benchmark
 
 If private expert annotations are unavailable, ConsensusScope can still be

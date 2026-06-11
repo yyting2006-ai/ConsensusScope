@@ -64,16 +64,20 @@ incorrect or unsafe candidates to review.
 
 This is evidence for the review-routing layer, not classroom effectiveness.
 The high auto-accuracy is expected because correct candidates are derived from
-public gold corrections and compared with constructed risk distractors. Future
-validation should add a small two-teacher 1-5 Likert pilot and report those
-ratings as offline diagnostic results, separate from deploy-time routing
-signals.
+public gold corrections and compared with constructed risk distractors.
+
+We have also collected a small blind two-teacher 1-5 Likert diagnostic pilot
+over 12 AI feedback items. The pilot is used only as offline evaluation: it
+identified a teacher-dependent feedback pattern that should not be automatically
+released. After adding a deploy-time `teacher_dependent` signal, review-needed
+recall improves from 0.714 to 0.857, unsafe reviewed recall remains 1.000, and
+auto precision against teacher-safe items improves from 0.400 to 0.500. This is
+still preliminary and should not be framed as classroom effectiveness.
 
 ## Submission Gaps
 
 - Record a video under 2.5 minutes.
 - Add a real screencast upload or submit the video as supplementary material.
 - Regenerate the final LaTeX PDF/package after the paper text is updated.
-- Future work: collect up to two instructor ratings on correctness, meaning
-  preservation, student readiness, usefulness, clarity, and direct-release
-  suitability.
+- Future work: expand beyond the current two-teacher, 12-item diagnostic pilot
+  with authentic anonymized classroom data and more instructor ratings.
