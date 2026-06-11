@@ -210,6 +210,8 @@ This is a preliminary pilot, not a classroom effectiveness study. It is useful
 for stress-testing routing behavior and identifying rule refinements before a
 larger teacher study.
 
+See `docs/teacher_likert_pilot_summary.md` for the compact reporting summary.
+
 ## Public Learner-Corpus Empirical Benchmark
 
 If private expert annotations are unavailable, ConsensusScope can still be
