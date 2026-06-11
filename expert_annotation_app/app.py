@@ -687,7 +687,6 @@ def init_db() -> None:
         )
 
 
-@st.cache_data(show_spinner=False)
 def load_csv(name: str) -> pd.DataFrame:
     path = SAMPLE_DIR / name
     if not path.exists():
