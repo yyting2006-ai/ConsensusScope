@@ -45,9 +45,7 @@ or video recordings.
 4. Teacher uses the default Blind Annotation Mode.
 5. Teacher completes:
    - Expert Session
-   - Essay Annotation
-   - Feedback Annotation
-   - Feedback Safety Check
+   - Feedback Likert Questionnaire
    - Progress
    - Export
 6. Researcher exports CSV/JSON files from Export.
@@ -57,10 +55,11 @@ or video recordings.
 正式标注时请按左侧页面从上到下完成：
 
 ```text
-开始标注 -> 作文整体评价 -> 逐条反馈判断 -> 反馈风险判断 -> 查看进度 -> 导出结果
+开始标注 -> 逐条反馈 1-5 分问卷 -> 查看进度 -> 导出结果
 ```
 
 教师只需要选择教师编号 `1` 或 `2`，批次编号 `1` 或 `2`。默认盲标即可；“高级选项（研究者使用）”不要打开。
+每条 AI 反馈只需要按正确性、保留原意、学生可见性、有用性、清晰可操作性和直接放行六个维度打 1-5 分。
 
 ## Important Storage Boundary
 

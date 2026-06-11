@@ -170,8 +170,8 @@ New ESL writing review-routing assets:
 - `src/prompts/esl_feedback_prompt.py`: structured feedback-generation prompt
   template.
 - `scripts/evaluate_esl_routing_demo.py`: synthetic routing evaluation script.
-- `scripts/analyze_esl_feedback_experiment.py`: offline analysis script for
-  future teacher annotations.
+- `scripts/analyze_teacher_likert_pilot.py`: offline analysis script for a
+  two-teacher 1-5 Likert pilot on AI feedback safety and usefulness.
 - `scripts/run_public_gec_benchmark.py`: offline public learner-corpus
   benchmark runner for JFLEG-style parallel files, `.m2` GEC files, or a simple
   source/reference CSV.
@@ -378,22 +378,25 @@ Run the public learner-corpus benchmark smoke test:
 PYTHONPATH=. python3 scripts/run_public_gec_benchmark.py
 ```
 
-Analyze future teacher annotations:
+Analyze future two-teacher Likert ratings:
 
 ```bash
-PYTHONPATH=. python3 scripts/analyze_esl_feedback_experiment.py \
-  --annotations-dir path/to/teacher_annotations \
+PYTHONPATH=. python3 scripts/analyze_teacher_likert_pilot.py \
+  --ratings path/to/exported_teacher_ratings \
   --routing data/esl_writing_demo/routing_results.csv
 ```
 
 Expected annotation file name:
 
 ```text
-feedback_decisions.csv
+likert_feedback_ratings.csv
 ```
 
-Expected annotation columns include `feedback_item_id`, `teacher_safety_label`,
-`feedback_correctness`, `meaning_preservation`, and `teacher_final_action`.
+The current teacher pilot supports at most two teachers. Expected rating columns
+include `expert_id`, `batch_id`, `feedback_item_id`, `essay_id`,
+`correctness_score`, `meaning_preservation_score`, `student_readiness_score`,
+`usefulness_score`, `clarity_score`, and `direct_release_score`. All score
+columns must use the 1-5 scale.
 
 ## Legacy / Auxiliary Modules
 

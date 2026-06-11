@@ -22,11 +22,18 @@ DB_PATH = DATA_DIR / "expert_annotations.sqlite3"
 
 PAGES = [
     "1. Expert Session",
-    "2. Essay Annotation",
-    "3. Feedback Annotation",
-    "4. Feedback Safety Check",
-    "5. Progress",
-    "6. Export",
+    "2. Feedback Likert Questionnaire",
+    "3. Progress",
+    "4. Export",
+]
+
+LIKERT_SCORE_FIELDS = [
+    "correctness_score",
+    "meaning_preservation_score",
+    "student_readiness_score",
+    "usefulness_score",
+    "clarity_score",
+    "direct_release_score",
 ]
 
 ISSUE_TYPES = [
@@ -99,7 +106,7 @@ TRANSLATIONS = {
         "english": "English",
         "chinese": "中文",
         "site_title": "ConsensusScope Expert Annotation",
-        "site_caption": "Research annotation tool for AI-generated ESL writing feedback. This is separate from the main demo.",
+        "site_caption": "Two-teacher 1-5 questionnaire for AI-generated ESL writing feedback. This is separate from the main demo.",
         "password_info": "This research annotation website is password-protected.",
         "site_password": "Site password",
         "enter_site": "Enter annotation website",
@@ -109,15 +116,13 @@ TRANSLATIONS = {
         "pages": "Pages",
         "session_summary": "Teacher ID: {expert_id}\n\nBatch ID: {batch_id}",
         "page_0": "1. Expert Session",
-        "page_1": "2. Essay Annotation",
-        "page_2": "3. Feedback Annotation",
-        "page_3": "4. Feedback Safety Check",
-        "page_4": "5. Progress",
-        "page_5": "6. Export",
+        "page_1": "2. Feedback Likert Questionnaire",
+        "page_2": "3. Progress",
+        "page_3": "4. Export",
         "select_placeholder": "Select...",
         "session_required": "Create or select an expert session before annotation.",
         "expert_session": "Expert Session",
-        "expert_session_desc": "Select a teacher ID and a batch ID, then follow the pages from top to bottom. Gold labels are saved in the app's SQLite file and can be exported as CSV/JSON.",
+        "expert_session_desc": "Select teacher ID 1 or 2 and a batch ID, then complete the 1-5 questionnaire from top to bottom. Scores are saved in SQLite and can be exported as CSV/JSON.",
         "storage_backend": "Storage: {backend}",
         "existing_sessions": "Existing sessions",
         "load_selected_session": "Load selected session",
@@ -135,11 +140,28 @@ TRANSLATIONS = {
         "enable_assisted_admin": "Show system-assisted signals for researcher inspection",
         "create_select_session": "Start / Continue",
         "session_id_required": "Teacher ID and Batch ID are required.",
-        "session_ready": "Session is ready. Continue with Essay Annotation.",
+        "session_ready": "Session is ready. Continue with the Feedback Likert Questionnaire.",
         "data_loaded": "Data Loaded",
         "blind_active": "Blind Annotation Mode is active. System risk, recommended action, model agreement, model name, and ConsensusScope decisions are hidden.",
         "assisted_warning": "Assisted Review Mode can show optional system signals in an expander. Use Blind Annotation Mode for unbiased gold-label collection.",
-        "linear_workflow": "Recommended order: Expert Session -> Essay Annotation -> Feedback Annotation -> Feedback Safety Check -> Progress -> Export.",
+        "linear_workflow": "Recommended order: Expert Session -> Feedback Likert Questionnaire -> Progress -> Export.",
+        "likert_questionnaire": "Feedback Likert Questionnaire",
+        "likert_questionnaire_desc": "Teachers only give 1-5 scores. No categorical labels or written reasons are required in the formal pilot.",
+        "scale_note": "Scale: 1 = strongly negative / unsafe / not ready; 3 = uncertain; 5 = strongly positive / safe / ready.",
+        "correctness_score": "Correctness score",
+        "correctness_help": "1 = clearly wrong; 5 = fully correct.",
+        "meaning_preservation_score": "Meaning preservation score",
+        "meaning_preservation_help": "1 = changes the student's intended meaning; 5 = fully preserves the student's meaning.",
+        "student_readiness_score": "Student readiness score",
+        "student_readiness_help": "1 = unsafe to show to students; 5 = safe to show directly.",
+        "usefulness_score": "Usefulness score",
+        "usefulness_help": "1 = not useful for revision; 5 = very useful.",
+        "clarity_score": "Clarity/actionability score",
+        "clarity_help": "1 = unclear or vague; 5 = clear and actionable.",
+        "direct_release_score": "Direct-release score",
+        "direct_release_help": "1 = must be reviewed or rejected; 5 = can be released directly.",
+        "save_likert_rating": "Save 1-5 questionnaire",
+        "likert_saved": "Likert questionnaire saved for {item_id}.",
         "essay_annotation": "Essay Annotation",
         "no_essays": "No essays are available in sample_data/essays.csv.",
         "essay_progress": "Essay {current} of {total}",
@@ -198,14 +220,14 @@ TRANSLATIONS = {
         "safety_saved": "Safety check saved for {item_id}.",
         "progress": "Progress",
         "no_items": "No annotation items are available.",
-        "total_units": "Total annotation units",
+        "total_units": "Total questionnaire items",
         "complete": "Complete",
         "remaining": "Remaining",
         "completion_by_type": "Completion by type",
         "missing_fields": "Missing fields",
         "all_complete": "All required fields are complete for the current expert_id and batch_id.",
         "export": "Export",
-        "export_scope": "Exports are scoped to the current expert_id and batch_id.",
+        "export_scope": "Exports are scoped to the current teacher ID and batch ID.",
         "write_exports": "Write all export files to local exports/ folder",
         "export_written": "Export files written to {path}",
         "previous": "Previous",
@@ -234,6 +256,7 @@ TRANSLATIONS = {
         "essay_item": "Essay review",
         "feedback_decision_item": "Feedback judgment",
         "feedback_safety_item": "Feedback safety check",
+        "feedback_likert_item": "Feedback 1-5 questionnaire",
         "storage_notice": "For formal data collection, export the CSV/JSON files after annotation and back them up outside Streamlit Cloud.",
     },
     "zh": {
@@ -241,7 +264,7 @@ TRANSLATIONS = {
         "english": "English",
         "chinese": "中文",
         "site_title": "ConsensusScope 专家标注",
-        "site_caption": "用于 AI 生成 ESL 写作反馈的研究标注工具。该网站与主 demo 分离。",
+        "site_caption": "面向 AI 生成 ESL 写作反馈的双教师 1–5 分问卷工具。该网站与主 demo 分离。",
         "password_info": "该研究标注网站已启用密码保护。",
         "site_password": "网站密码",
         "enter_site": "进入标注网站",
@@ -251,15 +274,13 @@ TRANSLATIONS = {
         "pages": "页面",
         "session_summary": "教师编号：{expert_id}\n\n批次编号：{batch_id}",
         "page_0": "1. 开始标注",
-        "page_1": "2. 作文整体评价",
-        "page_2": "3. 逐条反馈判断",
-        "page_3": "4. 反馈风险判断",
-        "page_4": "5. 查看进度",
-        "page_5": "6. 导出结果",
+        "page_1": "2. 逐条反馈 1–5 分问卷",
+        "page_2": "3. 查看进度",
+        "page_3": "4. 导出结果",
         "select_placeholder": "请选择...",
         "session_required": "请先在“开始标注”页面选择教师编号和批次编号。",
         "expert_session": "开始标注",
-        "expert_session_desc": "请选择教师编号和批次编号，然后按照左侧页面从上到下完成标注。标注结果会保存到本应用的 SQLite 文件，并可导出为 CSV/JSON。",
+        "expert_session_desc": "请选择教师编号 1 或 2，以及批次编号，然后按照左侧页面从上到下完成 1–5 分问卷。结果会保存到本应用的 SQLite 文件，并可导出为 CSV/JSON。",
         "storage_backend": "当前存储：{backend}",
         "existing_sessions": "继续已有标注",
         "load_selected_session": "继续这个标注",
@@ -277,11 +298,28 @@ TRANSLATIONS = {
         "enable_assisted_admin": "显示系统辅助信息（研究者核查用）",
         "create_select_session": "开始 / 继续标注",
         "session_id_required": "请选择教师编号和批次编号。",
-        "session_ready": "已进入标注会话，请继续完成“作文整体评价”。",
+        "session_ready": "已进入标注会话，请继续完成“逐条反馈 1–5 分问卷”。",
         "data_loaded": "当前数据",
         "blind_active": "当前为盲标模式：系统风险等级、推荐动作、模型一致性、模型名称和 ConsensusScope 决策均不会显示。",
         "assisted_warning": "当前为辅助复核模式，会显示部分系统信号。正式收集教师 gold labels 时建议使用盲标模式。",
-        "linear_workflow": "推荐顺序：开始标注 -> 作文整体评价 -> 逐条反馈判断 -> 反馈风险判断 -> 查看进度 -> 导出结果。",
+        "linear_workflow": "推荐顺序：开始标注 -> 逐条反馈 1–5 分问卷 -> 查看进度 -> 导出结果。",
+        "likert_questionnaire": "逐条反馈 1–5 分问卷",
+        "likert_questionnaire_desc": "正式 pilot 中教师只需要给 1–5 分，不需要选择复杂分类标签，也不需要写判断理由。",
+        "scale_note": "评分说明：1 = 明显负面 / 不安全 / 不适合直接给学生；3 = 不确定；5 = 明显正面 / 安全 / 可以直接使用。",
+        "correctness_score": "正确性评分",
+        "correctness_help": "1 = 明显错误；5 = 完全正确。",
+        "meaning_preservation_score": "保留原意评分",
+        "meaning_preservation_help": "1 = 改变学生原意；5 = 完全保留学生原意。",
+        "student_readiness_score": "学生可见性评分",
+        "student_readiness_help": "1 = 不适合直接给学生看；5 = 可以直接给学生看。",
+        "usefulness_score": "修改有用性评分",
+        "usefulness_help": "1 = 对学生修改几乎无帮助；5 = 非常有帮助。",
+        "clarity_score": "清晰可操作性评分",
+        "clarity_help": "1 = 含混、难操作；5 = 清晰、可操作。",
+        "direct_release_score": "直接放行评分",
+        "direct_release_help": "1 = 必须复核或拒绝；5 = 可以直接放行。",
+        "save_likert_rating": "保存 1–5 分问卷",
+        "likert_saved": "已保存 {item_id} 的 1–5 分问卷。",
         "essay_annotation": "作文整体评价",
         "no_essays": "sample_data/essays.csv 中没有可用作文。",
         "essay_progress": "作文 {current} / {total}",
@@ -340,7 +378,7 @@ TRANSLATIONS = {
         "safety_saved": "已保存风险判断：{item_id}。",
         "progress": "查看进度",
         "no_items": "没有可用标注项。",
-        "total_units": "标注单元总数",
+        "total_units": "问卷项目总数",
         "complete": "已完成",
         "remaining": "未完成",
         "completion_by_type": "按类型统计完成情况",
@@ -376,6 +414,7 @@ TRANSLATIONS = {
         "essay_item": "作文整体评价",
         "feedback_decision_item": "逐条反馈判断",
         "feedback_safety_item": "反馈风险判断",
+        "feedback_likert_item": "逐条反馈 1–5 分问卷",
         "storage_notice": "正式收集数据时，请在标注后导出 CSV/JSON，并在 Streamlit Cloud 之外备份。",
     }
 }
@@ -458,6 +497,7 @@ def item_type_label(item_type: Any) -> str:
         "essay": "essay_item",
         "feedback_decision": "feedback_decision_item",
         "feedback_safety": "feedback_safety_item",
+        "feedback_likert": "feedback_likert_item",
     }
     key = mapping.get(safe_str(item_type))
     return t(key) if key else safe_str(item_type)
@@ -605,6 +645,24 @@ def init_db() -> None:
                 risk_reason_teacher TEXT,
                 rubric_dimension TEXT,
                 evidence_note TEXT,
+                created_at TEXT NOT NULL,
+                updated_at TEXT NOT NULL,
+                duration_seconds REAL NOT NULL DEFAULT 0,
+                UNIQUE(expert_id, batch_id, feedback_item_id)
+            );
+
+            CREATE TABLE IF NOT EXISTS likert_feedback_ratings (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                expert_id TEXT NOT NULL,
+                batch_id TEXT NOT NULL,
+                feedback_item_id TEXT NOT NULL,
+                essay_id TEXT NOT NULL,
+                correctness_score INTEGER,
+                meaning_preservation_score INTEGER,
+                student_readiness_score INTEGER,
+                usefulness_score INTEGER,
+                clarity_score INTEGER,
+                direct_release_score INTEGER,
                 created_at TEXT NOT NULL,
                 updated_at TEXT NOT NULL,
                 duration_seconds REAL NOT NULL DEFAULT 0,
@@ -843,6 +901,12 @@ def safety_missing_fields(row: Mapping[str, Any] | None) -> List[str]:
     if not row:
         return SAFETY_REQUIRED_FIELDS.copy()
     return [field for field in SAFETY_REQUIRED_FIELDS if missing_text(row.get(field))]
+
+
+def likert_missing_fields(row: Mapping[str, Any] | None) -> List[str]:
+    if not row:
+        return LIKERT_SCORE_FIELDS.copy()
+    return [field for field in LIKERT_SCORE_FIELDS if missing_score(row.get(field))]
 
 
 def first_incomplete_index(items: pd.DataFrame, id_col: str, records: Mapping[str, Mapping[str, Any]], checker) -> int:
@@ -1116,6 +1180,54 @@ def save_safety_check(feedback_item_id: str, essay_id: str, values: Mapping[str,
     touch_session()
 
 
+def save_likert_feedback_rating(feedback_item_id: str, essay_id: str, values: Mapping[str, Any], duration: float) -> None:
+    session = get_session()
+    existing = fetch_one("likert_feedback_ratings", "feedback_item_id", feedback_item_id)
+    previous = float(existing.get("duration_seconds") or 0.0)
+    current_time = now_iso()
+    params = {
+        **values,
+        "expert_id": session["expert_id"],
+        "batch_id": session["batch_id"],
+        "feedback_item_id": feedback_item_id,
+        "essay_id": essay_id,
+        "created_at": current_time,
+        "updated_at": current_time,
+        "duration_seconds": previous + duration,
+    }
+    with connect() as conn:
+        conn.execute(
+            """
+            INSERT INTO likert_feedback_ratings (
+                expert_id, batch_id, feedback_item_id, essay_id,
+                correctness_score, meaning_preservation_score, student_readiness_score,
+                usefulness_score, clarity_score, direct_release_score,
+                created_at, updated_at, duration_seconds
+            )
+            VALUES (
+                :expert_id, :batch_id, :feedback_item_id, :essay_id,
+                :correctness_score, :meaning_preservation_score, :student_readiness_score,
+                :usefulness_score, :clarity_score, :direct_release_score,
+                :created_at, :updated_at, :duration_seconds
+            )
+            ON CONFLICT(expert_id, batch_id, feedback_item_id)
+            DO UPDATE SET
+                essay_id=excluded.essay_id,
+                correctness_score=excluded.correctness_score,
+                meaning_preservation_score=excluded.meaning_preservation_score,
+                student_readiness_score=excluded.student_readiness_score,
+                usefulness_score=excluded.usefulness_score,
+                clarity_score=excluded.clarity_score,
+                direct_release_score=excluded.direct_release_score,
+                updated_at=excluded.updated_at,
+                duration_seconds=excluded.duration_seconds
+            """,
+            params,
+        )
+    add_log("feedback_likert", feedback_item_id, "save_likert_feedback_rating", values, duration)
+    touch_session()
+
+
 def page_expert_session(data: Mapping[str, pd.DataFrame]) -> None:
     st.header(t("expert_session"))
     st.write(t("expert_session_desc"))
@@ -1341,24 +1453,84 @@ def page_feedback_safety(data: Mapping[str, pd.DataFrame]) -> None:
             st.success(t("safety_saved", item_id=feedback_item_id))
 
 
+def score_required_with_help(label_key: str, value: Any, key: str) -> int | None:
+    return score_required(f"{t(label_key)}\n\n{t(label_key.replace('_score', '_help'))}", value, key)
+
+
+def page_likert_questionnaire(data: Mapping[str, pd.DataFrame]) -> None:
+    st.header(t("likert_questionnaire"))
+    st.write(t("likert_questionnaire_desc"))
+    st.info(t("scale_note"))
+    if not require_session():
+        return
+    feedback = data["feedback"].reset_index(drop=True)
+    if feedback.empty:
+        st.error(t("no_feedback"))
+        return
+    essays_by_id = as_records(data["essays"], "essay_id")
+    routing_by_id = as_records(data["routing"], "feedback_item_id")
+    ratings = read_annotation_table("likert_feedback_ratings")
+    records = as_records(ratings, "feedback_item_id")
+    total = len(feedback)
+    st.session_state.setdefault("likert_index", 0)
+    st.session_state["likert_index"] = min(max(0, int(st.session_state["likert_index"])), total - 1)
+    first_incomplete = first_incomplete_index(feedback, "feedback_item_id", records, likert_missing_fields)
+    nav_buttons("likert", total, "likert_index", first_incomplete)
+
+    row = feedback.iloc[int(st.session_state["likert_index"])].to_dict()
+    feedback_item_id = safe_str(row.get("feedback_item_id"))
+    essay_id = safe_str(row.get("essay_id"))
+    ensure_item_timer("likert", feedback_item_id)
+    existing = fetch_one("likert_feedback_ratings", "feedback_item_id", feedback_item_id)
+    st.caption(t("feedback_progress", current=int(st.session_state["likert_index"]) + 1, total=total))
+    render_feedback_card(row, essays_by_id, routing_by_id, get_session()["annotation_mode"])
+
+    with st.form(f"likert_feedback_form_{feedback_item_id}"):
+        c1, c2, c3 = st.columns(3)
+        values: Dict[str, Any] = {}
+        with c1:
+            values["correctness_score"] = score_required_with_help(
+                "correctness_score", existing.get("correctness_score"), f"{feedback_item_id}_correctness_score"
+            )
+            values["meaning_preservation_score"] = score_required_with_help(
+                "meaning_preservation_score",
+                existing.get("meaning_preservation_score"),
+                f"{feedback_item_id}_meaning_preservation_score",
+            )
+        with c2:
+            values["student_readiness_score"] = score_required_with_help(
+                "student_readiness_score", existing.get("student_readiness_score"), f"{feedback_item_id}_student_readiness_score"
+            )
+            values["usefulness_score"] = score_required_with_help(
+                "usefulness_score", existing.get("usefulness_score"), f"{feedback_item_id}_usefulness_score"
+            )
+        with c3:
+            values["clarity_score"] = score_required_with_help(
+                "clarity_score", existing.get("clarity_score"), f"{feedback_item_id}_clarity_score"
+            )
+            values["direct_release_score"] = score_required_with_help(
+                "direct_release_score", existing.get("direct_release_score"), f"{feedback_item_id}_direct_release_score"
+            )
+        submitted = st.form_submit_button(t("save_likert_rating"), type="primary", use_container_width=True)
+
+    if submitted:
+        missing = likert_missing_fields(values)
+        if validate_and_show(missing):
+            duration = elapsed_for_item("likert")
+            save_likert_feedback_rating(feedback_item_id, essay_id, values, duration)
+            reset_item_timer("likert")
+            st.success(t("likert_saved", item_id=feedback_item_id))
+
+
 def build_progress(data: Mapping[str, pd.DataFrame]) -> pd.DataFrame:
-    essays = data["essays"]
     feedback = data["feedback"]
-    essay_records = as_records(read_annotation_table("essay_annotations"), "essay_id")
-    feedback_records = as_records(read_annotation_table("feedback_decisions"), "feedback_item_id")
-    safety_records = as_records(read_annotation_table("feedback_safety_checks"), "feedback_item_id")
+    likert_records = as_records(read_annotation_table("likert_feedback_ratings"), "feedback_item_id")
 
     rows: List[Dict[str, Any]] = []
-    for _, row in essays.iterrows():
-        essay_id = safe_str(row.get("essay_id"))
-        missing = essay_missing_fields(essay_records.get(essay_id))
-        rows.append({"item_type": "essay", "item_id": essay_id, "complete": not missing, "missing_fields": "; ".join(missing)})
     for _, row in feedback.iterrows():
         feedback_id = safe_str(row.get("feedback_item_id"))
-        missing = feedback_missing_fields(feedback_records.get(feedback_id))
-        rows.append({"item_type": "feedback_decision", "item_id": feedback_id, "complete": not missing, "missing_fields": "; ".join(missing)})
-        safety_missing = safety_missing_fields(safety_records.get(feedback_id))
-        rows.append({"item_type": "feedback_safety", "item_id": feedback_id, "complete": not safety_missing, "missing_fields": "; ".join(safety_missing)})
+        missing = likert_missing_fields(likert_records.get(feedback_id))
+        rows.append({"item_type": "feedback_likert", "item_id": feedback_id, "complete": not missing, "missing_fields": "; ".join(missing)})
     return pd.DataFrame(rows)
 
 
@@ -1434,9 +1606,7 @@ def build_combined_json(data: Mapping[str, pd.DataFrame]) -> Dict[str, Any]:
         },
         "source_essays": data["essays"].to_dict(orient="records"),
         "source_feedback_items": data["feedback"].to_dict(orient="records"),
-        "essay_annotations": read_annotation_table("essay_annotations").to_dict(orient="records"),
-        "feedback_decisions": read_annotation_table("feedback_decisions").to_dict(orient="records"),
-        "feedback_safety_checks": read_annotation_table("feedback_safety_checks").to_dict(orient="records"),
+        "likert_feedback_ratings": read_annotation_table("likert_feedback_ratings").to_dict(orient="records"),
         "annotation_logs": read_annotation_table("annotation_logs").to_dict(orient="records"),
     }
 
@@ -1447,9 +1617,7 @@ def page_export(data: Mapping[str, pd.DataFrame]) -> None:
         return
     st.caption(t("storage_backend", backend=storage_backend_label()))
     tables = {
-        "essay_annotations.csv": read_annotation_table("essay_annotations"),
-        "feedback_decisions.csv": read_annotation_table("feedback_decisions"),
-        "feedback_safety_checks.csv": read_annotation_table("feedback_safety_checks"),
+        "likert_feedback_ratings.csv": read_annotation_table("likert_feedback_ratings"),
         "annotation_logs.csv": read_annotation_table("annotation_logs"),
     }
     st.write(t("export_scope"))
@@ -1567,14 +1735,10 @@ def main() -> None:
     if page_index == 0:
         page_expert_session(data)
     elif page_index == 1:
-        page_essay_annotation(data)
+        page_likert_questionnaire(data)
     elif page_index == 2:
-        page_feedback_annotation(data)
-    elif page_index == 3:
-        page_feedback_safety(data)
-    elif page_index == 4:
         page_progress(data)
-    elif page_index == 5:
+    elif page_index == 3:
         page_export(data)
 
 

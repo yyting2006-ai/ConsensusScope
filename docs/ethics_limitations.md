@@ -33,7 +33,7 @@ data is added later:
 
 - Remove names, student IDs, emails, school identifiers, demographic details,
   and rare personal details.
-- Store teacher annotations separately from identifiable student records.
+- Store teacher ratings separately from identifiable student records.
 - Report aggregate results unless explicit consent permits case-level excerpts.
 - Avoid uploading private classroom data to third-party model providers without
   institutional approval.
@@ -42,9 +42,10 @@ data is added later:
 
 - The current ESL writing data is synthetic and demonstration-oriented.
 - The deterministic routing function is transparent but simple; it should be
-  validated with teacher annotations before being presented as a measured
-  classroom tool.
+  validated with a small two-teacher 1-5 Likert pilot before being presented as
+  a measured classroom tool.
 - Saved live validation records, if used, show API connectivity and schema
   compliance, not a classroom user study.
-- Future validation should include instructor-annotated ESL essays and teacher
-  review-priority judgments.
+- Future validation should include instructor ratings for correctness, meaning
+  preservation, student readiness, usefulness, clarity, and direct-release
+  suitability.

@@ -65,13 +65,15 @@ incorrect or unsafe candidates to review.
 This is evidence for the review-routing layer, not classroom effectiveness.
 The high auto-accuracy is expected because correct candidates are derived from
 public gold corrections and compared with constructed risk distractors. Future
-validation should add teacher annotations and report them as offline diagnostic
-results, separate from deploy-time routing signals.
+validation should add a small two-teacher 1-5 Likert pilot and report those
+ratings as offline diagnostic results, separate from deploy-time routing
+signals.
 
 ## Submission Gaps
 
 - Record a video under 2.5 minutes.
 - Add a real screencast upload or submit the video as supplementary material.
 - Regenerate the final LaTeX PDF/package after the paper text is updated.
-- Future work: collect instructor annotations for feedback safety,
-  accept/edit/reject decisions, and review-priority judgments.
+- Future work: collect up to two instructor ratings on correctness, meaning
+  preservation, student readiness, usefulness, clarity, and direct-release
+  suitability.

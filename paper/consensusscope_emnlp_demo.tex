@@ -29,7 +29,7 @@ English-as-a-second-language (ESL) writing feedback. The core mechanism is a
 student target span, surrounding context, AI suggestion, evidence status,
 active safety dimensions, and routing decision into an auditable deploy-time
 graph. ConsensusScope normalizes feedback candidates into a shared schema,
-constructs these graphs without using gold labels or teacher annotations,
+constructs these graphs without using gold labels or teacher ratings,
 routes low-risk local edits separately from items that require teacher review,
 and exports graph-backed reports. The demo runs without external API calls for
 reproducible demonstrations, while optional live providers can write into the
@@ -166,14 +166,14 @@ model agreement. The exported route includes
 \texttt{safety\_graph\_active\_signals}, \texttt{safety\_graph\_path},
 \texttt{safety\_graph\_summary}, and JSON node/edge records. The graph is built
 only from deploy-time observable fields; it does not use public-corpus gold
-corrections, teacher decisions, or post-hoc classroom outcomes.
+corrections, teacher ratings, or post-hoc classroom outcomes.
 
 \paragraph{Deploy-time risk signals.}
 The router uses signals observable at review time: predicted issue type,
 suggestion text, target span, local context, model agreement, evidence status,
 parse errors, and textual cues for meaning change, unsupported claims,
 overcorrection, harsh tone, or whole-draft rewriting. It explicitly does not
-use teacher decisions, public corpus gold corrections, or post-hoc labels when
+use teacher ratings, public corpus gold corrections, or post-hoc labels when
 making deploy-time routes.
 
 \paragraph{Routing outputs.}
@@ -258,7 +258,7 @@ derived from public gold corrections, and incorrect candidates are constructed
 risk distractors. The number validates routing behavior under controlled
 conditions; it is not a claim that real LLM feedback is always correct.
 
-\begin{table}[t]
+\begin{table*}[t]
 \centering
 \small
 \begin{tabular}{lrrrr}
@@ -274,7 +274,7 @@ Review all & 0.000 & -- & 1.000 & 1.000 \\
 benchmark. Errors reviewed is the fraction of observed incorrect or unsafe
 feedback candidates routed to the human-review queue.}
 \label{tab:policy}
-\end{table}
+\end{table*}
 
 \section{Demo Scenario}
 
@@ -317,9 +317,10 @@ information should be removed before use. The current benchmark validates
 graph-backed review-routing behavior with public correction labels and
 constructed distractors. It does not measure student learning, teacher
 satisfaction, time-on-task, or real LLM feedback quality. Future work should
-add teacher annotations that label accept/edit/reject decisions on authentic
-anonymized feedback, while keeping deploy-time graph signals separate from
-offline gold labels.
+add a small teacher-aligned pilot in which up to two instructors rate each
+feedback item on 1--5 scales for correctness, meaning preservation, student
+readiness, usefulness, clarity, and direct-release suitability, while keeping
+deploy-time graph signals separate from offline diagnostic ratings.
 
 \section{Conclusion}
 

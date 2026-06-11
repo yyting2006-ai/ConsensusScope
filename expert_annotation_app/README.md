@@ -1,17 +1,18 @@
 # ConsensusScope Expert Annotation App
 
-This is an independent research annotation tool for collecting expert gold
-labels on AI-generated ESL writing feedback. It is separate from the main
-ConsensusScope demo and is not part of the paper UI.
+This is an independent research annotation tool for collecting teacher
+judgments on AI-generated ESL writing feedback. It is separate from the main
+ConsensusScope demo and is not a student-facing grading system.
 
 ## 中文使用说明
 
-这个网页给英语教师做人工标注用，不是主 demo，也不是自动作文评分器。
+这个网页用于让英语教师判断 AI 生成的英语写作反馈是否可靠。正式 pilot
+最多只邀请两位教师，每位教师只需要用 1-5 分问卷逐条评价 AI 反馈。
 
-教师正式标注时只走一条线：
+教师正式标注只走一条线：
 
 ```text
-开始标注 -> 作文整体评价 -> 逐条反馈判断 -> 反馈风险判断 -> 查看进度 -> 导出结果
+开始标注 -> 逐条反馈 1-5 分问卷 -> 查看进度 -> 导出结果
 ```
 
 教师只需要选择：
@@ -19,36 +20,34 @@ ConsensusScope demo and is not part of the paper UI.
 - 教师编号：`1` 或 `2`
 - 批次编号：`1` 或 `2`
 
-默认使用盲标模式。盲标模式不会显示系统风险等级、推荐动作、模型一致性、模型名称或 ConsensusScope 决策，避免影响教师判断。
+默认使用盲标模式。盲标模式不会显示系统风险等级、推荐动作、模型一致性、
+模型名称或 ConsensusScope 决策，避免影响教师判断。
 
-“高级选项（研究者使用）”中的系统辅助信息只用于研究者事后核查，不建议教师正式标注时打开。
+“高级选项（研究者使用）”只适合研究者事后核查系统判断，正式请老师标注时
+不要打开。
 
-作文备注为选填项；判断理由仍为必填项，因为后续需要分析教师为什么接受、修改或拒绝某条 AI 反馈。
+## What Teachers Rate
 
-## Purpose
+Each AI feedback item is scored on six 1-5 dimensions:
 
-English teachers can read anonymized ESL essays and item-level AI feedback, then
-label whether the feedback is correct, preserves the student's intended meaning,
-is safe to show to students, and should be accepted, edited, rejected, or marked
-as uncertain.
+- correctness score: whether the feedback is correct;
+- meaning preservation score: whether it preserves the student's intended
+  meaning;
+- student readiness score: whether it is safe to show to a student;
+- usefulness score: whether it helps revision;
+- clarity/actionability score: whether it is clear and actionable;
+- direct-release score: whether it can be released without teacher review.
 
-The teacher-facing workflow uses **Blind Annotation Mode** by default. In blind
-mode, the app hides system `risk_level`, `recommended_action`, model agreement,
-model name, and ConsensusScope routing decisions.
-
-Assisted Review Mode is kept only as a researcher/admin option for later
-inspection. Teachers should normally follow the single line:
+Scale anchors:
 
 ```text
-Start Annotation -> Essay Annotation -> Feedback Annotation -> Feedback Safety Check -> Progress -> Export
+1 = clearly negative / unsafe / not ready
+3 = uncertain
+5 = clearly positive / safe / ready
 ```
 
-Teachers only need to select a teacher ID (`1` or `2`) and a batch ID (`1` or
-`2`) before annotation.
-
-The interface supports English and Chinese switching from the sidebar. Exported
-CSV/JSON field names and label values remain in English canonical form for
-analysis.
+No categorical labels, written rationales, or teacher comments are required in
+the formal pilot.
 
 ## Run
 
@@ -78,17 +77,14 @@ EXPERT_ANNOTATION_PASSWORD = "replace-with-a-private-password"
 ```
 
 Set this as a root-level Streamlit Secret or as a local environment variable.
-Root-level Streamlit secrets are read through environment variables by the app.
 Do not hard-code it in the source code.
 
 ## Pages
 
 1. Expert Session
-2. Essay Annotation
-3. Feedback Annotation
-4. Feedback Safety Check
-5. Progress
-6. Export
+2. Feedback Likert Questionnaire
+3. Progress
+4. Export
 
 ## Data Inputs
 
@@ -96,7 +92,8 @@ Sample CSV files are stored in `sample_data/`:
 
 - `essays.csv`
 - `feedback_items.csv`
-- `routing_results.csv` optional, used only in Assisted Review Mode
+- `routing_results.csv` optional, used only when researcher-assisted signals
+  are enabled
 
 Use only anonymized ESL writing data. Do not upload names, student IDs, email
 addresses, class names, school identifiers, demographic details, or any other
@@ -112,32 +109,44 @@ annotation_data/expert_annotations.sqlite3
 
 On Streamlit Community Cloud, local SQLite is convenient for the demo but may be
 reset by the hosting platform. For formal teacher annotation, export the
-CSV/JSON files from the Export page after each session and back them up outside
-Streamlit Cloud.
+CSV/JSON files from the Export page after each teacher session and back them up
+outside Streamlit Cloud.
 
-The local SQLite database creates these tables:
+The primary table for the two-teacher pilot is:
 
-- `expert_sessions`
-- `essay_annotations`
-- `feedback_decisions`
-- `feedback_safety_checks`
-- `annotation_logs`
+- `likert_feedback_ratings`
 
-Each annotation record stores `expert_id`, `batch_id`, `created_at`,
+The app also keeps legacy tables from the earlier categorical prototype for
+backward compatibility, but they are not part of the current teacher-facing
+workflow.
+
+Each exported rating record stores `expert_id`, `batch_id`, `created_at`,
 `updated_at`, and `duration_seconds`.
 
 ## Export
 
 The Export page provides:
 
-- `essay_annotations.csv`
-- `feedback_decisions.csv`
-- `feedback_safety_checks.csv`
+- `likert_feedback_ratings.csv`
 - `annotation_logs.csv`
 - `combined_annotations.json`
 
 You can download files in the browser or write them to the local `exports/`
 folder.
+
+## Analyze A Two-Teacher Pilot
+
+After exporting the ratings, run:
+
+```bash
+PYTHONPATH=. python3 ../scripts/analyze_teacher_likert_pilot.py \
+  --ratings exports/1_1 \
+  --routing ../data/esl_writing_demo/routing_results.csv
+```
+
+The analysis reports teacher score averages, two-teacher agreement when both
+teachers rated the same items, and how well system routing covers feedback that
+teachers marked as needing review.
 
 ## Research And Privacy Boundary
 
