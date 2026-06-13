@@ -30,7 +30,10 @@ usage guard; it is not a substitute for keeping API keys out of the repository.
 1. Push this clean project to a GitHub repository.
 2. Create a new Streamlit app from that repository.
 3. Set the main file path to `app/streamlit_app.py`.
-4. Keep Python dependencies in `requirements.txt`.
+4. Keep Streamlit runtime dependencies in `requirements.txt`. Full offline
+   experiment and test dependencies are kept in `requirements-dev.txt` so
+   Streamlit Cloud cold starts do not install unnecessary plotting, ML, testing,
+   or video-conversion packages.
 5. Optional: paste the contents of `.streamlit/secrets.toml.example` into the
    Streamlit Secrets editor and fill in only the keys needed for Mode A.
 6. For a private live demo, also set `CONSENSUS_SCOPE_DEMO_PASSWORD` in
@@ -55,9 +58,24 @@ as the only copy of research data.
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+pip install -r requirements-dev.txt
 pytest -q
 streamlit run app/streamlit_app.py --server.port 8502
 ```
+
+## If Streamlit Cloud Stays "In The Oven"
+
+1. Open the app in Streamlit Community Cloud and click **Manage app**.
+2. Confirm the branch is `main` and the main file path is `app/streamlit_app.py`
+   for the main demo, or `expert_annotation_app/app.py` for the annotation app.
+3. Click **Reboot app**. If it still stays in the oven, use **Clear cache** and
+   reboot again.
+4. Check the logs. A real Python failure usually shows a traceback. Repeated
+   redirects between `share.streamlit.io/-/auth/app`, `/-/login`, and the app URL
+   usually indicate a Streamlit Cloud session or wake-up issue rather than a
+   source-code exception.
+5. If the app was created before recent dependency changes, delete and redeploy
+   the Streamlit app from the same GitHub repository.
 
 ## Reviewer Smoke Checklist
 
