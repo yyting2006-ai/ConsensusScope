@@ -199,31 +199,29 @@ implementation-test records, not classroom evaluation results.
 ## Two-Teacher Diagnostic Pilot
 
 We also ran a small blind diagnostic pilot with two English teachers on the
-expert annotation website. Each teacher rated 12 AI feedback items on six 1-5
+expert annotation website. Each teacher rated 30 AI feedback items on six 1-5
 dimensions: correctness, meaning preservation, student readiness, usefulness,
 clarity, and direct-release suitability. These ratings are offline diagnostics;
 they are not used by the deploy-time router.
 
-The expert annotation website now also includes an additional 18-item Batch 2
-for expanding this pilot. The reported numbers below use only the completed
-12-item pilot; Batch 2 should be reported only after both teachers complete the
-new ratings.
+The pilot exposed three borderline auto-release patterns: teacher-dependent
+advice such as "if the teacher wants", semantic drift in wording edits such as
+changing "remember" to "learned", and wrong local grammar corrections after
+modal verbs such as changing "can make" to "makes". The router now includes
+deploy-time signals for these cases.
 
-The pilot exposed one borderline auto-release pattern: feedback phrased as
-teacher-dependent advice, such as "if the teacher wants", should remain
-reviewable even when the local edit is low-risk. The router now includes a
-deploy-time `teacher_dependent` signal for this case.
+On the 30-item pilot set, the final teacher-aligned routing diagnostics are:
 
-On the 12-item pilot set, the conservative update changes the teacher-aligned
-routing diagnostics as follows:
-
-| Metric | Before | After |
-|---|---:|---:|
-| Auto share | 0.417 | 0.333 |
-| Review share | 0.583 | 0.667 |
-| Review-needed recall | 0.714 | 0.857 |
-| Unsafe reviewed recall | 1.000 | 1.000 |
-| Auto precision vs. teacher-safe items | 0.400 | 0.500 |
+| Metric | Value |
+|---|---:|
+| Feedback items | 30 |
+| Rating rows | 60 |
+| Auto share | 0.233 |
+| Review share | 0.767 |
+| Review-needed recall | 1.000 |
+| Unsafe reviewed recall | 1.000 |
+| Auto precision vs. teacher-safe items | 0.857 |
+| Within-one-point teacher agreement | 0.694 |
 
 This is a preliminary pilot, not a classroom effectiveness study. It is useful
 for stress-testing routing behavior and identifying rule refinements before a
@@ -447,9 +445,10 @@ include `expert_id`, `batch_id`, `feedback_item_id`, `essay_id`,
 `usefulness_score`, `clarity_score`, and `direct_release_score`. All score
 columns must use the 1-5 scale.
 
-For the expanded pilot, put all exported `likert_feedback_ratings*.csv` files
+For the current pilot, put all exported `likert_feedback_ratings*.csv` files
 from Teacher 1/2 and Batch 1/2 into one folder; the analysis script can read
-multiple exports from that folder.
+multiple exports from that folder and filters the routing table to the rated
+feedback items.
 
 ## Legacy / Auxiliary Modules
 

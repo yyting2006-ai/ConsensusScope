@@ -41,10 +41,10 @@ learner-correction corpora, including JFLEG, CoNLL-2014 annotated test data,
 FCE, and W\&I+LOCNESS. Across 349,782 generated feedback candidates from public
 correction data, the default policy auto-routes 32.9\% of candidates while
 sending all constructed incorrect or unsafe candidates to review. A small
-two-teacher diagnostic pilot further shows how teacher ratings can reveal
-borderline auto-release cases and guide conservative routing updates. These
-results validate the graph-backed review-routing mechanism, not classroom
-learning outcomes or real LLM feedback quality.
+30-item two-teacher diagnostic pilot further shows how teacher ratings can
+reveal borderline auto-release cases and guide conservative routing updates.
+These results validate the graph-backed review-routing mechanism, not
+classroom learning outcomes or real LLM feedback quality.
 \end{abstract}
 
 \section{Introduction}
@@ -294,25 +294,43 @@ licenses and are not redistributed.}
 
 \paragraph{Two-teacher diagnostic pilot.}
 To test whether the review routes align with human judgments, we collected a
-small blind pilot from two English teachers over 12 anonymized AI feedback
+small blind pilot from two English teachers over 30 anonymized AI feedback
 items. Each teacher rated correctness, meaning preservation, student
 readiness, usefulness, clarity, and direct-release suitability on 1--5 scales.
 The teacher ratings are used only as offline diagnostics. They are not visible
-to the deploy-time router. An initial analysis identified a borderline
-auto-accepted item whose wording made student release dependent on teacher
-preference (``if the teacher wants''). We therefore added an observable
-\texttt{teacher\_dependent} signal that routes such items to review. As shown
-in Figure~\ref{fig:teacherpilot}, this update improves recall for
-teacher-marked review-needed items while preserving recall for teacher-marked
-unsafe items.
+to the deploy-time router. The pilot identified three borderline
+auto-release patterns that are observable at deploy time: teacher-dependent
+wording (``if the teacher wants''), semantic drift in vocabulary edits
+(``remember'' to ``learned''), and wrong local grammar corrections after modal
+verbs (``can make'' to ``makes''). We added conservative graph signals for
+these cases without using teacher labels during routing. On the 30-item pilot,
+the final router sends 76.7\% of items to review, reaches 1.000 recall for
+teacher-marked review-needed items and teacher-marked unsafe items, and obtains
+0.857 auto-accept precision against teacher-safe items
+(Table~\ref{tab:teacherpilot}). The mean within-one-point agreement between
+the two teachers over six rating dimensions is 0.694.
 
-\begin{figure}[t]
+\begin{table}[t]
 \centering
-\includegraphics[width=\linewidth]{figures/teacher_pilot_before_after.pdf}
-\caption{Two-teacher offline diagnostic pilot on 12 AI feedback items. Teacher
-ratings are post-hoc diagnostics and are not used during routing.}
-\label{fig:teacherpilot}
-\end{figure}
+\small
+\begin{tabular}{lr}
+\toprule
+Teacher-aligned diagnostic & Value \\
+\midrule
+Feedback items & 30 \\
+Rating rows & 60 \\
+Auto share & 0.233 \\
+Review share & 0.767 \\
+Review-needed recall & 1.000 \\
+Unsafe reviewed recall & 1.000 \\
+Auto precision vs. teacher-safe & 0.857 \\
+Within-one-point teacher agreement & 0.694 \\
+\bottomrule
+\end{tabular}
+\caption{Two-teacher offline diagnostic pilot. Teacher ratings are post-hoc
+diagnostics and are not used during deploy-time routing.}
+\label{tab:teacherpilot}
+\end{table}
 
 \paragraph{Case analysis.}
 Table~\ref{tab:cases} illustrates how the same graph layer handles safe local
@@ -333,6 +351,8 @@ FB-002 & Local phrase improvement & local edit $\rightarrow$ auto-accept & Both 
 FB-003 & Reverses the student's thesis & meaning preservation $\rightarrow$ review & Blocks meaning change \\
 FB-008 & Adds unsupported exam-score claim & content grounding $\rightarrow$ review & Blocks unsupported evidence \\
 FB-009 & ``if the teacher wants'' punctuation advice & specificity $\rightarrow$ review & Reveals teacher-dependent wording \\
+FB-014 & ``remember'' changed to ``learned'' & meaning preservation $\rightarrow$ review & Reveals semantic drift in wording edits \\
+FB-005 & ``can make'' changed to ``makes'' & meaning preservation $\rightarrow$ review & Reveals wrong local grammar correction \\
 \bottomrule
 \end{tabular}
 \caption{Representative cases from the teacher diagnostic pilot. The graph
@@ -410,7 +430,7 @@ information should be removed before use. The current benchmark validates
 graph-backed review-routing behavior with public correction labels and
 constructed distractors. It does not measure student learning, teacher
 satisfaction, time-on-task, or real LLM feedback quality. The two-teacher
-pilot is preliminary and covers only 12 feedback items; it should be read as a
+pilot is preliminary and covers 30 feedback items; it should be read as a
 diagnostic check for routing behavior, not as a classroom user study. Future
 work should expand the teacher sample, add authentic anonymized classroom
 data, and keep deploy-time graph signals separate from offline diagnostic

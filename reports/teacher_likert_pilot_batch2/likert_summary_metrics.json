@@ -1,0 +1,68 @@
+{
+  "rated_items": 18,
+  "missing_routed_items": 0,
+  "teacher_count": 2,
+  "rating_rows": 36,
+  "auto_share": 0.2222,
+  "review_share": 0.7778,
+  "teacher_safe_items": 6,
+  "teacher_review_needed_items": 12,
+  "teacher_unsafe_items": 10,
+  "review_needed_recall": 1.0,
+  "unsafe_reviewed_recall": 1.0,
+  "auto_accept_precision_against_teacher_safe": 1.0,
+  "any_teacher_review_needed_items": 12,
+  "any_teacher_unsafe_items": 12,
+  "any_teacher_review_needed_recall": 1.0,
+  "any_teacher_unsafe_reviewed_recall": 1.0,
+  "agreement": {
+    "expert_count": 2,
+    "items_with_two_ratings": 18,
+    "fields": [
+      {
+        "field": "correctness_score",
+        "mean_absolute_difference": 0.7222,
+        "within_1_point_share": 0.7778,
+        "exact_agreement_share": 0.7222,
+        "spearman": 0.7429
+      },
+      {
+        "field": "meaning_preservation_score",
+        "mean_absolute_difference": 0.9444,
+        "within_1_point_share": 0.7222,
+        "exact_agreement_share": 0.6667,
+        "spearman": 0.5374
+      },
+      {
+        "field": "student_readiness_score",
+        "mean_absolute_difference": 0.8333,
+        "within_1_point_share": 0.7778,
+        "exact_agreement_share": 0.6667,
+        "spearman": 0.6696
+      },
+      {
+        "field": "usefulness_score",
+        "mean_absolute_difference": 1.1111,
+        "within_1_point_share": 0.7222,
+        "exact_agreement_share": 0.5,
+        "spearman": 0.4953
+      },
+      {
+        "field": "clarity_score",
+        "mean_absolute_difference": 1.5556,
+        "within_1_point_share": 0.6111,
+        "exact_agreement_share": 0.4444,
+        "spearman": 0.3036
+      },
+      {
+        "field": "direct_release_score",
+        "mean_absolute_difference": 0.7778,
+        "within_1_point_share": 0.7778,
+        "exact_agreement_share": 0.6111,
+        "spearman": 0.6917
+      }
+    ],
+    "mean_within_1_point_share": 0.7315
+  },
+  "note": "Likert ratings are offline teacher diagnostics. They are not used by the deploy-time router. Scores are averaged across at most two teachers."
+}

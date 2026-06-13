@@ -38,6 +38,12 @@ MEANING_CHANGE_HINTS = {
     "rewrite the thesis",
     "reverses",
 }
+SEMANTIC_DRIFT_PAIRS = [
+    ({"remember", "remembers", "remembered", "memory"}, {"learn", "learns", "learned", "learning"}),
+    ({"opinion", "opinions", "believe", "belief"}, {"fact", "facts", "prove", "proves"}),
+    ({"can", "may", "might"}, {"must", "always", "never"}),
+    ({"some", "many", "often"}, {"all", "always", "never"}),
+]
 UNSUPPORTED_HINTS = {"add a claim", "not present", "unsupported", "new argument", "factories should be closed"}
 VAGUE_HINTS = {"improve", "add evidence", "add a short explanation", "add a transition", "clearer", "more persuasive"}
 TEACHER_DEPENDENT_HINTS = {
@@ -87,7 +93,7 @@ SAFETY_GRAPH_DIMENSIONS = {
     },
     "meaning_preservation": {
         "label": "Meaning preservation",
-        "reasons": {"meaning_change", "overcorrection", "introduces_new_argument"},
+        "reasons": {"meaning_change", "overcorrection", "introduces_new_argument", "wrong_correction"},
         "severity": "high",
     },
     "content_grounding": {
@@ -126,6 +132,48 @@ def _contains_any(text: str, phrases: Iterable[str]) -> bool:
     for phrase in phrases:
         normalized_phrase = _norm(phrase)
         if normalized_phrase and re.search(rf"(?<![a-z0-9]){re.escape(normalized_phrase)}(?![a-z0-9])", lowered):
+            return True
+    return False
+
+
+def _has_semantic_drift_pair(target_span: str, ai_suggestion: str) -> bool:
+    target = _norm(target_span)
+    suggestion = _norm(ai_suggestion)
+    if not target or not suggestion:
+        return False
+    for source_terms, replacement_terms in SEMANTIC_DRIFT_PAIRS:
+        source_seen = any(re.search(rf"(?<![a-z0-9]){re.escape(term)}(?![a-z0-9])", target) for term in source_terms)
+        replacement_seen = any(
+            re.search(rf"(?<![a-z0-9]){re.escape(term)}(?![a-z0-9])", suggestion)
+            for term in replacement_terms
+        )
+        if source_seen and replacement_seen:
+            return True
+    return False
+
+
+def _third_person_form(verb: str) -> str:
+    if not verb:
+        return verb
+    if verb.endswith("y") and len(verb) > 1 and verb[-2] not in "aeiou":
+        return verb[:-1] + "ies"
+    if verb.endswith(("s", "x", "z", "ch", "sh", "o")):
+        return verb + "es"
+    return verb + "s"
+
+
+def _has_wrong_modal_correction(target_span: str, ai_suggestion: str) -> bool:
+    target = _norm(target_span)
+    suggestion = _norm(ai_suggestion)
+    if not target or not suggestion:
+        return False
+    optional_adverb = r"(?:(?:also|not|never|always|often|still|sometimes|usually)\s+|(?:[a-z]+ly)\s+)?"
+    modal_pattern = rf"\b(?:can|could|may|might|must|should|would|will)\s+{optional_adverb}([a-z]+)\b"
+    for verb in re.findall(modal_pattern, target):
+        if verb in {"be", "have", "do"}:
+            continue
+        inflected = _third_person_form(verb)
+        if inflected != verb and re.search(rf"(?<![a-z0-9]){re.escape(inflected)}(?![a-z0-9])", suggestion):
             return True
     return False
 
@@ -213,6 +261,8 @@ def extract_review_signals(
     missing_evidence = "missing" in statuses
     supported_evidence = "supported" in statuses
     meaning_hint = _contains_any(suggestion_blob, MEANING_CHANGE_HINTS)
+    semantic_drift = _has_semantic_drift_pair(target_span, ai_suggestion)
+    wrong_modal_correction = _has_wrong_modal_correction(target_span, ai_suggestion)
     unsupported_hint = _contains_any(suggestion_blob, UNSUPPORTED_HINTS) or _contains_any(
         suggestion_blob, EXTERNAL_CLAIM_HINTS
     )
@@ -252,6 +302,10 @@ def extract_review_signals(
         score += 0.24
     if meaning_hint:
         score += 0.26
+    if semantic_drift:
+        score += 0.28
+    if wrong_modal_correction:
+        score += 0.30
     if unsupported_hint:
         score += 0.25
     if whole_rewrite:
@@ -293,6 +347,8 @@ def extract_review_signals(
         "missing_evidence": missing_evidence,
         "supported_evidence": supported_evidence,
         "meaning_hint": meaning_hint,
+        "semantic_drift": semantic_drift,
+        "wrong_modal_correction": wrong_modal_correction,
         "unsupported_hint": unsupported_hint,
         "whole_rewrite": whole_rewrite,
         "harsh_feedback": harsh_feedback,
@@ -315,8 +371,15 @@ def _risk_reasons_from_signals(signals: Mapping[str, Any]) -> List[str]:
         reasons.append("low_model_agreement")
     if signals.get("low_issue"):
         reasons.append("local_language_edit")
-    if signals.get("meaning_hint") or signals.get("conflict_evidence") or issue in {"meaning_change", "wrong_correction"}:
+    if (
+        signals.get("meaning_hint")
+        or signals.get("semantic_drift")
+        or signals.get("conflict_evidence")
+        or issue in {"meaning_change", "wrong_correction"}
+    ):
         reasons.append("meaning_change")
+    if signals.get("wrong_modal_correction"):
+        reasons.append("wrong_correction")
     if signals.get("absolute_revision") or issue == "overcorrection":
         reasons.append("overcorrection")
     if signals.get("whole_rewrite"):

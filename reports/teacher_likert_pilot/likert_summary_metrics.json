@@ -1,0 +1,68 @@
+{
+  "rated_items": 30,
+  "missing_routed_items": 0,
+  "teacher_count": 2,
+  "rating_rows": 60,
+  "auto_share": 0.2333,
+  "review_share": 0.7667,
+  "teacher_safe_items": 10,
+  "teacher_review_needed_items": 19,
+  "teacher_unsafe_items": 15,
+  "review_needed_recall": 1.0,
+  "unsafe_reviewed_recall": 1.0,
+  "auto_accept_precision_against_teacher_safe": 0.8571,
+  "any_teacher_review_needed_items": 20,
+  "any_teacher_unsafe_items": 19,
+  "any_teacher_review_needed_recall": 0.95,
+  "any_teacher_unsafe_reviewed_recall": 1.0,
+  "agreement": {
+    "expert_count": 2,
+    "items_with_two_ratings": 30,
+    "fields": [
+      {
+        "field": "correctness_score",
+        "mean_absolute_difference": 0.8,
+        "within_1_point_share": 0.7667,
+        "exact_agreement_share": 0.6667,
+        "spearman": 0.6975
+      },
+      {
+        "field": "meaning_preservation_score",
+        "mean_absolute_difference": 1.0333,
+        "within_1_point_share": 0.7,
+        "exact_agreement_share": 0.6,
+        "spearman": 0.4874
+      },
+      {
+        "field": "student_readiness_score",
+        "mean_absolute_difference": 1.0333,
+        "within_1_point_share": 0.7333,
+        "exact_agreement_share": 0.6,
+        "spearman": 0.5551
+      },
+      {
+        "field": "usefulness_score",
+        "mean_absolute_difference": 1.1333,
+        "within_1_point_share": 0.7,
+        "exact_agreement_share": 0.4333,
+        "spearman": 0.4878
+      },
+      {
+        "field": "clarity_score",
+        "mean_absolute_difference": 1.6333,
+        "within_1_point_share": 0.5667,
+        "exact_agreement_share": 0.3667,
+        "spearman": 0.234
+      },
+      {
+        "field": "direct_release_score",
+        "mean_absolute_difference": 1.0,
+        "within_1_point_share": 0.7,
+        "exact_agreement_share": 0.4667,
+        "spearman": 0.6156
+      }
+    ],
+    "mean_within_1_point_share": 0.6944
+  },
+  "note": "Likert ratings are offline teacher diagnostics. They are not used by the deploy-time router. Scores are averaged across at most two teachers."
+}

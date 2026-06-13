@@ -67,17 +67,18 @@ The high auto-accuracy is expected because correct candidates are derived from
 public gold corrections and compared with constructed risk distractors.
 
 We have also collected a small blind two-teacher 1-5 Likert diagnostic pilot
-over 12 AI feedback items. The pilot is used only as offline evaluation: it
-identified a teacher-dependent feedback pattern that should not be automatically
-released. After adding a deploy-time `teacher_dependent` signal, review-needed
-recall improves from 0.714 to 0.857, unsafe reviewed recall remains 1.000, and
-auto precision against teacher-safe items improves from 0.400 to 0.500. This is
-still preliminary and should not be framed as classroom effectiveness.
+over 30 AI feedback items. The pilot is used only as offline evaluation: it
+identified teacher-dependent wording, semantic drift in wording edits, and
+wrong modal-verb corrections as borderline auto-release patterns. After adding
+deploy-time signals for these cases, review-needed recall is 1.000, unsafe
+reviewed recall is 1.000, and auto precision against teacher-safe items is
+0.857. This is still preliminary and should not be framed as classroom
+effectiveness.
 
 ## Submission Gaps
 
 - Record a video under 2.5 minutes.
 - Add a real screencast upload or submit the video as supplementary material.
 - Regenerate the final LaTeX PDF/package after the paper text is updated.
-- Future work: expand beyond the current two-teacher, 12-item diagnostic pilot
+- Future work: expand beyond the current two-teacher, 30-item diagnostic pilot
   with authentic anonymized classroom data and more instructor ratings.

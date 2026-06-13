@@ -122,6 +122,32 @@ def test_teacher_dependent_feedback_routes_to_review():
     assert "teacher_dependent" in route["risk_reasons"]
 
 
+def test_semantic_drift_in_local_wording_routes_to_review():
+    route = rule_based_route(
+        issue_type_predicted="vocabulary",
+        ai_suggestion="Change to 'what students have learned'.",
+        target_span="what students remember",
+        surrounding_context="Exams can show what students remember, but they cannot show every ability.",
+    )
+
+    assert route["risk_level"] == "medium"
+    assert route["recommended_action"] == "teacher_review"
+    assert "meaning_change" in route["risk_reasons"]
+
+
+def test_wrong_modal_correction_routes_to_review():
+    route = rule_based_route(
+        issue_type_predicted="grammar",
+        ai_suggestion="Change 'make' to 'makes'.",
+        target_span="It can also make students",
+        surrounding_context="It can also make students compare their lives with others.",
+    )
+
+    assert route["risk_level"] == "medium"
+    assert route["recommended_action"] == "teacher_review"
+    assert "wrong_correction" in route["risk_reasons"]
+
+
 def test_route_feedback_dataframe_matches_demo_ids():
     feedback = pd.read_csv("data/esl_writing_demo/feedback_items.csv")
     evidence = pd.read_csv("data/esl_writing_demo/review_evidence.csv")

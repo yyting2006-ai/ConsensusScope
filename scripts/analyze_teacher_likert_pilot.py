@@ -138,8 +138,13 @@ def analyze(ratings: pd.DataFrame, routing: pd.DataFrame) -> Dict[str, Any]:
     item_agg["teacher_review_needed"] = item_agg[core_mean_fields].le(3.0).any(axis=1)
     item_agg["teacher_marked_unsafe"] = item_agg[core_mean_fields].le(2.0).any(axis=1)
 
-    merged = routing.merge(item_agg, on="feedback_item_id", how="left")
-    missing = int(merged["expert_count"].isna().sum()) if "expert_count" in merged else len(merged)
+    rated_ids = set(ratings["feedback_item_id"].astype(str).unique().tolist())
+    routed_ids = set(routing["feedback_item_id"].astype(str).unique().tolist()) if "feedback_item_id" in routing else set()
+    missing_routing_for_rated_items = len(rated_ids.difference(routed_ids))
+    routing = routing[routing["feedback_item_id"].isin(rated_ids)].copy()
+
+    merged = routing.merge(item_agg, on="feedback_item_id", how="right")
+    missing = int(missing_routing_for_rated_items)
     merged["system_reviewed"] = merged["recommended_action"].isin(TEACHER_REVIEW_ACTIONS)
     merged["system_auto_accept"] = merged["recommended_action"].eq("auto_accept")
 

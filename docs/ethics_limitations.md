@@ -42,7 +42,7 @@ data is added later:
 
 - The current ESL writing data is synthetic and demonstration-oriented.
 - The deterministic routing function is transparent but simple; it should be
-  validated beyond the current two-teacher, 12-item 1-5 Likert diagnostic pilot
+  validated beyond the current two-teacher, 30-item 1-5 Likert diagnostic pilot
   before being presented as a measured classroom tool.
 - Saved live validation records, if used, show API connectivity and schema
   compliance, not a classroom user study.

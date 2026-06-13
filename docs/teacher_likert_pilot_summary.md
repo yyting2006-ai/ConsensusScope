@@ -10,7 +10,7 @@ for student learning outcomes.
 ## Setup
 
 - Annotators: two English teachers, anonymized as Teacher 1 and Teacher 2.
-- Items: 12 synthetic/anonymized AI feedback items from the expert annotation
+- Items: 30 synthetic/anonymized AI feedback items from the expert annotation
   app.
 - Mode: Blind Annotation Mode.
 - Scale: 1-5 Likert ratings for correctness, meaning preservation, student
@@ -18,20 +18,14 @@ for student learning outcomes.
 - Use of labels: offline diagnostics only; ratings are not visible to the
   deploy-time router.
 
-## Expansion Status
-
-The annotation website now contains an additional Batch 2 with 18 new feedback
-items, bringing the available teacher-annotation pool to 30 items. The results
-below are still the completed 12-item Batch 1 pilot only. Do not report Batch 2
-metrics until both teachers have completed the new ratings.
-
 ## Main Finding
 
-The pilot identified a borderline auto-release pattern: feedback phrased as
-teacher-dependent advice, such as "if the teacher wants", should remain
-reviewable even when it appears to be a local grammar or punctuation edit.
-ConsensusScope therefore adds a deploy-time `teacher_dependent` signal and
-routes such feedback to teacher review.
+The pilot identified three borderline auto-release patterns that should remain
+reviewable even when they look like local language edits: teacher-dependent
+advice such as "if the teacher wants", semantic drift such as "remember" to
+"learned", and wrong modal-verb correction such as "can make" to "makes".
+ConsensusScope therefore adds deploy-time `teacher_dependent`, semantic-drift,
+and wrong-correction signals and routes such feedback to teacher review.
 
 ## Representative Cases
 
@@ -43,22 +37,28 @@ routes such feedback to teacher review.
   grounding risk and routes it to teacher review.
 - `FB-009`: teacher-dependent punctuation advice; the pilot exposed it as a
   borderline auto-release case, so the optimized router sends it to review.
+- `FB-014`: vocabulary edit changes "remember" to "learned"; the graph now
+  activates meaning-preservation risk.
+- `FB-005`: grammar edit changes "can make" to "makes"; the graph now marks it
+  as a wrong local correction.
 
 ## Teacher-Aligned Routing Results
 
-| Metric | Before | After |
-|---|---:|---:|
-| Auto share | 0.417 | 0.333 |
-| Review share | 0.583 | 0.667 |
-| Review-needed recall | 0.714 | 0.857 |
-| Unsafe reviewed recall | 1.000 | 1.000 |
-| Auto precision vs. teacher-safe items | 0.400 | 0.500 |
-| Any-teacher unsafe reviewed recall | 0.714 | 0.857 |
+| Metric | Value |
+|---|---:|
+| Feedback items | 30 |
+| Rating rows | 60 |
+| Auto share | 0.233 |
+| Review share | 0.767 |
+| Review-needed recall | 1.000 |
+| Unsafe reviewed recall | 1.000 |
+| Auto precision vs. teacher-safe items | 0.857 |
+| Any-teacher unsafe reviewed recall | 1.000 |
 
 ## Inter-Teacher Agreement
 
-Across the 12 items, the mean within-one-point agreement over the six rating
-dimensions is 0.639. Agreement is strongest for correctness and weaker for
+Across the 30 items, the mean within-one-point agreement over the six rating
+dimensions is 0.694. Agreement is strongest for correctness and weaker for
 direct-release suitability and clarity, suggesting that release decisions are
 more subjective than correctness judgments.
 

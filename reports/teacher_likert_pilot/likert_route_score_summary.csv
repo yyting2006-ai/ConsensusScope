@@ -1,0 +1,3 @@
+recommended_action,items,avg_correctness_score,avg_meaning_preservation_score,avg_student_readiness_score,avg_usefulness_score,avg_clarity_score,avg_direct_release_score
+auto_accept,7,4.7857,4.7857,4.9286,4.2857,4.8571,4.5714
+teacher_review,23,2.2826,2.3913,2.3913,2.2609,3.587,2.2174

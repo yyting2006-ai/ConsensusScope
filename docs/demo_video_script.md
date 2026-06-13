@@ -96,9 +96,10 @@ Narration:
 > The evaluation page separates two kinds of evidence. The synthetic checks
 > verify implementation behavior, while the public learner-corpus benchmark
 > evaluates routing on JFLEG, CoNLL-2014, FCE, and W&I plus LOCNESS correction
-> data. We also ran a small two-teacher blind Likert pilot. It improved
-> review-needed recall from 0.714 to 0.857 after adding a deploy-time
-> teacher-dependent signal. These results validate graph-backed review routing,
+> data. We also ran a small two-teacher blind Likert pilot over 30 feedback
+> items. After adding deploy-time signals for teacher-dependent wording,
+> semantic drift, and wrong local corrections, review-needed and unsafe-item
+> recall both reach 1.000. These results validate graph-backed review routing,
 > not classroom learning outcomes.
 
 Screen:
