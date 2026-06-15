@@ -5,11 +5,13 @@ system URL.
 
 ## Public URL
 
-- Main demo URL: https://consensusscope-fzebywc3is3tducktjuvup.streamlit.app/
-- Expert annotation URL: https://consensusscope-uvsncgyjiswi6f2qpjzvq3.streamlit.app/
-- Confirm both apps load in a logged-in browser session.
-- If Streamlit shows "Your app is in the oven" for more than 10 minutes, open
-  Manage app, inspect logs, and reboot the app.
+- Main demo URL: https://demo.consensusscope.cn/
+- The main demo is self-hosted behind a Cloudflare named tunnel, not Streamlit
+  Community Cloud.
+- Confirm the public URL returns HTTP 200 and the Streamlit interface loads in
+  a normal browser session.
+- Server-side health checks should monitor both `http://127.0.0.1:7863/` and
+  `https://demo.consensusscope.cn/`.
 
 ## Local Fallback
 

@@ -12,6 +12,19 @@ edited, or rejected before release.
 It is not an automatic essay scorer, not a teacher replacement, and not a truth
 oracle.
 
+## Public Demo
+
+The reviewer-facing demo is available at:
+
+```text
+https://demo.consensusscope.cn/
+```
+
+The hosted demo is a self-hosted Streamlit instance exposed through a
+Cloudflare named tunnel. This replaces the earlier Streamlit Community Cloud
+link to avoid cold-start and "in the oven" availability failures during
+recording or review.
+
 ## Main Direction
 
 AI writing feedback can be fluent but unsafe. A feedback model may fix a local

@@ -1,6 +1,17 @@
 # ConsensusScope Deployment Guide
 
-This guide prepares ConsensusScope for a public Streamlit Community Cloud demo.
+This guide prepares ConsensusScope for a public reviewer-facing demo. The
+current hosted demo is:
+
+```text
+https://demo.consensusscope.cn/
+```
+
+The public demo is served by a self-hosted Streamlit process behind a
+Cloudflare named tunnel. This is the preferred deployment path for review and
+recording because it avoids Streamlit Community Cloud cold starts and "in the
+oven" availability failures.
+
 The app entry point is:
 
 ```text
@@ -25,7 +36,33 @@ For a password-protected live demo, set `CONSENSUS_SCOPE_DEMO_PASSWORD` in
 Streamlit Secrets together with the Mode A API keys. The password gate is only a
 usage guard; it is not a substitute for keeping API keys out of the repository.
 
-## Streamlit Community Cloud
+## Preferred Hosted Deployment
+
+The production-like demo uses:
+
+```text
+demo.consensusscope.cn
+  -> Cloudflare DNS
+  -> Cloudflare named tunnel
+  -> http://127.0.0.1:7863 on the Tencent Cloud server
+  -> app/streamlit_app.py
+```
+
+Recommended server-side services:
+
+```text
+consensusscope-demo.service
+consensusscope-named-tunnel.service
+consensusscope-healthcheck.timer
+consensusscope-daily-restart.timer
+```
+
+The health check should verify both `http://127.0.0.1:7863/` and
+`https://demo.consensusscope.cn/`, restarting only the ConsensusScope services
+when checks fail. Do not store Cloudflare tunnel credentials, API keys, or
+server secrets in the repository.
+
+## Streamlit Community Cloud Fallback
 
 1. Push this clean project to a GitHub repository.
 2. Create a new Streamlit app from that repository.
@@ -39,6 +76,9 @@ usage guard; it is not a substitute for keeping API keys out of the repository.
 6. For a private live demo, also set `CONSENSUS_SCOPE_DEMO_PASSWORD` in
    Streamlit Secrets. Leave it blank for an open no-API reviewer demo.
 7. Deploy and test the pages listed below.
+
+Streamlit Community Cloud is no longer the preferred public demo host for this
+submission because cold starts can make the app unavailable during review.
 
 ## Storage Boundary
 
@@ -63,7 +103,7 @@ pytest -q
 streamlit run app/streamlit_app.py --server.port 8502
 ```
 
-## If Streamlit Cloud Stays "In The Oven"
+## If The Streamlit Cloud Fallback Stays "In The Oven"
 
 1. Open the app in Streamlit Community Cloud and click **Manage app**.
 2. Confirm the branch is `main` and the main file path is `app/streamlit_app.py`

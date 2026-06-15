@@ -3,6 +3,15 @@
 This package contains a no-API local demo of ConsensusScope for ESL writing
 feedback review routing.
 
+Public hosted demo:
+
+```text
+https://demo.consensusscope.cn/
+```
+
+The hosted demo runs on a self-hosted Streamlit service behind a Cloudflare
+named tunnel. Local installation remains the reproducible fallback.
+
 ## 1. Requirements
 
 - macOS, Linux, or Windows
