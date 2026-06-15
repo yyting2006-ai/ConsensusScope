@@ -7,6 +7,13 @@ current hosted demo is:
 https://demo.consensusscope.cn/
 ```
 
+The current hosted backend API is:
+
+```text
+https://api.consensusscope.cn/
+https://api.consensusscope.cn/docs
+```
+
 The public demo is served by a self-hosted Streamlit process behind a
 Cloudflare named tunnel. This is the preferred deployment path for review and
 recording because it avoids Streamlit Community Cloud cold starts and "in the
@@ -46,21 +53,30 @@ demo.consensusscope.cn
   -> Cloudflare named tunnel
   -> http://127.0.0.1:7863 on the Tencent Cloud server
   -> app/streamlit_app.py
+
+api.consensusscope.cn
+  -> Cloudflare DNS
+  -> Cloudflare named tunnel
+  -> http://127.0.0.1:7864 on the Tencent Cloud server
+  -> backend/app.py
 ```
 
 Recommended server-side services:
 
 ```text
 consensusscope-demo.service
+consensusscope-backend.service
 consensusscope-named-tunnel.service
 consensusscope-healthcheck.timer
 consensusscope-daily-restart.timer
 ```
 
 The health check should verify both `http://127.0.0.1:7863/` and
-`https://demo.consensusscope.cn/`, restarting only the ConsensusScope services
-when checks fail. Do not store Cloudflare tunnel credentials, API keys, or
-server secrets in the repository.
+`https://demo.consensusscope.cn/` for the frontend, and
+`http://127.0.0.1:7864/health` plus `https://api.consensusscope.cn/health` for
+the backend, restarting only the ConsensusScope services when checks fail. Do
+not store Cloudflare tunnel credentials, API keys, or server secrets in the
+repository.
 
 ## Streamlit Community Cloud Fallback
 
@@ -80,12 +96,35 @@ server secrets in the repository.
 Streamlit Community Cloud is no longer the preferred public demo host for this
 submission because cold starts can make the app unavailable during review.
 
+## Backend API Service
+
+ConsensusScope includes a FastAPI backend for production-style deployments:
+
+```bash
+uvicorn backend.app:app --host 127.0.0.1 --port 7864
+```
+
+The backend provides SQLite persistence for review sessions, feedback items,
+teacher decisions, audit logs, and report export. Configure the database and
+public API URL with:
+
+```bash
+export CONSENSUS_SCOPE_BACKEND_DB=/opt/consensusscope-demo/data/consensusscope_backend.sqlite3
+export CONSENSUS_SCOPE_BACKEND_URL=https://api.consensusscope.cn
+```
+
+If exposed publicly, place the API behind HTTPS and avoid storing API keys in
+source code. Provider keys should be configured only through deployment secrets
+or environment variables.
+
 ## Storage Boundary
 
-This public demo package does not use an external database. The main demo keeps
-teacher-queue decisions in the current browser session. The expert annotation
-app writes annotations to a local SQLite file inside the Streamlit app container
-and provides CSV/JSON export buttons.
+The hosted public demo uses the FastAPI backend and SQLite for review-session
+records, teacher decisions, audit logs, and report export. Local fallback runs
+can still operate without the backend, in which case teacher-queue decisions are
+kept in the current browser session. The expert annotation app writes
+annotations to a local SQLite file inside the Streamlit app container and
+provides CSV/JSON export buttons.
 
 For formal data collection on Streamlit Community Cloud, export the annotation
 files after each teacher session and back them up outside Streamlit Cloud. Local

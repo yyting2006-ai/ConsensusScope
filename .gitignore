@@ -1,4 +1,7 @@
 .env
+*.pem
+*.key
+.streamlit/secrets.toml
 .venv/
 __pycache__/
 *.py[cod]
@@ -11,6 +14,8 @@ dist/
 *.zip
 *.log
 *.pid
+*.sqlite3
+*.sqlite3-*
 
 # Raw benchmark downloads are not needed for the public demo package.
 data/raw/

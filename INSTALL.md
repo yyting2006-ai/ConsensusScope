@@ -9,6 +9,12 @@ Public hosted demo:
 https://demo.consensusscope.cn/
 ```
 
+Hosted backend API:
+
+```text
+https://api.consensusscope.cn/docs
+```
+
 The hosted demo runs on a self-hosted Streamlit service behind a Cloudflare
 named tunnel. Local installation remains the reproducible fallback.
 
@@ -49,7 +55,25 @@ http://localhost:8502
 The app includes single-essay review, batch review, AI feedback comparison,
 teacher queue, effectiveness evaluation, reports, settings, and diagnostics.
 
-## 4. Open The Product UI Prototype
+## 4. Start The Backend API
+
+In a second terminal, run:
+
+```bash
+uvicorn backend.app:app --host 127.0.0.1 --port 7864
+```
+
+Then open:
+
+```text
+http://127.0.0.1:7864/docs
+```
+
+The backend stores review sessions, feedback items, teacher decisions, audit
+logs, and exported reports in SQLite. Set `CONSENSUS_SCOPE_BACKEND_DB` to use a
+custom database path.
+
+## 5. Open The Product UI Prototype
 
 Open this file directly in a browser:
 

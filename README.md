@@ -20,6 +20,13 @@ The reviewer-facing demo is available at:
 https://demo.consensusscope.cn/
 ```
 
+The hosted backend API is available at:
+
+```text
+https://api.consensusscope.cn/health
+https://api.consensusscope.cn/docs
+```
+
 The hosted demo is a self-hosted Streamlit instance exposed through a
 Cloudflare named tunnel. This replaces the earlier Streamlit Community Cloud
 link to avoid cold-start and "in the oven" availability failures during
@@ -132,6 +139,31 @@ new item. The exported route contains:
 - `safety_graph_summary`: one-sentence explanation for the route.
 - `safety_graph_nodes` and `safety_graph_edges`: JSON audit records for
   reproducibility and debugging.
+
+## Backend API
+
+ConsensusScope also includes an independent FastAPI backend for production-like
+review sessions, teacher decisions, SQLite persistence, audit logs, and report
+export. The Streamlit app remains the reviewer-facing interface; the backend is
+the API layer for integration and persistent teacher-review records.
+
+Run locally:
+
+```bash
+uvicorn backend.app:app --host 127.0.0.1 --port 7864
+```
+
+Then open:
+
+```text
+http://127.0.0.1:7864/docs
+```
+
+The hosted API documentation is available at:
+
+```text
+https://api.consensusscope.cn/docs
+```
 
 This graph layer is the main innovation claim: ConsensusScope does not merely
 show a dashboard; it turns AI writing feedback into auditable safety objects

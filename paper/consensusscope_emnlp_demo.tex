@@ -172,6 +172,14 @@ the primary demo path. Settings/Diagnostics retains optional API configuration
 and legacy auxiliary modules, but those modules are not part of the main demo
 claim.
 
+\paragraph{Backend API.}
+The implementation uses a two-layer deployment. Streamlit provides the
+interactive reviewer-facing interface, while a FastAPI backend handles
+review-session creation, SQLite persistence, teacher decisions, audit logs, and
+report export. This separation lets the demo run as a self-contained interface
+for reviewers, while also exposing a conventional API for integration with
+teacher-review workflows.
+
 \begin{figure*}[t]
 \centering
 \includegraphics[width=0.48\linewidth]{figures/review_workspace.png}
@@ -405,15 +413,22 @@ table.
 ConsensusScope is released under the MIT License. The public repository and
 live demo are available at:
 \url{https://github.com/yyting2006-ai/ConsensusScope} and
-\url{https://demo.consensusscope.cn/}. The hosted demo is served through a
-Cloudflare named tunnel to a self-hosted Streamlit instance rather than
-Streamlit Community Cloud, which avoids cold-start failures during review. The
-demo can be installed and run with:
+\url{https://demo.consensusscope.cn/}. The backend API documentation is
+available at \url{https://api.consensusscope.cn/docs}. The hosted demo is
+served through a Cloudflare named tunnel to a self-hosted Streamlit and FastAPI
+deployment rather than Streamlit Community Cloud, which avoids cold-start
+failures during review. The demo can be installed and run with:
 
 \begin{verbatim}
 pip install -r requirements.txt
 streamlit run app/streamlit_app.py \
   --server.port 8502
+\end{verbatim}
+
+The backend API can be started separately with:
+\begin{verbatim}
+uvicorn backend.app:app --host 127.0.0.1 \
+  --port 7864
 \end{verbatim}
 
 The public benchmark can be reproduced with

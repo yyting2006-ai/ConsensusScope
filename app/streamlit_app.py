@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 import pandas as pd
+import requests
 import streamlit as st
 import streamlit.components.v1 as components
 from dotenv import load_dotenv
@@ -232,6 +233,13 @@ MAIN_TRANSLATIONS = {
         "download_report_md": "Download report.md",
         "settings_title": "Page 8 · Settings / Diagnostics",
         "settings_info": "Operational teacher workflow pages are now Pages 2-7. This page keeps API settings and legacy diagnostics secondary.",
+        "backend_api": "Backend API",
+        "backend_description": "FastAPI service for review-session persistence, teacher decisions, audit logs, and report export.",
+        "backend_url": "Backend URL",
+        "backend_status": "Backend status",
+        "backend_available": "available",
+        "backend_unavailable": "unavailable",
+        "backend_not_configured": "not configured",
         "api_diagnostics": "API diagnostics",
         "legacy_feedback": "Legacy feedback technical demo",
         "aux_qa_comparison": "Auxiliary QA comparison",
@@ -477,6 +485,13 @@ MAIN_TRANSLATIONS = {
         "download_report_md": "下载报告.md",
         "settings_title": "第 8 页 · 设置 / 诊断",
         "settings_info": "当前主线教师工作流位于第 2-7 页。本页只保留 API 设置和旧辅助诊断。",
+        "backend_api": "后端 API",
+        "backend_description": "FastAPI 服务用于保存评审会话、教师决策、审计日志和导出报告。",
+        "backend_url": "后端地址",
+        "backend_status": "后端状态",
+        "backend_available": "可用",
+        "backend_unavailable": "不可用",
+        "backend_not_configured": "未配置",
         "api_diagnostics": "API 诊断",
         "legacy_feedback": "旧反馈技术演示",
         "aux_qa_comparison": "辅助 QA 对比",
@@ -866,6 +881,20 @@ def configured_value(key: str) -> str:
 
 def storage_backend_name() -> str:
     return mt("session_only")
+
+
+def backend_api_url() -> str:
+    return configured_value("CONSENSUS_SCOPE_BACKEND_URL") or "http://127.0.0.1:7864"
+
+
+@st.cache_data(ttl=15, show_spinner=False)
+def backend_healthcheck(url: str) -> Dict[str, Any]:
+    try:
+        response = requests.get(f"{url.rstrip('/')}/health", timeout=2)
+        response.raise_for_status()
+        return {"ok": True, "payload": response.json(), "error": ""}
+    except Exception as exc:
+        return {"ok": False, "payload": {}, "error": str(exc)}
 
 
 def truthy(value: str) -> bool:
@@ -1616,6 +1645,17 @@ def page_settings_diagnostics(
 ) -> None:
     st.markdown(f'<div class="section-title">{mt("settings_title")}</div>', unsafe_allow_html=True)
     st.info(mt("settings_info"))
+    with st.expander(mt("backend_api"), expanded=True):
+        url = backend_api_url()
+        health = backend_healthcheck(url)
+        st.caption(mt("backend_description"))
+        st.write(f"{mt('backend_url')}: {url}")
+        status = mt("backend_available") if health["ok"] else mt("backend_unavailable")
+        st.write(f"{mt('backend_status')}: {status}")
+        if health["ok"]:
+            st.json(health["payload"])
+        else:
+            st.code(health["error"] or mt("backend_not_configured"), language="text")
     with st.expander(mt("api_diagnostics"), expanded=False):
         st.write(f"{mt('api_mode')}: {api_mode}")
         st.write(f"{mt('answer_models')}: {', '.join(selected) if selected else mt('none')}")
