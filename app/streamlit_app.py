@@ -967,33 +967,315 @@ def inject_styles() -> None:
     st.markdown(
         """
         <style>
-        .stApp { background: #f6f7fb; }
-        .block-container { max-width: 1520px; padding-top: 1.15rem; padding-bottom: 2rem; }
-        section[data-testid="stSidebar"] { background: #101827; }
-        section[data-testid="stSidebar"] * { color: #f8fafc; }
+        :root {
+            --cs-bg: #eaf6ff;
+            --cs-bg-deep: #60b8ff;
+            --cs-surface: rgba(255, 255, 255, 0.84);
+            --cs-surface-strong: #ffffff;
+            --cs-surface-soft: rgba(236, 248, 255, 0.88);
+            --cs-text: #12304f;
+            --cs-muted: #5a7897;
+            --cs-border: rgba(71, 155, 224, 0.24);
+            --cs-blue: #1987f3;
+            --cs-blue-dark: #075bb8;
+            --cs-blue-soft: #e5f4ff;
+            --cs-cyan: #30c5e8;
+            --cs-orange: #ff9f1a;
+            --cs-green: #17a673;
+            --cs-red: #d9485f;
+            --cs-shadow: 0 18px 42px rgba(29, 111, 190, 0.18);
+        }
+
+        .stApp {
+            background:
+                radial-gradient(circle at 92% 5%, rgba(255,255,255,0.72) 0 0.4rem, transparent 0.45rem),
+                radial-gradient(circle at 88% 9%, rgba(255,255,255,0.48) 0 0.34rem, transparent 0.39rem),
+                linear-gradient(135deg, #d8f0ff 0%, #79c8ff 42%, #e9f7ff 100%);
+            color: var(--cs-text);
+        }
+
+        .block-container {
+            max-width: 1480px;
+            padding-top: 1rem;
+            padding-bottom: 2.25rem;
+        }
+
+        section[data-testid="stSidebar"] {
+            background: linear-gradient(180deg, rgba(13, 119, 219, 0.96), rgba(43, 160, 242, 0.94));
+            border-right: 1px solid rgba(255, 255, 255, 0.42);
+            box-shadow: 14px 0 34px rgba(21, 93, 170, 0.18);
+        }
+
+        section[data-testid="stSidebar"] > div {
+            padding-top: 1rem;
+        }
+
+        section[data-testid="stSidebar"] * {
+            color: #ffffff;
+        }
+
+        section[data-testid="stSidebar"] h3,
+        section[data-testid="stSidebar"] h4 {
+            letter-spacing: 0;
+            font-weight: 820;
+        }
+
+        section[data-testid="stSidebar"] [data-testid="stRadio"] label,
+        section[data-testid="stSidebar"] [data-testid="stSelectbox"] label,
+        section[data-testid="stSidebar"] [data-testid="stMultiSelect"] label,
+        section[data-testid="stSidebar"] [data-testid="stTextInput"] label {
+            color: rgba(255, 255, 255, 0.94) !important;
+            font-weight: 730;
+        }
+
+        section[data-testid="stSidebar"] [role="radiogroup"] label {
+            min-height: 38px;
+            padding: 7px 9px;
+            border-radius: 12px;
+            background: rgba(7, 74, 148, 0.30);
+            border: 1px solid rgba(255, 255, 255, 0.26);
+            margin-bottom: 7px;
+        }
+
+        section[data-testid="stSidebar"] [role="radiogroup"] label:hover {
+            background: rgba(7, 74, 148, 0.42);
+        }
+
+        section[data-testid="stSidebar"] [role="radiogroup"] label *,
+        section[data-testid="stSidebar"] [data-testid="stRadio"] p,
+        section[data-testid="stSidebar"] [data-testid="stRadio"] span {
+            color: #ffffff !important;
+            -webkit-text-fill-color: #ffffff !important;
+        }
+
+        section[data-testid="stSidebar"] div[data-baseweb="select"] > div,
+        section[data-testid="stSidebar"] input {
+            background: rgba(7, 74, 148, 0.34) !important;
+            border-color: rgba(255, 255, 255, 0.52) !important;
+            color: #ffffff !important;
+            border-radius: 12px !important;
+        }
+
+        section[data-testid="stSidebar"] div[data-baseweb="select"] *,
+        section[data-testid="stSidebar"] div[data-baseweb="input"] *,
+        section[data-testid="stSidebar"] div[data-baseweb="textarea"] *,
+        section[data-testid="stSidebar"] div[data-baseweb="select"] div,
+        section[data-testid="stSidebar"] div[data-baseweb="select"] span,
+        section[data-testid="stSidebar"] div[data-baseweb="select"] input,
+        section[data-testid="stSidebar"] input,
+        section[data-testid="stSidebar"] textarea {
+            color: #ffffff !important;
+            -webkit-text-fill-color: #ffffff !important;
+        }
+
+        section[data-testid="stSidebar"] .stButton > button {
+            background: rgba(255, 255, 255, 0.92) !important;
+            border: 1px solid rgba(255, 255, 255, 0.55) !important;
+            color: var(--cs-blue-dark) !important;
+            box-shadow: 0 10px 24px rgba(5, 80, 160, 0.14);
+        }
+
+        div[data-testid="stVerticalBlockBorderWrapper"],
+        div[data-testid="stExpander"],
+        div[data-testid="stForm"] {
+            border-radius: 18px !important;
+            border-color: var(--cs-border) !important;
+            background: rgba(255, 255, 255, 0.76) !important;
+            box-shadow: 0 12px 30px rgba(29, 111, 190, 0.10);
+        }
+
+        div[data-testid="stMetric"] {
+            background: linear-gradient(180deg, rgba(255,255,255,0.94), rgba(241,249,255,0.86));
+            border: 1px solid var(--cs-border);
+            border-radius: 18px;
+            padding: 14px 15px;
+            box-shadow: 0 12px 28px rgba(29, 111, 190, 0.12);
+        }
+
+        div[data-testid="stMetric"] label {
+            color: var(--cs-muted) !important;
+            font-weight: 720;
+        }
+
+        div[data-testid="stMetricValue"] {
+            color: var(--cs-blue-dark);
+            font-weight: 840;
+        }
+
+        .main .block-container h1,
+        .main .block-container h2,
+        .main .block-container h3 {
+            color: var(--cs-text);
+            letter-spacing: 0;
+        }
+
+        .stDataFrame,
+        div[data-testid="stDataFrame"] {
+            border-radius: 18px !important;
+            overflow: hidden;
+            box-shadow: 0 12px 30px rgba(29, 111, 190, 0.12);
+        }
+
         .topbar {
-            background: #ffffff; border: 1px solid #e5e7eb; border-radius: 8px;
-            padding: 18px 22px; margin-bottom: 16px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(180deg, rgba(255,255,255,0.88), rgba(237,249,255,0.78));
+            border: 1px solid rgba(255, 255, 255, 0.74);
+            border-radius: 22px;
+            padding: 18px 22px;
+            margin-bottom: 16px;
+            box-shadow: var(--cs-shadow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
         }
-        .title { font-size: 1.65rem; font-weight: 760; color: #111827; margin-bottom: 2px; }
-        .subtitle { color: #64748b; font-size: 0.95rem; }
-        .section-title { font-size: 1.08rem; font-weight: 720; color: #111827; margin: 8px 0 8px; }
-        .hint { color: #667085; font-size: 0.88rem; }
+
+        .topbar::after {
+            content: "";
+            position: absolute;
+            right: -58px;
+            top: -72px;
+            width: 190px;
+            height: 190px;
+            border-radius: 999px;
+            background: radial-gradient(circle, rgba(24, 135, 243, 0.24), rgba(255,255,255,0));
+            pointer-events: none;
+        }
+
+        .title {
+            font-size: 1.78rem;
+            font-weight: 860;
+            color: var(--cs-text);
+            margin-bottom: 4px;
+            letter-spacing: 0;
+        }
+
+        .subtitle {
+            color: var(--cs-muted);
+            font-size: 0.95rem;
+            line-height: 1.35;
+        }
+
+        .topbar-status {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .ui-pill {
+            min-height: 28px;
+            display: inline-flex;
+            align-items: center;
+            border-radius: 999px;
+            padding: 0 11px;
+            background: rgba(255,255,255,0.76);
+            border: 1px solid rgba(25, 135, 243, 0.18);
+            color: var(--cs-blue-dark);
+            font-size: 0.76rem;
+            font-weight: 760;
+            white-space: nowrap;
+        }
+
+        .section-title {
+            background: linear-gradient(90deg, rgba(255,255,255,0.92), rgba(236,248,255,0.76));
+            border: 1px solid var(--cs-border);
+            border-radius: 18px;
+            box-shadow: 0 10px 24px rgba(29, 111, 190, 0.10);
+            color: var(--cs-text);
+            font-size: 1.13rem;
+            font-weight: 820;
+            margin: 8px 0 10px;
+            padding: 12px 15px;
+        }
+
+        .hint {
+            color: var(--cs-muted);
+            font-size: 0.88rem;
+        }
+
         .metric-panel {
-            background: #ffffff; border: 1px solid #e5e7eb; border-radius: 8px;
-            padding: 16px; min-height: 108px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.94), rgba(239,249,255,0.84));
+            border: 1px solid var(--cs-border);
+            border-radius: 18px;
+            padding: 16px;
+            min-height: 108px;
+            box-shadow: 0 12px 28px rgba(29, 111, 190, 0.12);
         }
-        .metric-label { color: #667085; font-size: 0.82rem; font-weight: 650; }
-        .metric-value { color: #111827; font-size: 1.75rem; font-weight: 780; margin-top: 6px; }
+
+        .metric-label {
+            color: var(--cs-muted);
+            font-size: 0.82rem;
+            font-weight: 720;
+        }
+
+        .metric-value {
+            color: var(--cs-blue-dark);
+            font-size: 1.86rem;
+            font-weight: 860;
+            margin-top: 6px;
+        }
+
         .winner-box {
-            border-left: 4px solid #16a34a; background: #f0fdf4; color: #14532d;
-            padding: 12px 14px; border-radius: 8px; margin: 8px 0 12px;
+            border-left: 4px solid var(--cs-green);
+            background: rgba(236, 253, 245, 0.9);
+            color: #14532d;
+            padding: 12px 14px;
+            border-radius: 14px;
+            margin: 8px 0 12px;
         }
-        .risk-low { color: #166534; font-weight: 760; }
-        .risk-medium { color: #b45309; font-weight: 760; }
-        .risk-high { color: #b91c1c; font-weight: 760; }
-        textarea, input { border-radius: 8px !important; }
-        .stButton > button, .stDownloadButton > button { border-radius: 8px !important; font-weight: 700 !important; }
+
+        .risk-low { color: var(--cs-green); font-weight: 800; }
+        .risk-medium { color: #b86b00; font-weight: 800; }
+        .risk-high { color: var(--cs-red); font-weight: 800; }
+
+        textarea, input {
+            border-radius: 14px !important;
+        }
+
+        textarea,
+        input,
+        div[data-baseweb="select"] > div,
+        div[data-baseweb="textarea"] textarea {
+            border-color: var(--cs-border) !important;
+            background: rgba(255, 255, 255, 0.92) !important;
+        }
+
+        .stButton > button,
+        .stDownloadButton > button {
+            border-radius: 999px !important;
+            font-weight: 780 !important;
+            border: 1px solid rgba(25, 135, 243, 0.28) !important;
+            box-shadow: 0 10px 22px rgba(29, 111, 190, 0.13);
+        }
+
+        .stButton > button[kind="primary"],
+        .stDownloadButton > button[kind="primary"] {
+            background: linear-gradient(135deg, var(--cs-blue), #43b9ff) !important;
+            color: white !important;
+        }
+
+        div[data-testid="stAlert"] {
+            border-radius: 16px;
+            border-color: var(--cs-border);
+        }
+
+        hr {
+            border-color: rgba(255, 255, 255, 0.38);
+        }
+
+        @media (max-width: 900px) {
+            .topbar {
+                display: block;
+            }
+            .topbar-status {
+                justify-content: flex-start;
+                margin-top: 12px;
+            }
+        }
         </style>
         """,
         unsafe_allow_html=True,
@@ -1034,8 +1316,15 @@ def topbar() -> None:
     st.markdown(
         f"""
         <div class="topbar">
-          <div class="title">ConsensusScope</div>
-          <div class="subtitle">{mt("topbar_subtitle")}</div>
+          <div>
+            <div class="title">ConsensusScope</div>
+            <div class="subtitle">{mt("topbar_subtitle")}</div>
+          </div>
+          <div class="topbar-status">
+            <span class="ui-pill">Feedback Safety Graph</span>
+            <span class="ui-pill">Teacher-in-the-loop</span>
+            <span class="ui-pill">ESL Writing Review</span>
+          </div>
         </div>
         """,
         unsafe_allow_html=True,
