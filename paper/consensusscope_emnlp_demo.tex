@@ -5,11 +5,12 @@
 \usepackage{latexsym}
 \usepackage{booktabs}
 \usepackage{graphicx}
+\usepackage{amsmath}
 \usepackage{microtype}
 \usepackage{inconsolata}
 \usepackage{url}
 
-\title{ConsensusScope: Feedback Safety Graphs for Teacher-in-the-Loop Review Routing of AI Feedback on ESL Writing}
+\title{ConsensusScope: Feedback Safety Graph Routing for Teacher-in-the-Loop Review of AI Feedback on ESL Writing}
 
 \author{You Tingrui and Li Jimei and Zhang Na and Xiong Ling \\
   School of Information Science, Beijing Language and Culture University \\
@@ -20,31 +21,33 @@
 \maketitle
 
 \begin{abstract}
-AI writing-feedback systems can produce fluent comments, but teachers still
-need to decide which suggestions are safe to show to students. A local grammar
-edit may be acceptable, while an equally fluent suggestion may change the
-student's intended meaning, add unsupported content, overcorrect a draft, or
-use inappropriate student-facing language. We present ConsensusScope, an
-interactive system demo for teacher-in-the-loop review routing of AI-generated
-English-as-a-second-language (ESL) writing feedback. The core mechanism is a
-\emph{Feedback Safety Graph}: for each feedback item, the system links the
-student target span, surrounding context, AI suggestion, evidence status,
-active safety dimensions, and routing decision into an auditable deploy-time
-graph. ConsensusScope normalizes feedback candidates into a shared schema,
-constructs these graphs without using gold labels or teacher ratings,
-routes low-risk local edits separately from items that require teacher review,
-and exports graph-backed reports. The demo runs without external API calls for
-reproducible demonstrations, while optional live providers can write into the
-same schema. We evaluate the routing layer with a packaged synthetic
-stress-test suite and an offline benchmark derived from public
-learner-correction corpora, including JFLEG, CoNLL-2014 annotated test data,
-FCE, and W\&I+LOCNESS. Across 349,782 generated feedback candidates from public
-correction data, the default policy auto-routes 32.9\% of candidates while
-sending all constructed incorrect or unsafe candidates to review. A small
-30-item two-teacher diagnostic pilot further shows how teacher ratings can
-reveal borderline auto-release cases and guide conservative routing updates.
-These results validate the graph-backed review-routing mechanism, not
-classroom learning outcomes or real LLM feedback quality.
+AI writing-feedback systems can generate fluent revision advice, but fluency is
+not the same as pedagogical safety: a suggestion may preserve meaning, change a
+student's intended claim, introduce unsupported evidence, or overcorrect a
+draft. We formulate \emph{feedback-level safety routing} for ESL writing
+feedback: given an AI feedback item and its local context, decide whether the
+item can be released to students or must be reviewed by a teacher. We present
+ConsensusScope, an interactive demo built around a Feedback Safety Graph
+Routing algorithm. The algorithm first extracts deploy-time signals from the
+target span, surrounding context, AI suggestion, predicted issue type, evidence
+status, and optional model agreement; then maps these signals to safety
+dimensions such as local edit, meaning preservation, content grounding,
+pedagogical tone, specificity, and model agreement; finally, it computes a
+conservative risk route and materializes the decision as an auditable graph.
+This design makes the algorithmic object of the demo a feedback item, not an
+essay score or a final rewrite. The system normalizes feedback candidates into a
+shared schema, constructs graphs without using gold labels or teacher ratings,
+routes low-risk local edits separately from teacher-review items, and exports
+graph-backed reports through a Streamlit/FastAPI implementation. We evaluate
+the routing algorithm with a synthetic stress suite, a public learner-corpus
+benchmark derived from JFLEG, CoNLL-2014, FCE, and W\&I+LOCNESS, and a
+30-item two-teacher diagnostic pilot. Across 349,782 generated feedback
+candidates, the default policy auto-routes 32.9\% of candidates while sending
+all constructed incorrect or unsafe candidates to review; the teacher pilot
+shows 0.857 auto-accept precision against teacher-safe items and 0.694
+within-one-point teacher agreement. These results support the graph-backed
+safety-routing claim, not classroom learning outcomes or real LLM feedback
+quality.
 \end{abstract}
 
 \section{Introduction}
@@ -59,29 +62,36 @@ easier, but they also increase the need for review: a fluent comment may be
 locally grammatical while being pedagogically unsafe, unsupported, or too
 interventionist.
 
-ConsensusScope addresses this problem as a review-routing system rather than an
-automatic essay scorer. Given an ESL draft and a set of AI-style feedback
-candidates, the system asks a narrower deploy-time question: should this
-specific feedback item be released directly, or should a teacher inspect it
-first? We operationalize this question through a Feedback Safety Graph. Instead
-of reducing feedback to one confidence score, the graph records how the target
-span, AI suggestion, issue type, evidence status, and safety dimensions jointly
-support an \texttt{auto\_accept}, \texttt{teacher\_review}, or
-\texttt{needs\_more\_evidence} route.
+ConsensusScope addresses this gap as an algorithmic routing problem rather than
+an automatic essay-scoring problem. Given an ESL draft and a set of AI-style
+feedback candidates, the target output is an item-level route:
+\texttt{auto\_accept}, \texttt{teacher\_review}, or
+\texttt{needs\_more\_evidence}. The technical challenge is that a feedback item
+cannot be judged from its issue label alone. A grammar suggestion may be safe in
+one context but wrong after a modal verb; a vocabulary edit may be fluent but
+shift meaning; and a persuasive content suggestion may introduce evidence that
+the student never provided.
+
+The core idea is to convert each feedback item into a Feedback Safety Graph
+before making it student-facing. Instead of reducing feedback to one confidence
+score, the graph records how the target span, AI suggestion, predicted issue
+type, evidence status, extracted safety signals, and final route support one
+another. This graph representation lets the system expose the reason for a
+route, not merely the route itself.
 
 This framing is intentionally practical. It supports teachers who need to
 triage AI feedback before student release, educational NLP developers who need
 observable failure modes, and researchers studying reliability in
 human-in-the-loop feedback pipelines.
 
-The demo contributes: (1) a Feedback Safety Graph representation for
-student-facing AI writing feedback, covering local edits, meaning preservation,
-content grounding, pedagogical tone, feedback specificity, and model agreement;
-(2) a usable Streamlit workflow for single-essay review, batch review, feedback
-comparison, teacher queueing, evaluation, and graph-backed report export; and
-(3) a reproducible public learner-corpus benchmark that converts correction
-gold labels into feedback-level routing diagnostics while keeping deploy-time
-signals separate from offline labels.
+The demo contributes: (1) a feedback-level safety-routing formulation for
+AI-generated ESL writing feedback; (2) a Feedback Safety Graph Routing algorithm
+that extracts deploy-time safety signals, maps them to explicit graph
+dimensions, and applies conservative route thresholds without using teacher
+labels at inference time; (3) a usable Streamlit/FastAPI system for single-essay
+review, batch review, teacher queueing, evaluation, and graph-backed report
+export; and (4) a reproducible evaluation package that combines public
+learner-corpus routing diagnostics with a two-teacher offline pilot.
 
 \section{Related Work}
 
@@ -138,14 +148,14 @@ automatic correction, essay scoring, or generic model judging.}
 \label{tab:comparison}
 \end{table*}
 
-\section{System Overview}
+\section{Feedback Safety Graph Routing}
 
-ConsensusScope is organized around a teacher-facing feedback-review workflow
-(Figure~\ref{fig:workflow}). A teacher can paste a single anonymized ESL draft
-or upload a batch CSV. The system generates no-API AI-style feedback candidates
-or accepts live provider outputs in the same schema. Each feedback item is then
-screened by the routing layer and displayed as either a low-risk local edit or
-a teacher-review item.
+ConsensusScope is organized around an item-level routing algorithm embedded in
+a teacher-facing review system (Figure~\ref{fig:workflow}). A teacher can paste
+a single anonymized ESL draft or upload a batch CSV. The system generates
+no-API AI-style feedback candidates or accepts live provider outputs in the same
+schema. Each feedback item is then screened by the Feedback Safety Graph Router
+and displayed as either a low-risk local edit or a teacher-review item.
 
 \begin{figure}[t]
 \centering
@@ -164,33 +174,6 @@ auditable teacher-review routes rather than final automatic rewrites.}
 \label{fig:workflow}
 \end{figure}
 
-\paragraph{Interface.}
-The Streamlit demo has nine pages: Review Workspace, Single Essay Review, Batch
-Review, AI Feedback Comparison, Teacher Queue, Effectiveness Evaluation,
-Reports, Settings/Diagnostics, and Design Reference. The first seven pages form
-the primary demo path. Settings/Diagnostics retains optional API configuration
-and legacy auxiliary modules, but those modules are not part of the main demo
-claim.
-
-\paragraph{Backend API.}
-The implementation uses a two-layer deployment. Streamlit provides the
-interactive reviewer-facing interface, while a FastAPI backend handles
-review-session creation, SQLite persistence, teacher decisions, audit logs, and
-report export. This separation lets the demo run as a self-contained interface
-for reviewers, while also exposing a conventional API for integration with
-teacher-review workflows.
-
-\begin{figure*}[t]
-\centering
-\includegraphics[width=0.48\linewidth]{figures/review_workspace.png}
-\hfill
-\includegraphics[width=0.48\linewidth]{figures/teacher_queue.png}
-\caption{Teacher-facing demo screens. Left: the review workspace summarizes
-the safety-routing workflow. Right: the teacher queue prioritizes feedback
-items that need review before student release.}
-\label{fig:screenshots}
-\end{figure*}
-
 \paragraph{Unified feedback schema.}
 Every feedback candidate is represented with a stable item-level schema:
 \texttt{feedback\_item\_id}, \texttt{essay\_id}, \texttt{target\_span},
@@ -200,33 +183,61 @@ Every feedback candidate is represented with a stable item-level schema:
 schema lets deterministic demo reviewers and live OpenAI-compatible providers
 feed the same routing and reporting components.
 
-\paragraph{Feedback Safety Graph.}
-For each feedback item, ConsensusScope constructs a compact directed graph. The
-core path is:
-\begin{quote}
-\small
-\texttt{target span -> AI suggestion -> active safety dimension -> routing decision}.
-\end{quote}
-Graph nodes represent the student target span, surrounding context, AI
-suggestion, optional AI rationale, predicted issue type, evidence signal,
-activated safety dimensions, and route. Edges capture relations such as
-\texttt{contains}, \texttt{is\_revised\_by}, \texttt{activates}, and
-\texttt{justifies\_route}. The graph dimensions are local edit, meaning
-preservation, content grounding, pedagogical tone, feedback specificity, and
-model agreement. The exported route includes
-\texttt{safety\_graph\_active\_dimensions},
-\texttt{safety\_graph\_active\_signals}, \texttt{safety\_graph\_path},
-\texttt{safety\_graph\_summary}, and JSON node/edge records. The graph is built
-only from deploy-time observable fields; it does not use public-corpus gold
-corrections, teacher ratings, or post-hoc classroom outcomes.
+\paragraph{Problem definition.}
+Let $f=(x,c,u,t,e,a)$ denote a feedback item with target span $x$, local
+context $c$, AI suggestion $u$, predicted issue type $t$, evidence status $e$,
+and optional agreement signal $a$. The router estimates
+$R(f)=(r,s,G)$, where $r$ is a release route, $s \in [0,1]$ is a bounded risk
+score, and $G$ is an auditable graph connecting the observable signals to the
+route. The deploy-time objective is conservative: release only items whose
+observable signals indicate low-risk local feedback, while sending ambiguous,
+unsupported, meaning-changing, or unsafe items to teacher review.
 
-\paragraph{Deploy-time risk signals.}
-The router uses signals observable at review time: predicted issue type,
-suggestion text, target span, local context, model agreement, evidence status,
-parse errors, and textual cues for meaning change, unsupported claims,
-overcorrection, harsh tone, or whole-draft rewriting. It explicitly does not
-use teacher ratings, public corpus gold corrections, or post-hoc labels when
-making deploy-time routes.
+\paragraph{Algorithm.}
+The procedure in Figure~\ref{fig:routing-procedure} summarizes the Feedback
+Safety Graph Router. The algorithm first extracts deploy-time signals from the
+feedback item. These
+signals include issue-type risk, parse failure, evidence support or conflict,
+model agreement, meaning-change cues, semantic drift pairs such as
+\textit{remember} $\rightarrow$ \textit{learned}, wrong modal-verb corrections
+such as \textit{can make} $\rightarrow$ \textit{makes}, unsupported external
+claims, whole-draft rewriting, harsh tone, teacher-dependent wording, and broad
+target spans. Each signal contributes to a bounded risk score
+$s \in [0,1]$ and to a set of human-readable risk reasons. The reasons are then
+projected into six graph dimensions: local edit, meaning preservation, content
+grounding, pedagogical tone, feedback specificity, and model agreement.
+
+\begin{figure}[t]
+\centering
+\fbox{
+\begin{minipage}{0.92\linewidth}
+\small
+\textbf{Feedback Safety Graph Routing Procedure}\\
+\textbf{Input:} feedback item $f$, local context $c$, evidence status $e$, optional model agreement $a$\\
+\textbf{Output:} route $r$, risk level $\ell$, risk score $s$, graph $G$\\
+1. Extract deploy-time signals from $(f,c,e,a)$\\
+2. Map signals to risk reasons and safety dimensions\\
+3. Compute bounded risk score $s$ from additive safety evidence\\
+4. If parsing fails, set $r=\texttt{needs\_more\_evidence}$\\
+5. Else if $s \geq 0.72$, set $\ell=\texttt{high}$ and $r=\texttt{teacher\_review}$\\
+6. Else if $s \geq 0.32$, set $\ell=\texttt{medium}$ and $r=\texttt{teacher\_review}$\\
+7. Else set $\ell=\texttt{low}$ and $r=\texttt{auto\_accept}$\\
+8. Build graph $G$ with target span, suggestion, evidence, active dimensions, and route
+\end{minipage}}
+\caption{The routing algorithm uses deploy-time signals only. Teacher ratings
+and public-corpus gold corrections are reserved for offline evaluation.}
+\label{fig:routing-procedure}
+\end{figure}
+
+\paragraph{Graph construction.}
+For each feedback item, ConsensusScope constructs a compact directed graph with
+the core path \texttt{target span -> AI suggestion -> active safety dimension ->
+routing decision}. Graph nodes represent the student target span, surrounding
+context, AI suggestion, optional rationale, predicted issue type, evidence
+signal, activated safety dimensions, and route. Edges capture relations such as
+\texttt{contains}, \texttt{is\_revised\_by}, \texttt{activates}, and
+\texttt{justifies\_route}. The exported route includes graph dimensions, active
+signals, a path summary, and JSON node/edge records.
 
 \paragraph{Routing outputs.}
 For each feedback item, the system outputs \texttt{risk\_level},
@@ -239,6 +250,26 @@ explanation. Low-risk grammar,
 spelling, punctuation, and vocabulary edits can be routed to
 \texttt{auto\_accept}; medium- and high-risk items are routed to teacher
 review, more-evidence, or reject states.
+
+\section{System Implementation}
+
+The teacher-facing implementation exposes the routing algorithm as a working
+demo rather than a table-only analysis. The Streamlit interface has pages for
+Review Workspace, Single Essay Review, Batch Review, AI Feedback Comparison,
+Teacher Queue, Effectiveness Evaluation, Reports, Settings/Diagnostics, and
+Design Reference. A FastAPI backend handles review-session creation, SQLite
+persistence, teacher decisions, audit logs, and report export.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.48\linewidth]{figures/review_workspace.png}
+\hfill
+\includegraphics[width=0.48\linewidth]{figures/teacher_queue.png}
+\caption{Teacher-facing demo screens. Left: the review workspace summarizes
+the safety-routing workflow. Right: the teacher queue prioritizes feedback
+items that need review before student release.}
+\label{fig:screenshots}
+\end{figure*}
 
 \section{Target Users and Use Cases}
 
@@ -253,17 +284,18 @@ writing evaluation.
 
 \section{Evaluation}
 
-We evaluate the implemented routing layer, not a full writing-feedback
-generation model. The evaluation asks whether the system separates safe local
-edits from feedback that is incorrect, meaning-changing, unsupported, or
-unsafe. We use three types of evidence.
+We evaluate the implemented routing algorithm, not a full writing-feedback
+generation model. The evaluation asks whether Feedback Safety Graph Routing
+separates safe local edits from feedback that is incorrect, meaning-changing,
+unsupported, or unsafe, and whether the graph signals exposed by the algorithm
+match teacher-facing diagnostic patterns. We use three types of evidence.
 
-\paragraph{Synthetic implementation checks.}
+\paragraph{Algorithmic stress checks.}
 The packaged demo contains 15 feedback items with expected routes and 16
 stress-test cases for dangerous suggestions such as thesis reversal,
 whole-essay rewriting, unsupported factual claims, harsh tone, low agreement,
 and parse failures. The current router matches the expected action and risk
-labels on all 31 items. This is an implementation sanity check rather than a
+labels on all 31 items. This is an algorithm sanity check rather than a
 classroom outcome study.
 
 \paragraph{Public learner-corpus benchmark.}
@@ -341,7 +373,7 @@ diagnostics and are not used during deploy-time routing.}
 \end{table}
 
 \paragraph{Case analysis.}
-Table~\ref{tab:cases} illustrates how the same graph layer handles safe local
+Table~\ref{tab:cases} illustrates how the same routing algorithm handles safe local
 edits, meaning-changing suggestions, unsupported claims, and borderline
 teacher-dependent advice. The pilot did not make the router use teacher
 ratings at deploy time; it exposed which observable signal should be added to
@@ -455,11 +487,11 @@ ratings.
 
 \section{Conclusion}
 
-ConsensusScope demonstrates a practical Feedback Safety Graph layer for
-AI-generated ESL writing feedback. By normalizing feedback candidates,
-constructing item-level safety graphs, and routing uncertain or unsafe
-suggestions into a teacher queue, the system turns AI feedback from a final
-rewrite into an auditable educational workflow.
+ConsensusScope demonstrates Feedback Safety Graph Routing for AI-generated ESL
+writing feedback. By defining feedback-level safety routing, extracting
+deploy-time risk signals, constructing item-level safety graphs, and routing
+uncertain or unsafe suggestions into a teacher queue, the system turns AI
+feedback from a final rewrite into an auditable teacher-in-the-loop decision.
 
 \bibliography{references}
 

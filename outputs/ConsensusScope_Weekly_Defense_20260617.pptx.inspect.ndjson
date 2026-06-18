@@ -1,0 +1,350 @@
+{"kind":"deck","id":"pr/paucvk","name":"Deck"}
+{"kind":"layout","layoutId":"01909db5-8ffc-4f1d-80ad-e93f0a3abd75","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"005e0907-ca5a-41a1-ac90-f39c7de95aaf","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/apbnix","slide":1,"title":"ConsensusScope","textShapes":16}
+{"kind":"shape","id":"sh/e1w7mp0b","slide":1,"bbox":[0,0,520,900]}
+{"kind":"textbox","id":"sh/psfil0rq","slide":1,"text":"ConsensusScope","textPreview":"ConsensusScope","textChars":14,"textLines":1,"bbox":[84,110,420,58]}
+{"kind":"textbox","id":"sh/w7mp0bi9","slide":1,"text":"本周成果答辩","textPreview":"本周成果答辩","textChars":6,"textLines":1,"bbox":[84,184,420,54]}
+{"kind":"textbox","id":"sh/7adsji5s","slide":1,"text":"从多模型裁决原型，升级为面向英语二语写作反馈的教师在环审核系统","textPreview":"从多模型裁决原型，升级为面向英语二语写作反馈的教师在环审核系统","textChars":31,"textLines":1,"bbox":[84,270,360,140]}
+{"kind":"textbox","id":"sh/epkzupwb","slide":1,"text":"Teacher-in-loop","textPreview":"Teacher-in-loop","textChars":15,"textLines":1,"bbox":[84,470,176,42]}
+{"kind":"textbox","id":"sh/pg3ex0nu","slide":1,"text":"Feedback Safety","textPreview":"Feedback Safety","textChars":15,"textLines":1,"bbox":[84,526,176,42]}
+{"kind":"textbox","id":"sh/wval87ed","slide":1,"text":"Backend API","textPreview":"Backend API","textChars":11,"textLines":1,"bbox":[84,582,176,42]}
+{"kind":"textbox","id":"sh/36hcrmhk","slide":1,"text":"本周新增：后端与稳定部署、教师 Likert 标注、实证诊断、论文同步、Figma 设计方向稿","textPreview":"本周新增：后端与稳定部署、教师 Likert 标注、实证诊断、论文同步、Figma 设计方向稿","textChars":47,"textLines":1,"bbox":[590,112,840,94]}
+{"kind":"shape","id":"sh/eloj2t83","slide":1,"bbox":[594,250,780,145]}
+{"kind":"shape","id":"sh/wra5gbq1","slide":1,"bbox":[594,250,8,145]}
+{"kind":"textbox","id":"sh/lc7u54zi","slide":1,"text":"汇报主线","textPreview":"汇报主线","textChars":4,"textLines":1,"bbox":[618,274,732,34]}
+{"kind":"textbox","id":"sh/eloj2t83","slide":1,"text":"老师指出 NLP demo 要体现真实应用价值。本周将项目包装为“AI 写作反馈进入学生前的安全审核与教师复核工具”。","textPreview":"老师指出 NLP demo 要体现真实应用价值。本周将项目包装为“AI 写作反馈进入学生前的安全审核与教师复核工具”。","textChars":59,"textLines":1,"bbox":[618,318,732,61]}
+{"kind":"shape","id":"sh/36hcrmhk","slide":1,"bbox":[594,425,360,160]}
+{"kind":"shape","id":"sh/wfyxobm5","slide":1,"bbox":[594,425,8,160]}
+{"kind":"textbox","id":"sh/l0rqd4vm","slide":1,"text":"线上系统","textPreview":"线上系统","textChars":4,"textLines":1,"bbox":[618,449,312,34]}
+{"kind":"textbox","id":"sh/ed8bat47","slide":1,"text":"前端：demo.consensusscope.cn\nAPI：api.consensusscope.cn","textPreview":"前端：demo.consensusscope.cn | API：api.consensusscope.cn","textChars":51,"textLines":2,"bbox":[618,493,312,76]}
+{"kind":"shape","id":"sh/7u54zido","slide":1,"bbox":[1014,425,360,160]}
+{"kind":"shape","id":"sh/w7mp0bi9","slide":1,"bbox":[1014,425,8,160]}
+{"kind":"textbox","id":"sh/psfil0rq","slide":1,"text":"当前证据","textPreview":"当前证据","textChars":4,"textLines":1,"bbox":[1038,449,312,34]}
+{"kind":"textbox","id":"sh/9w3m94fu","slide":1,"text":"2 位教师\n30 条有效反馈项\n60 行 Likert 评分","textPreview":"2 位教师 | 30 条有效反馈项 | 60 行 Likert 评分","textChars":30,"textLines":3,"bbox":[1038,493,312,76]}
+{"kind":"shape","id":"sh/kb6xkf6d","slide":1,"bbox":[594,626,780,116]}
+{"kind":"shape","id":"sh/rqd4vmtw","slide":1,"bbox":[594,626,8,116]}
+{"kind":"textbox","id":"sh/25kb6xkf","slide":1,"text":"组会定位","textPreview":"组会定位","textChars":4,"textLines":1,"bbox":[618,650,732,34]}
+{"kind":"textbox","id":"sh/9knih4by","slide":1,"text":"不是宣称模型已经完全成熟，而是展示：应用场景更清晰、系统闭环更完整、后续实验路径更可执行。","textPreview":"不是宣称模型已经完全成熟，而是展示：应用场景更清晰、系统闭环更完整、后续实验路径更可执行。","textChars":45,"textLines":1,"bbox":[618,694,732,32]}
+{"kind":"textbox","id":"sh/kzupwb2h","slide":1,"text":"You Tingrui｜Beijing Language and Culture University","textPreview":"You Tingrui｜Beijing Language and Culture University","textChars":51,"textLines":1,"bbox":[594,800,640,24]}
+{"kind":"notes","id":"nt/apbnix","slide":1,"text":""}
+{"kind":"slide","id":"sl/l8q2xr","slide":2,"title":"01 研究定位","textShapes":11}
+{"kind":"textbox","id":"sh/xobm58z2","slide":2,"text":"01 研究定位","textPreview":"01 研究定位","textChars":7,"textLines":1,"bbox":[84,58,420,32]}
+{"kind":"textbox","id":"sh/qxs72x4n","slide":2,"text":"方向调整：从“多模型裁决”走向“教师可用的反馈审核”","textPreview":"方向调整：从“多模型裁决”走向“教师可用的反馈审核”","textChars":26,"textLines":1,"bbox":[84,88,980,72]}
+{"kind":"textbox","id":"sh/fil0rqd4","slide":2,"text":"本周最大的变化不是换界面，而是重写系统叙事和真实任务入口。","textPreview":"本周最大的变化不是换界面，而是重写系统叙事和真实任务入口。","textChars":29,"textLines":1,"bbox":[86,158,1120,46]}
+{"kind":"shape","id":"sh/4fu18jqh","slide":2,"bbox":[92,236,694,410]}
+{"kind":"shape","id":"sh/x0nuxc3y","slide":2,"bbox":[814,236,694,410]}
+{"kind":"textbox","id":"sh/m94fu18j","slide":2,"text":"上一版问题","textPreview":"上一版问题","textChars":5,"textLines":1,"bbox":[120,260,638,36]}
+{"kind":"textbox","id":"sh/fu18jqh0","slide":2,"text":"• 多模型一致性/裁决本身较抽象\n• 容易被问：真实用户是谁？\n• Streamlit Cloud 不稳定，像纯演示\n• 缺少人工标注闭环与后端存储","textPreview":"• 多模型一致性/裁决本身较抽象 | • 容易被问：真实用户是谁？ | • Streamlit Cloud 不稳定，像纯演示 | • 缺少人工标注闭环与后端存储","textChars":74,"textLines":4,"bbox":[126,312,626,314]}
+{"kind":"textbox","id":"sh/4r65wjud","slide":2,"text":"本周新版定位","textPreview":"本周新版定位","textChars":6,"textLines":1,"bbox":[842,260,638,36]}
+{"kind":"textbox","id":"sh/xc3ylc7u","slide":2,"text":"• 英语二语写作反馈进入学生前的安全审核\n• 用户明确：教师、教育 NLP 开发者、AI 写作平台\n• 保留多模型与风险路由，但服务于教师复核\n• 形成前端、后端、标注、论文四条线闭环","textPreview":"• 英语二语写作反馈进入学生前的安全审核 | • 用户明确：教师、教育 NLP 开发者、AI 写作平台 | • 保留多模型与风险路由，但服务于教师复核 | • 形成前端、后端、标注、论文四条线闭环","textChars":92,"textLines":4,"bbox":[848,312,626,314]}
+{"kind":"textbox","id":"sh/9cvixcze","slide":2,"text":"新的核心问题","textPreview":"新的核心问题","textChars":6,"textLines":1,"bbox":[114,706,260,34]}
+{"kind":"textbox","id":"sh/gr2p8nqx","slide":2,"text":"这条 AI 反馈能否直接给学生，还是必须先由教师复核？","textPreview":"这条 AI 反馈能否直接给学生，还是必须先由教师复核？","textChars":27,"textLines":1,"bbox":[356,700,900,46]}
+{"kind":"textbox","id":"sh/r65wjudg","slide":2,"text":"ConsensusScope｜本周成果汇报｜2026-06-17","textPreview":"ConsensusScope｜本周成果汇报｜2026-06-17","textChars":32,"textLines":1,"bbox":[84,850,720,24]}
+{"kind":"textbox","id":"sh/ylc7u54z","slide":2,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[1460,844,56,30]}
+{"kind":"notes","id":"nt/l8q2xr","slide":2,"text":""}
+{"kind":"slide","id":"sl/3tss9s","slide":3,"title":"02 Work Done","textShapes":24}
+{"kind":"textbox","id":"sh/h0fepkzu","slide":3,"text":"02 Work Done","textPreview":"02 Work Done","textChars":12,"textLines":1,"bbox":[84,58,420,32]}
+{"kind":"textbox","id":"sh/a9w3m94f","slide":3,"text":"本周完成概览","textPreview":"本周完成概览","textChars":6,"textLines":1,"bbox":[84,88,980,72]}
+{"kind":"textbox","id":"sh/zupwb2hw","slide":3,"text":"把“可以讲清楚”推进到“可以打开、可以标注、可以复核、可以写进论文”。","textPreview":"把“可以讲清楚”推进到“可以打开、可以标注、可以复核、可以写进论文”。","textChars":35,"textLines":1,"bbox":[86,158,1120,46]}
+{"kind":"shape","id":"sh/orytsvu9","slide":3,"bbox":[94,240,315,176]}
+{"kind":"textbox","id":"sh/hcrmhk3q","slide":3,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[120,260,263,58]}
+{"kind":"textbox","id":"sh/al87ed8b","slide":3,"text":"稳定部署","textPreview":"稳定部署","textChars":4,"textLines":1,"bbox":[122,320,259,30]}
+{"kind":"textbox","id":"sh/z61032ls","slide":3,"text":"腾讯云 + Cloudflare 域名，前后端分离运行。","textPreview":"腾讯云 + Cloudflare 域名，前后端分离运行。","textChars":28,"textLines":1,"bbox":[122,356,259,50]}
+{"kind":"shape","id":"sh/oza1gvy9","slide":3,"bbox":[443,240,315,176]}
+{"kind":"textbox","id":"sh/hk3q5o7q","slide":3,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[469,260,263,58]}
+{"kind":"textbox","id":"sh/hgn29gr2","slide":3,"text":"FastAPI 后端","textPreview":"FastAPI 后端","textChars":10,"textLines":1,"bbox":[471,320,259,30]}
+{"kind":"textbox","id":"sh/svu9knih","slide":3,"text":"会话、教师决策、审计日志、报告导出接口。","textPreview":"会话、教师决策、审计日志、报告导出接口。","textChars":20,"textLines":1,"bbox":[471,356,259,50]}
+{"kind":"shape","id":"sh/za1gvy90","slide":3,"bbox":[792,240,315,176]}
+{"kind":"textbox","id":"sh/ap4r65wj","slide":3,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[818,260,263,58]}
+{"kind":"textbox","id":"sh/hoza1gvy","slide":3,"text":"教师试标","textPreview":"教师试标","textChars":4,"textLines":1,"bbox":[820,320,259,30]}
+{"kind":"textbox","id":"sh/s36hcrmh","slide":3,"text":"两位教师完成 1–5 分 Likert 诊断数据。","textPreview":"两位教师完成 1–5 分 Likert 诊断数据。","textChars":25,"textLines":1,"bbox":[820,356,259,50]}
+{"kind":"shape","id":"sh/zidonyd0","slide":3,"bbox":[1141,240,315,176]}
+{"kind":"textbox","id":"sh/a1gvy90j","slide":3,"text":"30","textPreview":"30","textChars":2,"textLines":1,"bbox":[1167,260,263,58]}
+{"kind":"textbox","id":"sh/lszqtcj6","slide":3,"text":"有效反馈项","textPreview":"有效反馈项","textChars":5,"textLines":1,"bbox":[1169,320,259,30]}
+{"kind":"textbox","id":"sh/s72x4nap","slide":3,"text":"两批教师试标合并：12 + 18。","textPreview":"两批教师试标合并：12 + 18。","textChars":17,"textLines":1,"bbox":[1169,356,259,50]}
+{"kind":"shape","id":"sh/8z25kb6x","slide":3,"bbox":[94,480,430,185]}
+{"kind":"shape","id":"sh/1gvy90je","slide":3,"bbox":[94,480,8,185]}
+{"kind":"textbox","id":"sh/qtcj6tov","slide":3,"text":"AI 评审闭环","textPreview":"AI 评审闭环","textChars":7,"textLines":1,"bbox":[118,504,382,34]}
+{"kind":"textbox","id":"sh/je9cvixc","slide":3,"text":"作文输入 → AI 反馈项 → 风险信号 → auto-accept / teacher-review → 教师决策 → 报告导出。","textPreview":"作文输入 → AI 反馈项 → 风险信号 → auto-accept / teacher-review → 教师决策 → 报告导出。","textChars":66,"textLines":1,"bbox":[118,548,382,101]}
+{"kind":"shape","id":"sh/87ed8bat","slide":3,"bbox":[584,480,430,185]}
+{"kind":"shape","id":"sh/xs72x4na","slide":3,"bbox":[584,480,8,185]}
+{"kind":"textbox","id":"sh/q1orytsv","slide":3,"text":"论文同步","textPreview":"论文同步","textChars":4,"textLines":1,"bbox":[608,504,382,34]}
+{"kind":"textbox","id":"sh/fmlkjm1c","slide":3,"text":"论文主张改为 Feedback Safety Graph + teacher-in-the-loop routing，弱化不可验证的模型性能话术。","textPreview":"论文主张改为 Feedback Safety Graph + teacher-in-the-loop routing，弱化不可验证的模型性能话术。","textChars":73,"textLines":1,"bbox":[608,548,382,101]}
+{"kind":"shape","id":"sh/8jqh0fep","slide":3,"bbox":[1074,480,430,185]}
+{"kind":"shape","id":"sh/x4nap4r6","slide":3,"bbox":[1074,480,8,185]}
+{"kind":"textbox","id":"sh/n29gr2p8","slide":3,"text":"UI 设计方向","textPreview":"UI 设计方向","textChars":7,"textLines":1,"bbox":[1098,504,382,34]}
+{"kind":"textbox","id":"sh/yhgn29gr","slide":3,"text":"Figma 半成品已验证可作为设计师参考；下一步拆成组件和高保真页面。","textPreview":"Figma 半成品已验证可作为设计师参考；下一步拆成组件和高保真页面。","textChars":35,"textLines":1,"bbox":[1098,548,382,101]}
+{"kind":"textbox","id":"sh/58z25kb6","slide":3,"text":"本周成果可以支撑组会结论：项目已从“demo 原型”进入“应用系统 + 诊断实验 + 投稿材料”阶段。","textPreview":"本周成果可以支撑组会结论：项目已从“demo 原型”进入“应用系统 + 诊断实验 + 投稿材料”阶段。","textChars":51,"textLines":1,"bbox":[132,722,1230,42]}
+{"kind":"textbox","id":"sh/gn29gr2p","slide":3,"text":"ConsensusScope｜本周成果汇报｜2026-06-17","textPreview":"ConsensusScope｜本周成果汇报｜2026-06-17","textChars":32,"textLines":1,"bbox":[84,850,720,24]}
+{"kind":"textbox","id":"sh/nuxc3ylc","slide":3,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[1460,844,56,30]}
+{"kind":"notes","id":"nt/3tss9s","slide":3,"text":""}
+{"kind":"slide","id":"sl/6f6ip7","slide":4,"title":"03 Architecture","textShapes":24}
+{"kind":"textbox","id":"sh/m58z25kb","slide":4,"text":"03 Architecture","textPreview":"03 Architecture","textChars":15,"textLines":1,"bbox":[84,58,420,32]}
+{"kind":"textbox","id":"sh/twra5gbq","slide":4,"text":"系统架构：前端展示不再等于全部系统","textPreview":"系统架构：前端展示不再等于全部系统","textChars":17,"textLines":1,"bbox":[84,88,980,72]}
+{"kind":"textbox","id":"sh/4byhgn29","slide":4,"text":"新增后端后，demo 可以保存会话、记录教师决策、导出报告，并留下审计路径。","textPreview":"新增后端后，demo 可以保存会话、记录教师决策、导出报告，并留下审计路径。","textChars":38,"textLines":1,"bbox":[86,158,1120,46]}
+{"kind":"shape","id":"sh/b2hwfyxo","slide":4,"bbox":[100,250,255,132]}
+{"kind":"textbox","id":"sh/mhk3q5o7","slide":4,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[122,276,54,54]}
+{"kind":"textbox","id":"sh/t83itgfm","slide":4,"text":"教师/研究者","textPreview":"教师/研究者","textChars":6,"textLines":1,"bbox":[192,276,137,28]}
+{"kind":"textbox","id":"sh/4nap4r65","slide":4,"text":"上传匿名作文或进入示例批次","textPreview":"上传匿名作文或进入示例批次","textChars":13,"textLines":1,"bbox":[192,312,137,54]}
+{"kind":"shape","id":"sh/bat47y1k","slide":4,"bbox":[410,250,255,132]}
+{"kind":"textbox","id":"sh/mp0bi9s3","slide":4,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[432,276,54,54]}
+{"kind":"textbox","id":"sh/4byhgn29","slide":4,"text":"多模型反馈","textPreview":"多模型反馈","textChars":5,"textLines":1,"bbox":[502,276,137,28]}
+{"kind":"textbox","id":"sh/twra5gbq","slide":4,"text":"生成或读取统一格式 feedback items","textPreview":"生成或读取统一格式 feedback items","textChars":24,"textLines":1,"bbox":[502,312,137,54]}
+{"kind":"shape","id":"sh/m58z25kb","slide":4,"bbox":[720,250,255,132]}
+{"kind":"textbox","id":"sh/bq1oryts","slide":4,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[742,276,54,54]}
+{"kind":"textbox","id":"sh/4nap4r65","slide":4,"text":"Safety Graph","textPreview":"Safety Graph","textChars":12,"textLines":1,"bbox":[812,276,137,28]}
+{"kind":"textbox","id":"sh/t83itgfm","slide":4,"text":"用部署时可见信号判断风险","textPreview":"用部署时可见信号判断风险","textChars":12,"textLines":1,"bbox":[812,312,137,54]}
+{"kind":"shape","id":"sh/mhk3q5o7","slide":4,"bbox":[1030,250,255,132]}
+{"kind":"textbox","id":"sh/b2hwfyxo","slide":4,"text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[1052,276,54,54]}
+{"kind":"textbox","id":"sh/4vmtwra5","slide":4,"text":"教师复核","textPreview":"教师复核","textChars":4,"textLines":1,"bbox":[1122,276,137,28]}
+{"kind":"textbox","id":"sh/tgfmlkjm","slide":4,"text":"保留、修改、拒绝或导出报告","textPreview":"保留、修改、拒绝或导出报告","textChars":13,"textLines":1,"bbox":[1122,312,137,54]}
+{"kind":"shape","id":"sh/xc3ylc7u","slide":4,"bbox":[356,408,-52,24]}
+{"kind":"shape","id":"sh/4r65wjud","slide":4,"bbox":[666,718,-362,24]}
+{"kind":"shape","id":"sh/f6dcbulw","slide":4,"bbox":[976,1028,-672,24]}
+{"kind":"shape","id":"sh/mlkjm1cf","slide":4,"bbox":[178,492,1240,178]}
+{"kind":"textbox","id":"sh/xkf6dcbu","slide":4,"text":"FastAPI Backend","textPreview":"FastAPI Backend","textChars":15,"textLines":1,"bbox":[220,522,260,36]}
+{"kind":"textbox","id":"sh/4zidonyd","slide":4,"text":"review/single  ·  review/batch  ·  sessions  ·  teacher/decision  ·  export/report  ·  audit/logs","textPreview":"review/single  ·  review/batch  ·  sessions  ·  teacher/decision  ·  export/report  ·  audit/logs","textChars":97,"textLines":1,"bbox":[220,578,1000,34]}
+{"kind":"textbox","id":"sh/fepkzupw","slide":4,"text":"SQLite 持久化存储会话、反馈项、教师决策与审计日志；API key 不进入后端数据库。","textPreview":"SQLite 持久化存储会话、反馈项、教师决策与审计日志；API key 不进入后端数据库。","textChars":46,"textLines":1,"bbox":[220,626,1030,28]}
+{"kind":"textbox","id":"sh/mtwra5gb","slide":4,"text":"Frontend","textPreview":"Frontend","textChars":8,"textLines":1,"bbox":[230,704,176,42]}
+{"kind":"textbox","id":"sh/xobm58z2","slide":4,"text":"Backend","textPreview":"Backend","textChars":7,"textLines":1,"bbox":[454,704,176,42]}
+{"kind":"textbox","id":"sh/83itgfml","slide":4,"text":"Audit Trail","textPreview":"Audit Trail","textChars":11,"textLines":1,"bbox":[678,704,176,42]}
+{"kind":"textbox","id":"sh/i5sneloj","slide":4,"text":"Report Export","textPreview":"Report Export","textChars":13,"textLines":1,"bbox":[902,704,176,42]}
+{"kind":"textbox","id":"sh/7qpg3ex0","slide":4,"text":"ConsensusScope｜本周成果汇报｜2026-06-17","textPreview":"ConsensusScope｜本周成果汇报｜2026-06-17","textChars":32,"textLines":1,"bbox":[84,850,720,24]}
+{"kind":"textbox","id":"sh/0bi9s36h","slide":4,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[1460,844,56,30]}
+{"kind":"notes","id":"nt/6f6ip7","slide":4,"text":""}
+{"kind":"slide","id":"sl/d37ypp","slide":5,"title":"04 Demo Evidence","textShapes":13}
+{"kind":"textbox","id":"sh/94fu18jq","slide":5,"text":"04 Demo Evidence","textPreview":"04 Demo Evidence","textChars":16,"textLines":1,"bbox":[84,58,420,32]}
+{"kind":"textbox","id":"sh/2hwfyxob","slide":5,"text":"主 Demo 工作流：教师先看到风险分流，而不是被 AI 替代","textPreview":"主 Demo 工作流：教师先看到风险分流，而不是被 AI 替代","textChars":31,"textLines":1,"bbox":[84,88,980,72]}
+{"kind":"textbox","id":"sh/r2p8nqxs","slide":5,"text":"系统让教师快速定位“可以直接放行”和“必须人工判断”的反馈。","textPreview":"系统让教师快速定位“可以直接放行”和“必须人工判断”的反馈。","textChars":30,"textLines":1,"bbox":[86,158,1120,46]}
+{"kind":"shape","id":"sh/gvy90je9","slide":5,"bbox":[84,224,702,402]}
+{"kind":"textbox","id":"sh/2p8nqxs7","slide":5,"text":"Review Workspace：作文与反馈批次入口","textPreview":"Review Workspace：作文与反馈批次入口","textChars":26,"textLines":1,"bbox":[90,630,690,24]}
+{"kind":"shape","id":"sh/ra5gbq1o","slide":5,"bbox":[814,224,702,402]}
+{"kind":"textbox","id":"sh/9knih4by","slide":5,"text":"Teacher Queue：按风险优先级组织待复核反馈","textPreview":"Teacher Queue：按风险优先级组织待复核反馈","textChars":27,"textLines":1,"bbox":[820,630,690,24]}
+{"kind":"shape","id":"sh/p8nqxs72","slide":5,"bbox":[94,688,420,92]}
+{"kind":"shape","id":"sh/0nuxc3yl","slide":5,"bbox":[94,688,8,92]}
+{"kind":"textbox","id":"sh/72x4nap4","slide":5,"text":"教师视角","textPreview":"教师视角","textChars":4,"textLines":1,"bbox":[118,712,372,34]}
+{"kind":"textbox","id":"sh/ih4byhgn","slide":5,"text":"关心的是“哪些反馈需要我看”，不是模型分数本身。","textPreview":"关心的是“哪些反馈需要我看”，不是模型分数本身。","textChars":24,"textLines":1,"bbox":[118,756,372,8]}
+{"kind":"shape","id":"sh/pkzupwb2","slide":5,"bbox":[590,688,420,92]}
+{"kind":"shape","id":"sh/0z61032l","slide":5,"bbox":[590,688,8,92]}
+{"kind":"textbox","id":"sh/7ed8bat4","slide":5,"text":"AI 评审视角","textPreview":"AI 评审视角","textChars":7,"textLines":1,"bbox":[614,712,372,34]}
+{"kind":"textbox","id":"sh/itgfmlkj","slide":5,"text":"把模型输出转成结构化 feedback item，并解释风险来源。","textPreview":"把模型输出转成结构化 feedback item，并解释风险来源。","textChars":33,"textLines":1,"bbox":[614,756,372,8]}
+{"kind":"shape","id":"sh/pwb2hwfy","slide":5,"bbox":[1086,688,420,92]}
+{"kind":"shape","id":"sh/0bi9s36h","slide":5,"bbox":[1086,688,8,92]}
+{"kind":"textbox","id":"sh/sneloj2t","slide":5,"text":"投稿视角","textPreview":"投稿视角","textChars":4,"textLines":1,"bbox":[1110,712,372,34]}
+{"kind":"textbox","id":"sh/l87ed8ba","slide":5,"text":"这是可交互系统 demo，而不是离线表格结果。","textPreview":"这是可交互系统 demo，而不是离线表格结果。","textChars":23,"textLines":1,"bbox":[1110,756,372,8]}
+{"kind":"textbox","id":"sh/ahoza1gv","slide":5,"text":"ConsensusScope｜本周成果汇报｜2026-06-17","textPreview":"ConsensusScope｜本周成果汇报｜2026-06-17","textChars":32,"textLines":1,"bbox":[84,850,720,24]}
+{"kind":"textbox","id":"sh/32lszqtc","slide":5,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[1460,844,56,30]}
+{"kind":"image","id":"im/4zidonyd","slide":5,"name":"","alt":"Review Workspace：作文与反馈批次入口","bbox":[90,230,690,390]}
+{"kind":"image","id":"im/xobm58z2","slide":5,"name":"","alt":"Teacher Queue：按风险优先级组织待复核反馈","bbox":[820,230,690,390]}
+{"kind":"notes","id":"nt/d37ypp","slide":5,"text":""}
+{"kind":"slide","id":"sl/9a7doa","slide":6,"title":"05 Deployment","textShapes":11}
+{"kind":"textbox","id":"sh/94fu18jq","slide":6,"text":"05 Deployment","textPreview":"05 Deployment","textChars":13,"textLines":1,"bbox":[84,58,420,32]}
+{"kind":"textbox","id":"sh/2hwfyxob","slide":6,"text":"部署对比：从 Streamlit Cloud 不稳定到可控前后端服务","textPreview":"部署对比：从 Streamlit Cloud 不稳定到可控前后端服务","textChars":34,"textLines":1,"bbox":[84,88,980,72]}
+{"kind":"textbox","id":"sh/r2p8nqxs","slide":6,"text":"这页用于回答：为什么老师会问“demo 为什么没有后端”。","textPreview":"这页用于回答：为什么老师会问“demo 为什么没有后端”。","textChars":29,"textLines":1,"bbox":[86,158,1120,46]}
+{"kind":"shape","id":"sh/gvy90je9","slide":6,"bbox":[96,228,690,340]}
+{"kind":"shape","id":"sh/9gr2p8nq","slide":6,"bbox":[814,228,690,340]}
+{"kind":"textbox","id":"sh/2p8nqxs7","slide":6,"text":"原部署风险","textPreview":"原部署风险","textChars":5,"textLines":1,"bbox":[124,252,634,36]}
+{"kind":"textbox","id":"sh/ra5gbq1o","slide":6,"text":"• Streamlit Cloud 常见 in the oven / 冷启动\n• 无法稳定展示后端能力\n• 数据存储和审计边界不清楚\n• 不适合正式录屏和外部老师试用","textPreview":"• Streamlit Cloud 常见 in the oven / 冷启动 | • 无法稳定展示后端能力 | • 数据存储和审计边界不清楚 | • 不适合正式录屏和外部老师试用","textChars":83,"textLines":4,"bbox":[130,304,622,244]}
+{"kind":"textbox","id":"sh/kzupwb2h","slide":6,"text":"当前部署方案","textPreview":"当前部署方案","textChars":6,"textLines":1,"bbox":[842,252,634,36]}
+{"kind":"textbox","id":"sh/9knih4by","slide":6,"text":"• 前端域名：https://demo.consensusscope.cn/\n• 后端文档：https://api.consensusscope.cn/docs\n• FastAPI + SQLite 持久化 + audit logs\n• Cloudflare Tunnel 对外暴露，服务器端口不写入 PPT","textPreview":"• 前端域名：https://demo.consensusscope.cn/ | • 后端文档：https://api.consensusscope.cn/docs | • FastAPI + SQLite 持久化 + audit logs | • Cloudflare T...","textChars":154,"textLines":4,"bbox":[848,304,622,244]}
+{"kind":"shape","id":"sh/p8nqxs72","slide":6,"bbox":[158,628,1284,96]}
+{"kind":"textbox","id":"sh/0nuxc3yl","slide":6,"text":"现阶段判断","textPreview":"现阶段判断","textChars":5,"textLines":1,"bbox":[190,654,150,28]}
+{"kind":"textbox","id":"sh/72x4nap4","slide":6,"text":"已经具备“可以公开访问、可以解释架构、可以录屏”的基础；后续要继续补鉴权、真实教师批量使用和监控。","textPreview":"已经具备“可以公开访问、可以解释架构、可以录屏”的基础；后续要继续补鉴权、真实教师批量使用和监控。","textChars":49,"textLines":1,"bbox":[360,650,980,36]}
+{"kind":"textbox","id":"sh/ih4byhgn","slide":6,"text":"ConsensusScope｜本周成果汇报｜2026-06-17","textPreview":"ConsensusScope｜本周成果汇报｜2026-06-17","textChars":32,"textLines":1,"bbox":[84,850,720,24]}
+{"kind":"textbox","id":"sh/pkzupwb2","slide":6,"text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[1460,844,56,30]}
+{"kind":"notes","id":"nt/9a7doa","slide":6,"text":""}
+{"kind":"slide","id":"sl/boop2i","slide":7,"title":"06 Annotation","textShapes":22}
+{"kind":"textbox","id":"sh/58z25kb6","slide":7,"text":"06 Annotation","textPreview":"06 Annotation","textChars":13,"textLines":1,"bbox":[84,58,420,32]}
+{"kind":"textbox","id":"sh/yhgn29gr","slide":7,"text":"教师标注：从主观怀疑走向可诊断数据","textPreview":"教师标注：从主观怀疑走向可诊断数据","textChars":17,"textLines":1,"bbox":[84,88,980,72]}
+{"kind":"textbox","id":"sh/n29gr2p8","slide":7,"text":"当前不是大规模用户研究，而是用两位教师的 Likert 评分先检查 AI 评审是否合理。","textPreview":"当前不是大规模用户研究，而是用两位教师的 Likert 评分先检查 AI 评审是否合理。","textChars":44,"textLines":1,"bbox":[86,158,1120,46]}
+{"kind":"shape","id":"sh/gbq1oryt","slide":7,"bbox":[96,238,300,160]}
+{"kind":"textbox","id":"sh/5wjudg7a","slide":7,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[122,258,248,58]}
+{"kind":"textbox","id":"sh/y90je9cv","slide":7,"text":"教师","textPreview":"教师","textChars":2,"textLines":1,"bbox":[124,318,244,30]}
+{"kind":"textbox","id":"sh/nuxc3ylc","slide":7,"text":"最多两位，符合当前可获得资源。","textPreview":"最多两位，符合当前可获得资源。","textChars":15,"textLines":1,"bbox":[124,354,244,34]}
+{"kind":"shape","id":"sh/cbulwval","slide":7,"bbox":[438,238,300,160]}
+{"kind":"textbox","id":"sh/5sneloj2","slide":7,"text":"30","textPreview":"30","textChars":2,"textLines":1,"bbox":[464,258,248,58]}
+{"kind":"textbox","id":"sh/tcj6tova","slide":7,"text":"反馈项","textPreview":"反馈项","textChars":3,"textLines":1,"bbox":[466,318,244,30]}
+{"kind":"textbox","id":"sh/0rqd4vmt","slide":7,"text":"batch 1 为 12 条，batch 2 为 18 条。","textPreview":"batch 1 为 12 条，batch 2 为 18 条。","textChars":30,"textLines":1,"bbox":[466,354,244,34]}
+{"kind":"shape","id":"sh/b6xkf6dc","slide":7,"bbox":[780,238,300,160]}
+{"kind":"textbox","id":"sh/il0rqd4v","slide":7,"text":"60","textPreview":"60","textChars":2,"textLines":1,"bbox":[806,258,248,58]}
+{"kind":"textbox","id":"sh/t47y1kre","slide":7,"text":"评分行","textPreview":"评分行","textChars":3,"textLines":1,"bbox":[808,318,244,30]}
+{"kind":"textbox","id":"sh/0je9cvix","slide":7,"text":"每条由两位教师给 1–5 分。","textPreview":"每条由两位教师给 1–5 分。","textChars":15,"textLines":1,"bbox":[808,354,244,34]}
+{"kind":"shape","id":"sh/byhgn29g","slide":7,"bbox":[1122,238,300,160]}
+{"kind":"textbox","id":"sh/idonyd0z","slide":7,"text":"6","textPreview":"6","textChars":1,"textLines":1,"bbox":[1148,258,248,58]}
+{"kind":"textbox","id":"sh/p0bi9s36","slide":7,"text":"评分维度","textPreview":"评分维度","textChars":4,"textLines":1,"bbox":[1150,318,244,30]}
+{"kind":"textbox","id":"sh/0fepkzup","slide":7,"text":"正确性、保义、可给学生等。","textPreview":"正确性、保义、可给学生等。","textChars":13,"textLines":1,"bbox":[1150,354,244,34]}
+{"kind":"shape","id":"sh/cbulwval","slide":7,"bbox":[104,464,1400,220]}
+{"kind":"textbox","id":"sh/5sneloj2","slide":7,"text":"标注设计","textPreview":"标注设计","textChars":4,"textLines":1,"bbox":[138,494,150,30]}
+{"kind":"textbox","id":"sh/u54zidon","slide":7,"text":"盲标优先：教师不看系统 risk_level、模型名、推荐动作，只看匿名作文片段与 AI 反馈。","textPreview":"盲标优先：教师不看系统 risk_level、模型名、推荐动作，只看匿名作文片段与 AI 反馈。","textChars":48,"textLines":1,"bbox":[138,542,1180,34]}
+{"kind":"textbox","id":"sh/nqxs72x4","slide":7,"text":"评分字段简化为 1–5 分：正确性、保留原意、学生可读性、有用性、清晰度、是否可直接发布。","textPreview":"评分字段简化为 1–5 分：正确性、保留原意、学生可读性、有用性、清晰度、是否可直接发布。","textChars":45,"textLines":1,"bbox":[138,590,1180,32]}
+{"kind":"textbox","id":"sh/czed8v6p","slide":7,"text":"用途边界：这些标签只用于离线诊断，不在部署时直接喂给路由器。","textPreview":"用途边界：这些标签只用于离线诊断，不在部署时直接喂给路由器。","textChars":30,"textLines":1,"bbox":[138,632,1180,28]}
+{"kind":"textbox","id":"sh/5kb6xkf6","slide":7,"text":"组会要强调：当前数据少，但它已经暴露了系统最需要改进的样本类型。","textPreview":"组会要强调：当前数据少，但它已经暴露了系统最需要改进的样本类型。","textChars":32,"textLines":1,"bbox":[158,732,1180,42]}
+{"kind":"textbox","id":"sh/ytsvu9kn","slide":7,"text":"ConsensusScope｜本周成果汇报｜2026-06-17","textPreview":"ConsensusScope｜本周成果汇报｜2026-06-17","textChars":32,"textLines":1,"bbox":[84,850,720,24]}
+{"kind":"textbox","id":"sh/neloj2t8","slide":7,"text":"07","textPreview":"07","textChars":2,"textLines":1,"bbox":[1460,844,56,30]}
+{"kind":"notes","id":"nt/boop2i","slide":7,"text":""}
+{"kind":"slide","id":"sl/9x393k","slide":8,"title":"07 Evaluation","textShapes":31}
+{"kind":"textbox","id":"sh/7mp0bi9s","slide":8,"text":"07 Evaluation","textPreview":"07 Evaluation","textChars":13,"textLines":1,"bbox":[84,58,420,32]}
+{"kind":"textbox","id":"sh/w7mp0bi9","slide":8,"text":"有效性快照：路由有信号，但还不能夸大","textPreview":"有效性快照：路由有信号，但还不能夸大","textChars":18,"textLines":1,"bbox":[84,88,980,72]}
+{"kind":"textbox","id":"sh/psfil0rq","slide":8,"text":"30 条两位教师诊断显示：教师复核队列确实包含更多低分/高风险反馈。","textPreview":"30 条两位教师诊断显示：教师复核队列确实包含更多低分/高风险反馈。","textChars":34,"textLines":1,"bbox":[86,158,1120,46]}
+{"kind":"shape","id":"sh/epkzupwb","slide":8,"bbox":[96,228,660,470]}
+{"kind":"textbox","id":"sh/7adsji5s","slide":8,"text":"路由分组平均分","textPreview":"路由分组平均分","textChars":7,"textLines":1,"bbox":[132,258,280,30]}
+{"kind":"textbox","id":"sh/wval87ed","slide":8,"text":"Auto-accept 组平均分更高；teacher-review 组平均分更低，说明风险分流方向基本合理。","textPreview":"Auto-accept 组平均分更高；teacher-review 组平均分更低，说明风险分流方向基本合理。","textChars":54,"textLines":1,"bbox":[132,300,560,58]}
+{"kind":"textbox","id":"sh/pg3ex0nu","slide":8,"text":"Correctness","textPreview":"Correctness","textChars":11,"textLines":1,"bbox":[146,390,180,28]}
+{"kind":"textbox","id":"sh/eloj2t83","slide":8,"text":"auto_accept","textPreview":"auto_accept","textChars":11,"textLines":1,"bbox":[146,432,260,26]}
+{"kind":"shape","id":"sh/36hcrmhk","slide":8,"bbox":[426,436,230,18]}
+{"kind":"shape","id":"sh/fil0rqd4","slide":8,"bbox":[426,436,220.14,18]}
+{"kind":"textbox","id":"sh/qxs72x4n","slide":8,"text":"4.79","textPreview":"4.79","textChars":4,"textLines":1,"bbox":[668,431,72,26]}
+{"kind":"textbox","id":"sh/xobm58z2","slide":8,"text":"teacher_review","textPreview":"teacher_review","textChars":14,"textLines":1,"bbox":[146,474,260,26]}
+{"kind":"shape","id":"sh/83itgfml","slide":8,"bbox":[426,478,230,18]}
+{"kind":"shape","id":"sh/fu18jqh0","slide":8,"bbox":[426,478,105,18]}
+{"kind":"textbox","id":"sh/m94fu18j","slide":8,"text":"2.28","textPreview":"2.28","textChars":4,"textLines":1,"bbox":[668,473,72,26]}
+{"kind":"textbox","id":"sh/x0nuxc3y","slide":8,"text":"Direct release","textPreview":"Direct release","textChars":14,"textLines":1,"bbox":[146,540,220,28]}
+{"kind":"textbox","id":"sh/4fu18jqh","slide":8,"text":"auto_accept","textPreview":"auto_accept","textChars":11,"textLines":1,"bbox":[146,582,260,26]}
+{"kind":"shape","id":"sh/f6dcbulw","slide":8,"bbox":[426,586,230,18]}
+{"kind":"shape","id":"sh/mlkjm1cf","slide":8,"bbox":[426,586,210.28,18]}
+{"kind":"textbox","id":"sh/upwb2hwf","slide":8,"text":"4.57","textPreview":"4.57","textChars":4,"textLines":1,"bbox":[668,581,72,26]}
+{"kind":"textbox","id":"sh/nap4r65w","slide":8,"text":"teacher_review","textPreview":"teacher_review","textChars":14,"textLines":1,"bbox":[146,624,260,26]}
+{"kind":"shape","id":"sh/cvixczed","slide":8,"bbox":[426,628,230,18]}
+{"kind":"shape","id":"sh/5gbq1ory","slide":8,"bbox":[426,628,102,18]}
+{"kind":"textbox","id":"sh/udg7adsj","slide":8,"text":"2.22","textPreview":"2.22","textChars":4,"textLines":1,"bbox":[668,623,72,26]}
+{"kind":"shape","id":"sh/nyd0z610","slide":8,"bbox":[828,228,676,470]}
+{"kind":"textbox","id":"sh/cj6tovah","slide":8,"text":"诊断指标","textPreview":"诊断指标","textChars":4,"textLines":1,"bbox":[864,258,220,30]}
+{"kind":"shape","id":"sh/54zidony","slide":8,"bbox":[864,316,260,140]}
+{"kind":"textbox","id":"sh/u9knih4b","slide":8,"text":"0.95","textPreview":"0.95","textChars":4,"textLines":1,"bbox":[890,336,208,58]}
+{"kind":"textbox","id":"sh/judg7ads","slide":8,"text":"Review-needed recall","textPreview":"Review-needed recall","textChars":20,"textLines":1,"bbox":[892,396,204,30]}
+{"kind":"textbox","id":"sh/9w3m94fu","slide":8,"text":"任一教师认为需复核的样本中，路由命中的比例。","textPreview":"任一教师认为需复核的样本中，路由命中的比例。","textChars":22,"textLines":1,"bbox":[892,432,204,14]}
+{"kind":"shape","id":"sh/kb6xkf6d","slide":8,"bbox":[1182,316,260,140]}
+{"kind":"textbox","id":"sh/rqd4vmtw","slide":8,"text":"1.00","textPreview":"1.00","textChars":4,"textLines":1,"bbox":[1208,336,208,58]}
+{"kind":"textbox","id":"sh/25kb6xkf","slide":8,"text":"Unsafe reviewed","textPreview":"Unsafe reviewed","textChars":15,"textLines":1,"bbox":[1210,396,204,30]}
+{"kind":"textbox","id":"sh/9knih4by","slide":8,"text":"任一教师认为不安全的样本中，被送入复核的比例。","textPreview":"任一教师认为不安全的样本中，被送入复核的比例。","textChars":23,"textLines":1,"bbox":[1210,432,204,14]}
+{"kind":"shape","id":"sh/kzupwb2h","slide":8,"bbox":[864,500,260,140]}
+{"kind":"textbox","id":"sh/re1w7mp0","slide":8,"text":"0.86","textPreview":"0.86","textChars":4,"textLines":1,"bbox":[890,520,208,58]}
+{"kind":"textbox","id":"sh/2t83itgf","slide":8,"text":"Auto precision","textPreview":"Auto precision","textChars":14,"textLines":1,"bbox":[892,580,204,30]}
+{"kind":"textbox","id":"sh/9gr2p8nq","slide":8,"text":"auto_accept 与教师安全标签对齐情况。","textPreview":"auto_accept 与教师安全标签对齐情况。","textChars":24,"textLines":1,"bbox":[892,616,204,14]}
+{"kind":"shape","id":"sh/gvy90je9","slide":8,"bbox":[1182,500,260,140]}
+{"kind":"textbox","id":"sh/onyd0z61","slide":8,"text":"0.69","textPreview":"0.69","textChars":4,"textLines":1,"bbox":[1208,520,208,58]}
+{"kind":"textbox","id":"sh/d8v6psfi","slide":8,"text":"Within 1 point","textPreview":"Within 1 point","textChars":14,"textLines":1,"bbox":[1210,580,204,30]}
+{"kind":"textbox","id":"sh/6hcrmhk3","slide":8,"text":"六维评分两位教师一分内一致率。","textPreview":"六维评分两位教师一分内一致率。","textChars":15,"textLines":1,"bbox":[1210,616,204,14]}
+{"kind":"textbox","id":"sh/z25kb6xk","slide":8,"text":"结论：当前最强卖点不是“模型已经赢了”，而是能把风险样本显式暴露给教师，并提供可审计的改进闭环。","textPreview":"结论：当前最强卖点不是“模型已经赢了”，而是能把风险样本显式暴露给教师，并提供可审计的改进闭环。","textChars":48,"textLines":1,"bbox":[130,750,1260,48]}
+{"kind":"textbox","id":"sh/ovahoza1","slide":8,"text":"ConsensusScope｜本周成果汇报｜2026-06-17","textPreview":"ConsensusScope｜本周成果汇报｜2026-06-17","textChars":32,"textLines":1,"bbox":[84,850,720,24]}
+{"kind":"textbox","id":"sh/dg7adsji","slide":8,"text":"08","textPreview":"08","textChars":2,"textLines":1,"bbox":[1460,844,56,30]}
+{"kind":"notes","id":"nt/9x393k","slide":8,"text":""}
+{"kind":"slide","id":"sl/xkioez","slide":9,"title":"08 UI Direction","textShapes":13}
+{"kind":"textbox","id":"sh/sneloj2t","slide":9,"text":"08 UI Direction","textPreview":"08 UI Direction","textChars":15,"textLines":1,"bbox":[84,58,420,32]}
+{"kind":"textbox","id":"sh/32lszqtc","slide":9,"text":"UI 设计进展：把 Figma 半成品纳入本周成果","textPreview":"UI 设计进展：把 Figma 半成品纳入本周成果","textChars":25,"textLines":1,"bbox":[84,88,980,72]}
+{"kind":"textbox","id":"sh/ahoza1gv","slide":9,"text":"目前网站仍是工程可用版；Figma 用来给设计师定义视觉方向和页面密度。","textPreview":"目前网站仍是工程可用版；Figma 用来给设计师定义视觉方向和页面密度。","textChars":36,"textLines":1,"bbox":[86,158,1120,46]}
+{"kind":"shape","id":"sh/lkjm1cfa","slide":9,"bbox":[86,230,652,372]}
+{"kind":"textbox","id":"sh/3ex0nuxc","slide":9,"text":"当前工程版：功能完整，但视觉偏工具原型","textPreview":"当前工程版：功能完整，但视觉偏工具原型","textChars":19,"textLines":1,"bbox":[92,606,640,24]}
+{"kind":"shape","id":"sh/at47y1kr","slide":9,"bbox":[862,230,398,372]}
+{"kind":"textbox","id":"sh/w3m94fu1","slide":9,"text":"Figma 方向稿：更强的仪表盘层级与视觉聚焦","textPreview":"Figma 方向稿：更强的仪表盘层级与视觉聚焦","textChars":23,"textLines":1,"bbox":[868,606,386,24]}
+{"kind":"shape","id":"sh/udg7adsj","slide":9,"bbox":[1288,236,202,360]}
+{"kind":"textbox","id":"sh/nyd0z610","slide":9,"text":"可交付给设计师","textPreview":"可交付给设计师","textChars":7,"textLines":1,"bbox":[1312,266,160,30]}
+{"kind":"textbox","id":"sh/cj6tovah","slide":9,"text":"1. 首页信息架构\n2. 教师队列\n3. Feedback detail\n4. 风险图谱\n5. 报告导出\n6. 组件规范","textPreview":"1. 首页信息架构 | 2. 教师队列 | 3. Feedback detail | 4. 风险图谱 | 5. 报告导出 | 6. 组件规范","textChars":60,"textLines":6,"bbox":[1320,324,150,210]}
+{"kind":"shape","id":"sh/54zidony","slide":9,"bbox":[118,632,661,154]}
+{"kind":"shape","id":"sh/upwb2hwf","slide":9,"bbox":[807,632,661,154]}
+{"kind":"textbox","id":"sh/nap4r65w","slide":9,"text":"不能直接做的事","textPreview":"不能直接做的事","textChars":7,"textLines":1,"bbox":[146,656,605,36]}
+{"kind":"textbox","id":"sh/cvixczed","slide":9,"text":"• 不能把 .fig 嵌进 Streamlit 当交互网页\n• 不能只靠 AI UI 参会，需要人工设计落地","textPreview":"• 不能把 .fig 嵌进 Streamlit 当交互网页 | • 不能只靠 AI UI 参会，需要人工设计落地","textChars":54,"textLines":2,"bbox":[152,708,593,58]}
+{"kind":"textbox","id":"sh/5gbq1ory","slide":9,"text":"可以马上推进","textPreview":"可以马上推进","textChars":6,"textLines":1,"bbox":[835,656,605,36]}
+{"kind":"textbox","id":"sh/u18jqh0f","slide":9,"text":"• 把 Figma 页面拆成组件和状态\n• 按后端接口重写高保真前端","textPreview":"• 把 Figma 页面拆成组件和状态 | • 按后端接口重写高保真前端","textChars":34,"textLines":2,"bbox":[841,708,593,58]}
+{"kind":"textbox","id":"sh/jm1cfa9w","slide":9,"text":"ConsensusScope｜本周成果汇报｜2026-06-17","textPreview":"ConsensusScope｜本周成果汇报｜2026-06-17","textChars":32,"textLines":1,"bbox":[84,850,720,24]}
+{"kind":"textbox","id":"sh/bm58z25k","slide":9,"text":"09","textPreview":"09","textChars":2,"textLines":1,"bbox":[1460,844,56,30]}
+{"kind":"image","id":"im/lwval87e","slide":9,"name":"","alt":"当前工程版：功能完整，但视觉偏工具原型","bbox":[92,236,640,360]}
+{"kind":"image","id":"im/sneloj2t","slide":9,"name":"","alt":"Figma 方向稿：更强的仪表盘层级与视觉聚焦","bbox":[868,236,386,360]}
+{"kind":"notes","id":"nt/xkioez","slide":9,"text":""}
+{"kind":"slide","id":"sl/14x9wn","slide":10,"title":"09 Paper & Repo","textShapes":16}
+{"kind":"textbox","id":"sh/fepkzupw","slide":10,"text":"09 Paper & Repo","textPreview":"09 Paper & Repo","textChars":15,"textLines":1,"bbox":[84,58,420,32]}
+{"kind":"textbox","id":"sh/4zidonyd","slide":10,"text":"论文与代码包同步：主张更稳，系统性更强","textPreview":"论文与代码包同步：主张更稳，系统性更强","textChars":19,"textLines":1,"bbox":[84,88,980,72]}
+{"kind":"textbox","id":"sh/xkf6dcbu","slide":10,"text":"本周论文口径跟系统同步，避免 learned meta-judge 或大而空的性能主张。","textPreview":"本周论文口径跟系统同步，避免 learned meta-judge 或大而空的性能主张。","textChars":44,"textLines":1,"bbox":[86,158,1120,46]}
+{"kind":"shape","id":"sh/mlkjm1cf","slide":10,"bbox":[96,234,650,172]}
+{"kind":"shape","id":"sh/f6dcbulw","slide":10,"bbox":[96,234,8,172]}
+{"kind":"textbox","id":"sh/4r65wjud","slide":10,"text":"当前标题","textPreview":"当前标题","textChars":4,"textLines":1,"bbox":[120,258,602,34]}
+{"kind":"textbox","id":"sh/xc3ylc7u","slide":10,"text":"ConsensusScope: Feedback Safety Graphs for Teacher-in-the-Loop Review Routing of AI Feedback on ESL Writing","textPreview":"ConsensusScope: Feedback Safety Graphs for Teacher-in-the-Loop Review Routing of AI Feedback on ESL Writing","textChars":107,"textLines":1,"bbox":[120,302,602,88]}
+{"kind":"shape","id":"sh/m94fu18j","slide":10,"bbox":[854,234,550,172]}
+{"kind":"shape","id":"sh/fu18jqh0","slide":10,"bbox":[854,234,8,172]}
+{"kind":"textbox","id":"sh/r65wjudg","slide":10,"text":"当前主张","textPreview":"当前主张","textChars":4,"textLines":1,"bbox":[878,258,502,34]}
+{"kind":"textbox","id":"sh/ylc7u54z","slide":10,"text":"Feedback Safety Graph + 教师在环复核路由 + ESL 写作反馈安全审核。","textPreview":"Feedback Safety Graph + 教师在环复核路由 + ESL 写作反馈安全审核。","textChars":48,"textLines":1,"bbox":[878,302,502,88]}
+{"kind":"shape","id":"sh/9cvixcze","slide":10,"bbox":[96,462,404,156]}
+{"kind":"shape","id":"sh/gr2p8nqx","slide":10,"bbox":[96,462,8,156]}
+{"kind":"textbox","id":"sh/nih4byhg","slide":10,"text":"论文新增","textPreview":"论文新增","textChars":4,"textLines":1,"bbox":[120,486,356,34]}
+{"kind":"textbox","id":"sh/yxobm58z","slide":10,"text":"Backend API 段落、Release 信息、教师试标诊断、应用场景边界。","textPreview":"Backend API 段落、Release 信息、教师试标诊断、应用场景边界。","textChars":40,"textLines":1,"bbox":[120,530,356,72]}
+{"kind":"shape","id":"sh/5o7qpg3e","slide":10,"bbox":[548,462,404,156]}
+{"kind":"shape","id":"sh/g3ex0nux","slide":10,"bbox":[548,462,8,156]}
+{"kind":"textbox","id":"sh/rmhk3q5o","slide":10,"text":"代码新增","textPreview":"代码新增","textChars":4,"textLines":1,"bbox":[572,486,356,34]}
+{"kind":"textbox","id":"sh/y1kre1w7","slide":10,"text":"FastAPI backend、SQLite 存储、测试、部署配置、诊断面板。","textPreview":"FastAPI backend、SQLite 存储、测试、部署配置、诊断面板。","textChars":39,"textLines":1,"bbox":[572,530,356,72]}
+{"kind":"shape","id":"sh/6dcbulwv","slide":10,"bbox":[1000,462,404,156]}
+{"kind":"shape","id":"sh/vy90je9c","slide":10,"bbox":[1000,462,8,156]}
+{"kind":"textbox","id":"sh/oj2t83it","slide":10,"text":"避免风险","textPreview":"避免风险","textChars":4,"textLines":1,"bbox":[1024,486,356,34]}
+{"kind":"textbox","id":"sh/d4vmtwra","slide":10,"text":"不写 learned meta-judge 主张；不伪造视频链接；不夸大 30 条标注。","textPreview":"不写 learned meta-judge 主张；不伪造视频链接；不夸大 30 条标注。","textChars":44,"textLines":1,"bbox":[1024,530,356,72]}
+{"kind":"textbox","id":"sh/61032lsz","slide":10,"text":"Git 状态：最新主线提交已推送，提交信息为 Add FastAPI backend for demo deployment。","textPreview":"Git 状态：最新主线提交已推送，提交信息为 Add FastAPI backend for demo deployment。","textChars":63,"textLines":1,"bbox":[132,702,1180,42]}
+{"kind":"textbox","id":"sh/vmtwra5g","slide":10,"text":"ConsensusScope｜本周成果汇报｜2026-06-17","textPreview":"ConsensusScope｜本周成果汇报｜2026-06-17","textChars":32,"textLines":1,"bbox":[84,850,720,24]}
+{"kind":"textbox","id":"sh/o7qpg3ex","slide":10,"text":"10","textPreview":"10","textChars":2,"textLines":1,"bbox":[1460,844,56,30]}
+{"kind":"notes","id":"nt/14x9wn","slide":10,"text":""}
+{"kind":"slide","id":"sl/90ezqu","slide":11,"title":"10 Gaps","textShapes":18}
+{"kind":"textbox","id":"sh/q1orytsv","slide":11,"text":"10 Gaps","textPreview":"10 Gaps","textChars":7,"textLines":1,"bbox":[84,58,420,32]}
+{"kind":"textbox","id":"sh/xs72x4na","slide":11,"text":"目前仍需补强的部分","textPreview":"目前仍需补强的部分","textChars":9,"textLines":1,"bbox":[84,88,980,72]}
+{"kind":"textbox","id":"sh/87ed8bat","slide":11,"text":"这一页建议组会上主动讲，显得我们清楚项目风险，而不是被动挨问。","textPreview":"这一页建议组会上主动讲，显得我们清楚项目风险，而不是被动挨问。","textChars":31,"textLines":1,"bbox":[86,158,1120,46]}
+{"kind":"shape","id":"sh/je9cvixc","slide":11,"bbox":[104,236,420,142]}
+{"kind":"shape","id":"sh/qtcj6tov","slide":11,"bbox":[104,236,8,142]}
+{"kind":"textbox","id":"sh/1gvy90je","slide":11,"text":"数据规模","textPreview":"数据规模","textChars":4,"textLines":1,"bbox":[128,260,372,34]}
+{"kind":"textbox","id":"sh/8z25kb6x","slide":11,"text":"30 条教师标注已有雏形，下一步需要扩到 50–80 条并覆盖更多真实作文。","textPreview":"30 条教师标注已有雏形，下一步需要扩到 50–80 条并覆盖更多真实作文。","textChars":38,"textLines":1,"bbox":[128,304,372,58]}
+{"kind":"shape","id":"sh/fa9w3m94","slide":11,"bbox":[590,236,420,142]}
+{"kind":"shape","id":"sh/qpg3ex0n","slide":11,"bbox":[590,236,8,142]}
+{"kind":"textbox","id":"sh/wjudg7ad","slide":11,"text":"真实 UI","textPreview":"真实 UI","textChars":5,"textLines":1,"bbox":[614,260,372,34]}
+{"kind":"textbox","id":"sh/p4r65wju","slide":11,"text":"当前工程界面能用，但还没达到人工设计水准。Figma 方向稿需要设计师重做。","textPreview":"当前工程界面能用，但还没达到人工设计水准。Figma 方向稿需要设计师重做。","textChars":38,"textLines":1,"bbox":[614,304,372,58]}
+{"kind":"shape","id":"sh/ed8v6psf","slide":11,"bbox":[1076,236,420,142]}
+{"kind":"shape","id":"sh/7y1kre1w","slide":11,"bbox":[1076,236,8,142]}
+{"kind":"textbox","id":"sh/0bi9s36h","slide":11,"text":"模型效果","textPreview":"模型效果","textChars":4,"textLines":1,"bbox":[1100,260,372,34]}
+{"kind":"textbox","id":"sh/pwb2hwfy","slide":11,"text":"auto_accept precision 偏低，下一步要降低误放行风险。","textPreview":"auto_accept precision 偏低，下一步要降低误放行风险。","textChars":37,"textLines":1,"bbox":[1100,304,372,58]}
+{"kind":"shape","id":"sh/i5sneloj","slide":11,"bbox":[104,444,420,142]}
+{"kind":"shape","id":"sh/7qpg3ex0","slide":11,"bbox":[104,444,8,142]}
+{"kind":"textbox","id":"sh/0z61032l","slide":11,"text":"教师研究","textPreview":"教师研究","textChars":4,"textLines":1,"bbox":[128,468,372,34]}
+{"kind":"textbox","id":"sh/pkzupwb2","slide":11,"text":"两位教师只能做诊断，不能当作完整用户研究。","textPreview":"两位教师只能做诊断，不能当作完整用户研究。","textChars":21,"textLines":1,"bbox":[128,512,372,58]}
+{"kind":"shape","id":"sh/donyd0z6","slide":11,"bbox":[590,444,420,142]}
+{"kind":"shape","id":"sh/k3q5o7qp","slide":11,"bbox":[590,444,8,142]}
+{"kind":"textbox","id":"sh/vixczed8","slide":11,"text":"隐私与后端","textPreview":"隐私与后端","textChars":5,"textLines":1,"bbox":[614,468,372,34]}
+{"kind":"textbox","id":"sh/2x4nap4r","slide":11,"text":"公开试用前还要补鉴权、权限、数据清理策略。","textPreview":"公开试用前还要补鉴权、权限、数据清理策略。","textChars":21,"textLines":1,"bbox":[614,512,372,58]}
+{"kind":"shape","id":"sh/dcbulwva","slide":11,"bbox":[1076,444,420,142]}
+{"kind":"shape","id":"sh/kre1w7mp","slide":11,"bbox":[1076,444,8,142]}
+{"kind":"textbox","id":"sh/val87ed8","slide":11,"text":"录屏材料","textPreview":"录屏材料","textChars":4,"textLines":1,"bbox":[1100,468,372,34]}
+{"kind":"textbox","id":"sh/6psfil0r","slide":11,"text":"还需要正式 2.5 分钟英文演示视频和可公开 video URL。","textPreview":"还需要正式 2.5 分钟英文演示视频和可公开 video URL。","textChars":33,"textLines":1,"bbox":[1100,512,372,58]}
+{"kind":"shape","id":"sh/d8bat47y","slide":11,"bbox":[228,690,1120,70]}
+{"kind":"textbox","id":"sh/knih4byh","slide":11,"text":"组会建议表达：本周已经把“方向不清”的问题压下去，下一阶段重点补“证据强度”和“设计完成度”。","textPreview":"组会建议表达：本周已经把“方向不清”的问题压下去，下一阶段重点补“证据强度”和“设计完成度”。","textChars":47,"textLines":1,"bbox":[270,710,1030,32]}
+{"kind":"textbox","id":"sh/yhgn29gr","slide":11,"text":"ConsensusScope｜本周成果汇报｜2026-06-17","textPreview":"ConsensusScope｜本周成果汇报｜2026-06-17","textChars":32,"textLines":1,"bbox":[84,850,720,24]}
+{"kind":"textbox","id":"sh/n29gr2p8","slide":11,"text":"11","textPreview":"11","textChars":2,"textLines":1,"bbox":[1460,844,56,30]}
+{"kind":"notes","id":"nt/90ezqu","slide":11,"text":""}
+{"kind":"slide","id":"sl/j55a31","slide":12,"title":"11 Next Week","textShapes":26}
+{"kind":"textbox","id":"sh/bat47y1k","slide":12,"text":"11 Next Week","textPreview":"11 Next Week","textChars":12,"textLines":1,"bbox":[84,58,420,32]}
+{"kind":"textbox","id":"sh/4vmtwra5","slide":12,"text":"下周计划：把系统推到可投稿/可演示状态","textPreview":"下周计划：把系统推到可投稿/可演示状态","textChars":19,"textLines":1,"bbox":[84,88,980,72]}
+{"kind":"textbox","id":"sh/tgfmlkjm","slide":12,"text":"建议把任务拆成数据、模型、UI、论文、视频五条并行线。","textPreview":"建议把任务拆成数据、模型、UI、论文、视频五条并行线。","textChars":27,"textLines":1,"bbox":[86,158,1120,46]}
+{"kind":"shape","id":"sh/m1cfa9w3","slide":12,"bbox":[112,238,330,132]}
+{"kind":"textbox","id":"sh/bm58z25k","slide":12,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[134,264,54,54]}
+{"kind":"textbox","id":"sh/47y1kre1","slide":12,"text":"扩大标注","textPreview":"扩大标注","textChars":4,"textLines":1,"bbox":[204,264,212,28]}
+{"kind":"textbox","id":"sh/tsvu9kni","slide":12,"text":"在现有 30 条基础上继续扩到 50–80 条，并补真实作文来源","textPreview":"在现有 30 条基础上继续扩到 50–80 条，并补真实作文来源","textChars":32,"textLines":1,"bbox":[204,300,212,54]}
+{"kind":"shape","id":"sh/m58z25kb","slide":12,"bbox":[490,238,330,132]}
+{"kind":"textbox","id":"sh/bq1oryts","slide":12,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[512,264,54,54]}
+{"kind":"textbox","id":"sh/3ex0nuxc","slide":12,"text":"优化 AI 评审","textPreview":"优化 AI 评审","textChars":8,"textLines":1,"bbox":[582,264,212,28]}
+{"kind":"textbox","id":"sh/at47y1kr","slide":12,"text":"重点减少 auto_accept 误放行，完善 meaning-change / overcorrection 规则","textPreview":"重点减少 auto_accept 误放行，完善 meaning-change / overcorrection 规则","textChars":58,"textLines":1,"bbox":[582,300,212,54]}
+{"kind":"shape","id":"sh/lkjm1cfa","slide":12,"bbox":[868,238,330,132]}
+{"kind":"textbox","id":"sh/szqtcj6t","slide":12,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[890,264,54,54]}
+{"kind":"textbox","id":"sh/32lszqtc","slide":12,"text":"设计师交付","textPreview":"设计师交付","textChars":5,"textLines":1,"bbox":[960,264,212,28]}
+{"kind":"textbox","id":"sh/ahoza1gv","slide":12,"text":"把 Figma 方向稿拆为页面、组件、状态、中文/英文文案","textPreview":"把 Figma 方向稿拆为页面、组件、状态、中文/英文文案","textChars":29,"textLines":1,"bbox":[960,300,212,54]}
+{"kind":"shape","id":"sh/l87ed8ba","slide":12,"bbox":[112,442,330,132]}
+{"kind":"textbox","id":"sh/sneloj2t","slide":12,"text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[134,468,54,54]}
+{"kind":"textbox","id":"sh/3q5o7qpg","slide":12,"text":"后端完善","textPreview":"后端完善","textChars":4,"textLines":1,"bbox":[204,468,212,28]}
+{"kind":"textbox","id":"sh/e9cvixcz","slide":12,"text":"补鉴权、匿名数据导出、教师使用日志与稳定性检查","textPreview":"补鉴权、匿名数据导出、教师使用日志与稳定性检查","textChars":23,"textLines":1,"bbox":[204,504,212,54]}
+{"kind":"shape","id":"sh/m58z25kb","slide":12,"bbox":[490,442,330,132]}
+{"kind":"textbox","id":"sh/bq1oryts","slide":12,"text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[512,468,54,54]}
+{"kind":"textbox","id":"sh/4byhgn29","slide":12,"text":"论文同步","textPreview":"论文同步","textChars":4,"textLines":1,"bbox":[582,468,212,28]}
+{"kind":"textbox","id":"sh/twra5gbq","slide":12,"text":"更新数据量、系统截图、部署信息和限制声明","textPreview":"更新数据量、系统截图、部署信息和限制声明","textChars":20,"textLines":1,"bbox":[582,504,212,54]}
+{"kind":"shape","id":"sh/mhk3q5o7","slide":12,"bbox":[868,442,330,132]}
+{"kind":"textbox","id":"sh/b2hwfyxo","slide":12,"text":"6","textPreview":"6","textChars":1,"textLines":1,"bbox":[890,468,54,54]}
+{"kind":"textbox","id":"sh/4nap4r65","slide":12,"text":"录屏投稿","textPreview":"录屏投稿","textChars":4,"textLines":1,"bbox":[960,468,212,28]}
+{"kind":"textbox","id":"sh/t83itgfm","slide":12,"text":"2.5 分钟英文视频：场景、操作、证据、结尾链接","textPreview":"2.5 分钟英文视频：场景、操作、证据、结尾链接","textChars":24,"textLines":1,"bbox":[960,504,212,54]}
+{"kind":"shape","id":"sh/mp0bi9s3","slide":12,"bbox":[1260,238,190,336]}
+{"kind":"textbox","id":"sh/bat47y1k","slide":12,"text":"本周一句话总结","textPreview":"本周一句话总结","textChars":7,"textLines":1,"bbox":[1282,266,146,32]}
+{"kind":"textbox","id":"sh/1cfa9w3m","slide":12,"text":"ConsensusScope 已经从“多模型裁决演示”变成“教师在环的 AI 写作反馈安全审核系统”。","textPreview":"ConsensusScope 已经从“多模型裁决演示”变成“教师在环的 AI 写作反馈安全审核系统”。","textChars":51,"textLines":1,"bbox":[1282,320,146,166]}
+{"kind":"textbox","id":"sh/crmhk3q5","slide":12,"text":"谢谢","textPreview":"谢谢","textChars":2,"textLines":1,"bbox":[1282,514,146,34]}
+{"kind":"textbox","id":"sh/j6tovaho","slide":12,"text":"ConsensusScope｜本周成果汇报｜2026-06-17","textPreview":"ConsensusScope｜本周成果汇报｜2026-06-17","textChars":32,"textLines":1,"bbox":[84,850,720,24]}
+{"kind":"textbox","id":"sh/ulwval87","slide":12,"text":"12","textPreview":"12","textChars":2,"textLines":1,"bbox":[1460,844,56,30]}
+{"kind":"notes","id":"nt/j55a31","slide":12,"text":""}
