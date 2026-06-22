@@ -1000,6 +1000,12 @@ def inject_styles() -> None:
             padding-bottom: 2.25rem;
         }
 
+        .main .block-container > div {
+            display: flex;
+            flex-direction: column;
+            gap: 0.72rem;
+        }
+
         section[data-testid="stSidebar"] {
             background: linear-gradient(180deg, rgba(13, 119, 219, 0.96), rgba(43, 160, 242, 0.94));
             border-right: 1px solid rgba(255, 255, 255, 0.42);
@@ -1075,21 +1081,40 @@ def inject_styles() -> None:
             box-shadow: 0 10px 24px rgba(5, 80, 160, 0.14);
         }
 
-        div[data-testid="stVerticalBlockBorderWrapper"],
         div[data-testid="stExpander"],
         div[data-testid="stForm"] {
             border-radius: 18px !important;
             border-color: var(--cs-border) !important;
             background: rgba(255, 255, 255, 0.76) !important;
             box-shadow: 0 12px 30px rgba(29, 111, 190, 0.10);
+            margin: 8px 0 14px;
+        }
+
+        div[data-testid="stExpander"] > details,
+        div[data-testid="stForm"] > div {
+            padding: 12px !important;
         }
 
         div[data-testid="stMetric"] {
             background: linear-gradient(180deg, rgba(255,255,255,0.94), rgba(241,249,255,0.86));
             border: 1px solid var(--cs-border);
             border-radius: 18px;
-            padding: 14px 15px;
-            box-shadow: 0 12px 28px rgba(29, 111, 190, 0.12);
+            padding: 16px 17px;
+            margin: 8px 0 14px;
+            box-shadow: 0 8px 18px rgba(29, 111, 190, 0.08);
+        }
+
+        div[data-testid="column"] > div {
+            padding-left: 6px;
+            padding-right: 6px;
+        }
+
+        div[data-testid="column"]:first-child > div {
+            padding-left: 0;
+        }
+
+        div[data-testid="column"]:last-child > div {
+            padding-right: 0;
         }
 
         div[data-testid="stMetric"] label {
@@ -1113,7 +1138,8 @@ def inject_styles() -> None:
         div[data-testid="stDataFrame"] {
             border-radius: 18px !important;
             overflow: hidden;
-            box-shadow: 0 12px 30px rgba(29, 111, 190, 0.12);
+            margin: 10px 0 18px;
+            box-shadow: 0 8px 20px rgba(29, 111, 190, 0.08);
         }
 
         .topbar {
@@ -1188,8 +1214,8 @@ def inject_styles() -> None:
             color: var(--cs-text);
             font-size: 1.13rem;
             font-weight: 820;
-            margin: 8px 0 10px;
-            padding: 12px 15px;
+            margin: 12px 0 16px;
+            padding: 14px 17px;
         }
 
         .hint {
@@ -1201,9 +1227,10 @@ def inject_styles() -> None:
             background: linear-gradient(180deg, rgba(255,255,255,0.94), rgba(239,249,255,0.84));
             border: 1px solid var(--cs-border);
             border-radius: 18px;
-            padding: 16px;
+            padding: 18px;
+            margin: 8px 0 16px;
             min-height: 108px;
-            box-shadow: 0 12px 28px rgba(29, 111, 190, 0.12);
+            box-shadow: 0 8px 18px rgba(29, 111, 190, 0.08);
         }
 
         .metric-label {
