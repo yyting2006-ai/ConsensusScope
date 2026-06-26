@@ -11,7 +11,104 @@ from docx.shared import Inches, Pt, RGBColor
 
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "docs" / "ConsensusScope_EMNLP_demo_script_2min30_en.docx"
+OUT_BILINGUAL = ROOT / "docs" / "ConsensusScope_EMNLP_demo_script_2min30_bilingual.docx"
+OUT_EN = ROOT / "docs" / "ConsensusScope_EMNLP_demo_script_2min30_en.docx"
+
+
+SEGMENTS = [
+    {
+        "time": "0:00-0:20",
+        "page": "Problem / Page 1: Review Workspace",
+        "operation": [
+            "打开 Page 1: Review Workspace。",
+            "鼠标停在标题和顶部指标附近。",
+            "指一下主流程：single essay, batch review, comparison, queue, evaluation, reports。",
+        ],
+        "narration": (
+            "AI writing feedback can be fluent but unsafe. A model may fix a local grammar issue while also changing a student's intended meaning, "
+            "adding unsupported content, or overcorrecting a reasonable ESL draft."
+        ),
+    },
+    {
+        "time": "0:20-0:50",
+        "page": "Page 2: Single Essay Review",
+        "operation": [
+            "点击 Page 2: Single Essay Review。",
+            "选择内置 demo essay。",
+            "展示 assignment prompt、essay text、reviewer settings。",
+            "如果页面已有 routed feedback，就直接展示；如果没有，点击生成/路由按钮。",
+            "指向 auto-accepted items、teacher-review items、risk score、evidence signal、review explanation。",
+        ],
+        "narration": (
+            "In the single essay window, a teacher can paste an ESL draft, provide the assignment prompt, and generate AI-style feedback candidates. "
+            "The system then routes each feedback item before it reaches the student. Each item receives a risk score, evidence signal, review priority, and short explanation for the teacher."
+        ),
+    },
+    {
+        "time": "0:50-1:10",
+        "page": "Page 3: Batch Review",
+        "operation": [
+            "点击 Page 3: Batch Review。",
+            "展示 packaged synthetic CSV / sample data。",
+            "展示 batch summary table 和 routed feedback export。",
+            "不需要上传真实文件。",
+        ],
+        "narration": (
+            "The batch window supports the practical classroom workflow: multiple essays can be processed from a CSV, then exported as routed feedback for teacher triage."
+        ),
+    },
+    {
+        "time": "1:10-1:30",
+        "page": "Page 4: AI Feedback Comparison",
+        "operation": [
+            "点击 Page 4: AI Feedback Comparison。",
+            "指向按 target span 和 issue type 对齐的反馈。",
+            "指向 risk level / consensus state / review routing 相关列。",
+        ],
+        "narration": (
+            "The comparison page makes model disagreement visible. Feedback is grouped by target span and issue type, with reviewers, suggestions, risk levels, and consensus state shown together."
+        ),
+    },
+    {
+        "time": "1:30-2:00",
+        "page": "Page 5: Teacher Queue",
+        "operation": [
+            "点击 Page 5: Teacher Queue。",
+            "停在一个 high-risk item 上，例如 meaning change 或 unsupported claim。",
+            "指向 Feedback Safety Graph path、review confidence、evidence signal、priority、explanation。",
+            "如果页面有 action 控件，可以选择或展示一个 teacher action。",
+        ],
+        "narration": (
+            "The teacher queue prioritizes high-risk feedback first. Here are four cases: a safe local phrase edit can be accepted; "
+            "a thesis-reversing suggestion is routed to review; an unsupported exam-score claim is blocked; and a teacher-dependent punctuation suggestion is now reviewable after our two-teacher diagnostic pilot."
+        ),
+    },
+    {
+        "time": "2:00-2:20",
+        "page": "Page 6: Effectiveness Evaluation",
+        "operation": [
+            "点击 Page 6: Effectiveness Evaluation。",
+            "指向 action accuracy、risk accuracy、high-risk recall、review recall、auto-accept precision。",
+            "如页面有公开学习者语料 benchmark 表，指向 auto share、review share、errors reviewed。",
+            "点击 Page 7: Reports，展示 report preview 和 export buttons。",
+        ],
+        "narration": (
+            "The evaluation page separates two kinds of evidence. The synthetic checks verify implementation behavior, while the public learner-corpus benchmark evaluates routing on JFLEG, "
+            "CoNLL-2014, FCE, and W&I plus LOCNESS correction data. We also ran a small two-teacher blind Likert pilot over 30 feedback items. "
+            "After adding deploy-time signals for teacher-dependent wording, semantic drift, and wrong local corrections, review-needed and unsafe-item recall both reach 1.000. "
+            "These results validate graph-backed review routing, not classroom learning outcomes."
+        ),
+    },
+    {
+        "time": "2:20-2:30",
+        "page": "Page 7: Reports",
+        "operation": [
+            "停在 Reports 或返回 Page 1。",
+            "鼠标不要动，留 1 秒安静收尾。",
+        ],
+        "narration": "ConsensusScope turns AI feedback into a reviewable teaching workflow: generate, compare, route, review, and export.",
+    },
+]
 
 
 def set_run_font(run, font_name: str = "Arial", size: int | None = None, bold: bool | None = None):
@@ -73,15 +170,15 @@ def set_table_width(table, width_dxa: int = 9360):
     tbl_ind.set(qn("w:type"), "dxa")
 
 
-def set_cell_text(cell, text: str, bold: bool = False):
+def set_cell_text(cell, text: str, bold: bool = False, size: int = 9):
     cell.text = ""
     p = cell.paragraphs[0]
     p.paragraph_format.space_after = Pt(0)
     p.paragraph_format.line_spacing = 1.08
     r = p.add_run(text)
-    set_run_font(r, size=9, bold=bold)
+    set_run_font(r, size=size, bold=bold)
     cell.vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.CENTER
-    set_cell_margins(cell)
+    set_cell_margins(cell, top=90, bottom=90, start=120, end=120)
 
 
 def add_labeled_para(doc: Document, label: str, text: str):
@@ -93,58 +190,68 @@ def add_labeled_para(doc: Document, label: str, text: str):
     set_run_font(r2, size=10)
 
 
-def add_timeline_table(doc: Document, rows: list[tuple[str, str, str, str]]):
+def add_bullet(doc: Document, text: str):
+    p = doc.add_paragraph(style="List Bullet")
+    p.paragraph_format.space_after = Pt(2)
+    r = p.add_run(text)
+    set_run_font(r, size=9)
+
+
+def add_timeline_table(doc: Document):
     table = doc.add_table(rows=1, cols=4)
     table.style = "Table Grid"
     table.autofit = False
     set_table_width(table)
-    headers = ["Time", "Page", "Screen Action", "Narration Focus"]
-    widths = [0.8, 1.3, 2.9, 1.3]
+    headers = ["Time", "Page", "Chinese screen operation", "English narration focus"]
+    widths = [0.7, 1.55, 3.15, 1.1]
     for idx, header in enumerate(headers):
         cell = table.rows[0].cells[idx]
         cell.width = Inches(widths[idx])
         set_cell_text(cell, header, bold=True)
         shade_cell(cell, "E8EEF5")
-    for row_data in rows:
+    for segment in SEGMENTS:
         row = table.add_row()
-        for idx, text in enumerate(row_data):
+        values = [
+            segment["time"],
+            segment["page"],
+            "\n".join(segment["operation"]),
+            segment["narration"].split(".")[0] + ".",
+        ]
+        for idx, text in enumerate(values):
             cell = row.cells[idx]
             cell.width = Inches(widths[idx])
-            set_cell_text(cell, text)
+            set_cell_text(cell, text, size=8 if idx == 2 else 9)
     doc.add_paragraph()
 
 
-def add_segment(doc: Document, time: str, title: str, actions: list[str], narration: str):
+def add_segment(doc: Document, segment: dict[str, object]):
     h = doc.add_paragraph(style="Heading 2")
-    r = h.add_run(f"{time}  {title}")
+    r = h.add_run(f"{segment['time']}  {segment['page']}")
     set_run_font(r, size=12, bold=True)
 
     p = doc.add_paragraph()
     p.paragraph_format.space_after = Pt(2)
-    r = p.add_run("Screen actions:")
+    r = p.add_run("屏幕操作（中文，录屏时照做）")
     set_run_font(r, size=10, bold=True)
-    for action in actions:
-        p = doc.add_paragraph(style="List Bullet")
-        p.paragraph_format.space_after = Pt(2)
-        r = p.add_run(action)
-        set_run_font(r, size=9)
+    for action in segment["operation"]:
+        add_bullet(doc, str(action))
 
     p = doc.add_paragraph()
     p.paragraph_format.left_indent = Inches(0.15)
     p.paragraph_format.right_indent = Inches(0.05)
-    p.paragraph_format.space_before = Pt(2)
+    p.paragraph_format.space_before = Pt(3)
     p.paragraph_format.space_after = Pt(8)
     p_pr = p._p.get_or_add_pPr()
     shd = OxmlElement("w:shd")
     shd.set(qn("w:fill"), "F4F6F9")
     p_pr.append(shd)
-    r1 = p.add_run("Narration: ")
+    r1 = p.add_run("English narration: ")
     set_run_font(r1, size=10, bold=True)
-    r2 = p.add_run(narration)
+    r2 = p.add_run(str(segment["narration"]))
     set_run_font(r2, size=10)
 
 
-def build_doc() -> None:
+def build_doc(out_path: Path, bilingual: bool = True) -> None:
     doc = Document()
     sec = doc.sections[0]
     sec.page_width = Inches(8.5)
@@ -165,150 +272,51 @@ def build_doc() -> None:
     title = doc.add_paragraph()
     title.alignment = WD_ALIGN_PARAGRAPH.CENTER
     title.paragraph_format.space_after = Pt(3)
-    r = title.add_run("ConsensusScope EMNLP Demo Screencast Script")
+    r = title.add_run("ConsensusScope EMNLP Demo Recording Script")
     set_run_font(r, size=20, bold=True)
     r.font.color.rgb = RGBColor.from_string("0B2545")
 
     subtitle = doc.add_paragraph()
     subtitle.alignment = WD_ALIGN_PARAGRAPH.CENTER
     subtitle.paragraph_format.space_after = Pt(10)
-    r = subtitle.add_run("English version · 2 minutes 30 seconds · with screen actions")
+    subtitle_text = "Chinese screen actions + English narration · 2 minutes 30 seconds" if bilingual else "English narration · 2 minutes 30 seconds"
+    r = subtitle.add_run(subtitle_text)
     set_run_font(r, size=11)
     r.font.color.rgb = RGBColor.from_string("555555")
 
-    add_labeled_para(
-        doc,
-        "Recording target: ",
-        "International conference submission. Use English narration. Keep the final video at or below 2 minutes 30 seconds.",
-    )
-    add_labeled_para(
-        doc,
-        "Main message: ",
-        "AI writing feedback can be fluent but unsafe. ConsensusScope routes ESL writing feedback into low-risk auto-accept and teacher-review queues before students see unsafe suggestions.",
-    )
+    add_labeled_para(doc, "Recording URL: ", "https://demo.consensusscope.cn/")
+    add_labeled_para(doc, "Recording target: ", "International conference submission. Use English narration. Keep the final video at or below 2 minutes 30 seconds.")
+    add_labeled_para(doc, "Main message: ", "ConsensusScope reviews AI-generated ESL writing feedback before students see it; it is a teacher-in-the-loop routing tool, not an automatic essay scorer or teacher replacement.")
 
-    doc.add_heading("1. Page-by-page Recording Plan", level=1)
-    add_timeline_table(
-        doc,
-        [
-            ("0:00-0:20", "Page 1", "Open Review Workspace. Keep the pointer near the teacher-facing question and workflow.", "Problem and premise"),
-            ("0:20-0:45", "Page 2", "Click Essay Review. Show the assignment prompt, essay, and routing summary.", "System overview"),
-            ("0:45-1:15", "Page 3", "Click Feedback Detail. Show target span, suggestion, risk, routing explanation, and teacher actions.", "Feedback detail"),
-            ("1:15-1:45", "Page 4", "Click Teacher Queue. Point to filters and high-risk items.", "Teacher review queue"),
-            ("1:45-2:10", "Page 5", "Click Writing Rubric. Point to deploy-time routing rules.", "Routing rules"),
-            ("2:10-2:25", "Page 6", "Click Reports and show the report preview.", "Export"),
-            ("2:25-2:30", "Page 1/6", "Stop moving the mouse and close with one sentence.", "Conclusion"),
-        ],
-    )
+    doc.add_heading("1. One-Page Timeline", level=1)
+    add_timeline_table(doc)
 
-    doc.add_heading("2. Full English Narration Script", level=1)
-    add_segment(
-        doc,
-        "0:00-0:20",
-        "Opening",
-        [
-            "Click Page 1: Review Workspace in the sidebar.",
-            "Keep the pointer near the title ConsensusScope.",
-            "Briefly move the pointer over the teacher-facing workflow.",
-        ],
-        "AI writing feedback can be fluent but unsafe. A model may fix a local grammar issue while changing a student's intended meaning, adding unsupported content, or overcorrecting a reasonable ESL draft.",
-    )
+    doc.add_heading("2. Read-Aloud Script", level=1)
+    for segment in SEGMENTS:
+        add_segment(doc, segment)
 
-    add_segment(
-        doc,
-        "0:20-0:45",
-        "System overview",
-        [
-            "Click Page 2: Essay Review.",
-            "Show the anonymized synthetic essay.",
-            "Point to the assignment prompt and routing summary.",
-        ],
-        "ConsensusScope builds a Feedback Safety Graph for each AI-generated ESL writing feedback item before it reaches students. Low-risk local edits can be accepted, while feedback that may change meaning or require pedagogical judgment goes to the teacher queue.",
+    doc.add_heading("3. Presenter Safety Checklist", level=1)
+    p = doc.add_paragraph()
+    p.paragraph_format.space_after = Pt(2)
+    r = p.add_run(
+        "Use English narration; show only synthetic demo records; do not reveal API keys or service credentials; "
+        "do not claim classroom learning gains; do not frame ConsensusScope as a teacher replacement or automatic essay scorer; "
+        "do not bring back the learned meta-judge claim."
     )
-
-    add_segment(
-        doc,
-        "0:45-1:15",
-        "Feedback detail",
-        [
-            "Click Page 3: Feedback Detail.",
-            "Point to the high-risk thesis-reversal example.",
-            "Show routing explanation and teacher action buttons.",
-        ],
-        "Each feedback item has a unified schema: issue type, target span, suggestion, student-facing draft, risk level, routing reason, and review evidence.",
-    )
-
-    add_segment(
-        doc,
-        "1:15-1:45",
-        "Teacher review queue",
-        [
-            "Click Page 4: Teacher Queue.",
-            "Point to high-risk meaning-change and unsupported-claim items.",
-            "Show risk, issue type, and status filters.",
-        ],
-        "The teacher queue prioritizes high-risk feedback first. Teachers can filter by risk, issue type, and status, so the system supports human review rather than hiding uncertainty behind one automatic decision.",
-    )
-
-    add_segment(
-        doc,
-        "1:45-2:10",
-        "Writing rubric",
-        [
-            "Click Page 5: Writing Rubric.",
-            "Point to meaning preservation, local language edit, task response, and tone rules.",
-            "Mention that the router uses deploy-time signals, not hidden gold labels.",
-        ],
-        "The Writing Rubric page makes routing rules inspectable. The system uses deploy-time signals such as meaning preservation, local edit scope, task response, organization, tone, and parse quality.",
-    )
-
-    add_segment(
-        doc,
-        "2:05-2:25",
-        "Report export",
-        [
-            "Click Page 6: Reports.",
-            "Show the teacher-readable report preview.",
-            "Point to accepted edits, review-routed items, routing reasons, and limitations.",
-        ],
-        "The report exports a teacher-readable audit trail with accepted edits, review-routed items, routing reasons, and limitations.",
-    )
-
-    add_segment(
-        doc,
-        "2:20-2:30",
-        "Closing",
-        [
-            "Return to Page 1 or stay on Report Export.",
-            "Stop moving the mouse.",
-            "Leave one second of silence after the final sentence before stopping the recording.",
-        ],
-        "ConsensusScope helps teachers decide when AI feedback is safe to show and when it needs human review.",
-    )
-
-    doc.add_heading("3. Presenter Checklist", level=1)
-    for item in [
-        "Use English narration for international conference submission.",
-        "Keep the video at or below 2 minutes 30 seconds.",
-        "Do not type or reveal real API keys.",
-        "Do not claim teacher-study or classroom annotation results that are not in the data.",
-        "Do not frame ConsensusScope as an automatic essay scorer or teacher replacement.",
-        "Keep auxiliary QA pages clearly secondary to the ESL literary-feedback workflow.",
-    ]:
-        p = doc.add_paragraph(style="List Bullet")
-        r = p.add_run(item)
-        set_run_font(r, size=10)
+    set_run_font(r, size=9)
 
     footer = doc.sections[0].footer.paragraphs[0]
     footer.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    r = footer.add_run("ConsensusScope EMNLP demo script · English · 2:30")
+    r = footer.add_run("ConsensusScope EMNLP demo script · 2:30")
     set_run_font(r, size=8)
     r.font.color.rgb = RGBColor.from_string("777777")
 
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    doc.save(OUT)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    doc.save(out_path)
 
 
 if __name__ == "__main__":
-    build_doc()
-    print(OUT)
+    build_doc(OUT_BILINGUAL, bilingual=True)
+    build_doc(OUT_EN, bilingual=False)
+    print(OUT_BILINGUAL)
+    print(OUT_EN)

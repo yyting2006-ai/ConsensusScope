@@ -15,8 +15,8 @@ This checklist turns the local prototype into a submission-ready demo package.
 - [x] Public release notes included
 - [x] Public learner-corpus benchmark summaries included
 - [x] Public repository URL confirmed
-- [ ] Remove private `.env` before public release
-- [ ] Confirm no personal phone numbers, emails or student identifiers are in public files
+- [x] Confirm private `.env` is absent before public release
+- [x] Confirm no API keys, student identifiers, or private non-author contact data are in public files
 
 ## Demo
 
@@ -33,7 +33,7 @@ This checklist turns the local prototype into a submission-ready demo package.
 - [x] Screenshot generation script
 - [x] English submission interface: `app/streamlit_app.py`
 - [x] English screenshots: `docs/screenshots_en/`
-- [ ] Final narrated demo video or supplementary MPEG4 under 2.5 minutes
+- [x] Final narrated demo video URL: https://youtu.be/6reDMnZGGW4
 
 ## Paper
 
@@ -42,7 +42,7 @@ This checklist turns the local prototype into a submission-ready demo package.
 - [x] System description
 - [x] Public GEC evaluation snapshot
 - [x] Ethics and limitations section
-- [ ] Regenerate final ACL-style PDF and LaTeX source package
+- [x] Regenerate final ACL-style PDF and LaTeX source package
 - [ ] Add final video/supplementary file in the submission system
 
 ## Before Public Upload
