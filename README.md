@@ -23,7 +23,7 @@ https://demo.consensusscope.cn/
 The narrated demo video is available at:
 
 ```text
-https://youtu.be/6reDMnZGGW4
+https://youtu.be/vp4Kj48bv8Q
 ```
 
 The hosted backend API is available at:
@@ -114,7 +114,7 @@ Single Essay Review -> Batch Review -> AI Feedback Comparison -> Teacher Queue -
 For demo-track review, the repository includes:
 
 - `paper/consensusscope_emnlp_demo.tex`: EMNLP-style demo paper source.
-- Narrated demo video: https://youtu.be/6reDMnZGGW4
+- Narrated demo video: https://youtu.be/vp4Kj48bv8Q
 - `docs/screenshots_en/`: main screenshots for the system paper and video.
 - `docs/demo_video_script.md`: 2.5-minute English recording script.
 - `docs/demo_stability_checklist.md`: public URL, local fallback, and recording
@@ -524,7 +524,7 @@ under `legacy/`.
 ## Submission Materials
 
 - EMNLP demo paper draft: `paper/consensusscope_emnlp_demo.tex`
-- Narrated demo video: https://youtu.be/6reDMnZGGW4
+- Narrated demo video: https://youtu.be/vp4Kj48bv8Q
 - Demo video script: `docs/demo_video_script.md`
 - Narration script Word file:
   `docs/ConsensusScope_EMNLP_demo_script_2min30_en.docx`

@@ -33,7 +33,7 @@ This checklist turns the local prototype into a submission-ready demo package.
 - [x] Screenshot generation script
 - [x] English submission interface: `app/streamlit_app.py`
 - [x] English screenshots: `docs/screenshots_en/`
-- [x] Final narrated demo video URL: https://youtu.be/6reDMnZGGW4
+- [x] Final narrated demo video URL: https://youtu.be/vp4Kj48bv8Q
 
 ## Paper
 
