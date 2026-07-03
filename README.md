@@ -135,7 +135,11 @@ target span -> AI suggestion -> active safety dimension -> routing decision
 
 Each graph is built from deploy-time fields only. It does **not** use public
 corpus gold corrections, teacher labels, or classroom outcomes when routing a
-new item. The exported route contains:
+new item. A lightweight logistic calibration layer then maps the graph features
+to `calibrated_review_probability`; the packaged calibration artifact is fitted
+from the two-teacher Likert pilot and is used only to calibrate the
+auto-release/review boundary, not to replace the graph explanation. The exported
+route contains:
 
 - `safety_graph_active_dimensions`: active graph dimensions, such as
   `meaning_preservation`, `content_grounding`, or `local_edit`.
@@ -225,19 +229,23 @@ New ESL writing review-routing assets:
   used by the router.
 - `data/esl_writing_demo/routing_results.csv`: deterministic routing output for
   the packaged demo.
+- `data/esl_writing_demo/routing_calibration.json`: pilot-calibrated logistic
+  release policy fitted from the two-teacher Likert routing analysis.
 - `data/esl_writing_demo/expected_routing_labels.csv`: synthetic expectation
   labels for implementation-level routing evaluation.
 - `data/esl_writing_demo/ai_review_stress_cases.csv`: synthetic stress cases
   for dangerous AI feedback, including thesis reversal, whole-essay rewriting,
   unsupported factual claims, harsh student-facing language, low agreement, and
   parse failures.
-- `src/esl_writing_feedback.py`: Feedback Safety Graph construction and main
-  rule-based routing interface.
+- `src/esl_writing_feedback.py`: Feedback Safety Graph construction and
+  calibrated routing interface.
 - `src/prompts/esl_feedback_prompt.py`: structured feedback-generation prompt
   template.
 - `scripts/evaluate_esl_routing_demo.py`: synthetic routing evaluation script.
 - `scripts/analyze_teacher_likert_pilot.py`: offline analysis script for a
   two-teacher 1-5 Likert pilot on AI feedback safety and usefulness.
+- `scripts/calibrate_routing_policy.py`: offline logistic calibration script
+  that fits the release/review policy from Likert routing analysis.
 - `scripts/run_public_gec_benchmark.py`: offline public learner-corpus
   benchmark runner for JFLEG-style parallel files, `.m2` GEC files, or a simple
   source/reference CSV.
@@ -253,8 +261,9 @@ implementation-test records, not classroom evaluation results.
 We also ran a small blind diagnostic pilot with two English teachers on the
 expert annotation website. Each teacher rated 30 AI feedback items on six 1-5
 dimensions: correctness, meaning preservation, student readiness, usefulness,
-clarity, and direct-release suitability. These ratings are offline diagnostics;
-they are not used by the deploy-time router.
+clarity, and direct-release suitability. These ratings are offline diagnostics:
+per-item teacher labels are not read by the deploy-time router, while the
+aggregate pilot is used to fit and audit the calibration artifact.
 
 The pilot exposed three borderline auto-release patterns: teacher-dependent
 advice such as "if the teacher wants", semantic drift in wording edits such as
@@ -396,6 +405,9 @@ The ESL routing layer returns:
   `unclear`
 - `status`: `auto_accepted` or `needs_teacher_review`
 - `risk_score`: deploy-time risk score in `[0, 1]`
+- `calibrated_review_probability`: pilot-calibrated probability that teacher
+  review is needed
+- `routing_policy`: calibration artifact name used by the router
 - `review_confidence`: confidence in the route, not in the correctness of the
   feedback itself
 - `evidence_signal`: `supported`, `missing`, `conflict`, or `none`
@@ -483,6 +495,14 @@ Analyze future two-teacher Likert ratings:
 PYTHONPATH=. python3 scripts/analyze_teacher_likert_pilot.py \
   --ratings path/to/exported_teacher_ratings \
   --routing expert_annotation_app/sample_data/routing_results.csv
+```
+
+Fit or refresh the routing calibration policy from the analyzed pilot output:
+
+```bash
+PYTHONPATH=. python3 scripts/calibrate_routing_policy.py \
+  --input reports/teacher_likert_pilot/likert_routing_analysis.csv \
+  --output data/esl_writing_demo/routing_calibration.json
 ```
 
 Expected annotation file name:

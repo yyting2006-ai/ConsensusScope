@@ -64,5 +64,5 @@
     ],
     "mean_within_1_point_share": 0.6944
   },
-  "note": "Likert ratings are offline teacher diagnostics. They are not used by the deploy-time router. Scores are averaged across at most two teachers."
+  "note": "Likert ratings are offline teacher diagnostics. They are not read as per-item labels during deploy-time routing, but the aggregate analysis can be used to fit or audit a calibration artifact. Scores are averaged across at most two teachers."
 }

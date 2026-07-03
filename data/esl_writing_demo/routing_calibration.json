@@ -1,0 +1,28 @@
+{
+  "name": "pilot_calibrated_logistic_v1",
+  "source": "reports/teacher_likert_pilot/likert_routing_analysis.csv",
+  "target": "teacher_review_needed",
+  "items": 30,
+  "feature_names": [
+    "risk_score",
+    "has_local_edit",
+    "has_meaning_risk",
+    "has_grounding_risk",
+    "has_specificity_risk",
+    "has_agreement_risk",
+    "has_evidence_gap"
+  ],
+  "intercept": -0.58226995,
+  "coefficients": {
+    "risk_score": 0.8613054,
+    "has_local_edit": -0.46675807,
+    "has_meaning_risk": 1.13758565,
+    "has_grounding_risk": 0.65278588,
+    "has_specificity_risk": -0.04697089,
+    "has_agreement_risk": 0.0,
+    "has_evidence_gap": 0.0
+  },
+  "review_probability_cutoff": 0.3,
+  "review_needed_recall": 1.0,
+  "auto_precision": 1.0
+}

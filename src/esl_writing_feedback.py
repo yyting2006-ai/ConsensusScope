@@ -1,7 +1,8 @@
 from __future__ import annotations
 
-import re
 import json
+import math
+import re
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Sequence
 
@@ -115,6 +116,23 @@ SAFETY_GRAPH_DIMENSIONS = {
         "label": "Reviewer agreement",
         "reasons": {"low_model_agreement"},
         "severity": "medium",
+    },
+}
+
+CALIBRATED_REVIEW_POLICY = {
+    "name": "pilot_calibrated_logistic_v1",
+    "source": "two_teacher_likert_pilot_30_items",
+    "target": "teacher_review_needed",
+    "review_probability_cutoff": 0.30,
+    "intercept": -0.58226995,
+    "coefficients": {
+        "risk_score": 0.86130540,
+        "has_local_edit": -0.46675807,
+        "has_meaning_risk": 1.13758565,
+        "has_grounding_risk": 0.65278588,
+        "has_specificity_risk": -0.04697089,
+        "has_agreement_risk": 0.0,
+        "has_evidence_gap": 0.0,
     },
 }
 
@@ -578,6 +596,58 @@ def _confidence_from_signals(signals: Mapping[str, Any], risk_level: str) -> flo
     return round(_clamp(confidence, 0.42, 0.95), 3)
 
 
+def _calibration_features(signals: Mapping[str, Any], reasons: Sequence[str]) -> Dict[str, float]:
+    reason_set = set(reasons)
+    return {
+        "risk_score": float(signals.get("risk_score") or 0.0),
+        "has_local_edit": float(bool(signals.get("low_issue") or "local_language_edit" in reason_set)),
+        "has_meaning_risk": float(
+            bool(
+                reason_set.intersection({"meaning_change", "overcorrection", "wrong_correction"})
+                or signals.get("meaning_hint")
+                or signals.get("semantic_drift")
+                or signals.get("wrong_modal_correction")
+            )
+        ),
+        "has_grounding_risk": float(
+            bool("unsupported_claim" in reason_set or signals.get("unsupported_hint") or signals.get("missing_evidence"))
+        ),
+        "has_specificity_risk": float(
+            bool(reason_set.intersection({"too_vague", "teacher_dependent"}) or signals.get("vague_feedback"))
+        ),
+        "has_agreement_risk": float(bool("low_model_agreement" in reason_set or signals.get("low_agreement"))),
+        "has_evidence_gap": float(bool(signals.get("missing_evidence") or signals.get("conflict_evidence"))),
+    }
+
+
+def _calibrated_review_probability(signals: Mapping[str, Any], reasons: Sequence[str]) -> float:
+    """Pilot-calibrated probability that teacher review is needed.
+
+    The graph remains rule-explainable. The lightweight logistic layer only
+    calibrates the release/review boundary, so deployment does not require a
+    runtime ML package or online training.
+    """
+    features = _calibration_features(signals, reasons)
+    logit = float(CALIBRATED_REVIEW_POLICY["intercept"])
+    coefficients = CALIBRATED_REVIEW_POLICY["coefficients"]
+    for name, value in features.items():
+        logit += float(coefficients.get(name, 0.0)) * float(value)
+    return round(_clamp(1.0 / (1.0 + math.exp(-logit))), 3)
+
+
+def _has_high_severity_signal(signals: Mapping[str, Any], reasons: Sequence[str]) -> bool:
+    reason_set = set(reasons)
+    return bool(
+        signals.get("high_issue")
+        or signals.get("conflict_evidence")
+        or signals.get("whole_rewrite")
+        or signals.get("harsh_feedback")
+        or signals.get("introduces_new_argument")
+        or (signals.get("unsupported_hint") and signals.get("missing_evidence"))
+        or reason_set.intersection({"overcorrection", "introduces_new_argument", "too_harsh"})
+    )
+
+
 def _priority_from_score(risk_level: str, risk_score: float, recommended_action: str) -> str:
     if recommended_action == "auto_accept":
         return "low"
@@ -632,26 +702,35 @@ def rule_based_route(
     risk_score = float(signals["risk_score"])
     reasons = _risk_reasons_from_signals(signals)
     evidence_signal = _safe_text(signals.get("evidence_signal"))
+    review_probability = _calibrated_review_probability(signals, reasons)
+    review_cutoff = float(CALIBRATED_REVIEW_POLICY["review_probability_cutoff"])
 
     if signals.get("parse_error"):
         risk_level = "medium"
         recommended_action = "needs_more_evidence"
         meaning = "unclear"
-    elif risk_score >= 0.72:
+    elif review_probability >= review_cutoff:
+        risk_level = "high" if _has_high_severity_signal(signals, reasons) else "medium"
+        recommended_action = "teacher_review"
+        meaning = "changes_meaning" if any(
+            reason in reasons
+            for reason in ["meaning_change", "overcorrection", "introduces_new_argument", "unsupported_claim"]
+        ) else "unclear"
+    else:
+        risk_level = "low"
+        recommended_action = "auto_accept"
+        meaning = "preserves_meaning"
+
+    # High-severity evidence can override the learned release boundary. This
+    # preserves conservative behavior for obviously unsafe feedback while the
+    # logistic layer calibrates the ordinary auto-release/review boundary.
+    if recommended_action == "auto_accept" and _has_high_severity_signal(signals, reasons):
         risk_level = "high"
         recommended_action = "teacher_review"
         meaning = "changes_meaning" if any(
             reason in reasons
             for reason in ["meaning_change", "overcorrection", "introduces_new_argument", "unsupported_claim"]
         ) else "unclear"
-    elif risk_score >= 0.32:
-        risk_level = "medium"
-        recommended_action = "teacher_review"
-        meaning = "unclear"
-    else:
-        risk_level = "low"
-        recommended_action = "auto_accept"
-        meaning = "preserves_meaning"
 
     status = _status_for_action(recommended_action)
     review_confidence = _confidence_from_signals(signals, risk_level)
@@ -680,6 +759,8 @@ def rule_based_route(
         "meaning_preservation_predicted": meaning,
         "status": status,
         "risk_score": risk_score,
+        "calibrated_review_probability": review_probability,
+        "routing_policy": str(CALIBRATED_REVIEW_POLICY["name"]),
         "review_confidence": review_confidence,
         "evidence_signal": evidence_signal,
         "review_priority": review_priority,
@@ -738,6 +819,8 @@ def route_feedback_dataframe(feedback_items: pd.DataFrame, review_evidence: pd.D
                 "meaning_preservation_predicted",
                 "status",
                 "risk_score",
+                "calibrated_review_probability",
+                "routing_policy",
                 "review_confidence",
                 "evidence_signal",
                 "review_priority",
@@ -760,6 +843,8 @@ def route_feedback_dataframe(feedback_items: pd.DataFrame, review_evidence: pd.D
             "meaning_preservation_predicted",
             "status",
             "risk_score",
+            "calibrated_review_probability",
+            "routing_policy",
             "review_confidence",
             "evidence_signal",
             "review_priority",

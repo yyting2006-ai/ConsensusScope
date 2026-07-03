@@ -218,8 +218,9 @@ def analyze(ratings: pd.DataFrame, routing: pd.DataFrame) -> Dict[str, Any]:
         "any_teacher_unsafe_reviewed_recall": round(_safe_div(any_reviewed_unsafe, any_unsafe), 4),
         "agreement": _agreement_metrics(ratings),
         "note": (
-            "Likert ratings are offline teacher diagnostics. They are not used by the deploy-time router. "
-            "Scores are averaged across at most two teachers."
+            "Likert ratings are offline teacher diagnostics. They are not read as per-item labels during "
+            "deploy-time routing, but the aggregate analysis can be used to fit or audit a calibration "
+            "artifact. Scores are averaged across at most two teachers."
         ),
     }
     return {

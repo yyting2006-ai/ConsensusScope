@@ -23,6 +23,8 @@ def test_grammar_edit_routes_to_low_auto_accept():
     assert "local_language_edit" in route["risk_reasons"]
     assert route["safety_graph_active_dimensions"] == "local_edit"
     assert route["safety_graph_path"].endswith("local_edit -> auto_accept")
+    assert route["routing_policy"] == "pilot_calibrated_logistic_v1"
+    assert 0.0 <= route["calibrated_review_probability"] <= 1.0
 
 
 def test_meaning_change_routes_to_teacher_review():

@@ -15,8 +15,8 @@ for student learning outcomes.
 - Mode: Blind Annotation Mode.
 - Scale: 1-5 Likert ratings for correctness, meaning preservation, student
   readiness, usefulness, clarity, and direct-release suitability.
-- Use of labels: offline diagnostics only; ratings are not visible to the
-  deploy-time router.
+- Use of labels: offline diagnostics and calibration only; per-item teacher
+  labels are not visible to the deploy-time router.
 
 ## Main Finding
 
