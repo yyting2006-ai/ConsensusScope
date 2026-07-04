@@ -281,7 +281,7 @@ TRANSLATIONS = {
         "select_placeholder": "请选择...",
         "session_required": "请先在“开始标注”页面选择教师编号和批次编号。",
         "expert_session": "开始标注",
-        "expert_session_desc": "请选择教师编号 1 或 2，以及批次编号，然后按照左侧页面从上到下完成 1–5 分问卷。结果会保存到本应用的 SQLite 文件，并可导出为 CSV/JSON。",
+        "expert_session_desc": "请选择教师编号 1、2 或 3，以及批次编号，然后按照左侧页面从上到下完成 1–5 分问卷。结果会保存到本应用的 SQLite 文件，并可导出为 CSV/JSON。",
         "storage_backend": "当前存储：{backend}",
         "existing_sessions": "继续已有标注",
         "load_selected_session": "继续这个标注",
