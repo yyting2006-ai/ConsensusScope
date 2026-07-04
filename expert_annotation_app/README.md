@@ -7,7 +7,7 @@ ConsensusScope demo and is not a student-facing grading system.
 ## 中文使用说明
 
 这个网页用于让英语教师判断 AI 生成的英语写作反馈是否可靠。正式 pilot
-最多只邀请两位教师，每位教师只需要用 1-5 分问卷逐条评价 AI 反馈。
+最多邀请三位教师，每位教师只需要用 1-5 分问卷逐条评价 AI 反馈。
 
 教师正式标注只走一条线：
 
@@ -17,7 +17,7 @@ ConsensusScope demo and is not a student-facing grading system.
 
 教师只需要选择：
 
-- 教师编号：`1` 或 `2`
+- 教师编号：`1`、`2` 或 `3`
 - 批次编号：`1`、`2` 或 `3`
 
 批次含义：
@@ -34,7 +34,8 @@ ConsensusScope demo and is not a student-facing grading system.
 
 - 标注者 A：教师编号 `1`，批次编号 `3`
 - 标注者 B：教师编号 `2`，批次编号 `3`
-- 两位老师标同一批 30 条反馈，便于计算两位教师一致性。
+- 标注者 C：教师编号 `3`，批次编号 `3`
+- 三位老师标同一批 30 条反馈，便于计算平均评分、两两一致性和分歧样本。
 
 默认使用盲标模式。盲标模式不会显示系统风险等级、推荐动作、模型一致性、
 模型名称或 ConsensusScope 决策，避免影响教师判断。
