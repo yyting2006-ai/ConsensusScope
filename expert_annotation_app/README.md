@@ -18,15 +18,23 @@ ConsensusScope demo and is not a student-facing grading system.
 教师只需要选择：
 
 - 教师编号：`1` 或 `2`
-- 批次编号：`1` 或 `2`
+- 批次编号：`1`、`2` 或 `3`
 
 批次含义：
 
 - `1`：原始 pilot 批次，12 条 AI feedback items。
 - `2`：新增扩展批次，18 条 AI feedback items。
+- `3`：第三轮扩展批次，30 条 AI feedback items，重点覆盖比较文学写作、
+  AI 写作反馈、学习压力、纸质书/电子书比较和文学回应等匿名作文场景。
 
-如果老师已经完成过批次 `1`，请继续使用同一个教师编号，选择批次 `2`
-完成新增样本。不要让老师重复标注已经完成的批次。
+如果老师已经完成过批次 `1` 和 `2`，请继续使用同一个教师编号，选择批次
+`3` 完成第三轮新增样本。不要让老师重复标注已经完成的批次。
+
+第三轮建议：
+
+- 标注者 A：教师编号 `1`，批次编号 `3`
+- 标注者 B：教师编号 `2`，批次编号 `3`
+- 两位老师标同一批 30 条反馈，便于计算两位教师一致性。
 
 默认使用盲标模式。盲标模式不会显示系统风险等级、推荐动作、模型一致性、
 模型名称或 ConsensusScope 决策，避免影响教师判断。
@@ -99,7 +107,7 @@ Do not hard-code it in the source code.
 Sample CSV files are stored in `sample_data/`:
 
 - `essays.csv`
-- `feedback_items.csv`, including 30 feedback items across two annotation
+- `feedback_items.csv`, including 60 feedback items across three annotation
   batches
 - `routing_results.csv` optional, used only when researcher-assisted signals
   are enabled
@@ -158,8 +166,8 @@ teachers rated the same items, and how well system routing covers feedback that
 teachers marked as needing review.
 
 For the expanded pilot, put all exported `likert_feedback_ratings*.csv` files
-from both teachers and both batches into one folder. The analysis script can
-read that folder directly.
+from both teachers and all completed batches into one folder. The analysis
+script can read that folder directly.
 
 ## Research And Privacy Boundary
 

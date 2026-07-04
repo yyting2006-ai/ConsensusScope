@@ -1289,7 +1289,7 @@ def page_expert_session(data: Mapping[str, pd.DataFrame]) -> None:
     session = get_session()
     with st.form("session_form"):
         expert_options = ["1", "2"]
-        batch_options = ["1", "2"]
+        batch_options = ["1", "2", "3"]
         expert_index = expert_options.index(session["expert_id"]) if session["expert_id"] in expert_options else 0
         batch_index = batch_options.index(session["batch_id"]) if session["batch_id"] in batch_options else 0
         expert_id = st.selectbox(t("teacher_id_choice"), expert_options, index=expert_index)
