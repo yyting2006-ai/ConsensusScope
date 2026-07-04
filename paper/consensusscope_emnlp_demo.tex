@@ -69,12 +69,23 @@ rather than an essay score or final rewrite.\footnote{Code and hosted demo:
 \url{https://github.com/yyting2006-ai/ConsensusScope} and
 \url{https://demo.consensusscope.cn/}.}
 
-The core mechanism is Feedback Safety Graph Routing. ConsensusScope links the
+The core mechanism is Feedback Safety Graph Routing (Figure~\ref{fig:routing-cycle}).
+ConsensusScope links the
 target span, AI suggestion, evidence status, active safety dimensions, and final
 route in an auditable graph. Deploy-time signals include meaning-preservation
 warnings, content-grounding risks, local-edit scope, tone and specificity, model
 agreement, and parse failures. The system therefore exposes why an item is
 released, reviewed, or flagged as needing more evidence.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.94\linewidth]{figures/feedback_safety_routing_cycle.png}
+\caption{ConsensusScope workflow for safety routing of AI-generated ESL writing
+feedback. Blue arrows denote automated processing from anonymized essays and
+multi-model feedback to item-level routing decisions; red arrows denote teacher
+feedback loops that update review evidence and future audit analysis.}
+\label{fig:routing-cycle}
+\end{figure*}
 
 We evaluate this middle layer with stress checks, a public learner-corpus
 benchmark over 349,782 generated feedback candidates, and a 30-item two-teacher
@@ -141,184 +152,116 @@ automatic correction, essay scoring, or generic model judging.}
 \label{tab:comparison}
 \end{table*}
 
+
 \section{Method}
 
-The core method in ConsensusScope is the Feedback Safety Graph Router (FSGR), a
-three-module workflow for deciding whether an AI-generated writing-feedback item
-can be released to a student. FSGR addresses three connected deployment
-problems: heterogeneous model outputs, opaque safety evidence, and unreliable
-automatic release. Given an anonymized essay $E$ and feedback candidates
-$\mathcal{C}=\{c_i\}_{i=1}^{n}$, Module 1 converts each raw candidate into a
-unified feedback item, Module 2 converts the item into graph-backed safety
-signals, and Module 3 converts those signals into a route.
+ConsensusScope implements Feedback Safety Graph Routing (FSGR), an item-level
+routing method for deciding whether an AI-generated writing-feedback suggestion
+can be shown to a student. The workflow has three input-output modules: given
+an anonymized essay $E$ and feedback candidates $\mathcal{C}=\{c_i\}_{i=1}^{n}$,
+Module 1 normalizes each candidate, Module 2 builds graph-backed safety
+evidence, and Module 3 maps that evidence to a route
+$r_i\in\{A,V,E\}$, where $A$ denotes automatic release, $V$ denotes teacher
+review, and $E$ denotes a request for more evidence.
 
-\paragraph{Module 1: candidate normalization.}
-The input to the first module is a raw feedback candidate $c_i$: one proposed
-comment or edit for a specific span in an ESL essay, produced by an LLM, a
-prompt variant, or a benchmark generator. Because raw candidates may omit
-rationales, use different issue labels, or expose different model metadata, FSGR
-normalizes each candidate into
-$f_i=(q_i,d_i,x_i,z_i,u_i,h_i,m_i,t_i,a_i)$. Here $q_i$ is the feedback-item
-identifier, $d_i$ is the essay identifier, $x_i$ is the target span, $z_i$ is
-the surrounding context, $u_i$ is the AI suggestion, $h_i$ is the rationale,
-$m_i$ is the model source, $t_i$ is the predicted issue type, and $a_i$ is an
-optional agreement signal. The output of this module is therefore a comparable
-item $f_i$ that can be inspected by the same downstream safety procedure
-regardless of which generator produced it.
+\paragraph{Module 1: unified feedback item.}
+FSGR first normalizes each raw candidate into a stable schema
+$f_i=(d_i,x_i,z_i,u_i,h_i,t_i,a_i)$: essay id, target span, surrounding context,
+AI suggestion, rationale, predicted issue type, and optional agreement signal.
+This makes live OpenAI-compatible feedback, deterministic benchmark candidates,
+and stored audit records enter the same downstream router. The module output is
+the comparable feedback item $f_i$.
 
-\paragraph{Module 2: safety graph construction.}
-The second module takes $f_i$ as input and asks what observable evidence supports
-or blocks release. FSGR extracts a binary signal vector $b_i$ for parse failure,
-evidence conflict, meaning-change cues, unsupported claims, whole-draft
-rewriting, tone warnings, teacher-dependent wording, broad target spans, and
-agreement risk. It then maps these signals to six graph dimensions: local edit,
-meaning preservation, content grounding, pedagogical tone, feedback specificity,
-and model agreement. The module outputs an auditable graph $G_i$ whose core path
-is target span $\rightarrow$ AI suggestion $\rightarrow$ active safety dimension
-$\rightarrow$ routing decision. Nodes store the span, context, suggestion,
-rationale, issue type, evidence signal, active dimensions, and route; edges
-store relations such as \texttt{contains}, \texttt{is\_revised\_by},
-\texttt{activates}, and \texttt{justifies\_route}.
+\paragraph{Module 2: Feedback Safety Graph.}
+The router extracts deploy-time signals for parse failure, evidence gaps,
+meaning-change cues, unsupported claims, whole-draft rewriting, tone warnings,
+teacher-dependent wording, broad target spans, and agreement risk. These signals
+activate graph dimensions for local edit, meaning preservation, content
+grounding, pedagogical tone, feedback specificity, and model agreement. The
+stored path has the form
+\textit{target span $\rightarrow$ AI suggestion $\rightarrow$ active safety
+dimension $\rightarrow$ route}, so teachers can inspect why an item is released
+or queued. The module output is the graph record $G_i$ and its active safety
+signals.
 
-\paragraph{Module 3: calibrated release routing.}
-The third module takes the graph features from Module 2 and produces the final
-route $R(f_i)=(r_i,p_i,s_i,G_i)$. FSGR first computes a bounded risk score and a
-pilot-calibrated review probability:
+\paragraph{Module 3: release policy.}
+FSGR computes a bounded risk score and a calibrated review probability,
 \[
-s_i=\min(1,\sum_k \alpha_k b_{ik}),
-\quad
+s_i=\min(1,\sum_k \alpha_k b_{ik}),\quad
 p_i=\sigma(\beta_0+\beta^\top x_i),
 \]
-where $x_i$ concatenates $s_i$ with the active graph-dimension indicators and
-$p_i$ is the calibrated probability that teacher review is needed, following
-the standard binary-response regression formulation~\cite{cox1958regression}.
-It then assigns the route:
+where $b_i$ is the deploy-time signal vector and $x_i$ combines risk score and
+active graph dimensions, following the logistic regression formulation
+~\cite{cox1958regression}. High-severity signals and parse/evidence failures
+can override the probability. The module output is the final route:
 \[
 r_i =
 \begin{cases}
 E, & \phi_i=1,\\
 V, & h(b_i)=1 \vee p_i\ge \tau,\\
-A, & \text{otherwise},
+A, & \text{otherwise}.
 \end{cases}
 \]
-where $\phi_i$ indicates parse or evidence-grounding failure, $h(\cdot)$ marks
-high-severity signals, and $\tau$ is selected on the two-teacher diagnostic
-pilot to preserve review-needed recall. The actions $E$, $V$, and $A$ correspond
-to evidence request, teacher review, and auto release, respectively. The module
-outputs a risk level, recommended action, risk reasons, risk score, graph path,
-node/edge records, and a short explanation. Teacher ratings and public-corpus
-gold corrections are reserved for offline calibration and evaluation, not used
-as deploy-time labels.
+Teacher ratings and public-corpus gold corrections are used only for offline
+calibration and evaluation; they are not available when routing a new item.
 
-\section{Functionality}
+\section{System Interface}
 
-The Streamlit/FastAPI demo exposes the router as a teacher-facing workflow:
-single-essay review, batch review, AI feedback comparison, teacher queue,
-evaluation, and report export. Users inspect routed items, open graph paths,
-prioritize review queues, and save teacher decisions through the backend.
+The demo turns FSGR into a teacher-facing review workflow. In single-essay mode,
+a teacher reviews an anonymized ESL draft and inspects item-level routes. In
+batch mode, the system prioritizes medium- and high-risk feedback in a teacher
+queue before exporting a student-facing report. The FastAPI backend exposes the
+same router for programmatic use, returning the route, risk reasons, calibrated
+review probability, and graph record.
 
-The intended users are English writing teachers, educational NLP developers,
-and researchers studying human-in-the-loop feedback. Teachers use the system to
-separate low-risk local edits from suggestions that still require professional
-judgment. Developers use normalized records to debug generative-feedback
-pipelines, and researchers can compare routing policies, risk signals, and
-teacher-aligned diagnostics.
-
-The workflow is designed around teacher control rather than automatic release.
-In single-essay mode, a teacher can inspect how local spans, AI suggestions, and
-graph dimensions produce a route. In batch mode, the teacher queue prioritizes
-medium- and high-risk feedback items before student-facing reports are exported.
-This design makes the system useful even when the underlying feedback generator
-is replaced, because the routing layer only assumes a unified feedback schema.
-
-\paragraph{Interfaces.}
-The web interface is the primary demo surface for teachers. It exposes the
-essay view, feedback-item queue, graph explanation panel, batch upload, and
-student-report export. The FastAPI backend exposes the same routing functions
-for programmatic use, so developers can submit feedback items and retrieve the
-route, risk reasons, calibrated review probability, and graph record without
-using the Streamlit front end. The repository also includes command-line
-scripts for regenerating public-corpus benchmarks and calibration artifacts.
-
-\section{End-to-End Use Case}
-
-Consider a teacher reviewing a comparative-literature essay written by an
-English learner. ConsensusScope receives the anonymized draft and a set of
-AI-generated feedback candidates: a safe local grammar edit, a vocabulary
-substitution that slightly changes the student's stance, an organization comment
-about paragraph order, and a content suggestion that introduces evidence not
-present in the essay. The use case is to decide, before anything is shown to the
-student, which items can be released directly and which items need teacher
-judgment.
-
-ConsensusScope inserts a review-routing layer between generation and release.
-Each suggestion is converted to the unified feedback schema with its target
-span, local context, AI suggestion, rationale, issue type, and optional model
-agreement. The router then constructs a Feedback Safety Graph. A low-risk local
-grammar edit may activate the local-edit dimension and be routed to
-\texttt{auto\_accept}. A vocabulary edit that changes the student's intended
-meaning activates meaning preservation and is routed to \texttt{teacher\_review}.
-A content suggestion without support in the draft activates content grounding
-and is also routed to review. The teacher queue therefore focuses attention on
-items where professional judgment matters most.
-
-The same workflow also supports batch review. When many essays are uploaded,
-the teacher can first inspect high-risk or evidence-poor feedback, then export a
-student-facing report containing only accepted or edited items. The exported
-audit record preserves the route, risk reasons, graph path, and teacher action,
-so later error analysis can identify which feedback types repeatedly require
-human intervention. This is the central application value of the system: it does
-not make AI feedback automatically correct, but it makes feedback release
-observable, reviewable, and safer for teacher-supervised use.
-
-\begin{figure*}[t]
+\begin{figure}[t]
 \centering
-\includegraphics[width=0.96\linewidth]{figures/feedback_safety_routing_cycle.png}
-\caption{Feedback Safety Graph routing cycle in ConsensusScope. Blue arrows
-denote automated processing from anonymized essays and multi-model feedback to
-item-level routing decisions, while red arrows denote teacher feedback loops
-that update calibration evidence, review evidence, and future audit analysis.}
-\label{fig:routing-cycle}
-\end{figure*}
+\includegraphics[width=\linewidth]{figures/demo_teacher_queue_cropped.png}
+\caption{Teacher Queue in the ConsensusScope demo. The interface filters risky
+feedback, displays the target span and AI suggestion, and exposes the Feedback
+Safety Graph path before teacher release.}
+\label{fig:teacher-queue}
+\end{figure}
+
+The main users are English writing teachers, educational NLP developers, and
+researchers studying human-in-the-loop feedback. Teachers use the queue to
+separate low-risk local edits from suggestions requiring professional judgment.
+Developers use the unified records to debug generators, and researchers can
+compare routing policies and teacher-aligned diagnostics. The system is useful
+even when the underlying feedback generator changes, because the routing layer
+only assumes the unified feedback schema.
+
 
 \section{Evaluation}
 
-We evaluate ConsensusScope as a review-routing layer, not as a full feedback
-generator or a measure of student learning gains. The comparison question is
-whether Feedback Safety Graph Routing (FSGR) gives a better safety-efficiency
-trade-off than simpler policies such as review-all, low-risk release, or a more
-permissive release threshold. We measure unsafe-feedback recall in the review
-queue, auto-release share, and alignment with teacher-facing diagnostics.
+We evaluate ConsensusScope as a review-routing layer, not as a feedback
+generator, GEC model, or measure of student learning gains. The comparison
+question is whether FSGR gives a better safety-efficiency trade-off than simpler
+release policies such as review-all or more permissive automatic release. We
+measure unsafe-feedback recall in the review queue, auto-release share, and
+alignment with teacher-facing diagnostics. We do not run end-to-end comparisons
+with commercial AI writing-feedback products or compare GPT/Llama-style feedback
+generation quality, because the task is safety routing for feedback suggestions.
 
-\paragraph{Algorithmic stress checks.}
-The packaged demo contains 15 feedback items with expected routes and 16
-stress-test cases for dangerous suggestions such as thesis reversal,
-whole-essay rewriting, unsupported factual claims, harsh tone, low agreement,
-and parse failures. The router matches the expected action and risk labels on
-all 31 items; this is an algorithm sanity check, not a classroom study.
+\paragraph{Stress checks and public benchmark.}
+The packaged demo contains 31 stress and expected-route cases covering thesis
+reversal, unsupported factual claims, whole-essay rewriting, harsh tone, low
+agreement, and parse failures; the router matches the expected route labels. For
+a larger offline benchmark, we use public learner-correction corpora:
+JFLEG~\cite{napoles-etal-2017-jfleg}, CoNLL-2014~\cite{ng-etal-2014-conll},
+FCE~\cite{yannakoudakis2011fce}, and W\&I+LOCNESS~\cite{bryant-etal-2019-bea}.
+We use edit-distance alignment~\cite{levenshtein1966binary}, following
+edit-centric GEC evaluation
+~\cite{dahlmeier-ng-2012-better,bryant-etal-2017-automatic}. Each public gold
+edit yields one correct feedback candidate and one or two constructed risk
+distractors. Thus the 349,782 candidates are derived from 117,401 public gold
+edits plus 232,381 constructed risk distractors, not newly collected student
+records or uncontrolled LLM generations.
 
-\paragraph{Public learner-corpus benchmark.}
-We construct an offline routing benchmark from public learner-correction
-corpora: JFLEG~\cite{napoles-etal-2017-jfleg},
-CoNLL-2014~\cite{ng-etal-2014-conll}, FCE~\cite{yannakoudakis2011fce}, and
-W\&I+LOCNESS from the BEA-2019 shared task~\cite{bryant-etal-2019-bea}. For
-each original/corrected pair, we use edit-distance alignment
-~\cite{levenshtein1966binary}, following the edit-centric tradition of GEC
-evaluation~\cite{dahlmeier-ng-2012-better,bryant-etal-2017-automatic}, to
-create feedback-level gold edits. From each gold edit, we generate one
-gold-derived correct candidate and constructed risky distractors: one
-meaning-change distractor for every edit and, for low-risk local GEC edits, one
-additional overcorrection distractor. Thus the 349,782 candidates are not newly
-collected student records or uncontrolled LLM generations; they are
-benchmark-derived feedback candidates built from 117,401 public gold edits plus
-232,381 constructed risk distractors. The router sees only deploy-time feedback
-fields; gold labels are used afterward to check whether unsafe candidates were
-routed to review (Table~\ref{tab:public}).
-
-\begin{table*}[t]
+\begin{table}[t]
 \centering
 \scriptsize
-\setlength{\tabcolsep}{3pt}
+\resizebox{\columnwidth}{!}{%
 \begin{tabular}{lrrrrrrr}
 \toprule
 Source & Records & Gold edits & Correct cand. & Risk dist. & Candidates & Auto & Review \\
@@ -331,65 +274,24 @@ W\&I+LOCNESS & 38,692 & 62,384 & 62,384 & 123,751 & 186,135 & 0.329 & 0.671 \\
 Total & 76,053 & 117,401 & 117,401 & 232,381 & 349,782 & 0.328 & 0.672 \\
 \bottomrule
 \end{tabular}
+}
 \caption{Public learner-corpus routing benchmark. Candidate counts are derived
 from public gold edits: each edit contributes one correct candidate and one or
 two constructed risk distractors.}
 \label{tab:public}
-\end{table*}
-
-\paragraph{Two-teacher diagnostic pilot.}
-To test whether the review routes align with human judgments, we collected a
-small blind pilot from two English teachers over 30 anonymized AI feedback
-items. Each teacher rated correctness, meaning preservation, student
-readiness, usefulness, clarity, and direct-release suitability on 1--5 scales.
-The ratings are offline diagnostics: individual teacher labels are not read at
-deploy time, while the aggregate pilot is used to fit the lightweight
-calibration artifact. The pilot exposed borderline auto-release patterns:
-teacher-dependent wording, semantic drift in vocabulary edits, and wrong local
-grammar corrections after modal verbs. On the 30-item pilot, the final router
-sends 76.7\% of items to review, reaches 1.000 recall for teacher-marked
-review-needed and unsafe items, and obtains 0.857 auto-accept precision against
-teacher-safe items (Table~\ref{tab:teacherpilot}). Within-one-point teacher
-agreement is 0.694.
-
-\begin{table}[t]
-\centering
-\small
-\begin{tabular}{lr}
-\toprule
-Teacher-aligned diagnostic & Value \\
-\midrule
-Feedback items & 30 \\
-Rating rows & 60 \\
-Auto share & 0.233 \\
-Review share & 0.767 \\
-Review-needed recall & 1.000 \\
-Unsafe reviewed recall & 1.000 \\
-Auto precision vs. teacher-safe & 0.857 \\
-Within-one-point teacher agreement & 0.694 \\
-\bottomrule
-\end{tabular}
-\caption{Two-teacher offline diagnostic pilot. Teacher ratings are used for
-offline calibration and diagnosis, not as per-item labels during deployment.}
-\label{tab:teacherpilot}
 \end{table}
 
-\paragraph{Case analysis.}
-The pilot cases show the intended behavior: local phrase improvements can be
-auto-accepted, while thesis reversal, unsupported exam-score claims, and wrong
-modal-verb corrections are routed to review through meaning-preservation or
-content-grounding graph dimensions, without using teacher ratings at deploy
-time.
-
-\paragraph{Review-routing utility.}
-Table~\ref{tab:policy} compares three release policies over the same 349,782
-feedback candidates. \textit{Review all} is safe but gives no workload
-reduction; \textit{Accept low/med; review high} is the more permissive baseline.
-The default FSGR policy accepts only low-risk local edits, auto-routes 32.9\%
-of candidates, and preserves all constructed incorrect or unsafe candidates in
-the review queue. The 1.000 auto accuracy is a controlled diagnostic: correct
-candidates are derived from public gold corrections, and incorrect candidates
-are constructed risk distractors.
+\paragraph{Teacher diagnostics and routing utility.}
+A blind two-teacher pilot over 30 anonymized AI feedback items checks whether
+routes align with human judgments on correctness, meaning preservation, student
+readiness, usefulness, clarity, and direct-release suitability. The pilot is a
+diagnostic study, not a classroom trial: the router obtains 1.000 recall for
+teacher-marked review-needed and unsafe items, 0.857 auto-accept precision
+against teacher-safe items, and 0.694 within-one-point teacher agreement.
+Table~\ref{tab:policy} compares FSGR with two policy baselines: review-all and
+a more permissive low/medium-risk release policy. The default policy
+auto-routes 32.9\% of candidates while preserving all constructed incorrect or
+unsafe candidates in the review queue.
 
 \begin{table}[t]
 \centering
@@ -404,75 +306,33 @@ Accept low/med; review high & 0.336 & 1.000 & 0.664 & 1.000 \\
 Review all & 0.000 & -- & 1.000 & 1.000 \\
 \bottomrule
 \end{tabular}
-\caption{Pooled review-routing utility over the public learner-corpus
-benchmark. Err. rev. is the share of observed incorrect or unsafe candidates
-routed to human review.}
+\caption{Pooled review-routing utility. Err. rev. is the share of observed
+incorrect or unsafe candidates routed to human review.}
 \label{tab:policy}
 \end{table}
 
-\paragraph{Interpretation.}
-The evaluation should be read as review-routing evidence rather than a claim
-about fully automatic feedback quality. The public-corpus benchmark tests
-whether the router keeps constructed unsafe feedback out of automatic release;
-the teacher pilot checks whether the same signals align with human judgments on
-correctness, meaning preservation, readiness, and review necessity. The current
-policy is intentionally conservative: it sacrifices some automation rate in
-order to preserve all observed unsafe candidates in the review queue. This
-trade-off matches the target use case, where teacher time is limited but
-student-facing feedback should remain under human control.
-
-\section{Demo Scenario}
-
-The two-and-a-half-minute demo follows a teacher workflow: review one
-anonymized ESL draft, inspect graph paths, process a batch CSV, compare AI
-feedback, handle a high-risk item in Teacher Queue, and export a report.
-
-\section{Scope and Design Choices}
-
-ConsensusScope is deliberately designed as a routing and observability layer,
-not as a new essay scorer or a replacement for the feedback generator. This
-choice reflects the deployment setting: schools and developers may change the
-underlying LLM provider, prompt, or feedback generator, but they still need a
-stable mechanism for deciding which feedback items can be shown to students.
-The unified schema separates generation from review, while the graph record
-keeps the decision auditable.
-
-The system also separates deploy-time signals from offline diagnostic labels.
-At deploy time, the router can use agreement, issue type, target-span scope,
-parse status, evidence availability, meaning-change cues, and tone/specificity
-signals. It cannot know whether an item is a false consensus or a minority
-correct case unless such labels are produced by later evaluation. This
-separation is important for honest reporting: aggregate teacher ratings may
-calibrate the release policy offline, but per-item teacher labels and public
-correction labels are not read when routing a new student-facing item.
-
-These design choices define the contribution boundary. ConsensusScope does not
-claim that a particular LLM produces high-quality educational feedback. Instead,
-it shows how feedback from one or more generators can be converted into
-auditable routing decisions before reaching students. This makes the system
-suitable for classroom-facing deployments where teachers want the efficiency of
-generative feedback but still need a defensible review process.
+The evaluation supports a conservative deployment claim: ConsensusScope does
+not make AI feedback automatically correct, but it makes feedback release
+observable and keeps high-risk suggestions under teacher control.
 
 \section{Availability and Reproducibility}
 
-ConsensusScope is released under the MIT License. The repository, live demo,
-video, and API documentation are available at
+The repository, live demo, video, and API documentation are available at
 \url{https://github.com/yyting2006-ai/ConsensusScope},
 \url{https://demo.consensusscope.cn/},
 \url{https://youtu.be/vp4Kj48bv8Q}, and
-\url{https://api.consensusscope.cn/docs}. The hosted demo uses a self-hosted
-Streamlit/FastAPI deployment. The repository includes startup instructions and
-\texttt{scripts/run\_public\_gec\_benchmark.py}; raw corpora and per-item
-derived outputs are not committed.
+\url{https://api.consensusscope.cn/docs}. The repository includes startup
+instructions and \texttt{scripts/run\_public\_gec\_benchmark.py}; raw corpora
+and per-item derived outputs are not committed.
 
 \section{Ethics and Limitations}
 
 ConsensusScope is a teacher-support tool, not an automatic essay scorer or
 teacher replacement. Users should upload only anonymized student writing. The
 benchmark validates graph-backed routing with public correction labels and
-constructed distractors; it does not measure learning gains, teacher
-satisfaction, time-on-task, or real LLM feedback quality. The 30-item
-two-teacher pilot is diagnostic, not a classroom study.
+constructed distractors; it does not measure learning gains, time-on-task, or
+real LLM feedback quality. The teacher pilot is diagnostic, not a classroom
+study.
 
 \section{Conclusion}
 
@@ -486,62 +346,57 @@ receive.
 \bibliography{references}
 \endgroup
 
-\clearpage
-\onecolumn
 \appendix
-\begingroup
-\raggedright
-\small
 
-\section{Supplementary Implementation Artifacts}
+\section{Supplementary Implementation Details}
 
-This appendix is an artifact sheet for reproduction: pseudocode, calibrated
-weights, exported fields, and representative routed cases.
+This appendix provides compact implementation artifacts for reproducing the
+routing behavior described in the main paper. The appendix is not used to add
+new experimental claims; it documents the router, exported fields, and pilot
+case patterns.
 
+\paragraph{Router pseudocode.}
 \begin{center}
-\setlength{\fboxsep}{6pt}
-\fbox{\begin{minipage}{0.88\linewidth}
-\footnotesize
-\textbf{Algorithm A.1: Feedback Safety Graph Router for one feedback item}\\[2pt]
+\setlength{\fboxsep}{5pt}
+\fbox{\begin{minipage}{0.93\linewidth}
+\scriptsize
+\textbf{Algorithm A.1: Feedback Safety Graph Router}\\
 \textbf{Input:} normalized item $f_i$, local context $z_i$, optional rationale
 $h_i$, agreement signal $a_i$\\
 \textbf{Output:} route $r_i$, review probability $p_i$, risk score $s_i$, graph
-$G_i$\\[3pt]
-\begin{tabular}{@{}r p{0.78\linewidth}@{}}
-1 & Extract deploy-time signals $b_i$ for parse failure, evidence conflict,
+$G_i$
+\begin{enumerate}
+\setlength{\itemsep}{0pt}
+\setlength{\parsep}{0pt}
+\item Extract deploy-time signals $b_i$ for parse failure, evidence conflict,
 meaning-change cues, unsupported claims, tone warnings, broad target spans, and
-agreement risk.\\
-2 & Map $b_i$ to graph dimensions: local edit, meaning preservation, content
-grounding, pedagogical tone, feedback specificity, and model agreement.\\
-3 & Construct $G_i$ with target-span, suggestion, evidence, dimension, and route
-nodes.\\
-4 & Compute $s_i=\min(1,\sum_k \alpha_k b_{ik})$.\\
-5 & Build feature vector $x_i=[s_i;\mathrm{active\ dimensions}]$ and compute
-$p_i=\sigma(\beta_0+\beta^\top x_i)$.\\
-6 & If parse or grounding failure is active, set $r_i=E$
-(\texttt{needs\_more\_evidence}).\\
-7 & Else if a high-severity signal is active or $p_i\ge\tau$, set $r_i=V$
-(\texttt{teacher\_review}).\\
-8 & Else set $r_i=A$ (\texttt{auto\_accept}).\\
-9 & Return $r_i$, $p_i$, $s_i$, risk reasons, graph path, and JSON node/edge
-records.\\
-\end{tabular}
+agreement risk.
+\item Map $b_i$ to graph dimensions: local edit, meaning preservation, content
+grounding, pedagogical tone, feedback specificity, and model agreement.
+\item Construct $G_i$ with target-span, suggestion, evidence, dimension, and
+route nodes.
+\item Compute $s_i=\min(1,\sum_k\alpha_k b_{ik})$.
+\item Build $x_i=[s_i;\mathrm{active\ dimensions}]$ and compute
+$p_i=\sigma(\beta_0+\beta^\top x_i)$.
+\item If parse or grounding failure is active, set $r_i=E$.
+\item Else if a high-severity signal is active or $p_i\ge\tau$, set $r_i=V$.
+\item Else set $r_i=A$.
+\item Return $r_i$, $p_i$, $s_i$, risk reasons, graph path, and JSON records.
+\end{enumerate}
 \end{minipage}}
-
-\vspace{2pt}
-\textbf{Figure A.1:} Routing pseudocode used by the demo implementation. The
-actions $E$, $V$, and $A$ denote evidence request, teacher review, and auto
-release.
 \end{center}
 
-\begin{center}
-\begin{minipage}[t]{0.46\linewidth}
+The actions $E$, $V$, and $A$ denote evidence request, teacher review, and
+automatic release. High-severity graph signals can override the calibrated
+probability so that clearly unsafe feedback remains in the teacher queue.
+
+\paragraph{Calibration artifact.}
+\begin{table}[h]
 \centering
-\footnotesize
-\setlength{\tabcolsep}{4pt}
+\scriptsize
 \begin{tabular}{lr}
 \toprule
-Calibration feature & Weight \\
+Feature & Weight \\
 \midrule
 Intercept & -0.582 \\
 Risk score & 0.861 \\
@@ -553,53 +408,222 @@ Agreement-risk signal & 0.000 \\
 Evidence-gap signal & 0.000 \\
 \bottomrule
 \end{tabular}
+\caption{Pilot-calibrated logistic release weights. The cutoff is
+$\tau=0.300$ and is stored in \texttt{routing\_calibration.json}.}
+\label{tab:appendix-calibration}
+\end{table}
 
-\vspace{2pt}
-\textbf{Table A.1:} Pilot-calibrated logistic release policy. The cutoff is
-0.300 and is stored in \texttt{routing\_calibration.json}.
-\end{minipage}
-\hfill
-\begin{minipage}[t]{0.49\linewidth}
+\paragraph{Exported audit fields.}
+\begin{table}[h]
 \centering
-\footnotesize
-\setlength{\tabcolsep}{4pt}
-\begin{tabular}{p{0.54\linewidth}p{0.34\linewidth}}
+\scriptsize
+\begin{tabular}{ll}
 \toprule
 Output field & Stored value \\
 \midrule
 \texttt{risk\_level} & Risk label \\
 \texttt{recommended\_action} & Release route \\
-Calibrated review probability & Review probability \\
-Active graph dimensions & Active dimensions \\
+\texttt{review\_probability} & Calibrated probability \\
 \texttt{safety\_graph\_path} & Explanation path \\
 \texttt{safety\_graph\_nodes} & JSON node records \\
 \texttt{safety\_graph\_edges} & JSON edge records \\
+\texttt{teacher\_action} & Accept/edit/reject/defer \\
 \bottomrule
 \end{tabular}
+\caption{Core fields exported for each routed feedback item.}
+\label{tab:appendix-fields}
+\end{table}
 
-\vspace{2pt}
-\textbf{Table A.2:} Core fields exported for each routed feedback item.
-\end{minipage}
+\paragraph{Representative routed cases.}
+\begin{table}[h]
+\centering
+\scriptsize
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{llll}
+\toprule
+Case & Pattern & Route & Diagnostic use \\
+\midrule
+FB-002 & Local phrase edit & Auto & Teachers rate safe \\
+FB-003 & Thesis reversal & Review & Blocks meaning change \\
+FB-005 & Wrong modal edit & Review & Finds unsafe local edit \\
+FB-008 & Unsupported claim & Review & Blocks evidence gap \\
+\bottomrule
+\end{tabular}
+}
+\caption{Representative pilot cases. Teacher ratings are offline diagnostics,
+not deploy-time labels.}
+\label{tab:appendix-cases}
+\end{table}
+
+\paragraph{Reproducibility checklist.}
+The released package includes the Streamlit entry point, FastAPI router,
+sample ESL feedback items, stress cases, public-benchmark construction script,
+routing calibration file, and report-export templates. To reproduce the main
+benchmark, users run \texttt{scripts/run\_public\_gec\_benchmark.py} after
+placing the required public learner corpora outside the repository. The
+generated per-item benchmark outputs are intentionally not committed because of
+size and redistribution constraints.
+
+\paragraph{Input schemas.}
+ConsensusScope keeps generation, routing, and teacher review separable by using
+explicit CSV/JSON schemas. The essay table stores anonymized writing context;
+the feedback table stores model suggestions; the routing table stores deploy-time
+signals and graph records. The router does not require teacher labels when a new
+feedback item is processed.
+
+\begin{table}[h]
+\centering
+\scriptsize
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{ll}
+\toprule
+Schema & Required fields \\
+\midrule
+Essay & id, prompt, genre, level, anonymized text, word count, draft stage \\
+Feedback item & id, essay id, target span, context, suggestion, rationale, source, issue type \\
+Routing result & risk level, action, reasons, review probability, graph path, nodes, edges \\
+\bottomrule
+\end{tabular}
+}
+\caption{Input and output schemas used by the demo and benchmark scripts.}
+\label{tab:appendix-schema}
+\end{table}
+
+\paragraph{Deploy-time signals.}
+The router uses only signals observable before a teacher makes a decision. This
+separation prevents offline labels from leaking into deployment. Gold edits and
+teacher ratings are used after routing to evaluate whether the queue captured
+unsafe or review-needed items.
+
+\begin{center}
+\centering
+\scriptsize
+\begin{tabular}{p{0.30\linewidth}p{0.55\linewidth}}
+\toprule
+Signal group & Examples \\
+\midrule
+Meaning preservation & thesis reversal, changed stance, overgeneralization \\
+Content grounding & unsupported evidence, invented study, exam-score claim \\
+Local edit scope & article/preposition edit, narrow vocabulary substitution \\
+Pedagogical tone & harsh wording, student-level mismatch, vague advice \\
+System status & parse failure, missing context, low agreement \\
+\bottomrule
+\end{tabular}
+\par\smallskip
+\footnotesize\textbf{Table 8:} Deploy-time signal groups mapped to Feedback
+Safety Graph dimensions.
 \end{center}
 
 \begin{center}
 \scriptsize
-\setlength{\tabcolsep}{4pt}
-\begin{tabular}{p{0.09\linewidth}p{0.23\linewidth}p{0.27\linewidth}p{0.13\linewidth}p{0.18\linewidth}}
+\begin{tabular}{p{0.30\linewidth}p{0.55\linewidth}}
 \toprule
-Case & Pattern & Graph dimensions & Route & Diagnostic use \\
+Route & Operational meaning \\
 \midrule
-FB-002 & Local phrase improvement & Local edit & Auto-accept & Teachers rate safe \\
-FB-003 & Reverses student thesis & Meaning preservation & Review & Blocks meaning change \\
-FB-005 & Wrong modal correction & Local edit; meaning preservation & Review & Finds unsafe local edit \\
-FB-008 & Unsupported exam-score claim & Meaning preservation; content grounding & Review & Blocks unsupported evidence \\
+\texttt{auto\_accept} & The item is a narrow local edit with no active
+meaning-change, grounding, or tone warning. \\
+\texttt{teacher\_review} & The item may be useful, but a teacher should inspect
+the span, rationale, or graph path before release. \\
+\texttt{needs\_more\_}\newline\texttt{evidence} & The item cannot be grounded in the available
+essay context or failed parsing, so it is held back. \\
 \bottomrule
 \end{tabular}
-
-\vspace{2pt}
-\textbf{Table A.3:} Representative pilot cases. Teacher ratings are offline
-diagnostics and are not per-item inputs during deploy-time routing.
+\par\smallskip
+\footnotesize\textbf{Table 9:} Release semantics exposed to teachers and
+stored in the audit log.
 \end{center}
 
-\endgroup
+\paragraph{Minimal audit record.}
+Each routed item exports the same compact record for later review:
+\begin{center}
+\fbox{\begin{minipage}{0.92\columnwidth}
+\scriptsize
+\texttt{\{}\\
+\texttt{\ \ "feedback\_item\_id": "FB-008",}\\
+\texttt{\ \ "route": "teacher\_review",}\\
+\texttt{\ \ "review\_probability": 0.84,}\\
+\texttt{\ \ "risk\_reasons": ["unsupported\_claim"],}\\
+\texttt{\ \ "graph\_path": ["content\_grounding", "review"]}\\
+\texttt{\}}
+\end{minipage}}
+\end{center}
+
+\paragraph{Teacher workflow.}
+In a live review session, a teacher first filters the queue by risk level or
+issue type, opens an item, checks the target span and suggestion, and then
+inspects the graph path. The teacher can accept, edit, reject, or defer the
+item. Only accepted or edited items are exported into the student-facing report.
+The audit log keeps the route, graph path, risk reasons, and teacher action so
+that later error analysis can identify which feedback patterns repeatedly need
+human review.
+
+\paragraph{Comparison boundary.}
+The current benchmark is intentionally a routing benchmark. It compares release
+policies over the same feedback candidates rather than comparing feedback
+generators. This is important for deployment: a school may replace the LLM or
+prompt, but the review-routing layer should still expose whether a concrete
+suggestion is safe to release. End-to-end learning gains, teacher time savings,
+and commercial-system comparisons are left for future classroom studies.
+
+\paragraph{Benchmark accounting.}
+The public-corpus benchmark converts learner edits into item-level feedback
+events so that release policies can be tested without collecting new student
+records. The same router is then run over all constructed items.
+
+\begin{center}
+\scriptsize
+\begin{tabular}{lr}
+\toprule
+Benchmark item type & Count \\
+\midrule
+Gold edit feedback items & 117,401 \\
+Constructed risk distractors & 232,381 \\
+Total routed candidates & 349,782 \\
+\bottomrule
+\end{tabular}
+\par\smallskip
+\footnotesize\textbf{Table 10:} Public benchmark accounting used for the
+routing evaluation.
+\end{center}
+
+\paragraph{Teacher pilot form.}
+The teacher study uses a blind item-level rating form. Teachers see the
+anonymized essay context, target span, AI suggestion, and rationale, but not the
+system route, graph score, model identity, or agreement signal.
+
+\begin{center}
+\scriptsize
+\begin{tabular}{p{0.38\linewidth}p{0.47\linewidth}}
+\toprule
+Rating dimension & Question focus \\
+\midrule
+Correctness & Is the feedback linguistically or pedagogically correct? \\
+Meaning preservation & Does it keep the student's intended meaning? \\
+Student readiness & Can it be shown directly to a learner? \\
+Usefulness & Would it help revision? \\
+Clarity & Is the suggestion understandable? \\
+Direct-release suitability & Can it bypass teacher editing? \\
+\bottomrule
+\end{tabular}
+\par\smallskip
+\footnotesize\textbf{Table 11:} Blind teacher-rating dimensions used only for
+offline diagnosis and calibration.
+\end{center}
+
+\paragraph{Reproduction steps.}
+The submission package separates sensitive data, generated benchmark outputs,
+and source code. Reviewers can inspect the demo with sample data and reproduce
+the routing tables after placing public learner corpora in a local data folder.
+
+\begin{center}
+\fbox{\begin{minipage}{0.92\columnwidth}
+\scriptsize
+1. Install package requirements and start the Streamlit/FastAPI demo.\\
+2. Place public learner-corpus files outside the repository.\\
+3. Run the public GEC benchmark construction script.\\
+4. Run the routing evaluation and regenerate report tables.\\
+5. Export audit logs for manual inspection.
+\end{minipage}}
+\end{center}
+
 \end{document}
