@@ -24,42 +24,48 @@
         "mean_absolute_difference": 0.8,
         "within_1_point_share": 0.7667,
         "exact_agreement_share": 0.6667,
-        "spearman": 0.6975
+        "spearman": 0.6975,
+        "icc_2_1": 0.6548
       },
       {
         "field": "meaning_preservation_score",
         "mean_absolute_difference": 1.0333,
         "within_1_point_share": 0.7,
         "exact_agreement_share": 0.6,
-        "spearman": 0.4874
+        "spearman": 0.4874,
+        "icc_2_1": 0.5224
       },
       {
         "field": "student_readiness_score",
         "mean_absolute_difference": 1.0333,
         "within_1_point_share": 0.7333,
         "exact_agreement_share": 0.6,
-        "spearman": 0.5551
+        "spearman": 0.5551,
+        "icc_2_1": 0.5496
       },
       {
         "field": "usefulness_score",
         "mean_absolute_difference": 1.1333,
         "within_1_point_share": 0.7,
         "exact_agreement_share": 0.4333,
-        "spearman": 0.4878
+        "spearman": 0.4878,
+        "icc_2_1": 0.4746
       },
       {
         "field": "clarity_score",
         "mean_absolute_difference": 1.6333,
         "within_1_point_share": 0.5667,
         "exact_agreement_share": 0.3667,
-        "spearman": 0.234
+        "spearman": 0.234,
+        "icc_2_1": 0.1541
       },
       {
         "field": "direct_release_score",
         "mean_absolute_difference": 1.0,
         "within_1_point_share": 0.7,
         "exact_agreement_share": 0.4667,
-        "spearman": 0.6156
+        "spearman": 0.6156,
+        "icc_2_1": 0.6163
       }
     ],
     "mean_within_1_point_share": 0.6944

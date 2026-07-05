@@ -86,6 +86,20 @@ def _agreement_metrics(ratings: pd.DataFrame) -> Dict[str, Any]:
             continue
         diff = (pivot[experts[0]] - pivot[experts[1]]).abs()
         corr = pivot[experts[0]].corr(pivot[experts[1]], method="spearman")
+        values = pivot[experts].astype(float)
+        n_items, n_raters = values.shape
+        row_means = values.mean(axis=1)
+        col_means = values.mean(axis=0)
+        grand_mean = float(values.to_numpy().mean())
+        ss_rows = float(n_raters * ((row_means - grand_mean) ** 2).sum())
+        ss_cols = float(n_items * ((col_means - grand_mean) ** 2).sum())
+        ss_total = float(((values - grand_mean) ** 2).to_numpy().sum())
+        ss_error = max(0.0, ss_total - ss_rows - ss_cols)
+        ms_rows = ss_rows / max(1, n_items - 1)
+        ms_cols = ss_cols / max(1, n_raters - 1)
+        ms_error = ss_error / max(1, (n_items - 1) * (n_raters - 1))
+        denom = ms_rows + (n_raters - 1) * ms_error + (n_raters * (ms_cols - ms_error) / max(1, n_items))
+        icc_2_1 = None if abs(denom) < 1e-12 else (ms_rows - ms_error) / denom
         field_rows.append(
             {
                 "field": field,
@@ -93,6 +107,7 @@ def _agreement_metrics(ratings: pd.DataFrame) -> Dict[str, Any]:
                 "within_1_point_share": round(float(diff.le(1).mean()), 4),
                 "exact_agreement_share": round(float(diff.eq(0).mean()), 4),
                 "spearman": None if pd.isna(corr) else round(float(corr), 4),
+                "icc_2_1": None if icc_2_1 is None else round(float(icc_2_1), 4),
             }
         )
     out["fields"] = field_rows

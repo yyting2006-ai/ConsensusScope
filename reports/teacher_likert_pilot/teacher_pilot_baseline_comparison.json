@@ -1,0 +1,104 @@
+{
+  "teacher_pilot_items": 30,
+  "baseline_rows": [
+    {
+      "policy": "FSGR default",
+      "items": 30,
+      "auto_count": 7,
+      "safe_auto_count": 6,
+      "auto_share": 0.2333,
+      "auto_accept_precision_teacher_safe": 0.8571,
+      "review_count": 23,
+      "review_share": 0.7667,
+      "review_needed_recall": 1.0,
+      "unsafe_reviewed_recall": 1.0,
+      "unsafe_auto_released": 0,
+      "teacher_safe_auto_released": 6
+    },
+    {
+      "policy": "LLM-as-judge (judge)",
+      "items": 30,
+      "auto_count": 9,
+      "safe_auto_count": 7,
+      "auto_share": 0.3,
+      "auto_accept_precision_teacher_safe": 0.7778,
+      "review_count": 21,
+      "review_share": 0.7,
+      "review_needed_recall": 0.9474,
+      "unsafe_reviewed_recall": 1.0,
+      "unsafe_auto_released": 0,
+      "teacher_safe_auto_released": 7
+    },
+    {
+      "policy": "Issue-type rule only",
+      "items": 30,
+      "auto_count": 11,
+      "safe_auto_count": 6,
+      "auto_share": 0.3667,
+      "auto_accept_precision_teacher_safe": 0.5455,
+      "review_count": 19,
+      "review_share": 0.6333,
+      "review_needed_recall": 0.7895,
+      "unsafe_reviewed_recall": 0.8667,
+      "unsafe_auto_released": 2,
+      "teacher_safe_auto_released": 6
+    },
+    {
+      "policy": "Probability-only cutoff",
+      "items": 30,
+      "auto_count": 7,
+      "safe_auto_count": 6,
+      "auto_share": 0.2333,
+      "auto_accept_precision_teacher_safe": 0.8571,
+      "review_count": 23,
+      "review_share": 0.7667,
+      "review_needed_recall": 1.0,
+      "unsafe_reviewed_recall": 1.0,
+      "unsafe_auto_released": 0,
+      "teacher_safe_auto_released": 6
+    },
+    {
+      "policy": "Review all",
+      "items": 30,
+      "auto_count": 0,
+      "safe_auto_count": 0,
+      "auto_share": 0.0,
+      "auto_accept_precision_teacher_safe": null,
+      "review_count": 30,
+      "review_share": 1.0,
+      "review_needed_recall": 1.0,
+      "unsafe_reviewed_recall": 1.0,
+      "unsafe_auto_released": 0,
+      "teacher_safe_auto_released": 0
+    },
+    {
+      "policy": "Auto-release all",
+      "items": 30,
+      "auto_count": 30,
+      "safe_auto_count": 10,
+      "auto_share": 1.0,
+      "auto_accept_precision_teacher_safe": 0.3333,
+      "review_count": 0,
+      "review_share": 0.0,
+      "review_needed_recall": 0.0,
+      "unsafe_reviewed_recall": 0.0,
+      "unsafe_auto_released": 15,
+      "teacher_safe_auto_released": 10
+    }
+  ],
+  "fsgr_bootstrap_ci_95": {
+    "auto_accept_precision_teacher_safe": {
+      "low": 0.5,
+      "high": 1.0
+    },
+    "review_needed_recall": {
+      "low": 1.0,
+      "high": 1.0
+    },
+    "unsafe_reviewed_recall": {
+      "low": 1.0,
+      "high": 1.0
+    }
+  },
+  "note": "Teacher labels are offline diagnostics. Baselines are evaluated on the same 30 blind-rated feedback items and do not use teacher labels at deploy time."
+}
