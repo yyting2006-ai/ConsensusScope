@@ -1,6 +1,6 @@
 # ConsensusScope：基于反馈安全图谱的 ESL 写作反馈教师复核路由系统
 
-**ConsensusScope: Feedback Safety Graphs for Teacher-in-the-Loop Review Routing of AI Feedback on ESL Writing**
+**ConsensusScope: A Teacher-Controlled Safety Routing System for AI-Generated ESL Writing Feedback**
 
 ConsensusScope 当前主线是 **teacher-in-the-loop review routing for safe
 AI-generated ESL writing feedback**。系统的核心机制是 **反馈安全图谱

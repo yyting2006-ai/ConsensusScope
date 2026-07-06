@@ -10,7 +10,7 @@
 \usepackage{inconsolata}
 \usepackage{url}
 
-\title{ConsensusScope: Safety Routing for Generative AI English Essay Feedback}
+\title{ConsensusScope: A Teacher-Controlled Safety Routing System for AI-Generated ESL Writing Feedback}
 
 \author{You Tingrui\textsuperscript{1}, Li Jimei\textsuperscript{2*},
   Zhang Na\textsuperscript{2}, Xiong Ling\textsuperscript{2},
@@ -28,9 +28,9 @@
 Generative AI can reduce the workload of English essay feedback, but fluent
 suggestions may still change student meaning, add unsupported content, or
 overcorrect a draft. We present ConsensusScope, an interactive system for
-\emph{safety routing} of AI-generated English essay feedback. The system treats
-each feedback item, rather than an essay score or final rewrite, as the unit of
-control: it normalizes candidates, extracts deploy-time safety signals,
+\emph{safety routing} of AI-generated English essay feedback. The system uses
+each feedback item as the unit of control: it normalizes candidates, extracts
+deploy-time safety signals,
 constructs an auditable Feedback Safety Graph, and applies a pilot-informed
 release policy to route each item to \texttt{auto\_accept},
 \texttt{teacher\_review}, or \texttt{needs\_more\_evidence}. To make this
@@ -42,8 +42,9 @@ two-teacher pilot. The perturbation suite checks whether known high-risk
 feedback patterns are consistently held for review. In the diagnostic teacher
 pilot, FSGR auto-routes 7/30 items, of which 6/7 are teacher-safe; an
 LLM-as-judge baseline auto-routes 9/30 items, of which 7/9 are teacher-safe.
-The pilot also obtains 0.694 within-one-point teacher agreement. These results support
-graph-backed safety routing, not automatic essay scoring or teacher replacement.
+The pilot also obtains 0.694 within-one-point teacher agreement. These results
+support graph-backed safety routing as a teacher-control layer for AI feedback
+release.
 \end{abstract}
 
 \section{Introduction}
@@ -65,7 +66,8 @@ an anonymized ESL draft and AI feedback candidates, the system routes each item
 to \texttt{auto\_accept}, \texttt{teacher\_review}, or
 \texttt{needs\_more\_evidence}. The decision unit is a concrete feedback item
 tied to a target span, local context, suggestion, rationale, and issue type,
-rather than an essay score or final rewrite.\footnote{Code and hosted demo:
+which lets the system make release decisions before feedback becomes
+student-facing.\footnote{Code and hosted demo:
 \url{https://github.com/yyting2006-ai/ConsensusScope} and
 \url{https://demo.consensusscope.cn/}.}
 
@@ -75,9 +77,9 @@ target span, AI suggestion, evidence status, active safety dimensions, and final
 route in an auditable graph. Deploy-time signals include meaning-preservation
 warnings, evidence-grounding risks, local-edit scope, pedagogical tone and
 specificity, and model/system reliability signals such as low agreement and
-parse failures. The graph is an audit and routing substrate rather than a graph
-neural inference model: it preserves the evidence path used to release, review,
-or hold back each item.
+parse failures. The graph preserves the evidence path used to release, review,
+or hold back each item, making the route inspectable by teachers and reusable
+for later audit.
 
 \begin{figure*}[t]
 \centering
@@ -89,9 +91,9 @@ feedback loops that update review evidence and future audit analysis.}
 \label{fig:routing-cycle}
 \end{figure*}
 
-We evaluate this middle layer with stress checks, a controlled public-corpus
+We evaluate this routing layer with stress checks, a controlled public-corpus
 perturbation suite, an LLM-as-judge baseline, and a 30-item two-teacher
-diagnostic pilot. The evidence supports a narrow claim: ConsensusScope can
+diagnostic pilot. The evidence focuses on route quality: ConsensusScope can
 auto-route some low-risk feedback while keeping constructed unsafe items and
 teacher-marked unsafe items in the review queue.
 The demo contributes a safety-routing formulation, a Feedback Safety Graph
@@ -120,16 +122,16 @@ queue.
 Automated writing systems can provide revision support, but classroom use
 depends on how learners and teachers interpret the feedback
 ~\cite{madnani-etal-2018-writing,ranalli2018automated}. ConsensusScope follows
-this caution by avoiding a teacher-replacement claim and making AI feedback
+this line of work by keeping teachers in the release loop and making AI feedback
 inspectable before it becomes student-facing.
 
 \paragraph{LLM reliability and adjudication.}
 Multi-output and judge-based methods can help select answers or evaluate
 generations~\cite{wang2023selfconsistency,zheng2023judging,liu2023geval}.
-However, consensus or judge confidence is not equivalent to educational safety.
-Our demo treats model agreement as one observable signal alongside issue type,
-evidence status, meaning-change warnings, unsupported-claim cues, tone cues,
-and parse errors.
+For educational feedback, release decisions also need item-level safety
+evidence. Our demo treats model agreement as one observable signal alongside
+issue type, evidence status, meaning-change warnings, unsupported-claim cues,
+tone cues, and parse errors.
 
 \paragraph{System demonstrations.}
 Recent NLP demo papers emphasize usable interfaces, public APIs, and diagnostic
@@ -142,9 +144,9 @@ this demo-track pattern but focuses on the narrower teacher-facing question of
 whether generated writing feedback should be released, reviewed, or held for
 more evidence.
 
-Unlike GEC tools, essay scorers, or generic LLM-as-judge workflows,
-ConsensusScope routes each \emph{feedback item} before it reaches a student and
-exposes graph evidence behind release or review decisions.
+Table~\ref{tab:comparison} summarizes the task focus of ConsensusScope relative
+to neighboring system types: it routes each \emph{feedback item} before it
+reaches a student and exposes graph evidence behind release or review decisions.
 
 \begin{table*}[t]
 \centering
@@ -160,8 +162,8 @@ LLM-as-judge workflows & Model output & Preference or quality score & Uses graph
 Feedback dashboards & Review records & Tables or filters & Connects target span, suggestion, risk, route, and teacher action \\
 \bottomrule
 \end{tabular}
-\caption{ConsensusScope is positioned as feedback safety routing rather than
-automatic correction, essay scoring, or generic model judging.}
+\caption{Comparison of task focus: ConsensusScope targets feedback safety
+routing with item-level graph evidence.}
 \label{tab:comparison}
 \end{table*}
 
@@ -197,8 +199,8 @@ status, active safety dimensions, and routing decision; edges encode
 \texttt{justifies\_route}. The stored path has the form
 \textit{target span $\rightarrow$ AI suggestion $\rightarrow$ active safety
 dimension $\rightarrow$ route}, so teachers can inspect why an item is released
-or queued. The graph is not used for graph neural reasoning; it is a structured
-audit object whose active dimensions are also passed to the release policy. The
+or queued. The same active dimensions are passed to the release policy, linking
+the visual audit record with the routing decision. The
 module output is the graph record $G_i$ and its active safety signals.
 
 \paragraph{Module 3: release policy.}
@@ -209,10 +211,9 @@ p_i=\sigma(\beta_0+\beta^\top x_i),
 \]
 where $b_i$ is the deploy-time signal vector and $x_i$ combines risk score and
 active graph dimensions, following the logistic regression formulation
-~\cite{cox1958regression}. The logistic layer is used for transparent score
-aggregation rather than as a fully supervised classifier; because the teacher
-pilot is small, it should be read as a pilot-informed release policy with
-auditable thresholds. High-severity signals and parse/evidence failures can
+~\cite{cox1958regression}. The logistic layer provides transparent score
+aggregation with pilot-informed, auditable thresholds. High-severity signals and
+parse/evidence failures can
 override the probability. The module output is the final route:
 \[
 r_i =
@@ -307,23 +308,30 @@ two constructed risk distractors.}
 \paragraph{Teacher diagnostics and routing utility.}
 A blind two-teacher pilot over 30 anonymized AI feedback items checks whether
 routes align with human judgments on correctness, meaning preservation, student
-readiness, usefulness, clarity, and direct-release suitability. The pilot is a
-diagnostic study, not a classroom trial: the router obtains 1.000 recall for
-teacher-marked review-needed and unsafe items, 0.857 auto-accept precision
-against teacher-safe items, and 0.694 mean within-one-point teacher agreement
-across six Likert dimensions. ICC(2,1) is moderate for correctness (0.655) and
-direct-release suitability (0.616), but lower for clarity (0.154), reflecting
-teacher disagreement about wording quality.
+readiness, usefulness, clarity, and direct-release suitability. The router
+obtains 1.000 recall for teacher-marked review-needed and unsafe items, 0.857
+auto-accept precision against teacher-safe items, and 0.694 mean
+within-one-point teacher agreement across six Likert dimensions. ICC(2,1) is
+moderate for correctness (0.655) and direct-release suitability (0.616), but
+lower for clarity (0.154), reflecting teacher disagreement about wording
+quality.
 
-Table~\ref{tab:policy} compares FSGR with an LLM-as-judge baseline, an
-issue-type rule baseline, a score-only cutoff, review-all, and auto-release-all.
-The LLM-as-judge baseline uses \texttt{deepseek-chat} through the configured
-\texttt{judge} provider with zero temperature and sees the same target span,
-context, suggestion, rationale, and issue type, but not teacher labels or system
-routes. Its JSON output is mapped to auto-release only when
-\texttt{safe\_to\_release=true} and \texttt{needs\_teacher\_review=false}; the
-full prompt and mapping are in Appendix~A. Because the teacher pilot is small,
-these comparisons are diagnostic rather than statistically conclusive.
+Table~\ref{tab:policy} compares routing utility with an LLM-as-judge baseline,
+an issue-type rule baseline, a score-only cutoff, review-all, and
+auto-release-all. We do not use this small pilot table to claim that the graph
+alone improves aggregate accuracy: the score-only cutoff matches FSGR on the
+30-item pilot. The graph contribution is instead traceable routing evidence and
+coverage of safety failure modes, summarized in Table~\ref{tab:graphstress}.
+The LLM-as-judge baseline was run on July 4, 2026 (CST) with
+\texttt{deepseek-chat} through the configured \texttt{judge} provider and an
+OpenAI-compatible DeepSeek chat-completions endpoint. It uses temperature 0,
+\texttt{max\_tokens}=240, prompt-enforced JSON output rather than a provider
+JSON-mode flag, and the same target span, context, suggestion, rationale, and
+issue type seen by the router, excluding teacher labels and system routes. The
+client retries failed requests twice; any request or parse failure is mapped to
+review. No request or parse failures occurred in the reported run. Its JSON
+output is mapped to auto-release only when \texttt{safe\_to\_release=true} and
+\texttt{needs\_teacher\_review=false}.
 
 \begin{table}[t]
 \centering
@@ -343,12 +351,37 @@ Auto-release all & 30 & 10 & 0.333 & 0.000 & 15 & no \\
 \bottomrule
 \end{tabular}
 }
-\caption{Teacher-pilot routing baselines over 30 blind-rated feedback items.
-Auto n is the number of automatically released items; Safe n is the number of
-auto-released items judged teacher-safe; Review rec. is recall for
-teacher-marked review-needed items. Trace indicates whether an exported
-span-suggestion-dimension-route audit path is available.}
+\caption{Teacher-pilot routing utility over 30 blind-rated feedback items. Auto
+n is the number automatically released; Safe n is the number judged
+teacher-safe; Review rec. is recall for teacher-marked review-needed items.
+Trace indicates whether an exported span-suggestion-dimension-route audit path
+is available.}
 \label{tab:policy}
+\end{table}
+
+\begin{table}[t]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{2pt}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lrrl}
+\toprule
+Graph signal group & Cases & Match & Routed failure mode \\
+\midrule
+Local edit scope & 5 & 5/5 & low-risk release or local override \\
+Meaning preservation & 6 & 6/6 & thesis reversal, rewrite, wrong correction \\
+Content grounding & 4 & 4/4 & unsupported claim or source injection \\
+Specificity & 8 & 8/8 & vague or teacher-dependent advice \\
+Pedagogical tone & 2 & 2/2 & harsh student-facing wording \\
+Model agreement & 5 & 5/5 & low-agreement release prevention \\
+\bottomrule
+\end{tabular}
+}
+\caption{Graph stress-check coverage on 16 packaged cases. Match counts require
+both expected route and expected risk level to match. Cases may activate multiple
+graph signals; this table evaluates functional coverage, not statistical
+significance.}
+\label{tab:graphstress}
 \end{table}
 
 The public benchmark should be interpreted as controlled perturbation testing:
@@ -365,9 +398,11 @@ The repository, live demo, video, and API documentation are available at
 \url{https://github.com/yyting2006-ai/ConsensusScope},
 \url{https://demo.consensusscope.cn/},
 \url{https://youtu.be/vp4Kj48bv8Q}, and
-\url{https://api.consensusscope.cn/docs}. The repository includes startup
-instructions and \texttt{scripts/run\_public\_gec\_benchmark.py}; raw corpora
-and per-item derived outputs are not committed.
+\url{https://api.consensusscope.cn/docs}. The code is MIT-licensed; third-party
+corpora and APIs keep their original terms. The repository includes startup
+instructions and
+\texttt{scripts/run\_public\_gec\_benchmark.py}; raw corpora and per-item
+derived outputs are not committed.
 
 \section{Ethics and Limitations}
 
@@ -376,7 +411,11 @@ teacher replacement. Users should upload only anonymized student writing. The
 benchmark validates graph-backed routing with public correction labels and
 constructed distractors; it does not measure learning gains, time-on-task, or
 real LLM feedback quality. The teacher pilot is diagnostic, not a classroom
-study.
+study. The hosted demo is intended for anonymized examples and demonstration
+use. For real classroom deployment, we recommend local installation or
+institution-approved data handling. If external LLM providers are used for
+feedback generation or judging, teachers should ensure that student data are
+anonymized and processed under appropriate institutional policies.
 
 \section{Conclusion}
 
@@ -435,11 +474,12 @@ The actions $E$, $V$, and $A$ denote evidence request, teacher review, and
 automatic release. High-severity graph signals can override the review score so
 that clearly unsafe feedback remains in the teacher queue.
 
-\paragraph{Representative routed cases.}
-\begin{table}[h]
+\smallskip
+\noindent\begin{minipage}{\linewidth}
+\textbf{Representative routed cases.}\par\smallskip
 \centering
 \scriptsize
-\resizebox{\columnwidth}{!}{%
+\resizebox{\linewidth}{!}{%
 \begin{tabular}{llll}
 \toprule
 Case & Pattern & Route & Diagnostic use \\
@@ -451,21 +491,9 @@ FB-008 & Unsupported claim & Review & Blocks evidence gap \\
 \bottomrule
 \end{tabular}
 }
-\caption{Representative pilot cases. Teacher ratings are offline diagnostics,
-not deploy-time labels.}
-\label{tab:appendix-cases}
-\end{table}
-
-\paragraph{LLM-as-judge prompt and mapping.}
-The baseline judge receives the same fields as the router and no teacher labels.
-Any request or parse failure is conservatively mapped to review; in the reported
-run, no request or parse failures occurred. The prompt template is:
-\emph{judge whether one AI-generated ESL writing feedback item can be shown
-directly to a student without teacher editing; use only the anonymized essay
-context and feedback item; return JSON with \texttt{safe\_to\_release},
-\texttt{needs\_teacher\_review}, \texttt{risk\_reason}, and
-\texttt{confidence}; mark review for meaning change, unsupported content, wrong
-correction, overcorrection, harsh/vague wording, teacher preference, or missing
-evidence; mark safe only for narrow meaning-preserving local edits.}
+\par\smallskip
+\raggedright\footnotesize\textit{Table A.1: Representative pilot cases.
+Teacher ratings are offline diagnostics, not deploy-time labels.}
+\end{minipage}
 
 \end{document}

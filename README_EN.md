@@ -1,6 +1,6 @@
 # ConsensusScope
 
-**ConsensusScope: Feedback Safety Graphs for Teacher-in-the-Loop Review Routing of AI Feedback on ESL Writing**
+**ConsensusScope: A Teacher-Controlled Safety Routing System for AI-Generated ESL Writing Feedback**
 
 ConsensusScope helps teachers review AI-generated ESL writing feedback before it
 is shown to students. It separates low-risk local language edits from feedback
