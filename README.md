@@ -67,7 +67,10 @@ variables, Streamlit Secrets, or user-provided keys.
 The Streamlit app now contains operational teacher-facing windows:
 
 - **Language switch**: the main demo can switch between English and Chinese
-  from the sidebar without changing exported CSV schemas.
+  from the sidebar without changing the current page or exported CSV schemas.
+- **Personal accounts**: users register or sign in before reviewing writing;
+  review sessions, teacher decisions, and submitted feedback are isolated by
+  account.
 - **Single Essay Review**: paste one ESL essay, generate no-API AI-style
   feedback candidates, route each feedback item, and export a report.
 - **Batch Review**: upload a CSV or use packaged demo essays, process multiple
@@ -75,11 +78,15 @@ The Streamlit app now contains operational teacher-facing windows:
 - **AI Feedback Comparison**: compare feedback candidates by target span,
   reviewer, issue type, risk level, Feedback Safety Graph dimensions, and
   consensus state.
-- **Teacher Queue**: inspect medium/high-risk items and record local teacher
-  actions such as accept, edit, reject, or needs more evidence.
-- **Effectiveness Evaluation**: run synthetic expectation-label and AI-review
-  stress-test checks for routing behavior.
+- **Teacher Queue**: inspect medium/high-risk items and persist teacher actions
+  such as accept, edit, reject, or needs more evidence.
 - **Reports**: export routed feedback tables and teacher-readable reports.
+- **My Account**: update a profile, change a password, reopen personal review
+  history, or permanently delete a stored review and its related records.
+- **Feedback**: submit a bug report, feature request, usability note, or output
+  quality report; configured administrators can inspect the feedback inbox.
+- **Settings / Diagnostics**: configure optional providers and inspect synthetic
+  evaluation or legacy technical artifacts away from the main teacher workflow.
 
 The packaged practical workflow runs without external API calls. It is suitable
 for demo and interface validation, but it is not yet validated as a classroom
@@ -98,15 +105,15 @@ Streamlit app pages:
 3. Batch Review
 4. AI Feedback Comparison
 5. Teacher Queue
-6. Effectiveness Evaluation
-7. Reports
-8. Settings / Diagnostics
-9. Design Reference
+6. Reports
+7. My Account
+8. Feedback
+9. Settings / Diagnostics
 
 Operational teacher workflow:
 
 ```text
-Single Essay Review -> Batch Review -> AI Feedback Comparison -> Teacher Queue -> Effectiveness Evaluation -> Reports
+Single / Batch Review -> AI Feedback Comparison -> Teacher Queue -> Reports -> Personal History
 ```
 
 ## Submission Assets
@@ -153,10 +160,12 @@ route contains:
 
 ## Backend API
 
-ConsensusScope also includes an independent FastAPI backend for production-like
-review sessions, teacher decisions, SQLite persistence, audit logs, and report
-export. The Streamlit app remains the reviewer-facing interface; the backend is
-the API layer for integration and persistent teacher-review records.
+ConsensusScope also includes an independent FastAPI backend for account
+authentication, user-scoped review sessions, teacher decisions, product
+feedback, SQLite persistence, audit logs, and report export. The Streamlit app
+remains the teacher-facing interface; all review and account endpoints require
+an opaque Bearer session token. Passwords use PBKDF2-HMAC-SHA256 hashes and only
+SHA-256 hashes of session tokens are stored.
 
 Run locally:
 
@@ -191,9 +200,17 @@ pip install -U pip
 pip install -r requirements.txt
 ```
 
-Run the Streamlit technical demo:
+Start the account API in one terminal:
 
 ```bash
+CONSENSUS_SCOPE_BACKEND_DB="$HOME/.consensusscope/consensusscope_backend.sqlite3" \
+uvicorn backend.app:app --host 127.0.0.1 --port 7864
+```
+
+Run the Streamlit app in a second terminal:
+
+```bash
+CONSENSUS_SCOPE_BACKEND_URL=http://127.0.0.1:7864 \
 streamlit run app/streamlit_app.py --server.port 8502
 ```
 
@@ -460,8 +477,10 @@ The app supports two modes:
 - **Mode B**: user-provided keys for the current request in public deployments.
 
 Do not commit real API keys, put API keys in the paper, or hard-code them in the
-source code. For a password-protected live demo, set
-`CONSENSUS_SCOPE_DEMO_PASSWORD` in local `.env` or Streamlit Secrets.
+source code. User account passwords and provider API keys are separate. The
+account service never stores provider API keys. Mode A keys belong only in
+server-side deployment secrets; Mode B keys are used for the current request
+and must not be written to review history or logs.
 
 ## Reproducibility
 
@@ -474,7 +493,7 @@ PYTHONPATH=. pytest -q
 Run a Python syntax check:
 
 ```bash
-find src scripts app tests -name '._*' -prune -o -name '*.py' -print0 | xargs -0 python3 -m py_compile
+find src scripts app backend tests -name '._*' -prune -o -name '*.py' -print0 | xargs -0 python3 -m py_compile
 ```
 
 Run synthetic ESL routing evaluation:
@@ -558,6 +577,14 @@ under `legacy/`.
 Before adding real student essays, remove names, IDs, emails, demographic
 details, school identifiers, and any personally identifying information. The
 packaged ESL writing demo uses synthetic examples.
+
+The account backend stores submitted essay text and generated review artifacts
+until the user deletes that review or an operator applies a retention policy.
+For real classroom use, deploy under institution-approved storage and retention
+rules, keep the API behind HTTPS, back up the database, and migrate from SQLite
+before multi-instance or high-concurrency operation. The first account release
+does not provide email verification or password reset; users must change
+passwords while signed in or contact the deployment operator.
 
 ConsensusScope should support teacher judgment. Meaning-changing suggestions,
 unsupported claims, thesis rewrites, overcorrections, vague advice, and harsh

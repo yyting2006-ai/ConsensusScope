@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import hmac
 import io
 import json
 import os
@@ -121,11 +120,9 @@ MAIN_TRANSLATIONS = {
     "en": {
         "language_label": "Language / 语言",
         "topbar_subtitle": "Feedback Safety Graphs for teacher-in-the-loop ESL writing feedback review",
-        "demo_access": "Demo Access",
-        "demo_access_info": "This live demo is password-protected to prevent unintended API usage.",
-        "demo_password": "Demo password",
-        "unlock_demo": "Unlock demo",
-        "invalid_password": "Invalid password.",
+        "badge_graph": "Feedback Safety Graph",
+        "badge_teacher": "Teacher-in-the-loop",
+        "badge_esl": "ESL Writing Review",
         "api_configuration": "API Configuration",
         "api_mode": "API mode",
         "mode_a": "Mode A · Built-in API keys for live demos",
@@ -137,17 +134,38 @@ MAIN_TRANSLATIONS = {
         "fixed_judge_model": "Fixed judge model",
         "provider_settings": "Provider settings",
         "provider_settings_help": "Use the provider base URL only; the app appends /chat/completions automatically.",
-        "lock_demo": "Lock demo",
+        "account_access": "Sign in to ConsensusScope",
+        "account_access_caption": "Create a personal account to keep review history, teacher decisions, and product feedback private.",
+        "backend_required": "The account service is temporarily unavailable. Please try again shortly.",
+        "login_tab": "Sign in",
+        "register_tab": "Create account",
+        "username": "Username",
+        "password": "Password",
+        "confirm_password": "Confirm password",
+        "display_name": "Display name",
+        "email_optional": "Email (optional)",
+        "sign_in": "Sign in",
+        "create_account": "Create account",
+        "privacy_ack": "I will upload anonymized writing only and will not include names, student IDs, email addresses, or other personal information.",
+        "privacy_notice": "Accounts are for personal review history. Do not upload identifiable student information.",
+        "password_mismatch": "The passwords do not match.",
+        "password_rules": "Use 8 or more characters. Usernames may contain letters, numbers, dots, underscores, and hyphens.",
+        "auth_error": "Account request failed: {error}",
+        "account_section": "Account",
+        "signed_in_as": "Signed in as {name}",
+        "sign_out": "Sign out",
         "navigation": "Navigation",
         "page_home": "Page 1: Review Workspace",
         "page_single": "Page 2: Single Essay Review",
         "page_batch": "Page 3: Batch Review",
         "page_compare": "Page 4: AI Feedback Comparison",
         "page_queue": "Page 5: Teacher Queue",
-        "page_eval": "Page 6: Effectiveness Evaluation",
-        "page_reports": "Page 7: Reports",
-        "page_settings": "Page 8: Settings / Diagnostics",
-        "page_design": "Page 9: Design Reference",
+        "page_reports": "Page 6: Reports",
+        "page_account": "Page 7: My Account",
+        "page_feedback": "Page 8: Feedback",
+        "page_settings": "Page 9: Settings / Diagnostics",
+        "page_eval": "Effectiveness Evaluation",
+        "page_design": "Design Reference",
         "feedback_items": "Feedback items",
         "auto_accepted": "Auto accepted",
         "teacher_review": "Teacher review",
@@ -193,7 +211,7 @@ MAIN_TRANSLATIONS = {
         "consensus_states": "Consensus states",
         "queue_title": "Page 5 · Teacher Queue",
         "queue_empty": "No teacher-review items are currently queued.",
-        "queue_caption": "Teachers can accept, edit, reject, or defer feedback. Decisions are stored in the local Streamlit session.",
+        "queue_caption": "Accept, edit, reject, or defer each item. Saved decisions remain in your personal account.",
         "risk_level": "Risk level",
         "issue_type": "Issue type",
         "target_span": "Target span",
@@ -209,8 +227,14 @@ MAIN_TRANSLATIONS = {
         "evidence_signal": "Evidence signal",
         "priority": "Priority",
         "teacher_action": "Teacher action",
+        "save_decision": "Save decision",
+        "corrected_feedback": "Edited student-facing feedback",
+        "teacher_reason_optional": "Teacher note (optional)",
+        "edit_feedback_required": "Enter the edited feedback before saving an edit decision.",
+        "select_decision": "Select an action before saving.",
+        "session_not_persistent": "Run a personal single or batch review before saving teacher decisions.",
         "download_queue": "Download teacher queue.csv",
-        "eval_title": "Page 6 · Effectiveness Evaluation",
+        "eval_title": "Effectiveness Evaluation",
         "eval_caption": "This page evaluates implementation behavior on synthetic expectation labels, AI-review stress cases, and public learner-correction corpora. The public-corpus results evaluate routing against offline gold corrections, not classroom impact.",
         "combined_items": "Combined items",
         "action_accuracy": "Action accuracy",
@@ -226,13 +250,47 @@ MAIN_TRANSLATIONS = {
         "public_gec_note": "Interpretation note: auto accuracy is high because correct feedback candidates are derived from public gold corrections and evaluated against constructed risk distractors. These numbers validate the routing layer, not real LLM feedback quality or classroom effectiveness.",
         "validity_assessment": "Validity assessment",
         "validity_text": "Current evidence supports a graph-backed review-routing claim: the system operationalizes a teacher-review workflow, constructs deploy-time Feedback Safety Graphs, routes synthetic high-risk feedback to review, and reproduces this routing behavior on public learner-correction corpora converted into feedback-level gold labels. It does not yet support a classroom effectiveness claim because no real teacher annotations, student outcomes, or time-on-task measurements have been collected.",
-        "reports_title": "Page 7 · Reports",
+        "reports_title": "Page 6 · Reports",
         "report_table": "Report table",
         "report_preview": "Report preview",
         "download_routed_csv": "Download routed feedback.csv",
         "download_report_md": "Download report.md",
-        "settings_title": "Page 8 · Settings / Diagnostics",
-        "settings_info": "Operational teacher workflow pages are now Pages 2-7. This page keeps API settings and legacy diagnostics secondary.",
+        "account_title": "Page 7 · My Account",
+        "personal_overview": "Personal review overview",
+        "review_sessions": "Review sessions",
+        "saved_decisions": "Saved decisions",
+        "review_routed": "Routed for review",
+        "recent_reviews": "Recent reviews",
+        "no_history": "No saved reviews yet.",
+        "open_review": "Open selected review",
+        "delete_review": "Delete selected review",
+        "confirm_delete_review": "I understand this permanently deletes the stored essay, feedback items, teacher decisions, and audit events.",
+        "review_deleted": "Review deleted.",
+        "session_loaded": "Review loaded. Open the comparison, teacher queue, or reports page to continue.",
+        "profile": "Profile",
+        "save_profile": "Save profile",
+        "profile_saved": "Profile updated.",
+        "change_password": "Change password",
+        "current_password": "Current password",
+        "new_password": "New password",
+        "password_changed": "Password changed. Please sign in again.",
+        "feedback_title": "Page 8 · Product Feedback",
+        "feedback_caption": "Report a problem, suggest an improvement, or tell us how the review workflow performed.",
+        "feedback_category": "Category",
+        "feedback_rating": "Overall experience",
+        "feedback_message": "Feedback",
+        "feedback_page": "Related page (optional)",
+        "allow_contact": "You may contact me about this feedback using my account email.",
+        "submit_feedback": "Submit feedback",
+        "feedback_submitted": "Thank you. Your feedback has been saved.",
+        "my_feedback": "My submitted feedback",
+        "admin_feedback": "Feedback inbox",
+        "saving_review": "Running the review and saving it to your account...",
+        "saved_to_account": "Review saved to your account.",
+        "persistent_storage": "Personal account storage",
+        "backend_request_failed": "The server could not complete this request: {error}",
+        "settings_title": "Page 9 · Settings / Diagnostics",
+        "settings_info": "API settings, evaluation artifacts, and legacy diagnostics are kept here so the main navigation stays focused on the teacher workflow.",
         "backend_api": "Backend API",
         "backend_description": "FastAPI service for review-session persistence, teacher decisions, audit logs, and report export.",
         "backend_url": "Backend URL",
@@ -260,7 +318,6 @@ MAIN_TRANSLATIONS = {
         "download_design_brief": "Download Chinese design brief",
         "download_html_mockup": "Download HTML mockup",
         "design_missing": "Design reference mockup is not available in this package.",
-        "auth_not_configured": "Demo authentication is enabled, but CONSENSUS_SCOPE_DEMO_PASSWORD is not configured.",
         "read_error": "Failed to read {path}: {error}",
         "none": "None",
         "not_available": "Not available",
@@ -272,7 +329,7 @@ MAIN_TRANSLATIONS = {
         "recommended_method": "Recommended method",
         "empty_answer": "empty",
         "three_methods": "Three adjudication methods",
-        "workflow_line": "Single Essay Review -> Batch Review -> AI Feedback Comparison -> Teacher Queue -> Effectiveness Evaluation -> Reports",
+        "workflow_line": "Single / Batch Review -> AI Feedback Comparison -> Teacher Queue -> Reports -> Personal History",
         "aux_qa_metrics": "Auxiliary QA reliability metrics",
         "literary_title": "ESL comparative-literature essay feedback",
         "literary_caption": "Teacher-facing workflow: low-risk language edits are separated from factual and interpretive suggestions that need human review.",
@@ -373,11 +430,9 @@ MAIN_TRANSLATIONS = {
     "zh": {
         "language_label": "Language / 语言",
         "topbar_subtitle": "基于反馈安全图谱的 ESL 写作 AI 反馈教师复核路由",
-        "demo_access": "演示访问",
-        "demo_access_info": "该在线演示已启用密码保护，以避免无意调用 API。",
-        "demo_password": "演示密码",
-        "unlock_demo": "解锁演示",
-        "invalid_password": "密码错误。",
+        "badge_graph": "反馈安全图谱",
+        "badge_teacher": "教师参与复核",
+        "badge_esl": "ESL 写作评审",
         "api_configuration": "API 配置",
         "api_mode": "API 模式",
         "mode_a": "模式 A · 使用部署端内置 API key，适合现场演示",
@@ -389,17 +444,38 @@ MAIN_TRANSLATIONS = {
         "fixed_judge_model": "固定裁判模型",
         "provider_settings": "服务商设置",
         "provider_settings_help": "只填写服务商 base URL；应用会自动追加 /chat/completions。",
-        "lock_demo": "锁定演示",
+        "account_access": "登录 ConsensusScope",
+        "account_access_caption": "创建个人账号后，评审历史、教师决策和意见反馈会分别保存在你的账号下。",
+        "backend_required": "账号服务暂时不可用，请稍后重试。",
+        "login_tab": "登录",
+        "register_tab": "注册账号",
+        "username": "用户名",
+        "password": "密码",
+        "confirm_password": "确认密码",
+        "display_name": "显示名称",
+        "email_optional": "邮箱（选填）",
+        "sign_in": "登录",
+        "create_account": "创建账号",
+        "privacy_ack": "我只会上传匿名化作文，不包含姓名、学号、邮箱或其他个人身份信息。",
+        "privacy_notice": "个人账号仅用于保存评审记录。请勿上传可识别学生身份的信息。",
+        "password_mismatch": "两次输入的密码不一致。",
+        "password_rules": "密码不少于 8 位；用户名可使用字母、数字、点、下划线和连字符。",
+        "auth_error": "账号请求失败：{error}",
+        "account_section": "个人账号",
+        "signed_in_as": "当前账号：{name}",
+        "sign_out": "退出登录",
         "navigation": "导航",
         "page_home": "第 1 页：评审工作台",
         "page_single": "第 2 页：单篇作文评审",
         "page_batch": "第 3 页：批量评审",
         "page_compare": "第 4 页：AI 反馈对比",
         "page_queue": "第 5 页：教师复核队列",
-        "page_eval": "第 6 页：有效性评估",
-        "page_reports": "第 7 页：报告导出",
-        "page_settings": "第 8 页：设置 / 诊断",
-        "page_design": "第 9 页：设计参考",
+        "page_reports": "第 6 页：报告导出",
+        "page_account": "第 7 页：我的账号",
+        "page_feedback": "第 8 页：意见反馈",
+        "page_settings": "第 9 页：设置 / 诊断",
+        "page_eval": "有效性评估",
+        "page_design": "设计参考",
         "feedback_items": "反馈项",
         "auto_accepted": "自动接受",
         "teacher_review": "教师复核",
@@ -445,7 +521,7 @@ MAIN_TRANSLATIONS = {
         "consensus_states": "一致性状态",
         "queue_title": "第 5 页 · 教师复核队列",
         "queue_empty": "当前没有需要教师复核的项目。",
-        "queue_caption": "教师可以接受、编辑、拒绝或暂缓反馈。决策会保存在当前网页会话中。",
+        "queue_caption": "你可以接受、修改、拒绝或暂缓每条反馈；保存后的决策会保留在个人账号中。",
         "risk_level": "风险等级",
         "issue_type": "问题类型",
         "target_span": "目标片段",
@@ -461,8 +537,14 @@ MAIN_TRANSLATIONS = {
         "evidence_signal": "证据信号",
         "priority": "优先级",
         "teacher_action": "教师动作",
+        "save_decision": "保存决策",
+        "corrected_feedback": "修改后的学生可见反馈",
+        "teacher_reason_optional": "教师备注（选填）",
+        "edit_feedback_required": "选择“修改”时，请先填写修改后的反馈。",
+        "select_decision": "请先选择处理动作再保存。",
+        "session_not_persistent": "请先运行一次个人单篇或批量评审，再保存教师决策。",
         "download_queue": "下载教师队列.csv",
-        "eval_title": "第 6 页 · 有效性评估",
+        "eval_title": "有效性评估",
         "eval_caption": "本页在合成期望标签、AI 评审压力测试案例和公开学习者纠错语料上评估实现行为。公开语料结果是基于离线 gold correction 的路由评估，不是真实课堂效果。",
         "combined_items": "合并项目数",
         "action_accuracy": "动作准确率",
@@ -478,13 +560,47 @@ MAIN_TRANSLATIONS = {
         "public_gec_note": "解释说明：自动接受准确率高，是因为正确反馈候选来自公开 gold correction，并与构造的风险干扰项对比评估。这些数字验证的是路由层，不代表真实 LLM 反馈质量或课堂有效性。",
         "validity_assessment": "有效性说明",
         "validity_text": "当前证据支持图谱驱动的复核路由主张：系统可以实现教师复核工作流，为每条反馈构建部署时反馈安全图谱，将合成高风险反馈送入复核，并能在转换为反馈级 gold label 的公开学习者纠错语料上复现该路由行为。但它还不能证明真实课堂有效性，因为尚未收集真实教师标注、学生结果或耗时数据。",
-        "reports_title": "第 7 页 · 报告导出",
+        "reports_title": "第 6 页 · 报告导出",
         "report_table": "报告表格",
         "report_preview": "报告预览",
         "download_routed_csv": "下载路由反馈.csv",
         "download_report_md": "下载报告.md",
-        "settings_title": "第 8 页 · 设置 / 诊断",
-        "settings_info": "当前主线教师工作流位于第 2-7 页。本页只保留 API 设置和旧辅助诊断。",
+        "account_title": "第 7 页 · 我的账号",
+        "personal_overview": "个人评审概览",
+        "review_sessions": "评审记录",
+        "saved_decisions": "已保存决策",
+        "review_routed": "送入复核",
+        "recent_reviews": "最近评审",
+        "no_history": "暂时没有已保存的评审记录。",
+        "open_review": "打开所选评审",
+        "delete_review": "删除所选评审",
+        "confirm_delete_review": "我确认永久删除该作文、反馈项、教师决策和对应审计记录。",
+        "review_deleted": "评审记录已删除。",
+        "session_loaded": "评审记录已加载，可前往反馈对比、教师复核队列或报告页继续处理。",
+        "profile": "个人资料",
+        "save_profile": "保存资料",
+        "profile_saved": "个人资料已更新。",
+        "change_password": "修改密码",
+        "current_password": "当前密码",
+        "new_password": "新密码",
+        "password_changed": "密码已修改，请重新登录。",
+        "feedback_title": "第 8 页 · 意见反馈",
+        "feedback_caption": "可以报告问题、提出改进建议，或评价本次作文评审体验。",
+        "feedback_category": "反馈类型",
+        "feedback_rating": "整体体验",
+        "feedback_message": "反馈内容",
+        "feedback_page": "相关页面（选填）",
+        "allow_contact": "允许通过账号邮箱就此反馈联系我。",
+        "submit_feedback": "提交反馈",
+        "feedback_submitted": "感谢反馈，内容已经保存。",
+        "my_feedback": "我提交的反馈",
+        "admin_feedback": "反馈收件箱",
+        "saving_review": "正在运行评审并保存到个人账号...",
+        "saved_to_account": "评审已保存到个人账号。",
+        "persistent_storage": "个人账号存储",
+        "backend_request_failed": "服务器未能完成请求：{error}",
+        "settings_title": "第 9 页 · 设置 / 诊断",
+        "settings_info": "API 设置、有效性评测和旧辅助诊断统一收在本页，主导航只保留教师日常工作流。",
         "backend_api": "后端 API",
         "backend_description": "FastAPI 服务用于保存评审会话、教师决策、审计日志和导出报告。",
         "backend_url": "后端地址",
@@ -512,7 +628,6 @@ MAIN_TRANSLATIONS = {
         "download_design_brief": "下载中文设计说明",
         "download_html_mockup": "下载 HTML 原型",
         "design_missing": "该包中没有设计参考原型。",
-        "auth_not_configured": "已启用演示密码保护，但未配置 CONSENSUS_SCOPE_DEMO_PASSWORD。",
         "read_error": "读取 {path} 失败：{error}",
         "none": "无",
         "not_available": "不可用",
@@ -524,7 +639,7 @@ MAIN_TRANSLATIONS = {
         "recommended_method": "推荐方法",
         "empty_answer": "空",
         "three_methods": "三种裁决方法",
-        "workflow_line": "单篇作文评审 -> 批量评审 -> AI 反馈对比 -> 教师复核队列 -> 有效性评估 -> 报告导出",
+        "workflow_line": "单篇 / 批量评审 -> AI 反馈对比 -> 教师复核队列 -> 报告导出 -> 个人历史",
         "aux_qa_metrics": "辅助 QA 可靠性指标",
         "literary_title": "ESL 比较文学作文反馈",
         "literary_caption": "教师工作流：低风险语言修改会与需要人工复核的事实性、解释性建议分开。",
@@ -789,6 +904,11 @@ VALUE_LABELS_ZH = {
     "true_consensus": "真实共识",
     "high_disagreement": "高分歧",
     "confidence_mismatch": "置信度不匹配",
+    "bug": "问题报告",
+    "feature": "功能建议",
+    "usability": "使用体验",
+    "output_quality": "反馈质量",
+    "other": "其他",
 }
 
 
@@ -880,6 +1000,8 @@ def configured_value(key: str) -> str:
 
 
 def storage_backend_name() -> str:
+    if st.session_state.get("account_user"):
+        return mt("persistent_storage")
     return mt("session_only")
 
 
@@ -897,36 +1019,190 @@ def backend_healthcheck(url: str) -> Dict[str, Any]:
         return {"ok": False, "payload": {}, "error": str(exc)}
 
 
+def current_account_user() -> Dict[str, Any]:
+    user = st.session_state.get("account_user")
+    return user if isinstance(user, dict) else {}
+
+
+def clear_account_session() -> None:
+    st.session_state["account_token"] = ""
+    st.session_state["account_user"] = None
+    st.session_state["active_review_session_id"] = ""
+    st.session_state["teacher_decisions"] = {}
+
+
+def store_account_session(payload: Dict[str, Any]) -> None:
+    st.session_state["account_token"] = safe_str(payload.get("access_token"))
+    st.session_state["account_user"] = payload.get("user") or None
+
+
+def backend_request(
+    method: str,
+    endpoint: str,
+    *,
+    payload: Optional[Dict[str, Any]] = None,
+    params: Optional[Dict[str, Any]] = None,
+    authenticated: bool = True,
+    timeout: int = 60,
+) -> tuple[Optional[Dict[str, Any]], str]:
+    headers: Dict[str, str] = {"Accept": "application/json"}
+    if authenticated:
+        token = safe_str(st.session_state.get("account_token"))
+        if not token:
+            return None, "authentication required"
+        headers["Authorization"] = f"Bearer {token}"
+    try:
+        response = requests.request(
+            method,
+            f"{backend_api_url().rstrip('/')}{endpoint}",
+            json=payload,
+            params=params,
+            headers=headers,
+            timeout=timeout,
+        )
+    except Exception as exc:
+        return None, str(exc)
+    if response.status_code == 401 and authenticated:
+        clear_account_session()
+    if not response.ok:
+        try:
+            detail = response.json().get("detail", response.text)
+        except Exception:
+            detail = response.text
+        return None, safe_str(detail) or f"HTTP {response.status_code}"
+    if not response.content:
+        return {}, ""
+    try:
+        return response.json(), ""
+    except Exception:
+        return {"text": response.text}, ""
+
+
+def render_account_gate() -> bool:
+    if current_account_user() and safe_str(st.session_state.get("account_token")):
+        return True
+
+    health = backend_healthcheck(backend_api_url())
+    st.markdown(f'<div class="section-title">{mt("account_access")}</div>', unsafe_allow_html=True)
+    st.caption(mt("account_access_caption"))
+    st.info(mt("privacy_notice"))
+    if not health["ok"]:
+        st.error(mt("backend_required"))
+        st.code(health["error"], language="text")
+        return False
+
+    login_tab, register_tab = st.tabs([mt("login_tab"), mt("register_tab")])
+    with login_tab:
+        with st.form("account_login_form"):
+            username = st.text_input(mt("username"), key="login_username")
+            password = st.text_input(mt("password"), type="password", key="login_password")
+            submitted = st.form_submit_button(mt("sign_in"), use_container_width=True, type="primary")
+        if submitted:
+            data, error = backend_request(
+                "POST",
+                "/api/auth/login",
+                payload={"username": username, "password": password},
+                authenticated=False,
+            )
+            if data:
+                store_account_session(data)
+                st.rerun()
+            st.error(mt("auth_error", error=error))
+
+    with register_tab:
+        st.caption(mt("password_rules"))
+        with st.form("account_register_form"):
+            username = st.text_input(mt("username"), key="register_username")
+            display_name = st.text_input(mt("display_name"), key="register_display_name")
+            email = st.text_input(mt("email_optional"), key="register_email")
+            password = st.text_input(mt("password"), type="password", key="register_password")
+            confirmation = st.text_input(
+                mt("confirm_password"),
+                type="password",
+                key="register_password_confirmation",
+            )
+            privacy_acknowledged = st.checkbox(mt("privacy_ack"), key="register_privacy_ack")
+            submitted = st.form_submit_button(mt("create_account"), use_container_width=True, type="primary")
+        if submitted:
+            if password != confirmation:
+                st.error(mt("password_mismatch"))
+            else:
+                data, error = backend_request(
+                    "POST",
+                    "/api/auth/register",
+                    payload={
+                        "username": username,
+                        "password": password,
+                        "display_name": display_name,
+                        "email": email or None,
+                        "privacy_acknowledged": privacy_acknowledged,
+                    },
+                    authenticated=False,
+                )
+                if data:
+                    store_account_session(data)
+                    st.rerun()
+                st.error(mt("auth_error", error=error))
+    return False
+
+
+def render_account_sidebar() -> None:
+    user = current_account_user()
+    if not user:
+        return
+    display_name = safe_str(user.get("display_name")) or safe_str(user.get("username"))
+    st.sidebar.markdown(f"### {mt('account_section')}")
+    st.sidebar.caption(mt("signed_in_as", name=display_name))
+    if st.sidebar.button(mt("sign_out"), use_container_width=True):
+        backend_request("POST", "/api/auth/logout")
+        clear_account_session()
+        st.rerun()
+
+
+def single_result_from_backend(payload: Dict[str, Any]) -> Dict[str, Any]:
+    return {
+        "session_id": payload.get("session_id", ""),
+        "batch_id": payload.get("batch_id"),
+        "essay_id": payload.get("essay_id", ""),
+        "summary": payload.get("summary", {}),
+        "merged": pd.DataFrame(payload.get("feedback_items", [])),
+        "comparison": pd.DataFrame(payload.get("comparison", [])),
+        "report": payload.get("report", ""),
+    }
+
+
+def batch_result_from_backend(payload: Dict[str, Any]) -> Dict[str, Any]:
+    return {
+        "batch_id": payload.get("batch_id", ""),
+        "sessions": payload.get("sessions", []),
+        "summary": pd.DataFrame(payload.get("summary", [])),
+        "merged": pd.DataFrame(payload.get("feedback_items", [])),
+        "comparison": pd.DataFrame(payload.get("comparison", [])),
+        "report": payload.get("report", ""),
+    }
+
+
+def load_personal_review(session_id: str) -> tuple[Optional[Dict[str, Any]], str]:
+    session, error = backend_request("GET", f"/api/sessions/{session_id}")
+    if not session:
+        return None, error
+    feedback, feedback_error = backend_request("GET", f"/api/sessions/{session_id}/feedback")
+    if feedback is None:
+        return None, feedback_error
+    payload = {
+        "session_id": session_id,
+        "batch_id": session.get("batch_id"),
+        "essay_id": session.get("essay_id", ""),
+        "summary": session.get("summary", {}),
+        "feedback_items": feedback.get("feedback_items", []),
+        "comparison": session.get("comparison", []),
+        "report": session.get("report_text", ""),
+    }
+    return single_result_from_backend(payload), ""
+
+
 def truthy(value: str) -> bool:
     return value.strip().lower() in {"1", "true", "yes", "y", "on"}
-
-
-def demo_auth_required() -> bool:
-    return bool(configured_value("CONSENSUS_SCOPE_DEMO_PASSWORD")) or truthy(configured_value("CONSENSUS_SCOPE_AUTH_ENABLED"))
-
-
-def render_demo_auth_gate() -> bool:
-    expected = configured_value("CONSENSUS_SCOPE_DEMO_PASSWORD")
-    if not expected and not demo_auth_required():
-        return True
-    if st.session_state.get("demo_authenticated"):
-        return True
-
-    st.markdown(f'<div class="section-title">{mt("demo_access")}</div>', unsafe_allow_html=True)
-    st.info(mt("demo_access_info"))
-    if not expected:
-        st.error(mt("auth_not_configured"))
-        return False
-    with st.form("demo_auth_form"):
-        entered = st.text_input(mt("demo_password"), type="password")
-        submitted = st.form_submit_button(mt("unlock_demo"), use_container_width=True)
-    if submitted:
-        if hmac.compare_digest(entered, expected):
-            st.session_state["demo_authenticated"] = True
-            st.rerun()
-        else:
-            st.error(mt("invalid_password"))
-    return False
 
 
 @st.cache_data(show_spinner=False)
@@ -1319,7 +1595,11 @@ def ensure_state() -> None:
         "main_reviewer_id": "demo_teacher",
         "audit_selection": None,
         "api_mode": "Mode A",
-        "demo_authenticated": False,
+        "account_token": "",
+        "account_user": None,
+        "active_review_session_id": "",
+        "active_page_key": "page_home",
+        "account_flash": "",
     }
     for key, value in defaults.items():
         if key not in st.session_state:
@@ -1348,9 +1628,9 @@ def topbar() -> None:
             <div class="subtitle">{mt("topbar_subtitle")}</div>
           </div>
           <div class="topbar-status">
-            <span class="ui-pill">Feedback Safety Graph</span>
-            <span class="ui-pill">Teacher-in-the-loop</span>
-            <span class="ui-pill">ESL Writing Review</span>
+            <span class="ui-pill">{mt("badge_graph")}</span>
+            <span class="ui-pill">{mt("badge_teacher")}</span>
+            <span class="ui-pill">{mt("badge_esl")}</span>
           </div>
         </div>
         """,
@@ -1648,14 +1928,36 @@ def page_single_essay_review() -> None:
     default_prompt = safe_str(selected.get("assignment_prompt")) or "Write an ESL essay responding clearly to the assignment prompt."
     default_level = safe_str(selected.get("student_level")) or "upper-intermediate"
     default_essay = safe_str(selected.get("essay_text_anonymized"))
+    levels = ["intermediate", "upper-intermediate", "advanced", "not specified"]
+    default_level_index = levels.index(default_level) if default_level in levels else 1
+    widget_suffix = demo_choice.replace(" ", "_")
 
     left, right = st.columns([0.92, 1.08], gap="large")
     with left:
-        essay_id = st.text_input(mt("essay_id"), value=safe_str(selected.get("essay_id")) or "USER-ESSAY-001")
-        assignment = st.text_area(mt("assignment_prompt"), value=default_prompt, height=92)
-        level = st.selectbox(mt("student_level"), ["intermediate", "upper-intermediate", "advanced", "not specified"], index=1)
-        essay_text = st.text_area(mt("student_draft"), value=default_essay, height=260)
-        include_stress = st.checkbox(mt("include_stress"), value=True)
+        essay_id = st.text_input(
+            mt("essay_id"),
+            value=safe_str(selected.get("essay_id")) or "USER-ESSAY-001",
+            key=f"single_essay_id_{widget_suffix}",
+        )
+        assignment = st.text_area(
+            mt("assignment_prompt"),
+            value=default_prompt,
+            height=92,
+            key=f"single_assignment_{widget_suffix}",
+        )
+        level = st.selectbox(
+            mt("student_level"),
+            levels,
+            index=default_level_index,
+            key=f"single_level_{widget_suffix}",
+        )
+        essay_text = st.text_area(
+            mt("student_draft"),
+            value=default_essay,
+            height=260,
+            key=f"single_draft_{widget_suffix}",
+        )
+        include_stress = st.checkbox(mt("include_stress"), value=False)
         run = st.button(mt("generate_route"), use_container_width=True, type="primary")
     with right:
         st.markdown(f"### {mt('what_window_does')}")
@@ -1666,14 +1968,28 @@ def page_single_essay_review() -> None:
         if not essay_text.strip():
             st.error(mt("paste_essay_error"))
         else:
-            st.session_state["esl_single_result"] = review_esl_essay(
-                essay_text=essay_text,
-                essay_id=essay_id,
-                assignment_prompt=assignment,
-                student_level=level,
-                include_stress_tests=include_stress,
-            )
-            st.session_state["esl_batch_result"] = None
+            with st.spinner(mt("saving_review")):
+                data, error = backend_request(
+                    "POST",
+                    "/api/review/single",
+                    payload={
+                        "essay_text": essay_text,
+                        "essay_id": essay_id,
+                        "assignment_prompt": assignment,
+                        "student_level": level,
+                        "include_stress_tests": include_stress,
+                    },
+                    timeout=180,
+                )
+            if data:
+                result = single_result_from_backend(data)
+                st.session_state["esl_single_result"] = result
+                st.session_state["esl_batch_result"] = None
+                st.session_state["active_review_session_id"] = result.get("session_id", "")
+                st.session_state["teacher_decisions"] = {}
+                st.success(mt("saved_to_account"))
+            else:
+                st.error(mt("backend_request_failed", error=error))
 
     result = st.session_state.get("esl_single_result")
     if not result:
@@ -1700,7 +2016,7 @@ def page_batch_review() -> None:
         type=["csv"],
         help=mt("upload_help"),
     )
-    include_stress = st.checkbox(mt("include_stress_batch"), value=True)
+    include_stress = st.checkbox(mt("include_stress_batch"), value=False)
     if uploaded is not None:
         essays = pd.read_csv(uploaded).fillna("")
     else:
@@ -1714,8 +2030,37 @@ def page_batch_review() -> None:
         if "essay_text" not in essays.columns and "essay_text_anonymized" not in essays.columns:
             st.error(mt("csv_required"))
         else:
-            st.session_state["esl_batch_result"] = review_esl_batch(essays, include_stress_tests=include_stress)
-            st.session_state["esl_single_result"] = None
+            essay_text_column = "essay_text" if "essay_text" in essays.columns else "essay_text_anonymized"
+            payload_essays = []
+            for index, row in essays.fillna("").iterrows():
+                payload_essays.append(
+                    {
+                        "essay_id": safe_str(row.get("essay_id")) or f"BATCH-ESSAY-{index + 1:03d}",
+                        "essay_text": safe_str(row.get(essay_text_column)),
+                        "assignment_prompt": safe_str(row.get("assignment_prompt"))
+                        or "Write an ESL essay responding clearly to the assignment prompt.",
+                        "student_level": safe_str(row.get("student_level")) or "not specified",
+                        "include_stress_tests": include_stress,
+                    }
+                )
+            with st.spinner(mt("saving_review")):
+                data, error = backend_request(
+                    "POST",
+                    "/api/review/batch",
+                    payload={
+                        "essays": payload_essays,
+                        "include_stress_tests": include_stress,
+                    },
+                    timeout=300,
+                )
+            if data:
+                st.session_state["esl_batch_result"] = batch_result_from_backend(data)
+                st.session_state["esl_single_result"] = None
+                st.session_state["active_review_session_id"] = ""
+                st.session_state["teacher_decisions"] = {}
+                st.success(mt("saved_to_account"))
+            else:
+                st.error(mt("backend_request_failed", error=error))
     result = st.session_state.get("esl_batch_result")
     if not result:
         return
@@ -1764,18 +2109,13 @@ def page_teacher_queue() -> None:
         return
     st.caption(mt("queue_caption"))
     st.caption(f"{mt('storage_backend')}: {storage_backend_name()}")
-    reviewer_id = st.text_input(
-        mt("reviewer_id"),
-        value=safe_str(st.session_state.get("main_reviewer_id")) or "demo_teacher",
-        help=mt("reviewer_id_help"),
-    )
-    st.session_state["main_reviewer_id"] = reviewer_id
     risk_filter = st.multiselect(mt("risk_level"), ["high", "medium", "low"], default=["high", "medium"], format_func=value_label)
     issue_options = sorted(queue["issue_type_predicted"].fillna("").astype(str).unique().tolist())
     issue_filter = st.multiselect(mt("issue_type"), issue_options, default=issue_options, format_func=value_label)
     filtered = queue[queue["risk_level"].isin(risk_filter) & queue["issue_type_predicted"].isin(issue_filter)].copy()
     for _, row in filtered.iterrows():
         item_id = safe_str(row.get("feedback_item_id"))
+        session_id = safe_str(row.get("session_id")) or safe_str(result.get("session_id"))
         priority = safe_str(row.get("review_priority")) or "normal"
         score = safe_str(row.get("risk_score")) or "n/a"
         with st.expander(
@@ -1799,17 +2139,64 @@ def page_teacher_queue() -> None:
             cols[0].metric(mt("review_confidence"), safe_str(row.get("review_confidence")) or "n/a")
             cols[1].metric(mt("evidence_signal"), safe_str(row.get("evidence_signal")) or "none")
             cols[2].metric(mt("priority"), priority)
+            action_options = ["pending", "accept", "edit", "reject", "needs_more_evidence"]
+            saved_action = st.session_state.get("teacher_decisions", {}).get(item_id, "pending")
+            if saved_action not in action_options:
+                saved_action = "pending"
             action = st.radio(
                 mt("teacher_action"),
-                ["pending", "accept", "edit", "reject", "needs_more_evidence"],
+                action_options,
                 format_func=value_label,
                 horizontal=True,
-                key=f"teacher_action_{item_id}",
-                index=["pending", "accept", "edit", "reject", "needs_more_evidence"].index(
-                    st.session_state.get("teacher_decisions", {}).get(item_id, "pending")
-                ),
+                key=f"teacher_action_{session_id}_{item_id}",
+                index=action_options.index(saved_action),
             )
             st.session_state["teacher_decisions"][item_id] = action
+            corrected_feedback = ""
+            if action == "edit":
+                corrected_feedback = st.text_area(
+                    mt("corrected_feedback"),
+                    value=safe_str(row.get("ai_suggestion")),
+                    key=f"corrected_feedback_{session_id}_{item_id}",
+                    height=96,
+                )
+            teacher_reason = st.text_area(
+                mt("teacher_reason_optional"),
+                key=f"teacher_reason_{session_id}_{item_id}",
+                height=72,
+            )
+            if st.button(
+                mt("save_decision"),
+                key=f"save_decision_{session_id}_{item_id}",
+                use_container_width=True,
+                type="primary",
+            ):
+                if not session_id:
+                    st.warning(mt("session_not_persistent"))
+                elif action == "edit" and not corrected_feedback.strip():
+                    st.error(mt("edit_feedback_required"))
+                elif action == "pending":
+                    st.warning(mt("select_decision"))
+                else:
+                    saved, error = backend_request(
+                        "POST",
+                        "/api/teacher/decision",
+                        payload={
+                            "session_id": session_id,
+                            "feedback_item_id": item_id,
+                            "teacher_action": action,
+                            "teacher_corrected_feedback": corrected_feedback or None,
+                            "teacher_reason": teacher_reason or None,
+                            "metadata": {
+                                "risk_level": safe_str(row.get("risk_level")),
+                                "risk_score": safe_str(row.get("risk_score")),
+                            },
+                        },
+                    )
+                    if saved:
+                        st.success(mt("decision_saved"))
+                    else:
+                        st.error(mt("backend_request_failed", error=error))
     st.download_button(
         mt("download_queue"),
         data=filtered.to_csv(index=False, encoding="utf-8-sig"),
@@ -1946,6 +2333,217 @@ def page_reports() -> None:
     )
 
 
+def page_account() -> None:
+    st.markdown(f'<div class="section-title">{mt("account_title")}</div>', unsafe_allow_html=True)
+    flash = safe_str(st.session_state.pop("account_flash", ""))
+    if flash:
+        st.success(flash)
+    user = current_account_user()
+    summary_payload, summary_error = backend_request("GET", "/api/account/summary")
+    if summary_payload:
+        summary = summary_payload.get("summary", {})
+        st.markdown(f"### {mt('personal_overview')}")
+        c1, c2, c3, c4 = st.columns(4)
+        c1.metric(mt("review_sessions"), int(summary.get("review_sessions", 0)))
+        c2.metric(mt("feedback_items"), int(summary.get("feedback_items", 0)))
+        c3.metric(mt("review_routed"), int(summary.get("review_routed", 0)))
+        c4.metric(mt("saved_decisions"), int(summary.get("teacher_decisions", 0)))
+    elif summary_error:
+        st.warning(mt("backend_request_failed", error=summary_error))
+
+    profile_tab, history_tab, password_tab = st.tabs(
+        [mt("profile"), mt("recent_reviews"), mt("change_password")]
+    )
+    with profile_tab:
+        with st.form("account_profile_form"):
+            display_name = st.text_input(
+                mt("display_name"),
+                value=safe_str(user.get("display_name")),
+            )
+            email = st.text_input(
+                mt("email_optional"),
+                value=safe_str(user.get("email")),
+            )
+            submitted = st.form_submit_button(mt("save_profile"), use_container_width=True)
+        if submitted:
+            data, error = backend_request(
+                "PATCH",
+                "/api/account/profile",
+                payload={"display_name": display_name, "email": email or None},
+            )
+            if data:
+                st.session_state["account_user"] = data.get("user")
+                st.success(mt("profile_saved"))
+            else:
+                st.error(mt("backend_request_failed", error=error))
+
+    with history_tab:
+        history_payload, history_error = backend_request(
+            "GET",
+            "/api/sessions",
+            params={"limit": 100},
+        )
+        sessions = history_payload.get("sessions", []) if history_payload else []
+        if not sessions:
+            st.info(mt("no_history"))
+            if history_error:
+                st.caption(history_error)
+        else:
+            rows = []
+            for session in sessions:
+                item_summary = session.get("summary") or {}
+                rows.append(
+                    {
+                        "session_id": session.get("session_id"),
+                        "essay_id": session.get("essay_id"),
+                        "student_level": session.get("student_level"),
+                        "feedback_items": item_summary.get("feedback_items", 0),
+                        "auto_accept": item_summary.get("auto_accept", 0),
+                        "teacher_review": item_summary.get("teacher_review", 0),
+                        "created_at": session.get("created_at"),
+                    }
+                )
+            history_frame = pd.DataFrame(rows)
+            st.dataframe(display_frame(history_frame), use_container_width=True, hide_index=True)
+            labels = {
+                f"{safe_str(item.get('essay_id'))} · {safe_str(item.get('created_at'))[:16]} · {safe_str(item.get('session_id'))}": safe_str(item.get("session_id"))
+                for item in sessions
+            }
+            selected_label = st.selectbox(mt("recent_reviews"), list(labels))
+            session_id = labels[selected_label]
+            confirm_deletion = st.checkbox(
+                mt("confirm_delete_review"),
+                key=f"confirm_delete_review_{session_id}",
+            )
+            open_col, delete_col = st.columns(2)
+            if open_col.button(mt("open_review"), use_container_width=True, type="primary"):
+                loaded, error = load_personal_review(session_id)
+                if loaded:
+                    st.session_state["esl_single_result"] = loaded
+                    st.session_state["esl_batch_result"] = None
+                    st.session_state["active_review_session_id"] = session_id
+                    decisions_payload, _ = backend_request(
+                        "GET",
+                        "/api/teacher/decisions",
+                        params={"session_id": session_id},
+                    )
+                    decisions = decisions_payload.get("decisions", []) if decisions_payload else []
+                    st.session_state["teacher_decisions"] = {
+                        safe_str(item.get("feedback_item_id")): safe_str(item.get("teacher_action"))
+                        for item in decisions
+                    }
+                    st.success(mt("session_loaded"))
+                    display_esl_summary(loaded.get("summary", {}))
+                    display_esl_feedback_table(loaded.get("merged", pd.DataFrame()), mt("routed_feedback"))
+                else:
+                    st.error(mt("backend_request_failed", error=error))
+            if delete_col.button(
+                mt("delete_review"),
+                use_container_width=True,
+                disabled=not confirm_deletion,
+            ):
+                deleted, error = backend_request("DELETE", f"/api/sessions/{session_id}")
+                if deleted:
+                    if safe_str(st.session_state.get("active_review_session_id")) == session_id:
+                        st.session_state["esl_single_result"] = None
+                        st.session_state["esl_batch_result"] = None
+                        st.session_state["active_review_session_id"] = ""
+                        st.session_state["teacher_decisions"] = {}
+                    st.session_state["account_flash"] = mt("review_deleted")
+                    st.rerun()
+                else:
+                    st.error(mt("backend_request_failed", error=error))
+
+    with password_tab:
+        with st.form("account_password_form"):
+            current_password = st.text_input(mt("current_password"), type="password")
+            new_password = st.text_input(mt("new_password"), type="password")
+            confirmation = st.text_input(mt("confirm_password"), type="password")
+            submitted = st.form_submit_button(mt("change_password"), use_container_width=True)
+        if submitted:
+            if new_password != confirmation:
+                st.error(mt("password_mismatch"))
+            else:
+                data, error = backend_request(
+                    "POST",
+                    "/api/account/password",
+                    payload={
+                        "current_password": current_password,
+                        "new_password": new_password,
+                    },
+                )
+                if data:
+                    clear_account_session()
+                    st.success(mt("password_changed"))
+                    time.sleep(0.4)
+                    st.rerun()
+                else:
+                    st.error(mt("backend_request_failed", error=error))
+
+
+def page_product_feedback() -> None:
+    st.markdown(f'<div class="section-title">{mt("feedback_title")}</div>', unsafe_allow_html=True)
+    st.caption(mt("feedback_caption"))
+    user = current_account_user()
+    categories = ["bug", "feature", "usability", "output_quality", "other"]
+    related_pages = [
+        "",
+        mt("page_home"),
+        mt("page_single"),
+        mt("page_batch"),
+        mt("page_compare"),
+        mt("page_queue"),
+        mt("page_reports"),
+        mt("page_account"),
+        mt("page_settings"),
+    ]
+    with st.form("product_feedback_form", clear_on_submit=True):
+        category = st.selectbox(mt("feedback_category"), categories, format_func=value_label)
+        rating = st.slider(mt("feedback_rating"), min_value=1, max_value=5, value=4)
+        related_page = st.selectbox(mt("feedback_page"), related_pages)
+        message = st.text_area(mt("feedback_message"), height=180)
+        has_email = bool(safe_str(user.get("email")))
+        allow_contact = st.checkbox(mt("allow_contact"), value=False, disabled=not has_email)
+        submitted = st.form_submit_button(mt("submit_feedback"), use_container_width=True, type="primary")
+    if submitted:
+        data, error = backend_request(
+            "POST",
+            "/api/feedback",
+            payload={
+                "category": category,
+                "rating": rating,
+                "message": message,
+                "page": related_page or None,
+                "allow_contact": allow_contact,
+            },
+        )
+        if data:
+            st.success(mt("feedback_submitted"))
+        else:
+            st.error(mt("backend_request_failed", error=error))
+
+    history_payload, _ = backend_request("GET", "/api/feedback/mine")
+    own_feedback = history_payload.get("feedback", []) if history_payload else []
+    if own_feedback:
+        st.markdown(f"### {mt('my_feedback')}")
+        own_frame = pd.DataFrame(own_feedback)
+        own_columns = ["category", "rating", "message", "page", "status", "created_at"]
+        st.dataframe(
+            display_frame(own_frame[[col for col in own_columns if col in own_frame.columns]]),
+            use_container_width=True,
+            hide_index=True,
+        )
+
+    if user.get("is_admin"):
+        admin_payload, error = backend_request("GET", "/api/admin/feedback")
+        inbox = admin_payload.get("feedback", []) if admin_payload else []
+        st.markdown(f"### {mt('admin_feedback')}")
+        if inbox:
+            st.dataframe(display_frame(pd.DataFrame(inbox)), use_container_width=True, hide_index=True)
+        elif error:
+            st.warning(mt("backend_request_failed", error=error))
+
+
 def page_settings_diagnostics(
     api_mode: str,
     selected: List[str],
@@ -1977,6 +2575,8 @@ def page_settings_diagnostics(
         st.write(f"{mt('answer_models')}: {', '.join(selected) if selected else mt('none')}")
         st.write(f"{mt('enable_fixed_judge')}: {fixed_enabled}; {mt('fixed_judge_model')}: {fixed_provider or mt('not_available')}")
         st.write(f"{mt('storage_backend')}: {storage_backend_name()}")
+    with st.expander(mt("page_eval"), expanded=False):
+        page_effectiveness_evaluation()
     with st.expander(mt("legacy_feedback"), expanded=False):
         render_literary_feedback_mode(api_mode, selected, user_inputs)
     with st.expander(mt("aux_qa_comparison"), expanded=False):
@@ -1989,6 +2589,16 @@ def page_settings_diagnostics(
 
 def page_home(samples_df: pd.DataFrame, outputs_df: pd.DataFrame, metrics_df: pd.DataFrame, risk_df: pd.DataFrame) -> None:
     st.markdown(f'<div class="section-title">{mt("home_title")}</div>', unsafe_allow_html=True)
+    personal_payload, _ = backend_request("GET", "/api/account/summary")
+    if personal_payload:
+        personal = personal_payload.get("summary", {})
+        st.markdown(f"### {mt('personal_overview')}")
+        p1, p2, p3, p4 = st.columns(4)
+        p1.metric(mt("review_sessions"), int(personal.get("review_sessions", 0)))
+        p2.metric(mt("feedback_items"), int(personal.get("feedback_items", 0)))
+        p3.metric(mt("review_routed"), int(personal.get("review_routed", 0)))
+        p4.metric(mt("saved_decisions"), int(personal.get("teacher_decisions", 0)))
+        st.divider()
     esl_essays = read_table(str(DATA_PATHS["esl_essays"]))
     esl_feedback = read_table(str(DATA_PATHS["esl_feedback"]))
     esl_routing = read_table(str(DATA_PATHS["esl_routing"]))
@@ -2011,7 +2621,6 @@ def page_home(samples_df: pd.DataFrame, outputs_df: pd.DataFrame, metrics_df: pd
         mt("main_claim")
     )
     st.info(mt("safety_graph_mechanism"))
-    st.info(mt("prototype_info"))
     if not esl_routing.empty:
         st.markdown(f'<div class="section-title">{mt("routing_snapshot")}</div>', unsafe_allow_html=True)
         snapshot = {
@@ -2615,7 +3224,7 @@ def main() -> None:
     )
     st.session_state["ui_language"] = "zh" if language_choice == "中文" else "en"
     topbar()
-    if not render_demo_auth_gate():
+    if not render_account_gate():
         return
 
     samples_df = read_table(str(DATA_PATHS["samples"]))
@@ -2628,35 +3237,38 @@ def main() -> None:
     effectiveness_df = read_table(str(DATA_PATHS["risk_effectiveness"]))
     error_df = read_table(str(DATA_PATHS["error_cases"]))
 
+    render_account_sidebar()
+    st.sidebar.divider()
     st.sidebar.markdown("### ConsensusScope")
-    if demo_auth_required() and st.session_state.get("demo_authenticated"):
-        if st.sidebar.button(mt("lock_demo"), use_container_width=True):
-            st.session_state["demo_authenticated"] = False
-            st.rerun()
     page_keys = [
         "page_home",
         "page_single",
         "page_batch",
         "page_compare",
         "page_queue",
-        "page_eval",
         "page_reports",
+        "page_account",
+        "page_feedback",
         "page_settings",
-        "page_design",
     ]
-    page_labels = [mt(key) for key in page_keys]
-    page_label = st.sidebar.radio(
+    active_page_key = safe_str(st.session_state.get("active_page_key")) or "page_home"
+    if active_page_key not in page_keys:
+        active_page_key = "page_home"
+    page_key = st.sidebar.radio(
         mt("navigation"),
-        page_labels,
+        page_keys,
+        index=page_keys.index(active_page_key),
+        format_func=mt,
+        key=f"main_page_key_{ui_lang()}",
         label_visibility="collapsed",
     )
-    page_key = page_keys[page_labels.index(page_label)]
+    st.session_state["active_page_key"] = page_key
     st.sidebar.divider()
-    if page_key == "page_design":
-        api_mode, selected, user_inputs, fixed_enabled, fixed_provider = "Mode A", [], {}, False, ""
-    else:
+    if page_key == "page_settings":
         api_mode, selected, user_inputs, fixed_enabled, fixed_provider = render_api_sidebar()
-        st.sidebar.caption(f"{mt('storage_backend')}: {storage_backend_name()}")
+    else:
+        api_mode, selected, user_inputs, fixed_enabled, fixed_provider = "Mode A", [], {}, False, ""
+    st.sidebar.caption(f"{mt('storage_backend')}: {storage_backend_name()}")
 
     if page_key == "page_home":
         page_home(samples_df, outputs_df, metrics_df, risk_df)
@@ -2668,10 +3280,12 @@ def main() -> None:
         page_ai_feedback_comparison()
     elif page_key == "page_queue":
         page_teacher_queue()
-    elif page_key == "page_eval":
-        page_effectiveness_evaluation()
     elif page_key == "page_reports":
         page_reports()
+    elif page_key == "page_account":
+        page_account()
+    elif page_key == "page_feedback":
+        page_product_feedback()
     elif page_key == "page_settings":
         page_settings_diagnostics(
             api_mode,
@@ -2686,8 +3300,6 @@ def main() -> None:
             effectiveness_df,
             error_df,
         )
-    else:
-        page_design_reference()
 
 
 if __name__ == "__main__":

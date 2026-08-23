@@ -39,9 +39,10 @@ their own API keys for the current request.
 Never put real API keys in the paper, README, source code, Git history, or demo
 video.
 
-For a password-protected live demo, set `CONSENSUS_SCOPE_DEMO_PASSWORD` in
-Streamlit Secrets together with the Mode A API keys. The password gate is only a
-usage guard; it is not a substitute for keeping API keys out of the repository.
+The current user flow uses personal accounts backed by the FastAPI service; the
+older shared demo-password gate is not the main access-control mechanism. Keep
+Mode A provider keys server-side and configure administrator usernames only
+through deployment environment variables.
 
 ## Preferred Hosted Deployment
 
@@ -87,11 +88,10 @@ repository.
    experiment and test dependencies are kept in `requirements-dev.txt` so
    Streamlit Cloud cold starts do not install unnecessary plotting, ML, testing,
    or video-conversion packages.
-5. Optional: paste the contents of `.streamlit/secrets.toml.example` into the
-   Streamlit Secrets editor and fill in only the keys needed for Mode A.
-6. For a private live demo, also set `CONSENSUS_SCOPE_DEMO_PASSWORD` in
-   Streamlit Secrets. Leave it blank for an open no-API reviewer demo.
-7. Deploy and test the pages listed below.
+5. Configure `CONSENSUS_SCOPE_BACKEND_URL` and any server-side Mode A keys in
+   Streamlit Secrets. The backend must be hosted separately on persistent
+   storage.
+6. Deploy and test the account and review workflows listed below.
 
 Streamlit Community Cloud is no longer the preferred public demo host for this
 submission because cold starts can make the app unavailable during review.
@@ -111,6 +111,8 @@ public API URL with:
 ```bash
 export CONSENSUS_SCOPE_BACKEND_DB=/opt/consensusscope-demo/data/consensusscope_backend.sqlite3
 export CONSENSUS_SCOPE_BACKEND_URL=https://api.consensusscope.cn
+export CONSENSUS_SCOPE_CORS_ORIGINS=https://demo.consensusscope.cn
+export CONSENSUS_SCOPE_ADMIN_USERNAMES=your_admin_username
 ```
 
 If exposed publicly, place the API behind HTTPS and avoid storing API keys in
@@ -119,12 +121,17 @@ or environment variables.
 
 ## Storage Boundary
 
-The hosted public demo uses the FastAPI backend and SQLite for review-session
-records, teacher decisions, audit logs, and report export. Local fallback runs
-can still operate without the backend, in which case teacher-queue decisions are
-kept in the current browser session. The expert annotation app writes
-annotations to a local SQLite file inside the Streamlit app container and
-provides CSV/JSON export buttons.
+The hosted public demo uses the FastAPI backend and SQLite for users, hashed
+passwords, hashed session tokens, review-session records, teacher decisions,
+audit logs, product feedback, and report export. The main Streamlit app now
+requires this account service. Each review is scoped to its owner; users may
+delete a review and all related artifacts from My Account.
+
+SQLite is appropriate for a single-process pilot deployment. Before running
+multiple API workers or sustained high-concurrency traffic, migrate the store to
+a managed relational database and add automated encrypted backups, retention
+rules, password reset, email verification, rate limiting, and operational
+monitoring. The expert annotation app remains a separate research tool.
 
 For formal data collection on Streamlit Community Cloud, export the annotation
 files after each teacher session and back them up outside Streamlit Cloud. Local
@@ -139,6 +146,18 @@ source .venv/bin/activate
 pip install -r requirements.txt
 pip install -r requirements-dev.txt
 pytest -q
+```
+
+Terminal 1:
+
+```bash
+uvicorn backend.app:app --host 127.0.0.1 --port 7864
+```
+
+Terminal 2:
+
+```bash
+CONSENSUS_SCOPE_BACKEND_URL=http://127.0.0.1:7864 \
 streamlit run app/streamlit_app.py --server.port 8502
 ```
 
@@ -161,13 +180,18 @@ streamlit run app/streamlit_app.py --server.port 8502
 - The README states the ESL writing feedback review-routing purpose.
 - `ui_prototype/index.html` opens and shows the 7-page product workflow.
 - The Streamlit app starts from `app/streamlit_app.py`.
-- Page 2 Single Essay Review can generate and route feedback without API keys.
+- A user can register, sign out, and sign in again.
+- Page 2 Single Essay Review can generate, route, and persist feedback without
+  provider API keys.
 - Page 3 Batch Review can process the packaged synthetic CSV.
 - Page 4 AI Feedback Comparison shows reviewer/risk comparison rows.
-- Page 5 Teacher Queue shows review-routed items and local teacher actions.
-- Page 6 Effectiveness Evaluation reports synthetic expectation-label and
-  AI-review stress-test metrics.
-- Page 7 Reports exports routed feedback and Markdown report artifacts.
+- Page 5 Teacher Queue persists account-owned teacher actions.
+- Page 6 Reports exports routed feedback and Markdown report artifacts.
+- Page 7 My Account restores and deletes personal review history and supports
+  profile/password changes.
+- Page 8 Feedback saves product feedback and shows the user's prior submissions.
+- Page 9 Settings / Diagnostics contains provider settings and auxiliary
+  effectiveness artifacts.
 - Mode A and Mode B API configuration text is visible and does not expose keys.
 - The auxiliary QA and earlier feedback modules are clearly separated from the
   current main demo claim.
@@ -194,3 +218,8 @@ artifacts, while exact reruns can vary with provider-side model/API changes.
 Before adding real student essays, remove names, IDs, emails, demographic
 details, school identifiers, and any personally identifying information. The
 packaged ESL writing demo uses synthetic examples.
+
+The backend stores submitted essay text until the user deletes the review or an
+operator applies a retention policy. Keep the API behind HTTPS, restrict CORS to
+the deployed frontend, protect the database and backups, and publish a clear
+privacy/retention notice before classroom use.

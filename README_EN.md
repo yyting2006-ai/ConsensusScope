@@ -20,6 +20,13 @@ python3 -m venv .venv
 source .venv/bin/activate
 pip install -U pip
 pip install -r requirements.txt
+uvicorn backend.app:app --host 127.0.0.1 --port 7864
+```
+
+In a second terminal:
+
+```bash
+CONSENSUS_SCOPE_BACKEND_URL=http://127.0.0.1:7864 \
 streamlit run app/streamlit_app.py --server.port 8502
 ```
 
@@ -27,8 +34,11 @@ Then open `http://localhost:8502`.
 
 ## Current Main Assets
 
-- `app/streamlit_app.py`: practical teacher workspace with single-essay review,
-  batch review, AI feedback comparison, teacher queue, evaluation, and reports.
+- `app/streamlit_app.py`: bilingual teacher workspace with registration and
+  sign-in, single/batch review, comparison, teacher queue, reports, personal
+  history, profile/password management, and product feedback.
+- `backend/`: authenticated FastAPI service with per-user SQLite persistence,
+  review deletion, audit logs, and an administrator feedback inbox.
 - `ui_prototype/index.html`: designer-facing product prototype.
 - `profiles/esl_writing.yaml`: ESL writing feedback profile.
 - `data/esl_writing_demo/`: synthetic ESL essays, feedback items, evidence,
@@ -52,10 +62,10 @@ Then open `http://localhost:8502`.
 3. Batch Review
 4. AI Feedback Comparison
 5. Teacher Queue
-6. Effectiveness Evaluation
-7. Reports
-8. Settings / Diagnostics
-9. Design Reference
+6. Reports
+7. My Account
+8. Feedback
+9. Settings / Diagnostics
 
 ## Boundary
 
@@ -66,3 +76,8 @@ current main demo claim. The packaged evaluation includes synthetic stress
 checks and an offline public learner-corpus routing benchmark. It validates the
 review-routing layer, not classroom effectiveness, student learning gains, or
 real LLM feedback quality.
+
+Accounts keep review data private between users, but the backend stores essay
+text until the user deletes the review or the operator applies a retention
+policy. Only anonymized writing may be uploaded. The first account release does
+not include email verification or password reset.

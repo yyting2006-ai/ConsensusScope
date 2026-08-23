@@ -27,6 +27,13 @@ python3 -m venv .venv
 source .venv/bin/activate
 pip install -U pip
 pip install -r requirements.txt
+uvicorn backend.app:app --host 127.0.0.1 --port 7864
+```
+
+另开一个终端运行前端：
+
+```bash
+CONSENSUS_SCOPE_BACKEND_URL=http://127.0.0.1:7864 \
 streamlit run app/streamlit_app.py --server.port 8502
 ```
 
@@ -38,7 +45,8 @@ http://localhost:8502
 
 ## 当前主线资产
 
-- `app/streamlit_app.py`：可运行的教师工作台，包含单篇、批量、比对、队列、评估和报告窗口。
+- `app/streamlit_app.py`：中英文教师工作台，包含注册登录、单篇/批量评审、反馈比对、教师队列、报告、个人历史和意见反馈。
+- `backend/`：带账号鉴权的 FastAPI 服务，按用户隔离 SQLite 数据，并保存教师决策、审计日志和产品反馈。
 - `ui_prototype/index.html`：给设计师看的完整视觉原型。
 - `profiles/esl_writing.yaml`：ESL 写作反馈 profile。
 - `data/esl_writing_demo/`：合成 ESL 作文、反馈项、review evidence、routing output 和 AI 评审压力测试集。
@@ -56,15 +64,15 @@ http://localhost:8502
 3. Batch Review：上传或使用 CSV 批量处理多篇作文。
 4. AI Feedback Comparison：比较不同 AI reviewer 的反馈候选、风险、安全图谱维度和一致性状态。
 5. Teacher Queue：教师复核、接受、编辑、拒绝或要求更多证据。
-6. Effectiveness Evaluation：在合成期望标签和 AI-review stress cases 上评估路由行为。
-7. Reports：导出反馈表和教师可读报告。
-8. Settings / Diagnostics：API 设置和旧辅助诊断。
-9. Design Reference：设计师视觉参考。
+6. Reports：导出反馈表和教师可读报告。
+7. My Account：修改资料和密码，恢复或删除个人评审历史。
+8. Feedback：提交问题、功能建议、易用性或输出质量反馈。
+9. Settings / Diagnostics：API 设置、有效性评测和旧辅助诊断。
 
 核心工作流：
 
 ```text
-Single Essay Review -> Batch Review -> AI Feedback Comparison -> Teacher Queue -> Effectiveness Evaluation -> Reports
+Single / Batch Review -> AI Feedback Comparison -> Teacher Queue -> Reports -> Personal History
 ```
 
 ## 数据边界
@@ -120,6 +128,16 @@ reports/public_gec_summary_20260608.md
 这些结果验证的是“复核路由层”能否把构造出的错误/风险反馈送入教师复核队列，不表示真实 LLM 反馈质量达到 100%，也不表示已经完成课堂实验。
 
 后续如加入真实学生作文，必须先删除姓名、学号、邮箱、学校标识、人口统计信息和任何可识别个人身份的信息。
+
+## 账号与数据边界
+
+账号密码使用 PBKDF2-HMAC-SHA256 哈希保存，登录令牌只保存 SHA-256
+哈希；评审记录、教师决策和意见反馈均按账号隔离。用户可以在“我的账号”
+删除一条评审，系统会同步删除该作文、反馈项、教师决策和审计记录。
+
+后端会保存用户提交的作文原文，直到用户主动删除或部署方执行数据保留
+策略。因此只能上传匿名化作文；真实课堂部署还需要遵守学校的数据处理、
+备份和保留制度。当前第一版暂不提供邮箱验证和忘记密码功能。
 
 ## Legacy 说明
 
