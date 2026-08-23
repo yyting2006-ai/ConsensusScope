@@ -66,6 +66,10 @@ variables, Streamlit Secrets, or user-provided keys.
 
 The Streamlit app now contains operational teacher-facing windows:
 
+- **Formal product workspace**: a restrained responsive interface provides
+  service status, quick actions, workflow progress, recent activity, and clear
+  desktop/mobile navigation without exposing research-only controls in the
+  primary review path.
 - **Language switch**: the main demo can switch between English and Chinese
   from the sidebar without changing the current page or exported CSV schemas.
 - **Personal accounts**: users register or sign in before reviewing writing;
