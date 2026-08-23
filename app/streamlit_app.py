@@ -125,7 +125,6 @@ def safe_str(value: Any) -> str:
 MAIN_TRANSLATIONS = {
     "en": {
         "language_label": "Language / 语言",
-        "topbar_subtitle": "Feedback Safety Graphs for teacher-in-the-loop ESL writing feedback review",
         "sidebar_tagline": "AI feedback review workspace",
         "topbar_subtitle": "Teacher-controlled review routing for AI-generated ESL writing feedback",
         "badge_graph": "Feedback Safety Graph",
