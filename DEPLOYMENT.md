@@ -32,17 +32,17 @@ uses synthetic ESL writing drafts, synthetic AI feedback items, AI-review stress
 cases, review evidence, and deterministic routing results to demonstrate
 teacher review routing.
 
-For a live conference recording, use Mode A only through local `.env` variables
-or Streamlit Cloud secrets. For public deployments, use Mode B so users provide
-their own API keys for the current request.
+Optional live feedback generation uses provider keys configured only in the
+FastAPI service environment or its secret manager. Public users never enter a
+provider key in the browser.
 
 Never put real API keys in the paper, README, source code, Git history, or demo
 video.
 
 The current user flow uses personal accounts backed by the FastAPI service; the
 older shared demo-password gate is not the main access-control mechanism. Keep
-Mode A provider keys server-side and configure administrator usernames only
-through deployment environment variables.
+provider keys server-side and configure administrator usernames only through
+deployment environment variables.
 
 ## Preferred Hosted Deployment
 
@@ -88,9 +88,8 @@ repository.
    experiment and test dependencies are kept in `requirements-dev.txt` so
    Streamlit Cloud cold starts do not install unnecessary plotting, ML, testing,
    or video-conversion packages.
-5. Configure `CONSENSUS_SCOPE_BACKEND_URL` and any server-side Mode A keys in
-   Streamlit Secrets. The backend must be hosted separately on persistent
-   storage.
+5. Configure `CONSENSUS_SCOPE_BACKEND_URL` in Streamlit Secrets. The backend
+   and any provider keys must be hosted separately on persistent storage.
 6. Deploy and test the account and review workflows listed below.
 
 Streamlit Community Cloud is no longer the preferred public demo host for this
@@ -104,34 +103,52 @@ ConsensusScope includes a FastAPI backend for production-style deployments:
 uvicorn backend.app:app --host 127.0.0.1 --port 7864
 ```
 
-The backend provides SQLite persistence for review sessions, feedback items,
-teacher decisions, audit logs, and report export. Configure the database and
-public API URL with:
+The backend provides accounts, courses, assignments, anonymized essay storage,
+asynchronous review jobs, server-side model generation, SQLite persistence,
+teacher decisions, audit logs, and report export. Configure it with:
 
 ```bash
 export CONSENSUS_SCOPE_BACKEND_DB=/opt/consensusscope-demo/data/consensusscope_backend.sqlite3
 export CONSENSUS_SCOPE_BACKEND_URL=https://api.consensusscope.cn
 export CONSENSUS_SCOPE_CORS_ORIGINS=https://demo.consensusscope.cn
 export CONSENSUS_SCOPE_ADMIN_USERNAMES=your_admin_username
+export CONSENSUS_SCOPE_PUBLIC_URL=https://demo.consensusscope.cn
+export CONSENSUS_SCOPE_REVIEW_WORKERS=4
 ```
 
 If exposed publicly, place the API behind HTTPS and avoid storing API keys in
 source code. Provider keys should be configured only through deployment secrets
 or environment variables.
 
+Optional password-reset and email-verification delivery:
+
+```bash
+export CONSENSUS_SCOPE_SMTP_HOST=smtp.example.org
+export CONSENSUS_SCOPE_SMTP_PORT=587
+export CONSENSUS_SCOPE_SMTP_USERNAME=mailer@example.org
+export CONSENSUS_SCOPE_SMTP_PASSWORD='deployment-secret'
+export CONSENSUS_SCOPE_EMAIL_FROM=mailer@example.org
+export CONSENSUS_SCOPE_SMTP_STARTTLS=true
+```
+
+Do not enable `CONSENSUS_SCOPE_EXPOSE_ONE_TIME_TOKENS` outside automated tests.
+
 ## Storage Boundary
 
 The hosted public demo uses the FastAPI backend and SQLite for users, hashed
-passwords, hashed session tokens, review-session records, teacher decisions,
-audit logs, product feedback, and report export. The main Streamlit app now
-requires this account service. Each review is scoped to its owner; users may
-delete a review and all related artifacts from My Account.
+passwords, hashed session tokens, courses, assignments, anonymized essays,
+review jobs, review-session records, teacher decisions, audit logs, product
+feedback, and report export. The main Streamlit app requires this account
+service. Each record is scoped to its owner; users may export their data,
+delete a review, or delete the account and all owned artifacts from My Account.
 
 SQLite is appropriate for a single-process pilot deployment. Before running
 multiple API workers or sustained high-concurrency traffic, migrate the store to
 a managed relational database and add automated encrypted backups, retention
-rules, password reset, email verification, rate limiting, and operational
-monitoring. The expert annotation app remains a separate research tool.
+rules, reverse-proxy rate limiting, and operational monitoring. The API already
+provides in-process request limiting plus one-time password-reset and email
+verification flows; outbound delivery requires optional SMTP configuration.
+The expert annotation app remains a separate research tool.
 
 For formal data collection on Streamlit Community Cloud, export the annotation
 files after each teacher session and back them up outside Streamlit Cloud. Local
@@ -181,18 +198,22 @@ streamlit run app/streamlit_app.py --server.port 8502
 - `ui_prototype/index.html` opens and shows the 7-page product workflow.
 - The Streamlit app starts from `app/streamlit_app.py`.
 - A user can register, sign out, and sign in again.
-- Page 2 Single Essay Review can generate, route, and persist feedback without
-  provider API keys.
-- Page 3 Batch Review can process the packaged synthetic CSV.
-- Page 4 AI Feedback Comparison shows reviewer/risk comparison rows.
-- Page 5 Teacher Queue persists account-owned teacher actions.
-- Page 6 Reports exports routed feedback and Markdown report artifacts.
-- Page 7 My Account restores and deletes personal review history and supports
-  profile/password changes.
-- Page 8 Feedback saves product feedback and shows the user's prior submissions.
-- Page 9 Settings / Diagnostics contains provider settings and auxiliary
-  effectiveness artifacts.
-- Mode A and Mode B API configuration text is visible and does not expose keys.
+- Courses and Assignments can create an owned course, assignment, and anonymous
+  essay, and can open that essay in the review workflow.
+- Single Essay Review can generate, route, and persist deterministic feedback;
+  configured live providers are invoked only by the backend.
+- Batch Review can process a saved assignment, an uploaded CSV, or packaged
+  examples through an asynchronous job.
+- Teacher Queue shows the source span beside the AI suggestion and persists
+  account-owned teacher actions.
+- Reports exports routed feedback, a teacher audit trail, and a student-facing
+  report that withholds pending or rejected feedback.
+- My Account supports profile/password changes, personal data export, history
+  deletion, and account deletion.
+- Product Feedback saves submissions and shows the user's prior reports.
+- Settings / Diagnostics is visible only to configured administrators.
+- Provider credentials are never exposed in the page, API health response, or
+  exported artifacts.
 - The auxiliary QA and earlier feedback modules are clearly separated from the
   current main demo claim.
 

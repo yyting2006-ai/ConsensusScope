@@ -1097,6 +1097,50 @@ def review_esl_essay(
         student_level=student_level,
         include_stress_tests=include_stress_tests,
     )
+    return review_esl_feedback_candidates(
+        feedback,
+        essay_text=essay_text,
+        essay_id=essay_id,
+        assignment_prompt=assignment_prompt,
+        student_level=student_level,
+    )
+
+
+def review_esl_feedback_candidates(
+    feedback: pd.DataFrame,
+    *,
+    essay_text: str,
+    essay_id: str = "USER-ESSAY-001",
+    assignment_prompt: str = DEFAULT_ASSIGNMENT,
+    student_level: str = "upper-intermediate",
+) -> Dict[str, Any]:
+    """Route normalized local or live feedback through the same safety layer."""
+
+    if feedback is None or feedback.empty:
+        raise ValueError("at least one normalized feedback item is required")
+    normalized = feedback.copy().fillna("")
+    defaults = {
+        "essay_id": essay_id,
+        "target_span": "overall draft",
+        "surrounding_context": _safe_text(essay_text)[:240],
+        "ai_suggestion": "",
+        "ai_rationale": "",
+        "model_source": "unknown",
+        "issue_type_predicted": "other",
+        "student_level": student_level,
+        "assignment_prompt": assignment_prompt,
+    }
+    for column, default in defaults.items():
+        if column not in normalized:
+            normalized[column] = default
+        else:
+            normalized[column] = normalized[column].replace("", default)
+    if "feedback_item_id" not in normalized:
+        normalized["feedback_item_id"] = [f"{essay_id}-F{index + 1:03d}" for index in range(len(normalized))]
+    if "model_agreement" not in normalized or normalized["model_agreement"].astype(str).str.strip().eq("").all():
+        normalized["model_agreement"] = _estimate_model_agreement(normalized)
+
+    feedback = normalized
     evidence = build_review_evidence(feedback)
     routing = route_feedback_dataframe(feedback, evidence)
     merged = feedback.merge(routing, on="feedback_item_id", how="left").merge(evidence, on="feedback_item_id", how="left")

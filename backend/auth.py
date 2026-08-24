@@ -63,3 +63,10 @@ def issue_session_token(days: int = SESSION_DAYS) -> Tuple[str, str, str]:
 
 def hash_session_token(token: str) -> str:
     return hashlib.sha256(token.encode("utf-8")).hexdigest()
+
+
+def issue_one_time_token(minutes: int = 30) -> Tuple[str, str, str]:
+    token = secrets.token_urlsafe(32)
+    token_hash = hash_session_token(token)
+    expires_at = (utc_now() + timedelta(minutes=minutes)).isoformat()
+    return token, token_hash, expires_at

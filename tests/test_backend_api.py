@@ -186,13 +186,12 @@ def test_user_can_delete_own_review_and_related_records(tmp_path):
         headers=headers,
         params={"session_id": review["session_id"]},
     ).json()["logs"] == []
-    assert client.get("/api/account/summary", headers=headers).json()["summary"] == {
-        "review_sessions": 0,
-        "feedback_items": 0,
-        "auto_accepted": 0,
-        "review_routed": 0,
-        "teacher_decisions": 0,
-    }
+    summary = client.get("/api/account/summary", headers=headers).json()["summary"]
+    assert summary["review_sessions"] == 0
+    assert summary["feedback_items"] == 0
+    assert summary["auto_accepted"] == 0
+    assert summary["review_routed"] == 0
+    assert summary["teacher_decisions"] == 0
 
 
 def test_teacher_decision_validation_and_save(tmp_path):

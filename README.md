@@ -58,9 +58,10 @@ opaque confidence score:
 - a teacher queue for feedback that needs human judgment;
 - writing rubric and report pages for inspection and auditability.
 
-The packaged demo runs without external API calls. Live OpenAI-compatible API
-reviewers are optional and should be configured through local environment
-variables, Streamlit Secrets, or user-provided keys.
+The packaged demo runs without external API calls. Optional live
+OpenAI-compatible feedback generation is executed by the FastAPI backend with
+provider credentials supplied only through server-side deployment secrets.
+Provider keys are never entered in or returned to the browser.
 
 ## Current Practical Workflow
 
@@ -75,22 +76,29 @@ The Streamlit app now contains operational teacher-facing windows:
 - **Personal accounts**: users register or sign in before reviewing writing;
   review sessions, teacher decisions, and submitted feedback are isolated by
   account.
-- **Single Essay Review**: paste one ESL essay, generate no-API AI-style
-  feedback candidates, route each feedback item, and export a report.
-- **Batch Review**: upload a CSV or use packaged demo essays, process multiple
-  drafts, and export routed feedback.
-- **AI Feedback Comparison**: compare feedback candidates by target span,
-  reviewer, issue type, risk level, Feedback Safety Graph dimensions, and
-  consensus state.
+- **Courses and assignments**: organize anonymized essays by course and
+  assignment, add one essay, or import a CSV batch before review.
+- **Single Essay Review**: open a saved essay or paste a draft, run the
+  deterministic reviewer or configured server-side AI providers, and route
+  each feedback item through the Feedback Safety Graph.
+- **Batch Review**: review all essays in a saved assignment, upload a CSV, or
+  use packaged examples; asynchronous jobs expose progress and preserve
+  completed results in the account history.
 - **Teacher Queue**: inspect medium/high-risk items and persist teacher actions
   such as accept, edit, reject, or needs more evidence.
-- **Reports**: export routed feedback tables and teacher-readable reports.
-- **My Account**: update a profile, change a password, reopen personal review
-  history, or permanently delete a stored review and its related records.
+- **Reports**: export routed feedback, a teacher audit trail, and a
+  student-facing report containing only automatically released low-risk items
+  plus teacher-accepted or teacher-edited feedback.
+- **My Account**: update a profile, verify an email when SMTP is configured,
+  change or reset a password, export account data, reopen personal review
+  history, or permanently delete the account and owned records.
 - **Feedback**: submit a bug report, feature request, usability note, or output
   quality report; configured administrators can inspect the feedback inbox.
-- **Settings / Diagnostics**: configure optional providers and inspect synthetic
-  evaluation or legacy technical artifacts away from the main teacher workflow.
+- **Privacy preflight**: block likely names, email addresses, phone numbers,
+  student IDs, and class identifiers before an essay is persisted or sent to
+  an external model provider.
+- **Settings / Diagnostics**: administrators can inspect provider availability
+  and auxiliary diagnostics away from the teacher workflow.
 
 The packaged practical workflow runs without external API calls. It is suitable
 for demo and interface validation, but it is not yet validated as a classroom
@@ -105,19 +113,20 @@ ui_prototype/index.html
 Streamlit app pages:
 
 1. Review Workspace
-2. Single Essay Review
-3. Batch Review
-4. AI Feedback Comparison
+2. Courses and Assignments
+3. Single Essay Review
+4. Batch Review
 5. Teacher Queue
-6. Reports
+6. Reports and Exports
 7. My Account
-8. Feedback
-9. Settings / Diagnostics
+8. Product Feedback
+
+`Settings / Diagnostics` is visible only to configured administrators.
 
 Operational teacher workflow:
 
 ```text
-Single / Batch Review -> AI Feedback Comparison -> Teacher Queue -> Reports -> Personal History
+Course -> Assignment -> Single / Batch Review -> Teacher Queue -> Reports -> Personal History
 ```
 
 ## Submission Assets
@@ -165,11 +174,12 @@ route contains:
 ## Backend API
 
 ConsensusScope also includes an independent FastAPI backend for account
-authentication, user-scoped review sessions, teacher decisions, product
-feedback, SQLite persistence, audit logs, and report export. The Streamlit app
-remains the teacher-facing interface; all review and account endpoints require
-an opaque Bearer session token. Passwords use PBKDF2-HMAC-SHA256 hashes and only
-SHA-256 hashes of session tokens are stored.
+authentication, courses, assignments, anonymized essays, asynchronous review
+jobs, server-side model calls, user-scoped review sessions, teacher decisions,
+product feedback, SQLite persistence, audit logs, and teacher/student report
+export. The Streamlit app remains the teacher-facing interface; protected
+endpoints require an opaque Bearer session token. Passwords use
+PBKDF2-HMAC-SHA256 hashes and only SHA-256 hashes of session tokens are stored.
 
 Run locally:
 
@@ -474,17 +484,18 @@ instructor annotations and real anonymized classroom data.
 
 ## API Configuration
 
-The app supports two modes:
+The public product flow supports two feedback sources:
 
-- **Mode A**: built-in keys loaded from local `.env` or Streamlit Secrets for
-  controlled live demos.
-- **Mode B**: user-provided keys for the current request in public deployments.
+- **Deterministic demo reviewer**: reproducible and available without an API
+  key.
+- **Server-side live providers**: optional DeepSeek, Qwen, GLM, Kimi, or OpenAI
+  compatible providers configured by the deployment operator in `.env` or a
+  secret manager.
 
-Do not commit real API keys, put API keys in the paper, or hard-code them in the
-source code. User account passwords and provider API keys are separate. The
-account service never stores provider API keys. Mode A keys belong only in
-server-side deployment secrets; Mode B keys are used for the current request
-and must not be written to review history or logs.
+Users never paste provider keys into the browser. Do not commit real API keys,
+put them in a paper, hard-code them, or write them to review history and logs.
+The health endpoint exposes provider names and model identifiers only, never
+credentials.
 
 ## Reproducibility
 
@@ -583,12 +594,14 @@ details, school identifiers, and any personally identifying information. The
 packaged ESL writing demo uses synthetic examples.
 
 The account backend stores submitted essay text and generated review artifacts
-until the user deletes that review or an operator applies a retention policy.
-For real classroom use, deploy under institution-approved storage and retention
-rules, keep the API behind HTTPS, back up the database, and migrate from SQLite
-before multi-instance or high-concurrency operation. The first account release
-does not provide email verification or password reset; users must change
-passwords while signed in or contact the deployment operator.
+until the user deletes them or an operator applies a retention policy. A PII
+preflight blocks common identifiers, but it is a safeguard rather than a
+guarantee of anonymization. For real classroom use, deploy under
+institution-approved storage and retention rules, keep the API behind HTTPS,
+use encrypted backups, and migrate from SQLite before multi-instance or
+high-concurrency operation. Email verification and password-reset links work
+when SMTP is configured; deployments without SMTP must use operator-assisted
+recovery.
 
 ConsensusScope should support teacher judgment. Meaning-changing suggestions,
 unsupported claims, thesis rewrites, overcorrections, vague advice, and harsh

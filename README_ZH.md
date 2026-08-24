@@ -8,6 +8,9 @@ AI-generated ESL writing feedback**。系统的核心机制是 **反馈安全图
 
 它不是自动作文评分系统，不是教师替代品，也不是“真值判定器”。
 
+正式演示地址：<https://demo.consensusscope.cn/>；后端接口文档：
+<https://api.consensusscope.cn/docs>。
+
 ## 核心用途
 
 AI 写作反馈可能很流畅，但并不一定安全。模型可能正确修改局部语法错误，也可能改写学生原意、反转论点、加入无依据内容，或把本来合理的表达过度纠正。ConsensusScope 的作用不是给作文自动打分，而是把每条 AI 反馈变成可审计的安全图谱：
@@ -45,8 +48,8 @@ http://localhost:8502
 
 ## 当前主线资产
 
-- `app/streamlit_app.py`：中英文教师工作台，包含注册登录、单篇/批量评审、反馈比对、教师队列、报告、个人历史和意见反馈。
-- `backend/`：带账号鉴权的 FastAPI 服务，按用户隔离 SQLite 数据，并保存教师决策、审计日志和产品反馈。
+- `app/streamlit_app.py`：中英文教师工作台，包含注册登录、课程与作业、单篇/批量评审、教师队列、报告、个人历史和意见反馈。
+- `backend/`：带账号鉴权的 FastAPI 服务，按用户隔离课程、作业、匿名作文、异步评审任务、教师决策、审计日志和产品反馈，并负责服务器端模型调用。
 - `ui_prototype/index.html`：给设计师看的完整视觉原型。
 - `profiles/esl_writing.yaml`：ESL 写作反馈 profile。
 - `data/esl_writing_demo/`：合成 ESL 作文、反馈项、review evidence、routing output 和 AI 评审压力测试集。
@@ -60,19 +63,20 @@ http://localhost:8502
 ## 主线页面
 
 1. Review Workspace
-2. Single Essay Review：教师粘贴单篇作文，生成并路由 AI 反馈。
-3. Batch Review：上传或使用 CSV 批量处理多篇作文。
-4. AI Feedback Comparison：比较不同 AI reviewer 的反馈候选、风险、安全图谱维度和一致性状态。
-5. Teacher Queue：教师复核、接受、编辑、拒绝或要求更多证据。
-6. Reports：导出反馈表和教师可读报告。
-7. My Account：修改资料和密码，恢复或删除个人评审历史。
-8. Feedback：提交问题、功能建议、易用性或输出质量反馈。
-9. Settings / Diagnostics：API 设置、有效性评测和旧辅助诊断。
+2. Courses and Assignments：建立课程与作业，保存单篇匿名作文或导入 CSV。
+3. Single Essay Review：打开已保存作文或粘贴单篇作文，生成并路由 AI 反馈。
+4. Batch Review：按作业、上传 CSV 或使用示例批量处理多篇作文。
+5. Teacher Queue：逐条查看原文片段与 AI 建议，并接受、编辑、拒绝或要求更多证据。
+6. Reports and Exports：导出教师审计报告、路由数据和学生版反馈。
+7. My Account：修改资料和密码、导出账号数据、恢复历史或删除账号。
+8. Product Feedback：提交问题、功能建议、易用性或输出质量反馈。
+
+`Settings / Diagnostics` 仅向配置的管理员显示。
 
 核心工作流：
 
 ```text
-Single / Batch Review -> AI Feedback Comparison -> Teacher Queue -> Reports -> Personal History
+Course -> Assignment -> Single / Batch Review -> Teacher Queue -> Reports -> Personal History
 ```
 
 ## 数据边界
@@ -132,12 +136,24 @@ reports/public_gec_summary_20260608.md
 ## 账号与数据边界
 
 账号密码使用 PBKDF2-HMAC-SHA256 哈希保存，登录令牌只保存 SHA-256
-哈希；评审记录、教师决策和意见反馈均按账号隔离。用户可以在“我的账号”
-删除一条评审，系统会同步删除该作文、反馈项、教师决策和审计记录。
+哈希；课程、作业、作文、评审记录、教师决策和意见反馈均按账号隔离。
+用户可以导出个人数据、删除一条评审，或永久删除账号及其关联记录。
 
 后端会保存用户提交的作文原文，直到用户主动删除或部署方执行数据保留
-策略。因此只能上传匿名化作文；真实课堂部署还需要遵守学校的数据处理、
-备份和保留制度。当前第一版暂不提供邮箱验证和忘记密码功能。
+策略。系统会在保存或调用外部模型前检查常见姓名、邮箱、电话、学号和班级
+标识，但该检查不能替代人工匿名化。因此只能上传匿名化作文；真实课堂部署
+还需要遵守学校的数据处理、备份和保留制度。配置 SMTP 后可使用邮箱验证和
+忘记密码链接；未配置邮件服务时需由部署管理员协助找回。
+
+## 实时模型与密钥
+
+默认评审器不调用外部 API，适合复现和体验完整流程。部署方也可以在后端
+环境变量或密钥管理服务中配置 DeepSeek、Qwen、GLM、Kimi 或 OpenAI
+兼容模型。访问者不需要、也不能在浏览器里输入模型 API key；密钥不会写入
+评审记录、导出文件或健康检查响应。
+
+当前 SQLite 配置适合单个 API 进程和产品试用。多实例或持续高并发部署前，
+应迁移到托管关系型数据库，并建立加密备份、数据保留和监控策略。
 
 ## Legacy 说明
 

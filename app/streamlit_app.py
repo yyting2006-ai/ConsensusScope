@@ -21,7 +21,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-APP_VERSION = "0.3.0"
+APP_VERSION = "0.4.0"
 LOGO_PATH = ROOT / "ui_prototype" / "assets" / "placeholder-logo.svg"
 MAX_BATCH_ESSAYS = 100
 
@@ -131,16 +131,12 @@ MAIN_TRANSLATIONS = {
         "badge_teacher": "Teacher-in-the-loop",
         "badge_esl": "ESL Writing Review",
         "api_configuration": "API Configuration",
-        "api_mode": "API mode",
-        "mode_a": "Mode A · Built-in API keys for live demos",
-        "mode_b": "Mode B · User-provided API keys for public deployment",
-        "api_caption": "Mode A uses local .env or deployment secrets. Mode B uses user-provided keys only for the current request. API keys must not appear in the paper or be hard-coded.",
+        "api_mode": "Provider configuration",
+        "api_caption": "Auxiliary live providers use server-side deployment secrets. Credentials are never entered in or returned to the browser.",
         "answer_models": "Answer generation models",
-        "answer_models_help": "Each selected provider needs its own matching API key. If you only have one key, select only that provider.",
+        "answer_models_help": "Only providers configured by the deployment operator are available here.",
         "enable_fixed_judge": "Enable Fixed Judge in Live mode",
         "fixed_judge_model": "Fixed judge model",
-        "provider_settings": "Provider settings",
-        "provider_settings_help": "Use the provider base URL only; the app appends /chat/completions automatically.",
         "account_access": "Sign in to ConsensusScope",
         "account_access_caption": "Create a personal account to keep review history, teacher decisions, and product feedback private.",
         "backend_required": "The account service is temporarily unavailable. Please try again shortly.",
@@ -473,9 +469,6 @@ MAIN_TRANSLATIONS = {
         "download_summary_json": "Download system_summary.json",
         "download_method_metrics": "Download method_metrics.csv",
         "download_risk_labels": "Download risk_labels.csv",
-        "api_key_label": "{provider} API key",
-        "model_label": "{provider} model",
-        "base_url_label": "{provider} base URL",
         "storage_backend": "Storage backend",
         "session_only": "Browser session only",
         "reviewer_id": "Reviewer ID",
@@ -491,16 +484,12 @@ MAIN_TRANSLATIONS = {
         "badge_teacher": "教师参与复核",
         "badge_esl": "ESL 写作评审",
         "api_configuration": "API 配置",
-        "api_mode": "API 模式",
-        "mode_a": "模式 A · 使用部署端内置 API key，适合现场演示",
-        "mode_b": "模式 B · 使用用户自己的 API key，适合公开部署",
-        "api_caption": "模式 A 使用本地 .env 或部署端 Secrets。模式 B 只在当前请求中使用用户输入的 key。API key 不能写入论文，也不能硬编码进代码。",
+        "api_mode": "模型服务配置",
+        "api_caption": "辅助实时模型仅使用部署端密钥，访问者无需也不能在浏览器中输入 API key。",
         "answer_models": "回答生成模型",
-        "answer_models_help": "每个服务商都需要对应 API key。如果你只有一个 key，只选择对应服务商。",
+        "answer_models_help": "这里只显示部署管理员已经配置的模型服务商。",
         "enable_fixed_judge": "实时模式启用固定裁判",
         "fixed_judge_model": "固定裁判模型",
-        "provider_settings": "服务商设置",
-        "provider_settings_help": "只填写服务商 base URL；应用会自动追加 /chat/completions。",
         "account_access": "登录 ConsensusScope",
         "account_access_caption": "创建个人账号后，评审历史、教师决策和意见反馈会分别保存在你的账号下。",
         "backend_required": "账号服务暂时不可用，请稍后重试。",
@@ -833,9 +822,6 @@ MAIN_TRANSLATIONS = {
         "download_summary_json": "下载系统摘要.json",
         "download_method_metrics": "下载方法指标.csv",
         "download_risk_labels": "下载风险标签.csv",
-        "api_key_label": "{provider} API key",
-        "model_label": "{provider} 模型名称",
-        "base_url_label": "{provider} Base URL",
         "storage_backend": "存储后端",
         "session_only": "仅当前浏览器会话",
         "reviewer_id": "教师编号",
@@ -844,6 +830,231 @@ MAIN_TRANSLATIONS = {
         "graph_route_summary": "激活维度：{dimensions}。建议路由：{route}。",
     },
 }
+
+
+MAIN_TRANSLATIONS["en"].update(
+    {
+        "page_assignments": "Courses and assignments",
+        "assignments_title": "Courses and assignments",
+        "assignments_caption": "Organize anonymized essays by course and assignment before generating or reviewing AI feedback.",
+        "courses": "Courses",
+        "assignments": "Assignments",
+        "essays": "Essays",
+        "active_jobs": "Active jobs",
+        "new_course": "New course",
+        "course_name": "Course name",
+        "term": "Term",
+        "description_optional": "Description (optional)",
+        "create_course": "Create course",
+        "course_created": "Course created.",
+        "select_course": "Select course",
+        "new_assignment": "New assignment",
+        "assignment_title": "Assignment title",
+        "due_date_optional": "Due date (optional)",
+        "create_assignment": "Create assignment",
+        "assignment_created": "Assignment created.",
+        "select_assignment": "Select assignment",
+        "stored_essays": "Stored anonymized essays",
+        "add_essay": "Add one essay",
+        "external_essay_id": "Anonymous essay ID",
+        "draft_stage": "Draft stage",
+        "save_essay": "Save essay",
+        "essay_saved": "Essay saved.",
+        "upload_essay_batch": "Upload essay CSV",
+        "save_essay_batch": "Save CSV essays",
+        "essays_saved": "{count} essays saved.",
+        "no_courses": "Create a course to begin organizing assignments.",
+        "no_assignments": "Create an assignment before adding essays.",
+        "no_stored_essays": "No anonymized essays are stored for this assignment.",
+        "open_single_review": "Open in single review",
+        "start_assignment_batch": "Review all essays in this assignment",
+        "privacy_scan": "Privacy preflight",
+        "privacy_clear": "No high-confidence personal identifiers were detected.",
+        "privacy_blocked": "Remove the detected personal information before saving or reviewing this draft.",
+        "detected_types": "Detected identifier types: {types}",
+        "generation_source": "Feedback generation source",
+        "local_generation": "Built-in demonstration reviewers",
+        "live_generation": "Live server-side AI models",
+        "local_generation_help": "Fast, reproducible, and free of external API calls. Suitable for exploring the review workflow.",
+        "live_generation_help": "Uses configured server-side model providers. Student text is sent only after the privacy preflight passes.",
+        "configured_providers": "Configured model providers",
+        "no_live_providers": "No live model provider is currently configured. Use the built-in reviewers or ask the administrator to configure a provider.",
+        "model_providers": "Model providers",
+        "submit_review_job": "Start feedback review",
+        "job_queued": "Review job submitted.",
+        "job_running": "Generating and routing feedback...",
+        "job_completed": "Review completed and saved to your account.",
+        "job_failed": "Review job failed: {error}",
+        "job_timed_out": "The job is still running. You can leave this page and resume it from Recent jobs.",
+        "recent_jobs": "Recent review jobs",
+        "job_status": "Status",
+        "job_progress": "Progress",
+        "generation_mode": "Generation mode",
+        "model_trace": "Model execution trace",
+        "open_completed_review": "Open completed review",
+        "run_selected_essay": "Review selected essay",
+        "assignment_workspace": "Assignment workspace",
+        "workspace_inventory": "Workspace inventory",
+        "password_reset": "Reset password",
+        "forgot_password": "Forgot password?",
+        "email": "Email",
+        "request_reset": "Send reset instructions",
+        "reset_requested": "If this email is registered, reset instructions have been sent.",
+        "reset_token": "Reset token",
+        "set_new_password": "Set new password",
+        "password_reset_complete": "Password reset complete. Sign in with your new password.",
+        "verify_email": "Verify email",
+        "email_verified": "Email verified",
+        "email_unverified": "Email not verified",
+        "request_verification": "Send verification email",
+        "verification_requested": "Verification instructions have been sent.",
+        "account_data": "Account data",
+        "download_account_data": "Download my account data.json",
+        "danger_zone": "Danger zone",
+        "delete_account": "Delete account",
+        "delete_account_warning": "This permanently deletes your account, essays, review sessions, decisions, audit logs, and submitted feedback.",
+        "delete_confirmation": "Type DELETE to confirm",
+        "account_deleted": "Your account has been deleted.",
+        "security_and_data": "Security and data",
+        "student_report": "Student-facing report",
+        "student_report_caption": "Contains low-risk auto-released local edits plus feedback explicitly accepted or edited by the teacher. Pending and rejected items are withheld.",
+        "download_student_report": "Download student feedback.md",
+        "audit_report": "Teacher audit report",
+        "assignment": "Assignment",
+        "course": "Course",
+        "created_at": "Created",
+        "review_jobs": "Review jobs",
+        "admin_settings": "Administrator settings",
+        "settings_admin_only": "Technical diagnostics are available only to configured administrators.",
+        "saved_essay_notice": "This review uses a stored anonymized essay from your assignment workspace.",
+        "select_saved_or_demo": "Start from a saved essay, a synthetic example, or a blank draft",
+        "blank_or_demo": "Synthetic example / blank draft",
+        "saved_assignment_essay": "Saved assignment essay",
+        "batch_job_summary": "{completed} completed, {running} running, {failed} failed",
+        "student_release_status": "Student release status",
+        "released_items": "Released items",
+        "withheld_items": "Withheld items",
+        "prepare_student_report": "Prepare student-facing report",
+        "select_review_session": "Select review session",
+        "email_delivery_unavailable": "Email delivery is not configured on this deployment. Ask the administrator to configure SMTP before using email verification or password recovery.",
+        "words_short": "words",
+        "manage_assignments": "Manage assignments",
+        "workspace_activity": "Workspace activity",
+        "back_to_workspace": "Back to workspace",
+    }
+)
+
+MAIN_TRANSLATIONS["zh"].update(
+    {
+        "page_assignments": "课程与作业",
+        "assignments_title": "课程与作业",
+        "assignments_caption": "先按课程和作业整理匿名化作文，再生成或审核 AI 反馈。",
+        "courses": "课程",
+        "assignments": "作业",
+        "essays": "作文",
+        "active_jobs": "运行中任务",
+        "new_course": "新建课程",
+        "course_name": "课程名称",
+        "term": "学期",
+        "description_optional": "课程说明（选填）",
+        "create_course": "创建课程",
+        "course_created": "课程已创建。",
+        "select_course": "选择课程",
+        "new_assignment": "新建作业",
+        "assignment_title": "作业名称",
+        "due_date_optional": "截止日期（选填）",
+        "create_assignment": "创建作业",
+        "assignment_created": "作业已创建。",
+        "select_assignment": "选择作业",
+        "stored_essays": "已保存的匿名化作文",
+        "add_essay": "添加单篇作文",
+        "external_essay_id": "匿名作文编号",
+        "draft_stage": "草稿阶段",
+        "save_essay": "保存作文",
+        "essay_saved": "作文已保存。",
+        "upload_essay_batch": "上传作文 CSV",
+        "save_essay_batch": "保存 CSV 作文",
+        "essays_saved": "已保存 {count} 篇作文。",
+        "no_courses": "请先创建课程，再整理作业。",
+        "no_assignments": "请先创建作业，再添加作文。",
+        "no_stored_essays": "该作业下尚未保存匿名化作文。",
+        "open_single_review": "进入单篇评审",
+        "start_assignment_batch": "评审该作业全部作文",
+        "privacy_scan": "隐私预检",
+        "privacy_clear": "未检测到高置信度个人身份信息。",
+        "privacy_blocked": "请先删除检测到的个人信息，再保存或评审作文。",
+        "detected_types": "检测到的信息类型：{types}",
+        "generation_source": "反馈生成来源",
+        "local_generation": "内置演示评审器",
+        "live_generation": "服务器端实时 AI 模型",
+        "local_generation_help": "速度快、可复现且不调用外部 API，适合体验完整审核流程。",
+        "live_generation_help": "使用服务器已配置的模型；只有通过隐私预检后，作文才会发送给外部模型。",
+        "configured_providers": "已配置模型服务商",
+        "no_live_providers": "当前没有可用的实时模型服务商。请使用内置评审器，或联系管理员配置服务商。",
+        "model_providers": "模型服务商",
+        "submit_review_job": "开始反馈评审",
+        "job_queued": "评审任务已提交。",
+        "job_running": "正在生成并路由反馈……",
+        "job_completed": "评审已完成并保存到个人账号。",
+        "job_failed": "评审任务失败：{error}",
+        "job_timed_out": "任务仍在运行。你可以离开本页，之后从“最近任务”继续查看。",
+        "recent_jobs": "最近评审任务",
+        "job_status": "任务状态",
+        "job_progress": "进度",
+        "generation_mode": "生成模式",
+        "model_trace": "模型调用记录",
+        "open_completed_review": "打开已完成评审",
+        "run_selected_essay": "评审所选作文",
+        "assignment_workspace": "作业工作区",
+        "workspace_inventory": "工作区概览",
+        "password_reset": "重置密码",
+        "forgot_password": "忘记密码？",
+        "email": "邮箱",
+        "request_reset": "发送重置说明",
+        "reset_requested": "若该邮箱已注册，系统会发送密码重置说明。",
+        "reset_token": "重置令牌",
+        "set_new_password": "设置新密码",
+        "password_reset_complete": "密码已重置，请使用新密码登录。",
+        "verify_email": "验证邮箱",
+        "email_verified": "邮箱已验证",
+        "email_unverified": "邮箱未验证",
+        "request_verification": "发送验证邮件",
+        "verification_requested": "邮箱验证说明已发送。",
+        "account_data": "账号数据",
+        "download_account_data": "下载我的账号数据.json",
+        "danger_zone": "危险操作",
+        "delete_account": "删除账号",
+        "delete_account_warning": "此操作会永久删除账号、作文、评审记录、教师决策、审计日志和已提交的意见反馈。",
+        "delete_confirmation": "输入 DELETE 确认",
+        "account_deleted": "账号已删除。",
+        "security_and_data": "安全与数据",
+        "student_report": "学生版反馈报告",
+        "student_report_caption": "仅包含低风险自动发布的局部修改，以及教师明确接受或修改后的反馈；待处理和已拒绝项目不会出现在报告中。",
+        "download_student_report": "下载学生反馈.md",
+        "audit_report": "教师审计报告",
+        "assignment": "作业",
+        "course": "课程",
+        "created_at": "创建时间",
+        "review_jobs": "评审任务",
+        "admin_settings": "管理员设置",
+        "settings_admin_only": "技术诊断仅对已配置的管理员开放。",
+        "saved_essay_notice": "本次评审使用作业工作区中已保存的匿名化作文。",
+        "select_saved_or_demo": "从已保存作文、合成示例或空白草稿开始",
+        "blank_or_demo": "合成示例 / 空白草稿",
+        "saved_assignment_essay": "作业中已保存作文",
+        "batch_job_summary": "{completed} 个已完成，{running} 个运行中，{failed} 个失败",
+        "student_release_status": "学生发布状态",
+        "released_items": "已发布反馈",
+        "withheld_items": "暂不发布反馈",
+        "prepare_student_report": "生成学生版报告",
+        "select_review_session": "选择评审记录",
+        "email_delivery_unavailable": "当前部署尚未配置邮件发送服务。使用邮箱验证或找回密码前，请联系管理员配置 SMTP。",
+        "words_short": "词",
+        "manage_assignments": "管理课程与作业",
+        "workspace_activity": "工作区动态",
+        "back_to_workspace": "返回工作台",
+    }
+)
 
 
 def ui_lang() -> str:
@@ -1314,6 +1525,19 @@ def backend_request(
             detail = response.json().get("detail", response.text)
         except Exception:
             detail = response.text
+        if isinstance(detail, dict):
+            message = safe_str(detail.get("message"))
+            findings = detail.get("findings") or []
+            finding_types = sorted(
+                {
+                    safe_str(item.get("type"))
+                    for item in findings
+                    if isinstance(item, dict) and safe_str(item.get("type"))
+                }
+            )
+            if finding_types:
+                message = f"{message} ({', '.join(finding_types)})" if message else ", ".join(finding_types)
+            detail = message or json.dumps(detail, ensure_ascii=False)
         return None, safe_str(detail) or f"HTTP {response.status_code}"
     if not response.content:
         return {}, ""
@@ -1321,6 +1545,177 @@ def backend_request(
         return response.json(), ""
     except Exception:
         return {"text": response.text}, ""
+
+
+def privacy_preflight(text: str) -> tuple[Optional[Dict[str, Any]], str]:
+    return backend_request("POST", "/api/privacy/check", payload={"text": text})
+
+
+def configured_feedback_providers() -> List[Dict[str, Any]]:
+    payload, _ = backend_request("GET", "/api/providers")
+    providers = payload.get("providers", []) if payload else []
+    return providers if isinstance(providers, list) else []
+
+
+def wait_for_review_job(
+    job_id: str,
+    *,
+    timeout_seconds: int = 240,
+    progress_label: Optional[str] = None,
+) -> tuple[Optional[Dict[str, Any]], str]:
+    status_slot = st.empty()
+    progress_bar = st.progress(0, text=progress_label or mt("job_running"))
+    deadline = time.monotonic() + timeout_seconds
+    last_job: Dict[str, Any] = {}
+    while time.monotonic() < deadline:
+        payload, error = backend_request("GET", f"/api/review/jobs/{job_id}", timeout=15)
+        if not payload:
+            progress_bar.empty()
+            status_slot.empty()
+            return None, error
+        last_job = payload.get("job", {})
+        status_value = safe_str(last_job.get("status")) or "queued"
+        progress_value = int(last_job.get("progress") or 0)
+        progress_bar.progress(
+            max(0, min(100, progress_value)),
+            text=f"{mt('job_running')} {progress_value}%",
+        )
+        status_slot.caption(f"{mt('job_status')}: {value_label(status_value)}")
+        if status_value == "completed":
+            progress_bar.empty()
+            status_slot.empty()
+            return last_job, ""
+        if status_value == "failed":
+            progress_bar.empty()
+            status_slot.empty()
+            return None, safe_str(last_job.get("error_message")) or "review job failed"
+        time.sleep(0.6)
+    progress_bar.empty()
+    status_slot.empty()
+    return last_job or None, mt("job_timed_out")
+
+
+def wait_for_review_jobs(
+    job_ids: List[str],
+    *,
+    timeout_seconds: int = 600,
+) -> tuple[List[Dict[str, Any]], str]:
+    status_slot = st.empty()
+    progress_bar = st.progress(0, text=mt("job_running"))
+    deadline = time.monotonic() + timeout_seconds
+    jobs_by_id: Dict[str, Dict[str, Any]] = {}
+    while time.monotonic() < deadline:
+        for job_id in job_ids:
+            current = jobs_by_id.get(job_id, {})
+            if current.get("status") in {"completed", "failed"}:
+                continue
+            payload, error = backend_request("GET", f"/api/review/jobs/{job_id}", timeout=15)
+            if not payload:
+                progress_bar.empty()
+                status_slot.empty()
+                return list(jobs_by_id.values()), error
+            jobs_by_id[job_id] = payload.get("job", {})
+        jobs = [jobs_by_id.get(job_id, {}) for job_id in job_ids]
+        completed = sum(job.get("status") == "completed" for job in jobs)
+        failed = sum(job.get("status") == "failed" for job in jobs)
+        running = len(job_ids) - completed - failed
+        mean_progress = int(
+            sum(int(job.get("progress") or 0) for job in jobs) / max(1, len(job_ids))
+        )
+        progress_bar.progress(mean_progress, text=f"{mt('job_running')} {mean_progress}%")
+        status_slot.caption(
+            mt("batch_job_summary", completed=completed, running=running, failed=failed)
+        )
+        if completed + failed == len(job_ids):
+            progress_bar.empty()
+            status_slot.empty()
+            if failed:
+                errors = [
+                    safe_str(job.get("error_message"))
+                    for job in jobs
+                    if job.get("status") == "failed"
+                ]
+                return jobs, "; ".join(item for item in errors if item) or "one or more jobs failed"
+            return jobs, ""
+        time.sleep(0.7)
+    progress_bar.empty()
+    status_slot.empty()
+    return [jobs_by_id.get(job_id, {}) for job_id in job_ids], mt("job_timed_out")
+
+
+def batch_result_from_completed_jobs(jobs: List[Dict[str, Any]]) -> tuple[Optional[Dict[str, Any]], str]:
+    sessions: List[Dict[str, Any]] = []
+    merged_frames: List[pd.DataFrame] = []
+    comparison_frames: List[pd.DataFrame] = []
+    summary_rows: List[Dict[str, Any]] = []
+    for job in jobs:
+        session_id = safe_str(job.get("session_id"))
+        if not session_id:
+            continue
+        loaded, error = load_personal_review(session_id)
+        if not loaded:
+            return None, error
+        sessions.append(
+            {
+                "session_id": session_id,
+                "essay_id": loaded.get("essay_id"),
+                "summary": loaded.get("summary", {}),
+            }
+        )
+        merged = loaded.get("merged", pd.DataFrame())
+        comparison = loaded.get("comparison", pd.DataFrame())
+        if isinstance(merged, pd.DataFrame) and not merged.empty:
+            merged_frames.append(merged)
+        if isinstance(comparison, pd.DataFrame) and not comparison.empty:
+            comparison_frames.append(comparison)
+        summary_rows.append({"essay_id": loaded.get("essay_id"), **loaded.get("summary", {})})
+    if not sessions:
+        return None, "no completed review session was returned"
+    merged_all = pd.concat(merged_frames, ignore_index=True) if merged_frames else pd.DataFrame()
+    comparison_all = pd.concat(comparison_frames, ignore_index=True) if comparison_frames else pd.DataFrame()
+    return {
+        "batch_id": f"job-batch-{int(time.time())}",
+        "sessions": sessions,
+        "summary": pd.DataFrame(summary_rows),
+        "merged": merged_all,
+        "comparison": comparison_all,
+        "report": "ConsensusScope batch review. Download the routed feedback table for item-level details.",
+    }, ""
+
+
+def query_parameter(name: str) -> str:
+    try:
+        value = st.query_params.get(name, "")
+    except Exception:
+        value = ""
+    if isinstance(value, list):
+        value = value[0] if value else ""
+    return safe_str(value)
+
+
+def handle_account_action_query() -> None:
+    action = query_parameter("action")
+    token = query_parameter("token")
+    if action != "verify_email" or not token:
+        return
+    marker = f"verify:{token[:12]}"
+    if st.session_state.get("handled_account_action") == marker:
+        return
+    st.session_state["handled_account_action"] = marker
+    data, error = backend_request(
+        "POST",
+        "/api/auth/email-verification/confirm",
+        params={"token": token},
+        authenticated=False,
+    )
+    if data:
+        st.success(mt("email_verified"))
+        if current_account_user():
+            refreshed, _ = backend_request("GET", "/api/auth/me")
+            if refreshed:
+                st.session_state["account_user"] = refreshed.get("user")
+    else:
+        st.error(mt("auth_error", error=error))
 
 
 def render_account_gate() -> bool:
@@ -1345,7 +1740,9 @@ def render_account_gate() -> bool:
             st.code(health["error"], language="text")
             return False
 
-        login_tab, register_tab = st.tabs([mt("login_tab"), mt("register_tab")])
+        login_tab, register_tab, reset_tab = st.tabs(
+            [mt("login_tab"), mt("register_tab"), mt("password_reset")]
+        )
         with login_tab:
             with st.form("account_login_form"):
                 username = st.text_input(mt("username"), key="login_username")
@@ -1361,7 +1758,8 @@ def render_account_gate() -> bool:
                 if data:
                     store_account_session(data)
                     st.rerun()
-                st.error(mt("auth_error", error=error))
+                else:
+                    st.error(mt("auth_error", error=error))
 
         with register_tab:
             st.caption(mt("password_rules"))
@@ -1396,7 +1794,52 @@ def render_account_gate() -> bool:
                     if data:
                         store_account_session(data)
                         st.rerun()
-                    st.error(mt("auth_error", error=error))
+                    else:
+                        st.error(mt("auth_error", error=error))
+
+        with reset_tab:
+            reset_token = query_parameter("token") if query_parameter("action") == "reset_password" else ""
+            if reset_token:
+                st.caption(mt("password_rules"))
+                with st.form("password_reset_confirm_form"):
+                    new_password = st.text_input(mt("new_password"), type="password")
+                    confirmation = st.text_input(mt("confirm_password"), type="password")
+                    submitted = st.form_submit_button(mt("set_new_password"), use_container_width=True, type="primary")
+                if submitted:
+                    if new_password != confirmation:
+                        st.error(mt("password_mismatch"))
+                    else:
+                        data, error = backend_request(
+                            "POST",
+                            "/api/auth/password-reset/confirm",
+                            payload={"token": reset_token, "new_password": new_password},
+                            authenticated=False,
+                        )
+                        if data:
+                            st.success(mt("password_reset_complete"))
+                            try:
+                                st.query_params.clear()
+                            except Exception:
+                                pass
+                        else:
+                            st.error(mt("auth_error", error=error))
+            else:
+                with st.form("password_reset_request_form"):
+                    email = st.text_input(mt("email"), key="password_reset_email")
+                    submitted = st.form_submit_button(mt("request_reset"), use_container_width=True)
+                if submitted:
+                    data, error = backend_request(
+                        "POST",
+                        "/api/auth/password-reset/request",
+                        payload={"email": email},
+                        authenticated=False,
+                    )
+                    if data:
+                        st.success(mt("reset_requested"))
+                        if not data.get("email_delivery"):
+                            st.info(mt("email_delivery_unavailable"))
+                    else:
+                        st.error(mt("auth_error", error=error))
     return False
 
 
@@ -1453,6 +1896,12 @@ def single_result_from_backend(payload: Dict[str, Any]) -> Dict[str, Any]:
         "merged": pd.DataFrame(payload.get("feedback_items", [])),
         "comparison": pd.DataFrame(payload.get("comparison", [])),
         "report": payload.get("report", ""),
+        "essay_text": payload.get("essay_text", ""),
+        "assignment_id": payload.get("assignment_id"),
+        "essay_record_id": payload.get("essay_record_id"),
+        "generation_mode": payload.get("generation_mode", "local"),
+        "providers": payload.get("providers", []),
+        "model_metadata": payload.get("model_metadata", {}),
     }
 
 
@@ -1482,6 +1931,12 @@ def load_personal_review(session_id: str) -> tuple[Optional[Dict[str, Any]], str
         "feedback_items": feedback.get("feedback_items", []),
         "comparison": session.get("comparison", []),
         "report": session.get("report_text", ""),
+        "essay_text": session.get("essay_text", ""),
+        "assignment_id": session.get("assignment_id"),
+        "essay_record_id": session.get("essay_record_id"),
+        "generation_mode": session.get("generation_mode", "local"),
+        "providers": session.get("providers", []),
+        "model_metadata": session.get("model_metadata", {}),
     }
     return single_result_from_backend(payload), ""
 
@@ -1619,6 +2074,12 @@ def inject_styles() -> None:
             min-width: 286px !important;
             background: var(--cs-sidebar);
             border-right: 1px solid #263247;
+        }
+
+        section[data-testid="stSidebar"][aria-expanded="false"] {
+            width: 0 !important;
+            min-width: 0 !important;
+            border-right: 0;
         }
 
         section[data-testid="stSidebar"] > div {
@@ -2167,13 +2628,14 @@ def ensure_state() -> None:
         "saved_teacher_decisions": {},
         "main_reviewer_id": "demo_teacher",
         "audit_selection": None,
-        "api_mode": "Mode A",
+        "api_mode": "Server-managed",
         "account_token": "",
         "account_user": None,
         "active_review_session_id": "",
         "active_page_key": "page_home",
         "account_flash": "",
         "workspace_error": "",
+        "handled_account_action": "",
     }
     for key, value in defaults.items():
         if key not in st.session_state:
@@ -2263,72 +2725,48 @@ def provider_env_value(provider: str, field: str) -> str:
 
 
 def build_live_configs(api_mode: str, selected: List[str], user_inputs: Dict[str, Dict[str, str]]) -> List[LiveModelConfig]:
+    del api_mode, user_inputs
     configs: List[LiveModelConfig] = []
     defaults = default_live_model_configs()
     for provider in selected:
         if provider not in defaults:
             continue
-        item = user_inputs.get(provider, {})
-        if api_mode == "Mode A":
-            api_key = provider_env_value(provider, "api_key")
-            base_url = provider_env_value(provider, "base_url") or defaults[provider]["base_url"]
-            model = provider_env_value(provider, "model") or defaults[provider]["model"]
-        else:
-            api_key = item.get("api_key", "")
-            base_url = item.get("base_url", "") or defaults[provider]["base_url"]
-            model = item.get("model", "") or defaults[provider]["model"]
+        api_key = provider_env_value(provider, "api_key")
+        base_url = provider_env_value(provider, "base_url") or defaults[provider]["base_url"]
+        model = provider_env_value(provider, "model") or defaults[provider]["model"]
         configs.append(LiveModelConfig(provider=provider, api_key=api_key, base_url=base_url, model=model, enabled=True))
     return configs
 
 
 def build_fixed_judge_config(api_mode: str, provider: str, user_inputs: Dict[str, Dict[str, str]], enabled: bool) -> Optional[LiveModelConfig]:
+    del api_mode, user_inputs
     if not enabled:
         return None
     defaults = default_live_model_configs()
     if provider not in defaults:
         return None
-    item = user_inputs.get(provider, {})
-    if api_mode == "Mode A":
-        api_key = provider_env_value(provider, "api_key")
-        base_url = provider_env_value(provider, "base_url") or defaults[provider]["base_url"]
-        model = provider_env_value(provider, "model") or defaults[provider]["model"]
-    else:
-        api_key = item.get("api_key", "")
-        base_url = item.get("base_url", "") or defaults[provider]["base_url"]
-        model = item.get("model", "") or defaults[provider]["model"]
+    api_key = provider_env_value(provider, "api_key")
+    base_url = provider_env_value(provider, "base_url") or defaults[provider]["base_url"]
+    model = provider_env_value(provider, "model") or defaults[provider]["model"]
     return LiveModelConfig(provider=provider, api_key=api_key, base_url=base_url, model=model, enabled=True)
 
 
 def render_api_sidebar() -> tuple[str, List[str], Dict[str, Dict[str, str]], bool, str]:
     load_dotenv(ROOT / ".env")
     st.sidebar.markdown(f"#### {mt('api_configuration')}")
-    api_mode = st.sidebar.radio(
-        mt("api_mode"),
-        ["Mode A", "Mode B"],
-        format_func=lambda x: mt("mode_a") if x == "Mode A" else mt("mode_b"),
-        index=0 if st.session_state["api_mode"] == "Mode A" else 1,
-    )
+    api_mode = "Server-managed"
     st.session_state["api_mode"] = api_mode
     st.sidebar.caption(mt("api_caption"))
-    default_selected = [p for p in ["deepseek", "qwen", "glm", "kimi"] if p in ANSWER_PROVIDERS]
-    selected = st.sidebar.multiselect(mt("answer_models"), ANSWER_PROVIDERS, default=default_selected)
+    available = [provider for provider in ANSWER_PROVIDERS if provider_env_value(provider, "api_key")]
+    selected = st.sidebar.multiselect(mt("answer_models"), available, default=available)
     st.sidebar.caption(mt("answer_models_help"))
-    fixed_enabled = st.sidebar.checkbox(mt("enable_fixed_judge"), value=False)
-    fixed_provider = st.sidebar.selectbox(mt("fixed_judge_model"), selected or default_selected or ANSWER_PROVIDERS, index=0)
-
-    user_inputs: Dict[str, Dict[str, str]] = {}
-    defaults = default_live_model_configs()
-    with st.sidebar.expander(mt("provider_settings"), expanded=(api_mode == "Mode B")):
-        st.caption(mt("provider_settings_help"))
-        for provider in ANSWER_PROVIDERS:
-            st.markdown(f"**{provider}**")
-            api_key = ""
-            if api_mode == "Mode B":
-                api_key = st.text_input(mt("api_key_label", provider=provider), type="password", key=f"{provider}_api_key")
-            model = st.text_input(mt("model_label", provider=provider), value=defaults.get(provider, {}).get("model", ""), key=f"{provider}_model")
-            base_url = st.text_input(mt("base_url_label", provider=provider), value=defaults.get(provider, {}).get("base_url", ""), key=f"{provider}_base_url")
-            user_inputs[provider] = {"api_key": api_key, "model": model, "base_url": base_url}
-    return api_mode, selected, user_inputs, fixed_enabled, fixed_provider
+    fixed_enabled = st.sidebar.checkbox(mt("enable_fixed_judge"), value=False, disabled=not available)
+    fixed_provider = (
+        st.sidebar.selectbox(mt("fixed_judge_model"), selected or available, index=0)
+        if available
+        else ""
+    )
+    return api_mode, selected, {}, fixed_enabled, fixed_provider
 
 
 def render_model_outputs(outputs: List[Dict[str, Any]]) -> None:
@@ -2489,26 +2927,339 @@ def display_esl_feedback_table(df: pd.DataFrame, title: str = "Routed feedback")
     st.dataframe(display_frame(df[[c for c in cols if c in df.columns]]), use_container_width=True, hide_index=True)
 
 
+def load_assignment_workspace() -> tuple[List[Dict[str, Any]], List[Dict[str, Any]], List[Dict[str, Any]], List[Dict[str, Any]]]:
+    courses_payload, _ = backend_request("GET", "/api/courses")
+    assignments_payload, _ = backend_request("GET", "/api/assignments")
+    essays_payload, _ = backend_request("GET", "/api/essays", params={"limit": 2000})
+    jobs_payload, _ = backend_request("GET", "/api/review/jobs", params={"limit": 100})
+    return (
+        courses_payload.get("courses", []) if courses_payload else [],
+        assignments_payload.get("assignments", []) if assignments_payload else [],
+        essays_payload.get("essays", []) if essays_payload else [],
+        jobs_payload.get("jobs", []) if jobs_payload else [],
+    )
+
+
+def page_assignments() -> None:
+    page_header("assignments_title", "assignments_caption")
+    flash = safe_str(st.session_state.pop("assignment_flash", ""))
+    if flash:
+        st.success(flash)
+    courses, assignments, essays, jobs = load_assignment_workspace()
+
+    metric_course, metric_assignment, metric_essay, metric_job = st.columns(4)
+    metric_course.metric(mt("courses"), len(courses))
+    metric_assignment.metric(mt("assignments"), len(assignments))
+    metric_essay.metric(mt("essays"), len(essays))
+    metric_job.metric(mt("active_jobs"), sum(job.get("status") in {"queued", "running"} for job in jobs))
+
+    create_course_tab, create_assignment_tab = st.tabs([mt("new_course"), mt("new_assignment")])
+    with create_course_tab:
+        with st.form("create_course_form", clear_on_submit=True):
+            course_name = st.text_input(mt("course_name"))
+            term = st.text_input(mt("term"))
+            description = st.text_area(mt("description_optional"), height=90)
+            submitted = st.form_submit_button(mt("create_course"), use_container_width=True, type="primary")
+        if submitted:
+            data, error = backend_request(
+                "POST",
+                "/api/courses",
+                payload={"name": course_name, "term": term, "description": description},
+            )
+            if data:
+                st.session_state["assignment_flash"] = mt("course_created")
+                st.rerun()
+            else:
+                st.error(mt("backend_request_failed", error=error))
+
+    with create_assignment_tab:
+        if not courses:
+            st.info(mt("no_courses"))
+        else:
+            course_labels = {
+                safe_str(course["course_id"]): f"{safe_str(course['name'])} · {safe_str(course.get('term'))}"
+                for course in courses
+            }
+            with st.form("create_assignment_form", clear_on_submit=True):
+                course_id = st.selectbox(
+                    mt("select_course"),
+                    list(course_labels),
+                    format_func=lambda value: course_labels[value],
+                )
+                title = st.text_input(mt("assignment_title"))
+                prompt = st.text_area(mt("assignment_prompt"), height=130)
+                student_level = st.selectbox(
+                    mt("student_level"),
+                    ["intermediate", "upper-intermediate", "advanced", "not specified"],
+                    index=1,
+                )
+                due_date = st.text_input(mt("due_date_optional"), placeholder="2026-10-31")
+                submitted = st.form_submit_button(mt("create_assignment"), use_container_width=True, type="primary")
+            if submitted:
+                data, error = backend_request(
+                    "POST",
+                    "/api/assignments",
+                    payload={
+                        "course_id": course_id,
+                        "title": title,
+                        "prompt": prompt,
+                        "student_level": student_level,
+                        "due_date": due_date or None,
+                    },
+                )
+                if data:
+                    st.session_state["assignment_flash"] = mt("assignment_created")
+                    st.rerun()
+                else:
+                    st.error(mt("backend_request_failed", error=error))
+
+    if not assignments:
+        st.info(mt("no_assignments"))
+    else:
+        st.markdown(f'<div class="section-title">{mt("assignment_workspace")}</div>', unsafe_allow_html=True)
+        assignment_labels = {
+            safe_str(item["assignment_id"]): (
+                f"{safe_str(item.get('course_name'))} · {safe_str(item.get('title'))} "
+                f"({int(item.get('essay_count') or 0)})"
+            )
+            for item in assignments
+        }
+        selected_assignment_id = st.selectbox(
+            mt("select_assignment"),
+            list(assignment_labels),
+            format_func=lambda value: assignment_labels[value],
+            key="workspace_assignment_selector",
+        )
+        selected_assignment = next(
+            (item for item in assignments if safe_str(item.get("assignment_id")) == selected_assignment_id),
+            {},
+        )
+        st.info(safe_str(selected_assignment.get("prompt")))
+        assignment_essays = [
+            item for item in essays if safe_str(item.get("assignment_id")) == selected_assignment_id
+        ]
+        add_tab, upload_tab = st.tabs([mt("add_essay"), mt("upload_essay_batch")])
+        with add_tab:
+            with st.form("add_assignment_essay_form", clear_on_submit=True):
+                external_id = st.text_input(mt("external_essay_id"), placeholder="ANON-001")
+                draft_stage = st.selectbox(mt("draft_stage"), ["draft", "revised", "final"])
+                essay_text = st.text_area(mt("student_draft"), height=260)
+                submitted = st.form_submit_button(mt("save_essay"), use_container_width=True, type="primary")
+            if submitted:
+                privacy, privacy_error = privacy_preflight(essay_text)
+                if not privacy:
+                    st.error(mt("backend_request_failed", error=privacy_error))
+                elif not privacy.get("safe_to_submit"):
+                    st.error(mt("privacy_blocked"))
+                    st.caption(mt("detected_types", types=", ".join(privacy.get("finding_types", []))))
+                else:
+                    data, error = backend_request(
+                        "POST",
+                        "/api/essays",
+                        payload={
+                            "assignment_id": selected_assignment_id,
+                            "external_id": external_id,
+                            "essay_text": essay_text,
+                            "student_level": selected_assignment.get("student_level"),
+                            "draft_stage": draft_stage,
+                        },
+                    )
+                    if data:
+                        st.session_state["assignment_flash"] = mt("essay_saved")
+                        st.rerun()
+                    else:
+                        st.error(mt("backend_request_failed", error=error))
+
+        with upload_tab:
+            upload = st.file_uploader(mt("upload_essay_batch"), type=["csv"], key="assignment_csv_upload")
+            if upload is not None:
+                try:
+                    upload_frame = pd.read_csv(upload).fillna("")
+                except Exception as exc:
+                    upload_frame = pd.DataFrame()
+                    st.error(safe_str(exc))
+                st.caption(mt("upload_help"))
+                if not upload_frame.empty:
+                    st.dataframe(display_frame(upload_frame.head(20)), use_container_width=True, hide_index=True)
+                    text_column = "essay_text" if "essay_text" in upload_frame.columns else "essay_text_anonymized"
+                    id_column = "external_id" if "external_id" in upload_frame.columns else "essay_id"
+                    valid_columns = text_column in upload_frame.columns and id_column in upload_frame.columns
+                    if not valid_columns:
+                        st.error(mt("csv_required"))
+                    if st.button(
+                        mt("save_essay_batch"),
+                        use_container_width=True,
+                        type="primary",
+                        disabled=not valid_columns or len(upload_frame) > MAX_BATCH_ESSAYS,
+                    ):
+                        privacy_failures = []
+                        payload_rows = []
+                        for _, row in upload_frame.iterrows():
+                            row_text = safe_str(row.get(text_column))
+                            row_id = safe_str(row.get(id_column))
+                            privacy, _ = privacy_preflight(row_text)
+                            if not privacy or not privacy.get("safe_to_submit"):
+                                privacy_failures.append(row_id)
+                                continue
+                            payload_rows.append(
+                                {
+                                    "assignment_id": selected_assignment_id,
+                                    "external_id": row_id,
+                                    "essay_text": row_text,
+                                    "student_level": safe_str(row.get("student_level"))
+                                    or selected_assignment.get("student_level"),
+                                    "draft_stage": safe_str(row.get("draft_stage")) or "draft",
+                                }
+                            )
+                        if privacy_failures:
+                            st.error(f"{mt('privacy_blocked')} {', '.join(privacy_failures[:10])}")
+                        elif payload_rows:
+                            data, error = backend_request(
+                                "POST",
+                                "/api/essays/batch",
+                                payload={"essays": payload_rows},
+                                timeout=120,
+                            )
+                            if data:
+                                st.session_state["assignment_flash"] = mt(
+                                    "essays_saved", count=int(data.get("count", 0))
+                                )
+                                st.rerun()
+                            else:
+                                st.error(mt("backend_request_failed", error=error))
+
+        st.markdown(f"### {mt('stored_essays')}")
+        if not assignment_essays:
+            st.info(mt("no_stored_essays"))
+        else:
+            essay_frame = pd.DataFrame(assignment_essays)
+            visible_columns = [
+                "external_id",
+                "student_level",
+                "draft_stage",
+                "word_count",
+                "pii_status",
+                "updated_at",
+            ]
+            st.dataframe(
+                display_frame(essay_frame[[col for col in visible_columns if col in essay_frame.columns]]),
+                use_container_width=True,
+                hide_index=True,
+            )
+            essay_labels = {
+                safe_str(item["essay_record_id"]): (
+                    f"{safe_str(item.get('external_id'))} · {int(item.get('word_count') or 0)} {mt('words_short')}"
+                )
+                for item in assignment_essays
+            }
+            selected_essay_id = st.selectbox(
+                mt("select_saved_or_demo"),
+                list(essay_labels),
+                format_func=lambda value: essay_labels[value],
+                key="workspace_essay_selector",
+            )
+            single_col, batch_col = st.columns(2)
+            if single_col.button(mt("open_single_review"), use_container_width=True, type="primary"):
+                st.session_state["prefill_essay_record_id"] = selected_essay_id
+                st.session_state["single_source_selection"] = f"saved:{selected_essay_id}"
+                navigate_to("page_single")
+                st.rerun()
+            if batch_col.button(mt("start_assignment_batch"), use_container_width=True):
+                st.session_state["prefill_assignment_id"] = selected_assignment_id
+                st.session_state["batch_source_selection"] = "assignment"
+                st.session_state["batch_assignment_selection"] = selected_assignment_id
+                navigate_to("page_batch")
+                st.rerun()
+
+    if jobs:
+        st.markdown(f'<div class="section-title">{mt("recent_jobs")}</div>', unsafe_allow_html=True)
+        job_rows = [
+            {
+                "job_id": job.get("job_id"),
+                "status": job.get("status"),
+                "progress": job.get("progress"),
+                "generation_mode": job.get("generation_mode"),
+                "session_id": job.get("session_id"),
+                "created_at": job.get("created_at"),
+            }
+            for job in jobs[:20]
+        ]
+        st.dataframe(display_frame(pd.DataFrame(job_rows)), use_container_width=True, hide_index=True)
+
+
 def page_single_essay_review() -> None:
+    st.button(mt("back_to_workspace"), on_click=navigate_to, args=("page_home",))
     page_header("single_title", "single_caption")
     demo_essays = read_table(str(DATA_PATHS["esl_essays"]))
-    demo_choice = "Blank workspace"
-    if not demo_essays.empty:
-        blank = mt("blank_workspace")
-        demo_choice = st.selectbox(mt("load_demo"), [blank] + demo_essays["essay_id"].astype(str).tolist())
-    selected = first_record(demo_essays[demo_essays["essay_id"].astype(str) == demo_choice]) if demo_choice != mt("blank_workspace") and not demo_essays.empty else {}
-    default_prompt = safe_str(selected.get("assignment_prompt")) or "Write an ESL essay responding clearly to the assignment prompt."
-    default_level = safe_str(selected.get("student_level")) or "upper-intermediate"
-    default_essay = safe_str(selected.get("essay_text_anonymized"))
+    _, assignments, saved_essays, _ = load_assignment_workspace()
+    assignment_map = {safe_str(item.get("assignment_id")): item for item in assignments}
+    essay_map = {safe_str(item.get("essay_record_id")): item for item in saved_essays}
+
+    source_options = ["blank"]
+    source_labels = {"blank": mt("blank_workspace")}
+    for _, row in demo_essays.iterrows():
+        source_key = f"demo:{safe_str(row.get('essay_id'))}"
+        source_options.append(source_key)
+        source_labels[source_key] = f"{mt('blank_or_demo')} · {safe_str(row.get('essay_id'))}"
+    for item in saved_essays:
+        source_key = f"saved:{safe_str(item.get('essay_record_id'))}"
+        source_options.append(source_key)
+        assignment = assignment_map.get(safe_str(item.get("assignment_id")), {})
+        source_labels[source_key] = (
+            f"{mt('saved_assignment_essay')} · {safe_str(assignment.get('title'))} · "
+            f"{safe_str(item.get('external_id'))}"
+        )
+    prefill_id = safe_str(st.session_state.pop("prefill_essay_record_id", ""))
+    default_source = f"saved:{prefill_id}" if prefill_id in essay_map else "blank"
+    if prefill_id in essay_map:
+        st.session_state["single_source_selection"] = default_source
+    if st.session_state.get("single_source_selection") not in source_options:
+        st.session_state["single_source_selection"] = default_source
+    source = st.selectbox(
+        mt("select_saved_or_demo"),
+        source_options,
+        format_func=lambda value: source_labels[value],
+        key="single_source_selection",
+    )
+
+    selected: Dict[str, Any] = {}
+    selected_assignment: Dict[str, Any] = {}
+    assignment_id: Optional[str] = None
+    essay_record_id: Optional[str] = None
+    if source.startswith("demo:"):
+        demo_id = source.split(":", 1)[1]
+        selected = first_record(demo_essays[demo_essays["essay_id"].astype(str) == demo_id])
+    elif source.startswith("saved:"):
+        essay_record_id = source.split(":", 1)[1]
+        selected_payload, _ = backend_request("GET", f"/api/essays/{essay_record_id}")
+        selected = selected_payload.get("essay", {}) if selected_payload else essay_map.get(essay_record_id, {})
+        assignment_id = safe_str(selected.get("assignment_id")) or None
+        selected_assignment = assignment_map.get(assignment_id or "", {})
+        st.info(mt("saved_essay_notice"))
+
+    default_prompt = (
+        safe_str(selected_assignment.get("prompt"))
+        or safe_str(selected.get("assignment_prompt"))
+        or "Write an ESL essay responding clearly to the assignment prompt."
+    )
+    default_level = (
+        safe_str(selected.get("student_level"))
+        or safe_str(selected_assignment.get("student_level"))
+        or "upper-intermediate"
+    )
+    default_essay = safe_str(selected.get("essay_text")) or safe_str(selected.get("essay_text_anonymized"))
     levels = ["intermediate", "upper-intermediate", "advanced", "not specified"]
     default_level_index = levels.index(default_level) if default_level in levels else 1
-    widget_suffix = demo_choice.replace(" ", "_")
+    widget_suffix = source.replace(":", "_").replace(" ", "_")
+
+    providers = configured_feedback_providers()
+    provider_names = [safe_str(item.get("provider")) for item in providers]
 
     left, right = st.columns([1.35, 0.65], gap="large")
     with left:
         essay_id = st.text_input(
             mt("essay_id"),
-            value=safe_str(selected.get("essay_id")) or "USER-ESSAY-001",
+            value=safe_str(selected.get("external_id")) or safe_str(selected.get("essay_id")) or "USER-ESSAY-001",
             key=f"single_essay_id_{widget_suffix}",
         )
         assignment = st.text_area(
@@ -2529,7 +3280,6 @@ def page_single_essay_review() -> None:
             height=330,
             key=f"single_draft_{widget_suffix}",
         )
-        run = st.button(mt("generate_route"), use_container_width=True, type="primary")
     with right:
         st.markdown(f'<div class="section-title">{mt("draft_check")}</div>', unsafe_allow_html=True)
         word_count = len(essay_text.split())
@@ -2539,34 +3289,93 @@ def page_single_essay_review() -> None:
         else:
             st.warning(mt("draft_short"))
         st.info(mt("privacy_check"))
+        generation_mode_label = st.radio(
+            mt("generation_source"),
+            ["local", "live"],
+            format_func=lambda value: mt("local_generation") if value == "local" else mt("live_generation"),
+            key=f"single_generation_mode_{widget_suffix}",
+        )
+        st.caption(
+            mt("local_generation_help")
+            if generation_mode_label == "local"
+            else mt("live_generation_help")
+        )
+        selected_providers: List[str] = []
+        if generation_mode_label == "live":
+            if provider_names:
+                provider_display = {
+                    safe_str(item.get("provider")): f"{safe_str(item.get('provider')).title()} · {safe_str(item.get('model'))}"
+                    for item in providers
+                }
+                selected_providers = st.multiselect(
+                    mt("model_providers"),
+                    provider_names,
+                    default=provider_names[: min(3, len(provider_names))],
+                    format_func=lambda value: provider_display.get(value, value),
+                    key=f"single_providers_{widget_suffix}",
+                )
+            else:
+                st.warning(mt("no_live_providers"))
         with st.expander(mt("advanced_options"), expanded=False):
-            include_stress = st.checkbox(mt("include_stress"), value=False)
+            include_stress = st.checkbox(
+                mt("include_stress"),
+                value=False,
+                disabled=generation_mode_label == "live",
+            )
+
+    can_run = bool(essay_text.strip()) and (
+        generation_mode_label == "local" or bool(selected_providers)
+    )
+    run = st.button(
+        mt("submit_review_job"),
+        use_container_width=True,
+        type="primary",
+        disabled=not can_run,
+    )
 
     if run:
-        if not essay_text.strip():
-            st.error(mt("paste_essay_error"))
+        privacy, privacy_error = privacy_preflight(essay_text)
+        if not privacy:
+            st.error(mt("backend_request_failed", error=privacy_error))
+        elif not privacy.get("safe_to_submit"):
+            st.error(mt("privacy_blocked"))
+            st.caption(mt("detected_types", types=", ".join(privacy.get("finding_types", []))))
         else:
-            with st.spinner(mt("saving_review")):
-                data, error = backend_request(
-                    "POST",
-                    "/api/review/single",
-                    payload={
-                        "essay_text": essay_text,
-                        "essay_id": essay_id,
-                        "assignment_prompt": assignment,
-                        "student_level": level,
-                        "include_stress_tests": include_stress,
-                    },
-                    timeout=180,
-                )
+            st.success(mt("privacy_clear"))
+            data, error = backend_request(
+                "POST",
+                "/api/review/jobs",
+                payload={
+                    "essay_text": essay_text,
+                    "essay_id": essay_id,
+                    "assignment_prompt": assignment,
+                    "student_level": level,
+                    "include_stress_tests": include_stress if generation_mode_label == "local" else False,
+                    "assignment_id": assignment_id,
+                    "essay_record_id": essay_record_id,
+                    "generation_mode": generation_mode_label,
+                    "providers": selected_providers,
+                },
+                timeout=30,
+            )
             if data:
-                result = single_result_from_backend(data)
-                st.session_state["esl_single_result"] = result
-                st.session_state["esl_batch_result"] = None
-                st.session_state["active_review_session_id"] = result.get("session_id", "")
-                st.session_state["teacher_decisions"] = {}
-                st.session_state["saved_teacher_decisions"] = {}
-                st.success(mt("saved_to_account"))
+                job_id = safe_str((data.get("job") or {}).get("job_id"))
+                job, job_error = wait_for_review_job(job_id)
+                if job and safe_str(job.get("status")) == "completed":
+                    result, load_error = load_personal_review(safe_str(job.get("session_id")))
+                    if result:
+                        st.session_state["esl_single_result"] = result
+                        st.session_state["esl_batch_result"] = None
+                        st.session_state["active_review_session_id"] = result.get("session_id", "")
+                        st.session_state["teacher_decisions"] = {}
+                        st.session_state["saved_teacher_decisions"] = {}
+                        st.success(mt("job_completed"))
+                    else:
+                        st.error(mt("backend_request_failed", error=load_error))
+                elif job_error == mt("job_timed_out"):
+                    st.warning(job_error)
+                else:
+                    st.error(mt("job_failed", error=job_error))
             else:
                 st.error(mt("backend_request_failed", error=error))
 
@@ -2576,11 +3385,23 @@ def page_single_essay_review() -> None:
     st.markdown(f'<div class="section-title">{mt("review_result")}</div>', unsafe_allow_html=True)
     display_esl_summary(result["summary"])
     queue = teacher_queue_frame(result)
-    all_feedback_tab, queue_tab = st.tabs([mt("all_routed_feedback"), mt("teacher_queue_table")])
+    all_feedback_tab, comparison_tab, queue_tab = st.tabs(
+        [mt("all_routed_feedback"), mt("compare_title"), mt("teacher_queue_table")]
+    )
     with all_feedback_tab:
         display_esl_feedback_table(result["merged"], mt("routed_feedback"))
+    with comparison_tab:
+        comparison = result.get("comparison", pd.DataFrame())
+        if isinstance(comparison, pd.DataFrame) and not comparison.empty:
+            st.dataframe(display_frame(comparison), use_container_width=True, hide_index=True)
+        else:
+            st.info(mt("no_comparison"))
     with queue_tab:
         display_esl_feedback_table(queue, mt("teacher_queue_table"))
+    metadata = result.get("model_metadata") or {}
+    if metadata:
+        with st.expander(mt("model_trace"), expanded=False):
+            st.json(metadata)
     st.download_button(
         mt("download_single_report"),
         data=result["report"].encode("utf-8"),
@@ -2591,14 +3412,30 @@ def page_single_essay_review() -> None:
 
 
 def page_batch_review() -> None:
+    st.button(mt("back_to_workspace"), on_click=navigate_to, args=("page_home",))
     page_header("batch_title", "batch_caption")
-    upload_column, template_column = st.columns([1.45, 0.55], gap="large")
-    with upload_column:
-        uploaded = st.file_uploader(
-            mt("upload_csv"),
-            type=["csv"],
-            help=mt("upload_help"),
-        )
+    _, assignments, stored_essays, _ = load_assignment_workspace()
+    assignment_map = {safe_str(item.get("assignment_id")): item for item in assignments}
+    prefill_assignment_id = safe_str(st.session_state.pop("prefill_assignment_id", ""))
+    source_options = ["assignment", "upload", "demo"] if assignments else ["upload", "demo"]
+    default_source = "assignment" if prefill_assignment_id in assignment_map else source_options[0]
+    source_labels = {
+        "assignment": mt("saved_assignment_essay"),
+        "upload": mt("uploaded_file"),
+        "demo": mt("packaged_examples"),
+    }
+    if prefill_assignment_id in assignment_map:
+        st.session_state["batch_source_selection"] = "assignment"
+        st.session_state["batch_assignment_selection"] = prefill_assignment_id
+    if st.session_state.get("batch_source_selection") not in source_options:
+        st.session_state["batch_source_selection"] = default_source
+    source = st.segmented_control(
+        mt("batch_source"),
+        source_options,
+        format_func=lambda value: source_labels[value],
+        key="batch_source_selection",
+    ) or default_source
+
     template = pd.DataFrame(
         [
             {
@@ -2609,28 +3446,122 @@ def page_batch_review() -> None:
             }
         ]
     )
-    with template_column:
-        st.download_button(
-            mt("download_csv_template"),
-            data=template.to_csv(index=False, encoding="utf-8-sig"),
-            file_name="consensusscope_batch_template.csv",
-            mime="text/csv",
-            use_container_width=True,
+    uploaded = None
+    assignment_id: Optional[str] = None
+    selected_assignment: Dict[str, Any] = {}
+    if source == "assignment":
+        assignment_labels = {
+            safe_str(item.get("assignment_id")): (
+                f"{safe_str(item.get('course_name'))} · {safe_str(item.get('title'))} "
+                f"({int(item.get('essay_count') or 0)})"
+            )
+            for item in assignments
+        }
+        default_assignment_index = (
+            list(assignment_labels).index(prefill_assignment_id)
+            if prefill_assignment_id in assignment_labels
+            else 0
         )
-        with st.expander(mt("advanced_options"), expanded=False):
-            include_stress = st.checkbox(mt("include_stress_batch"), value=False)
-    if uploaded is not None:
-        try:
-            essays = pd.read_csv(uploaded).fillna("")
-        except Exception as exc:
-            st.error(mt("read_error", path=uploaded.name, error=exc))
-            return
+        if st.session_state.get("batch_assignment_selection") not in assignment_labels:
+            st.session_state["batch_assignment_selection"] = list(assignment_labels)[default_assignment_index]
+        assignment_id = st.selectbox(
+            mt("select_assignment"),
+            list(assignment_labels),
+            format_func=lambda value: assignment_labels[value],
+            key="batch_assignment_selection",
+        )
+        selected_assignment = assignment_map.get(assignment_id, {})
+        assignment_essays_payload, assignment_essays_error = backend_request(
+            "GET",
+            "/api/essays",
+            params={"assignment_id": assignment_id, "include_text": True, "limit": MAX_BATCH_ESSAYS},
+        )
+        assignment_rows = assignment_essays_payload.get("essays", []) if assignment_essays_payload else []
+        if assignment_essays_error:
+            st.warning(mt("backend_request_failed", error=assignment_essays_error))
+        essays = pd.DataFrame(
+            [
+                {
+                    "essay_id": item.get("external_id"),
+                    "essay_record_id": item.get("essay_record_id"),
+                    "assignment_id": assignment_id,
+                    "assignment_prompt": selected_assignment.get("prompt"),
+                    "student_level": item.get("student_level") or selected_assignment.get("student_level"),
+                    "essay_text": item.get("essay_text"),
+                }
+                for item in assignment_rows
+            ]
+        )
+        source_label = mt("saved_assignment_essay")
+    elif source == "upload":
+        upload_column, template_column = st.columns([1.45, 0.55], gap="large")
+        with upload_column:
+            uploaded = st.file_uploader(
+                mt("upload_csv"),
+                type=["csv"],
+                help=mt("upload_help"),
+            )
+        with template_column:
+            st.download_button(
+                mt("download_csv_template"),
+                data=template.to_csv(index=False, encoding="utf-8-sig"),
+                file_name="consensusscope_batch_template.csv",
+                mime="text/csv",
+                use_container_width=True,
+            )
+        if uploaded is None:
+            st.info(mt("upload_help"))
+            essays = pd.DataFrame()
+        else:
+            try:
+                essays = pd.read_csv(uploaded).fillna("")
+            except Exception as exc:
+                st.error(mt("read_error", path=uploaded.name, error=exc))
+                return
         source_label = mt("uploaded_file")
     else:
         essays = read_table(str(DATA_PATHS["esl_essays"]))
         source_label = mt("packaged_examples")
+
+    providers = configured_feedback_providers()
+    provider_names = [safe_str(item.get("provider")) for item in providers]
+    options_col, model_col = st.columns([0.85, 1.15], gap="large")
+    with options_col:
+        generation_mode = st.radio(
+            mt("generation_source"),
+            ["local", "live"],
+            format_func=lambda value: mt("local_generation") if value == "local" else mt("live_generation"),
+            key="batch_generation_mode",
+        )
+        include_stress = st.checkbox(
+            mt("include_stress_batch"),
+            value=False,
+            disabled=generation_mode == "live",
+        )
+    with model_col:
+        selected_providers: List[str] = []
+        if generation_mode == "live":
+            if provider_names:
+                provider_display = {
+                    safe_str(item.get("provider")): f"{safe_str(item.get('provider')).title()} · {safe_str(item.get('model'))}"
+                    for item in providers
+                }
+                selected_providers = st.multiselect(
+                    mt("model_providers"),
+                    provider_names,
+                    default=provider_names[: min(3, len(provider_names))],
+                    format_func=lambda value: provider_display.get(value, value),
+                    key="batch_model_providers",
+                )
+                st.caption(mt("live_generation_help"))
+            else:
+                st.warning(mt("no_live_providers"))
+        else:
+            st.info(mt("local_generation_help"))
+
     if essays.empty:
-        st.warning(mt("no_essays"))
+        if source != "upload" or uploaded is not None:
+            st.warning(mt("no_essays"))
         return
 
     essay_text_column = "essay_text" if "essay_text" in essays.columns else "essay_text_anonymized"
@@ -2649,40 +3580,70 @@ def page_batch_review() -> None:
     if total_count > MAX_BATCH_ESSAYS:
         st.error(mt("batch_limit", count=MAX_BATCH_ESSAYS))
 
-    st.dataframe(display_frame(essays.head(10)), use_container_width=True, hide_index=True)
-    can_run = has_text_column and valid_count == total_count and total_count <= MAX_BATCH_ESSAYS
+    preview_columns = [
+        col for col in ["essay_id", "student_level", "assignment_prompt", essay_text_column] if col in essays.columns
+    ]
+    st.dataframe(display_frame(essays[preview_columns].head(10)), use_container_width=True, hide_index=True)
+    can_run = (
+        has_text_column
+        and valid_count == total_count
+        and total_count <= MAX_BATCH_ESSAYS
+        and (generation_mode == "local" or bool(selected_providers))
+    )
     if st.button(mt("run_batch"), use_container_width=True, type="primary", disabled=not can_run):
-        payload_essays = []
-        for index, row in essays.fillna("").iterrows():
-            payload_essays.append(
-                {
-                    "essay_id": safe_str(row.get("essay_id")) or f"BATCH-ESSAY-{index + 1:03d}",
-                    "essay_text": safe_str(row.get(essay_text_column)),
-                    "assignment_prompt": safe_str(row.get("assignment_prompt"))
-                    or "Write an ESL essay responding clearly to the assignment prompt.",
-                    "student_level": safe_str(row.get("student_level")) or "not specified",
-                    "include_stress_tests": include_stress,
-                }
-            )
-        with st.spinner(mt("saving_review")):
+        combined_text = "\n\n".join(essays[essay_text_column].astype(str).tolist())
+        privacy, privacy_error = privacy_preflight(combined_text)
+        if not privacy:
+            st.error(mt("backend_request_failed", error=privacy_error))
+        elif not privacy.get("safe_to_submit"):
+            st.error(mt("privacy_blocked"))
+            st.caption(mt("detected_types", types=", ".join(privacy.get("finding_types", []))))
+        else:
+            payload_essays = []
+            for index, row in essays.fillna("").iterrows():
+                payload_essays.append(
+                    {
+                        "essay_id": safe_str(row.get("essay_id")) or f"BATCH-ESSAY-{index + 1:03d}",
+                        "essay_text": safe_str(row.get(essay_text_column)),
+                        "assignment_prompt": safe_str(row.get("assignment_prompt"))
+                        or safe_str(selected_assignment.get("prompt"))
+                        or "Write an ESL essay responding clearly to the assignment prompt.",
+                        "student_level": safe_str(row.get("student_level"))
+                        or safe_str(selected_assignment.get("student_level"))
+                        or "not specified",
+                        "include_stress_tests": include_stress if generation_mode == "local" else False,
+                        "assignment_id": safe_str(row.get("assignment_id")) or assignment_id,
+                        "essay_record_id": safe_str(row.get("essay_record_id")) or None,
+                    }
+                )
             data, error = backend_request(
                 "POST",
-                "/api/review/batch",
+                "/api/review/jobs/batch",
                 payload={
                     "essays": payload_essays,
-                    "include_stress_tests": include_stress,
+                    "generation_mode": generation_mode,
+                    "providers": selected_providers,
                 },
-                timeout=300,
+                timeout=30,
             )
-        if data:
-            st.session_state["esl_batch_result"] = batch_result_from_backend(data)
-            st.session_state["esl_single_result"] = None
-            st.session_state["active_review_session_id"] = ""
-            st.session_state["teacher_decisions"] = {}
-            st.session_state["saved_teacher_decisions"] = {}
-            st.success(mt("saved_to_account"))
-        else:
-            st.error(mt("backend_request_failed", error=error))
+            if data:
+                job_ids = [safe_str(job.get("job_id")) for job in data.get("jobs", [])]
+                jobs, jobs_error = wait_for_review_jobs(job_ids)
+                completed_jobs = [job for job in jobs if job.get("status") == "completed"]
+                result, result_error = batch_result_from_completed_jobs(completed_jobs)
+                if result:
+                    st.session_state["esl_batch_result"] = result
+                    st.session_state["esl_single_result"] = None
+                    st.session_state["active_review_session_id"] = ""
+                    st.session_state["teacher_decisions"] = {}
+                    st.session_state["saved_teacher_decisions"] = {}
+                    st.success(mt("job_completed"))
+                if jobs_error:
+                    st.warning(jobs_error)
+                if result_error and not result:
+                    st.error(mt("backend_request_failed", error=result_error))
+            else:
+                st.error(mt("backend_request_failed", error=error))
     result = st.session_state.get("esl_batch_result")
     if not result:
         return
@@ -2775,7 +3736,7 @@ def page_teacher_queue() -> None:
         st.success(mt("all_queue_items_complete") if pending_count == 0 else mt("no_feedback"))
         return
 
-    for _, row in filtered.iterrows():
+    for item_index, (_, row) in enumerate(filtered.iterrows()):
         item_id = safe_str(row.get("feedback_item_id"))
         session_id = safe_str(row.get("session_id")) or safe_str(result.get("session_id"))
         state_key = decision_state_key(session_id, item_id)
@@ -2783,10 +3744,29 @@ def page_teacher_queue() -> None:
         score = safe_str(row.get("risk_score")) or "n/a"
         with st.expander(
             f"{item_id} · {value_label(row.get('risk_level'))} · {mt('priority')}={value_label(priority)} · score={score}",
-            expanded=row.get("risk_level") == "high",
+            expanded=item_index == 0,
         ):
-            st.write(f"**{mt('target_span')}:** {row.get('target_span')}")
-            st.write(f"**{mt('ai_suggestion')}:** {row.get('ai_suggestion')}")
+            original_column, suggestion_column = st.columns(2, gap="large")
+            with original_column:
+                st.caption(mt("target_span"))
+                st.text_area(
+                    mt("target_span"),
+                    value=safe_str(row.get("target_span")),
+                    height=110,
+                    disabled=True,
+                    label_visibility="collapsed",
+                    key=f"queue_original_{session_id}_{item_id}",
+                )
+            with suggestion_column:
+                st.caption(mt("ai_suggestion"))
+                st.text_area(
+                    mt("ai_suggestion"),
+                    value=safe_str(row.get("ai_suggestion")),
+                    height=110,
+                    disabled=True,
+                    label_visibility="collapsed",
+                    key=f"queue_suggestion_{session_id}_{item_id}",
+                )
             st.write(f"**{mt('routing_reason')}:** {value_label(row.get('risk_reasons'))}")
             if safe_str(row.get("safety_graph_summary")) or safe_str(row.get("safety_graph_path")):
                 st.markdown(f"**{mt('feedback_safety_graph')}**")
@@ -2975,15 +3955,39 @@ def page_effectiveness_evaluation() -> None:
 
 def page_reports() -> None:
     page_header("reports_title", "reports_caption")
-    result = current_esl_result()
-    if not result:
+    sessions_payload, sessions_error = backend_request("GET", "/api/sessions", params={"limit": 200})
+    sessions = sessions_payload.get("sessions", []) if sessions_payload else []
+    if not sessions:
         st.info(mt("run_first"))
+        if sessions_error:
+            st.caption(sessions_error)
         st.button(
             mt("new_single_review"),
             type="primary",
             on_click=navigate_to,
             args=("page_single",),
         )
+        return
+
+    session_labels = {
+        safe_str(item.get("session_id")): (
+            f"{safe_str(item.get('essay_id'))} · {safe_str(item.get('created_at'))[:16]} · "
+            f"{value_label(item.get('generation_mode'))}"
+        )
+        for item in sessions
+    }
+    active_session_id = safe_str(st.session_state.get("active_review_session_id"))
+    default_index = list(session_labels).index(active_session_id) if active_session_id in session_labels else 0
+    session_id = st.selectbox(
+        mt("select_review_session"),
+        list(session_labels),
+        index=default_index,
+        format_func=lambda value: session_labels[value],
+        key="report_session_selector",
+    )
+    result, load_error = load_personal_review(session_id)
+    if not result:
+        st.error(mt("backend_request_failed", error=load_error))
         return
     merged = result.get("merged", pd.DataFrame())
     summary = result.get("summary", {})
@@ -2998,24 +4002,47 @@ def page_reports() -> None:
             if ui_lang() == "zh"
             else "ConsensusScope batch report\n\nDownload the routed feedback CSV for item-level details."
         )
-    preview_tab, data_tab = st.tabs([mt("report_preview"), mt("report_table")])
-    with preview_tab:
+    audit_tab, student_tab, data_tab = st.tabs(
+        [mt("audit_report"), mt("student_report"), mt("report_table")]
+    )
+    with audit_tab:
         st.text_area(mt("report_preview"), value=report_text, height=320, disabled=True)
+        st.download_button(
+            mt("download_report_md"),
+            data=report_text.encode("utf-8"),
+            file_name=f"{safe_str(result.get('essay_id'))}_teacher_audit.md",
+            mime="text/markdown",
+            use_container_width=True,
+        )
+    with student_tab:
+        st.info(mt("student_report_caption"))
+        report_state_key = f"student_report_{session_id}"
+        if st.button(mt("prepare_student_report"), use_container_width=True, type="primary"):
+            student_payload, student_error = backend_request(
+                "GET",
+                f"/api/export/student-report/{session_id}",
+            )
+            if student_payload:
+                st.session_state[report_state_key] = safe_str(student_payload.get("text"))
+            else:
+                st.error(mt("backend_request_failed", error=student_error))
+        student_report = safe_str(st.session_state.get(report_state_key))
+        if student_report:
+            st.text_area(mt("student_report"), value=student_report, height=320, disabled=True)
+            st.download_button(
+                mt("download_student_report"),
+                data=student_report.encode("utf-8"),
+                file_name=f"{safe_str(result.get('essay_id'))}_student_feedback.md",
+                mime="text/markdown",
+                use_container_width=True,
+            )
     with data_tab:
         display_esl_feedback_table(merged, mt("report_table"))
-    csv_download, report_download = st.columns(2)
-    csv_download.download_button(
+    st.download_button(
         mt("download_routed_csv"),
         data=merged.to_csv(index=False, encoding="utf-8-sig") if not merged.empty else "",
-        file_name="esl_routed_feedback.csv",
+        file_name=f"{safe_str(result.get('essay_id'))}_routed_feedback.csv",
         mime="text/csv",
-        use_container_width=True,
-    )
-    report_download.download_button(
-        mt("download_report_md"),
-        data=report_text.encode("utf-8"),
-        file_name="esl_feedback_review_report.md",
-        mime="text/markdown",
         use_container_width=True,
     )
 
@@ -3038,8 +4065,8 @@ def page_account() -> None:
     elif summary_error:
         st.warning(mt("backend_request_failed", error=summary_error))
 
-    profile_tab, history_tab, password_tab = st.tabs(
-        [mt("profile"), mt("recent_reviews"), mt("change_password")]
+    profile_tab, history_tab, password_tab, data_tab = st.tabs(
+        [mt("profile"), mt("recent_reviews"), mt("change_password"), mt("security_and_data")]
     )
     with profile_tab:
         with st.form("account_profile_form"):
@@ -3063,6 +4090,24 @@ def page_account() -> None:
                 st.success(mt("profile_saved"))
             else:
                 st.error(mt("backend_request_failed", error=error))
+        current_email = safe_str(current_account_user().get("email"))
+        if current_email:
+            if current_account_user().get("email_verified"):
+                st.success(mt("email_verified"))
+            else:
+                st.warning(mt("email_unverified"))
+                if st.button(mt("request_verification"), use_container_width=True):
+                    verification, error = backend_request(
+                        "POST",
+                        "/api/account/email-verification/request",
+                    )
+                    if verification:
+                        if verification.get("email_delivery"):
+                            st.success(mt("verification_requested"))
+                        else:
+                            st.warning(mt("email_delivery_unavailable"))
+                    else:
+                        st.error(mt("backend_request_failed", error=error))
 
     with history_tab:
         history_payload, history_error = backend_request(
@@ -3184,6 +4229,47 @@ def page_account() -> None:
                     st.rerun()
                 else:
                     st.error(mt("backend_request_failed", error=error))
+
+    with data_tab:
+        st.markdown(f"### {mt('account_data')}")
+        export_payload, export_error = backend_request("GET", "/api/account/export", timeout=120)
+        if export_payload:
+            export_data = export_payload.get("account_data", {})
+            st.download_button(
+                mt("download_account_data"),
+                data=json.dumps(export_data, ensure_ascii=False, indent=2).encode("utf-8"),
+                file_name="consensusscope_account_data.json",
+                mime="application/json",
+                use_container_width=True,
+            )
+        elif export_error:
+            st.warning(mt("backend_request_failed", error=export_error))
+
+        st.markdown(f"### {mt('danger_zone')}")
+        st.error(mt("delete_account_warning"))
+        with st.form("delete_account_form"):
+            deletion_password = st.text_input(mt("current_password"), type="password")
+            deletion_confirmation = st.text_input(mt("delete_confirmation"))
+            submitted = st.form_submit_button(
+                mt("delete_account"),
+                use_container_width=True,
+            )
+        if submitted:
+            deleted, error = backend_request(
+                "DELETE",
+                "/api/account",
+                payload={
+                    "password": deletion_password,
+                    "confirmation": deletion_confirmation,
+                },
+            )
+            if deleted:
+                clear_account_session()
+                st.success(mt("account_deleted"))
+                time.sleep(0.5)
+                st.rerun()
+            else:
+                st.error(mt("backend_request_failed", error=error))
 
 
 def page_product_feedback() -> None:
@@ -3315,13 +4401,24 @@ def page_home(samples_df: pd.DataFrame, outputs_df: pd.DataFrame, metrics_df: pd
     if summary_error:
         st.warning(mt("backend_request_failed", error=summary_error))
     p1, p2, p3, p4 = st.columns(4)
-    p1.metric(mt("review_sessions"), int(personal.get("review_sessions", 0)))
-    p2.metric(mt("feedback_items"), int(personal.get("feedback_items", 0)))
-    p3.metric(mt("review_routed"), int(personal.get("review_routed", 0)))
-    p4.metric(mt("saved_decisions"), int(personal.get("teacher_decisions", 0)))
+    p1.metric(mt("courses"), int(personal.get("courses", 0)))
+    p2.metric(mt("assignments"), int(personal.get("assignments", 0)))
+    p3.metric(mt("essays"), int(personal.get("essays", 0)))
+    p4.metric(mt("active_jobs"), int(personal.get("active_jobs", 0)))
+    r1, r2, r3, r4 = st.columns(4)
+    r1.metric(mt("review_sessions"), int(personal.get("review_sessions", 0)))
+    r2.metric(mt("feedback_items"), int(personal.get("feedback_items", 0)))
+    r3.metric(mt("review_routed"), int(personal.get("review_routed", 0)))
+    r4.metric(mt("saved_decisions"), int(personal.get("teacher_decisions", 0)))
 
     st.markdown(f'<div class="section-title">{mt("quick_actions")}</div>', unsafe_allow_html=True)
-    single_action, batch_action, queue_action, report_action = st.columns(4)
+    assignment_action, single_action, batch_action, queue_action, report_action = st.columns(5)
+    assignment_action.button(
+        mt("manage_assignments"),
+        use_container_width=True,
+        on_click=navigate_to,
+        args=("page_assignments",),
+    )
     single_action.button(
         mt("new_single_review"),
         use_container_width=True,
@@ -3350,6 +4447,21 @@ def page_home(samples_df: pd.DataFrame, outputs_df: pd.DataFrame, metrics_df: pd
 
     st.markdown(f'<div class="section-title">{mt("workflow_status")}</div>', unsafe_allow_html=True)
     render_workflow_strip()
+
+    st.markdown(f'<div class="section-title">{mt("workspace_activity")}</div>', unsafe_allow_html=True)
+    jobs_payload, _ = backend_request("GET", "/api/review/jobs", params={"limit": 8})
+    recent_jobs = jobs_payload.get("jobs", []) if jobs_payload else []
+    if recent_jobs:
+        job_rows = [
+            {
+                "job_status": item.get("status"),
+                "generation_mode": item.get("generation_mode"),
+                "progress": item.get("progress"),
+                "created_at": item.get("created_at"),
+            }
+            for item in recent_jobs
+        ]
+        st.dataframe(display_frame(pd.DataFrame(job_rows)), use_container_width=True, hide_index=True)
 
     st.markdown(f'<div class="section-title">{mt("recent_activity")}</div>', unsafe_allow_html=True)
     history_payload, history_error = backend_request("GET", "/api/sessions", params={"limit": 5})
@@ -3985,24 +5097,28 @@ def main() -> None:
     )
     st.session_state["ui_language"] = "zh" if language_choice == "中文" else "en"
     topbar()
+    handle_account_action_query()
     if not render_account_gate():
         render_footer()
         return
 
     page_keys = [
         "page_home",
+        "page_assignments",
         "page_single",
         "page_batch",
-        "page_compare",
         "page_queue",
         "page_reports",
         "page_account",
         "page_feedback",
-        "page_settings",
     ]
+    if current_account_user().get("is_admin"):
+        page_keys.append("page_settings")
     pending_page_key = safe_str(st.session_state.pop("pending_page_key", ""))
     active_page_key = pending_page_key or safe_str(st.session_state.get("active_page_key")) or "page_home"
     if active_page_key not in page_keys:
+        active_page_key = "page_home"
+    if active_page_key == "page_settings" and not current_account_user().get("is_admin"):
         active_page_key = "page_home"
     navigation_key = f"main_page_key_{ui_lang()}"
     if pending_page_key:
@@ -4023,7 +5139,7 @@ def main() -> None:
     if page_key == "page_settings":
         api_mode, selected, user_inputs, fixed_enabled, fixed_provider = render_api_sidebar()
     else:
-        api_mode, selected, user_inputs, fixed_enabled, fixed_provider = "Mode A", [], {}, False, ""
+        api_mode, selected, user_inputs, fixed_enabled, fixed_provider = "Server-managed", [], {}, False, ""
     render_sidebar_service()
     render_account_sidebar()
 
@@ -4043,6 +5159,8 @@ def main() -> None:
 
     if page_key == "page_home":
         page_home(samples_df, outputs_df, metrics_df, risk_df)
+    elif page_key == "page_assignments":
+        page_assignments()
     elif page_key == "page_single":
         page_single_essay_review()
     elif page_key == "page_batch":
